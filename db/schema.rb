@@ -18,15 +18,15 @@ ActiveRecord::Schema.define(version: 20160617081328) do
 
   create_table "activity_logs", force: :cascade do |t|
     t.string   "user_id"
-    t.boolean  "admin",      default: false
+    t.string   "admin",      default: "f"
     t.string   "browser"
     t.string   "ip_address"
     t.string   "controller"
     t.string   "action"
     t.string   "params"
     t.string   "note"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
   create_table "areas", force: :cascade do |t|
@@ -80,23 +80,23 @@ ActiveRecord::Schema.define(version: 20160617081328) do
   end
 
   create_table "departmental_sdbips", force: :cascade do |t|
-    t.integer  "department_id"
-    t.string   "department_name"
-    t.string   "subdepartment_name"
-    t.integer  "subdepartment_id"
-    t.string   "kpi_ref_number"
-    t.integer  "predetermined_objective_id"
+    t.integer  "department_id",                   null: false
+    t.string   "department_name",                 null: false
+    t.string   "subdepartment_name",              null: false
+    t.integer  "subdepartment_id",                null: false
+    t.string   "kpi_ref_number",                  null: false
+    t.integer  "predetermined_objective_id",      null: false
     t.integer  "kpi_owner_id"
-    t.text     "kpi"
+    t.text     "kpi",                             null: false
     t.string   "unit_of_measurement"
-    t.integer  "mscore_classification_id"
+    t.integer  "mscore_classification_id",        null: false
     t.string   "idp_ref"
-    t.integer  "national_outcome_id"
-    t.integer  "strategic_objective_id"
-    t.string   "source_of_evidence"
-    t.string   "baseline"
+    t.integer  "national_outcome_id",             null: false
+    t.integer  "strategic_objective_id",          null: false
+    t.string   "source_of_evidence",              null: false
+    t.string   "baseline",                        null: false
     t.string   "budget"
-    t.integer  "annual_target"
+    t.integer  "annual_target",                   null: false
     t.integer  "revised_target"
     t.integer  "first_quarter_target"
     t.integer  "second_quarter_target"
@@ -113,21 +113,21 @@ ActiveRecord::Schema.define(version: 20160617081328) do
     t.binary   "third_quarter_poe"
     t.binary   "fourth_quarter_poe"
     t.string   "performance_standard"
-    t.integer  "risk_rating_id"
-    t.integer  "kpa_id"
+    t.integer  "risk_rating_id",                  null: false
+    t.integer  "kpa_id",                          null: false
     t.string   "kpa_name"
-    t.integer  "ndp_objective_id"
-    t.integer  "capital_project_id"
-    t.integer  "kpi_concept_id"
-    t.integer  "kpi_type_id"
+    t.integer  "ndp_objective_id",                null: false
+    t.integer  "capital_project_id",              null: false
+    t.integer  "kpi_concept_id",                  null: false
+    t.integer  "kpi_type_id",                     null: false
     t.string   "impact"
-    t.integer  "provincial_strategic_outcome_id"
+    t.integer  "provincial_strategic_outcome_id", null: false
     t.integer  "ward_id"
     t.integer  "area_id"
     t.text     "past_year_performance"
-    t.integer  "reporting_category_id"
+    t.integer  "reporting_category_id",           null: false
     t.string   "top_layer_kpi_ref"
-    t.integer  "kpi_calculation_type_id"
+    t.integer  "kpi_calculation_type_id",         null: false
     t.date     "start_date"
     t.date     "end_date"
     t.datetime "created_at",                      null: false
@@ -471,7 +471,7 @@ ActiveRecord::Schema.define(version: 20160617081328) do
     t.string   "status",                 default: "New"
     t.integer  "login_count",            default: 0
     t.integer  "login_attempts",         default: 0
-    t.integer  "max_login_attempts",     default: 3,     null: false
+    t.integer  "max_login_attempts",     default: 3
     t.datetime "last_login"
     t.datetime "current_login_at"
     t.datetime "terminated_at"

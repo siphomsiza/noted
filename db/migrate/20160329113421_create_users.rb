@@ -30,7 +30,7 @@ class CreateUsers < ActiveRecord::Migration
         t.string  :last_login_ip
         t.string  :current_login_ip
         t.string  :reset_digest
-        t.strind  :active_log
+        t.string  :active_log
     	  t.datetime  :reset_sent_at
     	  t.boolean  :admin, default: false
         t.boolean  :support, default: false
