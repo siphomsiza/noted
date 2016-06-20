@@ -1,0 +1,28 @@
+<%= form_for :top_layer_administrators do |f| %>
+<% if @role.errors.any? %>
+  <div id="error_explanation">
+    <div class="alert alert-danger">
+      The form contains <%= pluralize(@role.errors.count, "error") %>.
+    </div>
+    <ul>
+    <% @role.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= f.label :user_id, "Select User:" %>
+<%= f.select :user_id, User.all.collect {|x| [x.firstname, x.id]}, {:include_blank => "Select User"}, class: "form-control" %>
+<br/>
+<div class="row">
+	<div class="col-lg-11">
+    <%= f.label :department_administrator, class: "checkbox inline" do %>
+      <%= f.check_box :departmental_administrator, :id=>"departmental_administrator_checkbox" %>
+      <span>Department Admin</span>
+    <% end %>
+    <%= f.label :municipal_manager, class: "checkbox inline" do %>
+      <%= f.check_box :municipal_manager, :id=>"municipal_manager_checkbox" %>
+      <span>Municipal Manager</span>
+    <% end %>
+  <% end %>

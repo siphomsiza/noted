@@ -1,0 +1,125 @@
+<% provide(:title, 'All Top Layer SDBIPs') %>
+<script>
+$(function() {
+	//highlight the current nav
+	$("#applicationmanifest a:contains('SDBIP')").parent().addClass('active');
+}); //jQuery is loaded
+</script>
+<br/>
+<div class="row">
+<div class="col-lg-12">
+	<article class="top-layer-sdbips">
+	<h1>Mkhondo Local Municipality</h1></article>
+		<ul class="nav nav-pills">
+		<li><%= link_to "Departmental SDBIP", departmental_sdbips_path, :class =>"btn btn-sm pull-right" %></li>
+		<% if current_user.admin? %>
+		<li class="active"><%= link_to "Top Layer SDBIP", top_layer_sdbips_path, :class =>"btn btn-xs pull-right" %></li>
+		<li><%= link_to "Capital Projects", capital_projects_path, :class =>"btn btn-xs pull-right"%></li>
+		<li><%= link_to "Monthly Cashflow", monthly_cashflows_path, :class =>"btn btn-xs pull-right"%></li>
+		<li><%= link_to "Revenue By Source", revenue_by_sources_path, :class =>"btn btn-xs pull-right"%></li>
+		<% end %>
+		</ul>
+</div>
+
+</div>
+
+<div class="row">
+<div id="top-layer-sdbips">
+<div class="col col-lg-12">
+				<div class="tabbable tabs" id="top-layer-sdbips-tabs">
+					<ul id = "myTab" class = "nav nav-tabs">
+						<li class="active">
+							<a href = "#new-top-layer-sdbip" data-toggle = "tab">
+								<span class="glyphicon glyphicon-plus-sign"></span>&nbsp; Add Top Layer
+							</a>
+						</li>
+						<li>
+							<a href = "#view_top_layer_sdbips" data-toggle = "tab"><span class="glyphicon glyphicon-list-alt"></span>&nbsp; View Top Layer</a>
+						</li>
+						<li>
+							<a href = "#manage_top_layer_sdbips" data-toggle = "tab"><span class="glyphicon glyphicon-list-alt"></span>&nbsp; Manage Top Layer</a>
+						</li>
+					</ul><!-- nav nav-tabs -->
+				</div><!-- tabbable tabs -->
+
+				<div id = "myTabContent" class = "tab-content">
+					<div class = "tab-pane active fade in" id = "new-top-layer-sdbip">
+							<div class="row">
+								<div class="col-lg-12">
+											<% if current_user.admin? %><br/>
+												<button class="btn btn-midi pull-right" data-toggle="modal" data-target="#top_layerModal" title="Click to upload Top Layer SDBIPs.">
+													<span class="glyphicon glyphicon-upload"></span>&nbsp;Import Top Layer SDBIP
+												</button>
+											<% end %>
+								</div>
+							</div>
+										<hr/>
+										<h2>New Top Layer SDBIP</h2>
+							<%= render 'form' %>
+					</div>
+
+					<div class = "tab-pane active fade" id = "view_top_layer_sdbips">
+						<% if @top_layer_sdbips.blank? && TopLayerSdbip.blank? %>
+						<p> There are no Top Layer SDBIPs currently in the system. <p>
+						<% elsif @top_layer_sdbips.blank? && !TopLayerSdbip.blank? %>
+						<p> You currently have no Top Layer SDBIPs currently. </p>
+						<% elsif !@top_layer_sdbips.blank? %>
+						<div class="table-responsive">
+							<%= render 'top_layer_sdbips'%>
+							<%= will_paginate @top_layer_sdbips, :class=>"center" %>
+						</div>
+						<% end %>
+					</div>
+
+					<div class = "tab-pane fade" id = "manage_top_layer_sdbips">
+
+									<% if @top_layer_sdbips.blank? && TopLayerSdbip.blank? %>
+									<p> There are no Top Layer SDBIPs currently in the system to edit. <p>
+									<% elsif @top_layer_sdbips.blank? && !TopLayerSdbip.blank? %>
+									<p> You currently have no Top Layer SDBIPs currently to edit. </p>
+									<% elsif !@top_layer_sdbips.blank? %>
+									<div class="table-responsive">
+										<%= render 'edit_top_layer_sdbip'%>
+										<%= will_paginate @top_layer_sdbips, :class=>"center" %>
+									</div>
+									<% end %>
+					</div>
+				</div>
+		</div>
+</div>
+</div>
+
+</div>
+</div>
+<div class="col col-lg-12">
+	<!-- Import Top Layer SDBIP modal -->
+	<div class="modal fade" id="top_layerModal" tabindex="-1" role="dialog" aria-labelledby="top_layerModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<%= form_tag import_top_layer_sdbips_path, accept: 'text/csv,text/xls,text/xlsx,text/ods', multipart: true do %>
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+							&times;
+						</button>
+						<h4 class="modal-title" id="top_layerModalLabel">
+							<ol class="breadcrumb">
+								<li><a href="#" data-dismiss="modal">SDBIP</a></li>
+								<li class="active">Importing Top Layer SDBIP</li>
+							</ol>
+						</h4>
+						<%= label_tag :NB,"Note: Supported files types are xls,xlsx, ods and csv types.", id: 'import-info' %>
+					</div>
+					<div class="modal-body">
+						<%= label_tag :file,"Select File to upload:" %>
+						<%= file_field_tag :file ,{:class=>"form-control"} %>
+					</div>
+					<div class="modal-footer">
+						<div class="col-md-4 col-md-offset-3">
+							<%= submit_tag "Import", :class=>"btn btn-midi" %>
+						</div>
+					</div>
+				<% end %>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal -->
+	</div>
+</div>

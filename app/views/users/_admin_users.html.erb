@@ -1,0 +1,42 @@
+<div class="tab-pane" id="admin_users">
+<div class="table-responsive table-bordered">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Avatar</th>
+        <th>Ref</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Admin Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+      <tr>
+        <td><%= gravatar_for user%></td>
+        <td><%= user.id %></td>
+        <td><%= user.firstname %></td>
+        <td><%= user.surname %></td>
+        <td><%= user.email %></td>
+        <td><% if user.admin? %> Yes <% else %> No <% end %></td>
+        <td>
+          <% if !user.admin? %>
+          <%= link_to  "",:data =>{confirm: "Set this user to Super User?"},controller: "users",action: "set_admin", id: user.id, method: :get, class: "btn btn-mini btn-primary" do %>
+            Add as Administrator
+          <% end %>
+          <% end %>
+          <% if user.admin? && !current_user?(user) %>
+          <%= link_to  "",:data =>{confirm: "Remove this user as Super User?"},controller: "users",action: "set_normal_user", id: user.id, method: :get, class: "btn btn-mini btn-primary" do %>
+            Remove user as Administrator
+          <% end %>
+          <% end %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div> <!-- table-responsive -->
+  <%= will_paginate @users %>
+</div>

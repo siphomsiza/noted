@@ -1,0 +1,25 @@
+<% provide(:title, 'All users') %>
+<article class="users">
+  <h1>Users Panel</h1>
+
+  <div class="tabbable tabs">
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#add_user" data-toggle="tab">Add User</a></li>
+      <li><a href="#manage_users" data-toggle="tab">Manage Users</a></li>
+      <li><a href="#report_users" data-toggle="tab">Report Users</a></li>
+      <li><a href="#setup_users" data-toggle="tab">Setup Users</a></li>
+    </ul><!-- nav nav-tabs -->
+  </div><!-- tabbable tabs -->
+
+  <section class="tab-content">
+
+    <%= render 'form' %>
+    <%= render 'manage_users' %>
+    <%= render 'report_users' %>
+    <%= render 'setup_users' %>
+
+  </section><!-- tab-content -->
+
+</article><!-- users -->
+
+<div id="">

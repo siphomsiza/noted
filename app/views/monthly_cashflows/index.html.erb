@@ -1,0 +1,76 @@
+<% provide(:title, 'Monthly Cashflows') %>
+<script>
+$(function() {
+	//highlight the current nav
+	$("#applicationmanifest a:contains('SDBIP')").parent().addClass('active');
+}); //jQuery is loaded
+</script>
+<br/>
+<div class="row">
+<div class="col col-lg-12">
+	<article class="sdbip">
+	<h1>Mkhondo Local Municipality</h1>
+<ul class="nav nav-pills">
+<li><%= link_to "Departmental SDBIP", departmental_sdbips_path, :class =>"btn btn-sm pull-right"%></li>
+<% if current_user.admin? %><li><%= link_to "Top Layer SDBIP", top_layer_sdbips_path, :class =>"btn btn-xs pull-right"%></li>
+<li><%= link_to "Capital Projects", capital_projects_path, :class =>"btn btn-xs pull-right"%></li>
+<li class="active"><%= link_to "Monthly Cashflow", monthly_cashflows_path, :class =>"btn btn-xs pull-right"%></li>
+<li><%= link_to "Revenue By Source", revenue_by_sources_path, :class =>"btn btn-xs pull-right"%></li>
+<% end %>
+</ul>
+</div>
+</div>
+<div class="row">
+	<div class="col col-lg-12">
+		<div class="tabbable tabs" id="departmental_sdbips-tabs">
+			<ul id = "myTab" class = "nav nav-tabs">
+				<li class="active">
+					<a href = "#new_monthly_cashflow" data-toggle = "tab">
+						<span class="glyphicon glyphicon-plus-sign"></span>&nbsp;Add Monthly Cashflow
+					</a>
+				</li>
+				<li>
+					<a href = "#view_monthly_cashflows" data-toggle = "tab"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;View Monthly Cashflows</a>
+				</li>
+				<li>
+					<a href = "#manage_monthly_cashflows" data-toggle = "tab"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;Manage Monthly Cashflows</a>
+				</li>
+			</ul><!-- nav nav-tabs -->
+		</div><!-- tabbable tabs -->
+
+		<div id = "myTabContent" class = "tab-content">
+			<br/>
+			<div class = "tab-pane active fade in" id = "new_monthly_cashflow">
+							<h2>New Monthly Cashflow</h2>
+				<%= render 'form' %>
+			</div>
+			<div class = "tab-pane active fade" id = "view_monthly_cashflows">
+				<% if @monthly_cashflows.blank? && MonthlyCashflow.blank? %>
+				<p> There are no Monthly Cashflows currently in the system. <p>
+				<% elsif @monthly_cashflows.blank? && !MonthlyCashflow.blank? %>
+				<p> You currently have no Monthly Cashflows currently. </p>
+				<% elsif !@monthly_cashflows.blank? %>
+				<div class="table-responsive">
+					<%= render 'monthly_cashflows'%>
+					<%= will_paginate @monthly_cashflows, :class=>"center" %>
+				</div>
+				<% end %>
+			</div>
+			<div class = "tab-pane active fade" id = "manage_monthly_cashflows">
+					<br/>
+							<% if @monthly_cashflows.blank? && MonthlyCashflow.blank? %>
+							<p> There are no Monthly Cashflows currently in the system to edit. <p>
+							<% elsif @monthly_cashflows.blank? && !MonthlyCashflow.blank? %>
+							<p> You currently have no Monthly Cashflows currently to edit. </p>
+							<% elsif !@monthly_cashflows.blank? %>
+							<div class="table-responsive">
+								<%= render 'edit_monthly_cashflow'%>
+								<%= will_paginate @monthly_cashflows, :class=>"center" %>
+							</div>
+							<% end %>
+
+			</div>
+		</div>
+
+</article>
+</div></div>

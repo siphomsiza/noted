@@ -1,0 +1,30 @@
+<div class="tab-pane" id="locked_users">
+<div class="table-responsive table-bordered">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Avatar</th>
+        <th>Ref</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Username</th>
+        <th>Date Added</th>
+        <th>Last Login</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @locked_users.each do |locked_user| %>
+      <tr>
+        <td><%= gravatar_for locked_user, size: 50 %></td>
+        <td><%= locked_user.id %></td>
+        <td><%= locked_user.firstname %></td>
+        <td><%= locked_user.surname %></td>
+        <td><%= locked_user.email %></td>
+        <td><%= locked_user.created_at %></td>
+        <td><%= locked_user.last_login %></td>
+        </tr>
+        <% end %>
+    </tbody>
+  </table>
+</div> <!-- table-responsive -->
+</div>

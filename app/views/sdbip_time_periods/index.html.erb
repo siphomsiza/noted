@@ -1,0 +1,99 @@
+<% provide(:title, 'All SDBIP Time Periods') %>
+<script>
+$(function() {
+	//highlight the current nav
+	$("#applicationmanifest a:contains('SETUP')").parent().addClass('active');
+}); //jQuery is loaded
+</script>
+<div>
+
+<div class="row">
+<div class="col col-lg-11">
+<ul class="nav nav-pills">
+<li><%= link_to "Master System Setup", master_setups_path, :class => "btn btn-xs pull-right" %></li>
+<li> <% if @setup.blank? %>
+        <%= link_to "System Setup", setups_path, :class => "btn btn-xs pull-right" %>
+      <% elsif @setup.blank? && Setup.blank? %>
+        <p>There is currently no setup configured.</p>
+      <% end %></li>
+<li><%= link_to "Departments", departments_path, :class =>"btn btn-xs pull-right"%></li>
+<li><%= link_to "Departmental Administrators", roles_path, :class =>"btn btn-xs pull-right"%></li>
+<li><%= link_to "Top Layer Administrators", roles_path, :class =>"btn btn-xs pull-right"%></li>
+<li><%= link_to "Headings", headings_path, :class =>"btn btn-xs pull-right"%></li>
+<li><%= link_to "Lists", lists_path, :class =>"btn btn-xs pull-right"%></li>
+<li class="active"><%= link_to "Time Periods", sdbip_time_periods_path, :class =>"btn btn-xs pull-right"%></li>
+</ul></div></div></div>
+    <div class="row">
+
+            <div class="tabbable tabs" id="sdbip_time_periods-tabs">
+              <ul id = "myTab" class = "nav nav-tabs">
+								<li class="active">
+                  <a href = "#add_sdbip_time_periods" data-toggle = "tab">Create</a>
+                </li>
+                <li>
+                  <a href = "#sdbip_time_periods" data-toggle = "tab">Manage</a>
+                </li>
+              </ul><!-- nav nav-tabs -->
+            </div><!-- tabbable tabs -->
+    <div id = "myTabContent" class = "tab-content">
+			<div class = "tab-pane active fade in" id = "add_sdbip_time_periods">
+		        <ul class="sdbip_time_periods">
+							<br/>
+							<h3>New Time Period</h3><hr/>
+		          <%= render 'form' %>
+		        </ul>
+		</div>
+     <div class = "tab-pane fade" id = "sdbip_time_periods">
+           <div class="col col-lg-12">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Period</th>
+            <th>Start Date</th>
+            <th>Reminder Date</th>
+            <th>Closure Date</th>
+            <th>Status</th>
+            <th colspan="2"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+        <% @sdbip_time_periods.each do |sdbip_time_period| %>
+          <tr>
+            <td><%= link_to sdbip_time_period.period,sdbip_time_period %>&nbsp;(month ending <%= sdbip_time_period.end_date.strftime("%Y-%B-%d") %>)</td>
+            <td><%= sdbip_time_period.start_date.strftime("%Y-%m-%d") %></td>
+            <td><%= sdbip_time_period.end_date.days_ago(7) %></td>
+            <td><%= sdbip_time_period.end_date.days_ago(-15) %></td>
+            <td><% if  sdbip_time_period.end_date.strftime("%Y-%m-%d") == Date.today.strftime("%Y-%m-%d") && sdbip_time_period.end_date.strftime("%Y-%m-%d") < 15.days.from_now %>
+              <label class="label label-success">Open</label>
+              <% elsif sdbip_time_period.end_date.strftime("%Y-%m-%d") > 15.days.from_now %>
+              <label class="label label-danger">Closed</label>
+              <% end %>
+            </td>
+            <td><%= link_to 'Edit', edit_sdbip_time_period_path(sdbip_time_period), class: 'btn btn-mini' %></td>
+                      <td><%= link_to 'Delete', sdbip_time_period, class: 'btn btn-mini', method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+      </div>
+</div></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+</div>

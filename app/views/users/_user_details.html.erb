@@ -1,0 +1,65 @@
+<div class="tab-pane active fade in" id="user_details">
+  <div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <th >Avatar</th>
+        <th >Ref</th>
+        <th >Title</th>
+        <th >First Name</th>
+        <th >Last Name</th>
+        <th >Job Tile</th>
+        <th >Department</th>
+        <th >Location</th>
+        <th >Manager</th>
+        <th >Employee Number</th>
+        <th >Employee Date</th>
+        <th >Country Prefix</th>
+        <th >landline</th>
+        <th >Mobile</th>
+        <th >Fax</th>
+        <th >Email</th>
+        <th >Gender</th>
+        <th >Race</th>
+        <th >Disabled</th>
+        <th >Date Added</th>
+        <th >Last Login</th>
+        <th >Date Terminated</th>
+        <th >Login Count</th>
+        <th >Status</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td></td>
+        <td><%= user.id %></td>
+        <td><%= user.title %></td>
+        <td><%= user.firstname %></td>
+        <td><%= user.surname %></td>
+        <td><%= user.job_title %></td>
+        <td><%= user.department %></td>
+        <td><%= user.location %></td>
+        <td><%= user.manager %></td>
+        <td><%= user.employee_number %></td>
+        <td><%= user.employment_date %></td>
+        <td><%= user.country_prefix %></td>
+        <td><%= user.landline %></td>
+        <td><%= user.mobile %></td>
+        <td><%= user.fax %></td>
+        <td><%= user.email %></td>
+        <td><%= user.gender %></td>
+        <td><%= user.race %></td>
+        <td><%= user.disabled %></td>
+        <td><%= user.created_at %></td>
+        <td><%= user.last_login %></td>
+        <td><%= user.terminated_at %></td>
+        <td><%= user.login_count %></td>
+        <td><%= user.status %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+  <%= will_paginate @users %>
+</div>

@@ -1,0 +1,55 @@
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+  <h3><%= "Editing #{@master_setup.municipality}" %></h3>
+</div>
+<div class="modal-body">
+<div class="row">
+<div class="col-lg-10 col-md-offset-1">
+  <%= form_for @master_setup do |f| %>
+    <% if @master_setup.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@master_setup.errors.count, "error") %> prohibited this master_setup from being saved:</h2>
+
+        <ul>
+        <% @master_setup.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field col-lg-12">
+      <%= f.label :municipality %><br>
+      <%= f.text_field :municipality,{:class => "form-control"} %>
+    </div>
+
+    <div class="field col-lg-12">
+    <%= f.label :province, "Province:" %>
+    <%= f.text_field :province, :class => "form-control",:autocomplete=>"off" %>
+    </div>
+    <div class="field col-lg-12">
+
+    <%= f.fields_for :regions do |regions_for_form| %>
+
+      <%= render 'region_fields', f: regions_for_form %>
+
+    <% end %>
+  <%= link_to_add_fields "Add Region/Area", f, :regions %>
+
+  </div>
+
+    <div class="actions col-lg-5">
+      <%= f.submit "Save", :class=> "btn btn-primary btn-midi" %>
+    </div>
+  <% end %>
+
+</div>
+</div>
+</div>
+<div class="modal-footer">
+
+</div>
+
+</div>
+</div>

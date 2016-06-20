@@ -1,0 +1,69 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  department_id: 1
+  reporting_kpi: false
+  idp_ref: MyString
+  mscore_classification_id: 1
+  national_outcome_id: 1
+  kpa_id: 1
+  predetermined_objective_id: 1
+  ndp_objective_id: 1
+  strategic_objective_id: 1
+  kpi: MyText
+  unit_of_measurement: MyText
+  risk: MyText
+  ward_id: 1
+  area_id: 1
+  kpi_owner_id: 1
+  baseline: MyString
+  poe: 
+  past_year_performance: MyText
+  mtas_indicator_id: 1
+  reporting_category: MyString
+  kpi_calculation_type_id: 1
+  kpi_target_type_id: 1
+  annual_target: 9.99
+  revised_target: 9.99
+  first_quarter_target: 9.99
+  second_quarter_target: 9.99
+  third_quarter_target: 9.99
+  fourth_quarter_target: 9.99
+  first_quarter_actual: 9.99
+  second_quarter_actual: 9.99
+  third_quarter_actual: 9.99
+  fourth_quarter_actual: 9.99
+
+two:
+  department_id: 1
+  reporting_kpi: false
+  idp_ref: MyString
+  mscore_classification_id: 1
+  national_outcome_id: 1
+  kpa_id: 1
+  predetermined_objective_id: 1
+  ndp_objective_id: 1
+  strategic_objective_id: 1
+  kpi: MyText
+  unit_of_measurement: MyText
+  risk: MyText
+  ward_id: 1
+  area_id: 1
+  kpi_owner_id: 1
+  baseline: MyString
+  poe: 
+  past_year_performance: MyText
+  mtas_indicator_id: 1
+  reporting_category: MyString
+  kpi_calculation_type_id: 1
+  kpi_target_type_id: 1
+  annual_target: 9.99
+  revised_target: 9.99
+  first_quarter_target: 9.99
+  second_quarter_target: 9.99
+  third_quarter_target: 9.99
+  fourth_quarter_target: 9.99
+  first_quarter_actual: 9.99
+  second_quarter_actual: 9.99
+  third_quarter_actual: 9.99
+  fourth_quarter_actual: 9.99

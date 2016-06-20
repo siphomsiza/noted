@@ -1,0 +1,109 @@
+<% provide(:title, 'All Lists') %>
+<script>
+$(function() {
+	//highlight the current nav
+	$("#applicationmanifest a:contains('SETUP')").parent().addClass('active');
+}); //jQuery is loaded
+</script>
+<div>
+
+<div class="row">
+<div class="col col-lg-11">
+<ul class="nav nav-pills">
+<li><%= link_to "Master System Setup",  master_setups_path, :class => "btn btn-xs pull-right" %></li>
+<li> <% if @setup.blank? %>
+        <%= link_to "System Setup", setups_path, :class => "btn btn-xs pull-right" %>
+      <% elsif @setup.blank? && Setup.blank? %>
+        <p>There is currently no setup configured.</p>
+      <% end %></li>
+<li><%= link_to "Departments", departments_path, :class =>"btn btn-xs pull-right"%></li>
+<li><%= link_to "Departmental Administrators", roles_path, :class =>"btn btn-xs pull-right"%></li>
+<li><%= link_to "Top Layer Administrators",  roles_path, :class =>"btn btn-xs pull-right"%></li>
+<li><%= link_to "Headings", headings_path, :class =>"btn btn-xs pull-right"%></li>
+<li class="active"><%= link_to "Lists", lists_path, :class =>"btn btn-xs pull-right"%></li>
+<li><%= link_to "Time Periods", sdbip_time_periods_path, :class =>"btn btn-xs pull-right"%></li>
+</ul></div></div></div>
+    <div class="row">
+
+            <div class="tabbable tabs" id="lists-tabs">
+              <ul id = "myTab" class = "nav nav-tabs">
+								<li class="active">
+									<a href = "#add_lists" data-toggle = "tab">Create</a>
+								</li>
+                <li>
+                  <a href = "#lists" data-toggle = "tab">Manage</a>
+                </li>
+
+              </ul><!-- nav nav-tabs -->
+            </div><!-- tabbable tabs -->
+    <div id = "myTabContent" class = "tab-content">
+			<div class = "tab-pane active fade in" id = "add_lists">
+		        <ul class="lists">
+		          <%= render 'form' %>
+		        </ul>
+		</div>
+     <div class = "tab-pane fade" id = "lists">
+      <div class="col col-lg-12">
+				<div class="table-responsive">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Areas</th>
+						<th>Wards</th>
+            <th>KPI Types</th>
+						<th>KPI Target Types</th>
+            <th>KPI Calculation Types</th>
+            <th>KPI Concepts</th>
+						<th>KPI Owners</th>
+						<th>KPAs</th>
+						<th>Mscore Classifications</th>
+						<th>Funding Sources</th>
+						<th>Risk Ratings</th>
+						<th>National Outcomes</th>
+						<th>NDP Objectives</th>
+						<th>Predetermined Objectives</th>
+						<th>Strategic Objectives</th>
+						<th>Reporting Category</th>
+						<th>Provincial Strategic Outcomes</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>
+							<ol>
+						<% @areas.each do |area|%>
+							<li><%= area.name %>
+							</li>
+						<% end %>
+						</ol>
+					</td>
+            <td><ol>
+					<% @wards.each do |ward|%>
+						<li><%= ward.name %>
+						</li>
+					<% end %>
+					</ol>
+				</td>
+				<td>
+					<ol>
+				<% @areas.each do |area|%>
+					<li><%= area.name %>
+					</li>
+				<% end %>
+				</ol>
+			</td>
+				<td><ol>
+			<% @wards.each do |ward|%>
+				<li><%= ward.name %>
+				</li>
+			<% end %>
+			</ol>
+		</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+	</div>
+	</div>
+</div>

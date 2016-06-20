@@ -1,0 +1,2 @@
+module DepartmentalSdbipProgressesHelper
+end

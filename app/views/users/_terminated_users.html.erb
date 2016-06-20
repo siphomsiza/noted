@@ -1,0 +1,35 @@
+<div class="tab-pane fade" id="terminated_users">
+<div class="table-responsive table-bordered">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Avatar</th>
+        <th>Ref</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Username</th>
+        <th>Date Added</th>
+        <th>Date Terminated</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+     <% @terminated_users.each do |terminated_user| %>
+      <tr>
+        <td><%= gravatar_for terminated_user, size: 50 %></td>
+        <td><%= terminated_user.id %></td>
+        <td><%= terminated_user.firstname %></td>
+        <td><%= terminated_user.surname %></td>
+        <td><%= terminated_user.email %></td>
+        <td><%= terminated_user.created_at %></td>
+        <td><%= terminated_user.terminated_at %></td>
+        <td>
+        <%= link_to controller: "users", action: "restore", id: terminated_user.id, method: "get",class:"btn btn-default btn-mini" do %>
+          <span class="glyphicon glyphicon-ban-circle"></span>Restore
+        <% end %></td>
+            </tr>
+          <% end %>
+    </tbody>
+  </table>
+</div> <!-- table-responsive -->
+</div>

@@ -1,0 +1,123 @@
+<% provide(:title, 'Capital Projects') %>
+<script>
+$(function() {
+	//highlight the current nav
+	$("#applicationmanifest a:contains('SDBIP')").parent().addClass('active');
+}); //jQuery is loaded
+</script>
+<br/>
+<div class="row">
+<div class="col col-lg-12">
+	<article class="sdbip">
+	<h1>Mkhondo Local Municipality</h1>
+<ul class="nav nav-pills">
+<li><%= link_to "Departmental SDBIP", departmental_sdbips_path, :class =>"btn btn-sm pull-right"%></li>
+<% if current_user.admin? %><li><%= link_to "Top Layer SDBIP", top_layer_sdbips_path, :class =>"btn btn-xs pull-right"%></li>
+<li class="active"><%= link_to "Capital Projects", capital_projects_path, :class =>"btn btn-xs pull-right"%></li>
+<li><%= link_to "Monthly Cashflow", monthly_cashflows_path, :class =>"btn btn-xs pull-right"%></li>
+<li><%= link_to "Revenue By Source", revenue_by_sources_path, :class =>"btn btn-xs pull-right"%></li>
+<% end %>
+</ul>
+</div></div>
+<div class="row">
+  <div id="departmentalsdbips">
+					<div class="col col-lg-12">
+						<div class="tabbable tabs" id="capital_projects-tabs">
+							<ul id = "myTab" class = "nav nav-tabs">
+								<li class="active">
+									<a href = "#new_capital_project" data-toggle = "tab">
+										<span class="glyphicon glyphicon-plus-sign"></span>&nbsp;Add Capital Project
+									</a>
+								</li>
+								<li>
+									<a href = "#view_capital_projects" data-toggle = "tab"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;View Capital Projects</a>
+								</li>
+								<li>
+									<a href = "#manage_capital_projects" data-toggle = "tab"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;Manage Capital Projects</a>
+								</li>
+							</ul><!-- nav nav-tabs -->
+						</div><!-- tabbable tabs -->
+
+						<div id = "myTabContent" class = "tab-content">
+
+							<div class = "tab-pane active fade in" id = "new_capital_project">
+								<% if current_user.admin? %>
+								<div class="row"><br/>
+									<div class="col col-lg-12">
+												<button class="btn btn-midi pull-right" data-toggle="modal" data-target="#capital_projectModal" title="Click to upload Capital projects.">
+													<span class="glyphicon glyphicon-upload"></span>&nbsp;Import Capital Projects
+												</button>&nbsp;
+
+
+											</div></div>
+											<hr/>
+								<% end %>
+								<%= render 'form' %>
+							</div>
+							<div class = "tab-pane active fade" id = "view_capital_projects">
+								<% if @capital_projects.blank? && CapitalProject.blank? %>
+								<p> There are no capital projects currently in the system. <p>
+								<% elsif @capital_projects.blank? && !CapitalProject.blank? %>
+								<p> You currently have no capital projects currently. </p>
+								<% elsif !@capital_projects.blank? %>
+								<%= render "capital_projects" %>
+								<% end %>
+							<% if !@capital_projects.blank? %>
+								<%= will_paginate @capital_projects %>
+								<% end %>
+							</div>
+							<div class = "tab-pane active fade" id = "manage_capital_projects">
+								<% if @capital_projects.blank? && CapitalProject.blank? %>
+								<p> There are no capital projects currently in the system. <p>
+								<% elsif @capital_projects.blank? && !CapitalProject.blank? %>
+								<p> You currently have no capital projects currently. </p>
+								<% elsif !@capital_projects.blank? %>
+								<%= render "edit_capital_project" %>
+								<% end %>
+							<% if !@capital_projects.blank? %>
+								<%= will_paginate @capital_projects %>
+								<% end %>
+							</div>
+					</div>
+
+
+					</div>
+
+				</div>
+
+						</div>
+				</article>
+</div></div>
+
+<div class="col col-lg-12">
+  <!-- Import SDBIP modal -->
+  <div class="modal fade" id="capital_projectModal" tabindex="-1" role="dialog" aria-labelledby="capital_projectModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <%= form_tag import_capital_projects_path, accept: 'text/csv,text/xls,text/xlsx,text/ods', multipart: true do %>
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+              &times;
+            </button>
+            <h4 class="modal-title" id="capital_projectModalLabel">
+              <ol class="breadcrumb">
+                <li><a href="#" data-dismiss="modal">SDBIP</a></li>
+                <li class="active">Capital Projects</li>
+              </ol>
+            </h4>
+            <%= label_tag :NB,"Note: Supported files types are xls,xlsx, ods and csv types.", id: 'import_info' %>
+          </div>
+          <div class="modal-body">
+            <%= label_tag :file,"Select File to upload:" %>
+            <%= file_field_tag :file ,{:class=>"form-control"} %>
+          </div>
+          <div class="modal-footer">
+            <div class="col-md-4 col-md-offset-3">
+              <%= submit_tag "Import", :class=>"btn btn-midi" %>
+            </div>
+          </div>
+        <% end %>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+  </div>
+</div>

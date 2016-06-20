@@ -1,0 +1,45 @@
+<%= form_for @setup do |f| %>
+	<!--General setup-->
+	<%= f.label :performance_comments, class: "checkbox inline" do %>
+    <%= f.check_box :performance_comments %>
+    <span><strong>Are the performance comment/corrective measures fields for the KPI Results required?</strong></span>
+  <% end %>
+	<%= f.label :performance_length, "If the performance comment/corrective measures fields are required,
+																	 what is the of minimum characters required?" %>
+  <%= f.select :performance_length, options_for_select([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]),
+                                          {}, {:class => "form-control"} %>
+	<%= f.label :project_life_cycle, class: "checkbox inline" do %>
+    <%= f.check_box :project_life_cycle %>
+    <span><strong>Use project life cycle?</strong></span>
+  <% end %>
+	<%= f.label :attach_poe, class: "checkbox inline" do %>
+    <%= f.check_box :attach_poe %>
+    <span><strong>Allow users to attach POE when updating Departmental/Top Layer KPIs?</strong></span>
+  <% end %>
+	<%= f.label :include_previous_departmental_actual, class: "checkbox inline" do %>
+    <%= f.check_box :include_previous_departmental_actual %>
+    <span><strong>Departmental SDBIP: Include the target/actual for the previous time period?</strong></span>
+  <% end %>
+	<%= f.label :include_departmental_previous_comments, class: "checkbox inline" do %>
+    <%= f.check_box :include_departmental_previous_comments %>
+    <span><strong>Departmental SDBIP: Include the comments for the previous time period?</strong></span>
+  <% end %>
+	<%= f.label :include_departmental_next_target, class: "checkbox inline" do %>
+    <%= f.check_box :include_departmental_next_target %>
+    <span><strong>Departmental SDBIP: Include the target for the next time period?</strong></span>
+  <% end %>
+	<%= f.label :include_toplayer_previous_target, class: "checkbox inline" do %>
+    <%= f.check_box :include_toplayer_previous_target %>
+    <span><strong>Top Layer SDBIP: Include the target/actual for the previous time period?</strong></span>
+  <% end %>
+	<%= f.label :include_toplayer_previous_comments, class: "checkbox inline" do %>
+    <%= f.check_box :include_toplayer_previous_comments %>
+    <span><strong>Top Layer SDBIP: Include the comments for the previous time period?</strong></span>
+  <% end %>
+	<%= f.label :include_toplayer_next_target, class: "checkbox inline" do %>
+    <%= f.check_box :include_toplayer_next_target %>
+    <span><strong>Top Layer SDBIP: Include the target for the next time period?</strong></span>
+  <% end %>
+
+	<%= f.submit "Save Setup", :class => "btn btn-sm" %>
+<% end %>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= full_title(yield(:title)) %></title>
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <%= javascript_include_tag "http://www.google.com/jsapi", "chartkick" %>
+    <%= stylesheet_link_tag "application", media: "all","data-turbolinks-track" => true %>
+    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+    <%= javascript_include_tag 'jquery' %>
+    <%= csrf_meta_tags %>
+    <%= render 'layouts/shim' %>
+  </head>
+
+  <body id="applicationmanifest" onload="updateClock(); setInterval('updateClock()', 1000 )">
+<div id="modal-holder"></div>
+		<section class="container">
+			<div class="content row">
+        <% if logged_in? %>
+          <%= render 'layouts/header' %>
+        <% end %>
+				<div class="main col col-lg-12">
+          <% flash.each do |message_type, message| %>
+            <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
+          <% end %>
+          <%= yield %>
+				</section><!-- main -->
+			</div><!-- content -->
+      <% if logged_in? %>
+        <%= render 'layouts/footer' %>
+      <% end %>
+		</div><!-- container -->
+
+  </body>
+</html>

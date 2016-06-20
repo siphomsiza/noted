@@ -1,0 +1,16 @@
+<tr>
+  <td>
+    <%= heading.id %>
+  </td>
+  <td>
+    <%= link_to heading.term, heading %>
+  </td>
+  <td>
+    <%= heading.description %>
+  </td>
+  <td>
+    <%= link_to heading, class: "btn btn-mini" do %>
+      <span class="glyphicon glyphicon-list"></span>&nbsp;Show
+    <% end %>
+  </td>
+</tr>

@@ -1,0 +1,12 @@
+<%= form_for @sdbip_time_period do |f| %>
+  <%= f.label :period %><br>
+		<%= f.select(:period,["Quarter 1","Quarter 2", "Quarter 3", "Quarter 4"],{},{:class=>"form-control"}) %>
+
+	<%= f.label :start_date %><br>
+	<%= f.date_select(:start_date,{},{:class=>"form-control"}) %>
+
+	<%= f.label :end_date %><br>
+	<%= f.date_select(:end_date, {} ,{:class=>"form-control"}) %>
+
+	<%= f.submit "Save", class: 'btn btn-mini'%>
+  <% end %>

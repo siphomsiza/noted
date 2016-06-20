@@ -1,0 +1,22 @@
+<% provide(:title, "New Role") %>
+<script>
+$(function() {
+	//highlight the current nav
+	$("#applicationmanifest a:contains('SETUP')").parent().addClass('active');
+}); //jQuery is loaded
+</script>
+<div>
+  <h2>
+    New Role
+  </h2>
+  <div class="row">
+    <div class="col col-md-6 col-md-offset-3">
+      <%= link_to roles_path , :class =>"btn btn-midi pull-right" do %>
+        <span class="glyphicon glyphicon-circle-arrow-left"></span> Back
+      <% end %>
+    </div>
+    <div class="col col-md-6 col-md-offset-3">
+      <%= render 'roles/form' %>
+    </div>
+  </div>
+</div>

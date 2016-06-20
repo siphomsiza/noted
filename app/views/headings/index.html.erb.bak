@@ -1,0 +1,98 @@
+<% provide(:title, 'All Headings') %>
+<script>
+$(function() {
+	//highlight the current nav
+	$("#applicationmanifest a:contains('SETUP')").parent().addClass('active');
+}); //jQuery is loaded
+</script>
+<div>
+  <h2>
+    Step 5: View Headings
+  </h2>
+  <div class="row">
+    <div class="col col-lg-12">
+      <% if current_user.admin? %>
+        <%= link_to new_heading_path , :class =>"btn btn-midi" do %>
+          <span class="glyphicon glyphicon-plus-sign"></span> New Heading
+        <% end %>
+      <% end %>
+      <%= link_to sdbip_time_periods_path, :class =>"btn btn-midi pull-right" do %>
+        Step 6: Time Periods <span class="glyphicon glyphicon-circle-arrow-right"></span>
+      <% end %>
+      <%= link_to roles_path, :class =>"btn btn-midi pull-right" do %>
+        <span class="glyphicon glyphicon-circle-arrow-left"></span> Step 4: Roles Setup
+      <% end %>
+    </div>
+    <div class="col col-lg-12">
+      <ul id = "myTab" class = "nav nav-tabs">
+      <li class="active">
+        <a href = "#general_headings" data-toggle = "tab">General</a>
+      </li>
+      <li>
+        <a href = "#departmental_sdbip" data-toggle = "tab">Departmental SDBIP</a>
+      </li>
+      <li>
+        <a href = "#top_layer_sdbip" data-toggle = "tab">Top Layer SDBIP</a>
+      </li>
+      <li>
+        <a href= "#capital_project" data-toggle = "tab">Capital Projects</a>
+      </li>
+      <li>
+        <a href= "#monthly_cashflow" data-toggle = "tab">Monthly Cashflows</a>
+      </li>
+      <li>
+        <a href= "#revenue_by_source" data-toggle = "tab">Revenue by Source</a>
+      </li>
+    </ul>
+    <div id = "myTabContent" class = "tab-content">
+
+      <div class = "tab-pane fade in active" id = "general_headings">
+        <ul class="headings">
+          <table class="table table-stiped table-hover">
+            <tr><th>&nbsp;</th><th>Default Terminology</th><th>Client Terminology</th><th></th></tr>
+          <%= render @general_headings %>
+      </table>
+        </ul>
+      </div>
+      <div class = "tab-pane fade" id = "departmental_sdbip">
+        <ul class="headings">
+          <table class="table table-stiped table-hover">
+            <tr><th>&nbsp;</th><th>Default Terminology</th><th>Client Terminology</th><th></th></tr>
+          <%= render @departmental_headings %>
+        </table>
+        </ul>
+      </div>
+      <div class = "tab-pane fade" id = "top_layer_sdbip">
+        <ul class="headings">
+          <table class="table table-stiped table-hover">
+            <tr><th>&nbsp;</th><th>Default Terminology</th><th>Client Terminology</th><th></th></tr>
+          <%= render @toplayer_headings %>
+        </table>
+        </ul>
+      </div>
+        <div class = "tab-pane fade" id = "capital_project">
+        <ul class="headings">
+          <table class="table table-stiped table-hover">
+            <tr><th>&nbsp;</th><th>Default Terminology</th><th>Client Terminology</th><th></th></tr>
+          <%= render @capitalProjects_headings %>
+        </table>
+        </ul>
+      </div>
+        <div class = "tab-pane fade" id = "monthly_cashflow">
+        <ul class="headings">
+          <table class="table table-stiped table-hover">
+            <tr><th>&nbsp;</th><th>Default Terminology</th><th>Client Terminology</th><th></th></tr>
+          <%= render @monthlycashflow_headings %></table>
+        </ul>
+      </div>
+        <div class = "tab-pane fade" id = "revenue_by_source">
+        <ul class="headings">
+          <table class="table table-stiped table-hover">
+            <tr><th>&nbsp;</th><th>Default Terminology</th><th>Client Terminology</th><th></th></tr>
+          <%= render @revenuebysource_headings %>
+        </table>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,240 @@
+<%= form_for(@list) do |f| %>
+<% if @list.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@list.errors.count, "error") %> prohibited this list from being saved:</h2>
+      <ul>
+      <% @list.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="panel text-center">
+        <%= f.label :name, "Name" %><br>
+        <%= f.text_field :name, :class => "form-control",:autocomplete=>"off" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="panel panel-default text-center">
+        <div class="panel-body">
+          <%= f.fields_for :areas do |area_for_form| %>
+          <%= render 'area_fields', f: area_for_form %>
+          <% end %>
+          <%= link_to_add_fields "Add Area" , f, :areas %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="panel panel-default text-center">
+        <div class="panel-body">
+          <%= f.fields_for :funding_sources do |funding_source_for_form| %>
+          <%= render 'funding_source_fields', f: funding_source_for_form %>
+          <% end %>
+          <%= link_to_add_fields "Add Funding Source", f, :funding_sources %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="panel panel-default text-center">
+        <div class="panel-body">
+          <%= f.fields_for :mscore_classifications do |mscore_classification_for_form| %>
+          <%= render 'mscore_classification_fields', f: mscore_classification_for_form %>
+          <% end %>
+          <%= link_to_add_fields "Add M Score Classification", f, :mscore_classifications %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="panel panel-default text-center">
+        <div class="panel-body">
+          <%= f.fields_for :kpas do |kpa_for_form| %>
+          <%= render 'kpa_fields', f: kpa_for_form %>
+          <% end %>
+          <%= link_to_add_fields "Add KPA", f, :kpas %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="panel panel-default text-center">
+        <div class="panel-body">
+          <%= f.fields_for :kpi_concepts do |kpi_concept_for_form| %>
+          <%= render 'kpi_concept_fields', f: kpi_concept_for_form %>
+          <% end %>
+          <%= link_to_add_fields "Add KPI Concept", f, :kpi_concepts %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="panel panel-default text-center">
+        <div class="panel-body">
+          <%= f.fields_for :kpi_owners do |kpi_owner_for_form| %>
+          <%= render 'kpi_owner_fields', f: kpi_owner_for_form %>
+          <% end %>
+          <%= link_to_add_fields "Add KPI Owner", f, :kpi_owners %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="panel panel-default text-center">
+        <div class="panel-body">
+          <%= f.fields_for :kpi_types do |kpi_type_for_form| %>
+          <%= render 'kpi_type_fields', f: kpi_type_for_form %>
+          <% end %>
+          <%= link_to_add_fields "Add KPI Type", f, :kpi_types %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="panel panel-default text-center">
+        <div class="panel-body">
+          <%= f.fields_for :risk_ratings do |risk_rating_for_form| %>
+          <%= render 'risk_rating_fields', f: risk_rating_for_form %>
+          <% end %>
+          <%= link_to_add_fields "Add Risk Rating", f, :risk_ratings %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="panel panel-default text-center">
+        <div class="panel-body">
+          <%= f.fields_for :national_outcomes do |national_outcome_for_form| %>
+          <%= render 'national_outcome_fields', f: national_outcome_for_form %>
+          <% end %>
+          <%= link_to_add_fields "Add National Outcome", f, :national_outcomes %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="panel panel-default text-center">
+        <div class="panel-body">
+          <%= f.fields_for :ndp_objectives do |ndp_objective_for_form| %>
+          <%= render 'ndp_objective_fields', f: ndp_objective_for_form %>
+          <% end %>
+          <%= link_to_add_fields "Add NDP Objective", f, :ndp_objectives %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="panel panel-default text-center">
+        <div class="panel-body">
+          <%= f.fields_for :predetermined_objectives do |predetermined_objective_for_form| %>
+          <%= render 'predetermined_objective_fields', f: predetermined_objective_for_form %>
+          <% end %>
+          <%= link_to_add_fields "Add Predetermined Objectives", f, :predetermined_objectives %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="panel panel-default text-center">
+        <div class="panel-body">
+          <%= f.fields_for :provincial_strategic_outcomes do |provincial_strategic_outcome_for_form| %>
+          <%= render 'provincial_strategic_outcome_fields', f: provincial_strategic_outcome_for_form %>
+          <% end %>
+          <%= link_to_add_fields "Add Provincial Strategic Outcome", f, :provincial_strategic_outcomes %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="panel panel-default text-center">
+        <div class="panel-body">
+          <%= f.fields_for :reporting_categories do |reporting_category_for_form| %>
+          <%= render 'reporting_category_fields', f: reporting_category_for_form %>
+          <% end %>
+          <%= link_to_add_fields "Add Reporting Category", f, :reporting_categories %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="panel panel-default text-center">
+        <div class="panel-body">
+          <%= f.fields_for :strategic_objectives do |strategic_objective_for_form| %>
+          <%= render 'strategic_objective_fields', f: strategic_objective_for_form %>
+          <% end %>
+          <%= link_to_add_fields "Add Strategic Objective", f, :strategic_objectives %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="panel panel-default text-center">
+        <div class="panel-body">
+          <%= f.fields_for :kpi_calculation_types do |kpi_calculation_type_for_form| %>
+          <%= render 'kpi_calculation_type_fields', f: kpi_calculation_type_for_form %>
+          <% end %>
+          <%= link_to_add_fields "Add KPI Calculation Type", f, :kpi_calculation_types %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="panel panel-default text-center">
+        <div class="panel-body">
+        <%= f.fields_for :kpi_target_types do |kpi_target_type_for_form| %>
+         <%= render 'kpi_target_type_fields', f: kpi_target_type_for_form %>
+      <% end %>
+      <%= link_to_add_fields "Add KPI Target Type", f, :kpi_target_types %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+
+        <%= f.submit class: 'btn btn-mini'%>
+  <% end %>
+  <hr/>
+  </div>
+</div>
