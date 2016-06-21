@@ -40,6 +40,8 @@ Rails.application.routes.draw do
   get 'unlock_user', to: 'users#unlock'
   get 'restore', to: 'users#restore'
   get 'activate', to: 'users#activate'
+  get 'users/:id/edit_new_user' => 'users#edit_new_user', :as => :edit_new_user
+  get 'users/:id/edit_active_user' => 'users#edit_active_user', :as => :edit_active_user
   get 'export', to: 'departmental_sdbip_progresses#export',defaults: { format: 'csv'}
   post 'export', to: 'departmental_sdbip_progresses#export'
   get 'departmental_sdbips/update_subdepartments', as: 'update_subdepartments'

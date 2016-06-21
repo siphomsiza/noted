@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   before_action :admin_user,     only: [:edit, :update,:destroy,:index,:show]
 
   def index
-      
+
       @roles = Role.paginate(page: params[:page],per_page: 15)
       @user_activities = ActivityLog.where(admin: false).paginate(page: params[:page], per_page: 15)
       @super_user_activities = ActivityLog.where(admin: true).paginate(page: params[:page], per_page: 15)
@@ -30,7 +30,21 @@ class UsersController < ApplicationController
     end
 
   end
+  def edit_new_user
+  @user = User.find(params[:id])
+  respond_to do |format|
+    format.html
+    format.js
+  end
+end
 
+def edit_active_user
+  @user = User.find(params[:id])
+  respond_to do |format|
+    format.html
+    format.js
+  end
+end
   def create
     @user = User.new(user_params)
     if @user.save
