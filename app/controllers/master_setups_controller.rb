@@ -4,7 +4,8 @@ class MasterSetupsController < ApplicationController
   # GET /master_setups
   # GET /master_setups.json
   def index
-      @jobtitle = Jobtitle.new
+    @jobtitle = Jobtitle.new
+    @job_titles = Jobtitle.all
     @master_setup = MasterSetup.new
     @master_setups = MasterSetup.all
   end
