@@ -33,6 +33,7 @@ gem 'prawn',                            '2.1.0'
 gem 'prawnto',                          '0.1.1'
 gem 'prawn-table',                      '0.1.2'
 gem 'railroady',                        '1.4.2'
+gem 'google-webfonts-rails',            '0.0.4'
 
 group :development, :test do
   gem 'byebug',                         '8.2.2'

@@ -8,19 +8,18 @@
   box-sizing:         border-box;
 }
 
-/* Colors */
-$red: 				#BA83D4;
-$magenta: 		#FDF5E3;
-$beige: 			#FDF5E3;
-$yellow:			#FDAD22;
-$purple:			#475C98;
-$darkblue: 		#586E75;
-$pink:				#D33682;
+/* Primary Color Variations */
+$deepblue: #162360;
+$powderblue: #7083AD;
+$midgrey: #ACB1B4;
+
+/* Font Typeface */
+$fontFamily: "Josefin Sans";
 
 /* typography */
 h1, h2, h3, h4, h5, h6 {
-	font-family: $font-family-sans-serif;
-	color: $purple;
+	font-family: $fontFamily;
+	color: $deepblue;
   text-align: center;
 }
 
@@ -35,6 +34,17 @@ h2 {
   letter-spacing: -1px;
   margin-bottom: 30px;
   font-weight: normal;
+}
+
+#branding {
+	img {
+		//margin: 10px 0 5px 25px;
+		max-width: 450px;
+			@media(max-width: 767px) {
+				//margin: 10px 0 5px 10px;
+				width: 90%;
+			}
+	}
 }
 
 #landingpage h1 {
@@ -62,65 +72,47 @@ h2 {
 }
 
 p {
-	font-family: $font-family-serif;
+	font-family: $fontFamily;
 	font-size: 1.1em;
-	line-height: 1.7em;
-	color: $darkblue;
+	line-height: 1.4em;
+	color: $deepblue;
 	padding: 0 2%;
   //text-align: center;
 }
 
 label {
-  font-family: $font-family-sans-serif;
-	color: $purple;
+  font-family: $fontFamily;
+	color: $deepblue;
 }
 
 a {
-  font-family: $font-family-serif;
-  color: $darkblue;
+  font-family: $fontFamily;
+  color: $deepblue;
 }
 
 table {
-  font-family: $font-family-sans-serif;
-	color: $purple;
-}
-
-/* header */
-#logo {
-  font-family: $font-family-sans-serif;
-  float: left;
-  margin-right: 10px;
-  font-size: 1.7em;
-  color: $purple;
-  text-transform: uppercase;
-  letter-spacing: -1px;
-  padding-top: 9px;
-  font-weight: bold;
-  &:hover {
-    //color: white !important;
-    //background-color: $pink !important;
-    text-decoration: none;
-  }
+  font-family: $fontFamily;
+	color: $deepblue;
 }
 
 .navbar {
     margin-bottom: 0;
     background-color: white;
-    z-index: 9999;
-    border: 0;
-    font-size: 12px !important;
-    line-height: 1.42857143 !important;
+    //z-index: 9999;
+    //border: 0;
+    //font-size: 12px !important;
+    //line-height: 1.42857143 !important;
     letter-spacing: 4px;
-    border-radius: 0;
+    //border-radius: 0;
 }
 
 .navbar li a, .navbar .navbar-brand {
-    color: $purple !important;
+    color: $deepblue !important;
 }
 
 .navbar-nav li a:hover, .navbar-nav li.active a {
     color: white !important;
-    background-color: $pink !important;
+    background-color: $deepblue !important;
 }
 
 .navbar-default .navbar-toggle {
@@ -130,7 +122,7 @@ table {
 
 .scrollspy .nav{
   li.active {
-    background: $pink;
+    background: $deepblue;
   }
 
   li:first-child {
@@ -173,16 +165,21 @@ footer {
 		li {
 			text-shadow: none;
 			a {
-				color: $purple;
+				color: $deepblue;
 			}
 		}
+
+    li a:hover {
+  		background: $deepblue;
+  		color: white;
+  	}
 	}
   position: absolute;
   bottom: 0;
   //width: 100%;
   /* Set the fixed height of the footer here */
   //height: 30px;
-  color: $purple;
+  color: $deepblue;
   margin: 0 auto;
   //width: 100%;
   /* Set the fixed height of the footer here */
@@ -191,17 +188,17 @@ footer {
 
 /* button */
 .btn:hover {
-  border: 1px solid $purple;
-  background-color: $purple !important;
+  border: 1px solid $deepblue;
+  background-color: $deepblue !important;
   color: white;
   font-weight: bold;
 }
 
 .btn {
   margin: 1px 0;
-  border: 1px solid $purple;
+  border: 1px solid $deepblue;
   background-color: white !important;
-  color: $purple;
+  color: $deepblue;
   font-weight: bold;
 }
 
@@ -273,29 +270,29 @@ input {
   li {
     overflow: auto;
     padding: 10px 0;
-    border-bottom: 1px solid $purple;
+    border-bottom: 1px solid $deepblue;
   }
 }
 
 /* tabs */
 .nav-tabs {
 	li a {
-		color: $purple;
+		color: $deepblue;
 	}
 
 	li.active a {
-		background: $beige;
+		background: $midgrey;
 	}
 
 	li a:hover {
-		background: $pink;
+		background: $deepblue;
 		color: white;
 	}
 }
 
 .nav-tabs li.active {
 	a {
-		color: $pink;
+		color: $deepblue;
 		font-weight: bold;
 	}
 }
@@ -307,7 +304,7 @@ input {
 	}
 
 	h3 {
-		color: $pink;
+		color: $deepblue;
 		line-height: 1em
 	}
 
@@ -1449,7 +1446,7 @@ input {
 }
 
 .panel {
-    //border: 1px solid $purple;
+    //border: 1px solid $deepblue;
     //border-radius:0;
     transition: box-shadow 0.5s;
 }
@@ -1459,7 +1456,7 @@ input {
 }
 
 .panel-heading {
-    //color: $purple !important;
+    //color: $deepblue !important;
     background-color: white !important;
     //padding: 25px;
     //border-bottom: 1px solid transparent;
@@ -1484,7 +1481,7 @@ input {
   margin-bottom: 0 auto;
 }
 }
-//   //
+
 #kpi-owner-checkbox,
 #unit-of-measurement,
 #mscore-classification,
