@@ -1,0 +1,21 @@
+$(function(){
+  $(document).on('change','#selected_department_update', function(){
+     var select_value = $(this).val();
+     $('#current_department_update').val(select_value);
+     alert( "Handler for .change() called." + select_value );
+  });
+  $(document).on('change','#selected_subdepartment_update', function(){
+     var select_value = $(this).val();
+     alert( "Handler for .change() called." + select_value );
+     $('#current_subdepartment_update').val(select_value);
+
+  });
+});
+
+$("#departmental-sdbip-modal").html("<%= j(render 'edit') %>")
+$("#departmental-sdbip-modal").modal("show")
+$(document).ready(function(){
+    $('input[type="submit"]').click(function(){
+        $("#departmental-sdbip-modal").modal("hide")
+    });
+});

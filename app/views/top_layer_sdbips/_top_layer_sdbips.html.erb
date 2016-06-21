@@ -1,0 +1,92 @@
+<div class="table-responsive">
+	<%= will_paginate @top_layer_sdbips,:class=>"center" %>
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>Department</th>
+      <th>Reporting kpi</th>
+      <th>Idp ref</th>
+      <th>Mscore classification</th>
+      <th>National outcome</th>
+      <th>Kpa</th>
+      <th>Predetermined objective</th>
+      <th>Ndp objective</th>
+      <th>Strategic objective</th>
+      <th>Kpi</th>
+      <th>Unit of measurement</th>
+      <th>Risk</th>
+      <th>Ward</th>
+      <th>Area</th>
+      <th>Kpi owner</th>
+      <th>Baseline</th>
+      <th>Poe</th>
+      <th>Past year performance</th>
+      <th>Mtas indicator</th>
+      <th>Reporting category</th>
+      <th>Kpi calculation type</th>
+      <th>Kpi target type</th>
+      <th>Annual target</th>
+      <th>Revised target</th>
+      <th>First quarter target</th>
+      <th>Second quarter target</th>
+      <th>Third quarter target</th>
+      <th>Fourth quarter target</th>
+      <th>First quarter actual</th>
+      <th>Second quarter actual</th>
+      <th>Third quarter actual</th>
+      <th>Fourth quarter actual</th>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @top_layer_sdbips.each do |top_layer_sdbip| %>
+      <tr>
+        <td><%= top_layer_sdbip.department.name %></td>
+        <td><% if top_layer_sdbip.reporting_kpi? %>
+					<span class="glyphicon glyphicon-ok-sign"></span>
+					<% else %>
+
+						<span class="glyphicon glyphicon-remove-sign"></span>
+					<% end %></td>
+        <td><%= top_layer_sdbip.idp_ref %></td>
+        <td><%= top_layer_sdbip.mscore_classification.name %></td>
+        <td><%= top_layer_sdbip.national_outcome.name %></td>
+        <td><%= top_layer_sdbip.kpa.name %></td>
+        <td><%= top_layer_sdbip.predetermined_objective.name %></td>
+        <td><%= top_layer_sdbip.ndp_objective.name %></td>
+        <td><%= top_layer_sdbip.strategic_objective.name %></td>
+        <td><%= top_layer_sdbip.kpi %></td>
+        <td><%= top_layer_sdbip.unit_of_measurement %></td>
+        <td><%= top_layer_sdbip.risk %></td>
+        <td><%= top_layer_sdbip.ward.name %></td>
+        <td><%= top_layer_sdbip.area.name %></td>
+        <td><%= top_layer_sdbip.kpi_owner.name %></td>
+        <td><%= top_layer_sdbip.baseline %></td>
+        <td><%= top_layer_sdbip.poe %></td>
+        <td><%= top_layer_sdbip.past_year_performance %></td>
+        <td><%= top_layer_sdbip.mtas_indicator.name %></td>
+        <td><%= top_layer_sdbip.reporting_category %></td>
+        <td><%= top_layer_sdbip.kpi_calculation_type.name %></td>
+        <td><%= top_layer_sdbip.kpi_target_type_id %></td>
+        <td><%= top_layer_sdbip.annual_target %></td>
+        <td><%= top_layer_sdbip.revised_target %></td>
+        <td><%= top_layer_sdbip.first_quarter_target %></td>
+        <td><%= top_layer_sdbip.second_quarter_target %></td>
+        <td><%= top_layer_sdbip.third_quarter_target %></td>
+        <td><%= top_layer_sdbip.fourth_quarter_target %></td>
+        <td><%= top_layer_sdbip.first_quarter_actual %></td>
+        <td><%= top_layer_sdbip.second_quarter_actual %></td>
+        <td><%= top_layer_sdbip.third_quarter_actual %></td>
+        <td><%= top_layer_sdbip.fourth_quarter_actual %></td>
+        <td><%= link_to edit_top_layer_sdbip_path(top_layer_sdbip), class: "btn btn-mini", :title=>"Click to update KPI" do %>
+					<span class="glyphicon glyphicon-pencil"></span>&nbsp;Edit
+				<% end %>
+			</td>
+        
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+</div>

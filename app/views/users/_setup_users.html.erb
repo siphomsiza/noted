@@ -1,0 +1,27 @@
+<div class="tab-pane" id="setup_users">
+  <section class="media">
+	  <div class="media-body">
+
+      <article>
+
+      	<div class="tabbable tabs">
+      		<ul class="nav nav-tabs">
+      			<li class="active"><a href="#user_access" data-toggle="tab">User Access</a></li>
+      			<li><a href="#admin_users" data-toggle="tab">Admin Users</a></li>
+      			<li><a href="#security_settings" data-toggle="tab">Security Settings</a></li>
+      		</ul><!-- nav nav-tabs -->
+      	</div><!-- tabbable tabs -->
+
+      	<section class="tab-content">
+
+          <%= render 'user_access' %>
+          <%= render 'admin_users' %>
+          <%= render 'security_settings' %>
+
+      	</section><!-- tab-content -->
+
+      </article><!-- users -->
+
+	  </div><!-- media-body -->
+	</section><!-- media -->
+</div><!-- friday -->

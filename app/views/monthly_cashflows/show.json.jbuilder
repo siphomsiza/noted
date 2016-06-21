@@ -1,0 +1,1 @@
+json.extract! @monthly_cashflow, :id, :month, :vote_number, :subdepartment_id, :department_id, :mscore_classification_id, :line_item, :operational_expenditure, :revenue, :capital_expenditure, :created_at, :updated_at

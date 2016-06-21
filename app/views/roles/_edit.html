@@ -1,0 +1,128 @@
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+  <h3>Editing Roles</h3>
+</div>
+<div class="modal-body">
+<div class="row">
+<div class="col-lg-10 col-md-offset-1">
+
+  <%= form_for(@role) do |f| %>
+  <% if @role.errors.any? %>
+    <div id="error_explanation">
+      <div class="alert alert-danger">
+        The form contains <%= pluralize(@role.errors.count, "error") %>.
+      </div>
+      <ul>
+      <% @role.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.label :user_id, "Select User:" %>
+  <%= f.select :user_id, User.all.collect {|x| [x.firstname, x.id]}, {:include_blank => "Select User"}, class: "form-control" %>
+  <br/>
+  <div class="row">
+  	<div class="col-lg-11">
+      <%= f.label :kpi_owner, class: "checkbox inline" do %>
+  		  <%= f.check_box :kpi_owner,:id=>"kpi_owner_checkbox" %>
+        <span>KPI Owner</span>
+      <% end %>
+      <%= f.label :subdepartmental_administrator, class: "checkbox inline" do %>
+        <%= f.check_box :subdepartmental_administrator, :id=>"subdepartmental_administrator_checkbox" %>
+        <span>Subdepartment Admin</span>
+      <% end %>
+      <%= f.label :department_administrator, class: "checkbox inline" do %>
+        <%= f.check_box :departmental_administrator, :id=>"departmental_administrator_checkbox" %>
+        <span>Department Admin</span>
+      <% end %>
+      <%= f.label :finance_admin, class: "checkbox inline" do %>
+        <%= f.check_box :finance_admin, :id=>"finance_admin_checkbox" %>
+        <span>Finance Admin</span>
+      <% end %>
+      <%= f.label :municipal_manager, class: "checkbox inline" do %>
+        <%= f.check_box :municipal_manager, :id=>"municipal_manager_checkbox" %>
+        <span>Municipal Manager</span>
+      <% end %>
+      <%= f.label :internal_auditor, class: "checkbox inline" do %>
+        <%= f.check_box :internal_auditor, :id=>"internal_auditor_checkbox" %>
+        <span>Internal Auditor</span>
+      <% end %>
+      <%= f.label :auditor_general, class: "checkbox inline" do %>
+        <%= f.check_box :auditor_general, :id=>"auditor_general_checkbox" %>
+        <span>Auditor General</span>
+      <% end %>
+  	</div>
+  </div>
+  <% if @role.new_record? %>
+  <div id="kpi_owner_select">
+      <br/>
+    <%= f.label :kpi_owner_id,"Select KPI Owner Title:" %>
+    <%= f.select :kpi_owner_id, KpiOwner.all.collect {|x| [x.name, x.id]},{}, {class: "form-control"} %>
+  </div>
+  <% else %>
+  <br/>
+  <%= f.label :kpi_owner_id,"Select KPI Owner Title:" %>
+  <%= f.select :kpi_owner_id, KpiOwner.all.collect {|x| [x.name, x.id]},{}, {class: "form-control"} %>
+
+  <% end %>
+
+  <%= f.fields_for :roles_details do |role_details_for_form| %>
+
+    <div class="row"><div class="col-lg-12">
+       <%= render 'roles_detail_fields', f: role_details_for_form %>
+    </div></div>
+
+  <% end %>
+
+  <!--<%= link_to_add_fields "Add Department/Subdepartment", f, :roles_details %>-->
+    <hr>
+  <%= f.submit :class =>'btn btn-mini' %>
+
+  <% end %>
+  <hr/>
+  <!--<%= link_to "Back", roles_path %>-->
+  <script type="text/javascript">
+          $(document).ready(function(){
+              $('input[type="checkbox"]').click(function(){
+                  if($('#kpi_owner_checkbox').prop("checked") == true){
+                      $('#kpi_owner_select').show();
+                  }
+                  if($('#kpi_owner_checkbox').prop("checked") == false){
+                    $("#kpi_owner_select").hide();
+                  }
+                  if($('#subdepartmental_administrator_checkbox').prop("checked") == true){
+                      $('#subdepartment_select').show();
+                  }
+                  if($('#subdepartmental_administrator_checkbox').prop("checked") == false){
+                    $("#subdepartment_select").hide();
+
+                  }
+                  if($('#departmental_administrator_checkbox').prop("checked") == true){
+                      $("#department_select").show();
+                  }
+                  if($('#departmental_administrator_checkbox').prop("checked") == false && $('#kpi_owner_checkbox').prop("checked") == false){
+                    $("#department_select").hide();
+                  }
+              });
+              toggleFields();
+          });
+
+          function toggleFields(){
+            $("#kpi_owner_select").hide();
+            $("#department_select").hide();
+            $("#subdepartment_select").hide();
+          }
+      </script>
+
+</div>
+</div>
+</div>
+<div class="modal-footer">
+
+</div>
+
+</div>
+</div>

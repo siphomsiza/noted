@@ -1,0 +1,66 @@
+<% provide(:title, "Contact") %>
+<div>
+  <h2>
+    Contact Us
+  </h2>
+  <div class="row">
+    <div class="col-sm-5">
+      <p>Contact us and we'll get back to you within 24 hours.</p>
+      <p align="left"><span class="glyphicon glyphicon-map-marker"></span> Block 9,<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;1st Floor <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;St David's Place,<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;Parktown,Johannesburg,<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;South Africa, 2193</p>
+      <p><span class="glyphicon glyphicon-phone-alt"></span> +27 11 484-1253/&nbsp;8223</p>
+      <p><span class="glyphicon glyphicon-print"></span> +27 86 619-9887</p>
+      <p><span class="glyphicon glyphicon-envelope"></span> info@armsaudit.co.za</p>
+    </div>
+    <div class="col-sm-7">
+      <div class="row">
+        <div class="col-sm-6 form-group">
+          <input class="form-control" id="name" name="name" placeholder="Name" type="text" required>
+        </div>
+        <div class="col-sm-6 form-group">
+          <input class="form-control" id="email" name="email" placeholder="Email" type="email" required>
+        </div>
+      </div>
+      <textarea class="form-control" id="comments" name="comments" placeholder="Comment" rows="5"></textarea><br>
+      <div class="row">
+        <div class="col-sm-12 form-group">
+          <button class="btn pull-right" type="submit"><span class="glyphicon glyphicon-envelope"></span> Send Message </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Set height and width with CSS -->
+<div id="googleMap" style="height:400px;width:100%;"></div>
+
+<!-- Add Google Maps -->
+<script src="http://maps.googleapis.com/maps/api/js"></script>
+<script>
+var latitude = -25.777873;
+var longitude = 28.282421;
+var myCenter = new google.maps.LatLng(latitude, longitude);
+
+function initialize() {
+var mapProp = {
+center:myCenter,
+zoom:12,
+scrollwheel:false,
+draggable:false,
+mapTypeId:google.maps.MapTypeId.ROADMAP
+};
+
+var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+
+var marker = new google.maps.Marker({
+position:myCenter,
+});
+
+marker.setMap(map);
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+</script>

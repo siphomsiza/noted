@@ -1,0 +1,21 @@
+<table class="table table-hover">
+  <tbody>
+    <tr>
+      <td align="left">
+        <%= gravatar_for user, size: 50 %>
+      </td>
+      <td align="center">
+        <%= link_to user.firstname, user %>
+      </td>
+      <td align="right">
+        <% if current_user.admin? && !current_user?(user) %>
+          <%= link_to user, method: :delete, data: { confirm: "You sure?" }, class: "btn btn-mini" do %>
+            <span class="glyphicon glyphicon-remove-sign"></span>&nbsp;Delete
+          <% end %>
+        <% else %>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <% end %>
+      </td>
+    </tr>
+  </tbody>
+</table>

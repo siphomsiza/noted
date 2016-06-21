@@ -1,0 +1,49 @@
+<% provide(:title, 'All SDBIP Time Periods') %>
+<script>
+$(function() {
+	//highlight the current nav
+	$("#applicationmanifest a:contains('SETUP')").parent().addClass('active');
+}); //jQuery is loaded
+</script>
+<div>
+  <h2>
+    Step 6: Listing SDBIP Time Periods
+  </h2>
+  <div class="row">
+    <div class="col col-lg-12">
+      <%= link_to new_sdbip_time_period_path , :class =>"btn btn-midi pull-left" do %>
+        <span class="glyphicon glyphicon-plus-sign"></span> New SDBIP Time Period
+      <% end %>
+      <%= link_to headings_path, :class =>"btn btn-midi pull-right" do %>
+        <span class="glyphicon glyphicon-circle-arrow-left"></span> Step 5: Headings
+      <% end %>
+    </div>
+    <div class="col col-lg-12">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>Period</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Status</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+        <% @sdbip_time_periods.each do |sdbip_time_period| %>
+          <tr>
+            <td><%= sdbip_time_period.period %></td>
+            <td><%= sdbip_time_period.start_date.strftime("%d %b %Y") %></td>
+            <td><%= sdbip_time_period.end_date.strftime("%d %b %Y") %></td>
+            <td><%= sdbip_time_period.status %></td>
+            <td><%= link_to 'Show', sdbip_time_period, class: 'btn btn-mini' %></td>
+            <td><%= link_to 'Edit', edit_sdbip_time_period_path(sdbip_time_period), class: 'btn btn-mini' %></td>
+                      <td><%= link_to 'Destroy', sdbip_time_period, class: 'btn btn-mini', method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,129 @@
+<% provide(:title, 'All Roles') %>
+<script>
+$(function() {
+	//highlight the current nav
+	$("#applicationmanifest a:contains('SETUP')").parent().addClass('active');
+}); //jQuery is loaded
+</script>
+<div>
+
+<div class="row">
+<div class="col col-lg-11">
+<ul class="nav nav-pills">
+<li><%= link_to "Master System Setup", master_setups_path, :class => "btn btn-xs pull-right" %></li>
+<li> <% if @setups.blank? %>
+        <%= link_to "System Setup", setups_path, :class => "btn btn-xs pull-right" %>
+      <% elsif @setups.blank? && Setup.blank? %>
+        <p>There is currently no setup configured.</p>
+      <% end %></li>
+<li><%= link_to "Departments", departments_path, :class =>"btn btn-xs pull-right"%></li>
+<li><%= link_to "Departmental Administrators", roles_path, :class =>"btn btn-xs pull-right"%></li>
+<li><%= link_to "Top Layer Administrators", roles_path, :class =>"btn btn-xs pull-right"%></li>
+<li><%= link_to "Headings", headings_path, :class =>"btn btn-xs pull-right"%></li>
+<li><%= link_to "Lists", lists_path, :class =>"btn btn-xs pull-right"%></li>
+<li><%= link_to "Time Periods", sdbip_time_periods_path, :class =>"btn btn-xs pull-right"%></li>
+</ul></div></div></div>
+    <div class="row">
+
+            <div class="tabbable tabs" id="roles-tabs">
+              <ul id = "myTab" class = "nav nav-tabs">
+
+                <li class="active">
+                  <a href = "#add_roles" data-toggle = "tab">Create</a>
+                </li>
+								<li>
+									<a href = "#roles" data-toggle = "tab">Manage</a>
+								</li>
+              </ul><!-- nav nav-tabs -->
+            </div><!-- tabbable tabs -->
+    <div id = "myTabContent" class = "tab-content">
+			<div class = "tab-pane active fade in" id = "add_roles"><br/>
+		        <ul class="roles">
+							<h3>New Role</h3><hr/>
+		          <%= render 'form' %>
+		        </ul>
+		</div>
+     <div class = "tab-pane fade" id = "roles">
+           <div class="col col-lg-12">
+      <table class="table table-hover">
+        <thead>
+        <tr>
+					<th>User</th>
+          <th>Email</th>
+          <th>KPI Admin</th>
+          <th>Secondary Time Period</th>
+					<th>Finance Admin</th>
+          <th>Municipal Manager</th>
+          <th>Auditor</th>
+          <th>Auditor General</th>
+
+          <th colspan="2"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+      <% @roles.each do |role| %>
+        <tr>
+					  <td><%=  role.user.firstname %><%=  role.user.surname %></td>
+          <td><%= link_to role.user.email %></td>
+          <td><% if role.kpi_owner? %>
+					<span class="glyphicon glyphicon-ok-sign"></span>
+					<% else %>
+					<span class="glyphicon glyphicon-remove-sign"></span>
+					<% end %>
+          </td>
+          <td><% if role.subdepartmental_administrator? || role.departmental_administrator? %>
+					<span class="glyphicon glyphicon-ok-sign"></span>
+					<% else %>
+					<span class="glyphicon glyphicon-remove-sign"></span>
+					<% end %>
+
+          </td>
+					<td><% if role.finance_admin? %>
+					<span class="glyphicon glyphicon-ok-sign"></span>
+					<% else %>
+					<span class="glyphicon glyphicon-remove-sign"></span>
+					<% end %>
+
+          </td>
+          <td><% if role.municipal_manager? %>
+					<span class="glyphicon glyphicon-ok-sign"></span>
+					<% else %>
+					<span class="glyphicon glyphicon-remove-sign"></span>
+					<% end %>
+
+          </td>
+          <td><% if role.internal_auditor? %>
+					<span class="glyphicon glyphicon-ok-sign success"></span>
+					<% else %>
+					<span class="glyphicon glyphicon-remove-sign danger"></span>
+					<% end %>
+
+          </td>
+          <td><% if role.auditor_general? %>
+					<span class="glyphicon glyphicon-ok-sign"></span>
+					<% else %>
+					<span class="glyphicon glyphicon-remove-sign"></span>
+					<% end %>
+
+          </td>
+          <td><%= link_to edit_role_path(role),remote: true,'data-target' => "#role-modal", 'data-toggle' => 'modal', class: "btn btn-mini", :title=>"Click to edit KPI" do %>
+	              <span class="glyphicon glyphicon-pencil"></span>&nbsp;Edit
+	            <% end %>
+	              <div id="role-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+
+	              </div>
+							</td>
+          <td><%= link_to role,class: 'btn btn-mini btn-danger', method: :delete, data: { confirm: 'Are you sure?' }, :style=>"text-decoration: none;" do %>
+            <span class="glyphicon glyphicon-remove-sign"></span>&nbsp;Delete
+          <% end %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</div></div>
+
+  </div>

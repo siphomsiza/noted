@@ -1,0 +1,65 @@
+<%= form_for(@revenue_by_source) do |f| %>
+  <div class="row">
+      <div class="col-lg-6 col-md-offset-3">
+
+  <div class="field">
+    <%= f.label :vote_number %><br>
+    <%= f.text_field :vote_number,{class:'form-control'} %>
+  </div>
+  <div class="field">
+    <%= f.label :line_item %><br>
+    <%= f.text_area :line_item,{class:'form-control'} %>
+  </div>
+  <div class="field">
+    <%= f.label :July %><br>
+    <%= f.text_field :july,{class:'form-control'} %>
+  </div>
+  <div class="field">
+    <%= f.label :August %><br>
+    <%= f.text_field :august,{class:'form-control'} %>
+  </div>
+  <div class="field">
+    <%= f.label :September %><br>
+    <%= f.text_field :september,{class:'form-control'} %>
+  </div>
+  <div class="field">
+    <%= f.label :October %><br>
+    <%= f.text_field :october,{class:'form-control'} %>
+  </div>
+  <div class="field">
+    <%= f.label :November %><br>
+    <%= f.text_field :november,{class:'form-control'} %>
+  </div>
+  <div class="field">
+    <%= f.label :December %><br>
+    <%= f.text_field :december,{class:'form-control'} %>
+  </div>
+  <div class="field">
+    <%= f.label :January %><br>
+    <%= f.text_field :january,{class:'form-control'} %>
+  </div>
+  <div class="field">
+    <%= f.label :February %><br>
+    <%= f.text_field :february,{class:'form-control'} %>
+  </div>
+  <div class="field">
+    <%= f.label :March %><br>
+    <%= f.text_field :march,{class:'form-control'} %>
+  </div>
+  <div class="field">
+    <%= f.label :April %><br>
+    <%= f.text_field :april,{class:'form-control'} %>
+  </div>
+  <div class="field">
+    <%= f.label :May %><br>
+    <%= f.text_field :may,{class:'form-control'} %>
+  </div>
+  <div class="field">
+    <%= f.label :June %><br>
+    <%= f.text_field :june,{class:'form-control'} %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Save",{class:'btn btn-mini btn-primary'} %>
+  </div>
+</div></div>
+<% end %>

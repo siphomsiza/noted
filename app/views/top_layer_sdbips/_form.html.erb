@@ -1,0 +1,137 @@
+<%= form_for(@top_layer_sdbip) do |f| %>
+
+  <div class="row">
+      <div class="col-lg-6 col-md-offset-3">
+  <div class="field">
+    <%= f.label :department_id,"Department:" %><br>
+    <%= f.select :department_id, Department.all.collect{|u| [u.name, u.id]},{},{class: 'form-control'} %>
+  </div>
+  <div class="field">
+    <%= f.check_box :reporting_kpi,id:'reporting_kpi' %>&nbsp;<%= f.label :reporting_kpi,"Reporting KPI:" %>
+  </div>
+  <div class="field">
+    <%= f.label :idp_ref,"IDP Ref:" %><br>
+    <%= f.text_field :idp_ref,{class:'form-control'} %>
+  </div>
+  <div class="field">
+    <%= f.label :mscore_classification_id,"Mscore Classification:" %><br>
+    <%= f.select :mscore_classification_id,MscoreClassification.all.collect{|u| [u.name, u.id]},{},{class: 'form-control'} %>
+  </div>
+  <div class="field">
+    <%= f.label :national_outcome_id,"National Outcome:" %><br>
+    <%= f.select :national_outcome_id,NationalOutcome.all.collect{|u| [u.name, u.id]},{},{class:'form-control'} %>
+  </div>
+  <div class="field">
+    <%= f.label :kpa_id,"KPA:" %><br>
+    <%= f.select :kpa_id, Kpa.all.collect{|u| [u.name, u.id]},{},{class:'form-control'} %>
+  </div>
+  <div class="field">
+    <%= f.label :predetermined_objective_id,"Predetermined Objectives:" %><br>
+    <%= f.select :predetermined_objective_id,PredeterminedObjective.all.collect{|u| [u.name, u.id]},{},{class:'form-control'} %>
+  </div>
+  <div class="field">
+    <%= f.label :ndp_objective_id,"NDP Objective:" %><br>
+    <%= f.select :ndp_objective_id,NdpObjective.all.collect{|u| [u.name, u.id]},{},{class:'form-control'} %>
+  </div>
+  <div class="field">
+    <%= f.label :strategic_objective_id,"Strategic Objective:" %><br>
+    <%= f.select :strategic_objective_id,StrategicObjective.all.collect{|u| [u.name, u.id]},{},{class:'form-control'} %>
+  </div>
+  <div class="field">
+    <%= f.label :kpi,"KPI:" %><br>
+    <%= f.text_area :kpi,{class:'form-control'} %>
+  </div>
+  <div class="field">
+    <%= f.label :unit_of_measurement,"Unit of Measurement:" %><br>
+    <%= f.text_area :unit_of_measurement,{class:'form-control'} %>
+  </div>
+  <div class="field">
+    <%= f.label :risk,"Risk:" %><br>
+    <%= f.text_area :risk,{class:'form-control'} %>
+  </div>
+  <div class="field">
+    <%= f.label :area_id,"Area:" %><br>
+    <%= f.select :area_id,Area.all.collect{|u| [u.name, u.id]},{},{class:'form-control'} %>
+  </div>
+  <div class="field">
+    <%= f.label :ward_id,"Ward:" %><br>
+    <%= f.select :ward_id, Ward.all.collect{|u| [u.name, u.id]},{},{class:'form-control'} %>
+  </div>
+
+  <div class="field">
+    <%= f.label :kpi_owner_id,"Program Driver:" %><br>
+    <%= f.select :kpi_owner_id, KpiOwner.all.collect{|u| [u.name, u.id]},{},{class:'form-control'} %>
+  </div>
+  <div class="field">
+    <%= f.label :baseline,"Baseline:" %><br>
+    <%= f.text_field :baseline,{class:'form-control'} %>
+  </div>
+  <div class="field">
+    <%= f.label :poe,"POE" %><br>
+    <%= f.text_field :poe,{class:'form-control'} %>
+  </div>
+  <div class="field">
+    <%= f.label :past_year_performance,"Past Year Performance:" %><br>
+    <%= f.text_area :past_year_performance,{class:'form-control'} %>
+  </div>
+  <div class="field">
+    <%= f.label :mtas_indicator_id,"Mtas Indicator:" %><br>
+    <%= f.select :mtas_indicator_id,MtasIndicator.all.collect{|u| [u.name, u.id]}, {},{class:'form-control'} %>
+  </div>
+  <div class="field">
+    <%= f.label :reporting_category,"Reporting Category:" %><br>
+    <%= f.text_field :reporting_category,{class:'form-control'} %>
+  </div>
+  <div class="field">
+    <%= f.label :kpi_calculation_type_id,"KPI Calcualtion Type:" %><br>
+    <%= f.select :kpi_calculation_type_id,KpiCalculationType.all.collect{|u| [u.name, u.id]},{},{class:'form-control'} %>
+  </div>
+  <div class="field">
+    <%= f.label :kpi_target_type_id,"KPI Target Type:" %><br>
+    <%= f.select :kpi_target_type_id,KpiTargetType.all.collect{|u| [u.name, u.id]},{},{class:'form-control'} %>
+  </div>
+  <div class="field">
+    <%= f.label :annual_target,"Annual Target:" %><br>
+    <%= f.text_field :annual_target,{class:'form-control'} %>
+  </div>
+  <div class="field">
+    <%= f.label :revised_target,"Revised Target:" %><br>
+    <%= f.text_field :revised_target,{class:'form-control'} %>
+  </div>
+  <div class="field">
+    <%= f.label :first_quarter_target %><br>
+    <%= f.text_field :first_quarter_target,{class:'form-control'} %>
+  </div>
+  <div class="field">
+    <%= f.label :second_quarter_target %><br>
+    <%= f.text_field :second_quarter_target,{class:'form-control'} %>
+  </div>
+  <div class="field">
+    <%= f.label :third_quarter_target %><br>
+    <%= f.text_field :third_quarter_target,{class:'form-control'} %>
+  </div>
+  <div class="field">
+    <%= f.label :fourth_quarter_target %><br>
+    <%= f.text_field :fourth_quarter_target,{class:'form-control'} %>
+  </div>
+  <div class="field">
+    <%= f.label :first_quarter_actual %><br>
+    <%= f.text_field :first_quarter_actual,{class:'form-control'} %>
+  </div>
+  <div class="field">
+    <%= f.label :second_quarter_actual %><br>
+    <%= f.text_field :second_quarter_actual,{class:'form-control'} %>
+  </div>
+  <div class="field">
+    <%= f.label :third_quarter_actual %><br>
+    <%= f.text_field :third_quarter_actual,{class:'form-control'} %>
+  </div>
+  <div class="field">
+    <%= f.label :fourth_quarter_actual %><br>
+    <%= f.text_field :fourth_quarter_actual,{class:'form-control'} %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Save",{class:'btn btn-midi btn-primary'} %>
+  </div>
+</div></div>
+<% end %>

@@ -1,0 +1,30 @@
+<div class="tab-pane" id="inactive_users">
+<div class="table-responsive table-bordered">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Avatar</th>
+        <th>Ref</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Status</th>
+        <th>Date Added</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @inactive_users.each do |inactive_user| %>
+      <tr>
+        <td><%= gravatar_for inactive_user, size: 50 %></td>
+        <td><%= inactive_user.id %></td>
+        <td><%= inactive_user.firstname %></td>
+        <td><%= inactive_user.surname %></td>
+        <td><%= inactive_user.email %></td>
+        <td><%= inactive_user.status %></td>
+        <td><%= inactive_user.created_at %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div> <!-- table-responsive -->
+</div>

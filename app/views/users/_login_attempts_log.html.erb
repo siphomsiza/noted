@@ -1,0 +1,33 @@
+<div class="tab-pane" id="login_attempts_log">
+<div class="table-responsive table-bordered">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Avatar</th>
+        <th>Ref</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Date Added</th>
+        <th>Log in Attempts</th>
+        <th>Successful Log in Count</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+     <% @user_login_attempts.each do |user_login_attempt| %>
+      <tr>
+        <td><%= gravatar_for user_login_attempt, size: 50 %></td>
+        <td><%= user_login_attempt.id %></td>
+        <td><%= user_login_attempt.firstname %></td>
+        <td><%= user_login_attempt.surname %></td>
+        <td><%= user_login_attempt.email %></td>
+        <td><%= user_login_attempt.created_at %></td>
+        <td><%= user_login_attempt.login_attempts %></td>
+          <td><%= user_login_attempt.login_count %></td>
+            </tr>
+          <% end %>
+    </tbody>
+  </table>
+</div> <!-- table-responsive -->
+</div>

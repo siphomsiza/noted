@@ -1,0 +1,51 @@
+
+<div class="table-responsive col-lg-12">
+
+  <table>
+    <thead>
+      <tr>
+        <th>Vote number</th>
+        <th>Line item</th>
+        <th>July</th>
+        <th>August</th>
+        <th>September</th>
+        <th>October</th>
+        <th>November</th>
+        <th>December</th>
+        <th>January</th>
+        <th>February</th>
+        <th>March</th>
+        <th>April</th>
+        <th>May</th>
+        <th>June</th>
+        <th colspan="1"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @revenue_by_sources.each do |revenue_by_source| %>
+        <tr>
+          <td><%= revenue_by_source.vote_number %></td>
+          <td><%= revenue_by_source.line_item %></td>
+          <td><%= revenue_by_source.july %></td>
+          <td><%= revenue_by_source.august %></td>
+          <td><%= revenue_by_source.september %></td>
+          <td><%= revenue_by_source.october %></td>
+          <td><%= revenue_by_source.november %></td>
+          <td><%= revenue_by_source.december %></td>
+          <td><%= revenue_by_source.january %></td>
+          <td><%= revenue_by_source.february %></td>
+          <td><%= revenue_by_source.march %></td>
+          <td><%= revenue_by_source.april %></td>
+          <td><%= revenue_by_source.may %></td>
+          <td><%= revenue_by_source.june %></td>
+          <td><%= link_to edit_revenue_by_source_path(revenue_by_source) , class: "btn btn-mini", :title=>"Click to update KPI" do %>
+              <span class="glyphicon glyphicon-pencil"></span>&nbsp;Edit
+            <% end %></td>
+          
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+</div>

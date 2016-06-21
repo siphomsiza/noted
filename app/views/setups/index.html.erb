@@ -1,0 +1,163 @@
+
+<% provide(:title, 'All SDBIPs') %>
+<script>
+$(function() {
+  //highlight the current nav
+  $("#applicationmanifest a:contains('SETUP')").parent().addClass('active');
+}); //jQuery is loaded
+</script>
+<div>
+<div id="setup">
+<div class="row">
+<div class="col col-lg-11">
+<ul class="nav nav-pills">
+<li><%= link_to "Master System Setup", master_setups_path, :class => "btn btn-xs pull-right" %></li>
+<li class="active"> <% if @setups.blank? %>
+        <%= link_to "System Setup", setups_path, :class => "btn btn-xs pull-right" %>
+      <% elsif @setups.blank? && Setup.blank? %>
+        <p>There is currently no setup configured.</p>
+      <% end %></li>
+<li><%= link_to "Departments", departments_path, :class =>"btn btn-xs pull-right"%></li>
+<li><%= link_to "Departmental Administrators", roles_path, :class =>"btn btn-xs pull-right"%></li>
+<li><%= link_to "Top Layer Administrators", roles_path, :class =>"btn btn-xs pull-right"%></li>
+<li class ="active"><%= link_to "Headings", headings_path, :class =>"btn btn-xs pull-right"%></li>
+<li><%= link_to "Lists", lists_path, :class =>"btn btn-xs pull-right"%></li>
+<li><%= link_to "Time Periods", sdbip_time_periods_path, :class =>"btn btn-xs pull-right"%></li>
+</ul></div></div></div>
+
+<div class="row">
+<div class="tabbable tabs" id="setup-tabs">
+<ul id = "myTab" class = "nav nav-tabs">
+<li class="active fade in"><a href = "#new_setup" data-toggle = "tab">Create</a>
+</li>
+<li><a href = "#view_setup" data-toggle = "tab">Manage</a>
+</li>
+</ul><!-- nav nav-tabs -->
+</div><!-- tabbable tabs -->
+
+<div id = "myTabContent" class = "tab-content">
+  <div class="tab-pane active fade in" id="new_setup">
+    <% if @setups.blank? %>
+    <br/><h3>New System Setup</h3><hr/>
+    <%= render "form" %>
+    <% else %>
+    <p>System Setup already configured.</p>
+    <% end %>
+  </div>
+<div class = "tab-pane fade" id = "view_setup">
+<div class="col col-lg-12">
+   <table class="table table-hover">
+
+          <thead>
+          <tr>
+            <th>&nbsp;</th>
+            <th>Setup</th>
+          </tr>
+          </thead>
+          <tbody>
+          <% @setups.each do |setup| %>
+            <tr class="<%= cycle('odd', 'even') %>">
+              <td>
+          <% if setup.performance_comments? %>
+          <span class="glyphicon glyphicon-ok-sign"></span>
+          <% else %>
+          <span class="glyphicon glyphicon-remove-sign"></span>
+          <% end %>
+            </td>
+           <td>Are the performance comment/corrective measures fields for the KPI Results required?</td>
+
+          </tr>
+           <tr class="<%= cycle('odd', 'even') %>">
+           <td><%= setup.performance_length %></td>
+           <td>If the performance comment/corrective measures fields are required,&nbsp;what is the of minimum characters required?</td>
+
+          </tr>
+           <tr class="<%= cycle('odd', 'even') %>">
+           <td><% if setup.project_life_cycle? %>
+           <span class="glyphicon glyphicon-ok-sign"></span>
+           <% else %>
+           <span class="glyphicon glyphicon-remove-sign"></span>
+           <% end %></td>
+           <td>Use project life cycle?</td>
+
+          </tr>
+           <tr class="<%= cycle('odd', 'even') %>">
+           <td><% if setup.attach_poe? %>
+           <span class="glyphicon glyphicon-ok-sign"></span>
+           <% else %>
+           <span class="glyphicon glyphicon-remove-sign"></span>
+           <% end %>
+           </td>
+           <td>Allow users to attach POE when updating Departmental/Top Layer KPIs?</td>
+
+          </tr>
+           <tr class="<%= cycle('odd', 'even') %>">
+           <td>
+             <% if setup.include_departmental_previous_comments? %>
+             <span class="glyphicon glyphicon-ok-sign"></span>
+             <% else %>
+             <span class="glyphicon glyphicon-remove-sign"></span>
+             <% end %>
+
+           </td>
+           <td><b>Departmental SDBIP:</b>&nbsp;Include the target/actual for the previous time period?</td>
+
+          </tr>
+           <tr class="<%= cycle('odd', 'even') %>">
+           <td><% if setup.include_departmental_next_target? %>
+           <span class="glyphicon glyphicon-ok-sign"></span>
+           <% else %>
+           <span class="glyphicon glyphicon-remove-sign"></span>
+           <% end %>
+
+           </td>
+           <td><b>Departmental SDBIP:</b>&nbsp;Include the comments for the previous time period?</td>
+
+          </tr>
+           <tr class="<%= cycle('odd', 'even') %>">
+           <td><% if setup.include_toplayer_previous_target? %>
+           <span class="glyphicon glyphicon-ok-sign"></span>
+           <% else %>
+           <span class="glyphicon glyphicon-remove-sign"></span>
+           <% end %>
+
+           </td>
+           <td><b>Departmental SDBIP:</b>&nbsp;Include the target for the next time period?</td>
+
+          </tr>
+           <tr class="<%= cycle('odd', 'even') %>">
+           <td><% if setup.include_toplayer_next_target? %>
+           <span class="glyphicon glyphicon-ok-sign"></span>
+           <% else %>
+           <span class="glyphicon glyphicon-remove-sign"></span>
+           <% end %>
+
+           </td>
+           <td><b>Top Layer SDBIP:</b>&nbsp;Include the comments for the previous time period?</td>
+
+          </tr>
+          <tr class="<%= cycle('odd', 'even') %>">
+           <td><% if setup.include_toplayer_previous_comments? %>
+           <span class="glyphicon glyphicon-ok-sign"></span>
+           <% else %>
+           <span class="glyphicon glyphicon-remove-sign"></span>
+           <% end %>
+           </td>
+           <td><b>Top Layer SDBIP:</b>&nbsp;Include the target for the next time period?</td>
+
+          </tr>
+        <tr><td colspan="4"><%= link_to edit_setup_path(setup),remote: true,'data-target' => "#setup-modal", 'data-toggle' => 'modal', class: "btn btn-mini", :title=>"Click to edit KPI" do %>
+              <span class="glyphicon glyphicon-pencil"></span>&nbsp;Edit
+            <% end %>
+              <div id="setup-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+
+              </div>
+          </td></tr>
+
+        <% end %>
+        </tbody>
+      </table>
+
+      </div>
+      </div>
+</div>

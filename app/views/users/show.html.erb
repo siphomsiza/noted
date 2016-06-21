@@ -1,0 +1,114 @@
+<% provide(:title, @user.firstname) %>
+<script>
+$(function() {
+	//highlight the current nav
+	$("#applicationmanifest a:contains('USERS')").parent().addClass('active');
+}); //jQuery is loaded
+</script>
+<div class="row">
+  <div class="col-lg-6 col-md-offset-3">
+    <div>
+      <table class="table table-hover">
+        <tbody>
+          <tr>
+            <td align="right">
+              <%= gravatar_for @user, size: 50 %>
+            </td>
+            <td align="left">
+              <strong><%= @user.firstname %></strong>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+		</div>
+		<hr>
+    <div>
+
+      <% if !@user.role.blank? %>
+      <% if !@user.role.roles_details.blank? %>
+
+        <% end %>
+        <% end %>
+      </p>
+      <p><ok>Role:</ok>
+        <% if @user.admin? %>
+          <%= label_tag "System Admin" %>
+        <% end %>
+      <% if !@user.role.blank? %>
+      <% if @user.role.kpi_owner? %>
+        <%= label_tag :Kpi_Owner %>
+        <% if !@user.role.roles_details.blank? %>
+
+          <% end %>
+        <% elsif @user.role.departmental_administrator?%>
+        <%= label_tag :Departmental_Administrator %>
+        <% if !@user.role.roles_details.blank? %>
+
+          <% end %>
+        <% elsif @user.role.municipal_manager?%>
+        <%= label_tag :Municipal_Manager %>
+        <% if !@user.role.roles_details.blank? %>
+          <% end %>
+        <% elsif @user.role.internal_auditor?%>
+        <%= label_tag :Internal_Auditor %>
+        <% elsif @user.role.auditor_general?%>
+        <%= label_tag :Auditor_General %>
+        <% elsif @user.admin?%>
+        <%= label_tag :System_Administrator %>
+          <% end %>
+        <% end %>
+      </p>
+      <p><ok>Location:</ok>
+        <%= @user.location %>
+      </p>
+      <p><ok>Email:</ok>
+        <%= link_to @user.email %>
+      </p>
+    </div>
+    <div>
+    	<p><ok>Registered:</ok>
+        <%= @user.created_at %>
+      </p>
+    	<p><ok>Last Login:</ok>
+        <%= @user.activated_at %>
+      </p>
+  		<p><ok>Phone:</ok>
+        <%= link_to number_to_phone(@user.landline, :area_code => true, :delimiter => ' ') %>
+      </p>
+  		<p><ok>Mobile:&nbsp;</ok>
+        <%= link_to number_to_phone(@user.mobile, :area_code => true, :delimiter => ' ') %>
+      </p>
+  	</div>
+    <hr>
+    <div>
+    
+    </div>
+		<br>
+    <div class="text-center">
+
+      <% if current_user.admin? && !current_user?(@user) %>&nbsp;|&nbsp;
+      <%= link_to new_password_reset_path, :class=>"btn btn-mini btn-primary"  do %>
+        <span class="glyphicon glyphicon-"></span>Reset Password
+      <% end %>&nbsp;
+      <% if @user.activated? %>
+      |&nbsp;
+      <%= link_to controller: "users", action: "deactivate", id: @user.id, method: "get",:class=>"btn btn-default btn-mini" do %>
+        <span class="glyphicon glyphicon-ban-circle"></span>Deactivate
+      <% end %>&nbsp;
+      <% end %>
+      <% if !@user.activated? %>
+      |&nbsp;
+      <%= link_to controller: "users", action: "activate", id: @user.id, method: "get", :class=>"btn btn-default btn-mini" do %>
+        <span class="glyphicon glyphicon-ban-circle"></span>Activate
+      <% end %>&nbsp;
+      <% else %>
+
+      <% end %>
+       |&nbsp;
+      <%= link_to  @user , :class=>"btn btn-danger btn-mini", method: :delete, data: { confirm: "You sure?" } do %>
+        <span class="glyphicon glyphicon-remove-sign"></span>&nbsp;Delete
+      <% end %>
+      <% end %>
+		</div>
+  </div>
+</div>

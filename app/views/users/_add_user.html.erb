@@ -1,0 +1,230 @@
+<div class="tab-pane active" class="newuserform" id="add_user">
+	<section class="media">
+	  <div class="media-body">
+	<h2>New User</h2>
+
+	<form class="newuser form-horizontal" action="#">
+
+	  <fieldset id="userinfo">
+	    <legend>User Info</legend>
+
+			<section class="row">
+			<label class="col col-lg-4 control-label" for="title">Title</label>
+				<div class="controls col col-lg-8">
+					<select class="form-control"  name="title" id="title">
+						<option>Choose...</option>
+						<option value="Mr">Mr</option>
+						<option value="Mrs">Mrs</option>
+						<option value="Ms">Ms</option>
+					</select>
+				</div><!-- controls -->
+			</section><!-- row -->
+
+				<section class="row">
+					<label class="col col-lg-4 control-label" for="firstname">First Name</label>
+					<div class="controls col col-lg-8">
+						<input class="form-control" type="text" name="firstname" id="firstname" autofocus placeholder="First Name" required>
+					</div><!-- controls -->
+				</section><!-- row -->
+
+				<section class="row">
+					<label class="col col-lg-4 control-label" for="lastname">Last Name</label>
+					<div class="controls col col-lg-8">
+						<input class="form-control" type="text" name="lastname" id="lastname" autofocus placeholder="Last Name" required>
+					</div><!-- controls -->
+				</section><!-- row -->
+
+				<section class="row">
+					<label class="col col-lg-4 control-label" for="idnumber">ID Number</label>
+					<div class="controls col col-lg-8">
+						<input class="form-control" type="text" name="idnumber" id="idnumber" autofocus placeholder="ID Number" required>
+					</div><!-- controls -->
+				</section><!-- row -->
+
+				<section class="row">
+					<label class="col col-lg-4 control-label" for="birthday">Birthday</label>
+					<div class="controls col col-lg-8">
+						<input class="form-control" type="text" name="birthday" id="birthday" autofocus placeholder="Birthday" required>
+					</div><!-- controls -->
+				</section><!-- row -->
+
+	  </fieldset><!-- personal info -->
+
+		<fieldset id="systeminfo">
+	    <legend>System Info</legend>
+			<section class="row">
+				<label class="col col-lg-4 control-label" for="activelogin">Active Login</label>
+				<div class="controls col col-lg-8">
+					<input class="form-control" type="text" name="activelogin" id="activelogin" autofocus placeholder="Yes" />
+				</div><!-- controls -->
+			</section><!-- row -->
+
+			<section class="row">
+				<label class="col col-lg-4 control-label" for="username">User Name</label>
+				<div class="controls col col-lg-8">
+					<input class="form-control" type="text" name="username" id="username" autofocus placeholder="User Name" />
+				</div><!-- controls -->
+			</section><!-- row -->
+
+	  </fieldset><!-- system info -->
+
+		<fieldset id="employmentinfo">
+	    <legend>Employment Info</legend>
+			<section class="row">
+				<label class="col col-lg-4 control-label" for="employeenumber">Employee Number</label>
+				<div class="controls col col-lg-8">
+					<input class="form-control" type="text" name="employeenumber" id="employeenumber" />
+				</div><!-- controls -->
+			</section><!-- row -->
+
+			<section class="row">
+				<label class="col col-lg-4 control-label" for="employmentdate">Employment Date</label>
+				<div class="controls col col-lg-8">
+					<input class="form-control" type="text" name="employmentdate" id="employmentdate" />
+				</div><!-- controls -->
+			</section><!-- row -->
+
+			<section class="row">
+			<label class="col col-lg-4 control-label" for="jobtitle">Job Title</label>
+				<div class="controls col col-lg-8">
+					<select class="form-control"  name="jobtitle" id="jobtitle">
+						<option>Choose...</option>
+						<option value="Job Title1">Job Title1</option>
+						<option value="Job Title2">Job Title2</option>
+						<option value="Job Title3">Job Title3</option>
+					</select>
+				</div><!-- controls -->
+			</section><!-- row -->
+
+			<section class="row">
+			<label class="col col-lg-4 control-label" for="department">Department</label>
+				<div class="controls col col-lg-8">
+					<select class="form-control"  name="department" id="department">
+						<option>Choose...</option>
+						<option value="Department1">Department1</option>
+						<option value="Department2">Department2</option>
+						<option value="Department3">Department3</option>
+					</select>
+				</div><!-- controls -->
+			</section><!-- row -->
+
+			<section class="row">
+			<label class="col col-lg-4 control-label" for="location">Location</label>
+				<div class="controls col col-lg-8">
+					<select class="form-control"  name="location" id="location">
+						<option>Choose...</option>
+						<option value="Location1">Location1</option>
+						<option value="Location2">Location2</option>
+						<option value="Location3">Location3</option>
+					</select>
+				</div><!-- controls -->
+			</section><!-- row -->
+
+			<section class="row">
+			<label class="col col-lg-4 control-label" for="manager">Manager</label>
+				<div class="controls col col-lg-8">
+					<select class="form-control"  name="manager" id="manager">
+						<option>Choose...</option>
+						<option value="Manager1">Manager1</option>
+						<option value="Manager2">Manager2</option>
+						<option value="Manager3">Manager3</option>
+					</select>
+				</div><!-- controls -->
+			</section><!-- row -->
+
+	  </fieldset><!-- employment info -->
+
+		<fieldset id="contactdetails">
+	    <legend>Contact Details</legend>
+			<section class="row">
+				<label class="col col-lg-4 control-label" for="countryprefix">Country Prefix</label>
+				<div class="controls col col-lg-8">
+					<input class="form-control" type="text" name="countryprefix" id="countryprefix" />
+				</div><!-- controls -->
+			</section><!-- row -->
+
+			<section class="row">
+				<label class="col col-lg-4 control-label" for="landline">Landline/Office</label>
+				<div class="controls col col-lg-8">
+					<input class="form-control" type="text" name="landline" id="landline" />
+				</div><!-- controls -->
+			</section><!-- row -->
+
+			<section class="row">
+				<label class="col col-lg-4 control-label" for="mobile">Mobile/Cellphone</label>
+				<div class="controls col col-lg-8">
+					<input class="form-control" type="text" name="mobile" id="mobile" />
+				</div><!-- controls -->
+			</section><!-- row -->
+
+			<section class="row">
+				<label class="col col-lg-4 control-label" for="fax">Fax</label>
+				<div class="controls col col-lg-8">
+					<input class="form-control" type="text" name="fax" id="fax" />
+				</div><!-- controls -->
+			</section><!-- row -->
+
+			<section class="row">
+				<label class="col col-lg-4 control-label" for="email">Email</label>
+				<div class="controls col col-lg-8">
+					<input class="form-control" type="email" name="email" id="email" required autocomplete="off" />
+				</div><!-- controls -->
+			</section><!-- row -->
+
+	  </fieldset><!-- contact details -->
+
+	  <fieldset id="statutoryrequirements">
+			<legend>Statutory Requirements</legend>
+
+			<section class="row">
+			<label class="col col-lg-4 control-label" for="gender">Gender</label>
+				<div class="controls col col-lg-8">
+					<select class="form-control" name="gender" id="gender">
+						<option>Choose...</option>
+						<option value="male">Male</option>
+						<option value="female">Female</option>
+					</select>
+				</div><!-- controls -->
+			</section><!-- row -->
+
+			<section class="row">
+			<label class="col col-lg-4 control-label" for="race">Race</label>
+				<div class="controls col col-lg-8">
+					<select class="form-control" name="race" id="race">
+						<option>Choose...</option>
+						<option value="black">Black</option>
+						<option value="white">White</option>
+						<option value="indian">Indian</option>
+						<option value="indian">Coloured</option>
+					</select>
+				</div><!-- controls -->
+			</section><!-- row -->
+
+			<section class="row">
+			<label class="col col-lg-4 control-label" for="occupationalcategory">Occupational Category</label>
+				<div class="controls col col-lg-8">
+					<select class="form-control" name="occupationalcategory" id="occupationalcategory">
+						<option>Choose...</option>
+						<option value="employee">Employee</option>
+						<option value="manager">Manager</option>
+					</select>
+				</div><!-- controls -->
+			</section><!-- row -->
+
+			<section class="row">
+			<label class="col col-lg-4 control-label" for="disabled">Disabled?</label>
+				<div class="controls col col-lg-8">
+					<select class="form-control" name="disabled" id="disabled">
+						<option>Choose...</option>
+						<option value="yes">Yes</option>
+						<option value="no">No</option>
+					</select>
+				</div><!-- controls -->
+			</section><!-- row -->
+
+	  </fieldset>
+	  <button class="btn" type="submit">Create User</button>
+	</form>
+</div><!-- media-body -->
+</section><!-- media -->
+</div>

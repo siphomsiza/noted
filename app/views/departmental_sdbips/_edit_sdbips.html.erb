@@ -1,0 +1,104 @@
+<div class="table-responsive">
+  <table class="table table-striped table-bordered departmental-sdbip-edit" id="sdbips_table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>KPI</th>
+        <th>Department</th>
+        <th>Subdepartment</th>
+        <th>KPI Ref Number</th>
+        <th>KPI Type</th>
+        <th>Predetermined Objective</th>
+        <th class="kpiowner">KPI Owner</th>
+        <th class="unit_of_measurement">Unit of Measurement</th>
+        <th class="mscore_classification">M Score Classification</th>
+        <th class="idp_ref">IDP Ref</th>
+        <th class="national_outcome">National Outcome</th>
+        <th class="strategic_objectives">Strategic Objective</th>
+        <th class="source_of_evidence">Source of Evidence</th>
+        <th class="baseline">Baseline</th>
+        <th class="annual_target">Annual Target</th>
+        <th class="revised_target">Revised Target</th>
+        <th class="first_quarter_target">First Quarter Target</th>
+        <th class="second_quarter_target">Second Quarter Target</th>
+        <th class="third_quarter_target">Third Quarter Target</th>
+        <th class="fourth_quarter_target">Fourth Quarter Target</th>
+        <th class="budget">Budget</th>
+        <th class="performance_standard">Performance Standard</th>
+        <th class="risk_rating">Risk Rating</th>
+        <th class="kpa">KPA</th>
+        <th class="ndp_objectives">NDP Objective</th>
+        <th class="capital_project">Capital Project</th>
+        <th class="kpi_concept">KPI Concept</th>
+        <th class="impact">Impact</th>
+        <th class="provincial_strategic_outcome">Provincial Strategic Outcome</th>
+        <th class="area">Area</th>
+        <th class="ward">Ward</th>
+        <th class="past_year_performance">Past Year Performance</th>
+        <th class="reporting_category">Reporting Category</th>
+        <th class="top_layer_ref">Top Layer KPI Ref</th>
+        <th class="kpi_calculation_type">KPI Calculation Type</th>
+        <th class="start_date">Start Date</th>
+        <th class="end_date">End Date</th>
+        <th class="created_date">Create Date</th>
+        <th class="updated_date">Update Date</th>
+
+      </tr>
+    </thead>
+    <tbody>
+    <% @departmental_sdbips.each do |departmental_sdbip| %>
+      <tr>
+        <td><%= departmental_sdbip.id %></td>
+        <td>
+        <%= link_to edit_departmental_sdbip_path(departmental_sdbip),remote: true,'data-target' => "#departmental-sdbip-modal", 'data-toggle' => 'modal', :title=>"Click to Update KPI" do %>
+            <%= departmental_sdbip.kpi %>
+          <% end %>
+          <div id="departmental-sdbip-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+
+          </div>
+        </td>
+        <td><%= departmental_sdbip.department.name %></td>
+        <td><%= departmental_sdbip.subdepartment.subdepartment_name %></td>
+        <td><%= departmental_sdbip.kpi_ref_number %></td>
+        <td><% if !departmental_sdbip.kpi_type_id.blank? %><%= departmental_sdbip.kpi_type.name %><% end %></td>
+        <td><% if !departmental_sdbip.predetermined_objective_id.blank? %><%= departmental_sdbip.predetermined_objective.name %><% end %></td>
+        <td class="kpiowner"><% if !departmental_sdbip.kpi_owner_id.blank? %><%= departmental_sdbip.kpi_owner.name %><% end %></td>
+        <td class="unit_of_measurement"><%= departmental_sdbip.unit_of_measurement %></td>
+        <td class="mscore_classification"><%= departmental_sdbip.mscore_classification.name %></td>
+        <td class="idp_ref"><%= departmental_sdbip.idp_ref %></td>
+        <td class="national_outcome"><% if !departmental_sdbip.national_outcome_id.blank? %><%= departmental_sdbip.national_outcome.name %><% end %></td>
+        <td class="strategic_objectives"><%= departmental_sdbip.strategic_objective.name %></td>
+        <td class="source_of_evidence"><%= departmental_sdbip.source_of_evidence %></td>
+        <td class="baseline"><%= departmental_sdbip.baseline %></td>
+        <th class="annual_target"><%= departmental_sdbip.annual_target %></th>
+        <th class="revised_target"><%= departmental_sdbip.revised_target %></th>
+        <th class="first_quarter_target"><%= departmental_sdbip.first_quarter_target %></th>
+        <th class="second_quarter_target"><%= departmental_sdbip.second_quarter_target %></th>
+        <th class="third_quarter_target"><%= departmental_sdbip.third_quarter_target %></th>
+        <th class="fourth_quarter_target"><%= departmental_sdbip.fourth_quarter_target %></th>
+        <td class="budget"><%= departmental_sdbip.budget %></td>
+        <td class="performance_standard"><%= departmental_sdbip.performance_standard %></td>
+        <td class="risk_rating"><% if !departmental_sdbip.risk_rating_id.blank?%><%= departmental_sdbip.risk_rating.name %><% end %></td>
+        <td class="kpa"><% if !departmental_sdbip.kpa_id.blank? %><%= departmental_sdbip.kpa.name %><% end %></td>
+        <td class="ndp_objectives"><% if !departmental_sdbip.ndp_objective_id.blank? %><%= departmental_sdbip.ndp_objective.name %><% end %></td>
+        <td class="capital_project"><% if !departmental_sdbip.capital_project_id.blank? %><%= departmental_sdbip.capital_project.mun_cp_ref %><% end %></td>
+        <td class="kpi_concept"><% if !departmental_sdbip.kpi_concept_id.blank? %><%= departmental_sdbip.kpi_concept.name %><% end %></td>
+
+        <td class="impact"><%= departmental_sdbip.impact %></td>
+        <td class="provincial_strategic_outcome"><% if !departmental_sdbip.provincial_strategic_outcome_id.blank? %><%= departmental_sdbip.provincial_strategic_outcome.name %><% end %></td>
+        <td class="area"><% if !departmental_sdbip.area_id.blank? %><%= departmental_sdbip.area.name %><% end %></td>
+        <td class="ward"><% if !departmental_sdbip.ward_id.blank? %><%= departmental_sdbip.ward.name %><% end %></td>
+        <td class="past_year_performance"><%= departmental_sdbip.past_year_performance %></td>
+        <td class="reporting_category"><% if !departmental_sdbip.reporting_category_id.blank? %><%= departmental_sdbip.reporting_category.name %><% end %></td>
+        <td class="top_layer_ref"><%= departmental_sdbip.top_layer_kpi_ref %></td>
+        <td class="kpi_calculation_type"><% if !departmental_sdbip.kpi_calculation_type_id.blank? %><%= departmental_sdbip.kpi_calculation_type.name %><% end %></td>
+        <td class="start_date"><%= departmental_sdbip.start_date %></td>
+        <td class="end_date"><%= departmental_sdbip.end_date %></td>
+        <td class="created_date"><%= departmental_sdbip.created_at.strftime(' %Y-%B-%d') %></td>
+        <td class="updated_date"><%= departmental_sdbip.updated_at.strftime('%d-%B-%Y') %></td>
+
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

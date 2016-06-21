@@ -1,0 +1,132 @@
+<% provide(:title, "Setup") %>
+<!-- Service Panels -->
+<!-- The circle icons use Font Awesome's stacked icon classes. For more information, visit http://fontawesome.io/setups/ -->
+
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header"><strong>Setup Panels</strong></h1>
+  </div>
+  <br/>
+  <div class="col-md-4 col-sm-8">
+    <div class="panel panel-default text-center">
+      <div class="panel-heading">
+        <h4>Step&nbsp;1:&nbsp;System Setup</h4>
+      </div>
+      <div class="panel-body panel-height">
+
+        <p>Answer some questions please.&nbsp;<span class="glyphicon glyphicon-arrow-right"></span></p>
+      </div>
+      <div class="panel-footer">
+      <%= link_to "Configure", setups_path, :class=>"btn" %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 col-sm-8">
+    <div class="panel panel-default text-center">
+      <div class="panel-heading">
+        <h4>Step&nbsp;2:&nbsp;Department Setup</h4>
+      </div>
+      <div class="panel-body panel-height">
+        <p>Setup the Department and Sub-Department structure.&nbsp;<span class="glyphicon glyphicon-arrow-right"></span></p>
+      </div>
+
+      <div class="panel-footer">
+          <% if @setups.blank? %>
+      <div class="container">
+      <br/><br/>
+      </div>
+          <% else %>
+          <%= link_to "Configure", departments_path, :class=>"btn" %>
+          <% end %>
+
+      </div>
+
+    </div>
+  </div>
+
+  <div class="col-md-4 col-sm-8">
+    <div class="panel panel-default text-center">
+      <div class="panel-heading">
+        <h4>Step&nbsp;3:&nbsp;List Setup</h4>
+      </div>
+      <div class="panel-body panel-height">
+        <p>Setup the lists used by the system.&nbsp;<span class="glyphicon glyphicon-arrow-right"></span></p>
+      </div>
+      <div class="panel-footer">
+      <% if @setups.blank? || @departments.blank? %>
+       <div class="container">
+      <br/><br/>
+      </div>
+      <% else %>
+        <%= link_to "Configure", lists_path, :disabled=> false, :class=>"btn" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+<hr>
+<div class="row">
+  <div class="col-md-4 col-sm-8">
+    <div class="panel panel-default text-center">
+      <div class="panel-heading">
+        <h4>Step&nbsp;4:&nbsp;Roles Setup</h4>
+      </div>
+      <div class="panel-body panel-height">
+        <p>Setup the roles and access rights for specific users.&nbsp;<span class="glyphicon glyphicon-arrow-right"></span></p>
+      </div>
+
+      <div class="panel-footer">
+      <% if @setups.blank? || @departments.blank? || @lists.blank? %>
+     <div class="container">
+      <br/><br/>
+      </div>
+      <% else %>
+        <%= link_to "Configure", roles_path, :class => "btn" %>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+  <div class="col-md-4 col-sm-8">
+    <div class="panel panel-default text-center">
+      <div class="panel-heading">
+        <h4>Step&nbsp;5:&nbsp;Headings</h4>
+      </div>
+      <div class="panel-body panel-height">
+        <p>Setup the headings used by the system.&nbsp;<span class="glyphicon glyphicon-arrow-right"></span></p>
+      </div>
+      <div class="panel-footer">
+       <% if @setups.blank? || @departments.blank? || @lists.blank? || @roles.blank? %>
+        <div class="container">
+      <br/><br/>
+      </div>
+        <% else %>
+        <%= link_to "Configure", headings_path ,:class=>"btn" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 col-sm-8">
+    <div class="panel panel-default text-center">
+      <div class="panel-heading">
+        <h4>Step&nbsp;6:&nbsp;Time Periods</h4>
+      </div>
+      <div class="panel-body panel-height">
+        <p>Setup the time period automatic reminder & closures.&nbsp;<span class="glyphicon glyphicon-arrow-right"></span></p>
+      </div>
+      <div class="panel-footer">
+       <% if @setups.blank? || @departments.blank? || @lists.blank? || @roles.blank? || @headings.blank? %>
+      <div class="container">
+      <br/><br/>
+      </div>
+       <% else %>
+       <%= link_to "Configure",sdbip_time_periods_path,:class=>"btn" %>
+       <% end %>
+      </div>
+    </div>
+  </div>
+
+
+</div>

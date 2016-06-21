@@ -1,0 +1,39 @@
+<div class="tab-pane fade" id="users_details_log">
+<div class="table-responsive table-bordered">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Avatar</th>
+        <th>Ref</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Username</th>
+        <th>Status</th>
+        <th>Date Added</th>
+        <th>Last Login</th>
+        <th>Last Login IP</th>
+        <th>Login Count</th>
+        <th>Login Attempt</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+      <tr>
+        <td><%= gravatar_for user, size: 50 %></td>
+        <td><%= user.id %></td>
+        <td><%= user.firstname %></td>
+        <td><%= user.surname %></td>
+        <td><%= user.email %></td>
+        <td><%= user.status%></td>
+        <td><%= user.created_at %></td>
+        <td><%= user.last_login %></td>
+        <td><%= user.last_login_ip%></td>
+        <td><%= user.login_count %></td>
+        <td><%= user.login_attempts%></td>
+      </tr>
+      <% end %>
+    </tbody>
+    </table>
+    <%= will_paginate @users %>
+</div>
+</div>

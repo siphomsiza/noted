@@ -1,0 +1,167 @@
+<% provide(:title, 'All users') %>
+<div>
+  <h2>
+    Users Panel
+  </h2>
+  <div class="row">
+    <div class="col col-lg-12">
+      <%= link_to new_user_path , :class =>"btn btn-midi pull-right" do %>
+        <span class="glyphicon glyphicon-plus-sign"></span> New
+      <% end %>
+      <%= link_to :back, :class =>"btn btn-midi pull-right" do %>
+        <span class="glyphicon glyphicon-circle-arrow-left"></span> Back
+      <% end %>
+    </div>
+    <div class="col col-lg-12">
+      <div class="tabbable tabs">
+        <ul id = "myTab" class = "nav nav-tabs">
+          <li class = "active">
+            <a href = "#users" data-toggle = "tab">
+               All Users
+            </a>
+          </li>
+          <li>
+            <a href = "#admins" data-toggle = "tab">Administrators</a>
+          </li>
+          <li>
+            <a href = "#active" data-toggle = "tab">Active</a>
+          </li>
+          <li>
+            <a href= "#inactive" data-toggle = "tab">
+               Inactive
+            </a>
+          </li>
+	<li>
+    <a href = "#logon_report" data-toggle = "tab">Logon Report</a>
+  </li>
+        </ul><!-- nav nav-tabs -->
+	    </div><!-- tabbable tabs -->
+
+      <div id = "myTabContent" class = "tab-content">
+
+        <div class = "tab-pane fade in active" id = "users">
+        <div class="row"><div class="col-md-10 col-offset-2">
+          <% form_tag users_path, :method => 'get' do %>
+          <%= text_field_tag :search, params[:search] %>
+          <%= submit_tag "Search", :firstname => nil %>
+      <% end %>
+        </div>
+        </div>
+          <%= will_paginate @users, :remote=>true, :class=>"center" %>
+          <ul class="users">
+            <%= render @users %>
+          </ul>
+          <%= will_paginate @users, :remote=>true, :class=>"center" %>
+        </div>
+
+        <div class = "tab-pane fade" id = "admins">
+        <div class="row">
+            <% form_tag users_path, :method => 'get' do %>
+        <p>
+          <%= text_field_tag :search, params[:search] %>
+          <%= submit_tag "Search", :firstname => nil %>
+        </p>
+      <% end %>
+        </div>
+          <%= will_paginate @admin_users, :remote=>true, :class=>"center" %>
+          <ul class="users">
+            <%= render @admin_users %>
+          </ul>
+          <%= will_paginate @admin_users, :remote=>true, :class=>"center" %>
+
+
+        </div>
+
+        <div class = "tab-pane fade" id = "active">
+        <div class="row">
+            <% form_tag users_path, :method => 'get' do %>
+        <p>
+          <%= text_field_tag :search, params[:search] %>
+          <%= submit_tag "Search", :firstname => nil %>
+        </p>
+      <% end %>
+        </div>
+          <%= will_paginate @active_users, :remote=>true, :class=>"center" %>
+          <ul class="users">
+            <%= render @active_users %>
+          </ul>
+          <%= will_paginate @active_users, :remote=>true, :class=>"center" %>
+        </div>
+
+
+        <div class = "tab-pane fade" id = "inactive">
+          <div class="row">
+            <% form_tag users_path, :method => 'get' do %>
+        <p>
+          <%= text_field_tag :search, params[:search] %>
+          <%= submit_tag "Search", :firstname => nil %>
+        </p>
+      <% end %>
+        </div>
+          <%= will_paginate @inactive_users, :remote=>true, :class=>"center" %>
+          <ul class="users">
+            <%= render @inactive_users %>
+          </ul>
+          <%= will_paginate @inactive_users, :remote=>true, :class=>"center" %>
+        </div>
+<div class = "tab-pane fade in" id = "logon_report">
+
+    <button class="btn btn-midi btn-primary" data-toggle="modal" data-target="#filterModal" title="Click to Filter log reports.">
+   <span class=""</span>&nbsp;Filter
+   </button>&nbsp;
+   <div>
+      <table class="table-stiped table-responsive table-hover">
+  <tr>
+  <th>Date</th>
+  <th>User ID</th>
+  <th>User Name</th>
+  <th>Activity Log</th>
+  </tr>
+  </table>
+  
+   </div>
+</div>
+<div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="filterModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+<div class="modal-content">
+<%= form_tag users_path, method: 'get' do %>
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+&times;
+</button>
+<h4 class="modal-title" id="filterModalLabel">
+<ol class="breadcrumb">
+<li>Filter Logon Report</a></li>
+</ol>
+</h4>
+
+</div>
+
+<div class="modal-body">
+<!-- checkboxes-->
+<%= label_tag :NB,"Type of Log:" %><br/>
+<%= check_box_tag :failure_password,:id=>'failure_password' %><%= label_tag :failure_password,"Failure: Password" %><br/>
+<%= check_box_tag :failure_unknown_username, :id=>'failure_unknown_username' %><%= label_tag :failure_unknown_username,"Failure: Unknown Username" %><br/>
+<%= check_box_tag :failure_locked_account, :id=>'failure_locked_account' %><%= label_tag :failure_locked_account,"Failure: Locked Account" %><br/>
+<%= check_box_tag :failure_terminated_account, :id=>'failure_terminated_account'%><%= label_tag :terminated_account,"Failure: Terminated Account" %><br/><br/>
+
+ <div><%= label_tag :NB,"Date:" %> </div>
+ <div class="row">
+ <div class="col-md-5">
+     From:<%= date_field(:start_date, nil,placeholder: '--Select Start Date--',:class => 'form-control') %>
+     </div>
+    <div class="col-md-5">To:<%= date_field(:end_date,nil,placeholder: '--Select End Date--',:class => 'form-control') %></div>
+    </div>
+
+</div>
+<div class="modal-footer">
+<div class="col-md-4 col-md-offset-3"> <%= submit_tag "Save", :class=>"btn btn-primary btn-midi" %></div>
+
+</div>
+</div>
+<% end %>
+</div><!-- /.modal-content -->
+      </div><!-- tab-content -->
+    </div>
+  </div>
+</div>

@@ -1,0 +1,151 @@
+<% provide(:title, "Dashboard") %>
+<div>
+  <h2>
+    Dashboard
+  </h2>
+  <div class="row">
+    <div class="col col-lg-12">
+      <div class="well text-center">
+        <span id="date">&nbsp;</span>&nbsp;<span id="clock">&nbsp;</span>
+        <br/>
+        <span id="weather">
+          <img src="../assets/images/spinner_.gif" alt="loading" id="spinner" >
+        </span>
+        <span id="forecast">
+          <noscript>This application requires JavaScript to function. Please enable scripts in your browser.</noscript>
+        </span>
+      </div>
+    </div>
+    <div class="col col-lg-12">
+      <h3 class="sub-header"><span class="glyphicon glyphicon-user"></span>&nbsp;Users Statistics</h3>
+      <div class="row">
+        <div class="col-lg-3 col-md-6">
+          <div class="panel">
+            <div class="panel-heading">
+              <div class="row">
+                <div>
+                  <div class="c100 p<%= @users.count %>">
+                    <span><%= @users.count %></span>
+                    <div class="slice">
+                      <div class="bar"></div>
+                      <div class="fill"></div>
+                    </div>
+                  </div>
+                </div>
+                <div>All Users</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="panel">
+            <div class="panel-heading">
+              <div class="row">
+                <div>
+                  <div class="c100 p<%= @users.where(admin: true).count %> red">
+                    <span><%= @users.where(admin: true).count %></span>
+                    <div class="slice">
+                      <div class="bar"></div>
+                      <div class="fill"></div>
+                    </div>
+                  </div>
+                </div>
+                <div>Admin Users</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="panel">
+            <div class="panel-heading">
+              <div class="row">
+                <div>
+                  <div class="c100 p<%= @users.where(activated: true).count %> green">
+                    <span><%= @users.where(activated: true).count %></span>
+                    <div class="slice">
+                      <div class="bar"></div>
+                      <div class="fill"></div>
+                    </div>
+                  </div>
+                </div>
+                <div>Active Users</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <div class="panel">
+            <div class="panel-heading">
+              <div class="row">
+                <div>
+                  <div class="c100 p<%= @users.where(activated: false).count %> orange">
+                    <span><%= @users.where(activated: false).count %></span>
+                    <div class="slice">
+                      <div class="bar"></div>
+                      <div class="fill"></div>
+                    </div>
+                  </div>
+                </div>
+                <div>Inactive Users</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col col-lg-12">
+      <h3>Total Performance Standards for Mkhondo Municipality</h3>
+      <div class="panel panel-default col-md-6">
+        <div class="panel-body">
+          <%= pie_chart @departmental_sdbips.group(:performance_standard).count, width: "400px", height: "250px" %>
+        </div>
+        <!-- /.panel-body -->
+      </div>
+      <div class="panel panel-default col-md-6">
+        <div class="panel-body">
+          <%= bar_chart @departmental_sdbips.group(:performance_standard).count, width: "400px", height: "250px" %>
+        </div>
+        <!-- /.panel-body -->
+      </div>
+    </div>
+    <div class="col col-lg-12">
+      <h3>Total Performance Standards by Department</h3>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <%= column_chart @departmental_sdbips.group(:department_id,:performance_standard).count, width: "95%", height: "400px" %>
+        </div>
+        <!-- /.panel-body -->
+      </div>
+    </div>
+    <div class="col col-lg-12">
+      <h3 class="sub-header"><span class="glyphicon glyphicon-time"></span>&nbsp;SDBIP Time Periods</h3>
+    </div>
+    <div class="col col-lg-12">
+      <h3 class="sub-header"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;Activity Log</h3>
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>User</th>
+              <th>Activity</th>
+              <th>Location(IP Address)</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% User.where(admin: true).each do |activity|%>
+            <tr>
+              <td><%= activity.firstname %></td>
+              <td><%= activity.created_at %></td>
+              <td><%= activity.updated_at %></td>
+              <td><%= activity.created_at %></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+

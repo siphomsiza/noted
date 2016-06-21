@@ -1,0 +1,31 @@
+<% provide(:title, 'Revenue By Source') %>
+<script>
+$(function() {
+	//highlight the current nav
+	$("#applicationmanifest a:contains('SDBIP')").parent().addClass('active');
+}); //jQuery is loaded
+</script>
+<br/>
+<div class="row">
+<div class="col col-lg-11">
+<ul class="nav nav-pills">
+<li><%= link_to "Departmental SDBIP", departmental_sdbips_path, :class =>"btn btn-sm pull-right"%></li>
+<% if current_user.admin? %><li><%= link_to "Top Layer SDBIP", top_layer_sdbips_path, :class =>"btn btn-xs pull-right"%></li>
+<li><%= link_to "Capital Projects", capital_projects_path, :class =>"btn btn-xs pull-right"%></li>
+<li><%= link_to "Monthly Cashflow", monthly_cashflows_path, :class =>"btn btn-xs pull-right"%></li>
+<li class="active"><%= link_to "Revenue By Source", revenue_by_sources_path, :class =>"btn btn-xs pull-right"%></li>
+<% end %>
+</ul>
+</div>
+</div>
+<div class="row">
+	<div>
+<h2>New Revenue By Source</h2>
+<div class="row">
+	<div class="col col-lg-12">
+		<%= link_to revenue_by_sources_path, :class =>"btn btn-midi" do %>
+				<span class="glyphicon glyphicon-circle-arrow-left"></span>&nbsp;Back
+		<% end %></div></div></div></div
+
+
+<%= render 'form' %>

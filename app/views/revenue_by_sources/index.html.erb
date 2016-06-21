@@ -1,0 +1,88 @@
+<% provide(:title, 'Revenue By Source') %>
+<script>
+$(function() {
+	//highlight the current nav
+	$("#applicationmanifest a:contains('SDBIP')").parent().addClass('active');
+}); //jQuery is loaded
+</script>
+<br/>
+<div class="row">
+<div class="col col-lg-12">
+	<article class="sdbip">
+	<h1>Mkhondo Local Municipality</h1>
+<ul class="nav nav-pills">
+<li><%= link_to "Departmental SDBIP", departmental_sdbips_path, :class =>"btn btn-sm pull-right"%></li>
+<% if current_user.admin? %><li><%= link_to "Top Layer SDBIP", top_layer_sdbips_path, :class =>"btn btn-xs pull-right"%></li>
+<li><%= link_to "Capital Projects", capital_projects_path, :class =>"btn btn-xs pull-right"%></li>
+<li><%= link_to "Monthly Cashflow", monthly_cashflows_path, :class =>"btn btn-xs pull-right"%></li>
+<li class="active"><%= link_to "Revenue By Source", revenue_by_sources_path, :class =>"btn btn-xs pull-right"%></li>
+<% end %>
+</ul>
+</div>
+</div>
+<div class="row">
+  <div>
+
+				<div class="col col-lg-12">
+					<div class="tabbable tabs" id="departmental_sdbips-tabs">
+						<ul id = "myTab" class = "nav nav-tabs">
+							<li class="active">
+								<a href = "#new_revenue_by_source" data-toggle = "tab">
+									<span class="glyphicon glyphicon-plus-sign"></span>&nbsp;Add Revenue By Source
+								</a>
+							</li>
+							<li>
+								<a href = "#view_revenue_by_sources" data-toggle = "tab"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;View Revenue By Source</a>
+							</li>
+							<li>
+								<a href = "#manage_revenue_by_sources" data-toggle = "tab"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;Manage Revenue By Source</a>
+							</li>
+						</ul><!-- nav nav-tabs -->
+					</div><!-- tabbable tabs -->
+
+					<div id = "myTabContent" class = "tab-content">
+						<br/>
+						<div class = "tab-pane active fade in" id = "new_revenue_by_source">
+
+										<h2>New Monthly Cashflow</h2>
+							<%= render 'form' %>
+						</div>
+						<div class = "tab-pane active fade" id = "view_revenue_by_sources">
+							<% if @revenue_by_sources.blank? && RevenueBySource.blank? %>
+							<p> There are no Revenue By Source(s) currently in the system. <p>
+							<% elsif @revenue_by_sources.blank? && !RevenueBySource.blank? %>
+							<p> You currently have no Revenue By Source(s) currently. </p>
+							<% elsif !@revenue_by_sources.blank? %>
+							<div class="table-responsive">
+								<%= render 'revenue_by_sources'%>
+								<%= will_paginate @revenue_by_sources, :class=>"center" %>
+							</div>
+							<% end %>
+						</div>
+						<div class = "tab-pane fade" id = "manage_revenue_by_sources">
+							
+							<% if @revenue_by_sources.blank? && RevenueBySource.blank? %>
+
+							<p> There are no Revenue By Source(s) currently in the system to edit. <p>
+
+							<% elsif @revenue_by_sources.blank? && !RevenueBySource.blank? %>
+
+							<p> You currently have no Revenue By Source(s) currently to edit. </p>
+
+							<% elsif !@revenue_by_sources.blank? %>
+
+							<div class="table-responsive">
+
+								<%= render 'edit_revenue_by_source'%>
+
+								<%= will_paginate @revenue_by_sources, :class=>"center" %>
+
+							</div>
+
+							<% end %>
+
+						</div>
+					</div>
+
+			</article>
+</div></div>

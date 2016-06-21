@@ -1,0 +1,64 @@
+<% provide(:title, "Show Departments") %>
+<script>
+$(function() {
+	//highlight the current nav
+	$("#applicationmanifest a:contains('SETUP')").parent().addClass('active');
+}); //jQuery is loaded
+</script>
+<div>
+  <h2>
+    <%= @department.name %>
+  </h2>
+  <div class="row">
+    <div class="col col-lg-12">
+      <span class="pull-right"><%= link_to :back, :class =>"btn btn-midi",:style=>"text-decoration: none;" do %>
+          <span class="glyphicon glyphicon-circle-arrow-left"></span>&nbsp;Back
+        <% end %>
+      <% if current_user.admin? %>
+        &nbsp;
+      <%= link_to edit_department_path(@department), class: "btn btn-mini" do %>
+                  <span class="glyphicon glyphicon-pencil"></span>Edit
+                <% end %>
+                &nbsp;
+      <%= link_to @department, method: :delete, data: { confirm: "You sure?" }, class: "btn btn-mini" do %>
+                  <span class="glyphicon glyphicon-remove-sign"></span>Delete
+                <% end %>&nbsp;<%= link_to new_department_path , :class =>"btn btn-midi",:style=>"text-decoration: none;" do %>
+                <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;New
+        <% end %><% end %></span>
+    </div>
+    <div class="col col-lg-12">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+
+            <th>Department Name</th>
+            <th>Tel no.</th>
+            <th>Fax</th>
+             <th>Sub-departments</th>
+
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <tr class="<%= cycle('odd', 'even') %>">
+
+            <td><%= @department.name %></td>
+             <td><%= link_to number_to_phone(@department.tel_no, :area_code => true, :delimiter => ' ') %></td>
+              <td><%= link_to number_to_phone(@department.fax_no, :area_code => true, :delimiter => ' ') %></td>
+            <td><% @department.subdepartments %>
+        <ol class="subdepartments">
+          <% @department.subdepartments.each do |subdepartment| %>
+            <li><%=  subdepartment.subdepartment_name %></li>
+           <% end %>
+        </ol>
+      </td>
+    
+
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

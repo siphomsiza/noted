@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Master Setups</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Municipality</th>
+      <th>Regions/Areas</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @master_setups.each do |master_setup| %>
+      <tr>
+        <td><%= master_setup.municipality %></td>
+        <td><%= master_setup.municipality %></td>
+        <td><%= link_to 'Show', master_setup %></td>
+        <td><%= link_to 'Edit', edit_master_setup_path(master_setup) %></td>
+        <td><%= link_to 'Destroy', master_setup, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,36 @@
+<table class="table table-striped table-bordered">
+<thead>
+  <tr>
+    <th>Department</th>
+    <th>Subdepartment</th>
+    <th>Mscore classification</th>
+    <th>Line item</th>
+    <th>Month</th>
+    <th>Vote number</th>
+    <th>Operational Expenditure</th>
+    <th>Revenue</th>
+    <th>Capital Expenditure</th>
+    <th colspan="1"></th>
+  </tr>
+</thead>
+
+<tbody>
+  <% @monthly_cashflows.each do |monthly_cashflow| %>
+    <tr>
+      <td><%= monthly_cashflow.department.name %></td>
+      <td><%= monthly_cashflow.subdepartment.subdepartment_name %></td>
+      <td><%= monthly_cashflow.mscore_classification.name %></td>
+      <td><%= monthly_cashflow.line_item %></td>
+      <td><%= monthly_cashflow.month %></td>
+      <td><%= monthly_cashflow.vote_number %></td>
+      <td><%= monthly_cashflow.operational_expenditure %></td>
+      <td><%= monthly_cashflow.revenue %></td>
+      <td><%= monthly_cashflow.capital_expenditure %></td>
+      <td><%= link_to edit_monthly_cashflow_path(monthly_cashflow), class: "btn btn-mini", :title=>"Click to update KPI" do %>
+          <span class="glyphicon glyphicon-pencil"></span>&nbsp;Update
+        <% end %></td>
+
+    </tr>
+  <% end %>
+</tbody>
+</table>

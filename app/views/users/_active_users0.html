@@ -1,0 +1,86 @@
+<div class="tab-pane active" id="active_users">
+<div class="table-responsive table-bordered">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Avatar</th>
+        <th>Ref</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Username</th>
+        <th>Date Added</th>
+        <th>Last Login</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @active_users.each do |active_user| %>
+      <tr>
+        <td><%= gravatar_for active_user, size: 50 %></td>
+        <td><%= active_user.id %></td>
+        <td><%= active_user.firstname %></td>
+        <td><%= active_user.surname %></td>
+        <td><%= active_user.email %></td>
+        <td><%= active_user.created_at %></td>
+        <td><%= active_user.last_login %></td>
+        <td>
+          <%= link_to edit_user_path(active_user),remote: true,'data-target' => "#user-modal", 'data-toggle' => 'modal', class: "btn btn-mini", :title=>"Click to Edit user details" do %>
+              <span class="glyphicon glyphicon-pencil"></span>&nbsp;Edit Details
+            <% end %>
+            <div id="user-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+
+            </div>
+            <% if current_user.admin? && !current_user?(active_user) %> |
+          <%= link_to "#", class: "btn" do %>
+            Edit Access
+          <% end %><% end %>
+          <% if current_user.admin? && !current_user?(active_user) %> |
+          <%= link_to "",'data-target' => "#reset-password", 'data-toggle' => 'modal', class: "btn btn-mini", :title=>"Click to change your password" do %>
+              &nbsp;Reset Password
+            <% end %>
+          <% end %>
+          <% if current_user.admin? && !current_user?(active_user) %>
+           |
+          <%= link_to active_user, data:{confirm: 'Are you sure?'} , :method => :delete, class: "btn" do %><span class="glyphicon glyphicon-trash"></span>&nbsp;
+            Delete
+          <% end %>
+          <% end %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= will_paginate @active_users %>
+</div> <!-- table-responsive -->
+</div>
+
+<div class="modal fade" id="reset-password" tabindex="-1" role="dialog"
+aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+<button type="button" class="close"
+data-dismiss="modal" aria-hidden="true">
+&times;
+</button>
+  <h3><%= "Reset password #{@user.firstname}" %></h3>
+</div>
+<div class="modal-body">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <%= form_for(:password_reset, url: password_resets_path) do |f| %>
+        <%= f.label :email %>
+        <%= f.email_field :email, class: 'form-control' %>
+
+
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <%= f.submit "Submit", class: "btn" %>
+
+</div>
+<% end %>
+</div><!-- /.modal-content -->
+</div><!-- /.modal -->
+</div>
