@@ -272,7 +272,7 @@ $(function() {
     reportValue = s.value ;
 		alert(reportValue);
     $.ajax({
-       url : '/departmental_sdbip_progresses_index',
+       url : '/index',
        type : "post",
        data : { report_title: JSON.stringify(reportValue), format_type: JSON.stringify(formatSelection),data_value: JSON.stringify(selectInfoValues),departments_value: JSON.stringify(departmentValues), subdepartments_value: JSON.stringify(subDepartmentValues), kpi_owner_values: JSON.stringify(kpiOwnerValues), predetermined_objectives_values: JSON.stringify(preDeterminedValues), mscore_classification_values: JSON.stringify(gfsClassificationValues),ndp_objectives_values: JSON.stringify(ndpObjectivesValues),kpa_values: JSON.stringify(nationalKpaValues),strategic_objectives_values: JSON.stringify(strategicObjectiveValues), kpi_calculation_type_data: JSON.stringify(kpiCalculationValues),kpi_type_values: JSON.stringify(kpiTypeValues), areas_values: JSON.stringify(areaValues), ward_values: JSON.stringify(wardsValues), provincial_startegic_values: JSON.stringify(provincialStrategicValues), kpi_concept_values: JSON.stringify(kpiConceptValues)}
    }).done(function (response) {

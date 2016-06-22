@@ -42,7 +42,7 @@ Rails.application.routes.draw do
   get 'activate', to: 'users#activate'
   get 'users/:id/edit_new_user' => 'users#edit_new_user', :as => :edit_new_user
   get 'users/:id/edit_active_user' => 'users#edit_active_user', :as => :edit_active_user
-  post 'departmental_sdbip_progresses/index' => 'departmental_sdbip_progresses#index', :as => :departmental_sdbip_progresses_index
+  post 'departmental_sdbip_progresses/index' => 'departmental_sdbip_progresses#index'
   get 'departmental_sdbip_progresses/index' => 'departmental_sdbip_progresses#index'
   get 'departmental_sdbip_progresses/:id/show' => 'departmental_sdbip_progresses#show'
   get 'export', to: 'departmental_sdbip_progresses#export',defaults: { format: 'csv'}

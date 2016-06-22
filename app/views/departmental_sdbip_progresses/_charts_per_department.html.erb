@@ -26,7 +26,7 @@
       <% Department.all.each do |dept| %>
         <tr>
           <td><%= dept.name %></td>
-          <td><%= link_to "View",departmental_sdbip_progress_path(dept) ,class:'btn' %></td>
+          <td><%= link_to "View",departmental_sdbip_progresses_index_path(dept) ,class:'btn' %></td>
           <td>
 
           <button type="view" value="View">View</button>
