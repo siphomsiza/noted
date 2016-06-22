@@ -1,7 +1,7 @@
 class DepartmentalSdbipProgressesController < ApplicationController
-  before_action :logged_in_user, only: [:new, :index, :edit, :update, :destroy,:show,:export]
-  before_action :admin_user,     only: [:new, :index, :destroy,:show,:export]
-  before_action :kpi_owner_user,     only: [:index,:edit,:update, :index,:show,:export]
+  before_action :logged_in_user, only: [:index,:show,:export]
+  before_action :admin_user,     only: [:index,:show,:export]
+  before_action :kpi_owner_user,     only: [:index,:show,:export]
   skip_before_filter  :verify_authenticity_token
 
   def index
@@ -234,10 +234,6 @@ class DepartmentalSdbipProgressesController < ApplicationController
   end
   end
 
-  def new
-
-  end
-
   def show
   	@departmental_sdbips = DepartmentalSdbip.where('department_id = ?' ,params[:id])
     #@subdepartments = @departmental_sdbips(:subdepartment_id).where(department_id: params[:id]).distinct
@@ -295,30 +291,6 @@ class DepartmentalSdbipProgressesController < ApplicationController
     @kpi_extremely_well_met_performance_management_unit = @departmental_sdbips.where("subdepartment_id = 4 AND performance_standard = 'KPI Extremely Well Met'")
     @kpi_extremely_well_met_legal_services = @departmental_sdbips.where("subdepartment_id = 5 AND performance_standard = 'KPI Extremely Well Met'")
     @kpi_extremely_well_met_forestry = @departmental_sdbips.where("subdepartment_id = 6 AND performance_standard = 'KPI Extremely Well Met'")
-
-  end
-
-  def edit
-
-  end
-    def create
-    @departmental_sdbip_progress = DepartmentalSdbipProgress.new(sdbip_params)
-    if @departmental_sdbip_progress.save
-      flash[:notice] = "Survey complete! Thank you for your time."
-      redirect_to departmental_sdbip_progresses_path
-    else
-      render :new
-    end
-  end
-
-  def destroy
-    @departmental_sdbip_progress = DepartmentalSdbipProgress.find(params[:id])
-    @departmental_sdbip_progress.destroy
-    flash[:notice] = "?? was successfully destroyed."
-    redirect_to departmental_sdbip_progresses_path
-  end
-
-  def update
 
   end
 
@@ -439,10 +411,7 @@ class DepartmentalSdbipProgressesController < ApplicationController
  end
 
   private
-  def sdbip_params
-  	params.require(:progress).permit(:sdbip_time_period_id, :actual,
-            :poe, :corrective_measures, :comments, :id,:_destroy)
-  end
+
   def logged_in_user
       unless logged_in?
         store_location
