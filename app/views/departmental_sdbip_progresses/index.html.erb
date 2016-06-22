@@ -99,7 +99,7 @@ $(function() {
 			}
 		}
 
-		/*var gfsClassificationFilters = document.getElementById('gfs-classification-filter').options,
+		var gfsClassificationFilters = document.getElementById('gfs-classification-filter').options,
 		gfsClassificationValues = [];
 		var count6 = 0;
 		for (var i = 0; i < gfsClassificationFilters.length; i++) {
@@ -129,7 +129,7 @@ $(function() {
 			}
 		}
 
-		var municipalKpaFilters = document.getElementById('municipal-kpa-filter').options,
+		/*var municipalKpaFilters = document.getElementById('municipal-kpa-filter').options,
 		municipalKpaValues = [];
 		var count9 = 0;
 		for (var i = 0; i < municipalKpaFilters.length; i++) {
@@ -137,7 +137,7 @@ $(function() {
 				municipalKpaValues[count9] = municipalKpaFilters[i].value;
 				count9++;
 			}
-		}
+		}*/
 
 		var ndpObjectivesFilters = document.getElementById('ndp-objectives-filter').options,
 		ndpObjectivesValues = [];
@@ -209,7 +209,7 @@ $(function() {
 			}
 		}
 
-		var kpiTargetFilters = document.getElementById('kpi-target-filter').options,
+		/*var kpiTargetFilters = document.getElementById('kpi-target-filter').options,
 		kpiTargetValues = [];
 		var count17 = 0;
 		for (var i = 0; i < kpiTargetFilters.length; i++) {
@@ -257,7 +257,7 @@ $(function() {
 			if (tpSelections[i].checked == true) {
 				tpSelection = tpSelections[i].value;
 			}
-		}
+		}*/
 
 		//Report Format
 		var formatSelections = document.getElementById('departmental-sdbip-report').format_selection,
@@ -267,13 +267,19 @@ $(function() {
 			if (formatSelections[i].checked == true) {
 				formatSelection = formatSelections[i].value;
 			}
-		}*/
-
+		}
+		var s = document.getElementById("report-title");
+    reportValue = s.value ;
+		alert(reportValue);
     $.ajax({
-       url : "/export",
-       type : "post",
-       data : { data_value: JSON.stringify(selectInfoValues),departments_value: JSON.stringify(departmentValues), subdepartments_value: JSON.stringify(subDepartmentValues), kpi_owner_values: JSON.stringify(kpiOwnerValues), predetermined_objectives_values: JSON.stringify(preDeterminedValues) }
-   });
+       url : "<%= url_for(action: 'index') %>",
+       type : "get",
+       data : { report_title: JSON.stringify(reportValue), format_type: JSON.stringify(formatSelection),data_value: JSON.stringify(selectInfoValues),departments_value: JSON.stringify(departmentValues), subdepartments_value: JSON.stringify(subDepartmentValues), kpi_owner_values: JSON.stringify(kpiOwnerValues), predetermined_objectives_values: JSON.stringify(preDeterminedValues), mscore_classification_values: JSON.stringify(gfsClassificationValues),ndp_objectives_values: JSON.stringify(ndpObjectivesValues),kpa_values: JSON.stringify(nationalKpaValues),strategic_objectives_values: JSON.stringify(strategicObjectiveValues), kpi_calculation_type_data: JSON.stringify(kpiCalculationValues),kpi_type_values: JSON.stringify(kpiTypeValues), areas_values: JSON.stringify(areaValues), ward_values: JSON.stringify(wardsValues), provincial_startegic_values: JSON.stringify(provincialStrategicValues), kpi_concept_values: JSON.stringify(kpiConceptValues)}
+   }).done(function (response) {
+    // Do something with the response
+}).fail(function () {
+    alert("Error!");
+});
   }
 	/* Done evaluating all radio buttons */
 
@@ -295,3 +301,4 @@ $(function() {
     </div>
   </div>
 </div><!-- departmentalsdbipprogress -->
+<!-- Large modal -->
