@@ -498,13 +498,8 @@
       </div>
       <div class="form-group col col-lg-12">
         <label>KPI Target Type:</label>
-        <select multiple class="form-control" id="kpi-target-filter">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
+        <%= select_tag :kpi_target_type_id, options_for_select(KpiTargetType.all.collect {|p| [ p.name, p.id ] }),{:id=>"kpi-target-filter",:multiple => "true",:class=>'form-control'} %>
+
       </div>
       <div class="form-group col col-lg-12">
         <label>KPI Result:</label>
@@ -556,10 +551,11 @@
       <div class="form-group col col-lg-12">
         <label class="control-label">Report Title:</label>
         <div>
-          <input type="text" class="form-control">
+          <input type="text" id="report-title" class="form-control">
         </div>
       </div>
-      <button class="btn btn-primary pull-right" value="format: csv" type="submit" style="margin-right: 5px;"> Generate Report</button>
+      <button class="btn btn-primary pull-right" value=" " type="submit" style="margin-right: 5px;"> Generate Report</button>
+
 	  </fieldset><!-- personal info -->
 	</form>
 
