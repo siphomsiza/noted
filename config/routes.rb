@@ -42,6 +42,9 @@ Rails.application.routes.draw do
   get 'activate', to: 'users#activate'
   get 'users/:id/edit_new_user' => 'users#edit_new_user', :as => :edit_new_user
   get 'users/:id/edit_active_user' => 'users#edit_active_user', :as => :edit_active_user
+  post 'departmental_sdbip_progresses/index' => 'departmental_sdbip_progresses#index', :as => :departmental_sdbip_progresses_index
+  get 'departmental_sdbip_progresses/index' => 'departmental_sdbip_progresses#index'
+  get 'departmental_sdbip_progresses/:id/show' => 'departmental_sdbip_progresses#show'
   get 'export', to: 'departmental_sdbip_progresses#export',defaults: { format: 'csv'}
   post 'export', to: 'departmental_sdbip_progresses#export'
   get 'departmental_sdbips/update_subdepartments', as: 'update_subdepartments'
@@ -68,10 +71,7 @@ Rails.application.routes.draw do
   resources :users
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
-  resources :departmental_sdbip_progresses do
-    get "report"=>"report"
 
-  end
   resources :lists
 
   # The priority is based upon order of creation: first created -> highest priority.
