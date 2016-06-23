@@ -99,14 +99,16 @@ def self.open_spreadsheet(file)
   end
 end
 
-def self.report_to_csv(data_value,options = {})
+def self.report_to_csv(data_value,selected_array_of_values,options = {})
+
 	CSV.generate(options) do |csv|
 		column_names = [data_value]
 		csv << column_names
-		all.each do |departmental_sdbip|
-		#csv << [departmental_sdbip.kpi_ref_number, departmental_sdbip.kpi,departmental_sdbip.department.name, departmental_sdbip.subdepartment.subdepartment_name,departmental_sdbip.kpa.name,departmental_sdbip.kpi_type.name,departmental_sdbip.kpi_owner.name,departmental_sdbip.strategic_objective.name,departmental_sdbip.baseline,departmental_sdbip.annual_target,departmental_sdbip.revised_target,departmental_sdbip.first_quarter_target,departmental_sdbip.second_quarter_target,departmental_sdbip.third_quarter_target,departmental_sdbip.fourth_quarter_target, departmental_sdbip.area.name,departmental_sdbip.ward.name,departmental_sdbip.source_of_evidence,departmental_sdbip.unit_of_measurement]
+		all.each do
+			csv << [selected_array_of_values]
 		end
 	end
+
 end
 
 def self.to_csv(options = {})

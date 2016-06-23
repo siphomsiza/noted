@@ -2,78 +2,74 @@
   <table class="table table-striped table-bordered" id="sdbips-results-table">
     <thead>
       <tr>
-        <th>ID</th>
         <th>KPI</th>
-        <th>Department</th>
-        <th>Subdepartment</th>
-        <th>KPI Ref Number</th>
-        <th>KPI Type</th>
-        <th>Predetermined Objective</th>
-        <th>KPI Owner</th>
-        <th>Unit of Measurement</th>
-        <th>M Score Classification</th>
-        <th>IDP Ref</th>
-        <th>National Outcome</th>
-        <th>Strategic Objective</th>
-        <th>Source of Evidence</th>
-        <th>Baseline</th>
-        <th>Annual Target</th>
-        <th>Revised Target</th>
+        <% if @selected_headers.include?("Department")%><th>Department</th><% end %>
+        <% if @selected_headers.include?("Subdepartment")%><th>Subdepartment</th><% end %>
+        <% if @selected_headers.include?("KPI Ref Number")%><th>KPI Ref Number</th><% end %>
+        <% if @selected_headers.include?("KPI Type")%><th>KPI Type</th><% end %>
+        <% if @selected_headers.include?("Predetermined Objectives")%><th>Predetermined Objective</th><% end %>
+        <% if @selected_headers.include?("KPI Owner")%><th>KPI Owner</th><% end %>
+        <% if @selected_headers.include?("Unit of Measurement")%><th>Unit of Measurement</th><% end %>
+        <% if @selected_headers.include?("")%><th>MScore Classification</th><% end %>
+        <% if @selected_headers.include?("IDP Ref")%><th>IDP Ref</th><% end %>
+        <% if @selected_headers.include?("National Outcome")%><th>National Outcome</th><% end %>
+        <% if @selected_headers.include?("Strategic Objectives")%><th>Strategic Objective</th><% end %>
+        <% if @selected_headers.include?("Source of Evidence")%><th>Source of Evidence</th><% end %>
+        <% if @selected_headers.include?("Baseline")%><th>Baseline</th><% end %>
+        <% if @selected_headers.include?("Annual Target")%><th>Annual Target</th><% end %>
+        <% if @selected_headers.include?("Revised Target")%><th>Revised Target</th><% end %>
         <th>First Quarter Target</th>
         <th>Second Quarter Target</th>
         <th>Third Quarter Target</th>
         <th>Fourth Quarter Target</th>
-        <th>Budget</th>
-        <th>Performance Standard</th>
-        <th>Risk Rating</th>
-        <th>KPA</th>
-        <th>NDP Objective</th>
+        <% if @selected_headers.include?("Budget")%><th>Budget</th><% end %>
+        <% if @selected_headers.include?("Performance Standard")%><th>Performance Standard</th><% end %>
+        <% if @selected_headers.include?("Risk Rating")%><th>Risk Rating</th><% end %>
+        <% if @selected_headers.include?("KPA")%><th>KPA</th><% end %>
+        <% if @selected_headers.include?("NDP Objectives")%><th>NDP Objective</th><% end %>
         <th>Capital Project</th>
-        <th>KPI Concept</th>
+        <% if @selected_headers.include?("KPI Concept")%><th>KPI Concept</th><% end %>
         <th>Impact</th>
-        <th>Provincial Strategic Outcome</th>
-        <th>Area</th>
-        <th>Ward</th>
+        <% if @selected_headers.include?("provincial Strategic Outcome")%><th>Provincial Strategic Outcome</th><% end %>
+        <% if @selected_headers.include?("Area")%><th>Area</th><% end %>
+        <% if @selected_headers.include?("Ward")%><th>Ward</th><% end %>
         <th>Past Year Performance</th>
         <th>Reporting Category</th>
         <th>Top Layer KPI Ref</th>
-        <th>KPI Calculation Type</th>
+        <% if @selected_headers.include?("KPI calculation Type")%><th>KPI Calculation Type</th><% end %>
         <th>Start Date</th>
         <th>End Date</th>
-        <th>Create Date</th>
-        <th>Update Date</th>
 
       </tr>
     </thead>
     <tbody>
     <% @departmental_sdbips.each do |departmental_sdbip| %>
       <tr>
-        <td><%= departmental_sdbip.id %></td>
         <td><%= departmental_sdbip.kpi %></td>
-        <td><%= departmental_sdbip.department.name %></td>
-        <td><%= departmental_sdbip.subdepartment.subdepartment_name %></td>
-        <td><%= departmental_sdbip.kpi_ref_number %></td>
-        <td><% if !departmental_sdbip.kpi_type_id.blank? %><%= departmental_sdbip.kpi_type.name %><% end %></td>
-        <td><% if !departmental_sdbip.predetermined_objective_id.blank? %><%= departmental_sdbip.predetermined_objective.name %><% end %></td>
-        <td><% if !departmental_sdbip.kpi_owner_id.blank? %><%= departmental_sdbip.kpi_owner.name %><% end %></td>
-        <td><%= departmental_sdbip.unit_of_measurement %></td>
-        <td><%= departmental_sdbip.mscore_classification.name %></td>
-        <td><%= departmental_sdbip.idp_ref %></td>
-        <td><% if !departmental_sdbip.national_outcome_id.blank? %><%= departmental_sdbip.national_outcome.name %><% end %></td>
-        <td><%= departmental_sdbip.strategic_objective.name %></td>
-        <td><%= departmental_sdbip.source_of_evidence %></td>
-        <td><%= departmental_sdbip.baseline %></td>
-        <th><%= departmental_sdbip.annual_target %></th>
-        <th><%= departmental_sdbip.revised_target %></th>
+        <% if @selected_headers.include?("Department")%><td><%= departmental_sdbip.department.name %></td><% end %>
+        <% if @selected_headers.include?("Subdepartment")%><td><%= departmental_sdbip.subdepartment.subdepartment_name %></td><% end %>
+        <% if @selected_headers.include?("KPI Ref Number")%><td><%= departmental_sdbip.kpi_ref_number %></td><% end %>
+        <% if @selected_headers.include?("KPI Type")%><td><% if !departmental_sdbip.kpi_type_id.blank? %><%= departmental_sdbip.kpi_type.name %><% end %></td><% end %>
+        <% if @selected_headers.include?("Predetermined Objectives")%><td><% if !departmental_sdbip.predetermined_objective_id.blank? %><%= departmental_sdbip.predetermined_objective.name %><% end %></td><% end %>
+        <% if @selected_headers.include?("KPI Owner")%><td><% if !departmental_sdbip.kpi_owner_id.blank? %><%= departmental_sdbip.kpi_owner.name %><% end %></td><% end %>
+        <% if @selected_headers.include?("Unit of Measurement")%><td><%= departmental_sdbip.unit_of_measurement %></td><% end %>
+        <% if @selected_headers.include?("")%><td><%= departmental_sdbip.mscore_classification.name %></td><% end %>
+        <% if @selected_headers.include?("IDP Ref")%><td><%= departmental_sdbip.idp_ref %></td><% end %>
+        <% if @selected_headers.include?("National Outcome")%><td><% if !departmental_sdbip.national_outcome_id.blank? %><%= departmental_sdbip.national_outcome.name %><% end %></td><% end %>
+        <% if @selected_headers.include?("Strategic Objectives")%><td><%= departmental_sdbip.strategic_objective.name %></td><% end %>
+        <% if @selected_headers.include?("Source of Evidence")%><td><%= departmental_sdbip.source_of_evidence %></td><% end %>
+        <% if @selected_headers.include?("Baseline")%><td><%= departmental_sdbip.baseline %></td><% end %>
+        <% if @selected_headers.include?("Annual Target")%><th><%= departmental_sdbip.annual_target %></th><% end %>
+        <% if @selected_headers.include?("Revised Target")%><th><%= departmental_sdbip.revised_target %></th><% end %>
         <th><%= departmental_sdbip.first_quarter_target %></th>
         <th><%= departmental_sdbip.second_quarter_target %></th>
         <th><%= departmental_sdbip.third_quarter_target %></th>
         <th><%= departmental_sdbip.fourth_quarter_target %></th>
-        <td><%= departmental_sdbip.budget %></td>
-        <td><%= departmental_sdbip.performance_standard %></td>
-        <td><% if !departmental_sdbip.risk_rating_id.blank?%><%= departmental_sdbip.risk_rating.name %><% end %></td>
-        <td><% if !departmental_sdbip.kpa_id.blank? %><%= departmental_sdbip.kpa.name %><% end %></td>
-        <td><% if !departmental_sdbip.ndp_objective_id.blank? %><%= departmental_sdbip.ndp_objective.name %><% end %></td>
+        <% if @selected_headers.include?("Budget")%><td><%= departmental_sdbip.budget %></td><% end %>
+        <% if @selected_headers.include?("Performance Standard")%><td><%= departmental_sdbip.performance_standard %></td><% end %>
+        <% if @selected_headers.include?("Risk Rating")%><td><% if !departmental_sdbip.risk_rating_id.blank?%><%= departmental_sdbip.risk_rating.name %><% end %></td><% end %>
+        <% if @selected_headers.include?("KPA")%><td><% if !departmental_sdbip.kpa_id.blank? %><%= departmental_sdbip.kpa.name %><% end %></td><% end %>
+        <% if @selected_headers.include?("NDP Objectives")%><td><% if !departmental_sdbip.ndp_objective_id.blank? %><%= departmental_sdbip.ndp_objective.name %><% end %></td><% end %>
         <td><% if !departmental_sdbip.capital_project_id.blank? %><%= departmental_sdbip.capital_project.mun_cp_ref %><% end %></td>
         <td><% if !departmental_sdbip.kpi_concept_id.blank? %><%= departmental_sdbip.kpi_concept.name %><% end %></td>
         <td><%= departmental_sdbip.impact %></td>
@@ -86,8 +82,6 @@
         <td><% if !departmental_sdbip.kpi_calculation_type_id.blank? %><%= departmental_sdbip.kpi_calculation_type.name %><% end %></td>
         <td><%= departmental_sdbip.start_date %></td>
         <td><%= departmental_sdbip.end_date %></td>
-        <td><%= departmental_sdbip.created_at.strftime(' %Y-%B-%d') %></td>
-        <td><%= departmental_sdbip.updated_at.strftime('%d-%B-%Y') %></td>
 
       </tr>
       <% end %>
