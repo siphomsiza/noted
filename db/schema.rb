@@ -93,10 +93,10 @@ ActiveRecord::Schema.define(version: 20160617081328) do
     t.string   "idp_ref"
     t.integer  "national_outcome_id",             null: false
     t.integer  "strategic_objective_id",          null: false
-    t.string   "source_of_evidence",              null: false
-    t.string   "baseline",                        null: false
+    t.string   "source_of_evidence"
+    t.string   "baseline"
     t.string   "budget"
-    t.integer  "annual_target",                   null: false
+    t.integer  "annual_target"
     t.integer  "revised_target"
     t.integer  "first_quarter_target"
     t.integer  "second_quarter_target"

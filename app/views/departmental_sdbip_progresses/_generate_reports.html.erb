@@ -519,8 +519,8 @@
         <label>Group by:</label>
         <select class="form-control">
           <option>No grouping</option>
-          <option>Grouping One</option>
-          <option>Grouping Two</option>
+          <option>Department ASC</option>
+          <option>Department DESC</option>
         </select>
       </div>
 	  </fieldset><!-- personal info -->
@@ -530,12 +530,12 @@
       <div class="form-group col col-lg-12">
         <div class="radio">
           <label>
-            <input type="radio" value="onscreen display" name="format_selection" id="format-selection-onscreen" checked>Onscreen display
+            <input type="radio" value="onscreen display" name="format_selection" data-toggle="modal" id="format-selection-onscreen" checked>Onscreen display
           </label>
         </div>
         <div class="radio">
           <label>
-            <input type="radio" value=".csv" name="format_selection" id="format-selection-text">Microsoft Excel (Plain Text)
+            <input type="radio" value=".csv" name="format_selection" id="format-selection-text">CSV
           </label>
         </div>
         <div class="radio">
@@ -554,6 +554,7 @@
           <input type="text" id="report-title" class="form-control" required >
         </div>
       </div>
+      
       <button class="btn btn-primary pull-right" value=" " type="submit" style="margin-right: 5px;"> Generate Report</button>
 
 	  </fieldset><!-- personal info -->
