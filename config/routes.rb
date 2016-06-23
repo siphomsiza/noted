@@ -43,7 +43,6 @@ Rails.application.routes.draw do
   get 'users/:id/edit_new_user' => 'users#edit_new_user', :as => :edit_new_user
   get 'users/:id/edit_active_user' => 'users#edit_active_user', :as => :edit_active_user
 
-  get 'departmental_sdbip_progresses/:id/show' => 'departmental_sdbip_progresses#show'
   get 'export', to: 'departmental_sdbip_progresses#export',defaults: { format: 'csv'}
   post 'export', to: 'departmental_sdbip_progresses#export'
   get 'departmental_sdbips/update_subdepartments', as: 'update_subdepartments'
@@ -60,9 +59,9 @@ Rails.application.routes.draw do
     collection {post :import}
     collection { post :export }
   end
-
+  post 'index', to: 'departmental_sdbip_progresses#index', :as => :index
   resources :departmental_sdbip_progresses do
-    post 'departmental_sdbip_progresses/index' => 'departmental_sdbip_progresses#index', :as => :index
+
   end
   resources :kpi_calculation_types
   resources :sdbip_time_periods

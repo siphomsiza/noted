@@ -6,14 +6,6 @@ class DepartmentalSdbipProgressesController < ApplicationController
 
   def index
     selected_values = []
-    @departmental_sdbip_progresses = DepartmentalSdbip.all
-    csv_string = CSV.generate do |csv|
-      #column_names = [params[:data_value]]
-      csv << DepartmentalSdbip.column_names
-      @departmental_sdbip_progresses.each do |departmental_sdbip|
-        #csv << [departmental_sdbip.kpi_ref_number, departmental_sdbip.kpi,departmental_sdbip.department.name, departmental_sdbip.subdepartment.subdepartment_name,departmental_sdbip.kpa.name,departmental_sdbip.kpi_type.name,departmental_sdbip.kpi_owner.name,departmental_sdbip.strategic_objective.name,departmental_sdbip.baseline,departmental_sdbip.annual_target,departmental_sdbip.revised_target,departmental_sdbip.first_quarter_target,departmental_sdbip.second_quarter_target,departmental_sdbip.third_quarter_target,departmental_sdbip.fourth_quarter_target, departmental_sdbip.area.name,departmental_sdbip.ward.name,departmental_sdbip.source_of_evidence,departmental_sdbip.unit_of_measurement]
-      end
-    end
    if params[:data_value]
      @sdbip_progresses = DepartmentalSdbip.all
 
@@ -28,107 +20,130 @@ class DepartmentalSdbipProgressesController < ApplicationController
        selected_values << "DepartmentalSdbip.subepartment_name"
      end
      if params[:data_value].include?('KPI Owner')
+       kpi_owner_values = params[:kpi_owner_values]
        @sdbip_progresses = @sdbip_progresses.where(:kpi_owner_id => kpi_owner_values.split(""))
      end
-     if params[:data_value].include?('Project Name')
-     	@sdbip_progresses = @sdbip_progresses.where(["id = ?",project_name])
-     end
+
      if params[:data_value].include?('KPI Ref Number')
-     	@sdbip_progresses = @sdbip_progresses.where(["kpi_ref_number = ?",kpi_ref_number])
+       #kpi_ref_number_values = params[:kpi_ref_number_values]
+     	#@sdbip_progresses = @sdbip_progresses.where(:kpi_ref_number => kpi_ref_number_values.split(""))
      end
      if params[:data_value].include?('Revised Target')
-     	@sdbip_progresses = @sdbip_progresses.where(["revised_target = ?",revised_target])
+       #revised_target_values = params[:revised_target_values]
+     	#@sdbip_progresses = @sdbip_progresses.where(:revised_target => revised_target_values.split(""))
      end
      if params[:data_value].include?('KPI Concept')
+       kpi_concept_values = params[:kpi_concept_values]
        @sdbip_progresses = @sdbip_progresses.where(:kpi_concept_id => kpi_concept_values.split(""))
      end
      if params[:data_value].include?('KPI Type')
+       kpi_type_values = params[:kpi_type_values]
        @sdbip_progresses = @sdbip_progresses.where(:kpi_type_id => kpi_type_values.split(""))
      end
 
      if params[:data_value].include?('KPI Calculation Type')
+       kpi_calculation_type_values = params[:kpi_calculation_type_values]
        @sdbip_progresses = @sdbip_progresses.where(:kpi_calculation_type_id => kpi_calculation_type_values.split(""))
      end
 
      if params[:data_value].include?('Top Layer KPI Ref')
-     	@sdbip_progresses = @sdbip_progresses.where(["top_layer_kpi_ref = ?",top_layer_kpi_ref])
+       #top_layer_kpi_ref_values = params[:top_layer_kpi_ref_values]
+     	#@sdbip_progresses = @sdbip_progresses.where(:top_layer_kpi_ref => top_layer_kpi_ref_values.split(""))
      end
      if params[:data_value].include?('Baseline')
-     	@sdbip_progresses = @sdbip_progresses.where(["baseline = ?",baseline])
+       #baseline_values = params[:baseline_values]
+     	#@sdbip_progresses = @sdbip_progresses.where(:baseline => baseline_values.split(""))
      end
      if params[:data_value].include?('Wards')
+       ward_values = params[:ward_values]
        @sdbip_progresses = @sdbip_progresses.where(:ward_id => ward_values.split(""))
      end
      if params[:data_value].include?('Area')
+       area_values = params[:area_values]
        @sdbip_progresses = @sdbip_progresses.where(:area_id => area_values.split(""))
      end
 
      if params[:data_value].include?('Budget')
-     	@sdbip_progresses = @sdbip_progresses.where(["budget = ?",budget])
+       #budget_values = params[:budget_values]
+     	#@sdbip_progresses = @sdbip_progresses.where(:budget => budget_values.split(""))
      end
      if params[:data_value].include?('KPI')
-       @sdbip_progresses = @sdbip_progresses.where(:kpi => kpi_values.split(""))
+       #kpi_values = params[:kpi_values]
+       #@sdbip_progresses = @sdbip_progresses.where(:kpi => kpi_values.split(""))
      end
      if params[:data_value].include?('KPA')
-       @sdbip_progresses = @sdbip_progresses.where(:kpa_id => kpa_values.split(""))
+       #kpa_values = params[:kpa_values]
+       #@sdbip_progresses = @sdbip_progresses.where(:kpa_id => kpa_values.split(""))
      end
      if params[:data_value].include?('Past Year Performance')
-     	@sdbip_progresses = @sdbip_progresses.where(["past_year_performance = ?",past_year_performance])
+       #past_year_performance_values = params[:past_year_performance_values]
+     	#@sdbip_progresses = @sdbip_progresses.where(:past_year_performance => past_year_performance_values.split(""))
      end
      if params[:data_value].include?('Provincial Strategic Outcome')
-       @sdbip_progresses = @sdbip_progresses.where(:provincial_strategic_outcome_id => provincial_strategic_outcome_values.split(""))
+       #provincial_strategic_outcome_values = params[:provincial_startegic_values]
+       #@sdbip_progresses = @sdbip_progresses.where(:provincial_strategic_outcome_id => provincial_strategic_outcome_values.split(""))
      end
      if params[:data_value].include?('Predetermined Objectives')
+       predetermined_objectives_values = params[:predetermined_objectives_values]
        @sdbip_progresses = @sdbip_progresses.where(:predetermined_objective_id => predetermined_objectives_values.split(""))
      end
      if params[:data_value].include?('Reporting Category')
-     	@sdbip_progresses = @sdbip_progresses.where(["reporting_category_id = ?",reporting_category_id])
+       #reporting_category_values = params[:reporting_category_values]
+     	#@sdbip_progresses = @sdbip_progresses.where(:reporting_category_id => reporting_category_values.split(""))
      end
      if params[:data_value].include?('GFS Classification')
+       mscore_classification_values = params[:mscore_classification_values]
        @sdbip_progresses = @sdbip_progresses.where(:mscore_classification_id => mscore_classification_values.split(""))
      end
 
      if params[:data_value].include?('NDP Objectives')
+       ndp_objective_values = params[:ndp_objective_values]
        @sdbip_progresses = @sdbip_progresses.where(:ndp_objective_id => ndp_objective_values.split(""))
      end
      if params[:data_value].include?('IDP Ref')
-     	@sdbip_progresses = @sdbip_progresses.where(["idp_ref = ?",idp_ref])
+       #idp_ref_values = params[:idp_ref_values]
+     	#@sdbip_progresses = @sdbip_progresses.where(:idp_ref => idp_ref_values.split(""))
      end
      if params[:data_value].include?('Strategic Objective')
+       strategic_objective_values = params[:strategic_objective_values]
        @sdbip_progresses = @sdbip_progresses.where(:strategic_objective_id => strategic_objective_values.split(""))
      end
      if params[:data_value].include?('Impact')
-     	@sdbip_progresses = @sdbip_progresses.where(["impact = ?",impact])
+       #impact_values = params[:impact_values]
+     	#@sdbip_progresses = @sdbip_progresses.where(:impact => impact_values.split(""))
      end
      if params[:data_value].include?('Source of Evidence')
-     	 @sdbip_progresses = @sdbip_progresses.where("source_of_evidence = ?",source_of_evidence)
+       #source_of_evidence_values = params[:source_of_evidence_values]
+     	 #@sdbip_progresses = @sdbip_progresses.where(:source_of_evidence => source_of_evidence_values.split(""))
      end
      if params[:data_value].include?('Unit of Measurement')
-     	@sdbip_progresses = @sdbip_progresses.where("unit_of_measurement = ?",unit_of_measurement)
+       #unit_of_measurement_values = params[:unit_of_measurement_values]
+     	#@sdbip_progresses = @sdbip_progresses.where(:unit_of_measurement => unit_of_measurement_values.split(""))
      end
      if params[:data_value].include?('National Outcome')
+       national_outcome_values = params[:national_outcome_values]
        @sdbip_progresses = @sdbip_progresses.where(:national_outcome_id => national_outcome_values.split(""))
      end
-     if !annual_target.blank?  && annual_target.to_i > 0
-     	@sdbip_progresses = @sdbip_progresses.where(["annual_target = ?",annual_target])
+     if params[:data_value].include?('Annual Target')
+       #annual_target_values = params[:annual_target_values]
+     	#@sdbip_progresses = @sdbip_progresses.where(:annual_target => annual_target_values.split(""))
      end
-     @departmental_sdbip_progresses = @sdbip_progresses
 
-      csv_string = CSV.generate do |csv|
-        column_names = [params[:data_value]]
-        csv << column_names
-        @departmental_sdbip_progresses.each do |departmental_sdbip|
-          csv << [departmental_sdbip.kpi_ref_number, departmental_sdbip.kpi,departmental_sdbip.department.name, departmental_sdbip.subdepartment.subdepartment_name,departmental_sdbip.kpa.name,departmental_sdbip.kpi_type.name,departmental_sdbip.kpi_owner.name,departmental_sdbip.strategic_objective.name,departmental_sdbip.baseline,departmental_sdbip.annual_target,departmental_sdbip.revised_target,departmental_sdbip.first_quarter_target,departmental_sdbip.second_quarter_target,departmental_sdbip.third_quarter_target,departmental_sdbip.fourth_quarter_target, departmental_sdbip.area.name,departmental_sdbip.ward.name,departmental_sdbip.source_of_evidence,departmental_sdbip.unit_of_measurement]
+     @departmental_sdbip_progresses = @sdbip_progresses
+      respond_to do |format|
+        if params[:format_type].include?("onscreen display")
+          format.html
+        elsif params[:format_type].include?(".csv")
+          format.csv { send_data @departmental_sdbip_progresses.report_to_csv(params[:data_value]) }#(csv_string, :type => 'test/csv', :filename => "sdbips-{Time.now.strftime('%d-%m-%y--%H-%M')}.csv")}#(params[:data_value]),:type=>'csv/text', filename: "sdbips-#{Date.today}.csv" }
+        elsif params[:format_type].include?(".xls")
+          format.xls  { send_data @departmental_sdbip_progresses.report_to_csv(col_sep: "\t") }
         end
       end
-      respond_to do |format|
-        format.html
-        format.csv { send_data(csv_string, :type => 'test/csv', :filename => "sdbips-{Time.now.strftime('%d-%m-%y--%H-%M')}.csv")}#(params[:data_value]),:type=>'csv/text', filename: "sdbips-#{Date.today}.csv" }
-        format.xls # { send_data @products.to_csv(col_sep: "\t") }
+
+      @departmental_sdbip_progresses.each do |progress|
+        puts progress.kpi
       end
-      #send_data(csv_string, :type => 'test/csv', :filename => "sdbips-#{Time.now.strftime('%d-%m-%y--%H-%M')}.csv")
-      #puts send_data(csv_string, :type => 'test/csv', :filename => "sdbips-#{Time.now.strftime('%d-%m-%y--%H-%M')}.csv")
-   else
+    end
     @departmental_sdbips = DepartmentalSdbip.all
     @kpi_not_yet_measured = DepartmentalSdbip.where("performance_standard = ?", "KPI Not Yet Measured")
 
@@ -224,14 +239,12 @@ class DepartmentalSdbipProgressesController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.csv { send_data(csv_string, :type => 'test/csv', :filename => "sdbips-#{Time.now.strftime('%d-%m-%y--%H-%M')}.csv")}#(params[:data_value]),:type=>'csv/text', filename: "sdbips-#{Date.today}.csv" }
-      format.xls # { send_data @products.to_csv(col_sep: "\t") }
       format.pdf do
         pdf = ReportPdf.new(@departmental_sdbips)
         send_data pdf.render, filename: 'report.pdf', type: 'application/pdf', :layout => 'landscape'
       end
     end
-  end
+
   end
 
   def show
