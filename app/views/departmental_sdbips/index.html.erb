@@ -10,7 +10,7 @@ $(function() {
 <div class="col col-lg-12">
 	<article class="sdbip">
 	<h1>Mkhondo Local Municipality</h1></article>
-<ul class="nav nav-pills">
+<ul class="nav nav-pills nav-justified">
 <li class="active"><%= link_to "Departmental SDBIP", departmental_sdbips_path, :class =>"btn btn-sm pull-right"%></li>
 <% if current_user.admin? %>
 <li><%= link_to "Top Layer SDBIP", top_layer_sdbips_path, :class =>"btn btn-xs pull-right"%></li>

@@ -45,7 +45,6 @@ $(function() {
 
 	function evaluateForm(event) {
 		event.preventDefault();
-
 		/* Start evaluating all checkboxes */
 		var selectInfos = document.getElementById('departmental-sdbip-report').select_info,
 		selectInfoValues = [];
@@ -268,14 +267,24 @@ $(function() {
 				formatSelection = formatSelections[i].value;
 			}
 		}
-		var s = document.getElementById("report-title");
-    reportValue = s.value ;
-		alert(reportValue);
+
+		var reportValue = document.getElementById("report-title").value;
+
+
+
     $.ajax({
        url : '/index',
        type : "post",
-       data : { report_title: JSON.stringify(reportValue), format_type: JSON.stringify(formatSelection),data_value: JSON.stringify(selectInfoValues),departments_value: JSON.stringify(departmentValues), subdepartments_value: JSON.stringify(subDepartmentValues), kpi_owner_values: JSON.stringify(kpiOwnerValues), predetermined_objectives_values: JSON.stringify(preDeterminedValues), mscore_classification_values: JSON.stringify(gfsClassificationValues),ndp_objectives_values: JSON.stringify(ndpObjectivesValues),kpa_values: JSON.stringify(nationalKpaValues),strategic_objectives_values: JSON.stringify(strategicObjectiveValues), kpi_calculation_type_data: JSON.stringify(kpiCalculationValues),kpi_type_values: JSON.stringify(kpiTypeValues), areas_values: JSON.stringify(areaValues), ward_values: JSON.stringify(wardsValues), provincial_startegic_values: JSON.stringify(provincialStrategicValues), kpi_concept_values: JSON.stringify(kpiConceptValues)}
+       data : { report_title: JSON.stringify(reportValue),format_type: JSON.stringify(formatSelection),data_value: JSON.stringify(selectInfoValues),departments_value: JSON.stringify(departmentValues), subdepartments_value: JSON.stringify(subDepartmentValues), kpi_owner_values: JSON.stringify(kpiOwnerValues), predetermined_objectives_values: JSON.stringify(preDeterminedValues), mscore_classification_values: JSON.stringify(gfsClassificationValues),ndp_objectives_values: JSON.stringify(ndpObjectivesValues),kpa_values: JSON.stringify(nationalKpaValues),strategic_objectives_values: JSON.stringify(strategicObjectiveValues), kpi_calculation_type_values: JSON.stringify(kpiCalculationValues),kpi_type_values: JSON.stringify(kpiTypeValues), areas_values: JSON.stringify(areaValues), ward_values: JSON.stringify(wardsValues), provincial_startegic_values: JSON.stringify(provincialStrategicValues), kpi_concept_values: JSON.stringify(kpiConceptValues)},
+			success: function(data) {
+                //successmessage = 'Data was succesfully captured';
+                //$("label#successmessage").text(successmessage);
+								if (format_type.includes("onscreen display")){
+									$("#reports-modal").modal("show")
+								}
+        }
    });
+	 alert("we made it");
   }
 	/* Done evaluating all radio buttons */
 
@@ -297,4 +306,27 @@ $(function() {
     </div>
   </div>
 </div><!-- departmentalsdbipprogress -->
-<!-- Large modal -->
+
+<!-- Results Modal -->
+<div class="modal fade" id="reports-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+<div class="modal-content">
+
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+&times;
+</button>
+<h4 class="modal-title" id="myModalLabel">This Modal title</h4>
+</div>
+
+<div class="modal-body">
+Add some text here
+</div>
+
+<div class="modal-footer">
+<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+</div>
+
+</div><!-- /.modal-content -->
+</div><!-- /.modal -->
+</div>

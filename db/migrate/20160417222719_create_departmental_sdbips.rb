@@ -10,14 +10,14 @@ class CreateDepartmentalSdbips < ActiveRecord::Migration
       t.integer :kpi_owner_id, foreign_key: true
       t.text :kpi, null: false
       t.string :unit_of_measurement
-      t.integer :mscore_classification_id, foreign_key: true, null: false
+      t.integer :mscore_classification_id, foreign_key: true
       t.string :idp_ref
-      t.integer :national_outcome_id, foreign_key: true, null: false
-      t.integer :strategic_objective_id, foreign_key: true, null: false
-      t.string :source_of_evidence, null: false
-      t.string :baseline, null: false
+      t.integer :national_outcome_id, foreign_key: true
+      t.integer :strategic_objective_id, foreign_key: true
+      t.string :source_of_evidence
+      t.string :baseline
       t.string :budget
-      t.integer :annual_target, null: false
+      t.integer :annual_target
       t.integer :revised_target
       t.integer :first_quarter_target
       t.integer :second_quarter_target
@@ -34,22 +34,22 @@ class CreateDepartmentalSdbips < ActiveRecord::Migration
       t.binary  :third_quarter_poe
       t.binary  :fourth_quarter_poe
       t.string :performance_standard
-      t.integer :risk_rating_id, foreign_key: true, null: false
-      t.integer :kpa_id, foreign_key: true, null: false
+      t.integer :risk_rating_id, foreign_key: true
+      t.integer :kpa_id, foreign_key: true
       t.string :kpa_name
-      t.integer :ndp_objective_id, foreign_key: true, null: false
-      t.integer :capital_project_id, foreign_key: true, null: false
-      t.integer :kpi_concept_id, foreign_key: true, null: false
-      t.integer :kpi_type_id, foreign_key: true, null: false
+      t.integer :ndp_objective_id, foreign_key: true
+      t.integer :capital_project_id, foreign_key: true
+      t.integer :kpi_concept_id, foreign_key: true
+      t.integer :kpi_type_id, foreign_key: true
       t.string :impact
-      t.integer :provincial_strategic_outcome_id, foreign_key: true, null: false
+      t.integer :provincial_strategic_outcome_id, foreign_key: true
       t.integer :ward_id, foreign_key: true
       t.integer :area_id, foreign_key: true
       t.text :past_year_performance
       t.string :performance_standard
-      t.integer :reporting_category_id, foreign_key: true, null: false
+      t.integer :reporting_category_id, foreign_key: true
       t.string :top_layer_kpi_ref
-      t.integer :kpi_calculation_type_id, foreign_key: true, null: false
+      t.integer :kpi_calculation_type_id, foreign_key: true
       t.date :start_date
       t.date :end_date
 
