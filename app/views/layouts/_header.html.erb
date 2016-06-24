@@ -62,22 +62,13 @@
               <% end %>
             </li>
             <li>
-              <%= link_to edit_user_path(current_user) do %>
-                <span class="glyphicon glyphicon-cog"></span>Settings
+              <%= link_to edit_user_profile_path(current_user),remote: true,'data-target' => "#edit-user-profile-modal", 'data-toggle' => 'modal',:title=>"Click to Edit user details" do %>
+                <span class="glyphicon glyphicon-cog"></span>&nbsp;Settings
               <% end %>
+		            <div id="edit-user-profile-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+
+		            </div>
             </li>
-						<% if current_user.admin? %>
-            <li>
-              <%= link_to users_path do %>
-                <span class="glyphicon glyphicon-user"></span>Users
-              <% end %>
-            </li>
-            <li>
-              <%= link_to users_path do %>
-                <span class="glyphicon glyphicon-plus-sign"></span>Add a User
-              <% end %>
-            </li>
-							<% end %>
             <li class="divider"></li>
             <li>
               <%= link_to logout_path, method: "delete" do %>

@@ -1,28 +1,23 @@
-<% provide(:title, 'All Headings') %>
+<% provide(:title, 'Headings') %>
 <script>
 $(function() {
 	//highlight the current nav
 	$("#applicationmanifest a:contains('SETUP')").parent().addClass('active');
 }); //jQuery is loaded
 </script>
-<div>
 
 <div class="row">
 <div class="col col-lg-">
 <ul class="nav nav-pills nav-justified">
-<li><%= link_to "Master System Setup", master_setups_path, :class => "btn btn-xs pull-right" %></li>
-<li> <% if @setup.blank? %>
-        <%= link_to "System Setup", setups_path, :class => "btn btn-xs pull-right" %>
-      <% elsif @setup.blank? && Setup.blank? %>
-        <p>There is currently no setup configured.</p>
-      <% end %></li>
-<li><%= link_to "Departments", departments_path, :class =>"btn btn-xs pull-right"%></li>
-<li><%= link_to "Departmental Administrators", roles_path, :class =>"btn btn-xs pull-right"%></li>
-<li><%= link_to "Top Layer Administrators", roles_path, :class =>"btn btn-xs pull-right"%></li>
-<li class="active"><%= link_to "Headings", headings_path, :class =>"btn btn-xs pull-right"%></li>
-<li><%= link_to "Lists", lists_path, :class =>"btn btn-xs pull-right"%></li>
-<li><%= link_to "Time Periods", sdbip_time_periods_path, :class =>"btn btn-xs pull-right"%></li>
-</ul></div></div></div>
+<li><%= link_to "Master Setup", master_setups_path %></li>
+<li><%= link_to "System Setup", setups_path %></li>
+<li><%= link_to "Departments", departments_path %></li>
+<li><%= link_to "Departmental Administrators", roles_path %></li>
+<li><%= link_to "Top Layer Administrators", roles_path %></li>
+<li class="active"><%= link_to "Headings", headings_path %></li>
+<li><%= link_to "Lists", lists_path%></li>
+<li><%= link_to "Time Periods", sdbip_time_periods_path %></li>
+</ul></div></div>
 
     <div class="row">
 
@@ -76,7 +71,7 @@ $(function() {
         <ul class="headings">
           <table class="table table-stiped table-hover">
             <tr><th>&nbsp;</th><th>Default Terminology</th><th>Client Terminology</th><th></th></tr>
-          <%= render @general_headings %>
+          <%= render @headings %>
       </table><%= will_paginate @general_headings %>
         </ul>
       </div>
@@ -86,7 +81,7 @@ $(function() {
           <table class="table table-stiped table-hover">
             <tr><th>&nbsp;</th><th>Default Terminology</th><th>Client Terminology</th><th></th></tr>
 
-          <%= render @departmental_headings %>
+          <%= render 'departmental_headings' %>
 
         </table>
           <%= will_paginate @departmental_headings %>
@@ -97,7 +92,7 @@ $(function() {
           <table class="table table-stiped table-hover">
             <tr><th>&nbsp;</th><th>Default Terminology</th><th>Client Terminology</th><th></th></tr>
 
-          <%= render @toplayer_headings %>
+          <%= render 'top_layer_headings' %>
 
         </table><%= will_paginate @toplayer_headings %>
         </ul>
@@ -107,7 +102,7 @@ $(function() {
           <table class="table table-stiped table-hover">
             <tr><th>&nbsp;</th><th>Default Terminology</th><th>Client Terminology</th><th></th></tr>
 
-            <%= render @capitalProjects_headings %>
+            <%= render 'capital_projects_headings' %>
 
         </table><%= will_paginate @capitalProjects_headings %>
         </ul>
@@ -117,7 +112,7 @@ $(function() {
           <table class="table table-stiped table-hover">
             <tr><th>&nbsp;</th><th>Default Terminology</th><th>Client Terminology</th><th></th></tr>
 
-            <%= render @monthlycashflow_headings %>
+            <%= render 'monthly_cashflow_headings' %>
 
           </table>  <%= will_paginate @monthlycashflow_headings %>
         </ul>
@@ -127,7 +122,7 @@ $(function() {
           <table class="table table-stiped table-hover">
             <tr><th>&nbsp;</th><th>Default Terminology</th><th>Client Terminology</th><th></th></tr>
 
-          <%= render @revenuebysource_headings %>
+          <%= render 'revenue_by_source_headings' %>
 
         </table><%= will_paginate @revenuebysource_headings %>
         </ul>

@@ -1,0 +1,26 @@
+<% @toplayer_headings.each do |heading| %>
+<tr>
+  <td>
+    <%= heading.id %>
+  </td>
+  <td>
+    <%= heading.term %>
+  </td>
+  <td>
+    <%= heading.description %>
+  </td>
+  <td><%= link_to edit_top_layer_headings_path(heading),class: "btn btn-mini",remote: true,'data-target' => "#top-layer-heading-modal", 'data-toggle' => 'modal', :title=>"Click to Update heading" do %>
+      <span class="glyphicon glyphicon-pencil"></span>&nbsp;Edit
+    <% end %>
+    <div id="top-layer-heading-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+
+    </div>
+
+  </td>
+  <td>
+    <%= link_to heading, class: "btn btn-mini", method: :delete, data: { confirm: 'Are you sure?' } do %>
+      <span class="glyphicon glyphicon-remove-sign"></span>&nbsp;Delete
+    <% end %>
+  </td>
+</tr>
+<% end %>

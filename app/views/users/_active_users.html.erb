@@ -27,12 +27,10 @@
           <%= link_to edit_active_user_path(active_user),remote: true,'data-target' => "#edit-active-user-modal", 'data-toggle' => 'modal', class: "btn btn-mini", :title=>"Click to Edit user details" do %>
               <span class="glyphicon glyphicon-pencil"></span>&nbsp;Edit Details
             <% end %>
-            <div id="edit-active-user-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
 
-            </div>
             <% if current_user.admin? && !current_user?(active_user) %> |
-          <%= link_to "#", class: "btn" do %>
-            Edit Access
+            <%= link_to "#", class: "btn btn-mini" do %>
+            <span class=""></span>&nbsp;Edit Access
           <% end %>
 
           <% end %>
@@ -40,16 +38,19 @@
           <% if current_user.admin? && !current_user?(active_user) %> |
 
           <%= link_to "",'data-target' => "#reset-password", 'data-toggle' => 'modal', class: "btn btn-mini", :title=>"Click to change your password" do %>
-              &nbsp;Reset Password
+              <span class=""></span>&nbsp;Reset Password
             <% end %>
 
           <% end %>
           <% if current_user.admin? && !current_user?(active_user) %>
            |
-          <%= link_to active_user, data:{confirm: 'Are you sure?'} , :method => :delete, class: "btn" do %><span class="glyphicon glyphicon-trash"></span>&nbsp;
+          <%= link_to active_user, data:{confirm: 'Are you sure?'} , :method => :delete, class: "btn btn-mini" do %><span class="glyphicon glyphicon-trash"></span>&nbsp;
             Delete
           <% end %>
           <% end %>
+          <div id="edit-active-user-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+
+          </div>
         </td>
       </tr>
       <% end %>

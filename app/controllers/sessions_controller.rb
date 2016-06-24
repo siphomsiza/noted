@@ -3,6 +3,9 @@ class SessionsController < ApplicationController
 
 
   def new
+
+    redirect_to introduction_url unless !session[:user_id]
+
   end
 
   def create
@@ -15,7 +18,7 @@ class SessionsController < ApplicationController
                 @user.increment!(:login_count)
             end
         params[:session][:remember_me] == '1' ? remember(user) : forget(user)
-        redirect_back_or user
+        redirect_back_or introduction_url
       elsif !user.activated?
         message  = "Account not activated. "
         message += "Check your email for the activation link."

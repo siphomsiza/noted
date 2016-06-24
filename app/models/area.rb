@@ -7,5 +7,5 @@ class Area < ActiveRecord::Base
 	def ward_for_form
     	collection = wards.where(area_id: id)
     	collection.any? ? collection : wards.build
-  	end
+  end
 end

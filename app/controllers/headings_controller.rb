@@ -1,6 +1,6 @@
 class HeadingsController < ApplicationController
-  before_action :logged_in_user, only: [:index, :show, :new, :edit, :update, :destroy]
-  before_action :admin_user,   only: [:index,:show, :new, :edit, :update, :destroy]
+  before_action :logged_in_user, only: [:index, :show, :new, :edit, :update, :destroy,:edit_departmental_headings,:edit_top_layer_headings,:edit_capital_projects_headings,:edit_revenue_by_source_headings,:edit_monthly_cashflow_headings]
+  before_action :admin_user,   only: [:index,:show, :new, :edit, :update, :destroy,:edit_departmental_headings,:edit_top_layer_headings,:edit_capital_projects_headings,:edit_revenue_by_source_headings,:edit_monthly_cashflow_headings]
   def index
     @heading = Heading.new
     @general_headings = Heading.where(category: 'General').paginate( page: params[:page],per_page: 17)
@@ -25,13 +25,46 @@ class HeadingsController < ApplicationController
     if @heading.save
       flash[:success] = "Heading was successfully created."
       redirect_to headings_path
-    else
-      render "new"
     end
   end
 
   def edit
     @heading = Heading.find(params[:id])
+  end
+  def edit_departmental_headings
+    @heading = Heading.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+  def edit_top_layer_headings
+    @heading = Heading.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+  def edit_capital_projects_headings
+    @heading = Heading.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+  def edit_revenue_by_source_headings
+    @heading = Heading.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+  def edit_monthly_cashflow_headings
+    @heading = Heading.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def update
@@ -40,8 +73,6 @@ class HeadingsController < ApplicationController
     if @heading.update_attributes(heading_params)
         flash[:success] = "Heading was successfully updated."
       redirect_to headings_path
-    else
-      render "edit"
     end
   end
 

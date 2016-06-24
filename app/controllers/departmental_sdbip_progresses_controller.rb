@@ -142,21 +142,6 @@ class DepartmentalSdbipProgressesController < ApplicationController
        #annual_target_values = params[:annual_target_values]
      	#@sdbip_progresses = @sdbip_progresses.where(:annual_target => annual_target_values.split(""))
      end
-
-     selected_array_of_values = selected_values
-     @selected_headers = selected_headings
-     @departmental_sdbip_progresses = @sdbip_progresses
-     file_name = params[:report_title]
-    
-      respond_to do |format|
-        if params[:format_type].include?("onscreen display")
-          format.html
-        elsif params[:format_type].include?(".csv")
-          format.csv { send_data @departmental_sdbip_progresses.report_to_csv(params[:data_value],params[:selected_array_of_values]), :type => 'test/csv', :filename => "#{file_name}-#{Time.now.strftime('%d-%m-%y--%H-%M')}.csv"}
-        elsif params[:format_type].include?(".xls")
-          format.xls  { send_data @departmental_sdbip_progresses.report_to_csv(params[:data_value],params[:selected_array_of_values],col_sep: "\t"), :type => 'test/xls', :filename => "#{file_name}-#{Time.now.strftime('%d-%m-%y--%H-%M')}.xls" }
-        end
-      end
     end
     @departmental_sdbip_progresses = @departmental_sdbip_progresses
     @departmental_sdbips = DepartmentalSdbip.all
@@ -251,15 +236,21 @@ class DepartmentalSdbipProgressesController < ApplicationController
     @kpi_met_municipal_transformation = DepartmentalSdbip.where("kpa_id = 5 AND performance_standard = 'KPI Met'")
     @kpi_well_met_municipal_transformation = DepartmentalSdbip.where("kpa_id = 5 AND performance_standard = 'KPI Well Met'")
     @kpi_extremely_well_met_municipal_transformation = DepartmentalSdbip.where("kpa_id = 5 AND performance_standard = 'KPI Extremely Well Met'")
-    if !params[:data_value]
-      respond_to do |format|
-        format.html
-        format.pdf do
+
+    selected_array_of_values = selected_values
+    @selected_headers = selected_headings
+    @departmental_sdbip_progresses = @sdbip_progresses
+     respond_to do |format|
+         format.html
+         format.csv { send_data @departmental_sdbip_progresses.report_to_csv(params[:data_value],params[:selected_array_of_values]), :type => 'test/csv', :filename => "file_name-#{Time.now.strftime('%d-%m-%y--%H-%M')}.csv"}
+         format.xls  { send_data @departmental_sdbip_progresses.report_to_csv(params[:data_value],params[:selected_array_of_values],col_sep: "\t"), :type => 'test/xls', :filename => "file_name-#{Time.now.strftime('%d-%m-%y--%H-%M')}.xls" }
+         format.pdf do
           pdf = ReportPdf.new(@departmental_sdbips)
-          send_data pdf.render, filename: 'report.pdf', type: 'application/pdf', :layout => 'landscape'
+          #send_data pdf.render, filename: 'report.pdf', type: 'application/pdf', :layout => 'landscape'
         end
+
       end
-    end
+
   end
 
   def show

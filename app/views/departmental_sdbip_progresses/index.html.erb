@@ -42,7 +42,6 @@ $(function() {
 	"use strict";
 
 	document.getElementById('departmental-sdbip-report').addEventListener('submit', evaluateForm);
-	document.getElementById('generate-report').addEventListener('click', evaluateForm);
 
 	function evaluateForm(event) {
 		event.preventDefault();
@@ -260,14 +259,14 @@ $(function() {
 		}*/
 
 		//Report Format
-		var formatSelections = document.getElementById('departmental-sdbip-report').format_selection,
+		/*var formatSelections = document.getElementById('departmental-sdbip-report').format_selection,
 		formatSelection;
 
 		for (var i = 0; i < formatSelections.length; i++) {
 			if (formatSelections[i].checked == true) {
 				formatSelection = formatSelections[i].value;
 			}
-		}
+		}*/
 
 		var reportValue = document.getElementById("report-title").value;
 
@@ -276,13 +275,9 @@ $(function() {
     $.ajax({
        url : '/index',
        type : "post",
-       data : { report_title: JSON.stringify(reportValue),format_type: JSON.stringify(formatSelection),data_value: JSON.stringify(selectInfoValues),departments_value: JSON.stringify(departmentValues), subdepartments_value: JSON.stringify(subDepartmentValues), kpi_owner_values: JSON.stringify(kpiOwnerValues), predetermined_objectives_values: JSON.stringify(preDeterminedValues), mscore_classification_values: JSON.stringify(gfsClassificationValues),ndp_objectives_values: JSON.stringify(ndpObjectivesValues),kpa_values: JSON.stringify(nationalKpaValues),strategic_objectives_values: JSON.stringify(strategicObjectiveValues), kpi_calculation_type_values: JSON.stringify(kpiCalculationValues),kpi_type_values: JSON.stringify(kpiTypeValues), areas_values: JSON.stringify(areaValues), ward_values: JSON.stringify(wardsValues), provincial_startegic_values: JSON.stringify(provincialStrategicValues), kpi_concept_values: JSON.stringify(kpiConceptValues)}
+       data : { report_title: JSON.stringify(reportValue),data_value: JSON.stringify(selectInfoValues),departments_value: JSON.stringify(departmentValues), subdepartments_value: JSON.stringify(subDepartmentValues), kpi_owner_values: JSON.stringify(kpiOwnerValues), predetermined_objectives_values: JSON.stringify(preDeterminedValues), mscore_classification_values: JSON.stringify(gfsClassificationValues),ndp_objectives_values: JSON.stringify(ndpObjectivesValues),kpa_values: JSON.stringify(nationalKpaValues),strategic_objectives_values: JSON.stringify(strategicObjectiveValues), kpi_calculation_type_values: JSON.stringify(kpiCalculationValues),kpi_type_values: JSON.stringify(kpiTypeValues), areas_values: JSON.stringify(areaValues), ward_values: JSON.stringify(wardsValues), provincial_startegic_values: JSON.stringify(provincialStrategicValues), kpi_concept_values: JSON.stringify(kpiConceptValues)}
    });
-
-	 if($('#format-selection-onscreen').is(':checked')) {
-			 //$("#reports-modal").modal('show')
-		}
-
+	  $("#reports-modal").modal('show');
   }
 	/* Done evaluating all radio buttons */
 
@@ -304,11 +299,7 @@ $(function() {
     </div>
   </div>
 </div><!-- departmentalsdbipprogress -->
-<% if !@departmental_sdbips.blank? && !@selected_headers.blank? %>
 
-		<%= render 'report' %>
-
-<% end %>
 <!-- Results Modal -->
 <div class="modal fade" id="reports-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 <div class="modal-dialog">
@@ -330,6 +321,9 @@ $(function() {
 </div>
 
 <div class="modal-footer">
+
+<%= link_to "CSV", departmental_sdbip_progresses_path(format: 'csv'), :class=> 'btn btn-midi' %>&nbsp;
+<%= link_to "Excel", departmental_sdbip_progresses_path(format: 'xls'), :class=>'btn btn-midi'%>&nbsp;
 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 </div>
 
