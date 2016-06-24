@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:index, :edit, :update, :destroy,:edit_new_user,:edit_active_user,:edit_user_profile]
-  before_action :correct_user,   only: [:edit, :update,:show,:edit_user_profile]
-  before_action :admin_user,     only: [:edit, :update,:destroy,:index,:show,:edit_new_user,:edit_active_user,:edit_user_profile]
+  before_action :logged_in_user, only: [:index, :edit, :update, :destroy,:edit_new_user,:edit_active_user]
+  before_action :correct_user,   only: [:edit, :update,:show]
+  before_action :admin_user,     only: [:edit, :update,:destroy,:index,:show,:edit_new_user,:edit_active_user]
 
   def index
 
@@ -45,6 +45,7 @@ def edit_active_user
     format.js
   end
 end
+
 def edit_user_profile
   @user = User.find(params[:id])
   respond_to do |format|
@@ -52,6 +53,7 @@ def edit_user_profile
     format.js
   end
 end
+
 def create
     @user = User.new(user_params)
     if @user.save
@@ -61,7 +63,7 @@ def create
     else
       redirect_to users_url
     end
-  end
+end
 
   def edit
     @user = User.find(params[:id])
@@ -73,12 +75,11 @@ def create
       flash[:success] = "Profile updated"
       if admin_user && !correct_user
         redirect_to users_url
-      else
-        #@user
-        redirect_to users_url
+      elsif !admin_user && correct_user
+        
       end
     else
-
+      flash[:success] = "Profile not updated."
     end
   end
 
