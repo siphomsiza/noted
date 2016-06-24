@@ -1,16 +1,15 @@
-<% provide(:title, 'All Roles') %>
+<% provide(:title, 'Master Setup') %>
 <script>
 $(function() {
 	//highlight the current nav
 	$("#applicationmanifest a:contains('SETUP')").parent().addClass('active');
 }); //jQuery is loaded
 </script>
-<div>
 
 <div class="row">
-<div class="col col-lg-">
+<div class="col col-lg-12">
 <ul class="nav nav-pills nav-justified">
-<li class="active"><%= link_to "Master System Setup", master_setups_path %></li>
+<li class="active"><%= link_to "Master Setup", master_setups_path %></li>
 <li><%= link_to "System Setup", setups_path %></li>
 <li><%= link_to "Departments", departments_path %></li>
 <li><%= link_to "Departmental Administrators", roles_path %></li>
@@ -21,7 +20,7 @@ $(function() {
 </ul>
 </div>
 </div>
-</div>
+
     <div class="row">
             <div class="tabbable tabs">
               <ul id = "myTab" class = "nav nav-tabs">

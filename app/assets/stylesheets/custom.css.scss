@@ -70,7 +70,9 @@ h2 {
 #departmentalsdbips td, th {
   font-size: 0.8em;
 }
-
+.btn-style{
+  color: $deepblue;
+}
 p {
 	font-family: $fontFamily;
 	font-size: 1.1em;
@@ -94,7 +96,16 @@ table {
   font-family: $fontFamily;
 	color: $deepblue;
 }
-
+.nav-justified li a{
+  font-family: $fontFamily;
+  color: $deepblue;
+  background-color: white !important;
+}
+.nav-justified li a:hover, .nav-justified li.active a{
+  font-family: $fontFamily;
+  color: white !important;
+  background-color: $powderblue !important;
+}
 .navbar {
     margin-bottom: 0;
     background-color: white;
@@ -197,8 +208,8 @@ footer {
 .btn {
   margin: 1px 0;
   border: 1px solid $deepblue;
-  background-color: white !important;
   color: $deepblue;
+  background-color: white !important;
   font-weight: bold;
 }
 
@@ -258,6 +269,8 @@ input {
 #setup_include_toplayer_previous_target,
 #setup_include_toplayer_previous_comments,
 #kpiowner_checkbox,
+#admin_checkbox,
+#disablity_checkbox,
 #setup_include_toplayer_next_target {
   width: auto;
   margin-left: 0;

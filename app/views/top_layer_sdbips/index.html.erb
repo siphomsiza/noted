@@ -1,4 +1,4 @@
-<% provide(:title, 'All Top Layer SDBIPs') %>
+<% provide(:title, 'Top Layer SDBIPs') %>
 <script>
 $(function() {
 	//highlight the current nav
@@ -11,12 +11,12 @@ $(function() {
 	<article class="top-layer-sdbips">
 	<h1>Mkhondo Local Municipality</h1></article>
 		<ul class="nav nav-pills nav-justified">
-		<li><%= link_to "Departmental SDBIP", departmental_sdbips_path, :class =>"btn btn-sm pull-right" %></li>
+		<li><%= link_to "Departmental SDBIP", departmental_sdbips_path %></li>
 		<% if current_user.admin? %>
-		<li class="active"><%= link_to "Top Layer SDBIP", top_layer_sdbips_path, :class =>"btn btn-xs pull-right" %></li>
-		<li><%= link_to "Capital Projects", capital_projects_path, :class =>"btn btn-xs pull-right"%></li>
-		<li><%= link_to "Monthly Cashflow", monthly_cashflows_path, :class =>"btn btn-xs pull-right"%></li>
-		<li><%= link_to "Revenue By Source", revenue_by_sources_path, :class =>"btn btn-xs pull-right"%></li>
+		<li class="active"><%= link_to "Top Layer SDBIP", top_layer_sdbips_path %></li>
+		<li><%= link_to "Capital Projects", capital_projects_path %></li>
+		<li><%= link_to "Monthly Cashflow", monthly_cashflows_path %></li>
+		<li><%= link_to "Revenue By Source", revenue_by_sources_path %></li>
 		<% end %>
 		</ul>
 </div>

@@ -4,6 +4,7 @@ class TopLayerSdbipsController < ApplicationController
   # GET /top_layer_sdbips
   # GET /top_layer_sdbips.json
   def index
+    
     @top_layer_sdbip = TopLayerSdbip.new
     @top_layer_sdbips = TopLayerSdbip.all
     if !@top_layer_sdbips.blank?
