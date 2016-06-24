@@ -70,7 +70,10 @@
 
 <!--<%= link_to_add_fields "Add Department/Subdepartment", f, :roles_details %>-->
   <hr>
-<%= f.submit "Save", :class =>'btn btn-mini pull-right' %>
+  <div class="actions col-lg-3 pull-right">
+    <%= f.submit "Save", :class =>'btn btn-mini' %>
+  </div>
+
 
 <% end %>
 <hr/>
