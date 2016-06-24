@@ -62,10 +62,10 @@
               <% end %>
             </li>
             <li>
-              <%= link_to edit_user_profile_path(current_user),remote: true,'data-target' => "#edit-user-profile-modal", 'data-toggle' => 'modal',:title=>"Click to Edit user details" do %>
+              <%= link_to edit_user_profile_path(current_user),remote: true,'data-target' => "#user-profile-modal", 'data-toggle' => 'modal',:title=>"Click to Edit user details" do %>
                 <span class="glyphicon glyphicon-cog"></span>&nbsp;Settings
               <% end %>
-		            <div id="edit-user-profile-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="editmodalLabel" aria-hidden="true">
+		            <div id="user-profile-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="editmodalLabel" aria-hidden="true">
 
 		            </div>
             </li>
