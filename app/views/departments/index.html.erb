@@ -67,8 +67,8 @@ $(function() {
 						  <li><%=  subdepartment.subdepartment_name %></li>
 							<% end %></ol>
 						</td>
-             <td><%= link_to number_to_phone(department.tel_no, :area_code => true, :delimiter => ' ') %></td>
-              <td><%= link_to number_to_phone(department.fax_no, :area_code => true, :delimiter => ' ') %></td>
+             <td><%=  number_to_phone(department.tel_no, :area_code => true, :delimiter => ' ') %></td>
+              <td><%=  number_to_phone(department.fax_no, :area_code => true, :delimiter => ' ') %></td>
 
            <!--<td><%= link_to department, class: "btn btn-mini" do %>
               <span class="glyphicon glyphicon-list-alt"></span>&nbsp;Show
