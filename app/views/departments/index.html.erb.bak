@@ -12,14 +12,14 @@ $(function() {
   <div class="row">
     <div class="col col-lg-12">
       <% if current_user.admin? %>
-        <%= link_to new_department_path, :class =>"btn btn-midi" do %>
+        <%= link_to new_department_path, :class =>"btn " do %>
           <span class="glyphicon glyphicon-plus-sign"></span> New Department
         <% end %>
       <% end %>
-      <%= link_to lists_path, :class =>"btn btn-midi pull-right" do %>
+      <%= link_to lists_path, :class =>"btn  pull-right" do %>
         Step 3: List Setup <span class="glyphicon glyphicon-circle-arrow-right"></span>
       <% end %>
-      <%= link_to setups_path, :class =>"btn btn-midi pull-right" do %>
+      <%= link_to setups_path, :class =>"btn  pull-right" do %>
         <span class="glyphicon glyphicon-circle-arrow-left"></span> Step 1: System Setup
       <% end %>
     </div>
