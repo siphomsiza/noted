@@ -10,7 +10,7 @@
       <% else %>
         <p>There is currently no setup configured.</p>
       <% end %>
-      <%= link_to departments_path, :class =>"btn btn-midi pull-right" do %>
+      <%= link_to departments_path, :class =>"btn  pull-right" do %>
         Step 2: Department Setup <span class="glyphicon glyphicon-circle-arrow-right"></span>
       <% end %>
     </div>

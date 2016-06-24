@@ -48,24 +48,21 @@ $(function() {
 						</div><!-- tabbable tabs -->
 
 						<div id = "myTabContent" class = "tab-content">
-							<br/>
 							<div class = "tab-pane active fade in" id = "new_sdbip">
-								<% if current_user.admin? %>	<div class="row">
+								<% if current_user.admin? %>
+								<div class="row"><br/>
 									<div class="col col-lg-12">
-
-												<button class="btn btn-midi pull-right" data-toggle="modal" data-target="#importModal" title="Click to upload SDBIP.">
-													<span class="glyphicon glyphicon-upload"></span>&nbsp;Import SDBIP
-												</button>&nbsp;
-
-
-											</div></div>
+												<button class="btn pull-right" data-toggle="modal" data-target="#importModal" title="Click to upload SDBIP.">
+													<span class="glyphicon glyphicon-upload"></span>&nbsp;Import SDBIP</button>&nbsp;
+											</div>
+								</div>
 											<hr/>
 											<% end %>
 											<h2>New Departmental SDBIP</h2>
 									<% if current_user.admin? %>
 											<%= render 'form' %>
 									<% else %>
-									<p align="center">You're not eligible to create SDBIPs.</p>
+										<p align="center">You're not eligible to create SDBIPs.</p>
 									<% end %>
 							</div>
 
@@ -92,20 +89,19 @@ $(function() {
 										</div>
 
 									<%= form_tag departmental_sdbips_path, method: :get do %>
-
 										<div class="row">
 											<div class="col-lg-12">
 												<div class="col-lg-3">
-													Who:&nbsp;<%= select_tag :subdepartment_id, grouped_options_for_select(@departments.map{ |group| [group.name, group.subdepartments.map{ |c| [c.subdepartment_name, c.id] } ] }),{class:'form-control'} %>
+													<label class="col control-label">Who:</label>&nbsp;<%= select_tag :subdepartment_id, grouped_options_for_select(@departments.map{ |group| [group.name, group.subdepartments.map{ |c| [c.subdepartment_name, c.id] } ] }),{class:'form-control'} %>
 												</div>
 												<div class="col-lg-3">
-													What:&nbsp;<%= select_tag :kpi_type_id,options_for_select([["All KPIs","0"]]+@kpitypes.all.collect {|x| [ x.name, x.id ] },id:'kpi_select'),prompt:'Select KPI Type',class: "form-control" %>
+													<label class="col control-label">What:</label>&nbsp;<%= select_tag :kpi_type_id,options_for_select([["All KPIs","0"]]+@kpitypes.all.collect {|x| [ x.name, x.id ] },id:'kpi_select'),prompt:'Select KPI Type',class: "form-control" %>
 												</div>
 												<div class="col-lg-2">
-												When:&nbsp;<%= date_field(:start_date, nil,placeholder: 'Select Start Date',:class => 'form-control input-sm') %>
+												<label class="col control-label">When:</label>&nbsp;<%= date_field(:start_date, nil,placeholder: 'Select Start Date',:class => 'form-control input-sm') %>
 												</div>
 												<div class="col-lg-2">
-													To:&nbsp;<%= date_field(:end_date,nil,placeholder: 'Select End Date',:class => 'form-control input-sm') %>
+													<label class="col control-label">To:</label>&nbsp;<%= date_field(:end_date,nil,placeholder: 'Select End Date',:class => 'form-control input-sm') %>
 												</div>
 												<div class="col-lg-1">
 													<%= submit_tag "Apply", class: "btn btn-sm", :department_id => nil %>
@@ -113,129 +109,149 @@ $(function() {
 											</div>
 										</div>
 									<% end %>
-									<h2><a href="#" data-toggle="collapse" data-target="#grpChkBox" title="Click link to display custom view functionality." id="filter_toggle"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;Custom View</a></h2>
-								<div id="grpChkBox" class="collapse">
+									<h3><a href="#" data-toggle="collapse" data-target="#grpChkBox" title="Click link to display custom view functionality." id="filter_toggle"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;Custom View</a></h3>
+								<div id="grpChkBox" class="collapse"><hr/>
 								<div class="row">
 								<div class="col-lg-12">
 								<div class="checkbox col-lg-2">
-								<label><input type="checkbox" id="kpi-owner-checkbox" name="kpi-owner" value="">KPI Owner</label>
+								<label><input type="checkbox" id="kpi-owner-checkbox" name="kpi-owner" value="">&nbsp,&nbsp;&nbsp;&nbsp;KPI Owner</label>
 								</div>
 							<div class="checkbox  col-lg-2">
-								<label><input type="checkbox" id="unit-of-measurement" name="unit-of-measurement" value="">Unit of Measurement</label>
+								<label><input type="checkbox" id="unit-of-measurement" name="unit-of-measurement" value="">&nbsp,&nbsp;&nbsp;&nbsp;Unit of Measurement</label>
 							</div>
-							<div class="checkbox col-lg-2"> <label><input type="checkbox" id="mscore-classification" name="mscore-classification" value="">M-score Classification</label> </div>
-							<div class="checkbox col-lg-2"> <label><input type="checkbox" id="idp-ref" name="idp-ref" value="">IDP Ref</label> </div>
+							<div class="checkbox col-lg-2"> <label><input type="checkbox" id="mscore-classification" name="mscore-classification" value="">&nbsp,&nbsp;&nbsp;&nbsp;M-score Classification</label> </div>
+							<div class="checkbox col-lg-2"> <label><input type="checkbox" id="idp-ref" name="idp-ref" value="">&nbsp,&nbsp;&nbsp;&nbsp;IDP Ref</label> </div>
 							<div class="checkbox col-lg-2">
-								<label><input type="checkbox" id="national-outcome" name="national-outcome" value="">National Outcome</label>
+								<label><input type="checkbox" id="national-outcome" name="national-outcome" value="">&nbsp,&nbsp;&nbsp;&nbsp;National Outcome</label>
 							</div>
 							<div class="checkbox col-lg-2">
-								<label><input type="checkbox" id="kpi-concept" name="kpi-concept" value="">KPI Concept</label>
+								<label><input type="checkbox" id="kpi-concept" name="kpi-concept" value="">&nbsp,&nbsp;&nbsp;&nbsp;KPI Concept</label>
 							</div>
 							</div>
 							</div>
 							<div class="row">
 							<div class="col-lg-12">
 							<div class="checkbox col-lg-2">
-								<label><input type="checkbox" id="strategic-objectives" name="strategic-objectives" value="">Strategic Objectives</label>
+								<label><input type="checkbox" id="strategic-objectives" name="strategic-objectives" value="">&nbsp,&nbsp;&nbsp;&nbsp;Strategic Objectives</label>
 							</div>
 							<div class="checkbox col-lg-2">
-								<label><input type="checkbox" id="source-of-evidence" name="source-of-evidence" value="">Source of Evidence</label>
+								<label><input type="checkbox" id="source-of-evidence" name="source-of-evidence" value="">&nbsp,&nbsp;&nbsp;&nbsp;Source of Evidence</label>
 							</div>
 
 							<div class="checkbox col-lg-2">
-								<label><input type="checkbox" id="baseline" name="baseline" value="">Baseline</label>
+								<label><input type="checkbox" id="baseline" name="baseline" value="">&nbsp,&nbsp;&nbsp;&nbsp;Baseline</label>
 							</div>
 							<div class="checkbox col-lg-2">
-								<label><input type="checkbox" id="risk-rating" name="risk-rating" value="">Risk Rating</label>
+								<label><input type="checkbox" id="risk-rating" name="risk-rating" value="">&nbsp,&nbsp;&nbsp;&nbsp;Risk Rating</label>
 							</div>
 							<div class="checkbox col-lg-2">
-								<label><input type="checkbox" id="ndp-objectives" name="ndp-objectives" value="">NDP Objectives</label>
+								<label><input type="checkbox" id="ndp-objectives" name="ndp-objectives" value="">&nbsp,&nbsp;&nbsp;&nbsp;NDP Objectives</label>
 							</div>
 							<div class="checkbox col-lg-2">
-								<label><input type="checkbox" id="reporting-category" name="reporting-category" value="">Reporting Category</label>
+								<label><input type="checkbox" id="reporting-category" name="reporting-category" value="">&nbsp,&nbsp;&nbsp;&nbsp;Reporting Category</label>
 							</div>
 							</div>
 							</div>
 							<div class="row">
 							<div class="col-lg-12">
 								<div class="checkbox col-lg-2">
-									<label><input type="checkbox" id="annual-target" name="annual-target" value="">Annual Target</label>
+									<label><input type="checkbox" id="annual-target" name="annual-target" value="">&nbsp,&nbsp;&nbsp;&nbsp;Annual Target</label>
 								</div>
 								<div class="checkbox col-lg-2">
-									<label><input type="checkbox" id="revised-target" name="revised-target" value="">Revised Target</label>
+									<label><input type="checkbox" id="revised-target" name="revised-target" value="">&nbsp,&nbsp;&nbsp;&nbsp;Revised Target</label>
 								</div>
 							<div class="checkbox col-lg-2">
-								<label><input type="checkbox" id="first-quarter-target" name="first-quarter-target" value="">1st Quarter Target</label>
+								<label><input type="checkbox" id="first-quarter-target" name="first-quarter-target" value="">&nbsp,&nbsp;&nbsp;&nbsp;1st Quarter Target</label>
 							</div>
 							<div class="checkbox col-lg-2">
-								<label><input type="checkbox" id="second-quarter-target" name="second-quarter-target" value="">2nd Quarter Target</label>
+								<label><input type="checkbox" id="second-quarter-target" name="second-quarter-target" value="">&nbsp,&nbsp;&nbsp;&nbsp;2nd Quarter Target</label>
 							</div>
 							<div class="checkbox col-lg-2">
-								<label><input type="checkbox" id="third-quarter-target" name="third-quarter-target" value="">3rd Quarter Target</label>
+								<label><input type="checkbox" id="third-quarter-target" name="third-quarter-target" value="">&nbsp,&nbsp;&nbsp;&nbsp;3rd Quarter Target</label>
 							</div>
 							<div class="checkbox col-lg-2">
-								<label><input type="checkbox" id="fourth-quarter-target" name="fourth-quarter-target" value="">4th Quarter Target</label>
+								<label><input type="checkbox" id="fourth-quarter-target" name="fourth-quarter-target" value="">&nbsp,&nbsp;&nbsp;&nbsp;4th Quarter Target</label>
 							</div>
 
 							</div>
-							</div>
+					</div>
+
 							<div class="row">
 							<div class="col-lg-12">
 
 							<div class="checkbox col-lg-2">
-								<label><input type="checkbox" id="capital-project" name="capital-project" value="">Capital Project</label>
+								<label><input type="checkbox" id="capital-project" name="capital-project" value="">&nbsp,&nbsp;&nbsp;&nbsp;Capital Project</label>
 							</div>
+
 							<div class="checkbox col-lg-2">
-								<label><input type="checkbox" id="impact" name="impact" value="">Impact</label>
+								<label><input type="checkbox" id="impact" name="impact" value="">&nbsp,&nbsp;&nbsp;&nbsp;Impact</label>
 							</div>
+
 							<div class="checkbox col-lg-2">
-								<label><input type="checkbox" id="provincial-strategic-outcome" name="provincial-strategic-outcome" value="">Provincial Strategic Outcome</label>
+								<label><input type="checkbox" id="provincial-strategic-outcome" name="provincial-strategic-outcome" value="">&nbsp,&nbsp;&nbsp;&nbsp;Provincial Strategic Outcome</label>
 							</div>
+
 							<div class="checkbox col-lg-2">
-								<label><input type="checkbox" id="performance-standard" name="performance-standard" value="">Performance Standard</label>
+								<label><input type="checkbox" id="performance-standard" name="performance-standard" value="">&nbsp,&nbsp;&nbsp;&nbsp;Performance Standard</label>
 							</div>
+
 							<div class="checkbox col-lg-2">
-								<label><input type="checkbox" id="area" name="area" value="">Area</label>
+								<label><input type="checkbox" id="area" name="area" value="">&nbsp,&nbsp;&nbsp;&nbsp;Area</label>
 							</div>
+
 							<div class="checkbox col-lg-2">
-								<label><input type="checkbox" id="ward" name="ward" value="">Ward</label>
+								<label><input type="checkbox" id="ward" name="ward" value="">&nbsp,&nbsp;&nbsp;&nbsp;Ward</label>
 							</div>
-							</di>
-							</div>
+						</div>
+					</div>
+
 							<div class="row">
 							<div class="col-lg-12">
 
 							<div class="checkbox col-lg-2">
-								<label><input type="checkbox" id="past-year-performance" name="past-year-performance" value="">Past Year performance</label>
+								<label><input type="checkbox" id="past-year-performance" name="past-year-performance" value="">&nbsp,&nbsp;&nbsp;&nbsp;Past Year performance</label>
 							</div>
 
 							<div class="checkbox col-lg-2">
-								<label><input type="checkbox" id="top-layer-ref" name="top-layer-ref" value="">Top layer KPI Ref</label>
+								<label><input type="checkbox" id="top-layer-ref" name="top-layer-ref" value="">&nbsp,&nbsp;&nbsp;&nbsp;Top layer KPI Ref</label>
 							</div>
 							<div class="checkbox col-lg-2">
-								<label><input type="checkbox" id="kpi-calculation-type" name="kpi-calculation-type" value="">KPI Calculation Type</label>
+								<label><input type="checkbox" id="kpi-calculation-type" name="kpi-calculation-type" value="">&nbsp,&nbsp;&nbsp;&nbsp;KPI Calculation Type</label>
 							</div>
+							<div class="checkbox col-lg-2">
+								<label><input type="checkbox" id="start-date" name="start-date" value="">&nbsp,&nbsp;&nbsp;&nbsp;Start Date</label>
 							</div>
+							<div class="checkbox col-lg-2">
+								<label><input type="checkbox" id="end-date" name="end-date" value="">&nbsp,&nbsp;&nbsp;&nbsp;End Date</label>
 							</div>
+							<div class="checkbox col-lg-2">
+								<label><input type="checkbox" id="created-date" name="created-date" value="">&nbsp,&nbsp;&nbsp;&nbsp;Created Date</label>
+							</div>
+
+					</div>
+			</div>
 							<div class="row">
 							<div class="col-lg-12">
+							<div class="checkbox col-lg-2">
+								<label><input type="checkbox" name="updated-date" id="updated-date" value="">&nbsp,&nbsp;&nbsp;&nbsp;Updated Date</label>
+							</div>
+							<div class="checkbox col-lg-2">
+
+							</div>
+							<div class="checkbox col-lg-2">
+
+							</div>
 
 							<div class="checkbox col-lg-2">
-								<label><input type="checkbox" id="start-date" name="start-date" value="">Start Date</label>
+
 							</div>
-							<div class="checkbox col-lg-2">
-								<label><input type="checkbox" id="end-date" name="end-date" value="">End Date</label>
-							</div>
-							<div class="checkbox col-lg-2">
-								<label><input type="checkbox" id="created-date" name="created-date" value="">Created Date</label>
-							</div>
-							<div class="checkbox col-lg-2">
-								<label><input type="checkbox" name="updated-date" id="updated-date" value="">Updated Date</label>
-							</div></div>
+
+						</div>
 							</div>
 							</div>
 							</div>
-								<% end %>
+
+								<% end %>	<br/>
 									<div class="col col-lg-12">
 
 										<% if !@departmental_sdbips.blank? %>

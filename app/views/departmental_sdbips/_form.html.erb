@@ -156,23 +156,9 @@
 
 
 
-		<%= f.submit "Save",class: 'btn btn-mini pull right'%>
+		<%= f.submit "Save",class: 'btn pull right'%>
 
     <% end %>
 
 </div>
 </div>
-<script>
-  $(function(){
-    $(document).on('change','#selected_department', function(){
-       var select_value = $(this).val();
-       $('#current_department').val(select_value);
-
-    });
-    $(document).on('change','#selected_subdepartment', function(){
-       var select_value = $(this).val();
-       $('#current_subdepartment').val(select_value);
-
-    });
-  });
-</script>

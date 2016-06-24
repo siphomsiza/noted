@@ -9,7 +9,12 @@ window.setTimeout(function() {
 });
         $(document).ready(function(){
             $('input[type="checkbox"]').click(function(){
-
+                if($('#disablity_checkbox').prop("checked") == true){
+                  $('#disability_description_fields').show();
+                }
+                if($('#disablity_checkbox').prop("checked") == false){
+                  $('#disability_description_fields').hide();
+                }
                 if($('#kpi_owner_checkbox').prop("checked") == true){
                     $('#kpi_owner_select').show();
                 }
@@ -40,6 +45,7 @@ window.setTimeout(function() {
           $("#update_kpi_owner_select").hide();
           $("#update_department_select").hide();
           $("#update_subdepartment_select").hide();
+          $('#disability_description_fields').hide();
 
 }
 
@@ -135,4 +141,16 @@ $(document).ready(function() {
         collapsible: true
       });
     });
-  
+
+  $(function(){
+        $(document).on('change','#selected_department', function(){
+           var select_value = $(this).val();
+           $('#current_department').val(select_value);
+
+        });
+        $(document).on('change','#selected_subdepartment', function(){
+           var select_value = $(this).val();
+           $('#current_subdepartment').val(select_value);
+
+        });
+  });

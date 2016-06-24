@@ -28,7 +28,7 @@ class DepartmentalSdbip < ActiveRecord::Base
 	belongs_to :sdbip_report
 	has_many :departmental_sdbip_progresses, :dependent => :destroy
 	accepts_nested_attributes_for :departmental_sdbip_progresses,allow_destroy: true
-
+	validates :department_name,:subdepartment_name,:kpi,:kpi_ref_number,:predetermined_objective_id,:mscore_classification_id,:national_outcome_id,:strategic_objective_id,:presence=> true
   #validate :extension_white_list
 
 	def subdepartment_for_form

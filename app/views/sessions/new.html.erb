@@ -1,8 +1,9 @@
 <% provide(:title, "Log in") %>
 <div class="row" id="landingpage">
+
   <div class="col-md-6 col-md-offset-3"><br/>
-    <section>
-  		<%= image_tag("keystone-colour-palette-1.jpg", alt: "Keystone Municipal Performance Management System logo") %>
+    <section id="landing-page-logo">
+  		<%= image_tag("keystone-colour-palette-3.jpg", alt: "Keystone Municipal Performance Management System logo") %>
   	</section><!-- branding -->
     <h2>Welcome Home</h2>
     <%= form_for(:session, url: login_path) do |f| %>
@@ -19,7 +20,7 @@
         <span>Remember me on this computer</span>
       <% end %>
 
-      <%= f.submit "Log in", :class=>"btn btn-midi" %>
+      <%= f.submit "Log in", :class=>"btn " %>
     <% end %>
   </div>
 </div>
