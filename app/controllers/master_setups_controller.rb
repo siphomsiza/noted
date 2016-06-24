@@ -31,11 +31,11 @@ class MasterSetupsController < ApplicationController
 
     respond_to do |format|
       if @master_setup.save
-        flash[:success] = 'Master setup was successfully created.'
+        flash[:success] = 'Location was successfully saved.'
         format.html { redirect_to master_setups_url}
         format.json { render :show, status: :created, location: master_setups_url }
       else
-        flash[:danger] = 'Master setup was not created.'
+        flash[:danger] = 'Location was not saved.'
         format.html { redirect_to master_setups_url}
         format.json { render :show, status: :created, location: master_setups_url }
       end
@@ -47,11 +47,11 @@ class MasterSetupsController < ApplicationController
   def update
     respond_to do |format|
       if @master_setup.update(master_setup_params)
-        flash[:success] = 'Master setup was successfully updated.'
+        flash[:success] = 'Location was successfully saved.'
         format.html { redirect_to master_setups_url}
         format.json { render :show, status: :created, location: master_setups_url }
       else
-        flash[:danger] = 'Master setup was not updated.'
+        flash[:danger] = 'Location was not saved.'
         format.html { redirect_to master_setups_url}
         format.json { render :show, status: :created, location: master_setups_url }
       end

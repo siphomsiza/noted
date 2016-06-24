@@ -1,4 +1,5 @@
-<%= form_for @setup do |f| %>
+<div class="col-lg-6 col-lg-offset-3"><br/>
+	<%= form_for @setup do |f| %>
 	<!--General setup-->
 	<%= f.label :performance_comments, class: "checkbox inline" do %>
     <%= f.check_box :performance_comments %>
@@ -45,3 +46,4 @@
     <%= f.submit "Save", :class =>'btn btn-mini' %>
   </div>
 <% end %>
+</div>
