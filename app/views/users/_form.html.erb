@@ -49,10 +49,13 @@
            <%= f.password_field :password_confirmation, class: 'form-control' %>
         </div><!-- controls -->
       </section><!-- row -->
-        <label class="col col-lg-4 control-label" for="systemadministrator"><% if current_user.admin? %>
-        <%= f.label :admin, class: "checkbox inline" do %>
-        <%= f.check_box :admin, :id=>'admin_checkbox'%>
-        <% end %><% end %>System Administrator</label>
+        <div class="controls col col-lg-4" for="systemadministrator">
+          <% if current_user.admin? %>
+          <%= f.label :admin, class: "checkbox inline" do %>
+      		  <%= f.check_box :admin,:id=>"admin_checkbox" %>
+            <span class="control-label">System Administrator</span>
+          <% end %>
+        <% end %></div>
 
     </fieldset><!-- system info -->
 
