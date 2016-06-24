@@ -198,14 +198,14 @@ footer {
 }
 
 /* button */
-.btn:hover {
+.btn:hover, .btn-midi:hover {
   border: 1px solid $deepblue;
   background-color: $deepblue !important;
   color: white;
   font-weight: bold;
 }
 
-.btn {
+.btn, .btn-midi {
   margin: 1px 0;
   border: 1px solid $deepblue;
   color: $deepblue;
@@ -263,6 +263,7 @@ input {
 #setup_project_life_cycle,
 #setup_attach_poe,
 #reporting_kpi,
+#admin_checkbox,
 #setup_include_previous_departmental_actual,
 #setup_include_departmental_previous_comments,
 #setup_include_departmental_next_target,

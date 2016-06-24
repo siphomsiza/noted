@@ -207,7 +207,7 @@
 
           </fieldset>
           <div class = "actions col-md-5">
-          <%= f.submit "Save", class: "btn btn-mini"%>
+          <%= f.submit "Save", class: "btn btn-mini pull-right"%>
           <% if current_user.admin? %>
           <%= link_to controller: "users", action: "terminate", id: @user.id, method: "get", class: "btn btn-mini" do%>
           <span class = "glyphicon glyphicon-remove-sign"></span>Terminate <% end %>&nbsp;|&nbsp;
