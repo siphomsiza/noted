@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Ruby version for this application
-# ruby '2.3.0'
+ruby '2.3.0'
 
 gem 'rails',                            '4.2.6'
 gem 'bcrypt',                           '3.1.11'
@@ -40,25 +40,35 @@ group :development, :test do
   gem 'web-console',                    '3.1.1'
   gem 'spring',                         '1.6.4'
   gem 'jasmine-rails',                  '0.12.4'
-  gem 'capistrano'
-  gem 'capistrano-bundler'
+  gem 'capistrano',                     '3.5.0'
+  gem 'capistrano-bundler',             '1.1.4'
   gem 'capistrano-passenger',           '>= 0.1.1'
-  gem 'capistrano-rails'
-  gem 'capistrano-rvm'
+  gem 'capistrano-rails',               '1.1.7'
+  gem 'capistrano-rvm',                 '0.1.2'
+  gem 'reek'
+  gem 'flay',                           '2.8.0'
+  gem 'flog',                           '4.4.0'
+  gem 'traceroute',                     '0.5.0'
+  gem 'rack-mini-profiler',             '~> 0.10.1'
+  gem 'bullet',                         '5.1.0'
+  gem 'brakeman',                       '3.3.2'
+  gem 'deadweight',                     '0.2.2'
+  gem 'rails_best_practices',           '1.16.0'
+  gem 'rubocop',                        '0.40.0'
+  gem 'metric_fu',                      '4.12.0'
 end
 
 group :test do
   gem 'capybara',                       '2.7.1'
   gem 'rspec-rails',                    '3.4.2'
   gem 'simplecov',                      '0.11.2', :require => false
-  gem 'simplecov-rcov'
-  gem 'rspec_junit_formatter' # Allows to inspect rspec output as junit output in Jenkins
+  gem 'simplecov-rcov',                 '0.2.3'
+  gem 'rspec_junit_formatter',          '0.2.3'
   gem 'cucumber-rails',                 '1.4.3', :require => false
   gem 'cucumber-rails-training-wheels', '1.0.0' # basic imperative step defs
   gem 'database_cleaner',               '1.5.3' # required by Cucumber
   gem 'autotest-rails',                 '4.2.1'
   gem 'factory_girl_rails',             '4.7.0' # if using FactoryGirl
-  gem 'metric_fu',                      '4.12.0' # collect code metrics
 end
 
 group :production do
