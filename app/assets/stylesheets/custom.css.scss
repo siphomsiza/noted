@@ -1,3 +1,9 @@
+/*
+Product Name: KEYSTONE Municipal Performance Management Systems
+Theme: Deepblue, Powderblue and Midgrey theme
+Author: Rachidi Bushidi
+*/
+
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "jquery.easy-pie-chart";
@@ -14,11 +20,35 @@ $powderblue: #7083AD;
 $midgrey: #ACB1B4;
 
 /* Font Typeface */
-$fontFamily: "Josefin Sans";
+$headingFontFamily: "Josefin Sans", Arial, sans-serif;
+$paragraphFontFamily: "PT Sans", Arial, sans-serif;
 
-/* typography */
+/****** Resets and overrides *******/
+
+/****** General Styles *********/
+
+/****** Header Style *********/
+
+/****** Navigation Style *********/
+
+/****** Footer Style *********/
+
+/****** Form Elements ********/
+
+/****** Misc ******/
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+	background: white;
+  margin-bottom: 30px;
+}
+
 h1, h2, h3, h4, h5, h6 {
-	font-family: $fontFamily;
+	font-family: $headingFontFamily;
 	color: $deepblue;
   text-align: center;
 }
@@ -35,6 +65,7 @@ h2 {
   margin-bottom: 30px;
   font-weight: normal;
 }
+
 #about-section a,
 #active_users a,
 #admin_users a,
@@ -109,7 +140,7 @@ h2 {
 }
 
 p {
-	font-family: $fontFamily;
+	font-family: $headingFontFamily;
 	font-size: 1.1em;
 	line-height: 1.4em;
 	color: $deepblue;
@@ -118,35 +149,35 @@ p {
 }
 
 label {
-  font-family: $fontFamily;
+  font-family: $headingFontFamily;
 	color: $deepblue;
 
 }
 .labels{
-  font-family: $fontFamily;
+  font-family: $headingFontFamily;
   color: $deepblue;
 }
 a {
-  font-family: $fontFamily;
+  font-family: $headingFontFamily;
   color: $deepblue;
 }
 
 table {
-  font-family: $fontFamily;
+  font-family: $headingFontFamily;
 	color: $deepblue;
 }
 .nav-justified li a{
-  font-family: $fontFamily;
+  font-family: $headingFontFamily;
   color: $deepblue;
   background-color: white !important;
 }
 .nav-justified li a:hover{
-  font-family: $fontFamily;
+  font-family: $headingFontFamily;
   color: white !important;
   background-color: $deepblue !important;
 }
 .nav-justified li.active a{
-  font-family: $fontFamily;
+  font-family: $headingFontFamily;
   color: white !important;
   background-color: $powderblue !important;
 }
@@ -187,17 +218,6 @@ table {
   li:last-child {
 	  border-bottom: none;
   }
-}
-
-/* main */
-html {
-  position: relative;
-  min-height: 100%;
-}
-
-body {
-	background: white;
-  margin-bottom: 30px;
 }
 
 .container {
@@ -255,8 +275,8 @@ footer {
 .btn, .btn-midi {
   margin: 1px 0;
   border: 1px solid $deepblue;
-  color: $deepblue;
   background-color: white !important;
+  color: $deepblue;
   font-weight: bold;
   text-decoration: none;
   text-decoration-color: $deepblue;
