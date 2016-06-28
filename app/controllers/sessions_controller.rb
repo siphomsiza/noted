@@ -3,6 +3,7 @@ class SessionsController < ApplicationController
 
 
   def new
+    redirect_to introduction_url unless !session[:user_id]
   end
 
   def create
@@ -15,7 +16,7 @@ class SessionsController < ApplicationController
                 @user.increment!(:login_count)
             end
         params[:session][:remember_me] == '1' ? remember(user) : forget(user)
-        redirect_back_or user
+        redirect_back_or introduction_url
       elsif !user.activated?
         message  = "Account not activated. "
         message += "Check your email for the activation link."
@@ -67,10 +68,12 @@ class SessionsController < ApplicationController
   def destroy
     note = "User logged out of the system."
     record_activity
-    @user = current_user
-    if @user.update_columns(:current_login_at => nil,:current_login_ip=> "",:last_login => Time.zone.now,:last_login_ip => request.env['REMOTE_ADDR'])
+    if session[:user_id]
+      @user = current_user
+      if @user.update_columns(:current_login_at => nil,:current_login_ip=> "",:last_login => Time.zone.now,:last_login_ip => request.env['REMOTE_ADDR'])
+      end
+      log_out if logged_in?
     end
-    log_out if logged_in?
     redirect_to root_url
 
   end

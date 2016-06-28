@@ -1,10 +1,10 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
+  before_action :logged_in_user, only: [:index, :edit, :update, :destroy,:edit_new_user,:edit_active_user]
   before_action :correct_user,   only: [:edit, :update,:show]
-  before_action :admin_user,     only: [:edit, :update,:destroy,:index,:show]
+  before_action :admin_user,     only: [:edit, :update,:destroy,:index,:show,:edit_new_user,:edit_active_user]
 
   def index
-      
+
       @roles = Role.paginate(page: params[:page],per_page: 15)
       @user_activities = ActivityLog.where(admin: false).paginate(page: params[:page], per_page: 15)
       @super_user_activities = ActivityLog.where(admin: true).paginate(page: params[:page], per_page: 15)
@@ -30,8 +30,31 @@ class UsersController < ApplicationController
     end
 
   end
+  def edit_new_user
+  @user = User.find(params[:id])
+  respond_to do |format|
+    format.html
+    format.js
+  end
+end
 
-  def create
+def edit_active_user
+  @user = User.find(params[:id])
+  respond_to do |format|
+    format.html
+    format.js
+  end
+end
+
+def edit_user_profile
+  @user = User.find(params[:id])
+  respond_to do |format|
+    format.html
+    format.js
+  end
+end
+
+def create
     @user = User.new(user_params)
     if @user.save
       @user.send_activation_email
@@ -40,7 +63,7 @@ class UsersController < ApplicationController
     else
       redirect_to users_url
     end
-  end
+end
 
   def edit
     @user = User.find(params[:id])
@@ -52,12 +75,11 @@ class UsersController < ApplicationController
       flash[:success] = "Profile updated"
       if admin_user && !correct_user
         redirect_to users_url
-      else
-        #@user
-        redirect_to users_url
+      elsif !admin_user && correct_user
+        
       end
     else
-
+      flash[:success] = "Profile not updated."
     end
   end
 

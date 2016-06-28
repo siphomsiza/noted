@@ -24,27 +24,38 @@
         <td><%= new_user.created_at %></td>
         <td><%= new_user.status %></td>
           <td>
-            <%= link_to edit_user_path(new_user),remote: true,'data-target' => "#user-modal", 'data-toggle' => 'modal', class: "btn btn-mini", :title=>"Click to Edit user details" do %>
+            <%= link_to edit_new_user_path(new_user),remote: true,'data-target' => "#edit-new-user-modal", 'data-toggle' => 'modal', class: "btn btn-mini", :title=>"Click to Edit user details" do %>
                 <span class="glyphicon glyphicon-pencil"></span>&nbsp;Edit Details
+
               <% end %>
-              <div id="user-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+              <div id="edit-new-user-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
 
               </div>
               <% if current_user.admin? && !current_user?(new_user) %> |
-            <%= link_to "#", class: "btn" do %>
+
+              <%= link_to "#", class: "btn" do %>
+
               Edit Access
-            <% end %><% end %>
+            <% end %>
+
+            <% end %>
             <% if current_user.admin? && !current_user?(new_user) %> |
+
             <%= link_to "",'data-target' => "#reset-password", 'data-toggle' => 'modal', class: "btn btn-mini", :title=>"Click to change your password" do %>
                 &nbsp;Reset Password
               <% end %>
+
             <% end %>
+
           <%= link_to new_user, data: {:confirm => 'Are you sure?'}, :method => :delete, class: "btn" do %>
             Delete
           <% end %>
         </td>
+
       </tr>
+
       <% end %>
+
       </tbody>
   </table>
 </div> <!-- table-responsive -->
@@ -53,6 +64,7 @@
 <div class="modal fade" id="reset-Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 <div class="modal-dialog">
 <div class="modal-content">
+
 <div class="modal-header">
 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
 &times;
@@ -61,6 +73,7 @@
   Forgot password
 </h4>
 </div>
+
 <div class="modal-body">
 
   <div class="row">
@@ -73,9 +86,11 @@
     </div>
   </div>
 </div>
+
 <div class="modal-footer">
 
 </div>
+
 </div><!-- /.modal-content -->
 </div><!-- /.modal -->
 </div>

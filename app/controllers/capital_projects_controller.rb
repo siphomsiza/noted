@@ -4,6 +4,7 @@ class CapitalProjectsController < ApplicationController
   # GET /capital_projects
   # GET /capital_projects.json
   def index
+
     @capital_project = CapitalProject.new
     @capital_projects = CapitalProject.all
       if !@capital_projects.blank?

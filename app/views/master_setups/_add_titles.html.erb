@@ -1,0 +1,26 @@
+<div class="tab-pane active fade in" id="add_job_title">
+  <div class="col-lg-6 col-lg-offset-3"><br/>
+    <h3>New Job Title</h3><br/>
+    <%= form_for(@jobtitle) do |f| %>
+  <% if @jobtitle.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@jobtitle.errors.count, "error") %> prohibited this jobtitle from being saved:</h2>
+
+      <ul>
+      <% @jobtitle.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title,:class=>'form-control' %>
+  </div>
+  <div class="actions col-lg-3 pull-right">
+    <%= f.submit "Save", :class =>'btn btn-mini' %>
+  </div>
+<% end %>
+</div>
+</div>

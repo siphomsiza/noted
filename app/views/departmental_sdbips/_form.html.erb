@@ -140,6 +140,9 @@
 		<%= f.label :reporting_category_id, "Reporting Category" %><br>
 		<%= f.select :reporting_category_id, ReportingCategory.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select Reporting Category"}, class: "form-control" %>
 
+    <%= f.label :risk_rating_id, "Risk Rating" %><br>
+		<%= f.select :risk_rating_id, RiskRating.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select Rating"}, class: "form-control" %>
+
 		<%= f.label :top_layer_kpi_ref, "Top Layer KPI Ref" %><br>
 		<%= f.text_field :top_layer_kpi_ref, :class => "form-control has-error col-md-5" %>
 
@@ -153,23 +156,11 @@
 
 
 
-		<%= f.submit "Save",class: 'btn btn-mini'%>
+    <div class="actions col-lg-3 pull-right">
+      <%= f.submit "Save", :class =>'btn btn-mini' %>
+    </div>
 
     <% end %>
 
 </div>
 </div>
-<script>
-  $(function(){
-    $(document).on('change','#selected_department', function(){
-       var select_value = $(this).val();
-       $('#current_department').val(select_value);
-
-    });
-    $(document).on('change','#selected_subdepartment', function(){
-       var select_value = $(this).val();
-       $('#current_subdepartment').val(select_value);
-
-    });
-  });
-</script>

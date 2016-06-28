@@ -1,16 +1,15 @@
-<% provide(:title, 'All Roles') %>
+<% provide(:title, 'Master Setup') %>
 <script>
 $(function() {
 	//highlight the current nav
 	$("#applicationmanifest a:contains('SETUP')").parent().addClass('active');
 }); //jQuery is loaded
 </script>
-<div>
 
 <div class="row">
-<div class="col col-lg-12">
+<div class="col col-lg-">
 <ul class="nav nav-pills nav-justified">
-<li class="active"><%= link_to "Master System Setup", master_setups_path %></li>
+<li class="active"><%= link_to "Master Setup", master_setups_path %></li>
 <li><%= link_to "System Setup", setups_path %></li>
 <li><%= link_to "Departments", departments_path %></li>
 <li><%= link_to "Departmental Administrators", roles_path %></li>
@@ -18,81 +17,20 @@ $(function() {
 <li><%= link_to "Headings", headings_path %></li>
 <li><%= link_to "Lists", lists_path %></li>
 <li><%= link_to "Time Periods", sdbip_time_periods_path %></li>
-</ul></div></div></div>
+</ul>
+</div>
+</div>
+
     <div class="row">
-
-            <div class="tabbable tabs" id="master-setup-tabs">
+            <div class="tabbable tabs">
               <ul id = "myTab" class = "nav nav-tabs">
-
-                <li class="active">
-                  <a href = "#add-master-setup" data-toggle = "tab">Create</a>
-                </li>
-								<li>
-									<a href = "#master-setups" data-toggle = "tab">Manage</a>
-								</li>
+								<li class="active"><a href = "#master-setup" data-toggle = "tab">Locations</a></li>
+								<li><a href = "#job-titles" data-toggle = "tab">Job Titles</a></li>
               </ul><!-- nav nav-tabs -->
             </div><!-- tabbable tabs -->
-    <div id = "myTabContent" class = "tab-content">
-			<div class = "tab-pane active fade in" id = "add-master-setup"><br/>
-		        <ul class="master-setups">
-							<div class="row">
-								<h3>Configure Master Setup</h3><hr/>
-								<div class="col-lg-12">
-									<div class="col-lg-6">
-										<h3>New Location</h3><hr/>
-		          			<%= render 'form' %>
-									</div>
-									<div class="col-lg-6">
-										<h3>New Job Title</h3><hr/>
-										<%= render 'job_title_form' %>
-									</div>
-						</div>
-					</div>
-		        </ul>
-		</div>
-     <div class = "tab-pane fade" id = "master-setups">
-           <div class="col col-lg-12">
-      <table class="table table-hover">
-        <thead>
-        <tr>
-					<th>Ref</th>
-					<th>Municipality</th>
-					<th>Province</th>
-          <th>Regions/Areas</th>
-          <th colspan="2"></th>
-        </tr>
-      </thead>
+						<section class="tab-content">
+							<%= render 'master_setup' %>
+							<%= render 'setup_job_titles' %>
+						</section>
 
-      <tbody>
-      <% @master_setups.each do |setup| %>
-        <tr>
-					<td><%=  setup.id %></td>
-					  <td><%=  setup.municipality %></td>
-							  <td><%=  setup.province %></td>
-		          <td>
-            <ol>
-              <% setup.regions.each do |region_name| %>
-          <li><%= region_name.name %></li>
-          <% end %>
-        </ol>
-        </td>
-          <td><%= link_to edit_master_setup_path(setup),class: 'btn btn-mini btn-warning', :style=>"text-decoration: none;", remote: true,'data-target' => "#master-setup-modal", 'data-toggle' => 'modal', :title=>"Click to Master Setup" do %>
-						<span class="glyphicon glyphicon-pencil"></span>&nbsp;Edit
-					<% end %>
-	          <div id="master-setup-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
-
-	          </div>
-					</td>
-          <td><%= link_to setup,class: 'btn btn-mini btn-danger', method: :delete, data: { confirm: 'Are you sure?' }, :style=>"text-decoration: none;" do %>
-            <span class="glyphicon glyphicon-remove-sign"></span>&nbsp;Delete
-          <% end %>
-          </td>
-        </tr>
-      <% end %>
-      </tbody>
-    </table>
-    </div>
-  </div>
-</div></div>
-
-  </div>
+</div>

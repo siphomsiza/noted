@@ -49,13 +49,16 @@
            <%= f.password_field :password_confirmation, class: 'form-control' %>
         </div><!-- controls -->
       </section><!-- row -->
-        <label class="col col-lg-4 control-label" for="systemadministrator">System Administrator</label>
-        <div class="controls col col-lg-8">
+      <section class="row">
+        <div class="controls col col-lg-4 control-label" for="systemadministrator">
           <% if current_user.admin? %>
           <%= f.label :admin, class: "checkbox inline" do %>
-          <%= f.check_box :admin, :id=>'admin_checkbox'%>
-          <% end %><% end %>
-   </div><!-- controls -->
+      		  <%= f.check_box :admin,:id=>"admin_checkbox" %>
+            <span class="control-label labels"><strong>System Administrator</strong></span>
+          <% end %>
+        <% end %>
+      </div>
+    </section>
     </fieldset><!-- system info -->
 
     <fieldset id="employmentinfo">
@@ -175,23 +178,28 @@
         </div><!-- controls -->
       </section><!-- row -->
 
-      <section class="row">
-      <label class="col col-lg-4 control-label" for="disabled">Disabled</label>
-        <div class="controls col col-lg-8">
-          <%= f.label :disabled, class: "checkbox inline" do %>
-    <%= f.check_box :disabled,:id=>'disablity_checkbox' %>
-  <% end %>
-   </div><!-- controls -->
-  </section><!-- row -->
-  <section class="row">
+
+        <section class="row">
+          <div class="controls col col-lg-4 control-label" for="disabled">
+            <%= f.label :disabled, class: "checkbox inline" do %>
+        		  <%= f.check_box :disabled,:id=>"disablity_checkbox" %>
+              <span class="control-label labels"><strong>Disabled</strong></span>
+          <% end %>
+        </div>
+      </section><!-- row -->
+
+  <section class="row" id="disability_description_fields">
         <label class="col col-lg-4 control-label" for="disabilitydescription">Disability Description</label>
         <div class="controls col col-lg-8">
           <%= f.text_field :disability_description, :class=>"form-control" , :autocomplete=>"off",:id=>'disablity_description' %>
         </div><!-- controls -->
-      </section><!-- row -->
+  </section><!-- row -->
 
     </fieldset>
-    <%= f.submit class: 'btn btn-mini'%>
+    <div class="col-lg-3 pull-right">
+      <%= f.submit class: 'btn'%>
+    </div>
+
  <% end %>
 </div><!-- media-body -->
 </section><!-- media -->

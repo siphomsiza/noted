@@ -145,7 +145,8 @@ end
       flash[:success] = "KPI was successfully saved."
       redirect_to departmental_sdbips_path
     else
-
+      flash[:danger] = "KPI was not saved. please fill all the required fields."
+      redirect_to departmental_sdbips_path
     end
   end
 

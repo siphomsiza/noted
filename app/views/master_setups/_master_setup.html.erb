@@ -1,25 +1,21 @@
-<p id="notice"><%= notice %></p>
+<div class="tab-pane active fade in" id="master-setup">
+  <section class="media">
+	  <div class="media-body">
+			<article>
+				<div class="tabbable tabs">
+					<ul class="nav nav-tabs">
+						<li class="active"><a href="#add_locations" data-toggle="tab">Create</a></li>
+						<li><a href="#manage_locations" data-toggle="tab">Manage</a></li>
+					</ul><!-- nav nav-tabs -->
+				</div><!-- tabbable tabs -->
 
-<h1>Listing Master Setups</h1>
+				<section class="tab-content">
+			    <%= render 'add_locations' %>
+			    <%= render 'manage_locations' %>
+				</section><!-- tab-content -->
 
-<table>
-  <thead>
-    <tr>
-      <th>Municipality</th>
-      <th>Regions/Areas</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+			</article><!-- users -->
 
-  <tbody>
-    <% @master_setups.each do |master_setup| %>
-      <tr>
-        <td><%= master_setup.municipality %></td>
-        <td><%= master_setup.municipality %></td>
-        <td><%= link_to 'Show', master_setup %></td>
-        <td><%= link_to 'Edit', edit_master_setup_path(master_setup) %></td>
-        <td><%= link_to 'Destroy', master_setup, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+	  </div><!-- media-body -->
+	</section><!-- media -->
+</div>

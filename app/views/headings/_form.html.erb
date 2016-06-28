@@ -10,7 +10,9 @@
       <%= f.label :category %><br>
       <%= f.select(:category,["Capital Projects", "Departmental SDBIP","General","Monthly Cashflows", "Revenue by source","Top Layer SDBIP"],{},{:class=>"form-control"})%>
 
-      <%= f.submit class: 'btn  btn-sm'%><br/>
+      <div class="actions col-lg-3 pull-right">
+        <%= f.submit "Save", :class =>'btn btn-mini' %>
+      </div>
 
     <% end %>
   </div>

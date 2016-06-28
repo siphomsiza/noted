@@ -2,7 +2,7 @@
 <script>
 $(function() {
 	//highlight the current nav
-	$("#applicationmanifest a:contains('SDBIP')").parent().addClass('active');
+	$("#applicationmanifest ul.navbar-nav li:eq(3)").addClass('active');
 }); //jQuery is loaded
 </script>
 <br/>
@@ -10,12 +10,12 @@ $(function() {
 <div class="col col-lg-12">
 	<article class="sdbip">
 	<h1>Mkhondo Local Municipality</h1>
-<ul class="nav nav-pills">
-<li><%= link_to "Departmental SDBIP", departmental_sdbips_path, :class =>"btn btn-sm pull-right"%></li>
-<% if current_user.admin? %><li><%= link_to "Top Layer SDBIP", top_layer_sdbips_path, :class =>"btn btn-xs pull-right"%></li>
-<li><%= link_to "Capital Projects", capital_projects_path, :class =>"btn btn-xs pull-right"%></li>
-<li><%= link_to "Monthly Cashflow", monthly_cashflows_path, :class =>"btn btn-xs pull-right"%></li>
-<li class="active"><%= link_to "Revenue By Source", revenue_by_sources_path, :class =>"btn btn-xs pull-right"%></li>
+<ul class="nav nav-pills nav-justified">
+<li><%= link_to "Departmental SDBIP", departmental_sdbips_path %></li>
+<% if current_user.admin? %><li><%= link_to "Top Layer SDBIP", top_layer_sdbips_path %></li>
+<li><%= link_to "Capital Projects", capital_projects_path %></li>
+<li><%= link_to "Monthly Cashflow", monthly_cashflows_path %></li>
+<li class="active"><%= link_to "Revenue By Source", revenue_by_sources_path %></li>
 <% end %>
 </ul>
 </div>
@@ -60,7 +60,7 @@ $(function() {
 							<% end %>
 						</div>
 						<div class = "tab-pane fade" id = "manage_revenue_by_sources">
-							
+
 							<% if @revenue_by_sources.blank? && RevenueBySource.blank? %>
 
 							<p> There are no Revenue By Source(s) currently in the system to edit. <p>

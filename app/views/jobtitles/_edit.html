@@ -1,0 +1,48 @@
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+  <h3><%= "Editing #{@jobtitle.title}" %></h3>
+</div>
+<div class="modal-body">
+<div class="row">
+    <div class="col-lg-10 col-md-offset-1">
+
+        <div class="tab-pane active" class="newuserform" id="add_user">
+        <section class="media">
+          <div class="media-body">
+            <%= form_for(@jobtitle) do |f| %>
+              <% if @jobtitle.errors.any? %>
+                <div id="error_explanation">
+                  <h2><%= pluralize(@jobtitle.errors.count, "error") %> prohibited this jobtitle from being saved:</h2>
+
+                  <ul>
+                  <% @jobtitle.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                  <% end %>
+                  </ul>
+                </div>
+              <% end %>
+
+              <div class="field">
+                <%= f.label :title %><br>
+                <%= f.text_field :title,:class=>'form-control' %>
+              </div>
+              <div class="actions">
+                <%= f.submit "Save",:class=>'btn  pull-right'%>
+              </div>
+            <% end %>
+
+          <div class = "modal-footer">
+
+        </div>
+
+      </div><!-- media-body -->
+      </section><!-- media -->
+      </div>
+
+
+    </div>
+</div>
+</div>
+</div>
+</div>

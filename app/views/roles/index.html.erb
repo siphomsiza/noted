@@ -8,21 +8,20 @@ $(function() {
 <div>
 
 <div class="row">
-<div class="col col-lg-11">
-<ul class="nav nav-pills">
-<li><%= link_to "Master System Setup", master_setups_path, :class => "btn btn-xs pull-right" %></li>
-<li> <% if @setups.blank? %>
-        <%= link_to "System Setup", setups_path, :class => "btn btn-xs pull-right" %>
-      <% elsif @setups.blank? && Setup.blank? %>
-        <p>There is currently no setup configured.</p>
-      <% end %></li>
-<li><%= link_to "Departments", departments_path, :class =>"btn btn-xs pull-right"%></li>
-<li><%= link_to "Departmental Administrators", roles_path, :class =>"btn btn-xs pull-right"%></li>
-<li><%= link_to "Top Layer Administrators", roles_path, :class =>"btn btn-xs pull-right"%></li>
-<li><%= link_to "Headings", headings_path, :class =>"btn btn-xs pull-right"%></li>
-<li><%= link_to "Lists", lists_path, :class =>"btn btn-xs pull-right"%></li>
-<li><%= link_to "Time Periods", sdbip_time_periods_path, :class =>"btn btn-xs pull-right"%></li>
-</ul></div></div></div>
+<div class="col col-lg-">
+<ul class="nav nav-pills nav-justified">
+<li><%= link_to "Master Setup", master_setups_path %></li>
+<li><%= link_to "System Setup", setups_path  %></li>
+<li><%= link_to "Departments", departments_path %></li>
+<li class="active"><%= link_to "Departmental Administrators", roles_path %></li>
+<li><%= link_to "Top Layer Administrators", roles_path %></li>
+<li><%= link_to "Headings", headings_path %></li>
+<li><%= link_to "Lists", lists_path %></li>
+<li><%= link_to "Time Periods", sdbip_time_periods_path %></li>
+</ul>
+</div>
+</div>
+</div>
     <div class="row">
 
             <div class="tabbable tabs" id="roles-tabs">

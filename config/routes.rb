@@ -40,6 +40,14 @@ Rails.application.routes.draw do
   get 'unlock_user', to: 'users#unlock'
   get 'restore', to: 'users#restore'
   get 'activate', to: 'users#activate'
+  get 'users/:id/edit_new_user' => 'users#edit_new_user', :as => :edit_new_user
+  get 'users/:id/edit_active_user' => 'users#edit_active_user', :as => :edit_active_user
+  get 'users/:id/edit_user_profile' => 'users#edit_user_profile', :as => :edit_user_profile
+  get 'headings/:id/edit_departmental_headings' => 'headings#edit_departmental_headings', :as => :edit_departmental_headings
+  get 'headings/:id/edit_top_layer_headings' => 'headings#edit_top_layer_headings', :as => :edit_top_layer_headings
+  get 'headings/:id/edit_capital_projects_headings' => 'headings#edit_capital_projects_headings', :as => :edit_capital_projects_headings
+  get 'headings/:id/edit_revenue_by_source_headings' => 'headings#edit_revenue_by_source_headings', :as => :edit_revenue_by_source_headings
+  get 'headings/:id/edit_monthly_cashflow_headings' => 'headings#edit_monthly_cashflow_headings', :as => :edit_monthly_cashflow_headings
   get 'export', to: 'departmental_sdbip_progresses#export',defaults: { format: 'csv'}
   post 'export', to: 'departmental_sdbip_progresses#export'
   get 'departmental_sdbips/update_subdepartments', as: 'update_subdepartments'
@@ -56,6 +64,10 @@ Rails.application.routes.draw do
     collection {post :import}
     collection { post :export }
   end
+  post 'index', to: 'departmental_sdbip_progresses#index', :as => :index
+  resources :departmental_sdbip_progresses do
+
+  end
   resources :kpi_calculation_types
   resources :sdbip_time_periods
   resources :kpi_target_types
@@ -66,10 +78,7 @@ Rails.application.routes.draw do
   resources :users
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
-  resources :departmental_sdbip_progresses do
-    get "report"=>"report"
 
-  end
   resources :lists
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -387,11 +387,11 @@
       </div>
       <div class="form-group col col-lg-12">
         <label>Municipal KPA:</label>
-        <%= select_tag :national_kpa_id,options_for_select(Kpa.all.collect {|p| [ p.name, p.id ] }),{:multiple => "true",:class=>'form-control'} %>
+        <%= select_tag :national_kpa_id,options_for_select(Kpa.all.collect {|p| [ p.name, p.id ] }),{:id=>'municipal-kpa-filter',:multiple => "true",:class=>'form-control'} %>
       </div>
       <div class="form-group col col-lg-12">
         <label>NDP Objectives:</label>
-        <%= select_tag :ndp_objective_id,options_for_select(NdpObjective.all.collect {|p| [ p.name, p.id ] }),{:multiple => "true",:class=>'form-control'} %>
+        <%= select_tag :ndp_objective_id,options_for_select(NdpObjective.all.collect {|p| [ p.name, p.id ] }),{:id=>'ndp-objectives-filter',:multiple => "true",:class=>'form-control'} %>
       </div>
       <div class="form-group col col-lg-12">
         <label>Capital Project:</label>
@@ -413,11 +413,11 @@
       </div>
       <div class="form-group col col-lg-12">
         <label>KPI Concept:</label>
-        <%= select_tag :kpi_concept_id,options_for_select(KpiConcept.all.collect {|p| [ p.name, p.id ] }),{:multiple => "true",:class=>'form-control'} %>
+        <%= select_tag :kpi_concept_id,options_for_select(KpiConcept.all.collect {|p| [ p.name, p.id ] }),{:id=>'kpi-concept-filter',:multiple => "true",:class=>'form-control'} %>
       </div>
       <div class="form-group col col-lg-12">
         <label>KPI Type:</label>
-        <%= select_tag :kpi_type_id, options_for_select(KpiType.all.collect {|p| [ p.name, p.id ] }),{:multiple => "true",:class=>'form-control'} %>
+        <%= select_tag :kpi_type_id, options_for_select(KpiType.all.collect {|p| [ p.name, p.id ] }),{:id=>'kpi-type-filter',:multiple => "true",:class=>'form-control'} %>
       </div>
       <div class="form-group col col-lg-12">
         <label class="control-label">Impact:</label>
@@ -436,15 +436,15 @@
       </div>
       <div class="form-group col col-lg-12">
         <label>Provincial Strategic Outcome:</label>
-        <%= select_tag :provincial_strategic_outcome_id, options_for_select(ProvincialStrategicOutcome.all.collect {|p| [ p.name, p.id ] }),{:multiple => "true",:class=>'form-control'} %>
+        <%= select_tag :provincial_strategic_outcome_id, options_for_select(ProvincialStrategicOutcome.all.collect {|p| [ p.name, p.id ] }),{:id=>'provincial-strategic-outcome-filter',:multiple => "true",:class=>'form-control'} %>
       </div>
       <div class="form-group col col-lg-12">
         <label>Wards:</label>
-        <%= select_tag :ward_id, options_for_select(Ward.all.collect {|p| [ p.name, p.id ] }),{:multiple => "true",:class=>'form-control'} %>
+        <%= select_tag :ward_id, options_for_select(Ward.all.collect {|p| [ p.name, p.id ] }),{:id=>'wards-filter',:multiple => "true",:class=>'form-control'} %>
       </div>
       <div class="form-group col col-lg-12">
         <label>Area:</label>
-        <%= select_tag :area_id, options_for_select(Area.all.collect {|p| [ p.name, p.id ] }),{:multiple => "true",:class=>'form-control'} %>
+        <%= select_tag :area_id, options_for_select(Area.all.collect {|p| [ p.name, p.id ] }),{:id=>'area-filter',:multiple => "true",:class=>'form-control'} %>
       </div>
       <div class="form-group col col-lg-12">
         <label class="control-label">Previous Year Actual Performance:</label>
@@ -494,17 +494,12 @@
       </div>
       <div class="form-group col col-lg-12">
         <label>KPI Calculation Type:</label>
-        <%= select_tag :kpi_calculation_type_id, options_for_select(KpiCalculationType.all.collect {|p| [ p.name, p.id ] }),{:multiple => "true",:class=>'form-control'} %>
+        <%= select_tag :kpi_calculation_type_id, options_for_select(KpiCalculationType.all.collect {|p| [ p.name, p.id ] }),{:id=>'kpi-calculation-filter',:multiple => "true",:class=>'form-control'} %>
       </div>
       <div class="form-group col col-lg-12">
         <label>KPI Target Type:</label>
-        <select multiple class="form-control" id="kpi-target-filter">
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-        </select>
+        <%= select_tag :kpi_target_type_id, options_for_select(KpiTargetType.all.collect {|p| [ p.name, p.id ] }),{:id=>"kpi-target-filter",:multiple => "true",:class=>'form-control'} %>
+
       </div>
       <div class="form-group col col-lg-12">
         <label>KPI Result:</label>
@@ -524,42 +519,23 @@
         <label>Group by:</label>
         <select class="form-control">
           <option>No grouping</option>
-          <option>Grouping One</option>
-          <option>Grouping Two</option>
+          <option>Department ASC</option>
+          <option>Department DESC</option>
         </select>
       </div>
 	  </fieldset><!-- personal info -->
 
-    <fieldset id="choose-format">
-	    <legend>4. Choose the document format of your report:</legend>
-      <div class="form-group col col-lg-12">
-        <div class="radio">
-          <label>
-            <input type="radio" value="onscreen display" name="format_selection" id="format-selection-onscreen" checked>Onscreen display
-          </label>
-        </div>
-        <div class="radio">
-          <label>
-            <input type="radio" value="microsoft excel plain text" name="format_selection" id="format-selection-text">Microsoft Excel (Plain Text)
-          </label>
-        </div>
-        <div class="radio">
-          <label>
-            <input type="radio" value="microsoft excel formatted" name="format_selection" id="format-selection-formatted">Microsoft Excel (Formatted)
-          </label>
-        </div>
-      </div>
-	  </fieldset><!-- personal info -->
-
     <fieldset id="generate-report">
-	    <legend>5. Generate the report:</legend>
+	    <legend>4. Generate the report:</legend>
       <div class="form-group col col-lg-12">
         <label class="control-label">Report Title:</label>
         <div>
-          <input type="text" class="form-control">
+          <input type="text" id="report-title" class="form-control" required >
         </div>
       </div>
-      <button class="btn btn-primary pull-right" value="format: csv" type="submit" style="margin-right: 5px;"> Generate Report</button>
+
+      <button class="btn btn-primary pull-right" type="submit" style="margin-right: 5px;"> Generate Report</button>
+
 	  </fieldset><!-- personal info -->
 	</form>
 

@@ -93,10 +93,10 @@ ActiveRecord::Schema.define(version: 20160617081328) do
     t.string   "idp_ref"
     t.integer  "national_outcome_id",             null: false
     t.integer  "strategic_objective_id",          null: false
-    t.string   "source_of_evidence",              null: false
-    t.string   "baseline",                        null: false
+    t.string   "source_of_evidence"
+    t.string   "baseline"
     t.string   "budget"
-    t.integer  "annual_target",                   null: false
+    t.integer  "annual_target"
     t.integer  "revised_target"
     t.integer  "first_quarter_target"
     t.integer  "second_quarter_target"
@@ -113,21 +113,21 @@ ActiveRecord::Schema.define(version: 20160617081328) do
     t.binary   "third_quarter_poe"
     t.binary   "fourth_quarter_poe"
     t.string   "performance_standard"
-    t.integer  "risk_rating_id",                  null: false
-    t.integer  "kpa_id",                          null: false
+    t.integer  "risk_rating_id"
+    t.integer  "kpa_id"
     t.string   "kpa_name"
-    t.integer  "ndp_objective_id",                null: false
-    t.integer  "capital_project_id",              null: false
-    t.integer  "kpi_concept_id",                  null: false
-    t.integer  "kpi_type_id",                     null: false
+    t.integer  "ndp_objective_id"
+    t.integer  "capital_project_id"
+    t.integer  "kpi_concept_id"
+    t.integer  "kpi_type_id"
     t.string   "impact"
-    t.integer  "provincial_strategic_outcome_id", null: false
+    t.integer  "provincial_strategic_outcome_id"
     t.integer  "ward_id"
     t.integer  "area_id"
     t.text     "past_year_performance"
-    t.integer  "reporting_category_id",           null: false
+    t.integer  "reporting_category_id"
     t.string   "top_layer_kpi_ref"
-    t.integer  "kpi_calculation_type_id",         null: false
+    t.integer  "kpi_calculation_type_id"
     t.date     "start_date"
     t.date     "end_date"
     t.datetime "created_at",                      null: false

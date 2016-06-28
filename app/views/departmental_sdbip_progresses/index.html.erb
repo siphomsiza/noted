@@ -9,7 +9,7 @@ $(function() {
 
   <div class="row">
     <div class="col col-lg-12">
-      <article class="reports">
+      <article class="reports"><br/>
 	<h1>Mkhondo Local Municipality</h1>
 
 	<div class="tabbable tabs">
@@ -45,7 +45,6 @@ $(function() {
 
 	function evaluateForm(event) {
 		event.preventDefault();
-
 		/* Start evaluating all checkboxes */
 		var selectInfos = document.getElementById('departmental-sdbip-report').select_info,
 		selectInfoValues = [];
@@ -99,7 +98,7 @@ $(function() {
 			}
 		}
 
-		/*var gfsClassificationFilters = document.getElementById('gfs-classification-filter').options,
+		var gfsClassificationFilters = document.getElementById('gfs-classification-filter').options,
 		gfsClassificationValues = [];
 		var count6 = 0;
 		for (var i = 0; i < gfsClassificationFilters.length; i++) {
@@ -129,7 +128,7 @@ $(function() {
 			}
 		}
 
-		var municipalKpaFilters = document.getElementById('municipal-kpa-filter').options,
+		/*var municipalKpaFilters = document.getElementById('municipal-kpa-filter').options,
 		municipalKpaValues = [];
 		var count9 = 0;
 		for (var i = 0; i < municipalKpaFilters.length; i++) {
@@ -137,7 +136,7 @@ $(function() {
 				municipalKpaValues[count9] = municipalKpaFilters[i].value;
 				count9++;
 			}
-		}
+		}*/
 
 		var ndpObjectivesFilters = document.getElementById('ndp-objectives-filter').options,
 		ndpObjectivesValues = [];
@@ -209,7 +208,7 @@ $(function() {
 			}
 		}
 
-		var kpiTargetFilters = document.getElementById('kpi-target-filter').options,
+		/*var kpiTargetFilters = document.getElementById('kpi-target-filter').options,
 		kpiTargetValues = [];
 		var count17 = 0;
 		for (var i = 0; i < kpiTargetFilters.length; i++) {
@@ -257,10 +256,10 @@ $(function() {
 			if (tpSelections[i].checked == true) {
 				tpSelection = tpSelections[i].value;
 			}
-		}
+		}*/
 
 		//Report Format
-		var formatSelections = document.getElementById('departmental-sdbip-report').format_selection,
+		/*var formatSelections = document.getElementById('departmental-sdbip-report').format_selection,
 		formatSelection;
 
 		for (var i = 0; i < formatSelections.length; i++) {
@@ -269,11 +268,16 @@ $(function() {
 			}
 		}*/
 
+		var reportValue = document.getElementById("report-title").value;
+
+
+
     $.ajax({
-       url : "/export",
+       url : '/index',
        type : "post",
-       data : { data_value: JSON.stringify(selectInfoValues),departments_value: JSON.stringify(departmentValues), subdepartments_value: JSON.stringify(subDepartmentValues), kpi_owner_values: JSON.stringify(kpiOwnerValues), predetermined_objectives_values: JSON.stringify(preDeterminedValues) }
+       data : { report_title: JSON.stringify(reportValue),data_value: JSON.stringify(selectInfoValues),departments_value: JSON.stringify(departmentValues), subdepartments_value: JSON.stringify(subDepartmentValues), kpi_owner_values: JSON.stringify(kpiOwnerValues), predetermined_objectives_values: JSON.stringify(preDeterminedValues), mscore_classification_values: JSON.stringify(gfsClassificationValues),ndp_objectives_values: JSON.stringify(ndpObjectivesValues),kpa_values: JSON.stringify(nationalKpaValues),strategic_objectives_values: JSON.stringify(strategicObjectiveValues), kpi_calculation_type_values: JSON.stringify(kpiCalculationValues),kpi_type_values: JSON.stringify(kpiTypeValues), areas_values: JSON.stringify(areaValues), ward_values: JSON.stringify(wardsValues), provincial_startegic_values: JSON.stringify(provincialStrategicValues), kpi_concept_values: JSON.stringify(kpiConceptValues)}
    });
+	  //$("#reports-modal").modal('show');
   }
 	/* Done evaluating all radio buttons */
 
@@ -295,3 +299,34 @@ $(function() {
     </div>
   </div>
 </div><!-- departmentalsdbipprogress -->
+
+<!-- Results Modal -->
+<div class="modal fade" id="reports-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+<div class="modal-content">
+
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+&times;
+</button>
+<h4 class="modal-title" id="myModalLabel">This Modal title</h4>
+</div>
+
+<div class="modal-body">
+	<% if !@departmental_sdbips.blank? && !@selected_headers.blank? %>
+
+			<%= render 'report' %>
+
+	<% end %>
+</div>
+
+<div class="modal-footer">
+
+<%= link_to "CSV", departmental_sdbip_progresses_path(format: 'csv'), :class=> 'btn ' %>&nbsp;
+<%= link_to "Excel", departmental_sdbip_progresses_path(format: 'xls'), :class=>'btn '%>&nbsp;
+<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+</div>
+
+</div><!-- /.modal-content -->
+</div><!-- /.modal -->
+</div>

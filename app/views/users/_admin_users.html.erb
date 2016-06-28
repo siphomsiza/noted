@@ -23,12 +23,12 @@
         <td><% if user.admin? %> Yes <% else %> No <% end %></td>
         <td>
           <% if !user.admin? %>
-          <%= link_to  "",:data =>{confirm: "Set this user to Super User?"},controller: "users",action: "set_admin", id: user.id, method: :get, class: "btn btn-mini btn-primary" do %>
+          <%= link_to  "#",:data =>{confirm: "Set this user to Super User?"},controller: "users",action: "set_admin", id: user.id, method: :get, class: "btn btn-mini btn-style" do %>
             Add as Administrator
           <% end %>
           <% end %>
           <% if user.admin? && !current_user?(user) %>
-          <%= link_to  "",:data =>{confirm: "Remove this user as Super User?"},controller: "users",action: "set_normal_user", id: user.id, method: :get, class: "btn btn-mini btn-primary" do %>
+          <%= link_to  "#",:data =>{confirm: "Remove this user as Super User?"},controller: "users",action: "set_normal_user", id: user.id, method: :get, class: "btn btn-mini btn-style" do %>
             Remove user as Administrator
           <% end %>
           <% end %>

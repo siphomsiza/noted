@@ -8,5 +8,7 @@
 	<%= f.label :end_date %><br>
 	<%= f.date_select(:end_date, {} ,{:class=>"form-control"}) %>
 
-	<%= f.submit "Save", class: 'btn btn-mini'%>
+  <div class="actions col-lg-3 pull-right">
+    <%= f.submit "Save", :class =>'btn btn-mini' %>
+  </div>
   <% end %>

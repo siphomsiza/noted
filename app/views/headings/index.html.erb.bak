@@ -12,14 +12,14 @@ $(function() {
   <div class="row">
     <div class="col col-lg-12">
       <% if current_user.admin? %>
-        <%= link_to new_heading_path , :class =>"btn btn-midi" do %>
+        <%= link_to new_heading_path , :class =>"btn " do %>
           <span class="glyphicon glyphicon-plus-sign"></span> New Heading
         <% end %>
       <% end %>
-      <%= link_to sdbip_time_periods_path, :class =>"btn btn-midi pull-right" do %>
+      <%= link_to sdbip_time_periods_path, :class =>"btn  pull-right" do %>
         Step 6: Time Periods <span class="glyphicon glyphicon-circle-arrow-right"></span>
       <% end %>
-      <%= link_to roles_path, :class =>"btn btn-midi pull-right" do %>
+      <%= link_to roles_path, :class =>"btn  pull-right" do %>
         <span class="glyphicon glyphicon-circle-arrow-left"></span> Step 4: Roles Setup
       <% end %>
     </div>
