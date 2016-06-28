@@ -4,11 +4,11 @@ class TopLayerSdbipsController < ApplicationController
   # GET /top_layer_sdbips
   # GET /top_layer_sdbips.json
   def index
-    
+
     @top_layer_sdbip = TopLayerSdbip.new
     @top_layer_sdbips = TopLayerSdbip.all
     if !@top_layer_sdbips.blank?
-     @top_layer_sdbips =  @top_layer_sdbips.paginate(page: params[:page],per_page: 10)
+      @top_layer_sdbips =  @top_layer_sdbips.paginate(page: params[:page],per_page: 10)
     end
   end
 
@@ -49,7 +49,7 @@ class TopLayerSdbipsController < ApplicationController
       if @top_layer_sdbip.save
         flash[:success] = 'Top layer sdbip was successfully created.'
         format.html { redirect_to top_layer_sdbips_url }
-        format.json { render :show, status: :created, location: @top_layer_sdbip }
+        format.json { render :show, status: :created, location: top_layer_sdbips_url }
       else
         flash[:danger] = 'Top layer sdbip was not created.'
         format.html { redirect_to top_layer_sdbips_url }

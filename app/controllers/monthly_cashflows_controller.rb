@@ -7,7 +7,7 @@ class MonthlyCashflowsController < ApplicationController
     @monthly_cashflow = MonthlyCashflow.new
     @monthly_cashflows = MonthlyCashflow.all
     if !@monthly_cashflows.blank?
-     @monthly_cashflows =  @monthly_cashflows.paginate(page: params[:page],per_page: 10)
+      @monthly_cashflows =  @monthly_cashflows.paginate(page: params[:page],per_page: 10)
     end
   end
 
@@ -36,7 +36,7 @@ class MonthlyCashflowsController < ApplicationController
         format.html { redirect_to monthly_cashflows_url}
         format.json { render :show, status: :created, location: @monthly_cashflow }
       else
-        format.html { render :new }
+        format.html { render monthly_cashflows_url }
         format.json { render json: @monthly_cashflow.errors, status: :unprocessable_entity }
       end
     end
@@ -51,7 +51,7 @@ class MonthlyCashflowsController < ApplicationController
         format.html { redirect_to monthly_cashflows_url}
         format.json { render :show, status: :ok, location: @monthly_cashflow }
       else
-        format.html { render :edit }
+        format.html { render monthly_cashflows_url }
         format.json { render json: @monthly_cashflow.errors, status: :unprocessable_entity }
       end
     end

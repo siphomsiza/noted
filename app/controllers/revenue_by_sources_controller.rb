@@ -7,7 +7,7 @@ class RevenueBySourcesController < ApplicationController
     @revenue_by_source = RevenueBySource.new
     @revenue_by_sources = RevenueBySource.all
     if !@revenue_by_sources.blank?
-     @revenue_by_sources =  @revenue_by_sources.paginate(page: params[:page],per_page: 10)
+      @revenue_by_sources =  @revenue_by_sources.paginate(page: params[:page],per_page: 10)
     end
   end
 
@@ -34,7 +34,7 @@ class RevenueBySourcesController < ApplicationController
       if @revenue_by_source.save
         flash[:success] = 'Revenue by source was successfully created.'
         format.html { redirect_to revenue_by_sources_url}
-        format.json { render :show, status: :created, location: @revenue_by_source }
+        format.json { render :show, status: :created, location: revenue_by_sources_url }
       else
           format.html { redirect_to revenue_by_sources_url}
         format.json { render json: @revenue_by_source.errors, status: :unprocessable_entity }
@@ -49,7 +49,7 @@ class RevenueBySourcesController < ApplicationController
       if @revenue_by_source.update(revenue_by_source_params)
         flash[:success] = 'Revenue by source was successfully updated.'
         format.html { redirect_to revenue_by_sources_url }
-        format.json { render :show, status: :ok, location: @revenue_by_source }
+        format.json { render :show, status: :ok, location: revenue_by_sources_url }
       else
         format.html { redirect_to revenue_by_sources_url}
         format.json { render json: @revenue_by_source.errors, status: :unprocessable_entity }

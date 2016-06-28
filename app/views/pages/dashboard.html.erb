@@ -1,5 +1,7 @@
 <% provide(:title, "Dashboard") %>
 <div>
+  <%= render 'layouts/municipality' %>
+</article>
   <h2>
     Dashboard
   </h2>
@@ -9,7 +11,7 @@
         <span id="date">&nbsp;</span>&nbsp;<span id="clock">&nbsp;</span>
         <br/>
         <span id="weather">
-          <img src="../assets/images/spinner_.gif" alt="loading" id="spinner" >
+          <%= image_tag("spinner_.gif", :alt=>"loading", :id=>"spinner") %>
         </span>
         <span id="forecast">
           <noscript>This application requires JavaScript to function. Please enable scripts in your browser.</noscript>
@@ -61,7 +63,7 @@
               <div class="row">
                 <div>
                   <div class="c100 p<%= @users.where(activated: true).count %> green">
-                    <span><%= @users.where(activated: true).count %></span>
+                    <span><%= @users.where(status: "Active").count %></span>
                     <div class="slice">
                       <div class="bar"></div>
                       <div class="fill"></div>
@@ -97,13 +99,17 @@
       <h3>Total Performance Standards for Mkhondo Municipality</h3>
       <div class="panel panel-default col-md-6">
         <div class="panel-body">
+          <% if !@departmental_sdbips.blank? %>
           <%= pie_chart @departmental_sdbips.group(:performance_standard).count, width: "400px", height: "250px" %>
+          <% end %>
         </div>
         <!-- /.panel-body -->
       </div>
       <div class="panel panel-default col-md-6">
         <div class="panel-body">
+          <% if !@departmental_sdbips.blank? %>
           <%= bar_chart @departmental_sdbips.group(:performance_standard).count, width: "400px", height: "250px" %>
+          <% end %>
         </div>
         <!-- /.panel-body -->
       </div>
@@ -112,7 +118,9 @@
       <h3>Total Performance Standards by Department</h3>
       <div class="panel panel-default">
         <div class="panel-body">
-          <%= column_chart @departmental_sdbips.group(:department_id,:performance_standard).count, width: "95%", height: "400px" %>
+          <% if !@departmental_sdbips.blank? %>
+          <%= column_chart @departmental_sdbips.group(:department_name,:performance_standard).count, width: "95%", height: "400px" %>
+          <% end %>
         </div>
         <!-- /.panel-body -->
       </div>
@@ -127,18 +135,20 @@
           <thead>
             <tr>
               <th>User</th>
-              <th>Activity</th>
+              <th>Email</th>
+              <th>Status</th>
               <th>Location(IP Address)</th>
               <th>Date</th>
             </tr>
           </thead>
           <tbody>
-            <% User.where(admin: true).each do |activity|%>
+            <% User.where.not(current_login_ip: "").each do |activity|%>
             <tr>
-              <td><%= activity.firstname %></td>
-              <td><%= activity.created_at %></td>
-              <td><%= activity.updated_at %></td>
-              <td><%= activity.created_at %></td>
+              <td><%= activity.firstname %>&nbsp;<%= activity.surname %></td>
+              <td><%= link_to activity.email %></td>
+              <td></td>
+              <td><%= activity.current_login_ip %></td>
+              <td><%= activity.current_login_at %></td>
             </tr>
             <% end %>
           </tbody>
@@ -147,5 +157,3 @@
     </div>
   </div>
 </div>
-
-

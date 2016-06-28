@@ -51,6 +51,7 @@ class CapitalProjectsController < ApplicationController
         format.html { redirect_to capital_projects_url }
         format.json { render :show, status: :created, location: @capital_project }
       else
+        flash[:danger] = 'Capital project was not created.'
         format.html { redirect_to capital_projects_url }
         format.json { render json: @capital_project.errors, status: :unprocessable_entity }
       end

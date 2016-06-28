@@ -48,7 +48,10 @@ h2 {
 #add_job_title a,
 #manage_locations a,
 #manage_job_titles a,
-#view_sdbips a{
+#view_sdbips a,
+#add_departments a,
+#departments a,
+{
   color: $deepblue;
   background-color: white;
 }
@@ -334,6 +337,44 @@ input {
   margin-left: 0;
 
 }
+#Department,
+#Sub-Department,
+#KPI-Ref-Number,
+#Pre-determined-Objectives,
+#KPI-Owner,
+#KPI,
+#unit-of-measurement,
+#gfs-classification,
+#IDP-ref,
+#national-outcome,
+#strategic-objective,
+#source-of-evidence,
+#budget,
+#target,
+#annual-target,
+#revised-target,
+#national-kpa,
+#municipal-kpa,
+#ndp-objectives,
+#capital-project,
+#kpi-concept,
+#kpi-type,
+#impact,
+#provincial-strategic-outcome,
+#wards,
+#area,
+#pevious-year-actual,
+#performance-standard,
+#reporting-category,
+#top-layer-kpi-ref,
+#kpi-calculation-type,
+#performance-comment,
+#target-actual-results,
+#corrective-measures,
+#proof-of-evidence{
+  width: auto;
+  margin-left: 0;
+}
 /* Users index */
 .users {
   list-style: none;
@@ -341,7 +382,6 @@ input {
   li {
     overflow: auto;
     padding: 10px 0;
-    border-bottom: 1px solid $deepblue;
   }
 }
 
