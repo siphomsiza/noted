@@ -1,4 +1,4 @@
-<% provide(:title, "Listing Departments") %>
+<% provide(:title, "Departments") %>
 <script>
 $(function() {
 	//highlight the current nav
@@ -8,6 +8,9 @@ $(function() {
 <div>
 <div class="row">
 <div class="col col-lg-">
+	<%= render 'layouts/municipality' %>
+	</article>
+
 <ul class="nav nav-pills nav-justified">
 <li><%= link_to "Master Setup", master_setups_path %></li>
 				<li>
