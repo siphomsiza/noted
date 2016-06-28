@@ -35,7 +35,40 @@ h2 {
   margin-bottom: 30px;
   font-weight: normal;
 }
-
+#about-section a,
+#active_users a,
+#admin_users a,
+#about-section-1 a,
+#all_users a,
+#inactive_users a,
+#locked_users a,
+#terminated_users a,
+#introduction a,
+#add_locations a,
+#add_job_title a,
+#manage_locations a,
+#manage_job_titles a,
+#view_sdbips a{
+  color: $deepblue;
+  background-color: white;
+}
+#about-section a:hover,
+#admin_users a:hover,
+#active_users a:hover,
+#about-section-1 a:hover,
+#all_users a:hover,
+#inactive_users a:hover,
+#locked_users a:hover,
+#terminated_users a:hover,
+#introduction a:hover,
+#add_locations a:hover,
+#add_job_title a:hover,
+#manage_locations a:hover,
+#manage_job_titles a:hover,
+#view_sdbips a:hover{
+  color: white;
+  background-color: $deepblue;
+}
 #branding {
 	img {
 		//margin: 10px 0 5px 25px;
@@ -62,7 +95,7 @@ h2 {
 }
 
 #introduction h1 {
-  font-size: 10em;
+  font-size: 8em;
   margin-bottom: 0px;
 }
 
@@ -87,8 +120,12 @@ p {
 label {
   font-family: $fontFamily;
 	color: $deepblue;
-}
 
+}
+.labels{
+  font-family: $fontFamily;
+  color: $deepblue;
+}
 a {
   font-family: $fontFamily;
   color: $deepblue;
@@ -98,7 +135,21 @@ table {
   font-family: $fontFamily;
 	color: $deepblue;
 }
-
+.nav-justified li a{
+  font-family: $fontFamily;
+  color: $deepblue;
+  background-color: white !important;
+}
+.nav-justified li a:hover{
+  font-family: $fontFamily;
+  color: white !important;
+  background-color: $deepblue !important;
+}
+.nav-justified li.active a{
+  font-family: $fontFamily;
+  color: white !important;
+  background-color: $powderblue !important;
+}
 .navbar {
     margin-bottom: 0;
     background-color: white;
@@ -191,19 +242,24 @@ footer {
 }
 
 /* button */
-.btn:hover {
+
+.btn:hover, .btn-midi:hover {
   border: 1px solid $deepblue;
   background-color: $deepblue !important;
   color: white;
+  text-decoration: none;
+  text-decoration-color: white;
   font-weight: bold;
 }
 
-.btn {
+.btn, .btn-midi {
   margin: 1px 0;
   border: 1px solid $deepblue;
-  background-color: white !important;
   color: $deepblue;
+  background-color: white !important;
   font-weight: bold;
+  text-decoration: none;
+  text-decoration-color: $deepblue;
 }
 
 /* miscellaneous */
@@ -262,11 +318,18 @@ input {
 #setup_include_toplayer_previous_target,
 #setup_include_toplayer_previous_comments,
 #kpiowner_checkbox,
+#admin_checkbox,
+#disablity_checkbox,
 #setup_include_toplayer_next_target {
   width: auto;
   margin-left: 0;
 }
+#admin_checkbox,
+#disablity_checkbox{
+  width: auto;
+  margin-left: 0;
 
+}
 /* Users index */
 .users {
   list-style: none;
@@ -1521,4 +1584,5 @@ input {
 #updated-date{
   width: auto;
   margin-left: 0;
+  margin-top: 0 auto;
 }
