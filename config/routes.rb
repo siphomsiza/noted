@@ -41,6 +41,7 @@ Rails.application.routes.draw do
   get 'restore', to: 'users#restore'
   get 'activate', to: 'users#activate'
   get 'users/:id/edit_new_user' => 'users#edit_new_user', :as => :edit_new_user
+  get 'roles/:id/edit_user_role' => 'roles#edit_user_role', :as => :edit_user_role
   get 'users/:id/edit_active_user' => 'users#edit_active_user', :as => :edit_active_user
   get 'users/:id/edit_user_profile' => 'users#edit_user_profile', :as => :edit_user_profile
   get 'headings/:id/edit_departmental_headings' => 'headings#edit_departmental_headings', :as => :edit_departmental_headings

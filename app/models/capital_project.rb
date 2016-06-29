@@ -4,6 +4,9 @@ class CapitalProject < ActiveRecord::Base
   belongs_to :mscore_classification
   belongs_to :area
   belongs_to :ward
+
+  validates :department_id , :subdepartment, :mscore_classification, :project_description, :presence => true
+
   def self.import(file)
   	case File.extname(file.original_filename)
    	when ".csv" then

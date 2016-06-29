@@ -9,7 +9,9 @@ class RolesController < ApplicationController
   def show
     @role = Role.find(params[:id])
   end
-
+  def edit_user_role
+    @role = Role.find(params[:id])
+  end
   def new
     @role = Role.new
     @role.roles_details.build

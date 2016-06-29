@@ -1,4 +1,6 @@
-<%= form_for(@jobtitle) do |f| %>
+<div class="row">
+  <div class="col-lg-6 col-md-offset-3">
+  <%= form_for(@jobtitle) do |f| %>
   <% if @jobtitle.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@jobtitle.errors.count, "error") %> prohibited this jobtitle from being saved:</h2>
@@ -11,11 +13,14 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="col-lg-5">
     <%= f.label :title %><br>
-    <%= f.text_field :title, :class=> "form-control" %>
+    <%= f.text_field :title, :class=> "form-control",:require => true %>
   </div>
-  <div class="actions col-lg-4">
-    <%= f.submit "Save", :class=> "btn btn-primary " %>
+
+  <div class="col-lg- pull-right">
+    <%= f.submit "Save", :class=> "btn pull-right" %>
   </div>
 <% end %>
+  </div>
+</div>

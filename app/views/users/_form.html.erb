@@ -73,7 +73,7 @@
       <section class="row">
         <label class="col col-lg-4 control-label" for="employmentdate">Employment Date</label>
         <div class="controls col col-lg-8">
-        <div class="col-md-11"><%= date_field(:start_date, nil,placeholder: '--Select Start Date--',:class => 'form-control') %>
+        <div class="col-md-16"><%= date_field(:start_date, nil,placeholder: '--Select Start Date--',:class => 'form-control') %>
      </div>
         </div><!-- controls -->
       </section><!-- row -->
@@ -196,10 +196,13 @@
   </section><!-- row -->
 
     </fieldset>
-    <div class="col-lg-3 pull-right">
-      <%= f.submit class: 'btn'%>
+    <section class="row">
+      <div class="col-lg-">
+        <div class="col-lg-3 pull-right">
+          <%= f.submit "Save",class: 'btn pull-right'%>
+        </div>
     </div>
-
+    </section><!-- row -->
  <% end %>
 </div><!-- media-body -->
 </section><!-- media -->
