@@ -31,7 +31,7 @@ $(function() {
     <%= render 'capital_projects_report' %>
     <%= render 'monthly_cashflow_report' %>
     <%= render 'revenue_by_source_report' %>
-	<%= render "charts_per_department" %>
+		<%= render "charts_per_department" %>
 
 	</section><!-- tab-content -->
 
@@ -279,21 +279,6 @@ $(function() {
 	  //$("#reports-modal").modal('show');
   }
 	/* Done evaluating all radio buttons */
-
-	$(function () {
-		$('#datepicker6').datepicker({dateFormat: 'mm-yy'});
-    $('#datepicker7').datepicker({
-      useCurrent: false,
-			dateFormat: 'mm-yy'
-    });
-    $("#datepicker6").on("dp.change", function (e) {
-      $('#datepicker7').data("DatePicker").minDate(e.date);
-    });
-    $("#datepicker7").on("dp.change", function (e) {
-      $('#datepicker6').data("DatePicker").maxDate(e.date);
-    });
-  });
-
 </script>
     </div>
   </div>

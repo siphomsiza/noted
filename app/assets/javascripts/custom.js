@@ -7,9 +7,25 @@ window.setTimeout(function() {
 }, 5000);
 
 });
-        $(document).ready(function(){
-            $('input[type="checkbox"]').click(function(){
-                if($('#disablity_checkbox').prop("checked") == true){
+$('#departmental-sdbip-report').submit(function() {
+      $('#reports-modal').show();
+});
+$(function () {
+  $('#datepicker6').datepicker({dateFormat: 'mm-yy'});
+  $('#datepicker7').datepicker({
+    useCurrent: false,
+    dateFormat: 'mm-yy'
+  });
+  $("#datepicker6").on("dp.change", function (e) {
+    $('#datepicker7').data("DatePicker").minDate(e.date);
+  });
+  $("#datepicker7").on("dp.change", function (e) {
+    $('#datepicker6').data("DatePicker").maxDate(e.date);
+  });
+});
+$(document).ready(function(){
+  $('input[type="checkbox"]').click(function(){
+        if($('#disablity_checkbox').prop("checked") == true){
                   $('#disability_description_fields').show();
                 }
                 if($('#disablity_checkbox').prop("checked") == false){
@@ -154,3 +170,64 @@ $(document).ready(function() {
 
         });
   });
+  $(function() {
+
+  	//activate schedule tabs
+  	var hash = window.location.hash;
+  	hash && $('ul.nav a[href="' + hash + '"]').tab('show');
+
+  	//controlling opening of accordions
+  	//$('#monday.accordion-body').addClass('in');
+
+  	//$('#artists #tuesday.accordion-body').addClass('in');
+  	//$('#artists #wednesday.accordion-body').addClass('in');
+  	//$('#artists #thursday.accordion-body').addClass('in');
+  	//$('#artists #friday.accordion-body').addClass('in');
+
+  	//add bootstrap classes to photos
+  	//$('.abouttheartists img').addClass('img-circle');
+  	//$('aside.photosfromlastyear img').addClass('img-thumbnail');
+  	//$('.artistinfo .photogrid img').addClass('img-circle');
+
+
+  	//highlight the current nav
+  	$("#introduction a:contains('INTRODUCTION')").parent().addClass('active');
+  	$("#dashboard a:contains('DASHBOARD')").parent().addClass('active');
+  	$("#setup a:contains('SETUP')").parent().addClass('active');
+  	$("#sdbip a:contains('SDBIP')").parent().addClass('active');
+  	$("#reports a:contains('REPORTS')").parent().addClass('active');
+    $("#users a:contains('USERS')").parent().addClass('active');
+  	$("#contact a:contains('CONTACT')").parent().addClass('active');
+
+
+  	//make menus drop automatically
+  	$('ul.nav li.dropdown').hover(function() {
+  		$('.dropdown-menu', this).fadeIn();
+  	}, function() {
+  		$('.dropdown-menu', this).fadeOut('fast');
+  	});//hover
+
+  	//show tooltips
+  	$("[data-toggle='tooltip']").tooltip({ animation: true});
+
+  	//show modals
+
+  	//$('.modalphotos img').on('click', function() {
+  	//	$('#modal').modal({
+  	//		show: true,
+  	//	})
+
+  	//	var mysrc = this.src.substr(0, this.src.length-7) + '.jpg';
+  	//	$('#modalimage').attr('src', mysrc);
+  	//	$('#modalimage').on('click', function(){
+  	//			$('#modal').modal('hide');
+  	//	})//hide modal
+  	//});//show modal
+
+
+  }); //jQuery is loaded
+  $('#submit-button').on('click', function() {
+  	$('#reports-modal').modal({
+  		show: true,
+    })
+  }); //

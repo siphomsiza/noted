@@ -26,7 +26,11 @@
             <div class="panel-heading">
               <div class="row">
                 <div>
+                  <% if @users.count > 100 %>
+                  <div class="c100 p100">
+                  <% else %>
                   <div class="c100 p<%= @users.count %>">
+                  <% end %>
                     <span><%= @users.count %></span>
                     <div class="slice">
                       <div class="bar"></div>
@@ -44,7 +48,11 @@
             <div class="panel-heading">
               <div class="row">
                 <div>
+                  <% if @users.where(admin: true).count > 100 %>
+                  <div class="c100 p100 red">
+                    <% else %>
                   <div class="c100 p<%= @users.where(admin: true).count %> red">
+                    <% end %>
                     <span><%= @users.where(admin: true).count %></span>
                     <div class="slice">
                       <div class="bar"></div>
@@ -62,7 +70,11 @@
             <div class="panel-heading">
               <div class="row">
                 <div>
-                  <div class="c100 p<%= @users.where(activated: true).count %> green">
+                  <% if @users.where(status: 'Active').count > 100 %>
+                  <div class="c100 p100 green">
+                    <% else %>
+                  <div class="c100 p<%= @users.where(status: 'Active').count %> green">
+                    <% end %>
                     <span><%= @users.where(status: "Active").count %></span>
                     <div class="slice">
                       <div class="bar"></div>
@@ -80,7 +92,11 @@
             <div class="panel-heading">
               <div class="row">
                 <div>
+                  <% if @users.where(activated: false).count > 100 %>
+                  <div class="c100 p100 orange">
+                    <% else %>
                   <div class="c100 p<%= @users.where(activated: false).count %> orange">
+                    <% end %>
                     <span><%= @users.where(activated: false).count %></span>
                     <div class="slice">
                       <div class="bar"></div>

@@ -11,7 +11,7 @@ class UsersController < ApplicationController
       @user = User.new
       @users = User.paginate(page: params[:page],per_page: 15)
       @admin_users = User.where(admin: true).paginate( page: params[:page],per_page: 15)
-      @active_users = User.where(activated: true).paginate( page: params[:page],per_page: 15)
+      @active_users = User.where(status: "Active").paginate( page: params[:page],per_page: 15)
       @inactive_users = User.where(activated: false).paginate( page: params[:page],per_page: 15)
       @terminated_users = User.where(terminated: true).paginate(page: params[:page],per_page: 15)
       @new_users = User.where(activated: false).paginate(page: params[:page],per_page: 15)
@@ -76,10 +76,11 @@ end
       if admin_user && !correct_user
         redirect_to users_url
       elsif !admin_user && correct_user
-        
+        redirect_to users_url
       end
     else
-      flash[:success] = "Profile not updated."
+      flash[:danger] = "Profile not updated."
+      redirect_to users_url
     end
   end
 
