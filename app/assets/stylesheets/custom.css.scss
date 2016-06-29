@@ -26,17 +26,6 @@ $paragraphFontFamily: "PT Sans", Arial, sans-serif;
 /****** Resets and overrides *******/
 
 /****** General Styles *********/
-
-/****** Header Style *********/
-
-/****** Navigation Style *********/
-
-/****** Footer Style *********/
-
-/****** Form Elements ********/
-
-/****** Misc ******/
-
 html {
   position: relative;
   min-height: 100%;
@@ -65,6 +54,156 @@ h2 {
   margin-bottom: 30px;
   font-weight: normal;
 }
+p {
+	font-family: $headingFontFamily;
+	font-size: 1.1em;
+	line-height: 1.4em;
+	color: $deepblue;
+	padding: 0 2%;
+  //text-align: center;
+}
+
+label {
+  font-family: $headingFontFamily;
+	color: $deepblue;
+
+}
+.labels{
+  font-family: $headingFontFamily;
+  color: $deepblue;
+}
+a {
+  font-family: $headingFontFamily;
+  color: $deepblue;
+}
+
+table {
+  font-family: $headingFontFamily;
+	color: $deepblue;
+}
+.container {
+	background: white;
+}
+
+.main {
+	background: white;
+}
+
+/****** Header Style *********/
+
+/****** Navigation Style *********/
+.navbar {
+    margin-bottom: 0;
+    background-color: white;
+    //z-index: 9999;
+    //border: 0;
+    //font-size: 12px !important;
+    //line-height: 1.42857143 !important;
+    letter-spacing: 4px;
+    //border-radius: 0;
+}
+
+.navbar li a, .navbar .navbar-brand {
+    color: $deepblue !important;
+}
+
+.navbar-nav li a:hover, .navbar-nav li.active a {
+    color: white !important;
+    background-color: $deepblue !important;
+}
+
+.navbar-default .navbar-toggle {
+    border-color: transparent;
+    color: #fff !important;
+}
+
+.scrollspy .nav{
+  li.active {
+    background: $deepblue;
+  }
+
+  li:first-child {
+	  border-top:none;
+  }
+
+  li:last-child {
+	  border-bottom: none;
+  }
+}
+
+/****** Footer Style *********/
+/* footer */
+footer {
+	ul.breadcrumb {
+		background: white;
+		margin: 0 auto;
+		-webkit-border-radius: 0;
+		-moz-border-radius: 0;
+		border-radius: 0;
+
+		li {
+			text-shadow: none;
+			a {
+				color: $deepblue;
+			}
+		}
+
+    li a:hover {
+  		background: white;
+  		color: $deepblue;
+  	}
+	}
+  position: absolute;
+  bottom: 0;
+  //width: 100%;
+  /* Set the fixed height of the footer here */
+  //height: 30px;
+  color: $deepblue;
+  margin: 0 auto;
+  //width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 30px;
+}
+
+/****** Form Elements ********/
+/* forms */
+input, textarea, select, .uneditable-input {
+  border: 1px solid #bbb;
+  width: 100%;
+  margin-bottom: 15px;
+  @include box_sizing;
+}
+
+input {
+  height: auto !important;
+}
+
+#error_explanation {
+  color: red;
+  ul {
+    color: red;
+    margin: 0 0 30px 0;
+  }
+}
+
+.field_with_errors {
+  @extend .has-error;
+  .form-control {
+    color: $state-danger-text;
+  }
+}
+
+.checkbox {
+  margin-top: -10px;
+  margin-bottom: 10px;
+  span {
+    margin-left: 20px;
+    font-weight: normal;
+  }
+}
+
+/****** Misc ******/
+
 
 #about-section a,
 #active_users a,
@@ -144,33 +283,7 @@ h2 {
   font-size: 0.8em;
 }
 
-p {
-	font-family: $headingFontFamily;
-	font-size: 1.1em;
-	line-height: 1.4em;
-	color: $deepblue;
-	padding: 0 2%;
-  //text-align: center;
-}
 
-label {
-  font-family: $headingFontFamily;
-	color: $deepblue;
-
-}
-.labels{
-  font-family: $headingFontFamily;
-  color: $deepblue;
-}
-a {
-  font-family: $headingFontFamily;
-  color: $deepblue;
-}
-
-table {
-  font-family: $headingFontFamily;
-	color: $deepblue;
-}
 .nav-justified li a{
   font-family: $headingFontFamily;
   color: $deepblue;
@@ -185,85 +298,6 @@ table {
   font-family: $headingFontFamily;
   color: white !important;
   background-color: $powderblue !important;
-}
-.navbar {
-    margin-bottom: 0;
-    background-color: white;
-    //z-index: 9999;
-    //border: 0;
-    //font-size: 12px !important;
-    //line-height: 1.42857143 !important;
-    letter-spacing: 4px;
-    //border-radius: 0;
-}
-
-.navbar li a, .navbar .navbar-brand {
-    color: $deepblue !important;
-}
-
-.navbar-nav li a:hover, .navbar-nav li.active a {
-    color: white !important;
-    background-color: $deepblue !important;
-}
-
-.navbar-default .navbar-toggle {
-    border-color: transparent;
-    color: #fff !important;
-}
-
-.scrollspy .nav{
-  li.active {
-    background: $deepblue;
-  }
-
-  li:first-child {
-	  border-top:none;
-  }
-
-  li:last-child {
-	  border-bottom: none;
-  }
-}
-
-.container {
-	background: white;
-}
-
-.main {
-	background: white;
-}
-
-/* footer */
-footer {
-	ul.breadcrumb {
-		background: white;
-		margin: 0 auto;
-		-webkit-border-radius: 0;
-		-moz-border-radius: 0;
-		border-radius: 0;
-
-		li {
-			text-shadow: none;
-			a {
-				color: $deepblue;
-			}
-		}
-
-    li a:hover {
-  		background: white;
-  		color: $deepblue;
-  	}
-	}
-  position: absolute;
-  bottom: 0;
-  //width: 100%;
-  /* Set the fixed height of the footer here */
-  //height: 30px;
-  color: $deepblue;
-  margin: 0 auto;
-  //width: 100%;
-  /* Set the fixed height of the footer here */
-  height: 30px;
 }
 
 /* button */
@@ -296,41 +330,6 @@ footer {
   @include box_sizing;
 }
 
-/* forms */
-input, textarea, select, .uneditable-input {
-  border: 1px solid #bbb;
-  width: 100%;
-  margin-bottom: 15px;
-  @include box_sizing;
-}
-
-input {
-  height: auto !important;
-}
-
-#error_explanation {
-  color: red;
-  ul {
-    color: red;
-    margin: 0 0 30px 0;
-  }
-}
-
-.field_with_errors {
-  @extend .has-error;
-  .form-control {
-    color: $state-danger-text;
-  }
-}
-
-.checkbox {
-  margin-top: -10px;
-  margin-bottom: 10px;
-  span {
-    margin-left: 20px;
-    font-weight: normal;
-  }
-}
 
 #session_remember_me, #user_disabled, #user_active_log,
 #setup_performance_comments,

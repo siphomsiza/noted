@@ -56,7 +56,7 @@
                  <%= f.password_field :password_confirmation, class: 'form-control' %>
               </div><!-- controls -->
             </section><!-- row -->
-              <% if current_user.admin? && !current_user?(@user)  %>
+              <% if current_user.admin? && !current_user?(@user)  && @user.new_record?  %>
               <label class="col col-lg-4 control-label" for="systemadministrator">System Administrator</label>
               <div class="controls col col-lg-8">
 

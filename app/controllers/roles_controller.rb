@@ -24,7 +24,8 @@ class RolesController < ApplicationController
       flash[:success]= "Role was successfully created"
       redirect_to roles_path
     else
-      render "new"
+      flash[:danger]= "Role was not created"
+      redirect_to roles_path
     end
   end
 
@@ -39,7 +40,7 @@ class RolesController < ApplicationController
       flash[:success] = "Role was successfully updated"
       redirect_to roles_path
     else
-      render "edit"
+      redirect_to roles_path
     end
   end
 
