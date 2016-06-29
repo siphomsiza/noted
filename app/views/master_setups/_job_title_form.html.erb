@@ -13,13 +13,13 @@
     </div>
   <% end %>
 
-  <div class="col-lg-6">
+  <div class="col-lg-5">
     <%= f.label :title %><br>
-    <%= f.text_field :title, :class=> "form-control" %>
+    <%= f.text_field :title, :class=> "form-control",:require => true %>
   </div>
 
-  <div class="actions pull-right">
-    <%= f.submit "Save", :class=> "btn" %>
+  <div class="col-lg- pull-right">
+    <%= f.submit "Save", :class=> "btn pull-right" %>
   </div>
 <% end %>
   </div>

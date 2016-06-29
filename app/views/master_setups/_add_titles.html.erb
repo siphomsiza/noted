@@ -13,13 +13,16 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title,:class=>'form-control' %>
+  <div class="row">
+    <div class="field col-lg-">
+      <%= f.label :title %><br>
+      <%= f.text_field :title,:class=>'form-control', :required => true, :autocomplete=> "off" %>
+    </div>
   </div>
-  <div class="actions col-lg-3 pull-right">
-    <%= f.submit "Save", :class =>'btn btn-mini' %>
+  <div class="row">
+    <div class="field col-lg-">
+        <%= f.submit "Save", :class =>'col-lg-3 btn pull-right' %>
+    </div>
   </div>
 <% end %>
 </div>
