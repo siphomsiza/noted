@@ -58,9 +58,10 @@ def create
     @user = User.new(user_params)
     if @user.save
       @user.send_activation_email
-      flash[:info] = "Please check your email to activate your account."
-      redirect_to users_path
+      flash[:info] = "Please check your email to confirm your account."
+      redirect_to users_url
     else
+      flash[:danger] = "Failed to add new user. Please complete properly the fields below."
       redirect_to users_url
     end
 end
@@ -76,7 +77,7 @@ end
       if admin_user && !correct_user
         redirect_to users_url
       elsif !admin_user && correct_user
-        
+
       end
     else
       flash[:success] = "Profile not updated."
