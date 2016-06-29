@@ -279,38 +279,14 @@ $(function() {
 	  //$("#reports-modal").modal('show');
   }
 	/* Done evaluating all radio buttons */
+function show_modal(){
+	$(function(){
+				$(document).on('submit','#departmental-sdbip-report', function(){
+					 $('#reports-modal').modal("show");
+				});
+	});
+}
 </script>
     </div>
   </div>
 </div><!-- departmentalsdbipprogress -->
-
-<!-- Results Modal -->
-<div class="modal fade" id="reports-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-<div class="modal-dialog">
-<div class="modal-content">
-
-<div class="modal-header">
-<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-&times;
-</button>
-<h4 class="modal-title" id="myModalLabel">This Modal title</h4>
-</div>
-
-<div class="modal-body">
-	<% if !@departmental_sdbips.blank? && !@selected_headers.blank? %>
-
-			<%= render 'report' %>
-
-	<% end %>
-</div>
-
-<div class="modal-footer">
-
-<%= link_to "CSV", departmental_sdbip_progresses_path(format: 'csv'), :class=> 'btn ' %>&nbsp;
-<%= link_to "Excel", departmental_sdbip_progresses_path(format: 'xls'), :class=>'btn '%>&nbsp;
-<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-</div>
-
-</div><!-- /.modal-content -->
-</div><!-- /.modal -->
-</div>

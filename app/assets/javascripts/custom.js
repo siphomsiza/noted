@@ -7,9 +7,7 @@ window.setTimeout(function() {
 }, 5000);
 
 });
-$('#departmental-sdbip-report').submit(function() {
-      $('#reports-modal').show();
-});
+
 $(function () {
   $('#datepicker6').datepicker({dateFormat: 'mm-yy'});
   $('#datepicker7').datepicker({
@@ -170,6 +168,7 @@ $(document).ready(function() {
 
         });
   });
+
   $(function() {
 
   	//activate schedule tabs

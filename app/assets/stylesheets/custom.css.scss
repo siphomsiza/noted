@@ -43,13 +43,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  //font-size: 3em;
   letter-spacing: -2px;
   margin-bottom: 30px;
 }
 
 h2 {
-  //font-size: 1.2em;
   letter-spacing: -1px;
   margin-bottom: 30px;
   font-weight: normal;
@@ -60,7 +58,7 @@ p {
 	line-height: 1.4em;
 	color: $deepblue;
 	padding: 0 2%;
-  //text-align: center;
+
 }
 
 label {
@@ -95,12 +93,7 @@ table {
 .navbar {
     margin-bottom: 0;
     background-color: white;
-    //z-index: 9999;
-    //border: 0;
-    //font-size: 12px !important;
-    //line-height: 1.42857143 !important;
     letter-spacing: 4px;
-    //border-radius: 0;
 }
 
 .navbar li a, .navbar .navbar-brand {
@@ -155,12 +148,8 @@ footer {
 	}
   position: absolute;
   bottom: 0;
-  //width: 100%;
-  /* Set the fixed height of the footer here */
-  //height: 30px;
   color: $deepblue;
   margin: 0 auto;
-  //width: 100%;
   /* Set the fixed height of the footer here */
   height: 30px;
 }
@@ -199,6 +188,76 @@ input {
   span {
     margin-left: 20px;
     font-weight: normal;
+  }
+}
+#session_remember_me, #user_disabled, #user_active_log,
+#setup_performance_comments,
+#setup_project_life_cycle,
+#setup_attach_poe,
+#reporting_kpi,
+#setup_include_previous_departmental_actual,
+#setup_include_departmental_previous_comments,
+#setup_include_departmental_next_target,
+#setup_include_toplayer_previous_target,
+#setup_include_toplayer_previous_comments,
+#kpiowner_checkbox,
+#admin_checkbox,
+#disablity_checkbox,
+#setup_include_toplayer_next_target {
+  width: auto;
+  margin-left: 0;
+}
+#admin_checkbox,
+#disablity_checkbox{
+  width: auto;
+  margin-left: 0;
+
+}
+#Department,
+#Sub-Department,
+#KPI-Ref-Number,
+#Pre-determined-Objectives,
+#KPI-Owner,
+#KPI,
+#unit-of-measurement,
+#gfs-classification,
+#IDP-ref,
+#national-outcome,
+#strategic-objective,
+#source-of-evidence,
+#budget,
+#target,
+#annual-target,
+#revised-target,
+#national-kpa,
+#municipal-kpa,
+#ndp-objectives,
+#capital-project,
+#kpi-concept,
+#kpi-type,
+#impact,
+#provincial-strategic-outcome,
+#wards,
+#area,
+#pevious-year-actual,
+#performance-standard,
+#reporting-category,
+#top-layer-kpi-ref,
+#kpi-calculation-type,
+#performance-comment,
+#target-actual-results,
+#corrective-measures,
+#proof-of-evidence{
+  width: auto;
+  margin-left: 0;
+}
+/* Users index */
+.users {
+  list-style: none;
+  margin: 0;
+  li {
+    overflow: auto;
+    padding: 10px 0;
   }
 }
 
@@ -331,76 +390,6 @@ input {
 }
 
 
-#session_remember_me, #user_disabled, #user_active_log,
-#setup_performance_comments,
-#setup_project_life_cycle,
-#setup_attach_poe,
-#reporting_kpi,
-#setup_include_previous_departmental_actual,
-#setup_include_departmental_previous_comments,
-#setup_include_departmental_next_target,
-#setup_include_toplayer_previous_target,
-#setup_include_toplayer_previous_comments,
-#kpiowner_checkbox,
-#admin_checkbox,
-#disablity_checkbox,
-#setup_include_toplayer_next_target {
-  width: auto;
-  margin-left: 0;
-}
-#admin_checkbox,
-#disablity_checkbox{
-  width: auto;
-  margin-left: 0;
-
-}
-#Department,
-#Sub-Department,
-#KPI-Ref-Number,
-#Pre-determined-Objectives,
-#KPI-Owner,
-#KPI,
-#unit-of-measurement,
-#gfs-classification,
-#IDP-ref,
-#national-outcome,
-#strategic-objective,
-#source-of-evidence,
-#budget,
-#target,
-#annual-target,
-#revised-target,
-#national-kpa,
-#municipal-kpa,
-#ndp-objectives,
-#capital-project,
-#kpi-concept,
-#kpi-type,
-#impact,
-#provincial-strategic-outcome,
-#wards,
-#area,
-#pevious-year-actual,
-#performance-standard,
-#reporting-category,
-#top-layer-kpi-ref,
-#kpi-calculation-type,
-#performance-comment,
-#target-actual-results,
-#corrective-measures,
-#proof-of-evidence{
-  width: auto;
-  margin-left: 0;
-}
-/* Users index */
-.users {
-  list-style: none;
-  margin: 0;
-  li {
-    overflow: auto;
-    padding: 10px 0;
-  }
-}
 
 /* tabs */
 .nav-tabs {

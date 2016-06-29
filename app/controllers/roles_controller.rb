@@ -38,9 +38,9 @@ class RolesController < ApplicationController
 
     if @role.update_attributes(role_params)
       flash[:success] = "Role was successfully updated"
-      redirect_to roles_path
+      redirect_to :back
     else
-      redirect_to roles_path
+      redirect_to :back
     end
   end
 
