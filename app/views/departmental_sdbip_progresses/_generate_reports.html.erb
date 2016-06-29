@@ -11,7 +11,7 @@
         </div>
         <div class="checkbox col col-lg-3">
           <label>
-            <input type="checkbox" id="Sub-Department" value="Sub-Department" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;Sub-Department
+            <input type="checkbox" style="margin-left: 0;" id="Sub-Department" value="Sub-Department" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;Sub-Department
           </label>
         </div>
         <div class="checkbox col col-lg-3">
@@ -536,9 +536,44 @@
         </div>
       </div>
       <div class="form-group col col-lg-12">
+
         <button class="btn btn-primary pull-right" id="submit-button" type="submit" style="margin-right: 0px;"> Generate Report</button>
       </div>
 	  </fieldset><!-- personal info -->
 	</form>
-
+<button type="button" data-target="reports-modal" data-toggle="modal">show modal</button>
 </div><!-- friday -->
+<!-- Results Modal -->
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#reports-modal">
+  Launch demo modal
+</button>
+<div class="modal fade" id="reports-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+<div class="modal-content">
+
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+&times;
+</button>
+<h4 class="modal-title" id="myModalLabel">This Modal title</h4>
+</div>
+
+<div class="modal-body">
+	<% if !@departmental_sdbips.blank? && !@selected_headers.blank? %>
+
+			<%= render 'report' %>
+
+	<% end %>
+</div>
+
+<div class="modal-footer">
+
+<%= link_to "CSV", departmental_sdbip_progresses_path(format: 'csv'), :class=> 'btn ' %>&nbsp;
+<%= link_to "Excel", departmental_sdbip_progresses_path(format: 'xls'), :class=>'btn '%>&nbsp;
+<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+</div>
+
+</div><!-- /.modal-content -->
+</div><!-- /.modal -->
+</div>
