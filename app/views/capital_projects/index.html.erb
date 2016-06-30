@@ -12,40 +12,39 @@ $(function() {
 	<%= render 'layouts/municipality' %>
 
 <ul class="nav nav-pills  nav-justified">
-<li>
-	<%= link_to "Departmental SDBIP", departmental_sdbips_path %>
-</li>
+
+<li><%= link_to "Departmental SDBIP", departmental_sdbips_path %></li>
+
 <% if current_user.admin? %>
-<li>
-	<%= link_to "Top Layer SDBIP", top_layer_sdbips_path %>
-</li>
-<li class="active">
-	<%= link_to "Capital Projects", capital_projects_path %>
-</li>
-<li>
-	<%= link_to "Monthly Cashflow", monthly_cashflows_path %>
-</li>
-<li>
-	<%= link_to "Revenue By Source", revenue_by_sources_path %>
-</li>
+<li><%= link_to "Top Layer SDBIP", top_layer_sdbips_path %></li>
+<li class="active"><%= link_to "Capital Projects", capital_projects_path %></li>
+
+<li><%= link_to "Monthly Cashflow", monthly_cashflows_path %></li>
+<li><%= link_to "Revenue By Source", revenue_by_sources_path %></li>
 
 <% end %>
+
 </ul>
+</div></div>
 
-</div>
-
-</div>
 <div class="row">
 
   <div id="departmentalsdbips">
+
 					<div class="col col-lg-12">
+
 						<div class="tabbable tabs" id="capital_projects-tabs">
+
 							<ul id = "myTab" class = "nav nav-tabs">
+
 								<li class="active">
+
 									<a href = "#new_capital_project" data-toggle = "tab">
+
 										<span class="glyphicon glyphicon-plus-sign"></span>&nbsp;Add Capital Project
 									</a>
 								</li>
+
 								<li>
 									<a href = "#view_capital_projects" data-toggle = "tab"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;View Capital Projects</a>
 								</li>
@@ -58,57 +57,85 @@ $(function() {
 						<div id = "myTabContent" class = "tab-content">
 
 							<div class = "tab-pane active fade in" id = "new_capital_project">
+
 								<% if current_user.admin? %>
+
 								<div class="row"><br/>
+
 									<div class="col col-lg-12">
 												<button class="btn  pull-right" data-toggle="modal" data-target="#capital_projectModal" title="Click to upload Capital projects.">
 													<span class="glyphicon glyphicon-upload"></span>&nbsp;Import Capital Projects
 												</button>&nbsp;
 
 
-											</div></div>
+											</div>
+									</div>
 											<hr/>
 								<% end %>
 								<%= render 'form' %>
 							</div>
+
 							<div class = "tab-pane active fade" id = "view_capital_projects">
+
 								<% if @capital_projects.blank? && CapitalProject.blank? %>
-								<p> There are no capital projects currently in the system. <p>
+
+								<p> There are no capital projects currently in the system. </p>
+
 								<% elsif @capital_projects.blank? && !CapitalProject.blank? %>
+
 								<p> You currently have no capital projects currently. </p>
+
 								<% elsif !@capital_projects.blank? %>
+
 								<%= render "capital_projects" %>
+
 								<% end %>
+
 							<% if !@capital_projects.blank? %>
+
 								<%= will_paginate @capital_projects %>
+
 								<% end %>
+
 							</div>
+
 							<div class = "tab-pane active fade" id = "manage_capital_projects">
+
 								<% if @capital_projects.blank? && CapitalProject.blank? %>
-								<p> There are no capital projects currently in the system. <p>
+
+								<p> There are no capital projects currently in the system. </p>
+
 								<% elsif @capital_projects.blank? && !CapitalProject.blank? %>
+
 								<p> You currently have no capital projects currently. </p>
+
 								<% elsif !@capital_projects.blank? %>
+
 								<%= render "edit_capital_project" %>
+
 								<% end %>
+
 							<% if !@capital_projects.blank? %>
+
 								<%= will_paginate @capital_projects %>
+
 								<% end %>
+
 							</div>
-					</div>
+			</div>
 
 
-					</div>
+		</div>
 
-				</div>
+	</div>
+</div>
+				
 
-						</div>
-				</article>
-</div></div>
 
 <div class="col col-lg-12">
   <!-- Import SDBIP modal -->
   <div class="modal fade" id="capital_projectModal" tabindex="-1" role="dialog" aria-labelledby="capital_projectModalLabel" aria-hidden="true">
+
     <div class="modal-dialog">
       <div class="modal-content">
         <%= form_tag import_capital_projects_path, accept: 'text/csv,text/xls,text/xlsx,text/ods', multipart: true do %>

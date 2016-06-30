@@ -9,17 +9,29 @@ $(function() {
 <div class="row">
 <div class="col col-lg-12">
 <%= render 'layouts/municipality' %>
+
 <ul class="nav nav-pills nav-justified">
+
 <li><%= link_to "Departmental SDBIP", departmental_sdbips_path %></li>
+
 <% if current_user.admin? %>
+
 <li><%= link_to "Top Layer SDBIP", top_layer_sdbips_path %></li>
+
 <li><%= link_to "Capital Projects", capital_projects_path %></li>
+
 <li class="active"><%= link_to "Monthly Cashflow", monthly_cashflows_path %></li>
+
 <li><%= link_to "Revenue By Source", revenue_by_sources_path %></li>
+
 <% end %>
+
 </ul>
+
 </div>
+
 </div>
+
 <div class="row">
 	<div class="col col-lg-12">
 		<div class="tabbable tabs" id="departmental_sdbips-tabs">
@@ -45,32 +57,51 @@ $(function() {
 				<%= render 'form' %>
 			</div>
 			<div class = "tab-pane active fade" id = "view_monthly_cashflows">
+
 				<% if @monthly_cashflows.blank? && MonthlyCashflow.blank? %>
-				<p> There are no Monthly Cashflows currently in the system. <p>
+
+				<p> There are no Monthly Cashflows currently in the system. </p>
+
 				<% elsif @monthly_cashflows.blank? && !MonthlyCashflow.blank? %>
+
 				<p> You currently have no Monthly Cashflows currently. </p>
+
 				<% elsif !@monthly_cashflows.blank? %>
+
 				<div class="table-responsive">
+
 					<%= render 'monthly_cashflows'%>
+
 					<%= will_paginate @monthly_cashflows, :class=>"center" %>
+
 				</div>
+
 				<% end %>
 			</div>
 			<div class = "tab-pane active fade" id = "manage_monthly_cashflows">
 					<br/>
 							<% if @monthly_cashflows.blank? && MonthlyCashflow.blank? %>
-							<p> There are no Monthly Cashflows currently in the system to edit. <p>
+
+							<p> There are no Monthly Cashflows currently in the system to edit. </p>
+
 							<% elsif @monthly_cashflows.blank? && !MonthlyCashflow.blank? %>
+
 							<p> You currently have no Monthly Cashflows currently to edit. </p>
+
 							<% elsif !@monthly_cashflows.blank? %>
+
 							<div class="table-responsive">
+
 								<%= render 'edit_monthly_cashflow'%>
+
 								<%= will_paginate @monthly_cashflows, :class=>"center" %>
+
 							</div>
+
 							<% end %>
 
-			</div>
 		</div>
 
-</article>
-</div></div>
+</div>
+</div>
+</div>

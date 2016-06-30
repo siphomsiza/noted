@@ -48,7 +48,7 @@ $(function() {
 						</div>
 						<div class = "tab-pane active fade" id = "view_revenue_by_sources">
 							<% if @revenue_by_sources.blank? && RevenueBySource.blank? %>
-							<p> There are no Revenue By Source(s) currently in the system. <p>
+							<p> There are no Revenue By Source(s) currently in the system. </p>
 							<% elsif @revenue_by_sources.blank? && !RevenueBySource.blank? %>
 							<p> You currently have no Revenue By Source(s) currently. </p>
 							<% elsif !@revenue_by_sources.blank? %>
@@ -62,7 +62,7 @@ $(function() {
 
 							<% if @revenue_by_sources.blank? && RevenueBySource.blank? %>
 
-							<p> There are no Revenue By Source(s) currently in the system to edit. <p>
+							<p> There are no Revenue By Source(s) currently in the system to edit. </p>
 
 							<% elsif @revenue_by_sources.blank? && !RevenueBySource.blank? %>
 
@@ -83,5 +83,6 @@ $(function() {
 						</div>
 					</div>
 
-			</article>
-</div></div>
+			</div>
+</div>
+</div>
