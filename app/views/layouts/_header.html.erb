@@ -24,7 +24,7 @@
           <% end %>
         </li>
 				<% end %>
-				<% if current_user.admin? || (!current_user.role.blank? && (current_user.role.kpi_owner? || current_user.role.municipal_manager? || current_user.role.internal_auditor? || current_user.role.auditor_general?))  %>
+				<% if current_user.admin? || (!current_user.role.blank? && (current_user.role.kpi_owner? || current_user.role.municipal_manager? || current_user.role.subdepartmental_administrator? || current_user.role.department_administrator? || current_user.role.internal_auditor? || current_user.role.auditor_general?))  %>
         <li class="<%= active_class(departmental_sdbips_path) %>">
           <%= link_to departmental_sdbips_path do %>
             <span class="glyphicon glyphicon-tasks"></span>SDBIP

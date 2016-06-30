@@ -21,6 +21,8 @@ $(function () {
     $('#datepicker6').data("DatePicker").maxDate(e.date);
   });
 });
+
+
 $(document).ready(function(){
   $('input[type="checkbox"]').click(function(){
         if($('#disablity_checkbox').prop("checked") == true){

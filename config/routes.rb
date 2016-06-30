@@ -37,7 +37,7 @@ Rails.application.routes.draw do
   post 'set_maximum_attempts', to: 'users#set_maximum_attempts'
   get 'terminate', to: 'users#terminate'
   get 'lock_user', to: 'users#lock_user'
-  get 'unlock_user', to: 'users#unlock'
+  get 'unlock_user', to: 'users#unlock_user'
   get 'restore', to: 'users#restore'
   get 'activate', to: 'users#activate'
   get 'users/:id/edit_new_user' => 'users#edit_new_user', :as => :edit_new_user
