@@ -15,6 +15,7 @@ class SdbipTimePeriodsController < ApplicationController
   def create
     @sdbip_time_period = SdbipTimePeriod.new(sdbip_time_period_params)
     if @sdbip_time_period.save
+      SendTimePeriodReminderEmailJob.set(wait: 10.seconds).perform_later
       flash[:success]="Sdbip Time Period was successfully created."
       redirect_to sdbip_time_periods_path
     else

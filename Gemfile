@@ -34,6 +34,7 @@ gem 'prawnto',                          '0.1.1'
 gem 'prawn-table',                      '0.1.2'
 gem 'railroady',                        '1.4.2'
 gem 'google-webfonts-rails',            '0.0.4'
+gem 'delayed_job_active_record',        '4.1.1'
 
 group :development, :test do
   gem 'byebug',                         '8.2.2'

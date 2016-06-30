@@ -44,4 +44,6 @@ Rails.application.configure do
 
   # Activate Web Console in the test environment
   config.web_console.development_only = false
+
+  config.active_job.queue_adapter = :delayed_job
 end
