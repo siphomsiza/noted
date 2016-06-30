@@ -256,11 +256,12 @@ $(function() {
 										<% if !@departmental_sdbips.blank? %>
 
 										<%= render "sdbips" %>
-
-										<% end %>
+											<%= will_paginate @departmental_sdbips, :class=>"center" %>
+											
+											<% end %>
 									</div>
 								</ul>
-										<%= will_paginate @departmental_sdbips, :class=>"center" %>
+
 							</div>
 
 							<div class = "tab-pane fade" id = "manage_sdbips">
@@ -274,15 +275,13 @@ $(function() {
 									<div class="col col-lg-12">
 
 										<% if !@departmental_sdbips.blank? %>
-
-										<%= render "edit_sdbips" %>
-
+											<%= render "edit_sdbips" %>
+											<%= will_paginate @departmental_sdbips, :class=>"center" %>
+										<% else %>
+											<p>There are no kpis for update.</p>
 										<% end %>
 									</div></div>
-
-										<%= will_paginate @departmental_sdbips, :class=>"center" %>
-										<% end %>
-
+									<% end %>
 							</div>
 			</div>
 

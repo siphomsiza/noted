@@ -10,6 +10,7 @@
         <th>Username</th>
         <th>Date Added</th>
         <th>Last Login</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -22,6 +23,11 @@
         <td><%= locked_user.email %></td>
         <td><%= locked_user.created_at %></td>
         <td><%= locked_user.last_login %></td>
+        <td><% if !current_user?(locked_user) %>
+        <%= link_to  controller: "users",action: "unlock_user", id: locked_user.id, method: "get",:data =>{confirm: "Unlock #{locked_user.firstname}?"}, :class => "btn btn-mini" do %>
+          Unlock User
+        <% end %>
+        <% end %></td>
         </tr>
         <% end %>
     </tbody>

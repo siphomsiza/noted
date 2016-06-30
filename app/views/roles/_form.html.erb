@@ -68,8 +68,10 @@
   </div></div>
 
 <% end %>
+<div id="department_select">
+<%= link_to_add_fields "Add Department/Subdepartment", f, :roles_details %>
+</div>
 
-<!--<%= link_to_add_fields "Add Department/Subdepartment", f, :roles_details %>-->
   <hr>
   <div class="actions col-lg-3 pull-right">
     <%= f.submit "Save", :class =>'btn btn-mini' %>
@@ -79,7 +81,7 @@
 <% end %>
 <hr/>
 </div>
-<!--<%= link_to "Back", roles_path %>-->
+
 <script type="text/javascript">
         $(document).ready(function(){
             $('input[type="checkbox"]').click(function(){
@@ -89,17 +91,10 @@
                 if($('#kpi_owner_checkbox').prop("checked") == false){
                   $("#kpi_owner_select").hide();
                 }
-                if($('#subdepartmental_administrator_checkbox').prop("checked") == true){
-                    $('#subdepartment_select').show();
+                if($('#subdepartmental_administrator_checkbox').prop("checked") == true || $('#departmental_administrator_checkbox').prop("checked") == true){
+                    $('#department_select').show();
                 }
-                if($('#subdepartmental_administrator_checkbox').prop("checked") == false){
-                  $("#subdepartment_select").hide();
-
-                }
-                if($('#departmental_administrator_checkbox').prop("checked") == true){
-                    $("#department_select").show();
-                }
-                if($('#departmental_administrator_checkbox').prop("checked") == false && $('#kpi_owner_checkbox').prop("checked") == false){
+                if($('#subdepartmental_administrator_checkbox').prop("checked") == false && $('#departmental_administrator_checkbox').prop("checked") == false){
                   $("#department_select").hide();
                 }
             });
@@ -109,6 +104,5 @@
         function toggleFields(){
           $("#kpi_owner_select").hide();
           $("#department_select").hide();
-          $("#subdepartment_select").hide();
         }
     </script>
