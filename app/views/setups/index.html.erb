@@ -6,12 +6,11 @@ $(function() {
   $("#applicationmanifest a:contains('SETUP')").parent().addClass('active');
 }); //jQuery is loaded
 </script>
-<div>
+
 <div id="setup">
 <div class="row">
 <div class="col col-lg-">
   <%= render 'layouts/municipality' %>
-  </article>
 
 <ul class="nav nav-pills nav-justified">
 <li><%= link_to "Master Setup", master_setups_path %></li>
@@ -22,7 +21,10 @@ $(function() {
 <li><%= link_to "Headings", headings_path %></li>
 <li><%= link_to "Lists", lists_path %></li>
 <li><%= link_to "Time Periods", sdbip_time_periods_path %></li>
-</ul></div></div></div>
+</ul>
+</div>
+</div>
+</div>
 
 <div class="row">
 <div class="tabbable tabs" id="setup-tabs">
@@ -159,4 +161,5 @@ $(function() {
 
       </div>
       </div>
+</div>
 </div>
