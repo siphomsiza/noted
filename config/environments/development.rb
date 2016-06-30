@@ -16,7 +16,7 @@ Rails.application.configure do
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :test
-  host = 'localhost:3000'                     # Local server
+  host = 'localhost'                     # Local server
   config.action_mailer.default_url_options = { host: host, protocol: 'https' }
 
   # Print deprecation notices to the Rails logger.
@@ -44,4 +44,6 @@ Rails.application.configure do
 
   # Activate Web Console in the test environment
   config.web_console.development_only = false
+
+  config.active_job.queue_adapter = :delayed_job
 end

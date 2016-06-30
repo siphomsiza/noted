@@ -20,9 +20,4 @@ class UserMailer < ApplicationMailer
     mail to: user.email, subject: "Password reset"
   end
 
-   def update_kpi(user)
-    @user = user
-    mail to: user.email, subject: "Time Period Update"
-    end
-
 end
