@@ -7,6 +7,7 @@ window.setTimeout(function() {
 }, 5000);
 
 });
+        
 
 $(function () {
   $('#datepicker6').datepicker({dateFormat: 'mm-yy'});

@@ -21,7 +21,7 @@
         <th><% if !user_activity.user_id.blank? %><%= user_activity.user.firstname %><% end %></th>
         <th><% if !user_activity.user_id.blank? %><%= user_activity.user.surname %><% end %></th>
         <th><% if !user_activity.user_id.blank? %><%= user_activity.user.email %><% end %></th>
-        <th><% if !user_activity.user_id.blank? %><%= user_activity.created_at %><% end %></th>
+        <th><% if !user_activity.user_id.blank? %><%= user_activity.created_at.strftime("%Y %b %d") %><% end %></th>
 
         <th><% if !user_activity.user_id.blank? %><%= user_activity.note %><% end %></th>
       </tr>

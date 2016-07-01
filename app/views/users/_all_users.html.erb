@@ -10,7 +10,6 @@
         <th>Email</th>
         <th>Date Added</th>
         <th>Last Login</th>
-        <th>Date Terminated</th>
         <th>Status</th>
         <th>Actions</th>
       </tr>
@@ -23,35 +22,34 @@
         <td><%= user.firstname %></td>
         <td><%= user.surname %></td>
         <td><%= user.email %></td>
-        <td><%= user.created_at %></td>
-        <td><%= user.last_login %></td>
-        <td><%= user.terminated_at %></td>
+        <td><%= user.created_at.strftime("%Y %b %d") %></td>
+        <td><% if !user.last_login.blank? %><%= user.last_login.strftime("%Y %b %d") %><% end %></td>
         <td><%= user.status%></td>
         <td>
           <% if !user.terminated? %>
-          <%= link_to edit_user_path(user),remote: true,'data-target' => "#user-modal", 'data-toggle' => 'modal', class: "btn btn-mini", :title=>"Click to Edit user details" do %>
+          <%= link_to edit_user_path(user),remote: true,'data-target' => "#user-modal", 'data-toggle' => 'modal', class: "btn btn-sm", :title=>"Click to Edit user details" do %>
               <span class="glyphicon glyphicon-pencil"></span>&nbsp;Edit Details
             <% end %>
             <div id="user-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
 
             </div>
             <% if current_user.admin? && !current_user?(user) %> |
-          <%= link_to "#", class: "btn" do %>
+          <%= link_to "#", class: "btn btn-sm" do %>
             Edit Access
           <% end %><% end %>
           <% if current_user.admin? && !current_user?(user) %> |
-          <%= link_to "",'data-target' => "#reset-password", 'data-toggle' => 'modal', class: "btn btn-mini", :title=>"Click to change your password" do %>
+          <%= link_to "",'data-target' => "#reset-password", 'data-toggle' => 'modal', class: "btn btn-sm", :title=>"Click to change your password" do %>
               &nbsp;Reset Password
             <% end %>
           <% end %>
           <% if current_user.admin? && !current_user?(user) %>
            |
-          <%= link_to user, data:{confirm: 'Are you sure?'} , :method => :delete, class: "btn" do %><span class="glyphicon glyphicon-trash"></span>&nbsp;
+          <%= link_to user, data:{confirm: 'Are you sure?'} , :method => :delete, class: "btn btn-sm" do %><span class="glyphicon glyphicon-trash"></span>&nbsp;
             Delete
           <% end %>
           <% end %>
           <% else user.terminated? %>
-          <%= link_to "",controller: "users", action: "restore", id: user.id, method: "get",class:"btn btn-default btn-mini" do %>
+          <%= link_to "",controller: "users", action: "restore", id: user.id, method: "get",class:"btn btn-default btn-sm" do %>
             <span class="glyphicon glyphicon-circle-ok"></span>Restore
           <% end %><% end %>
         </td>

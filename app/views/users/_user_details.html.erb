@@ -42,7 +42,7 @@
         <td><%= user.location %></td>
         <td><%= user.manager %></td>
         <td><%= user.employee_number %></td>
-        <td><%= user.employment_date %></td>
+        <td><% if !user.employment_date.blank? %><%= user.employment_date.strftime("%Y %b %d") %><% end %></td>
         <td><%= user.country_prefix %></td>
         <td><%= user.landline %></td>
         <td><%= user.mobile %></td>
@@ -51,9 +51,9 @@
         <td><%= user.gender %></td>
         <td><%= user.race %></td>
         <td><%= user.disabled %></td>
-        <td><%= user.created_at %></td>
-        <td><%= user.last_login %></td>
-        <td><%= user.terminated_at %></td>
+        <td><%= user.created_at.strftime("%Y %b %d") %></td>
+        <td><% if !user.last_login.blank? %><%= user.last_login.strftime("%Y %b %d") %><% end %></td>
+        <td><% if !user.terminated_at.blank? %><%= user.terminated_at.strftime("%Y %b %d") %><% end %></td>
         <td><%= user.login_count %></td>
         <td><%= user.status %></td>
       </tr>

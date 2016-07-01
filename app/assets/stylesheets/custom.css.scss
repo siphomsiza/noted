@@ -18,6 +18,7 @@ Author: Rachidi Bushidi
 $deepblue: #162360;
 $powderblue: #7083AD;
 $midgrey: #ACB1B4;
+$lightgrey: lighten($midgrey, 30%);
 
 /* Font Typeface */
 $headingFontFamily: "Josefin Sans", Arial, sans-serif;
@@ -156,6 +157,16 @@ footer {
 
 /****** Form Elements ********/
 /* forms */
+input:required:invalid, input:focus:invalid {
+    background-image: url(/images/invalid.png);
+    background-position: right top;
+    background-repeat: no-repeat;
+  }
+  input:required:valid {
+    background-image: url(/images/valid.png);
+    background-position: right top;
+    background-repeat: no-repeat;
+  }
 input, textarea, select, .uneditable-input {
   border: 1px solid #bbb;
   width: 100%;
@@ -342,6 +353,23 @@ input {
   font-size: 0.8em;
 }
 
+.second-level-navs ul{
+  li a{
+    font-family: $headingFontFamily;
+    color: $deepblue;
+    background-color: white !important;
+    }
+    li a:hover{
+      font-family: $headingFontFamily;
+      color: white !important;
+      background-color: $deepblue !important;
+    }
+    li:active a{
+      font-family: $headingFontFamily;
+      color: white !important;
+      background-color: $powderblue !important;
+    }
+}
 
 .nav-justified li a{
   font-family: $headingFontFamily;

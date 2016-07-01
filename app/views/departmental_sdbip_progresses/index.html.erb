@@ -12,15 +12,16 @@ $(function() {
 			<%= render 'layouts/municipality' %>
 
 	<div class="tabbable tabs">
-		<ul class="nav nav-tabs">
+		<ul class="nav nav-tabs second-level-navs">
 			<li class="active"><a href="#departmental_sdbip_report" data-toggle="tab">Departmental SDBIP</a></li>
 			<li><a href="#top_layer_sdbip_report" data-toggle="tab">Top Layer SDBIP</a></li>
 			<li><a href="#capital_projects_report" data-toggle="tab">Capital Projects</a></li>
 			<li><a href="#monthly_cashflow_report" data-toggle="tab">Monthly Cashflow</a></li>
       <li><a href="#revenue_by_source_report" data-toggle="tab">Revenue By Source</a></li>
-		 <li>
-            <a href="#charts_per_department" data-toggle="tab">YTD Dashboard</a>
-          </li>
+		 <li><a href="#charts_per_department" data-toggle="tab">YTD Dashboard</a></li>
+		 <% if current_user.admin? %>
+		  <li><a href="#audit_logs" data-toggle="tab">Assurance</a></li>
+			<% end %>
 </ul><!-- nav nav-tabs -->
 	</div><!-- tabbable tabs -->
 
@@ -32,6 +33,7 @@ $(function() {
     <%= render 'monthly_cashflow_report' %>
     <%= render 'revenue_by_source_report' %>
 		<%= render "charts_per_department" %>
+		<%= render "audit_logs" %>
 
 	</section><!-- tab-content -->
 

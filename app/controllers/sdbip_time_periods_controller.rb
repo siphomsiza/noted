@@ -27,6 +27,22 @@ class SdbipTimePeriodsController < ApplicationController
 
   end
 
+  def import
+    if params[:file].nil?
+       flash[:danger] = 'You have not selected a file'
+      redirect_to sdbip_time_periods_url
+    else
+    begin
+       SdbipTimePeriod.import(params[:file])
+       flash[:success] = "Time periods imported successfully."
+       redirect_to sdbip_time_periods_url
+    rescue
+      flash[:danger] = "Time periods failed to import."
+       redirect_to sdbip_time_periods_url
+    end
+  end
+  end
+
   def update
         @sdbip_time_period = SdbipTimePeriod.find(params[:id])
 
