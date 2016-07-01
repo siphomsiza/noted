@@ -135,7 +135,7 @@ end
   end
   def terminate
     @user = User.find(params[:id])
-    if @user.update_columns(:terminated => true, :terminated_at => Time.zone.now,:status => "terminated")
+    if @user.update_columns(:terminated => true, :terminated_at => Time.zone.now,:status => "Terminated")
       flash[:success] = "Account terminated successfully."
       redirect_to users_path
     else
@@ -157,7 +157,7 @@ end
       max_attempts = @user.max_login_attempts
       max_attempts.to_i
       max_attempts += 1
-      if @user.update_columns(:login_attempts=>max_attempts, :status => "Locked")
+      if @user.update_columns(:login_attempts=>max_attempts, :activated=> false, :status => "Locked")
         flash[:success] = "#{@user.firstname}'s account locked successfully."
         redirect_to users_path
       else
@@ -168,7 +168,7 @@ end
     end
     def unlock_user
       @user = User.find(params[:id])
-      if @user.update_columns(:login_attempts=>0, :status => "Activated")
+      if @user.update_columns(:login_attempts=>0, :activated => true, :status => "Activated")
         flash[:success] = "Unlocked #{@user.firstname}'s account successfully."
         redirect_to users_path
       else

@@ -21,10 +21,10 @@
         <td><%= locked_user.firstname %></td>
         <td><%= locked_user.surname %></td>
         <td><%= locked_user.email %></td>
-        <td><%= locked_user.created_at %></td>
-        <td><%= locked_user.last_login %></td>
+        <td><%= locked_user.created_at.strftime("%Y %b %d") %></td>
+        <td><% if !locked_user.last_login.blank? %><%= locked_user.last_login.strftime("%Y %b %d") %><% end %></td>
         <td><% if !current_user?(locked_user) %>
-        <%= link_to  controller: "users",action: "unlock_user", id: locked_user.id, method: "get",:data =>{confirm: "Unlock #{locked_user.firstname}?"}, :class => "btn btn-mini" do %>
+        <%= link_to  controller: "users",action: "unlock_user", id: locked_user.id, method: "get",:data =>{confirm: "Unlock #{locked_user.firstname}?"}, :class => "btn btn-sm" do %>
           Unlock User
         <% end %>
         <% end %></td>

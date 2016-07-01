@@ -2,8 +2,7 @@ Rails.application.routes.draw do
 
   mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
   resources :jobtitles
-  get 'jobtitle/title'
-
+  resources :activities
   resources :regions
   resources :master_setups
   resources :top_layer_sdbips do
@@ -70,7 +69,9 @@ Rails.application.routes.draw do
 
   end
   resources :kpi_calculation_types
-  resources :sdbip_time_periods
+  resources :sdbip_time_periods do
+    collection {post :import}
+  end
   resources :kpi_target_types
   resources :monthly_cashflows do
     collection {post :import}

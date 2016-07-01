@@ -25,8 +25,8 @@
         <td><%= user.surname %></td>
         <td><%= user.email %></td>
         <td><%= user.status%></td>
-        <td><%= user.created_at %></td>
-        <td><%= user.last_login %></td>
+        <td><%= user.created_at.strftime("%Y %b %d") %></td>
+        <td><% if !user.last_login.blank? %><%= user.last_login.strftime("%Y %b %d") %><% end %></td>
         <td><%= user.last_login_ip%></td>
         <td><%= user.login_count %></td>
         <td><%= user.login_attempts%></td>

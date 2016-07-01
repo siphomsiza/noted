@@ -1,4 +1,6 @@
 class DepartmentalSdbip < ActiveRecord::Base
+	include PublicActivity::Model
+	tracked only: [:update], owner: :user
 	belongs_to :department
 	belongs_to :list
 	belongs_to :subdepartment

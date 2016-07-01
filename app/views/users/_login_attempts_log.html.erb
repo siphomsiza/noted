@@ -11,7 +11,6 @@
         <th>Date Added</th>
         <th>Log in Attempts</th>
         <th>Successful Log in Count</th>
-        <th>Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -22,7 +21,7 @@
         <td><%= user_login_attempt.firstname %></td>
         <td><%= user_login_attempt.surname %></td>
         <td><%= user_login_attempt.email %></td>
-        <td><%= user_login_attempt.created_at %></td>
+        <td><%= user_login_attempt.created_at.strftime("%Y %b %d") %></td>
         <td><%= user_login_attempt.login_attempts %></td>
           <td><%= user_login_attempt.login_count %></td>
             </tr>

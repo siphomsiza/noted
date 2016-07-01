@@ -21,10 +21,10 @@
         <td><%= new_user.firstname %></td>
         <td><%= new_user.surname %></td>
         <td><%= new_user.email %></td>
-        <td><%= new_user.created_at %></td>
+        <td><%= new_user.created_at.strftime("%Y %b %d") %></td>
         <td><%= new_user.status %></td>
           <td>
-            <%= link_to edit_new_user_path(new_user),remote: true,'data-target' => "#edit-new-user-modal", 'data-toggle' => 'modal', class: "btn btn-mini", :title=>"Click to Edit user details" do %>
+            <%= link_to edit_new_user_path(new_user),remote: true,'data-target' => "#edit-new-user-modal", 'data-toggle' => 'modal', class: "btn btn-sm", :title=>"Click to Edit user details" do %>
                 <span class="glyphicon glyphicon-pencil"></span>&nbsp;Edit Details
 
               <% end %>
@@ -33,7 +33,7 @@
               </div>
               <% if current_user.admin? && !current_user?(new_user) %> |
 
-              <%= link_to "#", class: "btn" do %>
+              <%= link_to "#", class: "btn btn-sm" do %>
 
               Edit Access
             <% end %>
@@ -41,13 +41,13 @@
             <% end %>
             <% if current_user.admin? && !current_user?(new_user) %> |
 
-            <%= link_to "",'data-target' => "#reset-password", 'data-toggle' => 'modal', class: "btn btn-mini", :title=>"Click to change your password" do %>
+            <%= link_to "",'data-target' => "#reset-password", 'data-toggle' => 'modal', class: "btn btn-sm", :title=>"Click to change your password" do %>
                 &nbsp;Reset Password
               <% end %>
 
             <% end %>
 
-          <%= link_to new_user, data: {:confirm => 'Are you sure?'}, :method => :delete, class: "btn" do %>
+          <%= link_to new_user, data: {:confirm => 'Are you sure?'}, :method => :delete, class: "btn btn-sm" do %>
             Delete
           <% end %>
         </td>
