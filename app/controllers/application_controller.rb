@@ -1,26 +1,36 @@
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
-  after_filter :record_activity
 
 # ...
+  include PublicActivity::StoreController
   hide_action :current_user
   protect_from_forgery with: :exception
   include SessionsHelper
-
-  def record_activity
+  def record_activity(note)
     if !current_user.blank?
-    note = "User logged in to the system."
-    @activity = ActivityLog.new
-    @activity.note = note
-    @activity.user_id = current_user.id
-    #@activity.admin = current_user.admin
-    @activity.browser = request.env['HTTP_USER_AGENT']
-    @activity.ip_address = request.env['REMOTE_ADDR']
-    @activity.controller = controller_name
-    @activity.action = action_name
-    @activity.params = params.inspect
-    @activity.save
+      @activity = ActivityLog.new
+      @activity.user_id = current_user.id
+      @activity.admin = current_user.admin
+      @activity.browser = request.env['HTTP_USER_AGENT']
+      @activity.ip_address = request.env['REMOTE_ADDR']
+      @activity.controller = controller_name
+      @activity.action = action_name
+      @activity.note = note
+      @activity.params = params.inspect
+      @activity.save
+    end
+  end
+  def audit_log(departmental_sdbip_id)
+
+    if !current_user.blank?
+      @audit_log = Activity.new
+      @audit_log.user_id = current_user.id
+      @audit_log.browser = request.env['HTTP_USER_AGENT']
+      @audit_log.ip_address = request.env['REMOTE_ADDR']
+      @audit_log.params = params.inspect
+      @audit_log.departmental_sdbip_id = departmental_sdbip_id
+      @audit_log.save
     end
   end
   private

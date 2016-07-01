@@ -4,7 +4,11 @@
     <br/>
       <h3>Audit Logs</h3>
   <hr/>
+  <% if !@activities.blank? %>
+  
+      <%= render 'audits' %>
 
+  <% end %>
   </div>
 </div>
 </div>

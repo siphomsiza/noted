@@ -1,0 +1,36 @@
+<div class="table-responsive">
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>KPI</th>
+        <th>Department</th>
+        <th>Subdepartment</th>
+        <th>KPI Ref Number</th>
+        <th>Performance Comments</th>
+        <th>Corrective Measures</th>
+        <th>Proof of Evidence</th>
+        <th>Update Status</th>
+        <th>Assurance Status</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @activities.each do |activity| %>
+      <tr>
+        <td><%= activity.id %></td>
+        <td><%= activity.departmental_sdbip.kpi %></td>
+        <td><%= activity.departmental_sdbip.department.name %></td>
+        <td><%= activity.departmental_sdbip.subdepartment.subdepartment_name %></td>
+        <td><%= activity.departmental_sdbip.kpi_ref_number %></td>
+        <td><%= activity.departmental_sdbip.performance_comments %></td>
+        <td><%= activity.departmental_sdbip.corrective_measures %></td>
+        <td><%= activity.departmental_sdbip.source_of_evidence %></td>
+        <td></td>
+        <td></td>
+
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<%= will_paginate @activities %>

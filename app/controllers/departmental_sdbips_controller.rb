@@ -1,6 +1,6 @@
 class DepartmentalSdbipsController < ApplicationController
   before_action :logged_in_user, only: [:index, :edit, :update,:show]
-  before_action :admin_user,     only: [:new, :index, :destroy,:show]
+  before_action :admin_user,     only: [:new, :index,:edit,:update, :destroy,:show]
   before_action :kpi_owner_user,     only: [:index,:edit,:update, :index,:show]
   def index
 
@@ -162,13 +162,16 @@ end
   end
 
   def update
-
     @departmental_sdbip = DepartmentalSdbip.find(params[:id])
-    if @departmental_sdbip.update_attributes(departmental_sdbip_params)
+    if @departmental_sdbip.update(departmental_sdbip_params)
+        departmental_sdbip_id = @departmental_sdbip.id
+        puts departmental_sdbip_id
+        audit_log(departmental_sdbip_id)
         flash[:success] = "KPI was successfully updated"
         redirect_to departmental_sdbips_path
     else
-
+      flash[:danger] = "KPI was not updated"
+      redirect_to :back
     end
   end
   def import
@@ -221,7 +224,6 @@ end
       end
     # Confirms an admin user.
     def admin_user
-      #redirect_to(root_url) unless
       current_user.admin?
     end
     def kpi_owner_user

@@ -1,4 +1,5 @@
 class Area < ActiveRecord::Base
+	include PublicActivity::Common
 	belongs_to :list
 	has_many :departmental_sdbip
 	has_many :capital_projects

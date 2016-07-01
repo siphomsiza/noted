@@ -1,4 +1,5 @@
 class List < ActiveRecord::Base
+	include PublicActivity::Common
 	has_many :areas, :dependent => :destroy
 	has_many :funding_sources, :dependent => :destroy
 	has_many :kpi_calculation_types, :dependent => :destroy

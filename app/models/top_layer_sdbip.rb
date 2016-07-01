@@ -1,4 +1,5 @@
 class TopLayerSdbip < ActiveRecord::Base
+  include PublicActivity::Common
   belongs_to :department
   has_one :mscore_classification
   has_one :national_outcome
@@ -6,7 +7,7 @@ class TopLayerSdbip < ActiveRecord::Base
   has_one :kpa
   has_one :predetermined_objective
   has_one :strategic_objective
-  has_one :ndp_objective
+  belongs_to :ndp_objective
   has_one :ward
   has_one :area
   has_one :kpi_owner

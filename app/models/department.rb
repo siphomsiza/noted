@@ -1,4 +1,5 @@
 class Department < ActiveRecord::Base
+	include PublicActivity::Common
 	has_many :users
 	has_many :roles
 	has_many :top_layer_sdbips

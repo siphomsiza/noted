@@ -1,4 +1,5 @@
 class MonthlyCashflow < ActiveRecord::Base
+  include PublicActivity::Common
   belongs_to :department
   belongs_to :subdepartment
   belongs_to :mscore_classification

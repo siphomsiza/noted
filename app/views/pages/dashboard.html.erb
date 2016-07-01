@@ -124,7 +124,7 @@
       <div class="panel panel-default col-md-6">
         <div class="panel-body">
           <% if !@departmental_sdbips.blank? %>
-          <%= bar_chart @departmental_sdbips.group(:performance_standard).count, width: "400px", height: "250px" %>
+          <%= bar_chart @departmental_sdbips.group(:performance_standard).count, width: "400px", height: "300px" %>
           <% end %>
         </div>
         <!-- /.panel-body -->
@@ -135,7 +135,7 @@
       <div class="panel panel-default">
         <div class="panel-body">
           <% if !@departmental_sdbips.blank? %>
-            <%= column_chart @departmental_sdbips.group(:department_name, :performance_standard).count, width: "80%", height: "400px",  colors: ["red", "orange", "darkblue","darkgreen", "limegreen"] %>
+            <%= column_chart @departmental_sdbips.group(:department_name, :performance_standard).count, width: "80%", height: "400px" %>
           <% end %>
         </div>
         <!-- /.panel-body -->

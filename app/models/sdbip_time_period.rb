@@ -1,4 +1,5 @@
 class SdbipTimePeriod < ActiveRecord::Base
+  include PublicActivity::Common
   has_many :departmental_sdbips
   belongs_to :sdbip_report
   def self.import(file)

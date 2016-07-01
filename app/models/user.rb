@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-
+  has_many :activities
   belongs_to :department
   has_many :activity_logs
   has_one :role, :dependent => :destroy
@@ -66,9 +66,6 @@ class User < ActiveRecord::Base
   # Sends password reset email.
   def send_password_reset_email
     UserMailer.password_reset(self).deliver_now
-  end
-def update_kpi
-      UserMailer.update_kpi(self).deliver_now
   end
 
   # Returns true if a password reset has expired.

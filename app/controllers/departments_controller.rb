@@ -32,19 +32,15 @@ class DepartmentsController < ApplicationController
 
   end
 
-
-  # PATCH/PUT /municipalities/1
-  # PATCH/PUT /municipalities/1.json
   def update
     @users = User.all
     @department = Department.find(params[:id])
-    respond_to do |format|
       if @department.update(department_params)
-        format.html { redirect_to departments_path, success: 'Department was successfully updated.' }
-        format.json { render :show, status: :ok, location: departments_path}
+        flash[:success] = 'Department was successfully updated.'
+        redirect_to :back
       else
-        format.html { render :edit }
-        format.json { render json: @department.errors, status: :unprocessable_entity }
+        flash[:danger] = 'Department was not updated.'
+        redirect_to :back
       end
     end
   end

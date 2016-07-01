@@ -5,7 +5,7 @@ class DepartmentalSdbipProgressesController < ApplicationController
   skip_before_filter  :verify_authenticity_token
 
   def index
-    @activities = PublicActivity::Activity.all
+    @activities = Activity.paginate(page: params[:page],per_page: 15)
     selected_values = []
     selected_headings = []
    if params[:data_value]

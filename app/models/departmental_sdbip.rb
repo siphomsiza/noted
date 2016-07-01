@@ -1,7 +1,9 @@
 class DepartmentalSdbip < ActiveRecord::Base
+
 	include PublicActivity::Model
-	tracked only: [:update], owner: :user
+	#tracked owner: ->(controller, model) { controller && controller.current_user }
 	belongs_to :department
+	has_many :activities
 	belongs_to :list
 	belongs_to :subdepartment
 	belongs_to :kpi_owner

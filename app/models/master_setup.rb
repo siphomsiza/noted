@@ -1,4 +1,5 @@
 class MasterSetup < ActiveRecord::Base
+  include PublicActivity::Common
   validates :municipality,:province, :presence=> true, :uniqueness=>true
   has_many :regions, :dependent => :destroy
   accepts_nested_attributes_for :regions, allow_destroy: true

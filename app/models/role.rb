@@ -1,4 +1,5 @@
 class Role < ActiveRecord::Base
+	include PublicActivity::Common
 	belongs_to :user
 	belongs_to :department
 	belongs_to :subdepartment

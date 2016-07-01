@@ -8,7 +8,7 @@ class CapitalProjectsController < ApplicationController
     @capital_project = CapitalProject.new
     @capital_projects = CapitalProject.all
       if !@capital_projects.blank?
-       @capital_projects =  @capital_projects.paginate(page: params[:page],per_page: 10)
+       @capital_projects =  @capital_projects.paginate(page: params[:page],per_page: 15)
       end
   end
 
