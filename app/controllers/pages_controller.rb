@@ -24,6 +24,13 @@ class PagesController < ApplicationController
   def dashboard
     @users = User.all
     @departmental_sdbips = DepartmentalSdbip.all
+    @client = YahooWeather::Client.new
+    @response = @client.fetch(1582504)
+    @doc = @response.doc
+    @forecast = @doc["item"]["forecast"]
+    #@response = @client.fetch_by_location('New York')
+    #@response.units.temperature
+    #@response.condition.temp
   end
   private
   #

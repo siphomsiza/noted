@@ -36,3 +36,46 @@ $(function() {
 						</section>
 
 </div>
+
+<script src="http://maps.googleapis.com/maps/api/js"></script>
+<script>
+	'use strict';
+
+	document.addEventListener('DOMContentLoaded', drawMap);
+
+	// make map available in global scope
+	var map;
+
+	function drawMap() {
+		var municipalityLocation = new google.maps.LatLng(-27.0077637, 30.8018875);
+
+		var mapOptions = {
+	  	'center' : municipalityLocation,
+	  	'zoom' : 14,
+	  	'mapTypeId' : google.maps.MapTypeId.ROADMAP,
+	  	'draggable' : false
+		};
+
+		map = new google.maps.Map(document.getElementById("googleMap"), mapOptions);
+
+		var marker = new google.maps.Marker({
+			position: municipalityLocation,
+			map: map,
+			title: 'Find us here (Mkhondo Municipality)'
+		});
+
+		var popupContent = 'Mkhondo Municipality<br />';
+		popupContent += 'Piet Retief, 2380<br />';
+		popupContent += 'Mpumalanga, South Africa';
+
+		var infowindow = new google.maps.InfoWindow({
+			content: popupContent,
+			maxWidth: 270
+		});
+
+		google.maps.event.addListener(marker, 'click', function() {
+			infowindow.open(map, marker);
+		});
+	}
+
+</script>
