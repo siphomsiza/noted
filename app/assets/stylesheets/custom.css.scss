@@ -353,7 +353,7 @@ input {
   font-size: 0.8em;
 }
 
-.second-level-navs ul{
+#second-level-navs .nav-tabs{
   li a{
     font-family: $headingFontFamily;
     color: $deepblue;
@@ -368,6 +368,23 @@ input {
       font-family: $headingFontFamily;
       color: white !important;
       background-color: $powderblue !important;
+    }
+}
+#fourth-level-navs .nav-tabs{
+  li a{
+    font-family: $headingFontFamily;
+    color: $deepblue;
+    background-color: white !important;
+    }
+    li a:hover{
+      font-family: $headingFontFamily;
+      color: white !important;
+      background-color: $deepblue !important;
+    }
+    li:active a{
+      font-family: $headingFontFamily;
+      color: white !important;
+      background-color: $lightgrey !important;
     }
 }
 
