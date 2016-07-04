@@ -1,202 +1,204 @@
-<%= form_tag departmental_sdbip_progresses_path, method: :get do %>
-  <fieldset id="select-info">
 
+<%= form_tag departmental_sdbip_progresses_path, method: :get do %>
+<div class="allboxes">
+  <fieldset id="select-info">
     <legend><br/>1. Select the information to be displayed in the report:</legend>
+    <div class="allboxes">
     <div class="form-group row">
       <div class="checkbox col col-lg-3">
         <label>
-          <input type="checkbox" id="Department" value="Department" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;Department
+          <input type="checkbox" id="department-checkbox" name="audit_checkbox" value="Department">&nbsp;&nbsp;&nbsp;&nbsp;Department
         </label>
       </div>
       <div class="checkbox col col-lg-3">
         <label>
-          <input type="checkbox" style="margin-left: 0;" id="Sub-Department" value="Sub-Department" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;Sub-Department
+          <input type="checkbox" style="margin-left: 0;" name="audit_checkbox" id="sub-department-checkbox" value="Sub-Department">&nbsp;&nbsp;&nbsp;&nbsp;Sub-Department
         </label>
       </div>
       <div class="checkbox col col-lg-3">
         <label>
-          <input type="checkbox" id="KPI-Ref-Number" value="KPI Ref Number" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;KPI Ref Number
+          <input type="checkbox" id="kpi-ref-number-checkbox" name="audit_checkbox" value="KPI Ref Number">&nbsp;&nbsp;&nbsp;&nbsp;KPI Ref Number
         </label>
       </div>
       <div class="checkbox col col-lg-3">
         <label>
-          <input type="checkbox" id="Pre-determined-Objectives" value="Pre-determined Objectives" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;Pre-determined Objectives
+          <input type="checkbox" id="pre-determined-objectives-checkbox" name="audit_checkbox" value="Pre-determined Objectives">&nbsp;&nbsp;&nbsp;&nbsp;Pre-determined Objectives
         </label>
       </div>
     </div>
     <div class="form-group row">
       <div class="checkbox col col-lg-3">
         <label>
-          <input type="checkbox" value="KPI Owner" id="KPI-Owner" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;KPI Owner
+          <input type="checkbox" value="KPI Owner" name="audit_checkbox" id="kpi-owner-checkbox">&nbsp;&nbsp;&nbsp;&nbsp;KPI Owner
         </label>
       </div>
       <div class="checkbox col col-lg-3">
         <label>
-          <input type="checkbox" value="KPI" id="KPI" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;KPI
+          <input type="checkbox" value="KPI" name="audit_checkbox" id="kpi-checkbox">&nbsp;&nbsp;&nbsp;&nbsp;KPI
         </label>
       </div>
       <div class="checkbox col col-lg-3">
         <label>
-          <input type="checkbox" value="Unit of Measurement" id="unit-of-measurement" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;Unit of Measurement
+          <input type="checkbox" value="Unit of Measurement" name="audit_checkbox" id="unit-of-measurement-checkbox">&nbsp;&nbsp;&nbsp;&nbsp;Unit of Measurement
         </label>
       </div>
       <div class="checkbox col col-lg-3">
         <label>
-          <input type="checkbox" value="GFS Classification" id="gfs-classification" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;GFS Classification
-        </label>
-      </div>
-    </div>
-    <div class="form-group row">
-      <div class="checkbox col col-lg-3">
-        <label>
-          <input type="checkbox" value="IDP Ref" id="IDP-ref" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;IDP Ref
-        </label>
-      </div>
-      <div class="checkbox col col-lg-3">
-        <label>
-          <input type="checkbox" value="National Outcome" id="national-outcome" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;National Outcome
-        </label>
-      </div>
-      <div class="checkbox col col-lg-3">
-        <label>
-          <input type="checkbox" value="Strategic Objective" id="strategic-objective" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;Strategic Objective
-        </label>
-      </div>
-      <div class="checkbox col col-lg-3">
-        <label>
-          <input type="checkbox" value="Source of Evidence" id="source-of-evidence" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;Source of Evidence
+          <input type="checkbox" value="GFS Classification" name="audit_checkbox" id="gfs-classification-checkbox">&nbsp;&nbsp;&nbsp;&nbsp;GFS Classification
         </label>
       </div>
     </div>
     <div class="form-group row">
       <div class="checkbox col col-lg-3">
         <label>
-          <input type="checkbox" value="Baseline" id="budget" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;Baseline
+          <input type="checkbox" value="IDP Ref" name="audit_checkbox" id="idp-ref-checkbox">&nbsp;&nbsp;&nbsp;&nbsp;IDP Ref
         </label>
       </div>
       <div class="checkbox col col-lg-3">
         <label>
-          <input type="checkbox" value="Target" id="target" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;Target
+          <input type="checkbox" value="National Outcome" name="audit_checkbox" id="national-outcome-checkbox">&nbsp;&nbsp;&nbsp;&nbsp;National Outcome
         </label>
       </div>
       <div class="checkbox col col-lg-3">
         <label>
-          <input type="checkbox" value="Annual Target" id="annual-target" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;Annual Target
+          <input type="checkbox" value="Strategic Objective" name="audit_checkbox" id="strategic-objective-checkbox">&nbsp;&nbsp;&nbsp;&nbsp;Strategic Objective
         </label>
       </div>
       <div class="checkbox col col-lg-3">
         <label>
-          <input type="checkbox" value="Revised Target" id="revised-target" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;Revised Target
-        </label>
-      </div>
-    </div>
-    <div class="form-group row">
-      <div class="checkbox col col-lg-3">
-        <label>
-          <input type="checkbox" value="National KPA" id="national-kpa" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;National KPA
-        </label>
-      </div>
-      <div class="checkbox col col-lg-3">
-        <label>
-          <input type="checkbox" value="Municipal KPA" id="municipal-kpa" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;Municipal KPA
-        </label>
-      </div>
-      <div class="checkbox col col-lg-3">
-        <label>
-          <input type="checkbox" value="NDP Objectives" id="ndp-objectives" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;NDP Objectives
-        </label>
-      </div>
-      <div class="checkbox col col-lg-3">
-        <label>
-          <input type="checkbox" value="Capital Project" id="capital-project" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;Capital Project
+          <input type="checkbox" value="Source of Evidence" name="audit_checkbox" id="source-of-evidence-checkbox">&nbsp;&nbsp;&nbsp;&nbsp;Source of Evidence
         </label>
       </div>
     </div>
     <div class="form-group row">
       <div class="checkbox col col-lg-3">
         <label>
-          <input type="checkbox" value="KPI Concept" id="kpi-concept" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;KPI Concept
+          <input type="checkbox" value="Baseline" name="audit_checkbox" id="budget-checkbox">&nbsp;&nbsp;&nbsp;&nbsp;Baseline
         </label>
       </div>
       <div class="checkbox col col-lg-3">
         <label>
-          <input type="checkbox" value="KPI Type" id="kpi-type" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;KPI Type
+          <input type="checkbox" value="Target" name="audit_checkbox" id="target-checkbox">&nbsp;&nbsp;&nbsp;&nbsp;Target
         </label>
       </div>
       <div class="checkbox col col-lg-3">
         <label>
-          <input type="checkbox" value="Impact" id="impact" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;Impact
+          <input type="checkbox" value="Annual Target" name="audit_checkbox" id="annual-target">&nbsp;&nbsp;&nbsp;&nbsp;Annual Target
         </label>
       </div>
       <div class="checkbox col col-lg-3">
         <label>
-          <input type="checkbox" id="provincial-strategic-outcome" value="Provincial Strategic Outcome" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;Provincial Strategic Outcome
-        </label>
-      </div>
-    </div>
-    <div class="form-group row">
-      <div class="checkbox col col-lg-3">
-        <label>
-          <input type="checkbox" id="wards" value="Wards" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;Wards
-        </label>
-      </div>
-      <div class="checkbox col col-lg-3">
-        <label>
-          <input type="checkbox" id="area" value="Area" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;Area
-        </label>
-      </div>
-      <div class="checkbox col col-lg-3">
-        <label>
-          <input type="checkbox" id="pevious-year-actual" value="Previous Year Actual Performance" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;Previous Year Actual Performance
-        </label>
-      </div>
-      <div class="checkbox col col-lg-3">
-        <label>
-          <input type="checkbox" id="performance-standard" value="Performance Standard" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;Performance Standard
+          <input type="checkbox" value="Revised Target" name="audit_checkbox" id="revised-target-checkbox">&nbsp;&nbsp;&nbsp;&nbsp;Revised Target
         </label>
       </div>
     </div>
     <div class="form-group row">
       <div class="checkbox col col-lg-3">
         <label>
-          <input type="checkbox" id="reporting-category" value="Reporting Category" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;Reporting Category
+          <input type="checkbox" value="National KPA" name="audit_checkbox" id="national-kpa-checkbox">&nbsp;&nbsp;&nbsp;&nbsp;National KPA
         </label>
       </div>
       <div class="checkbox col col-lg-3">
         <label>
-          <input type="checkbox" id="top-layer-kpi-ref" value="Top Layer KPI Ref" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;Top Layer KPI Ref
+          <input type="checkbox" value="Municipal KPA" name="audit_checkbox" id="municipal-kpa">&nbsp;&nbsp;&nbsp;&nbsp;Municipal KPA
         </label>
       </div>
       <div class="checkbox col col-lg-3">
         <label>
-          <input type="checkbox" id="kpi-calculation-type" value="KPI Calculation Type" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;KPI Calculation Type
+          <input type="checkbox" value="NDP Objectives" name="audit_checkbox" id="ndp-objectives-checkbox">&nbsp;&nbsp;&nbsp;&nbsp;NDP Objectives
         </label>
       </div>
       <div class="checkbox col col-lg-3">
         <label>
-          <input type="checkbox" id="performance-comment" value="Performance Comment" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;Performance Comment
+          <input type="checkbox" value="Capital Project" name="audit_checkbox" id="capital-project-checkbox">&nbsp;&nbsp;&nbsp;&nbsp;Capital Project
         </label>
       </div>
     </div>
     <div class="form-group row">
       <div class="checkbox col col-lg-3">
         <label>
-          <input type="checkbox" id="target-actual-results" value="Target, Actual and Results" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;Target, Actual and Results
+          <input type="checkbox" value="KPI Concept" name="audit_checkbox" id="kpi-concept-checkbox">&nbsp;&nbsp;&nbsp;&nbsp;KPI Concept
         </label>
       </div>
       <div class="checkbox col col-lg-3">
         <label>
-          <input type="checkbox" id="corrective-measures" value="Corrective Measures" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;Corrective Measures
+          <input type="checkbox" value="KPI Type" name="audit_checkbox" id="kpi-type-checkbox">&nbsp;&nbsp;&nbsp;&nbsp;KPI Type
         </label>
       </div>
       <div class="checkbox col col-lg-3">
         <label>
-          <input type="checkbox" id="proof-of-evidence" value="Proof of evidence" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;Proof of evidence
+          <input type="checkbox" value="Impact" name="audit_checkbox" id="impact-checkbox">&nbsp;&nbsp;&nbsp;&nbsp;Impact
         </label>
       </div>
       <div class="checkbox col col-lg-3">
         <label>
-          <input type="checkbox" id="assurance-status" value="Assurance Status" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;Assurance Status
+          <input type="checkbox" name="audit_checkbox" id="provincial-strategic-outcome-checkbox" value="Provincial Strategic Outcome">&nbsp;&nbsp;&nbsp;&nbsp;Provincial Strategic Outcome
+        </label>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="checkbox col col-lg-3">
+        <label>
+          <input type="checkbox" name="audit_checkbox" id="wards-checkbox" value="Wards">&nbsp;&nbsp;&nbsp;&nbsp;Wards
+        </label>
+      </div>
+      <div class="checkbox col col-lg-3">
+        <label>
+          <input type="checkbox" id="area-checkbox" name="audit_checkbox" value="Area">&nbsp;&nbsp;&nbsp;&nbsp;Area
+        </label>
+      </div>
+      <div class="checkbox col col-lg-3">
+        <label>
+          <input type="checkbox" name="audit_checkbox" id="pevious-year-actual-checkbox" value="Previous Year Actual Performance">&nbsp;&nbsp;&nbsp;&nbsp;Previous Year Actual Performance
+        </label>
+      </div>
+      <div class="checkbox col col-lg-3">
+        <label>
+          <input type="checkbox" name="audit_checkbox" id="performance-standard-checkbox" value="Performance Standard">&nbsp;&nbsp;&nbsp;&nbsp;Performance Standard
+        </label>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="checkbox col col-lg-3">
+        <label>
+          <input type="checkbox" name="audit_checkbox" id="reporting-category-checkbox" value="Reporting Category">&nbsp;&nbsp;&nbsp;&nbsp;Reporting Category
+        </label>
+      </div>
+      <div class="checkbox col col-lg-3">
+        <label>
+          <input type="checkbox" name="audit_checkbox" id="top-layer-kpi-ref-checkbox" value="Top Layer KPI Ref">&nbsp;&nbsp;&nbsp;&nbsp;Top Layer KPI Ref
+        </label>
+      </div>
+      <div class="checkbox col col-lg-3">
+        <label>
+          <input type="checkbox" name="audit_checkbox" id="kpi-calculation-type-checkbox" value="KPI Calculation Type">&nbsp;&nbsp;&nbsp;&nbsp;KPI Calculation Type
+        </label>
+      </div>
+      <div class="checkbox col col-lg-3">
+        <label>
+          <input type="checkbox" name="audit_checkbox" id="performance-comment-checkbox" value="Performance Comment">&nbsp;&nbsp;&nbsp;&nbsp;Performance Comment
+        </label>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="checkbox col col-lg-3">
+        <label>
+          <input type="checkbox" name="audit_checkbox" id="target-actual-results-checkbox" value="Target, Actual and Results">&nbsp;&nbsp;&nbsp;&nbsp;Target, Actual and Results
+        </label>
+      </div>
+      <div class="checkbox col col-lg-3">
+        <label>
+          <input type="checkbox" name="audit_checkbox" id="corrective-measures-checkbox" value="Corrective Measures">&nbsp;&nbsp;&nbsp;&nbsp;Corrective Measures
+        </label>
+      </div>
+      <div class="checkbox col col-lg-3">
+        <label>
+          <input type="checkbox" name="audit_checkbox" id="proof-of-evidence-checkbox" value="Proof of evidence">&nbsp;&nbsp;&nbsp;&nbsp;Proof of evidence
+        </label>
+      </div>
+      <div class="checkbox col col-lg-3">
+        <label>
+          <input type="checkbox" name="audit_checkbox" id="assurance-status-checkbox" value="Assurance Status">&nbsp;&nbsp;&nbsp;&nbsp;Assurance Status
         </label>
       </div>
     </div>
@@ -245,12 +247,13 @@
       </div>
     </div>
   </fieldset><!-- personal info -->
-
+  </div>
   <fieldset id="select-filter">
     <legend>2. Select the filter you wish to apply:</legend>
     <div class="form-group col col-lg-12">
       <label>Department:</label>
       <%= select_tag :department_id,options_for_select(Department.all.collect {|p| [ p.name, p.id ] }),{:id=>"department-filter",:multiple => "true",:class=>'form-control'}%>
+      <%= hidden_field_tag(:selected_columns , id: "current-selected-columns") %>
     </div>
     <div class="form-group col col-lg-12">
       <label>Sub-Department:</label>
@@ -526,6 +529,7 @@
     </div>
   </fieldset><!-- personal info -->
 <% end %>
+
 <% if @audit_logs.blank? && Activity.blank? %>
 <% elsif !@audit_logs.blank? %>
 <div class="table-responsive">

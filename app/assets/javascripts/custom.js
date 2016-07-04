@@ -1,4 +1,13 @@
 $(document).ready(function () {
+  $(".allboxes input[type='checkbox']").change(function() {
+    var selected_columns = [];
+    $.each($('.allboxes input:checked'), function(a,b) {
+      //$("#current-selected-columns").push($(this).val());
+        selected_columns.push($(b).val());
+    });
+    //$('.text').text(selected_columns.join(' '));
+    alert(selected_columns);
+});
 
 window.setTimeout(function() {
     $(".alert").fadeTo(1500, 0).slideUp(500, function(){
@@ -68,6 +77,7 @@ $(document).ready(function(){
 
         });
   });
+
 
   $(function() {
 
