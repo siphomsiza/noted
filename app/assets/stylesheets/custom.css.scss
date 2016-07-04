@@ -18,7 +18,7 @@ Author: Rachidi Bushidi
 $deepblue: #162360;
 $powderblue: #7083AD;
 $midgrey: #ACB1B4;
-$lightgrey: lighten($midgrey, 30%);
+$lightgrey: #E4E6E7;
 
 /* Font Typeface */
 $headingFontFamily: "Josefin Sans", Arial, sans-serif;
@@ -296,10 +296,9 @@ input {
   color: $deepblue;
   background-color: white;
 }
-#about-section a:hover,
+
 #admin_users a:hover,
 #active_users a:hover,
-#about-section-1 a:hover,
 #all_users a:hover,
 #inactive_users a:hover,
 #locked_users a:hover,
@@ -313,6 +312,12 @@ input {
   color: white;
   background-color: $deepblue;
 }
+
+#about-section a:hover,
+#about-section-1 a:hover {
+  background-color: white;
+}
+
 #branding {
 	img {
 		//margin: 10px 0 5px 25px;
@@ -354,33 +359,70 @@ input {
   font-size: 0.8em;
 }
 
-#second-level-navs .nav-tabs{
-  li a{
-    //font-family: $headingFontFamily;
-    color: $deepblue;
-    background-color: white !important;
-    }
-    li a:hover{
-      //font-family: $headingFontFamily;
-      color: white !important;
-      background-color: $deepblue !important;
-    }
-    li a:active{
-      //font-family: $headingFontFamily;
-      color: white !important;
-      background-color: $powderblue !important;
-    }
+.second-level-navs .nav-tabs {
+	li a {
+		color: $deepblue !important;
+	}
+
+	li.active a {
+		background: $powderblue !important;
+	}
+
+	li a:hover {
+		background: $deepblue;
+		color: white !important;
+	}
 }
-#fourth-level-navs .nav-tabs{
-  li a{
-    color: $deepblue;
-    }
-    li a:hover{
-      color: white !important;
-    }
-    li:active a{
-      color: white !important;
-    }
+
+.second-level-navs .nav-tabs li.active {
+	a {
+		color: white !important;
+		//font-weight: bold;
+	}
+}
+
+.third-level-navs .nav-tabs {
+	li a {
+		color: $deepblue !important;
+	}
+
+	li.active a {
+		background: $midgrey !important;
+	}
+
+	li a:hover {
+		background: $deepblue;
+		color: white !important;
+	}
+}
+
+.third-level-navs .nav-tabs li.active {
+	a {
+		color: $deepblue !important;
+		font-weight: bold;
+	}
+}
+
+.fourth-level-navs .nav-tabs {
+	li a {
+		color: $deepblue !important;
+	}
+
+	li.active a {
+		background: $lightgrey !important;
+	}
+
+	li a:hover {
+		background: $deepblue;
+		color: white !important;
+	}
+}
+
+.fourth-level-navs .nav-tabs li.active {
+	a {
+		color: $deepblue !important;
+		font-weight: bold;
+	}
 }
 
 .nav-justified li a{
