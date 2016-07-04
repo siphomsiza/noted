@@ -160,15 +160,21 @@
           <th>Status</th>
         </tr>
       <% if @sdbip_time_periods.blank? %>
-      <tr><td colspan="5"><label class="label label-info">No actions overdue today or the next 7 days.</label></td></tr>
+      <tr><td colspan="5"><h3 class=" label label-info">No actions overdue today or the next 7 days.</h3></td></tr>
       <% else %>
+      <% @sdbip_time_periods.each do |time_period| %>
       <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+          <td><%= time_period.period %></td>
+          <td><%= time_period.start_date.strftime("%Y-%m-%d") %></td>
+          <td><%= time_period.end_date.days_ago(7).strftime("%Y-%m-%d") %></td>
+          <td><%= time_period.end_date.days_ago(-15).strftime("%Y-%m-%d") %></td>
+          <td><% if  time_period.end_date.strftime("%Y-%m-%d") == Date.today.strftime("%Y-%m-%d") && sdbip_time_period.end_date.strftime("%Y-%m-%d") < 15.days.from_now %>
+            <label class="label label-success">Open</label>
+            <% elsif time_period.end_date.strftime("%Y-%m-%d") > 15.days.from_now %>
+            <label class="label label-danger">Closed</label>
+            <% end %></td>
       </tr>
+      <% end %>
       <% end %>
     </table>
     </div>
