@@ -37,26 +37,23 @@ $(function() {
 		<div class="tabbable tabs" id="departmental_sdbips-tabs">
 			<ul id = "myTab" class = "nav nav-tabs">
 				<li class="active">
-					<a href = "#new_monthly_cashflow" data-toggle = "tab">
-						<span class="glyphicon glyphicon-plus-sign"></span>&nbsp;Add Monthly Cashflow
-					</a>
-				</li>
-				<li>
 					<a href = "#view_monthly_cashflows" data-toggle = "tab"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;View Monthly Cashflows</a>
 				</li>
 				<li>
 					<a href = "#manage_monthly_cashflows" data-toggle = "tab"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;Manage Monthly Cashflows</a>
+				</li>
+				<li>
+					<a href = "#new_monthly_cashflow" data-toggle = "tab">
+						<span class="glyphicon glyphicon-plus-sign"></span>&nbsp;Add Monthly Cashflow
+					</a>
 				</li>
 			</ul><!-- nav nav-tabs -->
 		</div><!-- tabbable tabs -->
 
 		<div id = "myTabContent" class = "tab-content">
 			<br/>
-			<div class = "tab-pane active fade in" id = "new_monthly_cashflow">
-							<h2>New Monthly Cashflow</h2>
-				<%= render 'form' %>
-			</div>
-			<div class = "tab-pane active fade" id = "view_monthly_cashflows">
+
+			<div class = "tab-pane active fade in" id = "view_monthly_cashflows">
 
 				<% if @monthly_cashflows.blank? && MonthlyCashflow.blank? %>
 
@@ -101,7 +98,10 @@ $(function() {
 							<% end %>
 
 		</div>
-
+		<div class = "tab-pane fade" id = "new_monthly_cashflow">
+						<h2>New Monthly Cashflow</h2>
+			<%= render 'form' %>
+		</div>
 </div>
 </div>
 </div>

@@ -38,40 +38,22 @@ $(function() {
 							<ul id = "myTab" class = "nav nav-tabs">
 
 								<li class="active">
-									<a href = "#new_sdbip" data-toggle = "tab">
-										<span class="glyphicon glyphicon-plus-sign"></span>&nbsp;Add KPI
-									</a>
-								</li>
-								<li>
 									<a href = "#view_sdbips" data-toggle = "tab"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;View KPIs</a>
 								</li>
 								<li>
 									<a href = "#manage_sdbips" data-toggle = "tab"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;Manage KPIs</a>
 								</li>
+								<li>
+									<a href = "#new_sdbip" data-toggle = "tab">
+										<span class="glyphicon glyphicon-plus-sign"></span>&nbsp;Add KPI
+									</a>
+								</li>
 							</ul><!-- nav nav-tabs -->
 						</div><!-- tabbable tabs -->
 
 						<div id = "myTabContent" class = "tab-content">
-							<div class = "tab-pane active fade in" id = "new_sdbip">
-								<% if current_user.admin? %>
-								<div class="row"><br/>
-									<div class="col col-lg-12">
-												<button class="btn pull-right" data-toggle="modal" data-target="#importModal" title="Click to upload SDBIP.">
-													<span class="glyphicon glyphicon-upload"></span>&nbsp;Import SDBIP</button>&nbsp;
-											</div>
-								</div>
-								<% end %>
-											<hr/>
-											
-											<h2>New Departmental KPI</h2>
-									<% if current_user.admin? %>
-											<%= render 'form' %>
-									<% else %>
-										<p align="center">You're not eligible to create SDBIPs.</p>
-									<% end %>
-							</div>
 
-							<div class = "tab-pane active fade" id = "view_sdbips">
+							<div class = "tab-pane active fade in" id = "view_sdbips">
 								<ul class="sdbips">
 									<% if @departmental_sdbips.blank? && DepartmentalSdbip.blank? %>
 									<p> There are no Departmental SDBIPs currently in the system </p>
@@ -109,7 +91,8 @@ $(function() {
 													<label class="col control-label">To:</label>&nbsp;<%= date_field(:end_date,nil,placeholder: 'Select End Date',:class => 'form-control input-sm') %>
 												</div>
 												<div class="col-lg-1">
-													<%= submit_tag "Apply", class: "btn btn-sm", :department_id => nil %>
+													<br/>
+													<%= submit_tag "Apply", class: "btn btn-mini", :department_id => nil %>
 												</div>
 											</div>
 										</div>
@@ -264,7 +247,7 @@ $(function() {
 
 											<%= render "sdbips" %>
 											<%= will_paginate @departmental_sdbips, :class=>"center" %>
-											
+
 											<% end %>
 									</div>
 								</ul>
@@ -272,7 +255,7 @@ $(function() {
 							</div>
 
 							<div class = "tab-pane fade" id = "manage_sdbips">
-									
+
 									<% if @departmental_sdbips.blank? && DepartmentalSdbip.blank? %>
 									<p> There are no Departmental SDBIPs currently in the system </p>
 									<% elsif @departmental_sdbips.blank? && !DepartmentalSdbip.blank? %>
@@ -292,6 +275,25 @@ $(function() {
 								</div>
 									<% end %>
 							</div>
+							<div class = "tab-pane fade" id = "new_sdbip">
+								<% if current_user.admin? %>
+								<div class="row"><br/>
+									<div class="col col-lg-12">
+												<button class="btn pull-right" data-toggle="modal" data-target="#importModal" title="Click to upload SDBIP.">
+													<span class="glyphicon glyphicon-upload"></span>&nbsp;Import SDBIP</button>&nbsp;
+											</div>
+								</div>
+								<% end %>
+											<hr/>
+
+											<h2>New Departmental KPI</h2>
+									<% if current_user.admin? %>
+											<%= render 'form' %>
+									<% else %>
+										<p align="center">You're not eligible to create SDBIPs.</p>
+									<% end %>
+							</div>
+
 			</div>
 		</div>
 
@@ -328,7 +330,7 @@ $(function() {
 							</div><!-- /.modal -->
 						</div>
 					</div>
-				
+
 <script>
 						 $(function () {
 								 var $chk = $("#grpChkBox input:checkbox");
@@ -340,4 +342,3 @@ $(function() {
 								 });
 						 });
 				 </script>
-

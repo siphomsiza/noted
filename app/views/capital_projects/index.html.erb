@@ -8,7 +8,7 @@ $(function() {
 <br/>
 <div class="row">
 <div class="col col-lg-12">
-	
+
 	<%= render 'layouts/municipality' %>
 
 <ul class="nav nav-pills  nav-justified">
@@ -38,44 +38,24 @@ $(function() {
 							<ul id = "myTab" class = "nav nav-tabs">
 
 								<li class="active">
+									<a href = "#view_capital_projects" data-toggle = "tab"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;View Capital Projects</a>
+								</li>
+								<li>
+									<a href = "#manage_capital_projects" data-toggle = "tab"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;Manage Capital Projects</a>
+								</li>
+								<li>
 
 									<a href = "#new_capital_project" data-toggle = "tab">
 
 										<span class="glyphicon glyphicon-plus-sign"></span>&nbsp;Add Capital Project
 									</a>
 								</li>
-
-								<li>
-									<a href = "#view_capital_projects" data-toggle = "tab"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;View Capital Projects</a>
-								</li>
-								<li>
-									<a href = "#manage_capital_projects" data-toggle = "tab"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;Manage Capital Projects</a>
-								</li>
 							</ul><!-- nav nav-tabs -->
 						</div><!-- tabbable tabs -->
 
 						<div id = "myTabContent" class = "tab-content">
 
-							<div class = "tab-pane active fade in" id = "new_capital_project">
-
-								<% if current_user.admin? %>
-
-								<div class="row"><br/>
-
-									<div class="col col-lg-12">
-												<button class="btn  pull-right" data-toggle="modal" data-target="#capital_projectModal" title="Click to upload Capital projects.">
-													<span class="glyphicon glyphicon-upload"></span>&nbsp;Import Capital Projects
-												</button>&nbsp;
-
-
-											</div>
-									</div>
-											<hr/>
-								<% end %>
-								<%= render 'form' %>
-							</div>
-
-							<div class = "tab-pane active fade" id = "view_capital_projects">
+							<div class = "tab-pane active fade in" id = "view_capital_projects">
 
 								<% if @capital_projects.blank? && CapitalProject.blank? %>
 
@@ -99,7 +79,7 @@ $(function() {
 
 							</div>
 
-							<div class = "tab-pane active fade" id = "manage_capital_projects">
+							<div class = "tab-pane fade" id = "manage_capital_projects">
 
 								<% if @capital_projects.blank? && CapitalProject.blank? %>
 
@@ -122,6 +102,24 @@ $(function() {
 								<% end %>
 
 							</div>
+							<div class = "tab-pane fade" id = "new_capital_project">
+
+								<% if current_user.admin? %>
+
+								<div class="row"><br/>
+
+									<div class="col col-lg-12">
+												<button class="btn  pull-right" data-toggle="modal" data-target="#capital_projectModal" title="Click to upload Capital projects.">
+													<span class="glyphicon glyphicon-upload"></span>&nbsp;Import Capital Projects
+												</button>&nbsp;
+
+
+											</div>
+									</div>
+											<hr/>
+								<% end %>
+								<%= render 'form' %>
+							</div>
 			</div>
 
 
@@ -129,7 +127,7 @@ $(function() {
 
 	</div>
 </div>
-				
+
 
 
 <div class="col col-lg-12">

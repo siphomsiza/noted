@@ -29,32 +29,18 @@ $(function() {
 
             <div class="tabbable tabs" id="sdbip_time_periods-tabs">
               <ul id = "myTab" class = "nav nav-tabs">
-								<li class="active">
-                  <a href = "#add_sdbip_time_periods" data-toggle = "tab">Create</a>
-                </li>
-                <li>
+
+                <li class="active">
                   <a href = "#sdbip_time_periods" data-toggle = "tab">Manage</a>
+                </li>
+								<li>
+                  <a href = "#add_sdbip_time_periods" data-toggle = "tab">Create</a>
                 </li>
               </ul><!-- nav nav-tabs -->
             </div><!-- tabbable tabs -->
     <div id = "myTabContent" class = "tab-content">
-			<div class = "tab-pane active fade in" id = "add_sdbip_time_periods">
-      <% if current_user.admin? %>
-                <div class="row"><br/>
-                  <div class="col col-lg-12">
-                        <button class="btn pull-right" data-toggle="modal" data-target="#importTimePeriodsModal" title="Click to upload Time Periods.">
-                          <span class="glyphicon glyphicon-upload"></span>&nbsp;Import Time Periods</button>&nbsp;
-                      </div>
-                </div>
-                  <hr/>
-      <% end %>
-		        <ul class="sdbip_time_periods">
-							<br/>
-							<h3>New Time Period</h3><hr/>
-		          <%= render 'form' %>
-		        </ul>
-		</div>
-     <div class = "tab-pane fade" id = "sdbip_time_periods">
+
+     <div class = "tab-pane active fade in" id = "sdbip_time_periods">
            <div class="col col-lg-12">
       <table class="table table-hover">
         <thead>
@@ -89,6 +75,22 @@ $(function() {
       </table>
     </div>
       </div>
+			<div class = "tab-pane fade" id = "add_sdbip_time_periods">
+      <% if current_user.admin? %>
+                <div class="row"><br/>
+                  <div class="col col-lg-12">
+                        <button class="btn pull-right" data-toggle="modal" data-target="#importTimePeriodsModal" title="Click to upload Time Periods.">
+                          <span class="glyphicon glyphicon-upload"></span>&nbsp;Import Time Periods</button>&nbsp;
+                      </div>
+                </div>
+                  <hr/>
+      <% end %>
+		        <ul class="sdbip_time_periods">
+							<br/>
+							<h3>New Time Period</h3><hr/>
+		          <%= render 'form' %>
+		        </ul>
+		</div>
 </div>
 </div>
 

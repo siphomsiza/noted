@@ -29,23 +29,17 @@ $(function() {
 <div class="row">
 <div class="tabbable tabs" id="setup-tabs">
 <ul id = "myTab" class = "nav nav-tabs">
-<li class="active fade in"><a href = "#new_setup" data-toggle = "tab">Create</a>
+
+<li class="active"><a href = "#view_setup" data-toggle = "tab">Manage</a>
 </li>
-<li><a href = "#view_setup" data-toggle = "tab">Manage</a>
+<li><a href = "#new_setup" data-toggle = "tab">Create</a>
 </li>
 </ul><!-- nav nav-tabs -->
 </div><!-- tabbable tabs -->
 
 <div id = "myTabContent" class = "tab-content">
-  <div class="tab-pane active fade in" id="new_setup">
-    <% if @setups.blank? %>
-    <br/><h3>New System Setup</h3><hr/>
-    <%= render "form" %>
-    <% else %>
-    <p>System Setup already configured.</p>
-    <% end %>
-  </div>
-<div class = "tab-pane fade" id = "view_setup">
+
+<div class = "tab-pane active fade in" id = "view_setup">
 <div class="col col-lg-12">
    <table class="table table-hover">
 
@@ -160,6 +154,14 @@ $(function() {
       </table>
 
       </div>
+      </div>
+      <div class="tab-pane fade" id="new_setup">
+        <% if @setups.blank? %>
+        <br/><h3>New System Setup</h3><hr/>
+        <%= render "form" %>
+        <% else %>
+        <p>System Setup already configured.</p>
+        <% end %>
       </div>
 </div>
 </div>

@@ -28,23 +28,17 @@ $(function() {
 
             <div class="tabbable tabs" id="roles-tabs">
               <ul id = "myTab" class = "nav nav-tabs">
-
-                <li class="active">
-                  <a href = "#add_roles" data-toggle = "tab">Create</a>
-                </li>
-								<li>
+								<li class="active">
 									<a href = "#roles" data-toggle = "tab">Manage</a>
 								</li>
+								<li>
+                  <a href = "#add_roles" data-toggle = "tab">Create</a>
+                </li>
               </ul><!-- nav nav-tabs -->
             </div><!-- tabbable tabs -->
     <div id = "myTabContent" class = "tab-content">
-			<div class = "tab-pane active fade in" id = "add_roles"><br/>
-		        <ul class="roles">
-							<h3>New User Role</h3><hr/>
-		          <%= render 'form' %>
-		        </ul>
-		</div>
-     <div class = "tab-pane fade" id = "roles">
+
+     <div class = "tab-pane active fade in" id = "roles">
            <div class="col col-lg-12">
       <table class="table table-hover">
         <thead>
@@ -125,6 +119,11 @@ $(function() {
     </table>
     </div>
   </div>
+	<div class = "tab-pane fade" id = "add_roles"><br/>
+				<ul class="roles">
+					<h3>New User Role</h3><hr/>
+					<%= render 'form' %>
+				</ul>
 </div>
 </div>
-
+</div>
