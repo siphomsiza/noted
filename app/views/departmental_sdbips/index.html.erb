@@ -85,10 +85,24 @@ $(function() {
 													<label class="col control-label">What:</label>&nbsp;<%= select_tag :kpi_type_id,options_for_select([["All KPIs","0"]]+@kpitypes.all.collect {|x| [ x.name, x.id ] },id:'kpi_select'),prompt:'Select KPI Type',class: "form-control" %>
 												</div>
 												<div class="col-lg-2">
-												<label class="col control-label">When:</label>&nbsp;<%= date_field(:start_date, nil,placeholder: 'Select Start Date',:class => 'form-control input-sm') %>
+												<label class="col control-label">When:</label>&nbsp;
+												<div class="input-group date">
+													<%= text_field :start_date, "data-provide" => 'datepicker', "data-date-format" => 'MM-yyyy',
+													                              "data-date-start-view" => 'months', "data-date-min-view-format" => 'months', :class => 'form-control' %>
+						              <div class="input-group-addon">
+						                <span class="glyphicon glyphicon-calendar"></span>
+						              </div>
+						            </div>
 												</div>
 												<div class="col-lg-2">
-													<label class="col control-label">To:</label>&nbsp;<%= date_field(:end_date,nil,placeholder: 'Select End Date',:class => 'form-control input-sm') %>
+													<label class="col control-label">To:</label>&nbsp;
+													<div class="input-group date">
+														<%= text_field :start_date, "data-provide" => 'datepicker', "data-date-format" => 'MM-yyyy',
+														                              "data-date-start-view" => 'months', "data-date-min-view" => 'months', :class => 'form-control' %>
+							              <div class="input-group-addon">
+							                <span class="glyphicon glyphicon-calendar"></span>
+							              </div>
+							            </div>
 												</div>
 												<div class="col-lg-1">
 													<label class="col control-label">&nbsp;</label>&nbsp;

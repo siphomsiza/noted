@@ -279,19 +279,6 @@ $(function() {
    });
 	  //$("#reports-modal").modal('show');
   }
-	$(function () {
-	  $('#datepicker6').datepicker({dateFormat: 'mm-yy'});
-	  $('#datepicker7').datepicker({
-	    useCurrent: false,
-	    dateFormat: 'mm-yy'
-	  });
-	  $("#datepicker6").on("dp.change", function (e) {
-	    $('#datepicker7').data("DatePicker").minDate(e.date);
-	  });
-	  $("#datepicker7").on("dp.change", function (e) {
-	    $('#datepicker6').data("DatePicker").maxDate(e.date);
-	  });
-	});
 
 	/* Done evaluating all radio buttons */
 function show_modal(){

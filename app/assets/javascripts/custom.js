@@ -1,15 +1,12 @@
 $(document).ready(function () {
-
-window.setTimeout(function() {
+  window.setTimeout(function() {
     $(".alert").fadeTo(1500, 0).slideUp(500, function(){
         $(this).remove();
     });
-}, 5000);
-
+  }, 5000);
 });
 
 $(document).ready(function(){
-
   $('input[type="checkbox"]').click(function(){
         if($('#disablity_checkbox').prop("checked") == true){
                   $('#disability_description_fields').show();
@@ -75,20 +72,6 @@ $(document).ready(function(){
   	var hash = window.location.hash;
   	hash && $('ul.nav a[href="' + hash + '"]').tab('show');
 
-  	//controlling opening of accordions
-  	//$('#monday.accordion-body').addClass('in');
-
-  	//$('#artists #tuesday.accordion-body').addClass('in');
-  	//$('#artists #wednesday.accordion-body').addClass('in');
-  	//$('#artists #thursday.accordion-body').addClass('in');
-  	//$('#artists #friday.accordion-body').addClass('in');
-
-  	//add bootstrap classes to photos
-  	//$('.abouttheartists img').addClass('img-circle');
-  	//$('aside.photosfromlastyear img').addClass('img-thumbnail');
-  	//$('.artistinfo .photogrid img').addClass('img-circle');
-
-
   	//highlight the current nav
   	$("#introduction a:contains('INTRODUCTION')").parent().addClass('active');
   	$("#dashboard a:contains('DASHBOARD')").parent().addClass('active');
@@ -130,3 +113,12 @@ $(document).ready(function(){
   		show: true,
     })
   }); //
+
+$(document).ready(function(){
+	$("#datepicker1").on("dp.change", function (e) {
+	  $('#datepicker2').data("DatePicker").minDate(e.date);
+	});
+	$("#datepicker2").on("dp.change", function (e) {
+	  $('#datepicker1').data("DatePicker").maxDate(e.date);
+	});
+});

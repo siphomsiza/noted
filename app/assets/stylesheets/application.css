@@ -13,4 +13,5 @@
  *= require prettify
  *= require_tree .
  *= require_self
+ *= require bootstrap-datepicker3
  */
