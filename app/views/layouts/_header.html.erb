@@ -65,9 +65,7 @@
               <%= link_to edit_user_profile_path(current_user),remote: true,'data-target' => "#user-details-modal", 'data-toggle' => 'modal',:title=>"Click to Edit user details" do %>
                 <span class="glyphicon glyphicon-cog"></span>Settings
               <% end %>
-		            <div id="user-details-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="editmodalLabel" aria-hidden="true">
 
-		            </div>
             </li>
             <li class="divider"></li>
             <li>
@@ -79,5 +77,7 @@
         </li>
 		</ul><!-- nav -->
 	</section><!-- navbar -->
+	<div id="user-details-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="editmodalLabel" aria-hidden="true">
 
+	</div>
 </header><!-- header -->
