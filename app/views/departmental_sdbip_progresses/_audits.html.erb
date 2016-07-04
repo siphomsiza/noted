@@ -545,17 +545,17 @@
       </tr>
     </thead>
     <tbody>
-    <% @audit_logs.each do |activity| %>
+    <% @audit_logs.each do |activity_log| %>
       <tr>
-        <td><%= activity.id %></td>
-        <td><%= activity.departmental_sdbip.kpi %></td>
-        <td><%= activity.departmental_sdbip.department.name %></td>
-        <td><%= activity.departmental_sdbip.subdepartment.subdepartment_name %></td>
-        <td><%= activity.departmental_sdbip.kpi_ref_number %></td>
-        <td><%= activity.departmental_sdbip.performance_comments %></td>
-        <td><%= activity.departmental_sdbip.corrective_measures %></td>
-        <td><%= activity.departmental_sdbip.source_of_evidence %></td>
-        <td><span class="glyphicon glyphicon-ok-circle"></span>&nbsp;<%= "updated By #{activity.user.firstname} #{activity.user.surname} on #{activity.created_at.strftime('%Y %b %d %H:%M:%S')}" %></td>
+        <td><%= activity_log.id %></td>
+        <td><%= activity_log.kpi %></td>
+        <td><%= activity_log.department.name %></td>
+        <td><%= activity_log.subdepartment.subdepartment_name %></td>
+        <td><%= activity_log.kpi_ref_number %></td>
+        <td><%= activity_log.performance_comments %></td>
+        <td><%= activity_log.corrective_measures %></td>
+        <td><%= activity_log.source_of_evidence %></td>
+        <td></td>
         <td></td>
 
       </tr>

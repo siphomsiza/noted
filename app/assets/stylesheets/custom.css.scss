@@ -356,20 +356,20 @@ input {
 
 #second-level-navs .nav-tabs{
   li a{
-    //font-family: $headingFontFamily;
     color: $deepblue;
     background-color: white !important;
     }
     li a:hover{
-      //font-family: $headingFontFamily;
+      font-family: $headingFontFamily;
       color: white !important;
       background-color: $deepblue !important;
     }
-    li a:active{
-      //font-family: $headingFontFamily;
+    li:active a{
+      font-family: $headingFontFamily;
       color: white !important;
       background-color: $powderblue !important;
     }
+
 }
 #fourth-level-navs .nav-tabs{
   li a{
