@@ -22,6 +22,7 @@ class PagesController < ApplicationController
 
   end
   def dashboard
+    sdbip_time_periods = SdbipTimePeriod.all
     @users = User.all
     @departmental_sdbips = DepartmentalSdbip.all
     @client = YahooWeather::Client.new

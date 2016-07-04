@@ -42,7 +42,7 @@ class DepartmentsController < ApplicationController
         flash[:danger] = 'Department was not updated.'
         redirect_to :back
       end
-    end
+  
   end
 
   # DELETE /municipalities/1

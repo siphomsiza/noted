@@ -20,7 +20,7 @@ $(function() {
       <li><a href="#revenue_by_source_report" data-toggle="tab">Revenue By Source</a></li>
 		 <li><a href="#charts_per_department" data-toggle="tab">YTD Dashboard</a></li>
 		 <% if current_user.admin? %>
-		  <li><a href="#audit_logs" data-toggle="tab">Assurance</a></li>
+		  <li><a href="#audit_logs" data-toggle="tab">Audit Logs</a></li>
 			<% end %>
 </ul><!-- nav nav-tabs -->
 	</div><!-- tabbable tabs -->
@@ -279,6 +279,20 @@ $(function() {
    });
 	  //$("#reports-modal").modal('show');
   }
+	$(function () {
+	  $('#datepicker6').datepicker({dateFormat: 'mm-yy'});
+	  $('#datepicker7').datepicker({
+	    useCurrent: false,
+	    dateFormat: 'mm-yy'
+	  });
+	  $("#datepicker6").on("dp.change", function (e) {
+	    $('#datepicker7').data("DatePicker").minDate(e.date);
+	  });
+	  $("#datepicker7").on("dp.change", function (e) {
+	    $('#datepicker6').data("DatePicker").maxDate(e.date);
+	  });
+	});
+
 	/* Done evaluating all radio buttons */
 function show_modal(){
 	$(function(){

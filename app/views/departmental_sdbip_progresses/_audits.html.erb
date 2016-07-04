@@ -25,7 +25,7 @@
         <td><%= activity.departmental_sdbip.performance_comments %></td>
         <td><%= activity.departmental_sdbip.corrective_measures %></td>
         <td><%= activity.departmental_sdbip.source_of_evidence %></td>
-        <td></td>
+        <td><span class="glyphicon glyphicon-ok-circle"></span>&nbsp;<%= "updated By #{activity.user.firstname} #{activity.user.surname} on #{activity.created_at.strftime('%Y %b %d %H:%M:%S')}" %></td>
         <td></td>
 
       </tr>

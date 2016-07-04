@@ -4,14 +4,15 @@
 			<article>
 				<div class="tabbable tabs" id="fourth-level-navs">
 					<ul class="nav nav-tabs">
-						<li class="active"><a href="#add_job_title" data-toggle="tab">Create</a></li>
-						<li><a href="#manage_job_titles" data-toggle="tab">Manage</a></li>
+						<li class="active"><a href="#manage_job_titles" data-toggle="tab">Manage</a></li>
+            <li><a href="#add_job_title" data-toggle="tab">Create</a></li>
 					</ul><!-- nav nav-tabs -->
 				</div><!-- tabbable tabs -->
 
 				<section class="tab-content">
+          <%= render 'manage_titles' %>
 			    <%= render 'add_titles' %>
-			    <%= render 'manage_titles' %>
+
 				</section><!-- tab-content -->
 
 			</article><!-- users -->

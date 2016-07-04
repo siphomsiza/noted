@@ -27,37 +27,23 @@ $(function() {
 <div class="col col-lg-12">
 				<div class="tabbable tabs" id="top-layer-sdbips-tabs">
 					<ul id = "myTab" class = "nav nav-tabs">
+
 						<li class="active">
-							<a href = "#new-top-layer-sdbip" data-toggle = "tab">
-								<span class="glyphicon glyphicon-plus-sign"></span>&nbsp; Add Top Layer
-							</a>
-						</li>
-						<li>
 							<a href = "#view_top_layer_sdbips" data-toggle = "tab"><span class="glyphicon glyphicon-list-alt"></span>&nbsp; View Top Layer</a>
 						</li>
 						<li>
 							<a href = "#manage_top_layer_sdbips" data-toggle = "tab"><span class="glyphicon glyphicon-list-alt"></span>&nbsp; Manage Top Layer</a>
 						</li>
+						<li>
+							<a href = "#new-top-layer-sdbip" data-toggle = "tab">
+								<span class="glyphicon glyphicon-plus-sign"></span>&nbsp; Add Top Layer
+							</a>
+						</li>
 					</ul><!-- nav nav-tabs -->
 				</div><!-- tabbable tabs -->
 
 				<div id = "myTabContent" class = "tab-content">
-					<div class = "tab-pane active fade in" id = "new-top-layer-sdbip">
-							<div class="row">
-								<div class="col-lg-12">
-											<% if current_user.admin? %><br/>
-												<button class="btn  pull-right" data-toggle="modal" data-target="#top_layerModal" title="Click to upload Top Layer SDBIPs.">
-													<span class="glyphicon glyphicon-upload"></span>&nbsp;Import Top Layer SDBIP
-												</button>
-											<% end %>
-								</div>
-							</div>
-										<hr/>
-										<h2>New Top Layer SDBIP</h2>
-							<%= render 'form' %>
-					</div>
-
-					<div class = "tab-pane active fade" id = "view_top_layer_sdbips">
+					<div class = "tab-pane active fade in" id = "view_top_layer_sdbips">
 						<% if @top_layer_sdbips.blank? && TopLayerSdbip.blank? %>
 						<p> There are no Top Layer SDBIPs currently in the system. <p>
 						<% elsif @top_layer_sdbips.blank? && !TopLayerSdbip.blank? %>
@@ -82,6 +68,20 @@ $(function() {
 										<%= will_paginate @top_layer_sdbips, :class=>"center" %>
 									</div>
 									<% end %>
+					</div>
+					<div class = "tab-pane fade" id = "new-top-layer-sdbip">
+							<div class="row">
+								<div class="col-lg-12">
+											<% if current_user.admin? %><br/>
+												<button class="btn  pull-right" data-toggle="modal" data-target="#top_layerModal" title="Click to upload Top Layer SDBIPs.">
+													<span class="glyphicon glyphicon-upload"></span>&nbsp;Import Top Layer SDBIP
+												</button>
+											<% end %>
+								</div>
+							</div>
+										<hr/>
+										<h2>New Top Layer SDBIP</h2>
+							<%= render 'form' %>
 					</div>
 				</div>
 		</div>
