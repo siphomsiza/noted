@@ -1,3 +1,533 @@
+<%= form_tag departmental_sdbip_progresses_path, method: :get do %>
+  <fieldset id="select-info">
+
+    <legend><br/>1. Select the information to be displayed in the report:</legend>
+    <div class="form-group row">
+      <div class="checkbox col col-lg-3">
+        <label>
+          <input type="checkbox" id="Department" value="Department" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;Department
+        </label>
+      </div>
+      <div class="checkbox col col-lg-3">
+        <label>
+          <input type="checkbox" style="margin-left: 0;" id="Sub-Department" value="Sub-Department" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;Sub-Department
+        </label>
+      </div>
+      <div class="checkbox col col-lg-3">
+        <label>
+          <input type="checkbox" id="KPI-Ref-Number" value="KPI Ref Number" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;KPI Ref Number
+        </label>
+      </div>
+      <div class="checkbox col col-lg-3">
+        <label>
+          <input type="checkbox" id="Pre-determined-Objectives" value="Pre-determined Objectives" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;Pre-determined Objectives
+        </label>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="checkbox col col-lg-3">
+        <label>
+          <input type="checkbox" value="KPI Owner" id="KPI-Owner" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;KPI Owner
+        </label>
+      </div>
+      <div class="checkbox col col-lg-3">
+        <label>
+          <input type="checkbox" value="KPI" id="KPI" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;KPI
+        </label>
+      </div>
+      <div class="checkbox col col-lg-3">
+        <label>
+          <input type="checkbox" value="Unit of Measurement" id="unit-of-measurement" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;Unit of Measurement
+        </label>
+      </div>
+      <div class="checkbox col col-lg-3">
+        <label>
+          <input type="checkbox" value="GFS Classification" id="gfs-classification" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;GFS Classification
+        </label>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="checkbox col col-lg-3">
+        <label>
+          <input type="checkbox" value="IDP Ref" id="IDP-ref" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;IDP Ref
+        </label>
+      </div>
+      <div class="checkbox col col-lg-3">
+        <label>
+          <input type="checkbox" value="National Outcome" id="national-outcome" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;National Outcome
+        </label>
+      </div>
+      <div class="checkbox col col-lg-3">
+        <label>
+          <input type="checkbox" value="Strategic Objective" id="strategic-objective" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;Strategic Objective
+        </label>
+      </div>
+      <div class="checkbox col col-lg-3">
+        <label>
+          <input type="checkbox" value="Source of Evidence" id="source-of-evidence" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;Source of Evidence
+        </label>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="checkbox col col-lg-3">
+        <label>
+          <input type="checkbox" value="Baseline" id="budget" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;Baseline
+        </label>
+      </div>
+      <div class="checkbox col col-lg-3">
+        <label>
+          <input type="checkbox" value="Target" id="target" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;Target
+        </label>
+      </div>
+      <div class="checkbox col col-lg-3">
+        <label>
+          <input type="checkbox" value="Annual Target" id="annual-target" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;Annual Target
+        </label>
+      </div>
+      <div class="checkbox col col-lg-3">
+        <label>
+          <input type="checkbox" value="Revised Target" id="revised-target" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;Revised Target
+        </label>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="checkbox col col-lg-3">
+        <label>
+          <input type="checkbox" value="National KPA" id="national-kpa" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;National KPA
+        </label>
+      </div>
+      <div class="checkbox col col-lg-3">
+        <label>
+          <input type="checkbox" value="Municipal KPA" id="municipal-kpa" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;Municipal KPA
+        </label>
+      </div>
+      <div class="checkbox col col-lg-3">
+        <label>
+          <input type="checkbox" value="NDP Objectives" id="ndp-objectives" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;NDP Objectives
+        </label>
+      </div>
+      <div class="checkbox col col-lg-3">
+        <label>
+          <input type="checkbox" value="Capital Project" id="capital-project" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;Capital Project
+        </label>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="checkbox col col-lg-3">
+        <label>
+          <input type="checkbox" value="KPI Concept" id="kpi-concept" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;KPI Concept
+        </label>
+      </div>
+      <div class="checkbox col col-lg-3">
+        <label>
+          <input type="checkbox" value="KPI Type" id="kpi-type" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;KPI Type
+        </label>
+      </div>
+      <div class="checkbox col col-lg-3">
+        <label>
+          <input type="checkbox" value="Impact" id="impact" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;Impact
+        </label>
+      </div>
+      <div class="checkbox col col-lg-3">
+        <label>
+          <input type="checkbox" id="provincial-strategic-outcome" value="Provincial Strategic Outcome" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;Provincial Strategic Outcome
+        </label>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="checkbox col col-lg-3">
+        <label>
+          <input type="checkbox" id="wards" value="Wards" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;Wards
+        </label>
+      </div>
+      <div class="checkbox col col-lg-3">
+        <label>
+          <input type="checkbox" id="area" value="Area" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;Area
+        </label>
+      </div>
+      <div class="checkbox col col-lg-3">
+        <label>
+          <input type="checkbox" id="pevious-year-actual" value="Previous Year Actual Performance" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;Previous Year Actual Performance
+        </label>
+      </div>
+      <div class="checkbox col col-lg-3">
+        <label>
+          <input type="checkbox" id="performance-standard" value="Performance Standard" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;Performance Standard
+        </label>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="checkbox col col-lg-3">
+        <label>
+          <input type="checkbox" id="reporting-category" value="Reporting Category" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;Reporting Category
+        </label>
+      </div>
+      <div class="checkbox col col-lg-3">
+        <label>
+          <input type="checkbox" id="top-layer-kpi-ref" value="Top Layer KPI Ref" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;Top Layer KPI Ref
+        </label>
+      </div>
+      <div class="checkbox col col-lg-3">
+        <label>
+          <input type="checkbox" id="kpi-calculation-type" value="KPI Calculation Type" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;KPI Calculation Type
+        </label>
+      </div>
+      <div class="checkbox col col-lg-3">
+        <label>
+          <input type="checkbox" id="performance-comment" value="Performance Comment" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;Performance Comment
+        </label>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="checkbox col col-lg-3">
+        <label>
+          <input type="checkbox" id="target-actual-results" value="Target, Actual and Results" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;Target, Actual and Results
+        </label>
+      </div>
+      <div class="checkbox col col-lg-3">
+        <label>
+          <input type="checkbox" id="corrective-measures" value="Corrective Measures" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;Corrective Measures
+        </label>
+      </div>
+      <div class="checkbox col col-lg-3">
+        <label>
+          <input type="checkbox" id="proof-of-evidence" value="Proof of evidence" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;Proof of evidence
+        </label>
+      </div>
+      <div class="checkbox col col-lg-3">
+        <label>
+          <input type="checkbox" id="assurance-status" value="Assurance Status" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;Assurance Status
+        </label>
+      </div>
+    </div>
+    <div class="form-group row col col-lg-12">
+      <div class='col-lg-3'>
+        <div>
+          <label>Results From:</label>
+          <div class='input-group date' id='datepicker6'>
+
+              <input type='text' class="form-control" />
+              <span class="input-group-addon">
+                  <span class="glyphicon glyphicon-calendar"></span>
+              </span>
+          </div>
+        </div>
+      </div>
+      <div class='col-lg-3'>
+        <div>
+          <label>To:</label>
+          <div class='input-group date' id='datepicker7'>
+
+            <input type='text' class="form-control" />
+            <span class="input-group-addon">
+              <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="col col-lg-6">
+        <label>For each time period display:</label>
+        <div class="radio">
+          <label>
+            <input type="radio" value="values as captured" name="display_method" id="display-method-captured" checked>Values as captured
+          </label>
+        </div>
+        <div class="radio">
+          <label>
+            <input type="radio" value="year-to-date values" name="display_method" id="display-method-year">Year-To-Date Values
+          </label>
+        </div>
+        <div class="radio">
+          <label>
+            <input type="radio" value="period-to-date values" name="display_method" id="display-method-period">Period-To-Date Values
+          </label>
+        </div>
+      </div>
+    </div>
+  </fieldset><!-- personal info -->
+
+  <fieldset id="select-filter">
+    <legend>2. Select the filter you wish to apply:</legend>
+    <div class="form-group col col-lg-12">
+      <label>Department:</label>
+      <%= select_tag :department_id,options_for_select(Department.all.collect {|p| [ p.name, p.id ] }),{:id=>"department-filter",:multiple => "true",:class=>'form-control'}%>
+    </div>
+    <div class="form-group col col-lg-12">
+      <label>Sub-Department:</label>
+      <%= select_tag :subdepartment_id, options_for_select(Subdepartment.all.collect {|p| [ p.subdepartment_name, p.id ] }),{:id=>"sub-department-filter",:multiple => "true",:class=>'form-control'} %>
+    </div>
+    <div class="form-group col col-lg-12">
+      <div class="input-group col col-lg-12">
+        <div class="col col-lg-6">
+          <label class="control-label">KPI Ref Number:</label>
+          <%= select_tag :kpi_ref_number,options_for_select(DepartmentalSdbip.all.collect {|p| [ p.kpi_ref_number, p.id ] }),{:id=>"kpi-ref-number-filter",:multiple => "true",:class=>'form-control'} %>
+        </div>
+        <div class="col col-lg-6"><br/><br/>
+          <select class="form-control">
+            <option>Match any words</option>
+            <option>Match exact words</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="form-group col col-lg-12">
+      <label>Pre-determined Objectives:</label>
+      <%= select_tag :predetermined_objective_id,options_for_select(PredeterminedObjective.all.collect {|p| [ p.name, p.id ] }),{:id=>"pre-determined-filter",:multiple => "true",:class=>'form-control'} %>
+    </div>
+    <div class="form-group col col-lg-12">
+      <label>KPI Owner:</label><br/>
+      <%= select_tag :kpi_owner_id,options_for_select(KpiOwner.all.collect {|p| [ p.name, p.id ] }),{:id=>"kpi-owner-filter",:multiple => "true",:class=>'form-control'} %>
+    </div>
+    <div class="form-group col col-lg-12">
+      <div class="input-group col col-lg-12">
+        <div class="col col-lg-6">
+          <label class="control-label">KPI:</label>
+         <%= select_tag :kpi,options_for_select(DepartmentalSdbip.all.collect {|p| [ p.kpi, p.id ] }),{:id=>"kpi-filter",:multiple => "true",:class=>'form-control'} %>
+        </div>
+        <div class="col col-lg-6">
+          <select class="form-control">
+            <option>Match any words</option>
+            <option>Match exact words</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="form-group col col-lg-12">
+
+      <div class="input-group col col-lg-12">
+        <div class="col col-lg-6">
+          <label class="control-label">Unit of Measurement:</label><br/>
+          <%= select_tag :unit_of_measurement, options_for_select(DepartmentalSdbip.all.collect {|p| [ p.unit_of_measurement, p.id ] }),{:id=>"unit-of-measurement-filter",:multiple => "true",:class=>'form-control'} %>
+        </div>
+        <div class="col col-lg-6">
+          <br/>
+          <select class="form-control">
+            <option>Match any words</option>
+            <option>Match exact words</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="form-group col col-lg-12">
+      <label>GFS Classification:</label>
+      <%= select_tag :mscore_classification_id, options_for_select(MscoreClassification.all.collect {|p| [ p.name, p.id ] }),{:id=>"gfs-classification-filter",:multiple => "true",:class=>'form-control'} %>
+    </div>
+    <div class="form-group col col-lg-12">
+      <label>Strategic Objective:</label>
+      <%= select_tag :strategic_objective_id,options_for_select(StrategicObjective.all.collect {|p| [ p.name, p.id ] }),{:id=>"strategic-objective-filter",:multiple => "true",:class=>'form-control'} %>
+    </div>
+    <div class="form-group col col-lg-12">
+      <label class="control-label">Source of Evidence:</label>
+      <div class="input-group col col-lg-12">
+        <div class="col col-lg-6">
+          <%= select_tag :source_of_evidence,options_for_select(DepartmentalSdbip.all.collect {|p| [ p.source_of_evidence, p.id ] }),{:multiple => "true",:class=>'form-control'} %>
+        </div>
+        <div class="col col-lg-6">
+          <select class="form-control">
+            <option>Match any words</option>
+            <option>Match exact words</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="form-group col col-lg-12">
+      <label class="control-label">Baseline:</label>
+      <div class="input-group col col-lg-12">
+        <div class="col col-lg-6">
+          <%= select_tag :baseline,options_for_select(DepartmentalSdbip.all.collect {|p| [ p.baseline, p.id ] }),{:multiple => "true",:class=>'form-control'} %>
+        </div>
+        <div class="col col-lg-6">
+          <select class="form-control">
+            <option>Match any words</option>
+            <option>Match exact words</option>
+          </select>
+        </div>
+
+      </div>
+    </div>
+    <div class="form-group col col-lg-12">
+      <label class="control-label">Target:</label>
+      <div class="input-group col col-lg-12">
+        <div class="col col-lg-6">
+          <%= select_tag :annual_target,options_for_select(DepartmentalSdbip.all.collect {|p| [ p.annual_target, p.id ] }),{:multiple => "true",:class=>'form-control'} %>
+        </div>
+        <div class="col col-lg-6">
+          <select class="form-control">
+            <option>Match any words</option>
+            <option>Match exact words</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="form-group col col-lg-12">
+      <label class="control-label">Annual Target:</label>
+      <div class="input-group col col-lg-12">
+        <div class="col col-lg-6">
+          <%= select_tag :annual_target,options_for_select(DepartmentalSdbip.all.collect {|p| [ p.annual_target, p.id ] }),{:multiple => "true",:class=>'form-control'} %>
+        </div>
+        <div class="col col-lg-6">
+          <select class="form-control">
+            <option>Match any words</option>
+            <option>Match exact words</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="form-group col col-lg-12">
+      <label class="control-label">Revised Target:</label>
+      <div class="input-group col col-lg-12">
+        <div class="col col-lg-6">
+          <%= select_tag :revised_target,options_for_select(DepartmentalSdbip.all.collect {|p| [ p.revised_target, p.id ] }),{:multiple => "true",:class=>'form-control'} %>
+        </div>
+        <div class="col col-lg-6">
+          <select class="form-control">
+            <option>Match any words</option>
+            <option>Match exact words</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="form-group col col-lg-12">
+      <label>National KPA:</label>
+      <%= select_tag :national_kpa_id,options_for_select(Kpa.all.collect {|p| [ p.name, p.id ] }),{:id=>"national-kpa-filter",:multiple => "true",:class=>'form-control'} %>
+    </div>
+    <div class="form-group col col-lg-12">
+      <label>Municipal KPA:</label>
+      <%= select_tag :national_kpa_id,options_for_select(Kpa.all.collect {|p| [ p.name, p.id ] }),{:id=>'municipal-kpa-filter',:multiple => "true",:class=>'form-control'} %>
+    </div>
+    <div class="form-group col col-lg-12">
+      <label>NDP Objectives:</label>
+      <%= select_tag :ndp_objective_id,options_for_select(NdpObjective.all.collect {|p| [ p.name, p.id ] }),{:id=>'ndp-objectives-filter',:multiple => "true",:class=>'form-control'} %>
+    </div>
+    <div class="form-group col col-lg-12">
+      <label>Capital Project:</label>
+      <div class="radio">
+        <label>
+          <input type="radio" value="all kpis" name="cp_selection" id="cp-selection-all" checked>All KPIs
+        </label>
+      </div>
+      <div class="radio">
+        <label>
+          <input type="radio" value="operational kpis only" name="cp_selection" id="cp-selection-operational">Operational KPIs only
+        </label>
+      </div>
+      <div class="radio">
+        <label>
+          <input type="radio" value="kpis associated with capital projects only" name="cp_selection" id="cp-selection-only">KPIs associated with Capital Projects only
+        </label>
+      </div>
+    </div>
+    <div class="form-group col col-lg-12">
+      <label>KPI Concept:</label>
+      <%= select_tag :kpi_concept_id,options_for_select(KpiConcept.all.collect {|p| [ p.name, p.id ] }),{:id=>'kpi-concept-filter',:multiple => "true",:class=>'form-control'} %>
+    </div>
+    <div class="form-group col col-lg-12">
+      <label>KPI Type:</label>
+      <%= select_tag :kpi_type_id, options_for_select(KpiType.all.collect {|p| [ p.name, p.id ] }),{:id=>'kpi-type-filter',:multiple => "true",:class=>'form-control'} %>
+    </div>
+    <div class="form-group col col-lg-12">
+      <label class="control-label">Impact:</label>
+      <div class="input-group col col-lg-12">
+        <div class="col col-lg-6">
+          <%= select_tag :impact, options_for_select(DepartmentalSdbip.all.collect {|p| [ p.impact, p.id ] }),{:multiple => "true",:class=>'form-control'} %>
+        </div>
+
+        <div class="col col-lg-6">
+          <select class="form-control">
+            <option>Match any words</option>
+            <option>Match exact words</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="form-group col col-lg-12">
+      <label>Provincial Strategic Outcome:</label>
+      <%= select_tag :provincial_strategic_outcome_id, options_for_select(ProvincialStrategicOutcome.all.collect {|p| [ p.name, p.id ] }),{:id=>'provincial-strategic-outcome-filter',:multiple => "true",:class=>'form-control'} %>
+    </div>
+    <div class="form-group col col-lg-12">
+      <label>Wards:</label>
+      <%= select_tag :ward_id, options_for_select(Ward.all.collect {|p| [ p.name, p.id ] }),{:id=>'wards-filter',:multiple => "true",:class=>'form-control'} %>
+    </div>
+    <div class="form-group col col-lg-12">
+      <label>Area:</label>
+      <%= select_tag :area_id, options_for_select(Area.all.collect {|p| [ p.name, p.id ] }),{:id=>'area-filter',:multiple => "true",:class=>'form-control'} %>
+    </div>
+    <div class="form-group col col-lg-12">
+      <label class="control-label">Previous Year Actual Performance:</label>
+      <div class="input-group col col-lg-12">
+        <div class="col col-lg-6">
+          <input type="text" class="form-control">
+        </div>
+        <div class="col col-lg-6">
+          <select class="form-control">
+            <option>Match any words</option>
+            <option>Match exact words</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="form-group col col-lg-12">
+      <label class="control-label">Performance Standard:</label>
+      <div class="input-group col col-lg-12">
+        <div class="col col-lg-6">
+            <%= select_tag :performance_standard, options_for_select(DepartmentalSdbip.all.collect {|p| [ p.performance_standard, p.id ] }),{:multiple => "true",:class=>'form-control'} %>
+        </div>
+        <div class="col col-lg-6">
+          <select class="form-control">
+            <option>Match any words</option>
+            <option>Match exact words</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="form-group col col-lg-12">
+      <label>Top Layer KPI Ref:</label>
+      <div class="radio">
+        <label>
+          <input type="radio" value="all kpis" name="tp_selection" id="tp-selection-all" checked>All KPIs
+        </label>
+      </div>
+      <div class="radio">
+        <label>
+          <input type="radio" value="not linked to top layer kpi" name="tp_selection" id="tp-selection-not-linked">Not linked to Top Layer KPI
+        </label>
+      </div>
+      <div class="radio">
+        <label>
+          <input type="radio" value="linked to top layer kpi" name="tp_selection" id="tp-selection-linked">Linked to Top Layer KPI
+        </label>
+      </div>
+    </div>
+    <div class="form-group col col-lg-12">
+      <label>KPI Calculation Type:</label>
+      <%= select_tag :kpi_calculation_type_id, options_for_select(KpiCalculationType.all.collect {|p| [ p.name, p.id ] }),{:id=>'kpi-calculation-filter',:multiple => "true",:class=>'form-control'} %>
+    </div>
+    <div class="form-group col col-lg-12">
+      <label>KPI Target Type:</label>
+      <%= select_tag :kpi_target_type_id, options_for_select(KpiTargetType.all.collect {|p| [ p.name, p.id ] }),{:id=>"kpi-target-filter",:multiple => "true",:class=>'form-control'} %>
+
+    </div>
+    <div class="form-group col col-lg-12">
+      <label>KPI Result:</label>
+      <select class="form-control" id="kpi-result-filter">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+      </select>
+    </div>
+  </fieldset><!-- personal info -->
+
+
+  <fieldset id="generate-report">
+    <div class="form-group col col-lg-12">
+      <%= submit_tag "Generate", :class=>"btn btn-midi col-lg-2 pull-right" %>
+    </div>
+  </fieldset><!-- personal info -->
+<% end %>
+<% if @audit_logs.blank? && Activity.blank? %>
+<% elsif !@audit_logs.blank? %>
 <div class="table-responsive">
   <table class="table table-striped table-bordered">
     <thead>
@@ -15,7 +545,7 @@
       </tr>
     </thead>
     <tbody>
-    <% @activities.each do |activity| %>
+    <% @audit_logs.each do |activity| %>
       <tr>
         <td><%= activity.id %></td>
         <td><%= activity.departmental_sdbip.kpi %></td>
@@ -33,4 +563,5 @@
     </tbody>
   </table>
 </div>
-<%= will_paginate @activities %>
+<%= will_paginate @audit_logs %>
+<% end %>
