@@ -52,7 +52,7 @@ $(function() {
             <th>Telephone Number</th>
             <th>Fax Number</th>
 
-            <th colspan="2"></th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -81,10 +81,9 @@ $(function() {
             <div id="departments-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
 
           </div>
-            </td>
-            <td>
+
             <% if current_user.admin? %>
-            <%= link_to department, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-mini" do %>
+            &nbsp;<%= link_to department, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-mini" do %>
               <span class="glyphicon glyphicon-remove-sign"></span>Delete
             <% end %>
             <% end %>

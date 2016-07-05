@@ -37,7 +37,16 @@ $(function() {
 
 	</section><!-- tab-content -->
 
+<script>
+var audit_selected_columns = [];
+$("input[name='audit_checkbox']").click(function() {
+	if($("input[name='audit_checkbox']").prop("checked") == true) {
+		audit_selected_columns.push($(this).val());
+	}//);
+	$("#current-selected-columns").val(JSON.stringify(audit_selected_columns));
+});
 
+</script>
 <script type="text/javascript">
 	"use strict";
 

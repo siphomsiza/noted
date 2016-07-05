@@ -7,7 +7,7 @@
      <th>Municipality</th>
      <th>Province</th>
      <th>Regions/Areas</th>
-     <th colspan="2"></th>
+     <th>Actions</th>
    </tr>
  </thead>
 
@@ -30,8 +30,7 @@
        <div id="master-setup-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
 
        </div>
-     </td>
-     <td><%= link_to setup,class: 'btn btn-mini btn-danger', method: :delete, data: { confirm: 'Are you sure?' }, :style=>"text-decoration: none;" do %>
+    &nbsp;<%= link_to setup,class: 'btn btn-mini btn-danger', method: :delete, data: { confirm: 'Are you sure?' }, :style=>"text-decoration: none;" do %>
        <span class="glyphicon glyphicon-remove-sign"></span>&nbsp;Delete
      <% end %>
      </td>

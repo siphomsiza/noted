@@ -7,6 +7,7 @@
 <div class="row">
     <div class="col-lg-10 col-md-offset-1">
 
+        <div class="tab-pane active" class="newuserform" id="add_user">
         <section class="media">
           <div class="media-body">
       <%= form_for(@user) do |f| %>
@@ -55,13 +56,14 @@
                  <%= f.password_field :password_confirmation, class: 'form-control' %>
               </div><!-- controls -->
             </section><!-- row -->
-              <% if current_user.admin? && !current_user?(@user)  && @user.new_record? %>
+              <% if current_user.admin? && !current_user?(@user) && @user.new_record? %>
               <label class="col col-lg-4 control-label" for="systemadministrator">System Administrator</label>
               <div class="controls col col-lg-8">
 
                 <%= f.label :admin, class: "checkbox inline" do %>
                 <%= f.check_box :admin, :id=>'admin_checkbox'%>
-                <% end %><% end %>
+                <% end %>
+                <% end %>
          </div><!-- controls -->
           </fieldset><!-- system info -->
 
@@ -222,6 +224,8 @@
 
       </div><!-- media-body -->
       </section><!-- media -->
+      </div>
+
 
     </div>
 </div>
