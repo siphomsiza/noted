@@ -40,9 +40,9 @@ $(function() {
 
      <div class = "tab-pane active fade in" id = "headings">
 
-     <div class="tabbable tabs" id="headings-tabs">
+     <div class="tabbable tabs fourth-level-navs" id="headings-tabs">
       <ul id = "myTab" class = "nav nav-tabs">
-      <li>
+      <li class="active">
         <a href = "#general_headings" data-toggle = "tab">General</a>
       </li>
       <li>
@@ -64,11 +64,11 @@ $(function() {
     </div>
 
     <div id = "myTabContent" class = "tab-content">
-     <div class = "tab-pane fade in" id = "general_headings">
+     <div class = "tab-pane active fade in" id = "general_headings">
         <ul class="headings">
           <table class="table table-stiped table-hover">
             <tr><th>&nbsp;</th><th>Default Terminology</th><th>Client Terminology</th><th></th></tr>
-          <%= render @headings %>
+          <%= render @general_headings %>
       </table><%= will_paginate @general_headings %>
         </ul>
       </div>

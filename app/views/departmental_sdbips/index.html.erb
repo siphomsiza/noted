@@ -85,27 +85,20 @@ $(function() {
 													<label class="col control-label">What:</label>&nbsp;<%= select_tag :kpi_type_id,options_for_select([["All KPIs","0"]]+@kpitypes.all.collect {|x| [ x.name, x.id ] },id:'kpi_select'),prompt:'Select KPI Type',class: "form-control" %>
 												</div>
 												<div class="col-lg-2">
-													<%= hidden_field :start_date, id: "selected_start_date" %>
-														<label class="col control-label">When:</label>
-														<div id="start-date" class="input-group date" data-provide="datepicker"
-																 data-date-format="MM-yyyy" data-date-start-view="months" data-date-min-view-mode="months">
-															<input type="text" class="form-control">
-															<div class="input-group-addon">
-																<span class="glyphicon glyphicon-calendar"></span>
-															</div>
-														</div>
-
+													<label class="col control-label">When:</label>&nbsp;
+													<div class="input-group date" data-provide="datepicker"
+						                 data-date-format="MM-yyyy" data-date-start-view="months"
+														 data-date-min-view-mode="months">
+														 <%= text_field :start_date, :as => :string, class: "form-control" %>
+						            	</div>
 												</div>
 												<div class="col-lg-2">
-													<%= hidden_field :end_date, id: "selected_end_date" %>
-								            <label class="col control-label">To:</label>
-								            <div  id="end-date" class="input-group date" data-provide="datepicker"
-								                 data-date-format="MM-yyyy" data-date-start-view="months" data-date-min-view-mode="months">
-								              <input type="text" class="form-control col-lg-1">
-								              <div class="input-group-addon">
-								                <span class="glyphicon glyphicon-calendar"></span>
-								              </div>
-								            </div>
+													<label class="col control-label">To:</label>&nbsp;
+													<div class="input-group date" data-provide="datepicker"
+							                 data-date-format="MM-yyyy" data-date-start-view="months"
+															 data-date-min-view-mode="months">
+														<%= text_field :end_date, :as => :string, class: "form-control" %>
+							            </div>
 
 												</div>
 												<div class="col-lg-1">

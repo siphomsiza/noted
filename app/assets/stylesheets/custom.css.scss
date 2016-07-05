@@ -238,6 +238,7 @@ input {
 #corrective-measures-checkbox,
 #proof-of-evidence-checkbox,
 #assurance-status-checkbox,
+#update-status-checkbox,
 #setup_performance_comments,
 #setup_project_life_cycle,
 #setup_attach_poe,
@@ -337,6 +338,8 @@ input {
   background-color: white;
 }
 
+#add_departments a:hover,
+#departments a:hover,
 #admin_users a:hover,
 #active_users a:hover,
 #all_users a:hover,

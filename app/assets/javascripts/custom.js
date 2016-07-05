@@ -1,10 +1,6 @@
 $(document).ready(function () {
-<<<<<<< HEAD
-  
+    
 window.setTimeout(function() {
-=======
-  window.setTimeout(function() {
->>>>>>> 8b2f40b2012fd124e00f72badf80756dcdd69793
     $(".alert").fadeTo(1500, 0).slideUp(500, function(){
         $(this).remove();
     });

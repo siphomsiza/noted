@@ -281,8 +281,8 @@ class DepartmentalSdbipProgressesController < ApplicationController
     @departmental_sdbip_progresses = @sdbip_progresses
      respond_to do |format|
          format.html
-         format.csv { send_data @departmental_sdbip_progresses.report_to_csv(params[:data_value],params[:selected_array_of_values]), :type => 'text/csv', :filename => "file_name-#{Time.now.strftime('%d-%m-%y--%H-%M')}.csv"}
-         format.xls  { send_data @departmental_sdbip_progresses.report_to_csv(params[:data_value],params[:selected_array_of_values],col_sep: "\t"), :type => 'text/xls', :filename => "file_name-#{Time.now.strftime('%d-%m-%y--%H-%M')}.xls" }
+         format.csv { if !@departmental_sdbip_progresses.blank? then send_data @departmental_sdbip_progresses.report_to_csv(params[:data_value],params[:selected_array_of_values]), :type => 'text/csv', :filename => "file_name-#{Time.now.strftime('%d-%m-%y--%H-%M')}.csv" end }
+         format.xls  { if !@departmental_sdbip_progresses.blank? then send_data @departmental_sdbip_progresses.report_to_csv(params[:data_value],params[:selected_array_of_values],col_sep: "\t"), :type => 'text/xls', :filename => "file_name-#{Time.now.strftime('%d-%m-%y--%H-%M')}.xls" end }
          format.pdf do
           pdf = ReportPdf.new(@departmental_sdbips)
           #send_data pdf.render, filename: 'report.pdf', type: 'application/pdf', :layout => 'landscape'

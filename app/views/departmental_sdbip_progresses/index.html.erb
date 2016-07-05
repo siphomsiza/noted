@@ -41,10 +41,9 @@ $(function() {
 var audit_selected_columns = [];
 $("input[name='audit_checkbox']").click(function() {
 	if($("input[name='audit_checkbox']").prop("checked") == true) {
-		audit_selected_columns.push($(this).val().text());
-		alert(audit_selected_columns);
+		audit_selected_columns.push($(this).val());
 	}//);
-	$("#current-selected-columns").val(audit_selected_columns);
+	$("#current-selected-columns").val(JSON.stringify(audit_selected_columns));
 });
 
 </script>
