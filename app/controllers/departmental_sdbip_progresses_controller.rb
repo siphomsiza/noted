@@ -8,10 +8,11 @@ class DepartmentalSdbipProgressesController < ApplicationController
     @audit_logs = []
     selected_values = []
     selected_headings = []
+    @selected_audit_headers = []
+    selected_audit_headers = []
     if params[:selected_columns] && params[:department_id] || params[:department_id] || params[:subdepartment_id] || params[:kpi_ref_number] || params[:predetermined_objective_id] || params[:kpi_owner_id] || params[:kpi] || params[:unit_of_measurement] || params[:mcore_classification_id] || params[:strategic_objective_id] || params[:source_of_evidence] || params[:baseline] || params[:annual_target] || params[:revised_target] || params[:national_kpa_id] || params[:ndp_objective_id] || params[:kpi_concept_id] || params[:kpi_type_id] || params[:provincial_strategic_outcome_id] || params[:ward_id] || params[:area_id] || params[:performance_standard] || params[:kpi_calculation_type_id] || params[:kpi_target_type_id]
-      puts "welcome to rails"
-      puts params[:selected_columns]
-      puts "we made it"
+      selected_audit_headers = params[:selected_columns]
+      @selected_audit_headers = params[:selected_columns]
       @audit_logs = Activity.filter_audit_logs(params[:department_id],
       params[:subdepartment_id],
       params[:kpi_ref_number],
@@ -34,10 +35,15 @@ class DepartmentalSdbipProgressesController < ApplicationController
       params[:performance_standard],
       params[:kpi_calculation_type_id],
       params[:kpi_target_type_id])
-      if !@audit_logs.blank?
-        @audit_logs = @audit_logs.paginate(page: params[:page],per_page: 15)
-      end
+
+        @audit_logs = @audit_logs
+
     end
+    if !@audit_logs.blank?
+        @audit_logs = @audit_logs.paginate(page: params[:page],per_page: 15)
+    end
+     @selected_audit_headers = selected_audit_headers
+
    if params[:data_value]
       selected_headings = params[:data_value]
      @sdbip_progresses = DepartmentalSdbip.all
@@ -173,8 +179,11 @@ class DepartmentalSdbipProgressesController < ApplicationController
      	#@sdbip_progresses = @sdbip_progresses.where(:annual_target => annual_target_values.split(""))
      end
     end
+
     @departmental_sdbip_progresses = @departmental_sdbip_progresses
     @departmental_sdbips = DepartmentalSdbip.all
+
+
     @kpi_not_yet_measured = DepartmentalSdbip.where("performance_standard = ?", "KPI Not Yet Measured")
 
     @kpi_measured = DepartmentalSdbip.where("performance_standard != ?", "KPI Measured")

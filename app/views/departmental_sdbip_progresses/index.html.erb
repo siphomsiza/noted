@@ -38,12 +38,13 @@ $(function() {
 	</section><!-- tab-content -->
 
 <script>
-var selected_columns = [];
+var audit_selected_columns = [];
 $("input[name='audit_checkbox']").click(function() {
 	if($("input[name='audit_checkbox']").prop("checked") == true) {
-		selected_columns.push($(this).val());
+		audit_selected_columns.push($(this).val().text());
+		alert(audit_selected_columns);
 	}//);
-	$("#current-selected-columns").val(selected_columns));
+	$("#current-selected-columns").val(audit_selected_columns);
 });
 
 </script>
