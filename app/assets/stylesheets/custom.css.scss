@@ -336,10 +336,7 @@ input {
   color: $deepblue;
   background-color: white;
 }
-<<<<<<< HEAD
-=======
 
->>>>>>> 2f2b70228ec60efa53ef0b3eb39a7c539ae59bd7
 #admin_users a:hover,
 #active_users a:hover,
 #all_users a:hover,
@@ -402,29 +399,7 @@ input {
   font-size: 0.8em;
 }
 
-<<<<<<< HEAD
-#second-level-navs .nav-tabs{
-  li a{
-    color: $deepblue;
-    background-color: white !important;
-    }
-    li a:hover{
-      font-family: $headingFontFamily;
-      color: white !important;
-      background-color: $deepblue !important;
-    }
-    li:active a{
-      font-family: $headingFontFamily;
-      color: white !important;
-      background-color: $powderblue !important;
-    }
-    li a:active{
-      font-family: $headingFontFamily;
-      color: white !important;
-      background-color: $powderblue !important;
-    }
 
-}
 #fourth-level-navs .nav-tabs{
   li a{
     color: $deepblue;
@@ -435,7 +410,7 @@ input {
     li:active a{
       color: white !important;
     }
-=======
+}
 .second-level-navs .nav-tabs {
 	li a {
 		color: $deepblue !important;
@@ -500,7 +475,6 @@ input {
 		color: $deepblue !important;
 		font-weight: bold;
 	}
->>>>>>> 2f2b70228ec60efa53ef0b3eb39a7c539ae59bd7
 }
 
 .nav-justified li a{
@@ -1747,15 +1721,10 @@ input {
   background-color: white !important;
   border: transparent;
 }
-#filter_toggle a{
+
+#filter_toggle a, a:hover{
   text-decoration: none;
   color: $deepblue;
-  background-color: white;
-}
-#filter_toggle a:hover{
-  text-decoration: none;
-  color: $deepblue;
-  background-color: white;
 }
 #capital-tabs{
   margin: 0;
