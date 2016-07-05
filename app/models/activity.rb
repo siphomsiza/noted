@@ -14,7 +14,8 @@ class Activity < ActiveRecord::Base
     national_kpa_id,ndp_objective_id,
     kpi_concept_id,kpi_type_id,
     provincial_strategic_outcome_id,ward_id,
-    area_id,performance_standard,
+    area_id,performance_standard,past_year_performance,
+    impact,
     kpi_calculation_type_id,kpi_target_type_id)
     @audits = DepartmentalSdbip.includes(:activities)
     audit_columns = []
@@ -36,13 +37,15 @@ class Activity < ActiveRecord::Base
       audit_columns.push("DepartmentalSdbip.kpi_owner.name")
     end
 
-    #if !kpi_ref_number_id.blank?
-      #kpi_ref_number_values = kpi_ref_number_id
-     #@audits = @audits.include.where(kpi_ref_number => kpi_ref_number_values.split(""))
-    #end
+    if !kpi_ref_number.blank?
+      kpi_ref_number_values = kpi_ref_number
+      @audits = @audits.where(:kpi_ref_number => kpi_ref_number_values.split(""))
+      audit_columns.push("DepartmentalSdbip.kpi_ref_number")
+    end
     if !revised_target.blank?
-      #revised_target_values = revised_target
-     #@audits = @audits.include.where(revised_target => revised_target_values.split(""))
+      revised_target_values = revised_target
+      @audits = @audits.where(:revised_target => revised_target_values.split(""))
+      audit_columns.push("DepartmentalSdbip.revised_target")
     end
     if !kpi_concept_id.blank?
       kpi_concept_values = kpi_concept_id
@@ -63,12 +66,14 @@ class Activity < ActiveRecord::Base
 
     #if !top_layer_kpi_ref.blank?
       #top_layer_kpi_ref_values = top_layer_kpi_ref_values
-     #@audits = @audits.include.where(top_layer_kpi_ref => top_layer_kpi_ref_values.split(""))
+      #@audits = @audits.where(:top_layer_kpi_ref => top_layer_kpi_ref_values.split(""))
+      #audit_columns.push("DepartmentalSdbip.top_layer_kpi_ref")
     #end
-    #if data_value.include?('Baseline')
-      #baseline_values = baseline_values
-     #@audits = @audits.include.where(baseline => baseline_values.split(""))
-    #end
+    if !baseline.blank?
+      baseline_values = baseline
+      @audits = @audits.where(:baseline => baseline_values.split(""))
+      audit_columns.push("DepartmentalSdbip.baseline")
+    end
     if !ward_id.blank?
       ward_values = ward_id
       @audits = @audits.where(:ward_id => ward_values.split(""))
@@ -80,26 +85,31 @@ class Activity < ActiveRecord::Base
       audit_columns.push("DepartmentalSdbip.area.name")
     end
 
-    #if data_value.include?('Budget')
-      #budget_values = budget_values
-     #@audits = @audits.include.where(budget => budget_values.split(""))
+    #if !budget.blank?
+      #budget_values = budget
+      #@audits = @audits.where(:budget => budget_values.split(""))
+      #audit_columns.push("DepartmentalSdbip.budget")
     #end
-    #if data_value.include?('KPI')
-      #kpi_values = kpi_values
-      #@audits = @audits.include.where(kpi => kpi_values.split(""))
-    #end
-    #if data_value.include?('KPA')
-      #kpa_values = kpa_values
-      #@audits = @audits.include.where(kpa_id => kpa_values.split(""))
-    #end
-    #if data_value.include?('Past Year Performance')
-      #past_year_performance_values = past_year_performance_values
-     #@audits = @audits.include.where(past_year_performance => past_year_performance_values.split(""))
-    #end
-    #if data_value.include?('Provincial Strategic Outcome')
-      #provincial_strategic_outcome_values = provincial_startegic_values
-      #@audits = @audits.include.where(provincial_strategic_outcome_id => provincial_strategic_outcome_values.split(""))
-    #end
+    if !kpi.blank?
+      kpi_values = kpi
+      @audits = @audits.where(:id => kpi_values.split(""))
+      audit_columns.push("DepartmentalSdbip.kpi")
+    end
+    if !national_kpa_id.blank?
+      kpa_values = kpa_values
+      @audits = @audits.where(:kpa_id => kpa_values.split(""))
+      audit_columns.push("DepartmentalSdbip.kpa.name")
+    end
+    if !past_year_performance.blank?
+      past_year_performance_values = past_year_performance_values
+      @audits = @audits.where(:id => past_year_performance_values.split(""))
+      audit_columns.push("DepartmentalSdbip.past_year_performance")
+    end
+    if !provincial_strategic_outcome_id.blank?
+      provincial_strategic_outcome_values = provincial_startegic_id
+      @audits = @audits.where(:provincial_strategic_outcome_id => provincial_strategic_outcome_values.split(""))
+      audit_columns.push("DepartmentalSdbip.provincial_strategic_outcome.name")
+    end
     if !predetermined_objective_id.blank?
       predetermined_objectives_values = predetermined_objective_id
       @audits = @audits.where(:predetermined_objective_id => predetermined_objectives_values.split(""))
@@ -120,37 +130,44 @@ class Activity < ActiveRecord::Base
       @audits = @audits.where(:ndp_objective_id => ndp_objective_values.split(""))
       audit_columns.push("DepartmentalSdbip.ndp_objective.name")
     end
-    #if data_value.include?('IDP Ref')
-      #idp_ref_values = idp_ref_values
-     #@audits = @audits.include.where(idp_ref => idp_ref_values.split(""))
+    #if !idp_ref.blank?
+    #  idp_ref_values = idp_ref
+     #@audits = @audits.where(:idp_ref => idp_ref_values.split(""))
+     #audit_columns.push("DepartmentalSdbip.idp_ref")
     #end
     if !strategic_objective_id.blank?
       strategic_objective_values = strategic_objective_id
       @audits = @audits.where(:strategic_objective_id => strategic_objective_values.split(""))
       audit_columns.push("DepartmentalSdbip.strategic_objective.name")
     end
-    #if data_value.include?('Impact')
-      #impact_values = impact_values
-     #@audits = @audits.include.where(impact => impact_values.split(""))
-    #end
-    #if data_value.include?('Source of Evidence')
-      #source_of_evidence_values = source_of_evidence_values
-      #@audits = @audits.include.where(source_of_evidence => source_of_evidence_values.split(""))
-    #end
-    #if data_value.include?('Unit of Measurement')
-      #unit_of_measurement_values = unit_of_measurement_values
-     #@audits = @audits.include.where(unit_of_measurement => unit_of_measurement_values.split(""))
-    #end
+    if !impact.blank?
+      impact_values = impact_values
+      @audits = @audits.where(:impact => impact_values.split(""))
+      audit_columns.push("DepartmentalSdbip.impact")
+    end
+    if !source_of_evidence.blank?
+      source_of_evidence_values = source_of_evidence
+      @audits = @audits.where(:source_of_evidence => source_of_evidence_values.split(""))
+      audit_columns.push("DepartmentalSdbip.source_of_evidence")
+    end
+    if !unit_of_measurement.blank?
+      unit_of_measurement_values = unit_of_measurement_values
+      @audits = @audits.where(:unit_of_measurement => unit_of_measurement_values.split(""))
+      audit_columns.push("DepartmentalSdbip.unit_of_measurement")
+    end
     #if !national_outcome_id.blank?
     #  national_outcome_values = national_outcome_id
-    #  @audits = @audits.include.where(national_outcome_id => national_outcome_values.split(""))
+    #  @audits = @audits.where(national_outcome_id => national_outcome_values.split(""))
     #  audit_columns.push("DepartmentalSdbip.national_outcome.name")
     #end
-    #if data_value.include?('Annual Target')
-      #annual_target_values = annual_target_values
-     #@audits = @audits.include.where(annual_target => annual_target_values.split(""))
-    #end
+    if !annual_target.blank?
+      annual_target_values = annual_target
+      @audits = @audits.where(:annual_target => annual_target_values.split(""))
+      audit_columns.push("DepartmentalSdbip.annual_target")
+    end
+   $selected_array_of_values = audit_columns
    @audit_logs = @audits
+
   end
 
 end
