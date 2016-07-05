@@ -7,4 +7,5 @@ class DepartmentalSdbipProgress < ActiveRecord::Base
 		else
 		end
 	end
+
 end

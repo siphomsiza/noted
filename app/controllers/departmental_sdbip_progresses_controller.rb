@@ -8,7 +8,10 @@ class DepartmentalSdbipProgressesController < ApplicationController
     @audit_logs = []
     selected_values = []
     selected_headings = []
-    if params[:department_id] || params[:department_id] || params[:subdepartment_id] || params[:kpi_ref_number] || params[:predetermined_objective_id] || params[:kpi_owner_id] || params[:kpi] || params[:unit_of_measurement] || params[:mcore_classification_id] || params[:strategic_objective_id] || params[:source_of_evidence] || params[:baseline] || params[:annual_target] || params[:revised_target] || params[:national_kpa_id] || params[:ndp_objective_id] || params[:kpi_concept_id] || params[:kpi_type_id] || params[:provincial_strategic_outcome_id] || params[:ward_id] || params[:area_id] || params[:performance_standard] || params[:kpi_calculation_type_id] || params[:kpi_target_type_id]
+    if params[:selected_columns] && params[:department_id] || params[:department_id] || params[:subdepartment_id] || params[:kpi_ref_number] || params[:predetermined_objective_id] || params[:kpi_owner_id] || params[:kpi] || params[:unit_of_measurement] || params[:mcore_classification_id] || params[:strategic_objective_id] || params[:source_of_evidence] || params[:baseline] || params[:annual_target] || params[:revised_target] || params[:national_kpa_id] || params[:ndp_objective_id] || params[:kpi_concept_id] || params[:kpi_type_id] || params[:provincial_strategic_outcome_id] || params[:ward_id] || params[:area_id] || params[:performance_standard] || params[:kpi_calculation_type_id] || params[:kpi_target_type_id]
+      puts "welcome to rails"
+      puts params[:selected_columns]
+      puts "we made it"
       @audit_logs = Activity.filter_audit_logs(params[:department_id],
       params[:subdepartment_id],
       params[:kpi_ref_number],
@@ -269,8 +272,8 @@ class DepartmentalSdbipProgressesController < ApplicationController
     @departmental_sdbip_progresses = @sdbip_progresses
      respond_to do |format|
          format.html
-         format.csv { send_data @departmental_sdbip_progresses.report_to_csv(params[:data_value],params[:selected_array_of_values]), :type => 'test/csv', :filename => "file_name-#{Time.now.strftime('%d-%m-%y--%H-%M')}.csv"}
-         format.xls  { send_data @departmental_sdbip_progresses.report_to_csv(params[:data_value],params[:selected_array_of_values],col_sep: "\t"), :type => 'test/xls', :filename => "file_name-#{Time.now.strftime('%d-%m-%y--%H-%M')}.xls" }
+         format.csv { send_data @departmental_sdbip_progresses.report_to_csv(params[:data_value],params[:selected_array_of_values]), :type => 'text/csv', :filename => "file_name-#{Time.now.strftime('%d-%m-%y--%H-%M')}.csv"}
+         format.xls  { send_data @departmental_sdbip_progresses.report_to_csv(params[:data_value],params[:selected_array_of_values],col_sep: "\t"), :type => 'text/xls', :filename => "file_name-#{Time.now.strftime('%d-%m-%y--%H-%M')}.xls" }
          format.pdf do
           pdf = ReportPdf.new(@departmental_sdbips)
           #send_data pdf.render, filename: 'report.pdf', type: 'application/pdf', :layout => 'landscape'

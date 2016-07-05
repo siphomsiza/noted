@@ -37,7 +37,16 @@ $(function() {
 
 	</section><!-- tab-content -->
 
+<script>
+var selected_columns = [];
+$("input[name='audit_checkbox']").click(function() {
+	if($("input[name='audit_checkbox']").prop("checked") == true) {
+		selected_columns.push($(this).val());
+	}//);
+	$("#current-selected-columns").val(selected_columns));
+});
 
+</script>
 <script type="text/javascript">
 	"use strict";
 
@@ -279,19 +288,6 @@ $(function() {
    });
 	  //$("#reports-modal").modal('show');
   }
-	$(function () {
-	  $('#datepicker6').datepicker({dateFormat: 'mm-yy'});
-	  $('#datepicker7').datepicker({
-	    useCurrent: false,
-	    dateFormat: 'mm-yy'
-	  });
-	  $("#datepicker6").on("dp.change", function (e) {
-	    $('#datepicker7').data("DatePicker").minDate(e.date);
-	  });
-	  $("#datepicker7").on("dp.change", function (e) {
-	    $('#datepicker6').data("DatePicker").maxDate(e.date);
-	  });
-	});
 
 	/* Done evaluating all radio buttons */
 function show_modal(){
