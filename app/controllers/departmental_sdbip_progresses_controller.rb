@@ -285,6 +285,7 @@ class DepartmentalSdbipProgressesController < ApplicationController
     @departmental_sdbip_progresses = @sdbip_progresses
 
      respond_to do |format|
+       
          format.html
          format.csv { send_data @audit_logs.to_csv, :filename => "file_name-#{Time.now.strftime('%d-%m-%y--%H-%M')}.csv" }
          #format.xls  { send_data @departmental_sdbip_progresses.report_to_csv(params[:data_value],params[:selected_array_of_values],col_sep: "\t"), :type => 'text/xls', :filename => "file_name-#{Time.now.strftime('%d-%m-%y--%H-%M')}.xls"  }
