@@ -72,10 +72,15 @@
 
       <section class="row">
         <label class="col col-lg-4 control-label" for="employmentdate">Employment Date</label>
-        <div class="controls col col-lg-8">
-        <div class="col-md-16"><%= date_field(:start_date, nil,placeholder: '--Select Start Date--',:class => 'form-control') %>
-     </div>
-        </div><!-- controls -->
+        <div class="controls col col-lg-8 form-group">
+          <div class="input-group date" data-provide="datepicker"
+               data-date-format="yyyy-mm-dd" data-date-start-view="days" data-date-min-view-mode="days">
+            <%= f.text_field :employment_date, class: "form-control" %>
+            <span class="input-group-addon">
+              <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+          </div>
+        </div>
       </section><!-- row -->
 
       <section class="row">
