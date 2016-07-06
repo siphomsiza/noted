@@ -17,14 +17,14 @@
   		<%= f.text_area :kpi, :class => "form-control has-error col-md-5" %>
 
 		<%= f.label :department_id %><br>
-		<%= f.select :department_id, Department.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select Department"}, :id=>"selected_department", class: "form-control" %>
+		<%= f.select :department_id, Department.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select Department"}, :id=>"new_selected_department", class: "form-control" %>
 
-    <%= f.hidden_field :department_name, id: "current_department" %>
+    <%= f.hidden_field :department_name, id: "new_current_department" %>
 
 		<%= f.label :subdepartment_id, "Subdepartment" %><br>
-		<%= f.select :subdepartment_id, Subdepartment.all.collect {|x| [x.subdepartment_name, x.id]}, {:include_blank => "Select Subdepartment"}, :id=>"selected_subdepartment", class: "form-control" %>
+		<%= f.select :subdepartment_id, Subdepartment.all.collect {|x| [x.subdepartment_name, x.id]}, {:include_blank => "Select Subdepartment"}, :id=>"new_selected_subdepartment", class: "form-control" %>
 
-    <%= f.hidden_field :subdepartment_name, id: "current_subdepartment" %>
+    <%= f.hidden_field :subdepartment_name, id: "new_current_subdepartment" %>
 
 		<%= f.label :kpi_ref_number, "KPI Ref Number" %><br>
 		<%= f.text_field :kpi_ref_number, :class => "form-control has-error col-md-5" %>
@@ -149,10 +149,26 @@
 		<%= f.label :kpi_calculation_type_id, "KPI Calculation Type" %><br>
 		<%= f.select :kpi_calculation_type_id, KpiCalculationType.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select KPI Calculation Type"}, class: "form-control" %>
 		<%= f.label :start_date, "Start Date:" %><br>
-		<%= f.date_field :start_date, :class => "form-control has-error col-md-5 input-sm" %>
+    <div class="form-group">
+      <div class="input-group date" data-provide="datepicker"
+           data-date-format="M-yyyy" data-date-start-view="months" data-date-min-view-mode="months">
+        <%= f.text_field :start_date, class: "form-control" %>
+        <span class="input-group-addon">
+          <span class="glyphicon glyphicon-calendar"></span>
+        </span>
+      </div>
+    </div>
 
 		<%= f.label :end_date, "End Date:" %><br>
-		<%= f.date_field :end_date, :class => "form-control has-error col-md-5 input-sm" %>
+    <div class="form-group">
+      <div class="input-group date" data-provide="datepicker"
+           data-date-format="M-yyyy" data-date-start-view="months" data-date-min-view-mode="months">
+        <%= f.text_field :end_date, class: "form-control" %>
+        <span class="input-group-addon">
+          <span class="glyphicon glyphicon-calendar"></span>
+        </span>
+      </div>
+    </div>
 
 
 
@@ -164,3 +180,15 @@
 
 </div>
 </div>
+<script>
+
+$(document).on('change','#new_selected_department', function(){
+   var select_department = $( "#new_selected_department option:selected" ).text();
+   $('#new_current_department').val(select_department);
+});
+$(document).on('change','#new_selected_subdepartment', function(){
+   var select_value = $( "#new_selected_subdepartment option:selected" ).text();
+   $('#new_current_subdepartment').val(select_value);
+    alert("we made it" + select_value);
+});
+</script>

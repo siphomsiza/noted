@@ -72,7 +72,9 @@ class HeadingsController < ApplicationController
 
     if @heading.update_attributes(heading_params)
         flash[:success] = "Heading was successfully updated."
-      redirect_to headings_path
+        redirect_to headings_path
+    else
+        redirect_to :back
     end
   end
 
