@@ -283,15 +283,15 @@ class DepartmentalSdbipProgressesController < ApplicationController
     selected_array_of_values = selected_values
     @selected_headers = selected_headings
     @departmental_sdbip_progresses = @sdbip_progresses
-    
+
      respond_to do |format|
          format.html
-         format.csv { send_data @audit_logs.report_to_csv , :type => 'text/csv', :filename => "file_name-#{Time.now.strftime('%d-%m-%y--%H-%M')}.csv" }
-         format.xls  { send_data @departmental_sdbip_progresses.report_to_csv(params[:data_value],params[:selected_array_of_values],col_sep: "\t"), :type => 'text/xls', :filename => "file_name-#{Time.now.strftime('%d-%m-%y--%H-%M')}.xls"  }
-         format.pdf do
-          pdf = ReportPdf.new(@departmental_sdbips)
+         format.csv { send_data @audit_logs.to_csv, :filename => "file_name-#{Time.now.strftime('%d-%m-%y--%H-%M')}.csv" }
+         #format.xls  { send_data @departmental_sdbip_progresses.report_to_csv(params[:data_value],params[:selected_array_of_values],col_sep: "\t"), :type => 'text/xls', :filename => "file_name-#{Time.now.strftime('%d-%m-%y--%H-%M')}.xls"  }
+         #format.pdf do
+        #  pdf = ReportPdf.new(@departmental_sdbips)
           #send_data pdf.render, filename: 'report.pdf', type: 'application/pdf', :layout => 'landscape'
-        end
+        #end
 
       end
 
