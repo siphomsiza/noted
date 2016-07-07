@@ -91,10 +91,10 @@ RSpec.describe PasswordResetsController, :type => :controller do
         get :index
       end
       xit {expect(response).to redirect_to(login_path)}
-      xit {flash[:danger].should eq("Please log in.")}
+      xit {expect(flash[:danger]).to eq("Please log in.")}
     end
 
-    
+
 
     #def log_in(user)
     #  post login_path, :email=> user.email, :password=> user.password

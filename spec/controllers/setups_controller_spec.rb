@@ -91,10 +91,10 @@ RSpec.describe SetupsController, :type => :controller do
         get :index
       end
       it {expect(response).to redirect_to(login_path)}
-      it {flash[:danger].should eq("Please log in.")}
+      it {expect(flash[:danger]).to eq("Please log in.")}
     end
 
-  
+
 
     #def log_in(user)
     #  post login_path, :email=> user.email, :password=> user.password

@@ -75,7 +75,7 @@ RSpec.describe ListsController, :type => :controller do
                 end
                 it {expect(response.status).to eq(200) }
                 xit {expect(response.content_type).to eq("text/html") }
-                xit {flash[:success].should eq("list sdbip was successfully updated.")}
+                xit {expect(flash[:success]).to eq("list sdbip was successfully updated.")}
                 xit {expect(response).to redirect_to("/list")}
               end
         end
@@ -92,7 +92,7 @@ RSpec.describe ListsController, :type => :controller do
                 xit {assigns(:list).to eq(@list)}
                xit {expect(response.status).to eq(200) }
                xit {expect(response.content_type).to eq("text/html") }
-                xit {flash[:success].should eq("list sdbip was successfully deleted.")}
+                xit {expect(flash[:success]).to eq("list sdbip was successfully deleted.")}
                 xit {expect(response).to redirect_to("/lists")}
               end
         end
@@ -103,7 +103,7 @@ RSpec.describe ListsController, :type => :controller do
         get :index
       end
       xit {expect(response).to redirect_to(login_path)}
-      xit {flash[:danger].should eq("Please log in.")}
+      xit {expect(flash[:success]).to eq("Please log in.")}
     end
 
 

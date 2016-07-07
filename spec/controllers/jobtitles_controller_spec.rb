@@ -75,7 +75,7 @@ RSpec.describe JobtitlesController, :type => :controller do
                 end
                 xit {expect(response.status).to eq(200) }
                 xit {expect(response.content_type).to eq("text/html") }
-                xit {flash[:success].should eq("jobtitle was successfully updated.")}
+                xit {expect(flash[:success]).to eq("jobtitle was successfully updated.")}
                 xit {expect(response).to redirect_to("/jobtitles")}
               end
         end
@@ -92,7 +92,7 @@ RSpec.describe JobtitlesController, :type => :controller do
                 xit {assigns(:jobtitle).to eq(@jobtitle)}
                 xit {expect(response.status).to eq(200) }
                 xit {expect(response.content_type).to eq("text/html") }
-                xit {flash[:success].should eq("jobtitle was successfully deleted.")}
+                xit {expect(flash[:success]).to eq("jobtitle was successfully deleted.")}
                 xit {expect(response).to redirect_to("/jobtitles")}
               end
         end
@@ -101,7 +101,7 @@ RSpec.describe JobtitlesController, :type => :controller do
             get :index
           end
           xit {expect(response).to redirect_to(login_path)}
-          xit {flash[:danger].should eq("Please log in.")}
+          xit {expect(flash[:success]).to eq("Please log in.")}
         end
 
 
@@ -110,10 +110,10 @@ RSpec.describe JobtitlesController, :type => :controller do
         get :index
       end
       xit {expect(response).to redirect_to(login_path)}
-      xit {flash[:danger].should eq("Please log in.")}
+      xit {expect(flash[:success]).to eq("Please log in.")}
     end
 
-  
+
 
     #def log_in(user)
     #  post login_path, :email=> user.email, :password=> user.password

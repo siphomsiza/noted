@@ -20,7 +20,7 @@ RSpec.describe HeadingsController, :type => :controller do
                 get :index
             end
             it {expect(response).to redirect_to(login_path)}
-            it {flash[:danger].should eq("Please log in.")}
+            it {expect(flash[:danger]).to eq("Please log in.")}
         end
     end
 
@@ -46,7 +46,7 @@ RSpec.describe HeadingsController, :type => :controller do
                     get :edit_top_layer_headings, :id=>1
                 end
                 xit {expect(response).to redirect_to(login_path)}
-                xit {flash[:danger].should eq("Please log in.")}
+                xit {expect(flash[:danger]).to eq("Please log in.")}
             end
 
         end
@@ -70,7 +70,7 @@ RSpec.describe HeadingsController, :type => :controller do
                     get :edit_capital_projects_headings, :id=>1
                 end
                 xit {expect(response).to redirect_to(login_path)}
-                xit {flash[:danger].should eq("Please log in.")}
+                xit {expect(flash[:danger]).to eq("Please log in.")}
             end
 
             context "when user is not admin" do
@@ -99,7 +99,7 @@ RSpec.describe HeadingsController, :type => :controller do
                 get :edit_revenue_by_source_headings, :id=>1
             end
             xit {expect(response).to redirect_to(login_path)}
-            xit {flash[:danger].should eq("Please log in.")}
+            xit {expect(flash[:danger]).to eq("Please log in.")}
         end
 
     end
@@ -122,7 +122,7 @@ RSpec.describe HeadingsController, :type => :controller do
                   get :edit_departmental_headings,{:id=>@heading.id}
               end
               xit {expect(response).to redirect_to(login_path)}
-              xit {flash[:danger].should eq("Please log in.")}
+              xit {expect(flash[:danger]).to eq("Please log in.")}
           end
 
           context "when user is not admin" do
@@ -152,7 +152,7 @@ RSpec.describe HeadingsController, :type => :controller do
                 get :edit_monthly_cashflow_headings,{:id=>@heading.id}
             end
             xit {expect(response).to redirect_to(login_path)}
-            xit {flash[:danger].should eq("Please log in.")}
+            xit {expect(flash[:danger]).to eq("Please log in.")}
         end
 
         context "when user is not admin" do
@@ -181,7 +181,7 @@ RSpec.describe HeadingsController, :type => :controller do
                 get :edit,{:id=>@heading.id}
               end
               it {expect(response).to redirect_to(login_path)}
-              it {flash[:danger].should eq("Please log in.")}
+              it {expect(flash[:danger]).to eq("Please log in.")}
           end
 
 
@@ -204,7 +204,7 @@ RSpec.describe HeadingsController, :type => :controller do
                   get :new
               end
               it {expect(response).to redirect_to(login_path)}
-              it {flash[:danger].should eq("Please log in.")}
+              it {expect(flash[:danger]).to eq("Please log in.")}
           end
       end
 
@@ -220,7 +220,7 @@ RSpec.describe HeadingsController, :type => :controller do
 
         xit {assigns(:heading).to eq(@heading)}
         xit {expect(response.status).to eq(200) }
-        it {flash[:success].should eq("Heading was successfully deleted.")}
+        it {expect(flash[:success]).to eq("Heading was successfully deleted.")}
         it {expect(response).to redirect_to("/headings")}
         end
       end
@@ -238,7 +238,7 @@ RSpec.describe HeadingsController, :type => :controller do
            }
           #expect(Heading.count).to not_eq(0)
           expect(response.status).to eq(200)
-          flash[:success].should eq("Heading was successfully created.")
+          expect(flash[:success]).to eq("Heading was successfully created.")
           expect(response).to redirect_to("/headings")
         end
         end
@@ -247,7 +247,7 @@ RSpec.describe HeadingsController, :type => :controller do
                   get :new
               end
               it {expect(response).to redirect_to(login_path)}
-              it {flash[:danger].should eq("Please log in.")}
+              it {expect(flash[:danger]).to eq("Please log in.")}
           end
 
       end
@@ -264,7 +264,7 @@ RSpec.describe HeadingsController, :type => :controller do
             put :update
           end
           it {expect(response.status).to eq(200) }
-          xit {flash[:success].should eq("Heading was successfully updated.")}
+          xit {expect(flash[:success]).to eq("Heading was successfully updated.")}
           xit {expect(response).to redirect_to("/headings")}
           end
           context "when user is not logged in" do
@@ -272,7 +272,7 @@ RSpec.describe HeadingsController, :type => :controller do
                     get :edit, :id=>1
                 end
                 it {expect(response).to redirect_to(login_path)}
-                it {flash[:danger].should eq("Please log in.")}
+                it {expect(flash[:danger]).to eq("Please log in.")}
             end
 
             context "when user is not admin" do
@@ -283,7 +283,7 @@ RSpec.describe HeadingsController, :type => :controller do
             end
         end
 
-    
+
 
     #def log_in(user)
     #  post login_path, :email=> user.email, :password=> user.password

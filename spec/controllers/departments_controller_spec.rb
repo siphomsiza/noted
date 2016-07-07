@@ -75,7 +75,7 @@ RSpec.describe DepartmentsController, :type => :controller do
                 end
                 it {expect(response.status).to eq(200) }
                 xit {expect(response.content_type).to eq("text/html") }
-                xit {flash[:success].should eq("Department was successfully updated.")}
+                xit {expect(flash[:success]).to eq("Department was successfully updated.")}
                 xit {expect(response).to redirect_to("/departments")}
               end
         end
@@ -92,7 +92,7 @@ RSpec.describe DepartmentsController, :type => :controller do
                 xit {assigns(:department).to eq(@department)}
                 xit {expect(response.status).to eq(200) }
                 it {expect(response.content_type).to eq("text/html") }
-                it {flash[:success].should eq("Department was successfully deleted.")}
+                it {expect(flash[:success]).to eq("Department was successfully deleted.")}
                 it {expect(response).to redirect_to("/departments")}
               end
         end
@@ -101,7 +101,7 @@ RSpec.describe DepartmentsController, :type => :controller do
             get :index
           end
           it {expect(response).to redirect_to(login_path)}
-          it {flash[:danger].should eq("Please log in.")}
+          it {expect(flash[:danger]).to eq("Please log in.")}
         end
 
 
@@ -110,10 +110,10 @@ RSpec.describe DepartmentsController, :type => :controller do
         get :index
       end
       it {expect(response).to redirect_to(login_path)}
-      it {flash[:danger].should eq("Please log in.")}
+      it {expect(flash[:danger]).to eq("Please log in.")}
     end
 
-    
+
 
     #def log_in(user)
     #  post login_path, :email=> user.email, :password=> user.password

@@ -75,7 +75,7 @@ RSpec.describe DepartmentalSdbipsController, :type => :controller do
                 end
                 xit {expect(response.status).to eq(200) }
                 xit {expect(response.content_type).to eq("text/html") }
-                xit {flash[:success].should eq("departmental sdbip was successfully updated.")}
+                xit {expect(flash[:success]).to eq("departmental sdbip was successfully updated.")}
                 xit {expect(response).to redirect_to("/departmental_sdbips")}
               end
         end
@@ -92,7 +92,7 @@ RSpec.describe DepartmentalSdbipsController, :type => :controller do
                 xit {assigns(:departmental_sdbip).to eq(@departmental_sdbip)}
                 xit {expect(response.status).to eq(200) }
                 xit {expect(response.content_type).to eq("text/html") }
-                xit {flash[:success].should eq("departmental sdbip was successfully deleted.")}
+                xit {expect(flash[:success]).to eq("departmental sdbip was successfully deleted.")}
                 xit {expect(response).to redirect_to("/departmental_sdbips")}
               end
         end

@@ -75,7 +75,7 @@ RSpec.describe RolesController, :type => :controller do
                 end
                 it {expect(response.status).to eq(200) }
                 xit {expect(response.content_type).to eq("text/html") }
-                xit {flash[:success].should eq("Role was successfully updated.")}
+                xit {expect(flash[:success]).to eq("Role was successfully updated.")}
                 xit {expect(response).to redirect_to("/roles")}
               end
         end
@@ -92,7 +92,7 @@ RSpec.describe RolesController, :type => :controller do
                 xit {assigns(:role).to eq(@role)}
                 xit {expect(response.status).to eq(200) }
                 it {expect(response.content_type).to eq("text/html") }
-                xit {flash[:success].should eq("Role was successfully deleted.")}
+                xit {expect(flash[:success]).to eq("Role was successfully deleted.")}
                 it {expect(response).to redirect_to("/roles")}
               end
         end
@@ -101,7 +101,7 @@ RSpec.describe RolesController, :type => :controller do
             get :index
           end
           xit {expect(response).to redirect_to(login_path)}
-          xit {flash[:danger].should eq("Please log in.")}
+          xit {expect(flash[:danger]).to eq("Please log in.")}
         end
 
 
@@ -110,10 +110,10 @@ RSpec.describe RolesController, :type => :controller do
         get :index
       end
       xit {expect(response).to redirect_to(login_path)}
-      xit {flash[:danger].should eq("Please log in.")}
+      xit {expect(flash[:danger]).to eq("Please log in.")}
     end
 
-  
+
 
     #def log_in(user)
     #  post login_path, :email=> user.email, :password=> user.password
