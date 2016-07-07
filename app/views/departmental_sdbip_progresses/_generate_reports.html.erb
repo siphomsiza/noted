@@ -1,5 +1,5 @@
 <div class="tab-pane active fade in" id="generate_reports">
-  <form class="form-horizontal" id="departmental-sdbip-report">
+  <%= form_tag departmental_sdbip_progresses_path(format: "csv"), method: :get do %>
     <fieldset id="select-info">
 
 	    <legend><br/>1. Select the information to be displayed in the report:</legend>
@@ -138,7 +138,7 @@
       <div class="form-group row">
         <div class="checkbox col col-lg-3">
           <label>
-            <input type="checkbox" id="wards" value="Wards" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;Wards
+            <input type="checkbox" id="wards" value="Ward" name="select_info">&nbsp;&nbsp;&nbsp;&nbsp;Wards
           </label>
         </div>
         <div class="checkbox col col-lg-3">
@@ -201,7 +201,7 @@
           <div>
             <label>Results From:</label>
             <div class="input-group date" data-provide="datepicker"
-                 data-date-format="MM-yyyy" data-date-start-view="months" data-date-min-view-mode="months">
+                 data-date-format="M-yyyy" data-date-start-view="months" data-date-min-view-mode="months">
               <input type="text" class="form-control">
               <div class="input-group-addon">
                 <span class="glyphicon glyphicon-calendar"></span>
@@ -213,7 +213,7 @@
           <div>
             <label>To:</label>
             <div class="input-group date" data-provide="datepicker"
-                 data-date-format="MM-yyyy" data-date-start-view="months" data-date-min-view-mode="months">
+                 data-date-format="M-yyyy" data-date-start-view="months" data-date-min-view-mode="months">
               <input type="text" class="form-control">
               <div class="input-group-addon">
                 <span class="glyphicon glyphicon-calendar"></span>
@@ -246,8 +246,9 @@
 	    <legend>2. Select the filter you wish to apply:</legend>
       <div class="form-group col col-lg-12">
         <label>Department:</label>
-        <%= select_tag :department_id,options_for_select(Department.all.collect {|p| [ p.name, p.id ] }),{:id=>"department-filter",:multiple => "true",:class=>'form-control'}%>
+        <%= select_tag :department_id,options_for_select(Department.all.collect {|p| [ p.name, p.id ] }),{:required => true, :id=>"department-filter",:multiple => "true",:class=>'form-control'}%>
       </div>
+      <%= hidden_field_tag "data_value",nil,:multiple => true,:id=> "current-report-selected-columns" %>
       <div class="form-group col col-lg-12">
         <label>Sub-Department:</label>
         <%= select_tag :subdepartment_id, options_for_select(Subdepartment.all.collect {|p| [ p.subdepartment_name, p.id ] }),{:id=>"sub-department-filter",:multiple => "true",:class=>'form-control'} %>
@@ -396,10 +397,11 @@
         <%= select_tag :ndp_objective_id,options_for_select(NdpObjective.all.collect {|p| [ p.name, p.id ] }),{:id=>'ndp-objectives-filter',:multiple => "true",:class=>'form-control'} %>
       </div>
       <div class="form-group col col-lg-12">
+        <%= hidden_field_tag "sdbip_capital_project_filters",nil,:multiple => false,:id=> "sdbip_capital_project_filter" %>
         <label>Capital Project:</label>
         <div class="radio">
           <label>
-            <input type="radio" value="all kpis" name="cp_selection" id="cp-selection-all" checked>All KPIs
+            <input type="radio" value="all kpis" name="cp_selection" id="cp-selection-all">All KPIs
           </label>
         </div>
         <div class="radio">
@@ -477,10 +479,11 @@
         </div>
       </div>
       <div class="form-group col col-lg-12">
+        <%= hidden_field_tag "sdbip_top_layer_kpi_ref_filters",nil,:multiple => false,:id=> "sdbip_top_layer_kpi_ref_filter" %>
         <label>Top Layer KPI Ref:</label>
         <div class="radio">
           <label>
-            <input type="radio" value="all kpis" name="tp_selection" id="tp-selection-all" checked>All KPIs
+            <input type="radio" value="all kpis" name="tp_selection" id="tp-selection-all">All KPIs
           </label>
         </div>
         <div class="radio">
@@ -532,20 +535,15 @@
       <div class="form-group col col-lg-12">
         <label class="control-label">Report Title:</label>
         <div>
-          <input type="text" id="report-title" class="form-control" required >
+          <%= text_field_tag :file_name,nil,{:class => "form-control", :required => true}%>
+
         </div>
       </div>
       <div class="form-group col col-lg-12">
-
-        <button class="btn btn-primary pull-right" id="submit-button" type="submit" style="margin-right: 0px;"> Generate Report</button>
-      </div>
+        <%= submit_tag "Generate Report", :id=>"sdbip-target-report",:class=> "btn btn-midi col-lg-2 pull-right"%>
+        <!--<button class="btn btn-primary pull-right" id="submit-button" type="submit" style="margin-right: 0px;"> Generate Report</button>
+      --></div>
 	  </fieldset><!-- personal info -->
-	</form>
+	<% end %>
 
 </div><!-- friday -->
-<!-- Report display -->
-<div class="row">
-  <% if !@departmental_sdbip_progresses.blank? %>
-    <%= render 'report' %>
-  <% end %>
-</div>

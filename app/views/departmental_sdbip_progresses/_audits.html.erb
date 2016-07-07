@@ -1,5 +1,5 @@
 
-<%= form_tag departmental_sdbip_progresses_path, method: :get do %>
+<%= form_tag departmental_sdbip_progresses_path(format: "csv"), method: :get do %>
 <div class="allboxes">
   <fieldset id="select-info">
     <legend><br/>1. Select the information to be displayed in the report:</legend>
@@ -274,7 +274,7 @@
     <legend>2. Select the filter you wish to apply:</legend>
     <div class="form-group col col-lg-12">
       <label>Department:</label>
-      <%= select_tag :department_id,options_for_select(Department.all.collect {|p| [ p.name, p.id ] }),{:id=>"department-filter",:multiple => "true",:class=>'form-control'}%>
+      <%= select_tag :department_id,options_for_select(Department.all.collect {|p| [ p.name, p.id ] }),{:required => true,:id=>"department-filter",:multiple => "true",:class=>'form-control'}%>
 
     </div>
     <%= hidden_field_tag "selected_columns",nil,:multiple => true,:id=> "current-selected-columns" %>
@@ -426,20 +426,21 @@
       <%= select_tag :ndp_objective_id,options_for_select(NdpObjective.all.collect {|p| [ p.name, p.id ] }),{:id=>'ndp-objectives-filter',:multiple => "true",:class=>'form-control'} %>
     </div>
     <div class="form-group col col-lg-12">
+      <%= hidden_field_tag "capital_project_filters",nil,:multiple => false,:id=> "capital_project_filter" %>
       <label>Capital Project:</label>
       <div class="radio">
         <label>
-          <input type="radio" value="all kpis" name="cp_selection" id="cp-selection-all" checked>All KPIs
+          <input type="radio" value="all kpis" name="audit_cp_selection" id="audit-cp-selection-all" >All KPIs
         </label>
       </div>
       <div class="radio">
         <label>
-          <input type="radio" value="operational kpis only" name="cp_selection" id="cp-selection-operational">Operational KPIs only
+          <input type="radio" value="operational kpis only" name="audit_cp_selection" id="audit-cp-selection-operational">Operational KPIs only
         </label>
       </div>
       <div class="radio">
         <label>
-          <input type="radio" value="kpis associated with capital projects only" name="cp_selection" id="cp-selection-only">KPIs associated with Capital Projects only
+          <input type="radio" value="kpis associated with capital projects only" name="audit_cp_selection" id="audit-cp-selection-only">KPIs associated with Capital Projects only
         </label>
       </div>
     </div>
@@ -506,20 +507,21 @@
       </div>
     </div>
     <div class="form-group col col-lg-12">
+      <%= hidden_field_tag "top_layer_kpi_ref_filters",nil,:multiple => false,:id=> "top_layer_kpi_ref_filter" %>
       <label>Top Layer KPI Ref:</label>
       <div class="radio">
         <label>
-          <input type="radio" value="all kpis" name="tp_selection" id="tp-selection-all" checked>All KPIs
+          <input type="radio" value="all kpis" name="audit_tp_selection" id="tp-selection-all" checked>All KPIs
         </label>
       </div>
       <div class="radio">
         <label>
-          <input type="radio" value="not linked to top layer kpi" name="tp_selection" id="tp-selection-not-linked">Not linked to Top Layer KPI
+          <input type="radio" value="not linked to top layer kpi" name="audit_tp_selection" id="tp-selection-not-linked">Not linked to Top Layer KPI
         </label>
       </div>
       <div class="radio">
         <label>
-          <input type="radio" value="linked to top layer kpi" name="tp_selection" id="tp-selection-linked">Linked to Top Layer KPI
+          <input type="radio" value="linked to top layer kpi" name="audit_tp_selection" id="tp-selection-linked">Linked to Top Layer KPI
         </label>
       </div>
     </div>
@@ -543,11 +545,17 @@
       </select>
     </div>
   </fieldset><!-- personal info -->
-
-
   <fieldset id="generate-report">
+    <legend>4. Generate the report:</legend>
     <div class="form-group col col-lg-12">
-      <%= submit_tag "Generate",{:selected_columns => nil, :id => "submit-tag", 'data-target'=>"audit_log_modal", 'data-toggle'=>"modal",:class=>"btn btn-midi col-lg-2 pull-right"} %>
+      <label class="control-label">Report Title:</label>
+      <div>
+        <%= text_field_tag :file_name,nil,{:class => "form-control", :required => true}%>
+
+      </div>
+    </div>
+    <div class="form-group col col-lg-12">
+      <%= submit_tag "Generate",{:selected_columns => nil, :id => "audit-target-report", 'data-target'=>"audit_log_modal", 'data-toggle'=>"modal",:class=>"btn btn-midi col-lg-2 pull-right"} %>
     </div>
   </fieldset><!-- personal info -->
 <% end %>
