@@ -529,11 +529,7 @@
       <label>KPI Calculation Type:</label>
       <%= select_tag :kpi_calculation_type_id, options_for_select(KpiCalculationType.all.collect {|p| [ p.name, p.id ] }),{:id=>'kpi-calculation-filter',:multiple => "true",:class=>'form-control'} %>
     </div>
-    <div class="form-group col col-lg-12">
-      <label>KPI Target Type:</label>
-      <%= select_tag :kpi_target_type_id, options_for_select(KpiTargetType.all.collect {|p| [ p.name, p.id ] }),{:id=>"kpi-target-filter",:multiple => "true",:class=>'form-control'} %>
 
-    </div>
     <div class="form-group col col-lg-12">
       <label>KPI Result:</label>
       <select class="form-control" id="kpi-result-filter">
@@ -542,6 +538,16 @@
         <option>3</option>
         <option>4</option>
         <option>5</option>
+      </select>
+    </div>
+  </fieldset><!-- personal info -->
+  <fieldset id="choose-group">
+    <legend>3. Choose your group and sort options:</legend>
+    <div class="form-group col col-lg-12">
+      <label>Group by:</label>
+      <select class="form-control">
+        <option>No grouping</option>
+
       </select>
     </div>
   </fieldset><!-- personal info -->
