@@ -5,7 +5,7 @@ class DepartmentalSdbipProgressesController < ApplicationController
   skip_before_filter  :verify_authenticity_token
 
   def index
-  
+
     selected_values = []
     selected_headings = []
     if params[:selected_columns] && (params[:department_id] || params[:department_id] || params[:subdepartment_id] || params[:kpi_ref_number] || params[:predetermined_objective_id] || params[:kpi_owner_id] || params[:kpi] || params[:unit_of_measurement] || params[:mcore_classification_id] || params[:strategic_objective_id] || params[:source_of_evidence] || params[:baseline] || params[:annual_target] || params[:revised_target] || params[:national_kpa_id] || params[:ndp_objective_id] || params[:kpi_concept_id] || params[:kpi_type_id] || params[:provincial_strategic_outcome_id] || params[:ward_id] || params[:area_id] || params[:performance_standard] || params[:kpi_calculation_type_id] || params[:kpi_target_type_id])
@@ -184,25 +184,14 @@ class DepartmentalSdbipProgressesController < ApplicationController
     @departmental_sdbip_progresses = @sdbip_progresses
 
      respond_to do |format|
-<<<<<<< HEAD
 
          format.html
          format.csv { send_data @audit_logs.report_to_csv , :type => 'text/csv', :filename => "#{params[:file_name]}-#{Time.now.strftime('%d-%m-%y--%H-%M')}.csv" }
          format.xls  { send_data @audit_logs.report_to_csv(col_sep: "\t"), :type => 'text/xls', :filename => "#{params[:file_name]}-#{Time.now.strftime('%d-%m-%y--%H-%M')}.xls"  }
          format.pdf do
           pdf = ReportPdf.new(@departmental_sdbips)
-=======
-         format.html
-         format.csv { send_data @audit_logs.to_csv, :filename => "file_name-#{Time.now.strftime('%d-%m-%y--%H-%M')}.csv" }
-         #format.xls  { send_data @departmental_sdbip_progresses.report_to_csv(params[:data_value],params[:selected_array_of_values],col_sep: "\t"), :type => 'text/xls', :filename => "file_name-#{Time.now.strftime('%d-%m-%y--%H-%M')}.xls"  }
-         #format.pdf do
-        #  pdf = ReportPdf.new(@departmental_sdbips)
->>>>>>> 12a012c503ff174817856df6e91fde88486d5de9
-          #send_data pdf.render, filename: 'report.pdf', type: 'application/pdf', :layout => 'landscape'
-        #end
-
       end
-
+    end
   end
 
   def show
