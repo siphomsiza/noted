@@ -73,14 +73,14 @@ end
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
-      flash[:success] = "#{@user.firstname} #{@user.surname}'s details updated successfully."
+      flash[:success] = "Profile updated"
       if admin_user && !correct_user
         redirect_to users_url
       elsif !admin_user && correct_user
         redirect_to users_url
       end
     else
-      flash[:danger] = "#{@user.firstname} #{@user.surname}'s details not updated."
+      flash[:danger] = "Profile not updated."
       redirect_to users_url
     end
   end
@@ -94,7 +94,7 @@ end
   def deactivate
     @user = User.find(params[:id])
     if @user.update_columns(:activated => false, :activated_at => Time.zone.now)
-      flash[:success] = "#{@user.firstname} #{@user.surname}'s account deactivated successfully."
+      flash[:success] = "Account deactivated successfully."
       redirect_to users_path
     end
 
@@ -127,20 +127,20 @@ end
   def set_normal_user
     @user = User.find(params[:id])
     if @user.update_columns(:admin => false)
-      flash[:success] = "#{@user.firstname} #{@user.surname} removed as System Administrator successfully."
+      flash[:success] = "User removed as System Administrator successfully."
       redirect_to users_path
     else
-      flash[:danger] = "Failed to remove #{@user.firstname} #{@user.surname} as System Administrator."
+      flash[:danger] = "Failed to remove #{@user.firstname} as System Administrator."
       redirect_to :back
     end
   end
   def terminate
     @user = User.find(params[:id])
     if @user.update_columns(:terminated => true, :terminated_at => Time.zone.now,:status => "Terminated")
-      flash[:success] = "#{@user.firstname} #{@user.surname}'s account terminated successfully."
+      flash[:success] = "Account terminated successfully."
       redirect_to users_path
     else
-      flash[:danger] = "Failed to terminate #{@user.firstname} #{@user.surname}'s account."
+      flash[:danger] = "Failed to terminate #{@user.firstname}'s Account."
       redirect_to :back
     end
 
@@ -159,10 +159,10 @@ end
       max_attempts.to_i
       max_attempts += 1
       if @user.update_columns(:login_attempts=>max_attempts, :activated=> false, :status => "Locked")
-        flash[:success] = "#{@user.firstname} #{@user.surname}'s account locked successfully."
+        flash[:success] = "#{@user.firstname}'s account locked successfully."
         redirect_to users_path
       else
-        flash[:danger] = "Failed to lock #{@user.firstname} #{@user.surname}'s account."
+        flash[:danger] = "Failed to lock #{@user.firstname}'s account."
         redirect_to :back
       end
 
@@ -170,10 +170,10 @@ end
     def unlock_user
       @user = User.find(params[:id])
       if @user.update_columns(:login_attempts=>0, :activated => true, :status => "Activated")
-        flash[:success] = "Unlocked #{@user.firstname} #{@user.surname}'s account successfully."
+        flash[:success] = "Unlocked #{@user.firstname}'s account successfully."
         redirect_to users_path
       else
-        flash[:danger] = "Failed to unlock #{@user.firstname} #{@user.surname}'s account."
+        flash[:danger] = "Failed to unlock #{@user.firstname}'s account."
         redirect_to :back
       end
 

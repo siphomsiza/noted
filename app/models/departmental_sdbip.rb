@@ -414,14 +414,14 @@ def self.report_to_csv(options = {})
 
 end
 
-def self.to_csv(options = {})
-  CSV.generate(options) do |csv|
-    column_names = ["KPI Ref no.","KPI","Department","Subdepartment","KPA","KPI Type","KPI Owner","Strategic Objectives","Baseline","Annual Target","Revised Target","1st Quarter Target","2nd Quarter Target","3rd Quarter Target","4th Quarter Target","Area","Ward","Source of Evidence","Unit of Measurement"]
-    csv << column_names
-    all.each do |departmental_sdbip|
-      csv << [departmental_sdbip.kpi_ref_number, departmental_sdbip.kpi,departmental_sdbip.department.name, departmental_sdbip.subdepartment.subdepartment_name,departmental_sdbip.kpa.name,departmental_sdbip.kpi_type.name,departmental_sdbip.kpi_owner.name,departmental_sdbip.strategic_objective.name,departmental_sdbip.baseline,departmental_sdbip.annual_target,departmental_sdbip.revised_target,departmental_sdbip.first_quarter_target,departmental_sdbip.second_quarter_target,departmental_sdbip.third_quarter_target,departmental_sdbip.fourth_quarter_target, departmental_sdbip.area.name,departmental_sdbip.ward.name,departmental_sdbip.source_of_evidence,departmental_sdbip.unit_of_measurement]
-    end
-  end
+	def self.to_csv(options = {})
+		CSV.generate(options) do |csv|
+			column_names = ["KPI Ref no.","KPI","Department","Subdepartment","KPA","KPI Type","KPI Owner","Strategic Objectives","Baseline","Annual Target","Revised Target","1st Quarter Target","2nd Quarter Target","3rd Quarter Target","4th Quarter Target","Area","Ward","Source of Evidence","Unit of Measurement"]
+    	csv << column_names
+    	all.each do |departmental_sdbip|
+      	csv << departmental_sdbip.attributes.values_at(*column_names)#[departmental_sdbip.kpi_ref_number, departmental_sdbip.kpi,departmental_sdbip.department.name, departmental_sdbip.subdepartment.subdepartment_name,departmental_sdbip.kpa.name,departmental_sdbip.kpi_type.name,departmental_sdbip.kpi_owner.name,departmental_sdbip.strategic_objective.name,departmental_sdbip.baseline,departmental_sdbip.annual_target,departmental_sdbip.revised_target,departmental_sdbip.first_quarter_target,departmental_sdbip.second_quarter_target,departmental_sdbip.third_quarter_target,departmental_sdbip.fourth_quarter_target, departmental_sdbip.area.name,departmental_sdbip.ward.name,departmental_sdbip.source_of_evidence,departmental_sdbip.unit_of_measurement]
+    	end
+  	end
 	end
 
 	def self.search(subdepartment_id,kpi_type_id,start_date,end_date)

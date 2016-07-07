@@ -1,5 +1,5 @@
 $(document).ready(function () {
-
+    
 window.setTimeout(function() {
     $(".alert").fadeTo(1500, 0).slideUp(500, function(){
         $(this).remove();
@@ -56,16 +56,15 @@ $(document).ready(function(){
 
   $(function(){
         $(document).on('change','#selected_department', function(){
-           var select_value = $( "#selected_department option:selected" ).text();
+           var select_value = $(this).val();
            $('#current_department').val(select_value);
 
         });
         $(document).on('change','#selected_subdepartment', function(){
-           var select_value = $( "#selected_subdepartment option:selected" ).text();
+           var select_value = $(this).val();
            $('#current_subdepartment').val(select_value);
 
         });
-
   });
 
 
