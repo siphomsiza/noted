@@ -35,7 +35,7 @@ RSpec.describe UsersController, :type => :controller do
         get :index
       end
       xit {expect(response).to redirect_to(login_path)}
-      it {flash[:danger].should eq("Please log in.")}
+      it {expect(flash[:danger]).to eq("Please log in.")}
     end
 
   end
@@ -67,7 +67,7 @@ RSpec.describe UsersController, :type => :controller do
     end
     context "user is not logged on to the system" do
       xit {expect(response).to redirect_to(login_path)}
-      xit {flash[:danger].should eq("Please log in.")}
+      xit {expect(flash[:danger]).to eq("Please log in.")}
     end
   end
   describe "#edit" do
@@ -82,7 +82,7 @@ RSpec.describe UsersController, :type => :controller do
     end
     context "user is not logged on to the system" do
       xit {expect(response).to redirect_to(login_path)}
-      it {flash[:danger].should eq("Please log in.")}
+      it {expect(flash[:danger]).to eq("Please log in.")}
     end
   end
   describe "#edit new user" do
@@ -98,7 +98,7 @@ RSpec.describe UsersController, :type => :controller do
     end
     context "user is not logged on to the system" do
       xit {expect(response).to redirect_to(login_path)}
-      xit {flash[:danger].should eq("Please log in.")}
+      xit {expect(flash[:danger]).to eq("Please log in.")}
     end
   end
   describe "#edit active user" do
@@ -114,7 +114,7 @@ RSpec.describe UsersController, :type => :controller do
     end
     context "user is not logged on to the system" do
       xit {expect(response).to redirect_to(login_path)}
-      xit {flash[:danger].should eq("Please log in.")}
+      xit {expect(flash[:danger]).to eq("Please log in.")}
     end
   end
   describe "#edit user profile" do
@@ -129,7 +129,7 @@ RSpec.describe UsersController, :type => :controller do
     end
     context "user is not logged on to the system" do
       xit {expect(response).to redirect_to(login_path)}
-      xit {flash[:danger].should eq("Please log in.")}
+      xit {expect(flash[:danger]).to eq("Please log in.")}
     end
   end
   describe "#update" do
@@ -161,7 +161,7 @@ RSpec.describe UsersController, :type => :controller do
     end
     context "user is not logged on to the system" do
       xit {expect(response).to redirect_to(login_path)}
-      xit {flash[:danger].should eq("Please log in.")}
+      xit {expect(flash[:danger]).to eq("Please log in.")}
     end
   end
   describe "#set admin" do
@@ -177,7 +177,7 @@ RSpec.describe UsersController, :type => :controller do
     end
     context "user is not logged on to the system" do
       xit {expect(response).to redirect_to(login_path)}
-     xit {flash[:danger].should eq("Please log in.")}
+     xit {expect(flash[:danger]).to eq("Please log in.")}
     end
   end
   describe "#set maximum attempts" do
@@ -193,7 +193,7 @@ RSpec.describe UsersController, :type => :controller do
     end
     context "user is not logged on to the system" do
       xit {expect(response).to redirect_to(login_path)}
-      xit {flash[:danger].should eq("Please log in.")}
+      xit {expect(flash[:danger]).to eq("Please log in.")}
     end
   end
   describe "#set normal user" do
@@ -209,7 +209,7 @@ RSpec.describe UsersController, :type => :controller do
     end
     context "user is not logged on to the system" do
       xit {expect(response).to redirect_to(login_path)}
-      xit {flash[:danger].should eq("Please log in.")}
+      xit {expect(flash[:danger]).to eq("Please log in.")}
     end
   end
   describe "#terminate" do
@@ -225,7 +225,7 @@ RSpec.describe UsersController, :type => :controller do
     end
     context "user is not logged on to the system" do
       xit {expect(response).to redirect_to(login_path)}
-      xit {flash[:danger].should eq("Please log in.")}
+      xit {expect(flash[:danger]).to eq("Please log in.")}
     end
   end
   describe "#restore" do
@@ -241,7 +241,7 @@ RSpec.describe UsersController, :type => :controller do
     end
     context "user is not logged on to the system" do
       xit {expect(response).to redirect_to(login_path)}
-      xit {flash[:danger].should eq("Please log in.")}
+      xit {expect(flash[:danger]).to eq("Please log in.")}
     end
   end
   describe "#lock user" do
@@ -257,7 +257,7 @@ RSpec.describe UsersController, :type => :controller do
     end
     context "user is not logged on to the system" do
       xit {expect(response).to redirect_to(login_path)}
-      xit {flash[:danger].should eq("Please log in.")}
+      xit {expect(flash[:danger]).to eq("Please log in.")}
     end
   end
   describe "#unlock user" do
@@ -273,7 +273,7 @@ RSpec.describe UsersController, :type => :controller do
     end
     context "user is not logged on to the system" do
       xit {expect(response).to redirect_to(login_path)}
-      xit {flash[:danger].should eq("Please log in.")}
+      xit {expect(flash[:danger]).to eq("Please log in.")}
     end
   end
   describe "#activate" do
@@ -289,7 +289,7 @@ RSpec.describe UsersController, :type => :controller do
     end
     context "user is not logged on to the system" do
       xit {expect(response).to redirect_to(login_path)}
-      xit {flash[:danger].should eq("Please log in.")}
+      xit {expect(flash[:danger]).to eq("Please log in.")}
     end
   end
   def user
