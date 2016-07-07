@@ -1,5 +1,5 @@
 
-<%= form_tag departmental_sdbip_progresses_path(format: "csv"), method: :get do %>
+<%= form_tag  method: :get do %>
 <div class="allboxes">
   <fieldset id="select-info">
     <legend><br/>1. Select the information to be displayed in the report:</legend>
@@ -453,18 +453,8 @@
       <%= select_tag :kpi_type_id, options_for_select(KpiType.all.collect {|p| [ p.name, p.id ] }),{:id=>'kpi-type-filter',:multiple => "true",:class=>'form-control'} %>
     </div>
     <div class="form-group col col-lg-12">
-      <label class="control-label">Impact:</label>
-      <div class="input-group col col-lg-12">
-        <div class="col col-lg-6">
-          <%= select_tag :impact, options_for_select(DepartmentalSdbip.all.collect {|p| [ p.impact, p.id ] }),{:multiple => "true",:class=>'form-control'} %>
-        </div>
-        <div class="col col-lg-6">
-          <select class="form-control">
-            <option>Match any words</option>
-            <option>Match exact words</option>
-          </select>
-        </div>
-      </div>
+      <label>Impact:</label>
+      <%= select_tag :impact, options_for_select(DepartmentalSdbip.all.collect {|p| [ p.impact, p.id ] }),{:multiple => "true",:class=>'form-control'} %>
     </div>
     <div class="form-group col col-lg-12">
       <label>Provincial Strategic Outcome:</label>
