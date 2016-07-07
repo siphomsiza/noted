@@ -27,9 +27,9 @@ class Activity < ActiveRecord::Base
       if top_layer_kpi_ref_filters == "all kpis"
 
       elsif top_layer_kpi_ref_filters == "not linked to top layer kpi"
-          @audits = @audits.where(:top_layer_kpi_ref=> "")
+          @audits = @audits.where(:top_layer_kpi_ref=> nil)
       elsif top_layer_kpi_ref_filters == "linked to top layer kpi"
-          @audits = @audits.where.not(:top_layer_kpi_ref=> "")
+          @audits = @audits.where.not(:top_layer_kpi_ref=> nil)
       end
     end
 
@@ -38,9 +38,9 @@ class Activity < ActiveRecord::Base
       if capital_project_filters == "all kpis"
 
       elsif capital_project_filters == "operational kpis only"
-          @audits = @audits.where(:kpi_type =>{:name => "Operational"})
+          @audits = @audits.where(:departmental_sdbip =>{:kpi_type_id => 2 })
       elsif capital_project_filters == "kpis associated with capital projects only"
-          @audits = @audits.where.not(:capital_project_id=> "")
+          @audits = @audits.where.not(:capital_project_id=> nil)
       end
 
     end
