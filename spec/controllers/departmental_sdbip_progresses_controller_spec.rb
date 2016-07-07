@@ -85,7 +85,7 @@ RSpec.describe DepartmentalSdbipProgressesController, :type => :controller do
         get :index
       end
       it {expect(response).to redirect_to(login_path)}
-      it {flash[:danger].should eq("Please log in.")}
+      it {expect(flash[:danger]).to eq("Please log in.")}
     end
 
 
