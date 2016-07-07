@@ -499,6 +499,8 @@ GEM
     sendgrid (1.2.4)
       json
     sexp_processor (4.7.0)
+    shoulda-matchers (3.1.1)
+      activesupport (>= 4.0.0)
     simplecov (0.11.2)
       docile (~> 1.1.0)
       json (~> 1.8)
@@ -615,6 +617,7 @@ DEPENDENCIES
   sass-rails (= 5.0.4)
   sdoc (= 0.4.1)
   sendgrid
+  shoulda-matchers
   simplecov (= 0.11.2)
   simplecov-rcov (= 0.2.3)
   spring (= 1.6.4)

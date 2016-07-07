@@ -71,6 +71,7 @@ group :test do
   gem 'database_cleaner',               '1.5.3' # required by Cucumber
   gem 'autotest-rails',                 '4.2.1'
   gem 'factory_girl_rails',             '4.7.0' # if using FactoryGirl
+  gem 'shoulda-matchers', require: false
 end
 
 group :production do
