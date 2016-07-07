@@ -183,7 +183,7 @@
 		<%= f.label :area_id, "Area" %><br>
 		<%= f.select :area_id, Area.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select Area"}, class: "form-control" %>
 		<%= f.label :performance_standard, "Performance Standard" %><br>
-    <%= f.select :performance_standard, options_for_select(["KPI Not Measured","KPI Not Met", "KPI Almost Met", "KPI Met", "KPI Well Met", "KPI Extremely Well Met"]),
+    <%= f.select :performance_standard, options_for_select(["KPI Not Met", "KPI Almost Met", "KPI Met", "KPI Well Met", "KPI Extremely Well Met"]),
                                           {}, {:class => "form-control"} %>
 
 		<%= f.label :past_year_performance, "Past Year Performance" %><br>

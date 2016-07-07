@@ -1,11 +1,12 @@
 $(function(){
   $(document).on('change','#selected_department_update', function(){
-     var select_value = $( "#selected_department_update option:selected" ).text();
+     var select_value = $(this).val();
      $('#current_department_update').val(select_value);
-     
+     alert( "Handler for .change() called." + select_value );
   });
   $(document).on('change','#selected_subdepartment_update', function(){
-     var select_value = $( "#selected_subdepartment_update option:selected" ).text();
+     var select_value = $(this).val();
+     alert( "Handler for .change() called." + select_value );
      $('#current_subdepartment_update').val(select_value);
 
   });
