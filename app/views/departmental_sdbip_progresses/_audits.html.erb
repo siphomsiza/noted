@@ -392,11 +392,12 @@
     </div>
     <div class="form-group col col-lg-12">
       <label class="control-label">Previous Year Actual Performance:</label>
-      <%= select_tag :performance_standard, options_for_select(DepartmentalSdbip.uniq.collect {|p| [ p.performance_standard, p.id ] }),{:multiple => "true",:class=>'form-control'} %>
+
+      <%= select_tag :past_year_performance, options_for_select(DepartmentalSdbip.where.not(past_year_performance: " ").collect {|p| [ p.past_year_performance, p.id ] }),{:multiple => "true",:class=>'form-control'} %>
     </div>
     <div class="form-group col col-lg-12">
       <label class="control-label">Performance Standard:</label>
-        <%= select_tag :past_year_performance, options_for_select(DepartmentalSdbip.all.collect {|p| [ p.past_year_performance, p.id ] }),{:multiple => "true",:class=>'form-control'} %>
+        <%= select_tag :performance_standard, options_for_select(["KPI Not Met", "KPI Almost Met", "KPI Met", "KPI Well Met", "KPI Extremely Well Met"]),{:multiple => "true",:class=>'form-control'} %>
     </div>
     <div class="form-group col col-lg-12">
       <%= hidden_field_tag "top_layer_kpi_ref_filters",nil,:multiple => false,:id=> "top_layer_kpi_ref_filter" %>
