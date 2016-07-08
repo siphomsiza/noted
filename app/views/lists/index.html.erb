@@ -37,93 +37,256 @@ $(function() {
     <div id = "myTabContent" class = "tab-content">
 
      <div class = "tab-pane active fade in" id = "lists">
-      <div class="col col-lg-12">
-<div class="accordion" id="accordion2">
-  <div class="accordion-group">
-    <div class="accordion-heading">
-      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
-        Collapsible Group Item #1
-      </a>
-    </div>
-    <div id="collapseOne" class="accordion-body collapse in">
-      <div class="accordion-inner">
-        Anim pariatur cliche...
-      </div>
-    </div>
-  </div>
-  <div class="accordion-group">
-    <div class="accordion-heading">
-      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
-        Collapsible Group Item #2
-      </a>
-    </div>
-    <div id="collapseTwo" class="accordion-body collapse">
-      <div class="accordion-inner">
-        Anim pariatur cliche...
-      </div>
-    </div>
-  </div>
-</div>
-				<div class="table-responsive">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>Areas</th>
-						<th>Wards</th>
-            <th>KPI Types</th>
-						<th>KPI Target Types</th>
-            <th>KPI Calculation Types</th>
-            <th>KPI Concepts</th>
-						<th>KPI Owners</th>
-						<th>KPAs</th>
-						<th>Mscore Classifications</th>
-						<th>Funding Sources</th>
-						<th>Risk Ratings</th>
-						<th>National Outcomes</th>
-						<th>NDP Objectives</th>
-						<th>Predetermined Objectives</th>
-						<th>Strategic Objectives</th>
-						<th>Reporting Category</th>
-						<th>Provincial Strategic Outcomes</th>
-          </tr>
-        </thead>
+      <div class="col col-lg-8 col-lg-offset-2"><br/>
+				<div class="bs-example">
+				    <div class="panel-group" id="accordion">
+				        <div class="panel panel-default">
+				            <div class="panel-heading">
+				                <h4 class="panel-title">
+				                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Areas</a>
+				                </h4>
+				            </div>
+				            <div id="collapseOne" class="panel-collapse collapse in">
+				                <div class="panel-body">
+				                    <% Area.all.each do |area| %>
+															<li><%= area.name %></li>
+														<% end %>
+				                </div>
+				            </div>
+				        </div>
+				        <div class="panel panel-default">
+				            <div class="panel-heading">
+				                <h4 class="panel-title">
+				                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Funding Sources</a>
+				                </h4>
+				            </div>
+				            <div id="collapseTwo" class="panel-collapse collapse">
+				                <div class="panel-body">
+													<% FundingSource.all.each do |funding_source| %>
+														<li><%= funding_source.name %></li>
+													<% end %>
+				                </div>
+				            </div>
+				        </div>
+				        <div class="panel panel-default">
+				            <div class="panel-heading">
+				                <h4 class="panel-title">
+				                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">GFS Classifications</a>
+				                </h4>
+				            </div>
+				            <div id="collapseThree" class="panel-collapse collapse">
+				                <div class="panel-body">
+													<% MscoreClassification.all.each do |mscore_classification| %>
+														<li><%= mscore_classification.name %></li>
+													<% end %>
+				                </div>
+				            </div>
+				        </div>
+								<div class="panel panel-default">
+				            <div class="panel-heading">
+				                <h4 class="panel-title">
+				                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">KPAs</a>
+				                </h4>
+				            </div>
+				            <div id="collapseFour" class="panel-collapse collapse">
+				                <div class="panel-body">
+													<% Kpa.all.each do |kpa| %>
+														<li><%= kpa.name %></li>
+													<% end %>
+				                </div>
+				            </div>
+				        </div>
 
-        <tbody>
-          <tr>
-            <td>
-							<ol>
-						<% @areas.each do |area|%>
-							<li><%= area.name %>
-							</li>
-						<% end %>
-						</ol>
-					</td>
-            <td><ol>
-					<% @wards.each do |ward|%>
-						<li><%= ward.name %>
-						</li>
-					<% end %>
-					</ol>
-				</td>
-				<td>
-					<ol>
-				<% @areas.each do |area|%>
-					<li><%= area.name %>
-					</li>
-				<% end %>
-				</ol>
-			</td>
-				<td><ol>
-			<% @wards.each do |ward|%>
-				<li><%= ward.name %>
-				</li>
-			<% end %>
-			</ol>
-		</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+								<div class="panel panel-default">
+				            <div class="panel-heading">
+				                <h4 class="panel-title">
+				                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">KPI Calculation Types</a>
+				                </h4>
+				            </div>
+				            <div id="collapseFive" class="panel-collapse collapse">
+				                <div class="panel-body">
+				                    <% KpiCalculationType.all.each do |kpi_calculation_type| %>
+  															<li><%= kpi_calculation_type.name %></li>
+														<% end %>
+				                </div>
+				            </div>
+				        </div>
+								<div class="panel panel-default">
+				            <div class="panel-heading">
+				                <h4 class="panel-title">
+				                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseSix">KPI Concepts</a>
+				                </h4>
+				            </div>
+				            <div id="collapseSix" class="panel-collapse collapse">
+				                <div class="panel-body">
+				                    <% KpiConcept.all.each do |kpi_concept| %>
+  														<li><%= kpi_concept.name %></li>
+														<% end %>
+				                </div>
+				            </div>
+				        </div>
+								<div class="panel panel-default">
+				            <div class="panel-heading">
+				                <h4 class="panel-title">
+				                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseKOT">KPI Owner Titles</a>
+				                </h4>
+				            </div>
+				            <div id="collapseKOT" class="panel-collapse collapse">
+				                <div class="panel-body">
+				                    <% KpiOwner.all.each do |kpi_owner| %>
+  														<li><%= kpi_owner.name %></li>
+														<% end %>
+				                </div>
+				            </div>
+				        </div>
+								<div class="panel panel-default">
+				            <div class="panel-heading">
+				                <h4 class="panel-title">
+				                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseSeven">KPI Target Types</a>
+				                </h4>
+				            </div>
+				            <div id="collapseSeven" class="panel-collapse collapse">
+				                <div class="panel-body">
+				                    <% KpiTargetType.all.each do |kpi_target_type| %>
+  														<li><%= kpi_target_type.name %></li>
+														<% end %>
+				                </div>
+				            </div>
+				        </div>
+
+								<div class="panel panel-default">
+				            <div class="panel-heading">
+				                <h4 class="panel-title">
+				                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseEight">KPI Types</a>
+				                </h4>
+				            </div>
+				            <div id="collapseEight" class="panel-collapse collapse">
+				                <div class="panel-body">
+				                    <% KpiType.all.each do |kpi_type| %>
+  														<li><%= kpi_type.name %></li>
+														<% end %>
+				                </div>
+				            </div>
+				        </div>
+
+								<div class="panel panel-default">
+				            <div class="panel-heading">
+				                <h4 class="panel-title">
+				                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseNine">National Outcomes</a>
+				                </h4>
+				            </div>
+				            <div id="collapseNine" class="panel-collapse collapse">
+				                <div class="panel-body">
+				                    <% NationalOutcome.all.each do |national_outcome| %>
+  														<li><%= national_outcome.name %></li>
+														<% end %>
+				                </div>
+				            </div>
+				        </div>
+								<div class="panel panel-default">
+				            <div class="panel-heading">
+				                <h4 class="panel-title">
+				                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTen">NDP Objectives</a>
+				                </h4>
+				            </div>
+				            <div id="collapseTen" class="panel-collapse collapse">
+				                <div class="panel-body">
+				                    <% NdpObjective.all.each do |ndp_objective| %>
+  														<li><%= ndp_objective.name %></li>
+														<% end %>
+				                </div>
+				            </div>
+				        </div>
+
+								<div class="panel panel-default">
+				            <div class="panel-heading">
+				                <h4 class="panel-title">
+				                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseEleven">Pre-determined Objectives</a>
+				                </h4>
+				            </div>
+				            <div id="collapseEleven" class="panel-collapse collapse">
+				                <div class="panel-body">
+				                    <% PredeterminedObjective.all.each do |predetermined_objective| %>
+  															<li><%= predetermined_objective.name %></li>
+														<% end %>
+				                </div>
+				            </div>
+				        </div>
+
+								<div class="panel panel-default">
+				            <div class="panel-heading">
+				                <h4 class="panel-title">
+				                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwelve">Provincial Strategic Outcomes</a>
+				                </h4>
+				            </div>
+				            <div id="collapseTwelve" class="panel-collapse collapse">
+				                <div class="panel-body">
+				                    <% ProvincialStrategicOutcome.all.each do |provincial_strategic_outcome| %>
+  														<li><%= provincial_strategic_outcome.name %></li>
+														<% end %>
+				                </div>
+				            </div>
+				        </div>
+								<div class="panel panel-default">
+				            <div class="panel-heading">
+				                <h4 class="panel-title">
+				                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseThirteen">Reporting Category</a>
+				                </h4>
+				            </div>
+				            <div id="collapseThirteen" class="panel-collapse collapse">
+				                <div class="panel-body">
+				                    <% ReportingCategory.all.each do |reporting_category| %>
+  															<li><%= reporting_category.name %></li>
+														<% end %>
+				                </div>
+				            </div>
+				        </div>
+								<div class="panel panel-default">
+				            <div class="panel-heading">
+				                <h4 class="panel-title">
+				                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseFourteen">Risk Rating</a>
+				                </h4>
+				            </div>
+				            <div id="collapseFourteen" class="panel-collapse collapse">
+				                <div class="panel-body">
+				                    <% RiskRating.all.each do |risk_rating| %>
+  															<li><%= risk_rating.name %></li>
+														<% end %>
+				                </div>
+				            </div>
+				        </div>
+								<div class="panel panel-default">
+				            <div class="panel-heading">
+				                <h4 class="panel-title">
+				                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseObj">Strategic Objectives</a>
+				                </h4>
+				            </div>
+				            <div id="collapseObj" class="panel-collapse collapse">
+				                <div class="panel-body">
+				                    <% StrategicObjective.all.each do |strategic_objective| %>
+  															<li><%= strategic_objective.name %></li>
+														<% end %>
+				                </div>
+				            </div>
+				        </div>
+								<div class="panel panel-default">
+				            <div class="panel-heading">
+				                <h4 class="panel-title">
+				                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseFifthteen">Wards</a>
+				                </h4>
+				            </div>
+				            <div id="collapseFifthteen" class="panel-collapse collapse">
+				                <div class="panel-body">
+				                    <% Ward.all.each do |wards| %>
+  														<li><%= wards.name %></li>
+														<% end %>
+				                </div>
+				            </div>
+				        </div>
+				    </div>
+
+				</div>
+
 	</div>
 	</div>
 	<div class = "tab-pane fade" id = "add_lists">

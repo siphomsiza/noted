@@ -1734,6 +1734,20 @@ input {
   margin-bottom: 0 auto;
 }
 }
+#lists{
+  a{
+    color: $deepblue !important;
+    text-decoration: none;
+  }
+   a:hover {
+    color: $deepblue;
+    text-decoration: none;
+  }
+  li{
+    text-shadow: none;
+      color: $deepblue;
+  }
+}
 
 #kpi-owner-checkbox,
 #unit-of-measurement,
