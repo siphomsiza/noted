@@ -19,7 +19,8 @@ class SdbipTimePeriodsController < ApplicationController
       flash[:success]="Sdbip Time Period was successfully created."
       redirect_to sdbip_time_periods_path
     else
-      render "new"
+      flash[:danger]="Sdbip Time Period was not updated."
+      redirect_to :back
     end
   end
 
@@ -51,7 +52,8 @@ class SdbipTimePeriodsController < ApplicationController
       flash[:success]="Sdbip Time Period was successfully updated."
       redirect_to sdbip_time_periods_path
     else
-      render "edit"
+      flash[:danger]="Sdbip Time Period was not updated."
+      redirect_to :back
     end
   end
 
@@ -59,7 +61,7 @@ class SdbipTimePeriodsController < ApplicationController
     @sdbip_time_period = SdbipTimePeriod.find(params[:id])
     @sdbip_time_period.destroy
         flash[:success]="Sdbip Time Period was successfully deleted."
-      redirect_to sdbip_time_periods_path
+        redirect_to sdbip_time_periods_path
   end
 
 
