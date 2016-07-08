@@ -14,7 +14,8 @@
 <% end %>
 
 <%= f.label :user_id, "Select User:" %>
-<%= f.select :user_id, User.all.collect {|x| [x.firstname, x.id]}, {:include_blank => "Select User"}, class: "form-control" %>
+<% @users = User.all#.includes(:user).where(:user_id => nil) %>
+<%= f.select :user_id, @users.all.collect {|x| [x.firstname, x.id]}, {:include_blank => "Select User"}, class: "form-control" %>
 <br/>
 <div class="row">
 	<div class="col-lg-11">
