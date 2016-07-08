@@ -1,0 +1,277 @@
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+  <h3></h3>
+</div>
+<div class="modal-body">
+  <div class="panel panel-default col-md-6">
+      <div class="panel-body">
+        <%= column_chart @departmental_sdbips.group(:performance_standard,:subdepartment_name).count, width: "400px", height: "400px", stacked: true, colors: ["limegreen", "darkgreen", "red","orange", "darkblue"] %>
+      </div>
+      <!-- /.panel-body -->
+    </div>
+
+   <div class="panel panel-default col-md-6">
+      <div class="panel-body">
+
+        <%= pie_chart @departmental_sdbips.group(:performance_standard).count, width: "400px", height: "400px", colors: ["limegreen", "darkgreen", "red","orange", "darkblue"] %>
+      </div>
+      <!-- /.panel-body -->
+    </div>
+
+   	 <div class="panel-body">
+     <table class="table table-hover">
+     <table class="table table-hover">
+ 	<thead><th></th>
+
+        <% @subdepartments.each do |subd| %>
+        <th><%= subd.subdepartment_name %></th>
+        <% end %>
+    </thead>
+    	<tr>
+
+          <th>KPI Not Yet Measured</th>
+
+
+          <td><%= @kpi_not_yet_measured_municipal_manager_office.count %>
+
+            <% if @all_peformance_standard_municipal_manager_office.count > 0 %>
+            (<%= (@kpi_not_yet_measured_municipal_manager_office.count * 100)/@all_peformance_standard_municipal_manager_office.count %> %)
+            <% end %>
+          </td>
+
+          <td><%= @kpi_not_yet_measured_internal_audit.count %>
+
+            <% if @all_peformance_standard_internal_audit.count > 0 %>
+            (<%= (@kpi_not_yet_measured_internal_audit.count * 100)/@all_peformance_standard_internal_audit.count %> %)
+            <% end %>
+          </td>
+
+          <td><%= @kpi_not_yet_measured_performance_management_unit.count %>
+
+            <% if @all_peformance_standard_performance_management_unit.count > 0 %>
+            (<%= (@kpi_not_yet_measured_performance_management_unit.count * 100)/@all_peformance_standard_performance_management_unit.count %> %)
+            <% end %>
+          </td>
+
+          <td><%= @kpi_not_yet_measured_legal_services.count %>
+
+            <% if @all_peformance_standard_legal_services.count > 0 %>
+            (<%= (@kpi_not_yet_measured_legal_services.count * 100)/@all_peformance_standard_legal_services.count %> %)
+            <% end %>
+          </td>
+
+          <td><%= @kpi_not_yet_measured_forestry.count %>
+
+            <% if @all_peformance_standard_forestry.count > 0 %>
+            (<%= (@kpi_not_yet_measured_forestry.count * 100)/@all_peformance_standard_forestry.count %> %)
+            <% end %>
+          </td>
+
+
+		</tr>
+
+        <tr>
+          <th>KPI Not Met</th>
+
+          <td><%= @kpi_not_met_municipal_manager_office.count %>
+
+            <% if @all_peformance_standard_municipal_manager_office.count > 0 %>
+            (<%= (@kpi_not_met_municipal_manager_office.count * 100)/@all_peformance_standard_municipal_manager_office.count %> %)
+            <% end %>
+          </td>
+
+          <td><%= (@kpi_not_met_internal_audit.count) %>
+
+            <% if @all_peformance_standard_internal_audit.count > 0 %>
+            (<%= (@kpi_not_met_internal_audit.count * 100)/@all_peformance_standard_internal_audit.count %> %)
+            <% end %>
+          </td>
+
+          <td><%= (@kpi_not_met_performance_management_unit.count) %>
+
+            <% if @all_peformance_standard_performance_management_unit.count > 0 %>
+            (<%= (@kpi_not_met_performance_management_unit.count * 100)/@all_peformance_standard_performance_management_unit.count %> %)
+            <% end %>
+          </td>
+
+          <td><%= (@kpi_not_met_legal_services.count) %>
+
+            <% if @all_peformance_standard_legal_services.count > 0 %>
+            (<%= (@kpi_not_met_legal_services.count * 100)/@all_peformance_standard_legal_services.count %> %)
+            <% end %>
+          </td>
+
+          <td><%= (@kpi_not_met_forestry.count) %>
+
+            <% if @all_peformance_standard_forestry.count > 0 %>
+            (<%= (@kpi_not_met_forestry.count * 100)/@all_peformance_standard_forestry.count %> %)
+            <% end %>
+          </td>
+
+
+        </tr>
+
+        <tr>
+        <th>KPI Almost Met</th>
+
+        <td><%= @kpi_almost_met_municipal_manager_office.count %>
+
+            <% if @all_peformance_standard_municipal_manager_office.count > 0 %>
+            (<%= (@kpi_almost_met_municipal_manager_office.count * 100)/@all_peformance_standard_municipal_manager_office.count %> %)
+            <% end %>
+          </td>
+
+          <td><%= @kpi_almost_met_internal_audit.count %>
+
+            <% if @all_peformance_standard_internal_audit.count > 0 %>
+            (<%= (@kpi_almost_met_internal_audit.count * 100)/@all_peformance_standard_internal_audit.count %> %)
+            <% end %>
+          </td>
+
+          <td><%= @kpi_almost_met_performance_management_unit.count %>
+
+            <% if @all_peformance_standard_performance_management_unit.count > 0 %>
+            (<%= (@kpi_almost_met_performance_management_unit.count * 100)/@all_peformance_standard_performance_management_unit.count %> %)
+            <% end %>
+          </td>
+
+          <td><%= @kpi_almost_met_legal_services.count %>
+
+            <% if @all_peformance_standard_legal_services.count > 0 %>
+            (<%= (@kpi_almost_met_legal_services.count * 100)/@all_peformance_standard_legal_services.count %> %)
+            <% end %>
+          </td>
+
+          <td><%= @kpi_almost_met_forestry.count %>
+
+            <% if @all_peformance_standard_forestry.count > 0 %>
+            (<%= (@kpi_almost_met_forestry.count * 100)/@all_peformance_standard_forestry.count %> %)
+            <% end %>
+          </td>
+
+        <tr>
+          <th>KPI Met</th>
+
+        <td><%= @kpi_met_municipal_manager_office.count %>
+
+            <% if @all_peformance_standard_municipal_manager_office.count > 0 %>
+            (<%= (@kpi_met_municipal_manager_office.count * 100)/@all_peformance_standard_municipal_manager_office.count %> %)
+            <% end %>
+          </td>
+
+          <td><%= @kpi_met_internal_audit.count %>
+
+            <% if @all_peformance_standard_internal_audit.count > 0 %>
+            (<%= (@kpi_met_internal_audit.count * 100)/@all_peformance_standard_internal_audit.count %> %)
+            <% end %>
+          </td>
+
+          <td><%= @kpi_met_performance_management_unit.count %>
+
+            <% if @all_peformance_standard_performance_management_unit.count > 0 %>
+            (<%= (@kpi_met_performance_management_unit.count * 100)/@all_peformance_standard_performance_management_unit.count %> %)
+            <% end %>
+          </td>
+
+          <td><%= @kpi_met_legal_services.count %>
+
+            <% if @all_peformance_standard_legal_services.count > 0 %>
+            (<%= (@kpi_met_legal_services.count * 100)/@all_peformance_standard_legal_services.count %> %)
+            <% end %>
+          </td>
+
+          <td><%= @kpi_met_forestry.count %>
+
+            <% if @all_peformance_standard_forestry.count > 0 %>
+            (<%= (@kpi_met_forestry.count * 100)/@all_peformance_standard_forestry.count %> %)
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+          <th>KPI Well Met</th>
+
+        <td><%= @kpi_well_met_municipal_manager_office.count %>
+
+            <% if @all_peformance_standard_municipal_manager_office.count > 0 %>
+            (<%= (@kpi_well_met_municipal_manager_office.count * 100)/@all_peformance_standard_municipal_manager_office.count %> %)
+            <% end %>
+          </td>
+
+          <td><%= @kpi_well_met_internal_audit.count %>
+
+            <% if @all_peformance_standard_internal_audit.count > 0 %>
+            (<%= (@kpi_well_met_internal_audit.count * 100)/@all_peformance_standard_internal_audit.count %> %)
+            <% end %>
+          </td>
+
+          <td><%= @kpi_well_met_performance_management_unit.count %>
+
+            <% if @all_peformance_standard_performance_management_unit.count > 0 %>
+            (<%= (@kpi_well_met_performance_management_unit.count * 100)/@all_peformance_standard_performance_management_unit.count %> %)
+            <% end %>
+          </td>
+
+          <td><%= @kpi_well_met_legal_services.count %>
+
+            <% if @all_peformance_standard_legal_services.count > 0 %>
+           (<%= (@kpi_well_met_legal_services.count * 100)/@all_peformance_standard_legal_services.count %> %)
+            <% end %>
+          </td>
+
+          <td><%= @kpi_well_met_forestry.count %>
+
+            <% if @all_peformance_standard_forestry.count > 0 %>
+            (<%= (@kpi_well_met_forestry.count * 100)/@all_peformance_standard_forestry.count %> %)
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+          <th>KPI Extremely Well Met</th>
+          
+        <td><%= @kpi_extremely_well_met_municipal_manager_office.count %>
+
+            <% if @all_peformance_standard_municipal_manager_office.count > 0 %>
+            (<%= (@kpi_extremely_well_met_municipal_manager_office.count * 100)/@all_peformance_standard_municipal_manager_office.count %> %
+            <% end %>)
+          </td>
+
+          <td><%= @kpi_extremely_well_met_internal_audit.count %>
+
+            <% if @all_peformance_standard_internal_audit.count > 0 %>
+            (<%= (@kpi_extremely_well_met_internal_audit.count * 100)/@all_peformance_standard_internal_audit.count %> %
+            <% end %>)
+          </td>
+
+          <td><%= @kpi_extremely_well_met_performance_management_unit.count %>
+
+            <% if @all_peformance_standard_performance_management_unit.count > 0 %>
+            (<%= (@kpi_extremely_well_met_performance_management_unit.count * 100)/@all_peformance_standard_performance_management_unit.count %> %)
+            <% end %>
+          </td>
+
+          <td><%= @kpi_extremely_well_met_legal_services.count %>
+
+            <% if @all_peformance_standard_legal_services.count > 0 %>
+            (<%= (@kpi_extremely_well_met_legal_services.count * 100)/@all_peformance_standard_legal_services.count %> %)
+            <% end %>
+          </td>
+
+          <td><%= @kpi_extremely_well_met_forestry.count %>
+
+            <% if @all_peformance_standard_forestry.count > 0 %>
+            (<%= (@kpi_extremely_well_met_forestry.count * 100)/@all_peformance_standard_forestry.count %> %)
+            <% end %>
+          </td>
+         </tr>
+
+    </table>
+
+  </table>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn pull-right col-lg-2" data-dismiss="modal">Close</button>
+</div>
+</div>
+</div>
