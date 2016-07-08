@@ -208,11 +208,7 @@
 
 		<%= f.label :kpi_calculation_type_id, "KPI Calculation Type" %><br>
 		<%= f.select :kpi_calculation_type_id, KpiCalculationType.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select KPI Calculation Type"}, class: "form-control" %>
-		<%= f.label :start_date, "Start Date:" %><br>
-		<%= f.date_field :start_date, :class => "form-control has-error col-md-5 input-sm" %>
 
-		<%= f.label :end_date, "End Date:" %><br>
-		<%= f.date_field :end_date, :class => "form-control has-error col-md-5 input-sm" %>
     <div class="row">
     <div class="actions col-lg-5">
       <% if current_user.admin? %>
