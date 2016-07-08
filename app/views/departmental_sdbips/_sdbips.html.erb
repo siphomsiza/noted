@@ -38,8 +38,6 @@
         <th class="reporting-category">Reporting Category</th>
         <th class="top-layer-ref">Top Layer KPI Ref</th>
         <th class="kpi-calculation-type">KPI Calculation Type</th>
-        <th class="start-date">Start Date</th>
-        <th class="end-date">End Date</th>
         <th class="created-date">Create Date</th>
         <th class="updated-date">Update Date</th>
 
@@ -84,8 +82,6 @@
         <td class="reporting-category"><% if !departmental_sdbip.reporting_category_id.blank? %><%= departmental_sdbip.reporting_category.name %><% end %></td>
         <td class="top-layer-ref"><%= departmental_sdbip.top_layer_kpi_ref %></td>
         <td class="kpi-calculation-type"><% if !departmental_sdbip.kpi_calculation_type_id.blank? %><%= departmental_sdbip.kpi_calculation_type.name %><% end %></td>
-        <td class="start-date"><%= departmental_sdbip.start_date %></td>
-        <td class="end-date"><%= departmental_sdbip.end_date %></td>
         <td class="created-date"><%= departmental_sdbip.created_at.strftime(' %Y-%B-%d') %></td>
         <td class="updated-date"><%= departmental_sdbip.updated_at.strftime('%d-%B-%Y') %></td>
 

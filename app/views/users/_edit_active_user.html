@@ -93,7 +93,7 @@
                   <section class="row">
                   <label class="col col-lg-4 control-label" for="jobtitle">Job Title</label>
                     <div class="controls col col-lg-8">
-                      <%= f.select :job_title, Jobtitle.all.collect {|x| [x.name, x.name]}, {:include_blank => "Select KPI Owner"}, class: "form-control" %>
+                      <%= f.select :job_title, Jobtitle.all.collect {|x| [x.title, x.title]}, {:include_blank => "Select KPI Owner"}, class: "form-control" %>
                     </div><!-- controls -->
                   </section><!-- row -->
 

@@ -17,7 +17,7 @@ $(function() {
 </li>
 <li><%= link_to "Departments", departments_path %></li>
 <li><%= link_to "Departmental Administrators", roles_path %></li>
-<li><%= link_to "Top Layer Administrators", roles_path %></li>
+<li class="disabled"><%= link_to "Top Layer Administrators", roles_path %></li>
 <li><%= link_to "Headings", headings_path %></li>
 <li><%= link_to "Lists", lists_path %></li>
 <li class="active"><%= link_to "Time Periods", sdbip_time_periods_path %></li>
@@ -67,9 +67,18 @@ $(function() {
               <label class="label label-danger">Closed</label>
               <% end %>
             </td>
-            <td><%= link_to 'Edit', edit_sdbip_time_period_path(sdbip_time_period), class: 'btn btn-mini' %>
+            <td><%= link_to edit_sdbip_time_period_path(sdbip_time_period),remote: true,'data-target' => "#time-periods-modal", 'data-toggle' => 'modal', class: 'btn btn-mini' do %>
+							<span class="glyphicon glyphicon-pencil"></span>&nbsp;Edit
+							<% end %>
+							<div id="time-periods-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+
+	          	</div>
 						&nbsp;
-						<%= link_to 'Delete', sdbip_time_period, class: 'btn btn-mini', method: :delete, data: { confirm: 'Are you sure?' } %></td>
+						<%= link_to sdbip_time_period, class: 'btn btn-mini', method: :delete, data: { confirm: 'Are you sure?' } do %>
+							<span class="glyphicon glyphicon-trash"></span>&nbsp;Delete
+							<% end %>
+
+					</td>
           </tr>
         <% end %>
         </tbody>
