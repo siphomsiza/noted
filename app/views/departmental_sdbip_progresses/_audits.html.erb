@@ -321,7 +321,7 @@
     </div>
     <div class="form-group col col-lg-12">
       <label class="control-label">Baseline:</label>
-          <%= select_tag :baseline,options_for_select(DepartmentalSdbip.all.collect {|p| [ p.baseline, p.id ] }),{:multiple => "true",:class=>'form-control'} %>
+          <%= select_tag :baseline,options_for_select(DepartmentalSdbip.all.collect {|p| [ p.baseline, p.id ] }),{:id=>'baseline-filter',:multiple => "true",:class=>'form-control'} %>
     </div>
     <div class="form-group col col-lg-12">
       <label class="control-label">Target:</label>
@@ -376,7 +376,7 @@
     </div>
     <div class="form-group col col-lg-12">
       <label>Impact:</label>
-      <%= select_tag :impact, options_for_select(DepartmentalSdbip.all.collect {|p| [ p.impact, p.id ] }),{:multiple => "true",:class=>'form-control'} %>
+      <%= select_tag :impact, options_for_select(DepartmentalSdbip.all.collect {|p| [ p.impact, p.id ] }),{:id=>'impact-filter',:multiple => "true",:class=>'form-control'} %>
     </div>
     <div class="form-group col col-lg-12">
       <label>Provincial Strategic Outcome:</label>
@@ -392,31 +392,11 @@
     </div>
     <div class="form-group col col-lg-12">
       <label class="control-label">Previous Year Actual Performance:</label>
-      <div class="input-group col col-lg-12">
-        <div class="col col-lg-6">
-          <input type="text" class="form-control">
-        </div>
-        <div class="col col-lg-6">
-          <select class="form-control">
-            <option>Match any words</option>
-            <option>Match exact words</option>
-          </select>
-        </div>
-      </div>
+      <%= select_tag :performance_standard, options_for_select(DepartmentalSdbip.uniq.collect {|p| [ p.performance_standard, p.id ] }),{:multiple => "true",:class=>'form-control'} %>
     </div>
     <div class="form-group col col-lg-12">
       <label class="control-label">Performance Standard:</label>
-      <div class="input-group col col-lg-12">
-        <div class="col col-lg-6">
-            <%= select_tag :performance_standard, options_for_select(DepartmentalSdbip.all.collect {|p| [ p.performance_standard, p.id ] }),{:multiple => "true",:class=>'form-control'} %>
-        </div>
-        <div class="col col-lg-6">
-          <select class="form-control">
-            <option>Match any words</option>
-            <option>Match exact words</option>
-          </select>
-        </div>
-      </div>
+        <%= select_tag :past_year_performance, options_for_select(DepartmentalSdbip.all.collect {|p| [ p.past_year_performance, p.id ] }),{:multiple => "true",:class=>'form-control'} %>
     </div>
     <div class="form-group col col-lg-12">
       <%= hidden_field_tag "top_layer_kpi_ref_filters",nil,:multiple => false,:id=> "top_layer_kpi_ref_filter" %>
@@ -473,8 +453,9 @@
       </div>
     </div>
     <div class="form-group col col-lg-12">
-
-      <%= submit_tag "Generate",{:selected_columns => nil, :id => "audit-target-report", 'data-target'=>"audit_log_modal", 'data-toggle'=>"modal",:class=>"btn btn-midi col-lg-2 pull-right"} %>
+      <%= submit_tag "PDF",{:selected_columns => nil, :id => "audit-target-report", 'data-target'=>"audit_log_modal", 'data-toggle'=>"modal",:class=>"btn btn-midi col-lg-2 disabled pull-right"} %>&nbsp;
+      <%= submit_tag "Excel",{:selected_columns => nil, :id => "audit-target-report", 'data-target'=>"audit_log_modal", 'data-toggle'=>"modal",:class=>"btn btn-midi col-lg-2 disabled pull-right"} %>&nbsp;
+      <%= submit_tag "CSV",{:selected_columns => nil, :id => "audit-target-report", 'data-target'=>"audit_log_modal", 'data-toggle'=>"modal",:class=>"btn btn-midi col-lg-2 pull-right"} %>
 
     </div>
   </fieldset><!-- personal info -->

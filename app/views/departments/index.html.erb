@@ -19,7 +19,7 @@ $(function() {
 						<%= link_to "Departments", departments_path %>
 				</li>
 				<li><%= link_to "Departmental Administrators", roles_path %></li>
-				<li><%= link_to "Top Layer Administrators", roles_path %></li>
+				<li class="disabled"><%= link_to "Top Layer Administrators", roles_path %></li>
 				<li><%= link_to "Headings", headings_path %></li>
 				<li><%= link_to "Lists", lists_path %></li>
 				<li><%= link_to "Time Periods", sdbip_time_periods_path %></li>
@@ -63,14 +63,12 @@ $(function() {
 						<% department.subdepartments.each do |subdepartment| %>
 						  <li><%=  subdepartment.subdepartment_name %></li>
 							<% end %>
-						
+
 						</td>
              <td><%=  number_to_phone(department.tel_no, :area_code => true, :delimiter => ' ') %></td>
               <td><%=  number_to_phone(department.fax_no, :area_code => true, :delimiter => ' ') %></td>
 
-           <!--<td><%= link_to department, class: "btn btn-mini" do %>
-              <span class="glyphicon glyphicon-list-alt"></span>&nbsp;Show
-            <% end %></td>-->
+           
             <td>
             <% if current_user.admin? %>
             <%= link_to edit_department_path(department),remote: true,'data-target' => "#departments-modal", 'data-toggle' => 'modal', class: "btn btn-mini" do %>

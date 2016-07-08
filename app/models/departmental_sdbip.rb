@@ -438,10 +438,9 @@ end
 			end
 		end
 		if !start_date.blank? && start_date.length > 1
-			@sdbips=@sdbips.where(["start_date >= ?",start_date])
+
 		end
 		if !end_date.blank? && end_date.length > 1
-			@sdbips=@sdbips.where(["end_date <= ?",end_date])
 
 		end
 		@departmental_sdbips = @sdbips

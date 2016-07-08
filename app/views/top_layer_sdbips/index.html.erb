@@ -47,7 +47,7 @@ $(function() {
 						<% if @top_layer_sdbips.blank? && TopLayerSdbip.blank? %>
 						<p> There are no Top Layer SDBIPs currently in the system. <p>
 						<% elsif @top_layer_sdbips.blank? && !TopLayerSdbip.blank? %>
-						<p> You currently have no Top Layer SDBIPs currently. </p>
+						<p> You currently have no Top Layer SDBIPs. </p>
 						<% elsif !@top_layer_sdbips.blank? %>
 						<div class="table-responsive">
 							<%= render 'top_layer_sdbips'%>
@@ -61,7 +61,7 @@ $(function() {
 									<% if @top_layer_sdbips.blank? && TopLayerSdbip.blank? %>
 									<p> There are no Top Layer SDBIPs currently in the system to edit. <p>
 									<% elsif @top_layer_sdbips.blank? && !TopLayerSdbip.blank? %>
-									<p> You currently have no Top Layer SDBIPs currently to edit. </p>
+									<p> You currently have no Top Layer SDBIPs to edit. </p>
 									<% elsif !@top_layer_sdbips.blank? %>
 									<div class="table-responsive">
 										<%= render 'edit_top_layer_sdbip'%>
