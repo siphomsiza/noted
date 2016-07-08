@@ -30,7 +30,7 @@
 
             <% if current_user.admin? && !current_user?(active_user) %> |
             <%= link_to "#", class: "btn btn-sm" do %>
-            <span class=""></span>&nbsp;Edit Access
+            <span class="glyphicon glyphicon-edit"></span>&nbsp;Edit Access
           <% end %>
 
           <% end %>
@@ -38,7 +38,7 @@
           <% if current_user.admin? && !current_user?(active_user) %> |
 
           <%= link_to "",'data-target' => "#reset-password", 'data-toggle' => 'modal', class: "btn btn-sm", :title=>"Click to change your password" do %>
-              <span class=""></span>&nbsp;Reset Password
+              <span class="glyphicon glyphicon-lock"></span>&nbsp;Reset Password
             <% end %>
 
           <% end %>

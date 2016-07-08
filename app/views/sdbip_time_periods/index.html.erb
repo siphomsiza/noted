@@ -50,7 +50,7 @@ $(function() {
             <th>Reminder Date</th>
             <th>Closure Date</th>
             <th>Status</th>
-            <th colspan="2"></th>
+            <th colspan="1"></th>
           </tr>
         </thead>
 
@@ -67,8 +67,9 @@ $(function() {
               <label class="label label-danger">Closed</label>
               <% end %>
             </td>
-            <td><%= link_to 'Edit', edit_sdbip_time_period_path(sdbip_time_period), class: 'btn btn-mini' %></td>
-                      <td><%= link_to 'Delete', sdbip_time_period, class: 'btn btn-mini', method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <td><%= link_to 'Edit', edit_sdbip_time_period_path(sdbip_time_period), class: 'btn btn-mini' %>
+						&nbsp;
+						<%= link_to 'Delete', sdbip_time_period, class: 'btn btn-mini', method: :delete, data: { confirm: 'Are you sure?' } %></td>
           </tr>
         <% end %>
         </tbody>
