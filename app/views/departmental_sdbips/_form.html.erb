@@ -123,7 +123,7 @@
 		<%= f.text_field :impact, :class => "form-control has-error col-md-5" %>
 
 		<%= f.label :provincial_strategic_outcome_id, "Provincial Strategic Outcome" %><br>
-		<%= f.select :provincial_strategic_outcome_id, RiskRating.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select Provincial Strategic Outcome"}, class: "form-control" %>
+		<%= f.select :provincial_strategic_outcome_id, ProvincialStrategicOutcome.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select Provincial Strategic Outcome"}, class: "form-control" %>
 
 		<%= f.label :ward_id, "Ward" %><br>
 		<%= f.select :ward_id, Ward.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select Ward"}, class: "form-control" %>
@@ -164,3 +164,18 @@
 
 </div>
 </div>
+<<<<<<< HEAD
+<script>
+
+$(document).on('change','#new_selected_department', function(){
+   var select_department = $( "#new_selected_department option:selected" ).text();
+   $('#new_current_department').val(select_department);
+});
+$(document).on('change','#new_selected_subdepartment', function(){
+   var select_value = $( "#new_selected_subdepartment option:selected" ).text();
+   $('#new_current_subdepartment').val(select_value);
+  
+});
+</script>
+=======
+>>>>>>> 12a012c503ff174817856df6e91fde88486d5de9

@@ -37,271 +37,105 @@ $(function() {
 
 	</section><!-- tab-content -->
 
+<script>
 
-<script type="text/javascript">
-	"use strict";
+$("input[name='audit_checkbox']").click(function() {
+	if($("input[name='audit_checkbox']").prop("checked") == true) {
+		audit_selected_columns.push($(this).val());
+	}
+	unique(audit_selected_columns);
+	$("#current-selected-columns").val(JSON.stringify(audit_selected_columns));
+});
 
-	document.getElementById('departmental-sdbip-report').addEventListener('submit', evaluateForm);
+var report_selected_columns = [];
+$("input[name='select_info']").click(function() {
+	if($("input[name='select_info']").prop("checked") == true) {
+		report_selected_columns.push($(this).val());
+	}
+	unique(report_selected_columns);
+	$("#current-report-selected-columns").val(JSON.stringify(report_selected_columns));
+});
 
-	function evaluateForm(event) {
-		event.preventDefault();
-		/* Start evaluating all checkboxes */
-		var selectInfos = document.getElementById('departmental-sdbip-report').select_info,
-		selectInfoValues = [];
-		var count = 0;
-		for (var i = 0; i < selectInfos.length; i++) {
-			if (selectInfos[i].checked == true) {
-				selectInfoValues[count] = selectInfos[i].value;
-				count++;
-			}
-		}
-		/* Done evaluating all checkboxes */
+//Evaluate and Eliminate multiple occurences of an array element
+function unique(list) {
+	var result = [];
+    $.each(list, function(i, e) {
+        if ($.inArray(e, result) == -1){
+       	 		var target = e;
+         		var numOccurences = $.grep(list, function (elem) {
+    						return elem === target;
+				 		}).length;
 
-		/* Start evaluating all multi-select */
-		var departmentFilters = document.getElementById('department-filter').options,
-		departmentValues = [];
-		var count2 = 0;
-		for (var i = 0; i < departmentFilters.length; i++) {
-			if (departmentFilters[i].selected == true) {
-				departmentValues[count2] = departmentFilters[i].value;
-				count2++;
-			}
-		}
+        	if((numOccurences%2) === 0){
 
-		var subDepartmentFilters = document.getElementById('sub-department-filter').options,
-		subDepartmentValues = [];
-		var count3 = 0;
-		for (var i = 0; i < subDepartmentFilters.length; i++) {
-			if (subDepartmentFilters[i].selected == true) {
-				subDepartmentValues[count3] = subDepartmentFilters[i].value;
-				count3++;
-			}
-		}
-
-		var preDeterminedFilters = document.getElementById('pre-determined-filter').options,
-		preDeterminedValues = [];
-		var count4 = 0;
-		for (var i = 0; i < preDeterminedFilters.length; i++) {
-			if (preDeterminedFilters[i].selected == true) {
-				preDeterminedValues[count4] = preDeterminedFilters[i].value;
-				count4++;
-			}
-		}
-
-		var kpiOwnerFilters = document.getElementById('kpi-owner-filter').options,
-		kpiOwnerValues = [];
-		var count5 = 0;
-		for (var i = 0; i < kpiOwnerFilters.length; i++) {
-			if (kpiOwnerFilters[i].selected == true) {
-				kpiOwnerValues[count5] = kpiOwnerFilters[i].value;
-				count5++;
-			}
-		}
-
-		var gfsClassificationFilters = document.getElementById('gfs-classification-filter').options,
-		gfsClassificationValues = [];
-		var count6 = 0;
-		for (var i = 0; i < gfsClassificationFilters.length; i++) {
-			if (gfsClassificationFilters[i].selected == true) {
-				gfsClassificationValues[count6] = gfsClassificationFilters[i].value;
-				count6++;
-			}
-		}
-
-		var strategicObjectiveFilters = document.getElementById('strategic-objective-filter').options,
-		strategicObjectiveValues = [];
-		var count7 = 0;
-		for (var i = 0; i < strategicObjectiveFilters.length; i++) {
-			if (strategicObjectiveFilters[i].selected == true) {
-				strategicObjectiveValues[count7] = strategicObjectiveFilters[i].value;
-				count7++;
-			}
-		}
-
-		var nationalKpaFilters = document.getElementById('national-kpa-filter').options,
-		nationalKpaValues = [];
-		var count8 = 0;
-		for (var i = 0; i < nationalKpaFilters.length; i++) {
-			if (nationalKpaFilters[i].selected == true) {
-				nationalKpaValues[count8] = nationalKpaFilters[i].value;
-				count8++;
-			}
-		}
-
-		/*var municipalKpaFilters = document.getElementById('municipal-kpa-filter').options,
-		municipalKpaValues = [];
-		var count9 = 0;
-		for (var i = 0; i < municipalKpaFilters.length; i++) {
-			if (municipalKpaFilters[i].selected == true) {
-				municipalKpaValues[count9] = municipalKpaFilters[i].value;
-				count9++;
-			}
-		}*/
-
-		var ndpObjectivesFilters = document.getElementById('ndp-objectives-filter').options,
-		ndpObjectivesValues = [];
-		var count10 = 0;
-		for (var i = 0; i < ndpObjectivesFilters.length; i++) {
-			if (ndpObjectivesFilters[i].selected == true) {
-				ndpObjectivesValues[count10] = ndpObjectivesFilters[i].value;
-				count10++;
-			}
-		}
-
-		var kpiConceptFilters = document.getElementById('kpi-concept-filter').options,
-		kpiConceptValues = [];
-		var count11 = 0;
-		for (var i = 0; i < kpiConceptFilters.length; i++) {
-			if (kpiConceptFilters[i].selected == true) {
-				kpiConceptValues[count11] = kpiConceptFilters[i].value;
-				count11++;
-			}
-		}
-
-		var kpiTypeFilters = document.getElementById('kpi-type-filter').options,
-		kpiTypeValues = [];
-		var count12 = 0;
-		for (var i = 0; i < kpiTypeFilters.length; i++) {
-			if (kpiTypeFilters[i].selected == true) {
-				kpiTypeValues[count12] = kpiTypeFilters[i].value;
-				count12++;
-			}
-		}
-
-		var provincialStrategicFilters = document.getElementById('provincial-strategic-outcome-filter').options,
-		provincialStrategicValues = [];
-		var count13 = 0;
-		for (var i = 0; i < provincialStrategicFilters.length; i++) {
-			if (provincialStrategicFilters[i].selected == true) {
-				provincialStrategicValues[count13] = provincialStrategicFilters[i].value;
-				count13++;
-			}
-		}
-
-		var wardsFilters = document.getElementById('wards-filter').options,
-		wardsValues = [];
-		var count14 = 0;
-		for (var i = 0; i < wardsFilters.length; i++) {
-			if (wardsFilters[i].selected == true) {
-				wardsValues[count14] = wardsFilters[i].value;
-				count14++;
-			}
-		}
-
-		var areaFilters = document.getElementById('area-filter').options,
-		areaValues = [];
-		var count15 = 0;
-		for (var i = 0; i < areaFilters.length; i++) {
-			if (areaFilters[i].selected == true) {
-				areaValues[count15] = areaFilters[i].value;
-				count15++;
-			}
-		}
-
-		var kpiCalculationFilters = document.getElementById('kpi-calculation-filter').options,
-		kpiCalculationValues = [];
-		var count16 = 0;
-		for (var i = 0; i < kpiCalculationFilters.length; i++) {
-			if (kpiCalculationFilters[i].selected == true) {
-				kpiCalculationValues[count16] = kpiCalculationFilters[i].value;
-				count16++;
-			}
-		}
-
-		/*var kpiTargetFilters = document.getElementById('kpi-target-filter').options,
-		kpiTargetValues = [];
-		var count17 = 0;
-		for (var i = 0; i < kpiTargetFilters.length; i++) {
-			if (kpiTargetFilters[i].selected == true) {
-				kpiTargetValues[count17] = kpiTargetFilters[i].value;
-				count17++;
-			}
-		}
-
-		var kpiResultFilters = document.getElementById('kpi-result-filter').options,
-		kpiResultValues = [];
-		var count18 = 0;
-		for (var i = 0; i < kpiResultFilters.length; i++) {
-			if (kpiResultFilters[i].selected == true) {
-				kpiResultValues[count18] = kpiResultFilters[i].value;
-				count18++;
-			}
-		}
-		/* Done evaluating all multi-select */
-
-		/* Start evaluating all radio buttons */
-		//Display Methods
-		/*var displayMethods = document.getElementById('departmental-sdbip-report').display_method,
-		displayMethod;
-		for (var i = 0; i < displayMethods.length; i++) {
-			if (displayMethods[i].checked == true) {
-				displayMethod = displayMethods[i].value;
-			}
-		}
-
-		//Capital Project Selection
-		var cpSelections = document.getElementById('departmental-sdbip-report').cp_selection,
-		cpSelection;
-		for (var i = 0; i < cpSelections.length; i++) {
-			if (cpSelections[i].checked == true) {
-				cpSelection = cpSelections[i].value;
-			}
-		}
-
-		//Top Layer Selection
-		var tpSelections = document.getElementById('departmental-sdbip-report').tp_selection,
-		tpSelection;
-
-		for (var i = 0; i < tpSelections.length; i++) {
-			if (tpSelections[i].checked == true) {
-				tpSelection = tpSelections[i].value;
-			}
-		}*/
-
-		//Report Format
-		/*var formatSelections = document.getElementById('departmental-sdbip-report').format_selection,
-		formatSelection;
-
-		for (var i = 0; i < formatSelections.length; i++) {
-			if (formatSelections[i].checked == true) {
-				formatSelection = formatSelections[i].value;
-			}
-		}*/
-
-		var reportValue = document.getElementById("report-title").value;
-
-
-
-    $.ajax({
-       url : '/index',
-       type : "post",
-       data : { report_title: JSON.stringify(reportValue),data_value: JSON.stringify(selectInfoValues),departments_value: JSON.stringify(departmentValues), subdepartments_value: JSON.stringify(subDepartmentValues), kpi_owner_values: JSON.stringify(kpiOwnerValues), predetermined_objectives_values: JSON.stringify(preDeterminedValues), mscore_classification_values: JSON.stringify(gfsClassificationValues),ndp_objectives_values: JSON.stringify(ndpObjectivesValues),kpa_values: JSON.stringify(nationalKpaValues),strategic_objectives_values: JSON.stringify(strategicObjectiveValues), kpi_calculation_type_values: JSON.stringify(kpiCalculationValues),kpi_type_values: JSON.stringify(kpiTypeValues), areas_values: JSON.stringify(areaValues), ward_values: JSON.stringify(wardsValues), provincial_startegic_values: JSON.stringify(provincialStrategicValues), kpi_concept_values: JSON.stringify(kpiConceptValues)}
-   });
-	  //$("#reports-modal").modal('show');
-  }
-	$(function () {
-	  $('#datepicker6').datepicker({dateFormat: 'mm-yy'});
-	  $('#datepicker7').datepicker({
-	    useCurrent: false,
-	    dateFormat: 'mm-yy'
-	  });
-	  $("#datepicker6").on("dp.change", function (e) {
-	    $('#datepicker7').data("DatePicker").minDate(e.date);
-	  });
-	  $("#datepicker7").on("dp.change", function (e) {
-	    $('#datepicker6').data("DatePicker").maxDate(e.date);
-	  });
-	});
-
-	/* Done evaluating all radio buttons */
-function show_modal(){
-	$(function(){
-				$(document).on('submit','#departmental-sdbip-report', function(){
-					 $('#reports-modal').modal("show");
-				});
-	});
+          	}
+					else{
+						
+          	result.push(e);
+          	}
+        }
+    });
+    return result;
 }
+/*$("input[type=radio]").click(
+	var cp_value = "";
+	var tp_value = "";
+	function() {
+		if($("#cp-selection-all").prop("checked") == true) {
+			cp_value = $(this).val();
+			$("#sdbip_capital_project_filter").val(cp_value);
+		}
+		if($("#cp-selection-operational").prop("checked") == true) {
+			cp_value = $(this).val();
+			$("#sdbip_capital_project_filter").val(cp_value);
+		}
+		if($("#cp-selection-only").prop("checked") == true) {
+			cp_value = $(this).val();
+			$("#sdbip_capital_project_filter").val(cp_value);
+		}
+
+		if($("#tp-selection-all").prop("checked") == true) {
+			tp_value = $(this).val();
+			$("#sdbip_top_layer_kpi_ref_filter").val(tp_value);
+		}
+		if($("#tp-selection-not-linked").prop("checked") == true) {
+			tp_value = $(this).val();
+			$("#sdbip_top_layer_kpi_ref_filter").val(tp_value);
+		}
+		if($("#tp-selection-linked").prop("checked") == true) {
+			tp_value = $(this).val();
+			$("#sdbip_top_layer_kpi_ref_filter").val(tp_value);
+		}
+		if($("#audit-cp-selection-all").prop("checked") == true) {
+			cp_value = $(this).val();
+			$("#capital_project_filter").val(cp_value);
+		}
+		if($("#audit-cp-selection-operational").prop("checked") == true) {
+			cp_value = $(this).val();
+			$("#capital_project_filter").val(cp_value);
+		}
+		if($("#audit-cp-selection-only").prop("checked") == true) {
+			cp_value = $(this).val();
+			$("#capital_project_filter").val(cp_value);
+		}
+
+		if($("#audit-tp-selection-all").prop("checked") == true) {
+			tp_value = $(this).val();
+			$("#top_layer_kpi_ref_filter").val(tp_value);
+		}
+		if($("#audit-tp-selection-not-linked").prop("checked") == true) {
+			tp_value = $(this).val();
+			$("#top_layer_kpi_ref_filter").val(tp_value);
+		}
+		if($("#audit-tp-selection-linked").prop("checked") == true) {
+			tp_value = $(this).val();
+			$("#top_layer_kpi_ref_filter").val(tp_value);
+		}
+	}
+
+);*/
+
 </script>
-    </div>
+  </div>
   </div>
 </div><!-- departmentalsdbipprogress -->

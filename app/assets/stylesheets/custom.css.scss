@@ -158,12 +158,12 @@ footer {
 /****** Form Elements ********/
 /* forms */
 input:required:invalid, input:focus:invalid {
-    background-image: url(/images/invalid.png);
+    //background-image: url(/images/invalid.png);
     background-position: right top;
     background-repeat: no-repeat;
   }
   input:required:valid {
-    background-image: url(/images/valid.png);
+    //background-image: url(/images/valid.png);
     background-position: right top;
     background-repeat: no-repeat;
   }
@@ -202,6 +202,43 @@ input {
   }
 }
 #session_remember_me, #user_disabled, #user_active_log,
+#department-checkbox,
+#sub-department-checkbox,
+#kpi-ref-number-checkbox,
+#pre-determined-objectives-checkbox,
+#kpi-owner-checkbox,
+#kpi-checkbox,
+#unit-of-measurement-checkbox,
+#gfs-classification-checkbox,
+#idp-ref-checkbox,
+#national-outcome-checkbox,
+#strategic-objective-checkbox,
+#source-of-evidence-checkbox,
+#budget-checkbox,
+#target-checkbox,
+#annual-target,
+#revised-target-checkbox,
+#national-kpa-checkbox,
+#municipal-kpa,
+#ndp-objectives-checkbox,
+#capital-project-checkbox,
+#kpi-concept-checkbox,
+#kpi-type-checkbox,
+#impact-checkbox,
+#provincial-strategic-outcome-checkbox,
+#wards-checkbox,
+#area-checkbox,
+#pevious-year-actual-checkbox,
+#performance-standard-checkbox,
+#reporting-category-checkbox,
+#top-layer-kpi-ref-checkbox,
+#kpi-calculation-type-checkbox,
+#performance-comment-checkbox,
+#target-actual-results-checkbox,
+#corrective-measures-checkbox,
+#proof-of-evidence-checkbox,
+#assurance-status-checkbox,
+#update-status-checkbox,
 #setup_performance_comments,
 #setup_project_life_cycle,
 #setup_attach_poe,
@@ -269,17 +306,21 @@ input {
   margin: 0;
   li {
     overflow: auto;
-    padding: 10px 0;
   }
 }
 
 /****** Misc ******/
 
 
-#about-section a,
+#about-section a,#about-section-1 a{
+  color: $deepblue;
+  background-color: white;
+}
+#about-section a:hover,#about-section-1 a:hover{
+  color: $deepblue;
+}
 #active_users a,
 #admin_users a,
-#about-section-1 a,
 #all_users a,
 #inactive_users a,
 #locked_users a,
@@ -297,6 +338,8 @@ input {
   background-color: white;
 }
 
+#add_departments a:hover,
+#departments a:hover,
 #admin_users a:hover,
 #active_users a:hover,
 #all_users a:hover,
@@ -359,6 +402,18 @@ input {
   font-size: 0.8em;
 }
 
+
+#fourth-level-navs .nav-tabs{
+  li a{
+    color: $deepblue;
+    }
+    li a:hover{
+      color: white !important;
+    }
+    li:active a{
+      color: white !important;
+    }
+}
 .second-level-navs .nav-tabs {
 	li a {
 		color: $deepblue !important;
@@ -1669,9 +1724,7 @@ input {
   background-color: white !important;
   border: transparent;
 }
-#filter_toggle{
-  text-decoration: none;
-}
+
 #capital-tabs{
   margin: 0;
 }

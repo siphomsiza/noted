@@ -175,7 +175,7 @@
     <% end %>
 
 		<%= f.label :provincial_strategic_outcome_id, "Provincial Strategic Outcome" %><br>
-		<%= f.select :provincial_strategic_outcome_id, RiskRating.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select Provincial Strategic Outcome"}, class: "form-control" %>
+		<%= f.select :provincial_strategic_outcome_id, ProvincialStrategicOutcome.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select Provincial Strategic Outcome"}, class: "form-control" %>
 
 		<%= f.label :ward_id, "Ward" %><br>
 		<%= f.select :ward_id, Ward.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select Ward"}, class: "form-control" %>

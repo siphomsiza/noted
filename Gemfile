@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 # Ruby version for this application
 ruby '2.3.0'
-gem 'bootstrap-datepicker-rails', '~> 1.6', '>= 1.6.1.1'
+gem 'bootstrap-datepicker-rails'
 gem 'rails',                            '4.2.6'
 gem 'bcrypt',                           '3.1.11'
 gem 'easy_as_pie',                      '0.1.2'
