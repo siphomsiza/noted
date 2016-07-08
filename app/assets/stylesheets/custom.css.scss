@@ -571,9 +571,11 @@ input {
   #importModal .modal-dialog  {width:600px; padding-top: 25px; outline: none;}
   #departmental_sdbip-modal .modal-dialog  {width:600px; padding-top: 25px; outline: none;}
   #capital_projectModal .modal-dialog  {width:600px; padding-top: 25px; outline: none;}
+  #ytd-modal .modal-dialog {width: 1000px; padding-top: 25px; outline: none;}
 }
 @media screen and (min-width: 300px) {
   #columnsModal .modal-dialog  {width:300px; padding-top: 20px; padding-right: 0px; outline: none;}
+  #ytd-modal .modal-dialog {width: 1000px; padding-top: 25px; outline: none;}
 }
 
 /*

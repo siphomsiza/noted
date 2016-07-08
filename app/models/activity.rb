@@ -179,7 +179,7 @@ class Activity < ActiveRecord::Base
 
       if !past_year_performance.blank?
         past_year_performance_values = past_year_performance_values
-        @audits = @audits.where(:id => past_year_performance_values.split(""))
+        @audits = @audits.where(:id => past_year_performance_values)
 
       end
     end
@@ -283,7 +283,7 @@ class Activity < ActiveRecord::Base
   		 audit_columns.push("departmental_sdbip.performance_standard")
   		 audit_columns_headers.push("Performance Standard")
        if !performance_standard.blank?
-          @audits = @audits.where(:performance_standard => performance_standard.split(""))
+          @audits = @audits.where(:performance_standard => performance_standard)
        end
   		end
   		if selected_columns.include?("Performance Comment")
