@@ -5,7 +5,7 @@
   <div class="panel panel-default col-md-12">
 		<div class="panel-body">
 			<div class="col-md-12">
-	        <%= pie_chart @departmental_sdbips.group(:performance_standard).count, width: "80%", height: "300px", colors: ["limegreen", "darkgreen", "red","orange", "darkblue"] %>
+	        <%= pie_chart @departmental_sdbips.group(:performance_standard).count, width: "80%", height: "300px", colors: ["orange","darkblue", "limegreen", "red", "darkgreen"] %>
 	    </div>
 		</div>
 		<!-- /.panel-body -->
@@ -17,7 +17,7 @@
 			<h3>Total Performance Standards by Department</h3>
 		</div>
 		<div class="panel-body">
-      <%= column_chart @departmental_sdbips.group(:performance_standard, :department_name).count, width: "80%", height: "400px", stacked: true, colors: ["red", "orange", "darkblue","darkgreen", "limegreen"] %>
+      <%= column_chart @departmental_sdbips.group(:performance_standard, :department_name).count, width: "80%", height: "400px", stacked: true, colors: ["orange","darkblue", "limegreen", "red", "darkgreen"]%>
 		</div>
 		<!-- /.panel-body -->
 	</div>
@@ -374,7 +374,7 @@
 
 	<div class="panel panel-default col-md-12">
 		<div class="panel-body">
-			<%= column_chart @departmental_sdbips.group(:performance_standard, :kpa_name).count, width: "100%", height: "450px", stacked: true, colors: ["limegreen", "orange", "red","darkblue", "darkgreen"] %>
+			<%= column_chart @departmental_sdbips.group(:performance_standard, :kpa_name).count, width: "100%", height: "450px", stacked: true, colors: ["orange","darkblue", "limegreen", "red", "darkgreen"] %>
 		</div>
 		<!-- /.panel-body -->
 	</div>

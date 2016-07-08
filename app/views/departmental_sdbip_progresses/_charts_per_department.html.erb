@@ -26,13 +26,17 @@
       <% Department.all.each do |dept| %>
         <tr>
           <td><%= dept.name %></td>
-          <td><%= link_to "View",departmental_sdbip_progresses_path(dept) ,class:'btn' %></td>
+          <td><%= link_to "View",departmental_sdbip_progress_path(dept),remote: true,'data-target' => "#ytd-modal", 'data-toggle' => 'modal', :title=>"Click to view YTD" ,class:'btn' %>
+              <div id="ytd-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+
+              </div>
+          </td>
           <td>
 
-          <button type="view" value="View" class="btn">View</button>
+          <button type="view" value="View" class="btn disabled">View</button>
           </td>
-          <td><button type="view" value="View" class="btn">View</button></td>
-          <td><button type="view" value="View" class="btn">View</button></td>
+          <td><button type="view" value="View" class="btn disabled">View</button></td>
+          <td><button type="view" value="View" class="btn disabled">View</button></td>
          <!--</tr>
        <tr>
           <td>Financial Services</td>

@@ -380,7 +380,7 @@ def self.filter_sdbip_report(sdbip_top_layer_kpi_ref_filters,sdbip_capital_proje
 		 audit_columns.push("departmental_sdbip.performance_standard")
 		 audit_columns_headers.push("Performance Standard")
 		 if !performance_standard.blank?
-				@audits = @audits.where(:performance_standard => performance_standard.split(""))
+				@audits = @audits.where(:performance_standard => performance_standard )
 		 end
 		end
 		if selected_columns.include?("Performance Comment")

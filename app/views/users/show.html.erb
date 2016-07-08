@@ -22,17 +22,19 @@ $(function() {
       </table>
 		</div>
 		<hr>
-    <div>
+		<div class="row">
+		  <div class="col-lg-8 col-md-offset-3">
 
       <% if !@user.role.blank? %>
       <% if !@user.role.roles_details.blank? %>
 
         <% end %>
         <% end %>
-      </p>
-      <p><ok>Role:</ok>
+			<table class="table table-hover table-striped">
+			<tr>
+      <th><strong>Role:</strong></th><td>
         <% if @user.admin? %>
-          <%= label_tag "System Admin" %>
+          <%= label_tag "System Administrator" %>
         <% end %>
       <% if !@user.role.blank? %>
       <% if @user.role.kpi_owner? %>
@@ -53,35 +55,55 @@ $(function() {
         <%= label_tag :Internal_Auditor %>
         <% elsif @user.role.auditor_general?%>
         <%= label_tag :Auditor_General %>
-        <% elsif @user.admin?%>
-        <%= label_tag :System_Administrator %>
+        <% elsif @user.role.finance_administrator?%>
+        <%= label_tag :Finance_Administrator %>
           <% end %>
         <% end %>
-      </p>
-      <p><ok>Location:</ok>
+      </td>
+		</tr>
+			<tr>
+				<th>
+      <strong>Location:</strong></th>
+			<td>
         <%= @user.location %>
-      </p>
-      <p><ok>Email:</ok>
+			</td>
+		</tr>
+		<tr>
+      <th><strong>Email:</strong></th>
+			<td>
         <%= link_to @user.email %>
-      </p>
-    </div>
-    <div>
-    	<p><ok>Registered:</ok>
-        <%= @user.created_at %>
-      </p>
-    	<p><ok>Last Login:</ok>
+      </td>
+		</tr>
+		<tr>
+
+    	<th><strong>Registered:</strong></th>
+        <td><%= @user.created_at %></td>
+    </tr>
+		<tr>
+			<th>
+    	<strong>Last Login:</strong></th>
+				<td>
         <%= @user.activated_at %>
-      </p>
-  		<p><ok>Phone:</ok>
-        <%= link_to number_to_phone(@user.landline, :area_code => true, :delimiter => ' ') %>
-      </p>
-  		<p><ok>Mobile:&nbsp;</ok>
-        <%= link_to number_to_phone(@user.mobile, :area_code => true, :delimiter => ' ') %>
-      </p>
-  	</div>
+			</td>
+    </tr>
+			<tr>
+  		<th><strong>Phone:</strong></th><td>
+        <%= number_to_phone(@user.landline, :area_code => true, :delimiter => ' ') %>
+      </td>
+		</tr>
+		<tr>
+			<th>
+  		<strong>Mobile:</strong></th>
+			<td>
+        <%= number_to_phone(@user.mobile, :area_code => true, :delimiter => ' ') %>
+      </td>
+		</tr>
+		</table>
+	</div>
+</div>
     <hr>
     <div>
-    
+
     </div>
 		<br>
     <div class="text-center">

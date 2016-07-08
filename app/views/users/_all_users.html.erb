@@ -45,7 +45,7 @@
           <% if current_user.admin? && !current_user?(user) %>
            |
           <%= link_to user, data:{confirm: 'Are you sure?'} , :method => :delete, class: "btn btn-sm" do %><span class="glyphicon glyphicon-trash"></span>&nbsp;
-            <span class="glyphicon glyphicon-trash"></span>&nbsp;Delete
+            Delete
           <% end %>
           <% end %>
           <% else user.terminated? %>
