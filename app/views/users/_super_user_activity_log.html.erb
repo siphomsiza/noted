@@ -17,14 +17,14 @@
       <% @super_user_activities.each do |super_user_activity| %>
 
       <tr>
-        <th></th>
-        <th><%= super_user_activity.id %></th>
-        <th><% if !super_user_activity.user_id.blank? %><%= super_user_activity.user.firstname %><% end %></th>
-        <th><% if !super_user_activity.user_id.blank? %><%= super_user_activity.user.surname %><% end %></th>
-        <th><% if !super_user_activity.user_id.blank? %><%= super_user_activity.user.email %><% end %></th>
-        <th><% if !super_user_activity.user_id.blank? %><%= super_user_activity.created_at.strftime("%Y %b %d %H-%M-%S") %><% end %></th>
+        <td></td>
+        <td><%= super_user_activity.id %></td>
+        <td><% if !super_user_activity.user_id.blank? %><%= super_user_activity.user.firstname %><% end %></td>
+        <td><% if !super_user_activity.user_id.blank? %><%= super_user_activity.user.surname %><% end %></td>
+        <td><% if !super_user_activity.user_id.blank? %><%= super_user_activity.user.email %><% end %></td>
+        <td><% if !super_user_activity.user_id.blank? %><%= super_user_activity.created_at.strftime("%Y %b %d %H-%M-%S") %><% end %></td>
 
-        <th><% if !super_user_activity.user_id.blank? %><%= super_user_activity.note %><% end %></th>
+        <td><% if !super_user_activity.user_id.blank? %><%= super_user_activity.note %><% end %></td>
       </tr>
       <% end %>
     </tbody>

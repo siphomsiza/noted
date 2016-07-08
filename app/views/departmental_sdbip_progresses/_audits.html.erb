@@ -229,7 +229,7 @@
         <div>
           <label>Results From:</label>
           <div class="input-group date" data-provide="datepicker"
-               data-date-format="MM-yyyy" data-date-start-view="months" data-date-min-view-mode="months">
+               data-date-format="M-yyyy" data-date-start-view="months" data-date-min-view-mode="months">
             <input type="text" class="form-control">
             <div class="input-group-addon">
               <span class="glyphicon glyphicon-calendar"></span>
@@ -241,7 +241,7 @@
         <div>
           <label>To:</label>
           <div class="input-group date" data-provide="datepicker"
-               data-date-format="MM-yyyy" data-date-start-view="months" data-date-min-view-mode="months">
+               data-date-format="M-yyyy" data-date-start-view="months" data-date-min-view-mode="months">
             <input type="text" class="form-control">
             <div class="input-group-addon">
               <span class="glyphicon glyphicon-calendar"></span>
@@ -283,18 +283,9 @@
       <%= select_tag :subdepartment_id, options_for_select(Subdepartment.all.collect {|p| [ p.subdepartment_name, p.id ] }),{:id=>"sub-department-filter",:multiple => "true",:class=>'form-control'} %>
     </div>
     <div class="form-group col col-lg-12">
-      <div class="input-group col col-lg-12">
-        <div class="col col-lg-6">
           <label class="control-label">KPI Ref Number:</label>
           <%= select_tag :kpi_ref_number,options_for_select(DepartmentalSdbip.all.collect {|p| [ p.kpi_ref_number, p.id ] }),{:id=>"kpi-ref-number-filter",:multiple => "true",:class=>'form-control'} %>
-        </div>
-        <div class="col col-lg-6"><br/><br/>
-          <select class="form-control">
-            <option>Match any words</option>
-            <option>Match exact words</option>
-          </select>
-        </div>
-      </div>
+
     </div>
     <div class="form-group col col-lg-12">
       <label>Pre-determined Objectives:</label>
@@ -305,35 +296,15 @@
       <%= select_tag :kpi_owner_id,options_for_select(KpiOwner.all.collect {|p| [ p.name, p.id ] }),{:id=>"kpi-owner-filter",:multiple => "true",:class=>'form-control'} %>
     </div>
     <div class="form-group col col-lg-12">
-      <div class="input-group col col-lg-12">
-        <div class="col col-lg-6">
           <label class="control-label">KPI:</label>
          <%= select_tag :kpi,options_for_select(DepartmentalSdbip.all.collect {|p| [ p.kpi, p.id ] }),{:id=>"kpi-filter",:multiple => "true",:class=>'form-control'} %>
-        </div>
-        <div class="col col-lg-6">
-          <select class="form-control">
-            <option>Match any words</option>
-            <option>Match exact words</option>
-          </select>
-        </div>
-      </div>
+
     </div>
     <div class="form-group col col-lg-12">
-
-      <div class="input-group col col-lg-12">
-        <div class="col col-lg-6">
           <label class="control-label">Unit of Measurement:</label><br/>
           <%= select_tag :unit_of_measurement, options_for_select(DepartmentalSdbip.all.collect {|p| [ p.unit_of_measurement, p.id ] }),{:id=>"unit-of-measurement-filter",:multiple => "true",:class=>'form-control'} %>
-        </div>
-        <div class="col col-lg-6">
-          <br/>
-          <select class="form-control">
-            <option>Match any words</option>
-            <option>Match exact words</option>
-          </select>
-        </div>
-      </div>
     </div>
+
     <div class="form-group col col-lg-12">
       <label>GFS Classification:</label>
       <%= select_tag :mscore_classification_id, options_for_select(MscoreClassification.all.collect {|p| [ p.name, p.id ] }),{:id=>"gfs-classification-filter",:multiple => "true",:class=>'form-control'} %>
@@ -344,74 +315,25 @@
     </div>
     <div class="form-group col col-lg-12">
       <label class="control-label">Source of Evidence:</label>
-      <div class="input-group col col-lg-12">
-        <div class="col col-lg-6">
+
           <%= select_tag :source_of_evidence,options_for_select(DepartmentalSdbip.all.collect {|p| [ p.source_of_evidence, p.id ] }),{:multiple => "true",:class=>'form-control'} %>
-        </div>
-        <div class="col col-lg-6">
-          <select class="form-control">
-            <option>Match any words</option>
-            <option>Match exact words</option>
-          </select>
-        </div>
-      </div>
+
     </div>
     <div class="form-group col col-lg-12">
       <label class="control-label">Baseline:</label>
-      <div class="input-group col col-lg-12">
-        <div class="col col-lg-6">
           <%= select_tag :baseline,options_for_select(DepartmentalSdbip.all.collect {|p| [ p.baseline, p.id ] }),{:multiple => "true",:class=>'form-control'} %>
-        </div>
-        <div class="col col-lg-6">
-          <select class="form-control">
-            <option>Match any words</option>
-            <option>Match exact words</option>
-          </select>
-        </div>
-
-      </div>
     </div>
     <div class="form-group col col-lg-12">
       <label class="control-label">Target:</label>
-      <div class="input-group col col-lg-12">
-        <div class="col col-lg-6">
           <%= select_tag :annual_target,options_for_select(DepartmentalSdbip.all.collect {|p| [ p.annual_target, p.id ] }),{:multiple => "true",:class=>'form-control'} %>
-        </div>
-        <div class="col col-lg-6">
-          <select class="form-control">
-            <option>Match any words</option>
-            <option>Match exact words</option>
-          </select>
-        </div>
-      </div>
     </div>
     <div class="form-group col col-lg-12">
       <label class="control-label">Annual Target:</label>
-      <div class="input-group col col-lg-12">
-        <div class="col col-lg-6">
           <%= select_tag :annual_target,options_for_select(DepartmentalSdbip.all.collect {|p| [ p.annual_target, p.id ] }),{:multiple => "true",:class=>'form-control'} %>
-        </div>
-        <div class="col col-lg-6">
-          <select class="form-control">
-            <option>Match any words</option>
-            <option>Match exact words</option>
-          </select>
-        </div>
-      </div>
     </div>
     <div class="form-group col col-lg-12">
       <label class="control-label">Revised Target:</label>
-      <div class="input-group col col-lg-12">
-        <div class="col col-lg-6">
           <%= select_tag :revised_target,options_for_select(DepartmentalSdbip.all.collect {|p| [ p.revised_target, p.id ] }),{:multiple => "true",:class=>'form-control'} %>
-        </div>
-        <div class="col col-lg-6">
-          <select class="form-control">
-            <option>Match any words</option>
-            <option>Match exact words</option>
-          </select>
-        </div>
-      </div>
     </div>
     <div class="form-group col col-lg-12">
       <label>National KPA:</label>

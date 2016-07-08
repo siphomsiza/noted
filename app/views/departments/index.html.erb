@@ -48,10 +48,9 @@ $(function() {
           <tr>
           <th>&nbsp;</th>
             <th>Department</th>
-						  <th>Sub-departments</th>
+						<th>Sub-departments</th>
             <th>Telephone Number</th>
             <th>Fax Number</th>
-
             <th>Actions</th>
           </tr>
         </thead>
@@ -61,9 +60,10 @@ $(function() {
            <td><%= department.id %></td>
             <td><%= department.name %></td>
 						<td>
-						<ol><% department.subdepartments.each do |subdepartment| %>
+						<% department.subdepartments.each do |subdepartment| %>
 						  <li><%=  subdepartment.subdepartment_name %></li>
-							<% end %></ol>
+							<% end %>
+						
 						</td>
              <td><%=  number_to_phone(department.tel_no, :area_code => true, :delimiter => ' ') %></td>
               <td><%=  number_to_phone(department.fax_no, :area_code => true, :delimiter => ' ') %></td>

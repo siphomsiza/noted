@@ -195,6 +195,7 @@ class DepartmentalSdbipProgressesController < ApplicationController
   end
 
   def show
+    
   	@departmental_sdbips = DepartmentalSdbip.where('department_id = ?' ,params[:id])
     #@subdepartments = @departmental_sdbips(:subdepartment_id).where(department_id: params[:id]).distinct
     @subdepartments = Subdepartment.where(department_id: params[:id])
