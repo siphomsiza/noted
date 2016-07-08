@@ -1,0 +1,43 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3>Editing Time Period</h3>
+    </div>
+    <div class="modal-body">
+      <div class="col-lg-10 col-md-offset-1">
+  <%= form_for @sdbip_time_period do |f| %>
+<%= f.label :period %><br>
+  <%= f.select(:period,["Quarter 1","Quarter 2", "Quarter 3", "Quarter 4"],{},{:class=>"form-control"}) %>
+
+<%= f.label :start_date %><br>
+
+<div class="form-group">
+  <div class="input-group date" data-provide="datepicker"
+       data-date-format="M-yyyy" data-date-start-view="days" data-date-min-view-mode="days">
+    <%= f.text_field :start_date, class: "form-control" %>
+    <span class="input-group-addon">
+      <span class="glyphicon glyphicon-calendar"></span>
+    </span>
+  </div>
+</div>
+<%= f.label :end_date %><br>
+
+<div class="form-group">
+  <div class="input-group date" data-provide="datepicker"
+       data-date-format="M-yyyy" data-date-start-view="days" data-date-min-view-mode="days">
+    <%= f.text_field :end_date, class: "form-control" %>
+    <span class="input-group-addon">
+      <span class="glyphicon glyphicon-calendar"></span>
+    </span>
+  </div>
+</div>
+<div class="actions col-lg-">
+  <%= f.submit "Save", :class =>'btn col-lg-3 btn-mini pull-right' %>
+</div>
+<% end %>
+</div>
+</div>
+<div class="modal-footer">
+</div>
+</div>
+</div>

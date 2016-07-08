@@ -4,10 +4,26 @@
 		<%= f.select(:period,["Quarter 1","Quarter 2", "Quarter 3", "Quarter 4"],{},{:class=>"form-control"}) %>
 
 	<%= f.label :start_date %><br>
-	<%= f.date_select(:start_date,{},{:class=>"form-control"}) %>
+  <div class="form-group">
+    <div class="input-group date" data-provide="datepicker"
+         data-date-format="M-yyyy" data-date-start-view="days" data-date-min-view-mode="days">
+      <%= f.text_field :start_date, class: "form-control" %>
+      <span class="input-group-addon">
+        <span class="glyphicon glyphicon-calendar"></span>
+      </span>
+    </div>
+  </div>
+  <%= f.label :end_date %><br>
 
-	<%= f.label :end_date %><br>
-	<%= f.date_select(:end_date, {} ,{:class=>"form-control"}) %>
+  <div class="form-group">
+    <div class="input-group date" data-provide="datepicker"
+         data-date-format="M-yyyy" data-date-start-view="days" data-date-min-view-mode="days">
+      <%= f.text_field :end_date, class: "form-control" %>
+      <span class="input-group-addon">
+        <span class="glyphicon glyphicon-calendar"></span>
+      </span>
+    </div>
+  </div>
 
   <div class="actions col-lg-3 pull-right">
     <%= f.submit "Save", :class =>'btn btn-mini' %>

@@ -47,7 +47,7 @@ $(function() {
 							<% if @revenue_by_sources.blank? && RevenueBySource.blank? %>
 							<p> There are no Revenue By Source(s) currently in the system. </p>
 							<% elsif @revenue_by_sources.blank? && !RevenueBySource.blank? %>
-							<p> You currently have no Revenue By Source(s) currently. </p>
+							<p> You currently have no Revenue By Source(s). </p>
 							<% elsif !@revenue_by_sources.blank? %>
 							<div class="table-responsive">
 								<%= render 'revenue_by_sources'%>
@@ -63,7 +63,7 @@ $(function() {
 
 							<% elsif @revenue_by_sources.blank? && !RevenueBySource.blank? %>
 
-							<p> You currently have no Revenue By Source(s) currently to edit. </p>
+							<p> You currently have no Revenue By Source(s) to edit. </p>
 
 							<% elsif !@revenue_by_sources.blank? %>
 
