@@ -3,15 +3,15 @@
   <table class="table">
     <thead>
       <tr>
-        <th><h5>Avatar</h5></th>
-        <th><h5>Ref</h5></th>
-        <th><h5>First Name</h5></th>
-        <th><h5>Last Name</h5></th>
-        <th><h5>Email</h5></th>
-        <th><h5>Date Added</h5></th>
-        <th><h5>Last Login</h5></th>
-        <th><h5>Status</h5></th>
-        <th><h5>Actions</h5></th>
+        <th><h4>Avatar</h4></th>
+        <th><h4>Ref</h4></th>
+        <th><h4>First Name</h4></th>
+        <th><h4>Last Name</h4></th>
+        <th><h4>Email</h4></th>
+        <th><h4>Date Added</h4></th>
+        <th><h4>Last Login</h4></th>
+        <th><h4>Status</h4></th>
+        <th><h4>Actions</h4></th>
       </tr>
     </thead>
     <tbody>
@@ -28,7 +28,7 @@
         <td>
           <% if !user.terminated? %>
           <%= link_to edit_user_path(user),remote: true,'data-target' => "#user-modal", 'data-toggle' => 'modal', class: "btn btn-sm", :title=>"Click to Edit user details" do %>
-              <span class="glyphicon glyphicon-pencil"></span>&nbsp;Edit Details
+              <span class="glyphicon glyphicon-edit"></span>&nbsp;Edit Details
             <% end %>
             <div id="user-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
 

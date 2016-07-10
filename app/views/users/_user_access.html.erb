@@ -3,14 +3,14 @@
   <table class="table">
     <thead>
       <tr>
-        <th><h5>User</h5></th>
-        <th><h5>System Admin</h5></th>
-        <th><h5>KPI Admin</h5></th>
-        <th><h5>Finance Admin</h5></th>
-        <th><h5>Top Layer Admin</h5></th>
-        <th><h5>Assurance Provider</h5></th>
-        <th><h5>Secondary Time Period</h5></th>
-        <th><h5>Action</h5></th>
+        <th><h4>User</h4></th>
+        <th><h4>System Admin</h4></th>
+        <th><h4>KPI Admin</h4></th>
+        <th><h4>Finance Admin</h4></th>
+        <th><h4>Top Layer Admin</h4></th>
+        <th><h4>Assurance Provider</h4></th>
+        <th><h4>Secondary Time Period</h4></th>
+        <th><h4>Action</h4></th>
       </tr>
     </thead>
     <tbody>
@@ -24,7 +24,7 @@
         <td><% if role.internal_auditor? || role.auditor_general? %>Yes<% else %>No<% end %></td>
         <td><% if role.departmental_administrator? || role.subdepartmental_administrator? %>Yes<% else %>No<% end %></td>
         <td><%= link_to edit_user_role_path(role),remote: true,'data-target' => "#user-access-modal", 'data-toggle' => 'modal', class: "btn btn-mini", :title=>"Click to Edit user details" do %>
-            <span class="glyphicon glyphicon-pencil"></span>&nbsp;Edit Access
+            <span class="glyphicon glyphicon-edit"></span>&nbsp;Edit Access
           <% end %>
           <div id="user-access-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
 
