@@ -5,15 +5,15 @@ class CreateDepartmentalSdbips < ActiveRecord::Migration
       t.string   :department_name, null: false
       t.string   :subdepartment_name, null: false
       t.integer :subdepartment_id, foreign_key: true, null: false
-      t.string :kpi_ref_number, null: false
-      t.integer :predetermined_objective_id, foreign_key: true
-      t.integer :kpi_owner_id, foreign_key: true
-      t.text :kpi, null: false
+      t.string :kpi_ref_number
+      t.integer :predetermined_objective_id
+      t.integer :kpi_owner_id
+      t.text :kpi
       t.string :unit_of_measurement
-      t.integer :mscore_classification_id, foreign_key: true
+      t.integer :mscore_classification_id
       t.string :idp_ref
-      t.integer :national_outcome_id, foreign_key: true
-      t.integer :strategic_objective_id, foreign_key: true
+      t.integer :national_outcome_id
+      t.integer :strategic_objective_id
       t.string :source_of_evidence
       t.string :baseline
       t.string :budget
@@ -34,24 +34,22 @@ class CreateDepartmentalSdbips < ActiveRecord::Migration
       t.binary  :third_quarter_poe
       t.binary  :fourth_quarter_poe
       t.string :performance_standard
-      t.integer :risk_rating_id, foreign_key: true
-      t.integer :kpa_id, foreign_key: true
+      t.integer :risk_rating_id
+      t.integer :kpa_id
       t.string :kpa_name
-      t.integer :ndp_objective_id, foreign_key: true
-      t.integer :capital_project_id, foreign_key: true
-      t.integer :kpi_concept_id, foreign_key: true
-      t.integer :kpi_type_id, foreign_key: true
+      t.integer :ndp_objective_id
+      t.integer :capital_project_id
+      t.integer :kpi_concept_id
+      t.integer :kpi_type_id
       t.string :impact
-      t.integer :provincial_strategic_outcome_id, foreign_key: true
-      t.integer :ward_id, foreign_key: true
-      t.integer :area_id, foreign_key: true
+      t.integer :provincial_strategic_outcome_id
+      t.integer :ward_id
+      t.integer :area_id
       t.text :past_year_performance
       t.string :performance_standard
-      t.integer :reporting_category_id, foreign_key: true
+      t.integer :reporting_category_id
       t.string :top_layer_kpi_ref
-      t.integer :kpi_calculation_type_id, foreign_key: true
-      t.date :start_date
-      t.date :end_date
+      t.integer :kpi_calculation_type_id
 
       t.timestamps null: false
     end
