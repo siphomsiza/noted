@@ -77,7 +77,7 @@ end
       if admin_user && !correct_user
         redirect_to users_url
       elsif !admin_user && correct_user
-        redirect_to users_url
+        redirect_to :back
       end
     else
       flash[:danger] = "Profile not updated."
