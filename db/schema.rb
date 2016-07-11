@@ -393,10 +393,9 @@ ActiveRecord::Schema.define(version: 20160701101620) do
   end
 
   create_table "sdbip_time_periods", force: :cascade do |t|
-    t.string   "period"
-    t.date     "start_date"
-    t.date     "end_date"
-    t.integer  "departmental_sdbip_id"
+    t.string   "period", :unique => true, :null => false
+    t.date     "start_date", :null => false
+    t.date     "end_date", :null => false
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
   end
