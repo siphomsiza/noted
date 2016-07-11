@@ -64,41 +64,41 @@ $(function() {
           <td><% if role.kpi_owner? %>
 					<span class="glyphicon glyphicon-ok-sign"></span>
 					<% else %>
-					<span class="glyphicon glyphicon-trash"></span>
+					<span class="glyphicon glyphicon-remove-sign"></span>
 					<% end %>
           </td>
           <td><% if role.subdepartmental_administrator? || role.departmental_administrator? %>
 					<span class="glyphicon glyphicon-ok-sign"></span>
 					<% else %>
-					<span class="glyphicon glyphicon-trash"></span>
+					<span class="glyphicon glyphicon-remove-sign"></span>
 					<% end %>
 
           </td>
 					<td><% if role.finance_admin? %>
 					<span class="glyphicon glyphicon-ok-sign"></span>
 					<% else %>
-					<span class="glyphicon glyphicon-trash"></span>
+					<span class="glyphicon glyphicon-remove-sign"></span>
 					<% end %>
 
           </td>
           <td><% if role.municipal_manager? %>
 					<span class="glyphicon glyphicon-ok-sign"></span>
 					<% else %>
-					<span class="glyphicon glyphicon-trash"></span>
+					<span class="glyphicon glyphicon-remove-sign"></span>
 					<% end %>
 
           </td>
           <td><% if role.internal_auditor? %>
 					<span class="glyphicon glyphicon-ok-sign success"></span>
 					<% else %>
-					<span class="glyphicon glyphicon-trash danger"></span>
+					<span class="glyphicon glyphicon-remove-sign danger"></span>
 					<% end %>
 
           </td>
           <td><% if role.auditor_general? %>
 					<span class="glyphicon glyphicon-ok-sign"></span>
 					<% else %>
-					<span class="glyphicon glyphicon-trash"></span>
+					<span class="glyphicon glyphicon-remove-sign"></span>
 					<% end %>
 
           </td>
@@ -109,7 +109,7 @@ $(function() {
 
 	              </div>
 							&nbsp;<%= link_to role,class: 'btn btn-mini btn-danger', method: :delete, data: { confirm: 'Are you sure?' }, :style=>"text-decoration: none;" do %>
-            <span class="glyphicon glyphicon-trash"></span>&nbsp;Delete
+            <span class="glyphicon glyphicon-remove-sign"></span>&nbsp;Delete
           <% end %>
           </td>
         </tr>

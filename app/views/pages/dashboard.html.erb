@@ -168,7 +168,7 @@
           <td><%= time_period.start_date.strftime("%Y-%m-%d") %></td>
           <td><%= time_period.end_date.days_ago(7).strftime("%Y-%m-%d") %></td>
           <td><%= time_period.end_date.days_ago(-15).strftime("%Y-%m-%d") %></td>
-          <td><% if  time_period.end_date.strftime("%Y-%m-%d") == Date.today.strftime("%Y-%m-%d") && sdbip_time_period.end_date.strftime("%Y-%m-%d") < 15.days.from_now %>
+          <td><% if  time_period.end_date.strftime("%Y-%m-%d") == Date.today.strftime("%Y-%m-%d") && time_period.end_date.strftime("%Y-%m-%d") < 15.days.from_now %>
             <label class="label label-success">Open</label>
             <% elsif time_period.end_date.strftime("%Y-%m-%d") > 15.days.from_now %>
             <label class="label label-danger">Closed</label>
@@ -180,9 +180,7 @@
     </div>
     <div class="col col-lg-12">
       <h3 class="sub-header"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;Activity Log</h3>
-      <div class="table-responsive">
-        <table class="table table-striped">
-          <thead>
+        <table class="table table-striped table-responsive">
             <tr>
               <th>User</th>
               <th>Email</th>
@@ -190,8 +188,6 @@
               <th>Location(IP Address)</th>
               <th>Date</th>
             </tr>
-          </thead>
-          <tbody>
             <% User.where.not(current_login_ip: "").each do |activity|%>
             <tr>
               <td><%= activity.firstname %>&nbsp;<%= activity.surname %></td>
@@ -201,9 +197,9 @@
               <td><%= activity.current_login_at %></td>
             </tr>
             <% end %>
-          </tbody>
+          
         </table>
-      </div>
+
     </div>
   </div>
 </div>

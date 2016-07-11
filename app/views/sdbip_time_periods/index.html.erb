@@ -57,7 +57,7 @@ $(function() {
         <tbody>
         <% @sdbip_time_periods.each do |sdbip_time_period| %>
           <tr>
-            <td><%= link_to sdbip_time_period.period,sdbip_time_period %>&nbsp;(month ending <%= sdbip_time_period.end_date.strftime("%Y-%B-%d") %>)</td>
+            <td><%= sdbip_time_period.period %></td>
             <td><%= sdbip_time_period.start_date.strftime("%Y-%m-%d") %></td>
             <td><%= sdbip_time_period.end_date.days_ago(7) %></td>
             <td><%= sdbip_time_period.end_date.days_ago(-15) %></td>
@@ -117,6 +117,7 @@ $(function() {
                       <h4 class="modal-title" id="importModalLabel">
                         <ol class="breadcrumb">
                           <li><a href="#" data-dismiss="modal">Setup</a></li>
+													<li>SDBIP Time Period</li>
                           <li class="active">Importing SDBIP Time Periods</li>
                         </ol>
                       </h4>
