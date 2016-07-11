@@ -40,26 +40,36 @@ body {
 h1, h2, h3, h4, h5, h6 {
 	font-family: $headingFontFamily;
 	color: $deepblue;
-  text-align: center;
 }
 
 h1 {
   letter-spacing: -2px;
   margin-bottom: 30px;
+  text-align: center;
 }
 
 h2 {
   letter-spacing: -1px;
   margin-bottom: 30px;
   font-weight: normal;
+  text-align: center;
 }
+
+h3 {
+  text-align: center;
+}
+
+h4, h5, h6 {
+  text-align: left;
+  font-weight: bold;
+}
+
 p {
 	font-family: $headingFontFamily;
 	font-size: 1.1em;
 	line-height: 1.4em;
 	color: $deepblue;
 	padding: 0 2%;
-
 }
 
 label {
@@ -67,10 +77,12 @@ label {
 	color: $deepblue;
 
 }
+
 .labels{
   font-family: $headingFontFamily;
   color: $deepblue;
 }
+
 a {
   font-family: $headingFontFamily;
   color: $deepblue;
@@ -311,7 +323,9 @@ input {
 }
 
 /****** Misc ******/
-
+#accordion, #accordion a {
+  color: $deepblue;
+}
 
 #about-section a,#about-section-1 a{
   color: $deepblue;
@@ -1735,20 +1749,6 @@ input {
   ul li{
   margin-bottom: 0 auto;
 }
-}
-#lists{
-  a{
-    color: $deepblue !important;
-    text-decoration: none;
-  }
-   a:hover {
-    color: $deepblue;
-    text-decoration: none;
-  }
-  li{
-    text-shadow: none;
-      color: $deepblue;
-  }
 }
 
 #kpi-owner-checkbox,

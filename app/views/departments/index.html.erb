@@ -47,11 +47,11 @@ $(function() {
         <thead>
           <tr>
           <th>&nbsp;</th>
-            <th>Department</th>
-						<th>Sub-departments</th>
-            <th>Telephone Number</th>
-            <th>Fax Number</th>
-            <th>Actions</th>
+            <th><h4>Department</h4></th>
+						<th><h4>Sub-departments</h4></th>
+            <th><h4>Telephone Number</h4></th>
+            <th><h4>Fax Number</h4></th>
+            <th><h4>Actions</h4></th>
           </tr>
         </thead>
         <tbody>
@@ -68,7 +68,7 @@ $(function() {
              <td><%=  number_to_phone(department.tel_no, :area_code => true, :delimiter => ' ') %></td>
               <td><%=  number_to_phone(department.fax_no, :area_code => true, :delimiter => ' ') %></td>
 
-           
+
             <td>
             <% if current_user.admin? %>
             <%= link_to edit_department_path(department),remote: true,'data-target' => "#departments-modal", 'data-toggle' => 'modal', class: "btn btn-mini" do %>
