@@ -25,7 +25,7 @@
         <td><%= new_user.status %></td>
           <td>
             <%= link_to edit_new_user_path(new_user),remote: true,'data-target' => "#edit-new-user-modal", 'data-toggle' => 'modal', class: "btn btn-sm", :title=>"Click to Edit user details" do %>
-                <span class="glyphicon glyphicon-pencil"></span>&nbsp;Edit Details
+                <span class="glyphicon glyphicon-edit"></span>&nbsp;Edit Details
 
               <% end %>
               <div id="edit-new-user-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">

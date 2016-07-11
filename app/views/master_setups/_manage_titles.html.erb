@@ -19,13 +19,13 @@
         <td><%=  title.created_at %></td>
         <td><%= title.updated_at %></li></td>
      <td><%= link_to edit_jobtitle_path(title),class: 'btn btn-mini btn-warning', :style=>"text-decoration: none;", remote: true,'data-target' => "#jobtitle-modal", 'data-toggle' => 'modal', :title=>"Click to Master Setup" do %>
-       <span class="glyphicon glyphicon-pencil"></span>&nbsp;Edit
+       <span class="glyphicon glyphicon-edit"></span>&nbsp;Edit
      <% end %>
        <div id="jobtitle-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
 
        </div>
      &nbsp;<%= link_to title,class: 'btn btn-mini btn-danger', method: :delete, data: { confirm: 'Are you sure?' }, :style=>"text-decoration: none;" do %>
-       <span class="glyphicon glyphicon-remove-sign"></span>&nbsp;Delete
+       <span class="glyphicon glyphicon-trash"></span>&nbsp;Delete
      <% end %>
      </td>
    </tr>

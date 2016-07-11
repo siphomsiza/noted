@@ -22,7 +22,7 @@
 
   <%= f.label :user_id, "Select User:" %>
   <% @users_for_role = User.where('id NOT IN(SELECT (user_id) FROM roles)') %>
-  <% @users_for_role = User.includes(:role).where(:roles=> {:user_id => nil} ) %>
+  <% @users_for_role = User.all %>
   <%= f.select :user_id, @users_for_role.all.collect {|x| [x.firstname, x.id]}, {:include_blank => "Select User"}, class: "form-control" %>
   <br/>
   <div class="row">

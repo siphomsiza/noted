@@ -24,7 +24,7 @@
         <td><% if role.internal_auditor? || role.auditor_general? %>Yes<% else %>No<% end %></td>
         <td><% if role.departmental_administrator? || role.subdepartmental_administrator? %>Yes<% else %>No<% end %></td>
         <td><%= link_to edit_user_role_path(role),remote: true,'data-target' => "#user-access-modal", 'data-toggle' => 'modal', class: "btn btn-mini", :title=>"Click to Edit user details" do %>
-            <span class="glyphicon glyphicon-pencil"></span>&nbsp;Edit Access
+            <span class="glyphicon glyphicon-edit"></span>&nbsp;Edit Access
           <% end %>
           <div id="user-access-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
 
