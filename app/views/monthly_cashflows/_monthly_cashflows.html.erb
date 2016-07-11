@@ -1,5 +1,4 @@
 <table class="table table-striped table-bordered">
-<thead>
   <tr>
     <th>Department</th>
     <th>Subdepartment</th>
@@ -12,9 +11,6 @@
     <th>Capital Expenditure</th>
 
   </tr>
-</thead>
-
-<tbody>
   <% @monthly_cashflows.each do |monthly_cashflow| %>
     <tr>
       <td><%= monthly_cashflow.department.name %></td>
@@ -26,8 +22,8 @@
       <td><%= monthly_cashflow.operational_expenditure %></td>
       <td><%= monthly_cashflow.revenue %></td>
       <td><%= monthly_cashflow.capital_expenditure %></td>
-    
+
     </tr>
   <% end %>
-</tbody>
+
 </table>
