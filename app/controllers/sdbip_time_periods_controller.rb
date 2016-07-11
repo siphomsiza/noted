@@ -35,7 +35,7 @@ class SdbipTimePeriodsController < ApplicationController
       redirect_to sdbip_time_periods_url
     else
     begin
-       SdbipTimePeriod.import(params[:file])
+       SdbipTimePeriod.delay(run_at: 30.seconds.from_now).import(params[:file])
        flash[:success] = "Time periods imported successfully."
        redirect_to sdbip_time_periods_url
     rescue

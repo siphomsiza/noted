@@ -7,10 +7,10 @@ class SdbipTimePeriod < ActiveRecord::Base
    	when ".csv" then
      CSV.foreach(file.path, headers: true) do |row|
        sdbip_time_period_hash = row.to_hash
-       capital_project = SdbipTimePeriod.where(id: sdbip_time_period_hash["id"])
+       sdbip_time_period = SdbipTimePeriod.where(id: sdbip_time_period_hash["id"])
 
-       if capital_project.count == 1
-         capital_project.first.update_attributes(sdbip_time_period_hash)
+       if sdbip_time_period.count == 1
+         sdbip_time_period.first.update_attributes(sdbip_time_period_hash)
        else
          SdbipTimePeriod.create!(sdbip_time_period_hash)
        end # end if !departmental_sdbip.nil?
@@ -37,8 +37,8 @@ class SdbipTimePeriod < ActiveRecord::Base
    header = spreadsheet.row(1)
    (2..spreadsheet.last_row).each do |i|
      row = Hash[[header, spreadsheet.row(i)].transpose]
-     capital_project_hash = row.to_hash#.slice(*accessible_attributes)
-     capital_project = where(id: row["id"])
+     sdbip_time_period_hash = row.to_hash#.slice(*accessible_attributes)
+     sdbip_time_period = where(id: row["id"])
      if sdbip_time_period.count == 1
          sdbip_time_period.first.update_attributes(sdbip_time_period_hash)
        else
