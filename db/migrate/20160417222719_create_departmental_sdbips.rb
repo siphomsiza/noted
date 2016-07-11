@@ -6,7 +6,7 @@ class CreateDepartmentalSdbips < ActiveRecord::Migration
       t.string   :subdepartment_name, null: false
       t.integer :subdepartment_id, foreign_key: true, null: false
       t.string :kpi_ref_number, null: false
-      t.integer :predetermined_objective_id, foreign_key: true, null: false
+      t.integer :predetermined_objective_id, foreign_key: true
       t.integer :kpi_owner_id, foreign_key: true
       t.text :kpi, null: false
       t.string :unit_of_measurement

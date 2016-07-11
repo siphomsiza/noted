@@ -111,7 +111,7 @@ ActiveRecord::Schema.define(version: 20160701101620) do
     t.string   "subdepartment_name",              null: false
     t.integer  "subdepartment_id",                null: false
     t.string   "kpi_ref_number",                  null: false
-    t.integer  "predetermined_objective_id",      null: false
+    t.integer  "predetermined_objective_id"
     t.integer  "kpi_owner_id"
     t.text     "kpi",                             null: false
     t.string   "unit_of_measurement"
