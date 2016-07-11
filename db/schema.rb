@@ -110,15 +110,15 @@ ActiveRecord::Schema.define(version: 20160701101620) do
     t.string   "department_name",                 null: false
     t.string   "subdepartment_name",              null: false
     t.integer  "subdepartment_id",                null: false
-    t.string   "kpi_ref_number",                  null: false
+    t.string   "kpi_ref_number"
     t.integer  "predetermined_objective_id"
     t.integer  "kpi_owner_id"
-    t.text     "kpi",                             null: false
+    t.text     "kpi"
     t.string   "unit_of_measurement"
-    t.integer  "mscore_classification_id",        null: false
+    t.integer  "mscore_classification_id"
     t.string   "idp_ref"
-    t.integer  "national_outcome_id",             null: false
-    t.integer  "strategic_objective_id",          null: false
+    t.integer  "national_outcome_id"
+    t.integer  "strategic_objective_id"
     t.string   "source_of_evidence"
     t.string   "baseline"
     t.string   "budget"
@@ -154,8 +154,6 @@ ActiveRecord::Schema.define(version: 20160701101620) do
     t.integer  "reporting_category_id"
     t.string   "top_layer_kpi_ref"
     t.integer  "kpi_calculation_type_id"
-    t.date     "start_date"
-    t.date     "end_date"
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
   end
