@@ -17,11 +17,11 @@ $(function() {
       <% if current_user.admin? %>
         &nbsp;
       <%= link_to edit_department_path(@department), class: "btn btn-mini" do %>
-                  <span class="glyphicon glyphicon-pencil"></span>Edit
+                  <span class="glyphicon glyphicon-edit"></span>Edit
                 <% end %>
                 &nbsp;
       <%= link_to @department, method: :delete, data: { confirm: "You sure?" }, class: "btn btn-mini" do %>
-                  <span class="glyphicon glyphicon-remove-sign"></span>Delete
+                  <span class="glyphicon glyphicon-trash"></span>Delete
                 <% end %>&nbsp;<%= link_to new_department_path , :class =>"btn ",:style=>"text-decoration: none;" do %>
                 <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;New
         <% end %><% end %></span>

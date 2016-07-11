@@ -75,7 +75,7 @@ end
     if @user.update_attributes(user_params)
       flash[:success] = "Profile updated"
       if admin_user && !correct_user
-        redirect_to users_url
+        redirect_to :back
       elsif !admin_user && correct_user
         redirect_to :back
       end

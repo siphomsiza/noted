@@ -32,12 +32,12 @@ $(function() {
      <% if !current_user.admin? && (current_user.role.kpi_owner? || current_user.role.auditor_general? || current_user.role.internal_auditor?) %>
     <% if @departmental_sdbip.kpi_owner_id == current_user.role.kpi_owner_id && !current_user.role.internal_auditor? %>
               <%= link_to edit_departmental_sdbip_path(@departmental_sdbip), class: "btn btn-mini", :title=>"Click to update KPI" do %>
-                <span class="glyphicon glyphicon-pencil"></span>&nbsp;Update KPI
+                <span class="glyphicon glyphicon-edit"></span>&nbsp;Update KPI
               <% end %>
               <% end %>
               <% if current_user.role.auditor_general? || (current_user.role.internal_auditor? && @departmental_sdbip.kpi_owner.id != current_user.role.kpi_owner_id) %>
               <%= link_to edit_departmental_sdbip_path(@departmental_sdbip), class: "btn btn-mini", :title=>"Click to update KPI" do %>
-                <span class="glyphicon glyphicon-pencil"></span>&nbsp;Update KPI
+                <span class="glyphicon glyphicon-edit"></span>&nbsp;Update KPI
               <% end %>
               <% end %>
      <% end %>
@@ -45,11 +45,11 @@ $(function() {
     <% if current_user.admin? %>
       &nbsp;
     <%= link_to edit_departmental_sdbip_path(@departmental_sdbip), class: "btn btn-mini" do %>
-                <span class="glyphicon glyphicon-pencil"></span>Edit
+                <span class="glyphicon glyphicon-edit"></span>Edit
               <% end %>
               &nbsp;
     <%= link_to @department, method: :delete, data: { confirm: "You sure?" }, class: "btn btn-mini" do %>
-                <span class="glyphicon glyphicon-remove-sign"></span>Delete
+                <span class="glyphicon glyphicon-trash"></span>Delete
               <% end %><% end %></span>
     </div>
     <div class="col col-lg-12">

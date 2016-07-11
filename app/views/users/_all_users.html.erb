@@ -28,7 +28,7 @@
         <td>
           <% if !user.terminated? %>
           <%= link_to edit_user_path(user),remote: true,'data-target' => "#user-modal", 'data-toggle' => 'modal', class: "btn btn-sm", :title=>"Click to Edit user details" do %>
-              <span class="glyphicon glyphicon-pencil"></span>&nbsp;Edit Details
+              <span class="glyphicon glyphicon-edit"></span>&nbsp;Edit Details
             <% end %>
             <div id="user-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
 

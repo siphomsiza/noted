@@ -47,7 +47,7 @@
 					<span class="glyphicon glyphicon-ok-sign"></span>
 					<% else %>
 
-						<span class="glyphicon glyphicon-remove-sign"></span>
+						<span class="glyphicon glyphicon-trash"></span>
 					<% end %></td>
         <td><%= top_layer_sdbip.idp_ref %></td>
         <td><%= top_layer_sdbip.mscore_classification.name %></td>
@@ -80,7 +80,7 @@
         <td><%= top_layer_sdbip.third_quarter_actual %></td>
         <td><%= top_layer_sdbip.fourth_quarter_actual %></td>
         <td><%= link_to edit_top_layer_sdbip_path(top_layer_sdbip), class: "btn btn-mini", :title=>"Click to update KPI" do %>
-					<span class="glyphicon glyphicon-pencil"></span>&nbsp;Edit
+					<span class="glyphicon glyphicon-edit"></span>&nbsp;Edit
 				<% end %>
 			</td>
         

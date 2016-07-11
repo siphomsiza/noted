@@ -211,7 +211,7 @@
           <%= f.submit "Save", class: "btn btn-mini pull-right"%>
           <% if current_user.admin? %>
           <%= link_to controller: "users", action: "terminate", id: @user.id, method: "get", class: "btn btn-mini" do%>
-          <span class = "glyphicon glyphicon-remove-sign"></span>Terminate <% end %>&nbsp;|&nbsp;
+          <span class = "glyphicon glyphicon-trash"></span>Terminate <% end %>&nbsp;|&nbsp;
           <%= link_to controller: "users", action: "lock_user", id: @user.id, method: "get", class: "btn btn-mini" do%>
           <span class = "glyphicon glyphicon-lock"></span>Lock
           <% end %>
