@@ -451,6 +451,7 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
+    rollout (2.3.0)
     roo (2.3.2)
       nokogiri (~> 1)
       rubyzip (~> 1.1, < 2.0.0)
@@ -610,6 +611,7 @@ DEPENDENCIES
   rails (= 4.2.6)
   rails_best_practices (= 1.16.0)
   reek
+  rollout
   roo (= 2.3.2)
   rspec-rails (= 3.4.2)
   rspec_junit_formatter (= 0.2.3)
