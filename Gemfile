@@ -37,6 +37,7 @@ gem 'google-webfonts-rails',            '0.0.4'
 gem 'delayed_job_active_record',        '4.1.1'
 gem 'yahoo_weather'
 gem 'rollout'
+gem 'newrelic_rpm'
 
 group :development, :test do
   gem 'byebug',                         '8.2.2'
