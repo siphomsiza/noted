@@ -1,7 +1,7 @@
 <div class = "tab-pane active fade in" id = "manage_locations">
       <div class="col col-lg-12">
- <table class="table table-hover">
-   <thead>
+ <table class="table table-hover table-striped table-responsive">
+
    <tr>
      <th><h4>Ref</h4></th>
      <th><h4>Municipality</h4></th>
@@ -9,9 +9,7 @@
      <th><h4>Regions/Areas</h4></th>
      <th><h4>Actions</h4></th>
    </tr>
- </thead>
 
- <tbody>
  <% @master_setups.each do |setup| %>
    <tr>
      <td><%=  setup.id %></td>
@@ -31,12 +29,12 @@
 
        </div>
     &nbsp;<%= link_to setup,class: 'btn btn-mini btn-danger', method: :delete, data: { confirm: 'Are you sure?' }, :style=>"text-decoration: none;" do %>
-       <span class="glyphicon glyphicon-remove-sign"></span>&nbsp;Delete
+       <span class="glyphicon glyphicon-trash"></span>&nbsp;Delete
      <% end %>
      </td>
    </tr>
  <% end %>
- </tbody>
+
 </table>
 <div id="googleMap" style="height:200px;width:100%;"></div>
 </div>

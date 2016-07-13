@@ -179,7 +179,7 @@ end
       redirect_to departmental_sdbips_path, :flash => { :danger => 'You have not selected a file'}
     else
     begin
-       DepartmentalSdbip.import(params[:file])
+       DepartmentalSdbip.delay(run_at: 30.seconds.from_now).import(params[:file])
        flash[:success] = "SDBIP imported successfully."
        redirect_to departmental_sdbips_path
     rescue

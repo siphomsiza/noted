@@ -6,6 +6,7 @@
 </div>
 
 <div class="modal-body">
+  
     <div class="col-lg-10 col-md-offset-1">
         <section class="media">
           <div class="media-body">
@@ -213,7 +214,7 @@
                     <div class="col-lg-6 pull-left">
                       <% if current_user.admin? && !current_user?(@user)%>
                       <%= link_to controller: "users", action: "terminate", id: @user.id, method: "get", class: "btn btn-mini" do%>
-                      <span class = "glyphicon glyphicon-remove-sign"></span>Terminate <% end %>&nbsp;|&nbsp;
+                      <span class = "glyphicon glyphicon-trash"></span>Terminate <% end %>&nbsp;|&nbsp;
                       <%= link_to controller: "users", action: "lock_user", id: @user.id, method: "get", class: "btn btn-mini" do%>
                       <span class = "glyphicon glyphicon-lock"></span>Lock
                       <% end %>
