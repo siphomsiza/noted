@@ -38,6 +38,9 @@ gem 'delayed_job_active_record',        '4.1.1'
 gem 'yahoo_weather'
 gem 'rollout'
 gem 'newrelic_rpm'
+gem 'scout_apm'
+gem 'airbrake'
+gem 'god'
 
 group :development, :test do
   gem 'byebug',                         '8.2.2'
