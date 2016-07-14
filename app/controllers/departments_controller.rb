@@ -2,8 +2,7 @@ class DepartmentsController < ApplicationController
   before_action :logged_in_user, only: [:new, :index, :edit, :update, :destroy,:show]
   before_action :admin_user,     only: [:new, :index, :edit, :update, :destroy,:show]
   def new
-  	@department = Department.new
-  	 @users = User.all
+  	 @department = Department.new
   end
 
   def index
@@ -26,7 +25,7 @@ class DepartmentsController < ApplicationController
   		redirect_to departments_path
 
       else
-      render :new
+      redirect_to :back
 
   	end
 
@@ -42,7 +41,7 @@ class DepartmentsController < ApplicationController
         flash[:danger] = 'Department was not updated.'
         redirect_to :back
       end
-  
+
   end
 
   # DELETE /municipalities/1

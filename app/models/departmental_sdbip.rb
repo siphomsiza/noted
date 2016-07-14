@@ -27,7 +27,7 @@ class DepartmentalSdbip < ActiveRecord::Base
 	belongs_to :strategic_objective
 	belongs_to :ward
 	belongs_to :departmental_idp_objective
-	belongs_to :capital_project
+	has_one :capital_project
 	belongs_to :sdbip_time_period
 	belongs_to :sdbip_report
 	has_many :departmental_sdbip_progresses, :dependent => :destroy
@@ -249,8 +249,8 @@ def self.filter_sdbip_report(sdbip_top_layer_kpi_ref_filters,sdbip_capital_proje
 	end
 
 	if selected_columns.include?("Capital Project")
-		audit_columns.push("departmental_sdbip.capital_project.mun_cp_ref")
-		audit_columns_headers.push("Capital Project")
+				audit_columns.push("departmental_sdbip.capital_project.mun_cp_ref")
+				audit_columns_headers.push("Capital Project")
 	end
 	if ("KPI").in?selected_columns
 		audit_columns.push("departmental_sdbip.kpi")
@@ -411,7 +411,17 @@ def self.report_to_csv(options = {})
 	CSV.generate(options) do |csv|
 		csv << column_names
 		all.each do |departmental_sdbip|
-			csv << array_of_values.map{|n|eval n}
+
+      if !CapitalProject.exists?(:departmental_sdbip_id=>departmental_sdbip.id)
+				array_of_values.each do |s|
+    			s.gsub!('departmental_sdbip.capital_project.mun_cp_ref', '')
+				end
+				csv << array_of_values.map{|n|eval n}
+
+			elsif CapitalProject.exists?(:departmental_sdbip_id=>departmental_sdbip.id)
+				csv << array_of_values.map{|n|eval n}
+      end
+
 		end
 	end
 

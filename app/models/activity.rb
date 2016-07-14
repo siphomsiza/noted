@@ -40,7 +40,7 @@ class Activity < ActiveRecord::Base
       elsif capital_project_filters == "operational kpis only"
           @audits = @audits.where(:departmental_sdbip =>{:kpi_type_id => 2 })
       elsif capital_project_filters == "kpis associated with capital projects only"
-          @audits = @audits.where.not(:capital_project_id=> nil)
+          @audits = @audits.includes(:capital_projects)
       end
 
     end

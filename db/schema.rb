@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 20160701101620) do
     t.integer  "department_id",            null: false
     t.integer  "subdepartment_id",         null: false
     t.integer  "mscore_classification_id", null: false
+    t.integer :departmental_sdbip_id, :index => true, :null => false, foreign_key: true
     t.string   "mun_cp_ref"
     t.string   "idp_nummber"
     t.string   "vote_number"
@@ -76,6 +77,7 @@ ActiveRecord::Schema.define(version: 20160701101620) do
     t.string   "june"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+
   end
 
   create_table "delayed_jobs", force: :cascade do |t|
@@ -143,7 +145,6 @@ ActiveRecord::Schema.define(version: 20160701101620) do
     t.integer  "kpa_id"
     t.string   "kpa_name"
     t.integer  "ndp_objective_id"
-    t.integer  "capital_project_id"
     t.integer  "kpi_concept_id"
     t.integer  "kpi_type_id"
     t.string   "impact"

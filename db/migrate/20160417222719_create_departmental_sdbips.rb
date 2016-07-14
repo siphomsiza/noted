@@ -5,7 +5,7 @@ class CreateDepartmentalSdbips < ActiveRecord::Migration
       t.string   :department_name, null: false
       t.string   :subdepartment_name, null: false
       t.integer :subdepartment_id, foreign_key: true, null: false
-      t.string :kpi_ref_number
+      t.string :kpi_ref_number, index: true, unique: true
       t.integer :predetermined_objective_id
       t.integer :kpi_owner_id
       t.text :kpi
@@ -38,7 +38,6 @@ class CreateDepartmentalSdbips < ActiveRecord::Migration
       t.integer :kpa_id
       t.string :kpa_name
       t.integer :ndp_objective_id
-      t.integer :capital_project_id
       t.integer :kpi_concept_id
       t.integer :kpi_type_id
       t.string :impact
