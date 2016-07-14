@@ -84,6 +84,7 @@ class DepartmentalSdbipProgressesController < ApplicationController
 
      ####Graphs###
     @departmental_sdbip_progresses = @departmental_sdbip_progresses
+    
     @departmental_sdbips = DepartmentalSdbip.order(performance_standard: :asc)
 
 

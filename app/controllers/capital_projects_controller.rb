@@ -1,5 +1,7 @@
 class CapitalProjectsController < ApplicationController
   before_action :set_capital_project, only: [:show, :edit, :update, :destroy]
+  before_action :logged_in_user, only: [:index,:show,:new,:edit,:destroy]
+  before_action :admin_user,     only: [:index,:show,:new,:edit,:destroy]
 
   # GET /capital_projects
   # GET /capital_projects.json
@@ -30,8 +32,10 @@ class CapitalProjectsController < ApplicationController
        CapitalProject.import(params[:file])
        flash[:success] = "Capital Projects imported successfully."
        redirect_to capital_projects_url
-    rescue
-      flash[:danger] = "Capital Projects failed to import."
+    rescue=> e
+
+       Rails.logger.error { "#{e.message} #{e.backtrace.join("\n")}" }
+      flash[:danger] = "Capital Projects failed to import #{e.message}."
        redirect_to capital_projects_url
     end
   end
@@ -61,15 +65,14 @@ class CapitalProjectsController < ApplicationController
   # PATCH/PUT /capital_projects/1
   # PATCH/PUT /capital_projects/1.json
   def update
-    respond_to do |format|
+
       if @capital_project.update(capital_project_params)
           flash[:success] ='Capital project was successfully updated.'
-        format.html { redirect_to capital_projects_url }
-        format.json { render :show, status: :ok, location: @capital_project }
+          redirect_to capital_projects_url
       else
-          format.html { redirect_to capital_projects_url }
-        format.json { render json: @capital_project.errors, status: :unprocessable_entity }
-      end
+
+           flash[:success] ='Capital project was not updated.'
+           redirect_to capital_projects_url
     end
   end
 
@@ -94,4 +97,21 @@ class CapitalProjectsController < ApplicationController
     def capital_project_params
       params.require(:capital_project).permit(:department_id, :subdepartment_id, :mscore_classification_id, :mun_cp_ref, :idp_nummber, :vote_number, :project_name, :project_description, :funding_source, :planned_start_date, :planned_completion_date, :actual_start_date, :actual_completion_date, :ward_id, :area_id, :july, :august, :september, :october, :november, :december, :january, :february, :march, :april, :may, :june)
     end
+
+    def logged_in_user
+        unless logged_in?
+          store_location
+          flash[:danger] = "Please log in."
+          redirect_to login_url
+        end
+      end
+
+      # Confirms an admin user.
+      def admin_user
+        #redirect_to(root_url) unless
+        current_user.admin?
+      end
+      def kpi_owner_user
+        redirect_to(root_url) unless !current_user.role.blank? || current_user.admin?
+      end
 end

@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
-  before_action :logged_in_user, only: [:new,:setup,:dashboard]
-  before_action :admin_user,     only: [:new,:setup,:dashboard]
+  before_action :logged_in_user, only: [:about,:new,:setup,:dashboard]
+  before_action :admin_user,     only: [:about,:new,:setup,:dashboard]
   before_action :municipal_manager_user,     only: [:dashboard]
   def home
   end
@@ -13,12 +13,8 @@ class PagesController < ApplicationController
 
   def contact
   end
+
   def setup
-    @setups = Setup.all
-    @lists = List.all
-    @departments = Department.all
-    @headings = Heading.all
-    @roles = Role.all
 
   end
   def dashboard
@@ -26,13 +22,21 @@ class PagesController < ApplicationController
     @sdbip_time_periods = SdbipTimePeriod.where(["end_date = ? OR end_date = ?",Date.today,Date.today.days_ago(-7)])
     @users = User.all
     @departmental_sdbips = DepartmentalSdbip.order(performance_standard: :asc)
-    @client = YahooWeather::Client.new
-    @response = @client.fetch(1582504)
-    @doc = @response.doc
-    @forecast = @doc["item"]["forecast"]
-    #@response = @client.fetch_by_location('New York')
-    #@response.units.temperature
-    #@response.condition.temp
+
+    begin
+      @client = YahooWeather::Client.new
+      @response = @client.fetch(1582504)
+      @doc = @response.doc
+      @forecast = @doc["item"]["forecast"]
+      #@response = @client.fetch_by_location('New York')
+      #@response.units.temperature
+      #@response.condition.temp
+
+  rescue SignalException => e
+    flash[:notice] = "received Exception #{e.message}"
+    puts "received Exception #{e}"
+  end
+
   end
   private
   #

@@ -25,8 +25,10 @@ class TopLayerSdbipsController < ApplicationController
        CapitalProject.import(params[:file])
        flash[:success] = "Top Layer SDBIPs imported successfully."
        redirect_to top_layer_sdbips_url
-    rescue
-      flash[:danger] = "Top Layer SDBIPs failed to import."
+    rescue=> e
+
+       Rails.logger.error { "#{e.message} #{e.backtrace.join("\n")}" }
+       flash[:danger] = "Top Layer SDBIPs failed to import #{e.message}."
        redirect_to top_layer_sdbips_url
     end
   end

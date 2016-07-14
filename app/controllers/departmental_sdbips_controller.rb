@@ -6,7 +6,7 @@ class DepartmentalSdbipsController < ApplicationController
 
     @departmental_sdbip = DepartmentalSdbip.new
     @departments = Department.all
-    @capital_projects = CapitalProject.paginate(page: params[:page],per_page: 10)
+
     @departmental_sdbips_to_file = DepartmentalSdbip.order(:department_id,:subdepartment_id)
     @subdepartments = Subdepartment.where("department_id = ?", Department.first.id)
     @kpitypes = KpiType.all
@@ -179,12 +179,19 @@ end
       redirect_to departmental_sdbips_path, :flash => { :danger => 'You have not selected a file'}
     else
     begin
-       DepartmentalSdbip.delay(run_at: 30.seconds.from_now).import(params[:file])
+      #temp = Tempfile.new(params[:file].original_filename)
+      #xlsx_package.serialize temp.path
+      #send_file temp.path, :filename => params[:file].original_filename, :type => "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+       DepartmentalSdbip.import(params[:file])
        flash[:success] = "SDBIP imported successfully."
        redirect_to departmental_sdbips_path
-    rescue
-      flash[:danger] = "SDBIP failed to import."
+    rescue => e
+       flash[:danger] = "SDBIP failed to import #{e.message}."
+       Rails.logger.error { "#{e.message} #{e.backtrace.join("\n")}" }
+       #temp.close
+       #temp.unlink
        redirect_to departmental_sdbips_path
+
     end
   end
   end

@@ -1,6 +1,10 @@
 class RolesController < ApplicationController
+  before_action :logged_in_user, only: [:index,:show,:new,:edit,:destroy]
+  before_action :admin_user,     only: [:index,:show,:new,:edit,:destroy]
+
   def index
     @role = Role.new
+    @role.roles_details.build
     @roles = Role.all
     @users = User.all
     @departments = Department.all
@@ -57,4 +61,21 @@ class RolesController < ApplicationController
           :kpi_owner, :municipal_manager, :departmental_administrator,:subdepartmental_administrator,
           :auditor_general,:finance_admin, :internal_auditor, :roles_details_attributes=>[:id,:department_id,:subdepartment_id,:_destroy],)
     end
+
+    def logged_in_user
+        unless logged_in?
+          store_location
+          flash[:danger] = "Please log in."
+          redirect_to login_url
+        end
+      end
+
+      # Confirms an admin user.
+      def admin_user
+        #redirect_to(root_url) unless
+        current_user.admin?
+      end
+      def kpi_owner_user
+        redirect_to(root_url) unless !current_user.role.blank? || current_user.admin?
+      end
 end

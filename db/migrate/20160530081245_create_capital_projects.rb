@@ -29,6 +29,7 @@ class CreateCapitalProjects < ActiveRecord::Migration
       t.string :may
       t.string :june
       t.timestamps null: false
+      t.integer :departmental_sdbip_id, :index => true, :null => false, foreign_key: true
     end
   end
 end

@@ -25,21 +25,20 @@ class SetupsController < ApplicationController
       redirect_to setups_path
   	else
   		flash[:notice]="Setup not saved."
-  		redirect_to new_setup_path
+  		redirect_to setups_path
   	end
   end
   def update
 
     @setup = Setup.find(params[:id])
-    respond_to do |format|
+
       if @setup.update(setup_params)
         flash[:success]='Setup was successfully updated.'
-        format.html { redirect_to setups_path, success: 'Setup was successfully updated.' }
-        format.json { render :show, status: :ok, location: setups_path}
+        redirect_to setups_path
+
       else
-        format.html { render :edit }
-        format.json { render json: @setup.errors, status: :unprocessable_entity }
-      end
+        flash[:danger]='Setup was not updated.'
+        redirect_to :back
     end
   end
 
@@ -48,10 +47,7 @@ class SetupsController < ApplicationController
   def destroy
     @setup = Setup.find(params[:id])
     @setup.destroy
-    respond_to do |format|
-      format.html { redirect_to setups_path, notice: 'Setup was successfully deleted.' }
-      format.json { head :no_content }
-    end
+      redirect_to setups_path, notice: 'Setup was successfully deleted.'
   end
 
   private

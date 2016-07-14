@@ -110,9 +110,6 @@
 		<%= f.label :ndp_objective_id, "NDP Objectives" %><br>
 		<%= f.select :ndp_objective_id, NdpObjective.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select NDP Objective"}, class: "form-control" %>
 
-		<%= f.label :capital_project_id, "Capital Project" %><br>
-		<%= f.select :capital_project_id, CapitalProject.all.collect {|x| [x.mun_cp_ref, x.id]}, {:include_blank => "Select Capital Project"}, class: "form-control" %>
-
 		<%= f.label :kpi_concept_id, "KPI Concept" %><br>
 		<%= f.select :kpi_concept_id, KpiConcept.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select KPI Concept"}, class: "form-control" %>
 

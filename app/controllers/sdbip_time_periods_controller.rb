@@ -38,8 +38,9 @@ class SdbipTimePeriodsController < ApplicationController
        SdbipTimePeriod.delay(run_at: 30.seconds.from_now).import(params[:file])
        flash[:success] = "Time periods imported successfully."
        redirect_to sdbip_time_periods_url
-    rescue
-      flash[:danger] = "Time periods failed to import."
+    rescue => e
+       Rails.logger.error { "#{e.message} #{e.backtrace.join("\n")}" }
+      flash[:danger] = "Time periods failed to import #{e.message}."
        redirect_to sdbip_time_periods_url
     end
   end
