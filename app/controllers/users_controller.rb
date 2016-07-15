@@ -7,6 +7,7 @@ class UsersController < ApplicationController
   def index
 
       @roles = Role.paginate(page: params[:page],per_page: 15)
+      @locations = MasterSetup.all
       @system_users = User.all.includes(:department)
       @user_activities = ActivityLog.where(admin: false).paginate(page: params[:page], per_page: 15)
       @super_user_activities = ActivityLog.where(admin: true).paginate(page: params[:page], per_page: 15)
@@ -181,7 +182,7 @@ end
 
     def user_params
       params.require(:user).permit(:title, :firstname, :surname, :id_number, :active_log,
-      :user_name, :admin, :employee_number, :employee_date, :job_title, :department, :location, :manager,
+      :user_name, :admin, :employee_number, :employee_date,:birth_date,:username,:id_number, :job_title, :department, :location, :manager,
       :country_prefix, :landline, :mobile, :fax, :gender, :race, :occupational_category,
       :disabled, :birthday, :email, :password,
                                    :password_confirmation, :roles_attributes=>[:name, :description, :edit_right,:delete_right,:create_right,:approve_right,:view_right,:deactivate_right,:update_right,:user_id])

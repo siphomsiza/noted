@@ -8,7 +8,7 @@ class CreateCapitalProjects < ActiveRecord::Migration
       t.string :idp_nummber
       t.string :vote_number
       t.string :project_name
-      t.string :project_description, null: false
+      #t.string :project_description, null: false
       t.string :funding_source
       t.date :planned_start_date
       t.date :planned_completion_date
@@ -29,7 +29,8 @@ class CreateCapitalProjects < ActiveRecord::Migration
       t.string :may
       t.string :june
       t.timestamps null: false
-      t.integer :departmental_sdbip_id, :index => true, :null => false, foreign_key: true
+      t.references :departmental_sdbips, column:  :project_description, null: false, foreign_key: true, index: true
     end
+
   end
 end

@@ -205,6 +205,8 @@
 
 		<%= f.label :kpi_calculation_type_id, "KPI Calculation Type" %><br>
 		<%= f.select :kpi_calculation_type_id, KpiCalculationType.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select KPI Calculation Type"}, class: "form-control" %>
+    <%= f.label :kpi_target_type_id, "KPI Target Type" %><br>
+		<%= f.select :kpi_target_type_id, KpiTargetType.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select KPI Target Type"}, class: "form-control" %>
 
     <div class="row">
     <div class="actions col-lg-5">

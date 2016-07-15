@@ -16,7 +16,7 @@ $(function() {
 
 <h3>Charts</h3>
 
-
+<%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
 <div class="panel panel-default col-md-6">
       <div class="panel-body">
         <%= column_chart @departmental_sdbips.group(:performance_standard,:subdepartment_name).count, width: "400px", height: "400px", stacked: true, colors: ["limegreen", "darkgreen", "red","orange", "darkblue"] %>

@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 20160701101620) do
     t.integer  "department_id",            null: false
     t.integer  "subdepartment_id",         null: false
     t.integer  "mscore_classification_id", null: false
-    t.integer :departmental_sdbip_id, :index => true, :null => false, foreign_key: true
+    t.integer  :departmental_sdbip_id, :index => true, :null => false, foreign_key: true
     t.string   "mun_cp_ref"
     t.string   "idp_nummber"
     t.string   "vote_number"
@@ -140,18 +140,21 @@ ActiveRecord::Schema.define(version: 20160701101620) do
     t.binary   "second_quarter_poe"
     t.binary   "third_quarter_poe"
     t.binary   "fourth_quarter_poe"
-    t.string   "performance_standard"
+    t.string   "performance_standard", default: "KPI Not Yet Measured", null: false
     t.integer  "risk_rating_id"
     t.integer  "kpa_id"
     t.string   "kpa_name"
     t.integer  "ndp_objective_id"
     t.integer  "kpi_concept_id"
     t.integer  "kpi_type_id"
+    t.integer  "kpi_target_type_id"
     t.string   "impact"
     t.integer  "provincial_strategic_outcome_id"
     t.integer  "ward_id"
     t.integer  "area_id"
     t.text     "past_year_performance"
+    t.text "performance_comments"
+    t.text "corrective_measures"
     t.integer  "reporting_category_id"
     t.string   "top_layer_kpi_ref"
     t.integer  "kpi_calculation_type_id"
@@ -387,6 +390,11 @@ ActiveRecord::Schema.define(version: 20160701101620) do
 
   create_table "roles_details", force: :cascade do |t|
     t.integer  "role_id",          null: false
+    t.boolean "can_update", default: false
+    t.boolean "can_edit", default: false
+    t.boolean "can_create", default: false
+    t.boolean "can_delete", default: false
+    t.boolean "do_setup", default: false
     t.integer  "subdepartment_id", null: false
     t.integer  "department_id",    null: false
     t.datetime "created_at",       null: false
@@ -477,6 +485,9 @@ ActiveRecord::Schema.define(version: 20160701101620) do
     t.string   "email"
     t.string   "title"
     t.string   "surname"
+    t.string "id_number", null: false, unique: true, limit: 13
+    t.date "birth_date"
+    t.string "username", unique: true
     t.string   "gender"
     t.string   "race"
     t.string   "occupational_category"

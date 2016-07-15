@@ -1,255 +1,119 @@
 <div class="table-responsive">
-  <table class="table table-striped table-bordered">
-    <thead>
+  <table class="table table-striped table-bordered departmental-sdbip-edit" id="sdbips_table">
       <tr>
-        <th>ID</th>
-        <th>KPI</th>
-        <th>Department</th>
-        <th>Subdepartment</th>
-        <th>KPI Ref Number</th>
-        <th>KPI Type</th>
-        <th>Predetermined Objective</th>
-        <th class="kpiowner">KPI Owner</th>
-        <th class="unit_of_measurement">Unit of Measurement</th>
-        <th class="mscore_classification">M Score Classification</th>
-        <th class="idp_ref">IDP Ref</th>
-        <th class="national_outcome">National Outcome</th>
-        <th class="strategic_objectives">Strategic Objective</th>
-        <th class="source_of_evidence">Source of Evidence</th>
-        <th class="baseline">Baseline</th>
-        <th class="annual_target">Annual Target</th>
-        <th class="revised_target">Revised Target</th>
-        <th class="first_quarter_target">First Quarter Target</th>
-        <th class="second_quarter_target">Second Quarter Target</th>
-        <th class="third_quarter_target">Third Quarter Target</th>
-        <th class="fourth_quarter_target">Fourth Quarter Target</th>
-        <th class="budget">Budget</th>
-        <th class="performance_standard">Performance Standard</th>
-        <th class="risk_rating">Risk Rating</th>
-        <th class="kpa">KPA</th>
-        <th class="ndp_objectives">NDP Objective</th>
-        <th class="capital_project">Capital Project</th>
-        <th class="kpi_concept">KPI Concept</th>
-        <th class="impact">Impact</th>
-        <th class="provincial_strategic_outcome">Provincial Strategic Outcome</th>
-        <th class="area">Area</th>
-        <th class="ward">Ward</th>
-        <th class="past_year_performance">Past Year Performance</th>
-        <th class="reporting_category">Reporting Category</th>
-        <th class="top_layer_ref">Top Layer KPI Ref</th>
-        <th class="kpi_calculation_type">KPI Calculation Type</th>
-        <th class="start_date">Start Date</th>
-        <th class="end_date">End Date</th>
-        <th class="created_date">Create Date</th>
-        <th class="updated_date">Update Date</th>
+        <th><h4>Ref</h4></th>
+        <th><h4>Department</h4></th>
+        <th><h4>Subdepartment</h4></th>
+        <th><h4>KPI</h4></th>
+        <th><h4>KPI Ref Number</h4></th>
+        <th><h4>Predetermined Objectives</h4></th>
+        <th class="kpiowner"><h4>KPI Owner</h4></th>
+        <th class="unit_of_measurement"><h4>Unit of Measurement</h4></th>
+        <th class="source_of_evidence"><h4>Source of Evidence</h4></th>
+        <th class="ndp_objectives"><h4>NDP Objective</h4></th>
+        <th class="capital-project"><h4>Capital Project</h4></th>
+        <th class="reporting_category"><h4>Reporting Category</h4></th>
+        <th class="kpi_calculation_type"><h4>KPI Calculation Type</h4></th>
 
+        <th class="first_quarter_target"><h4>Target</h4></th>
+        <th class="first_quarter_target"><h4>Actual</h4></th>
+        <th class="first_quarter_target"><h4>Results</h4></th>
+
+        <th class="second_quarter_target"><h4>Target</h4></th>
+        <th class="second_quarter_target"><h4>Actual</h4></th>
+        <th class="second_quarter_target"><h4>Results</h4></th>
+
+        <th class="third_quarter_target"><h4>Target</h4></th>
+        <th class="third_quarter_target"><h4>Actual</h4></th>
+        <th class="third_quarter_target"><h4>Results</h4></th>
+
+        <th class="fourth_quarter_target"><h4>Target</h4></th>
+        <th class="fourth_quarter_target"><h4>Actual</h4></th>
+        <th class="fourth_quarter_target"><h4>Results</h4></th>
+
+        <th class="annual_target"><h4>Annual Target</h4></th>
+        <th class="revised_target"><h4>Revised Target</h4></th>
+        <th class="annual_target"><h4>Actual</h4></th>
+        <th class="revised_target"><h4>Results</h4></th>
+
+        <th class="kpi_type"><h4>KPI Type</h4></th>
+        <th class="kpi_target_type"><h4>KPI Target Type</h4></th>
+        <th class="idp_ref"><h4>IDP Ref</h4></th>
+        <th class="mscore_classification"><h4>M Score Classification</h4></th>
+        <th class="national_outcome"><h4>National Outcome</h4></th>
+        <th class="strategic_objectives"><h4>Strategic Objective</h4></th>
+        <th class="baseline"><h4>Baseline</h4></th>
+        <th class="budget"><h4>Budget</h4></th>
+        <th class="performance_standard"><h4>Performance Standard</h4></th>
+        <th class="risk_rating"><h4>Risk Rating</h4></th>
+        <th class="kpa"><h4>KPA</h4></th>
+        <th class="kpi_concept"><h4>KPI Concept</h4></th>
+        <th class="impact"><h4>Impact</h4></th>
+        <th class="provincial_strategic_outcome"><h4>Provincial Strategic Outcome</h4></th>
+        <th class="area"><h4>Area</h4></th>
+        <th class="ward"><h4>Ward</h4></th>
+        <th class="past_year_performance"><h4>Past Year Performance</h4></th>
+        <th class="top_layer_ref"><h4>Top Layer KPI Ref</h4></th>
+        <th class="created_date"><h4>Create Date</h4></th>
+        <th class="updated_date"><h4>Update Date</h4></th>
       </tr>
-    </thead>
-    <tbody>
     <% @departmental_sdbips.each do |departmental_sdbip| %>
       <tr>
         <td><%= departmental_sdbip.id %></td>
+        <td><%= departmental_sdbip.department.name %></td>
+        <td><%= departmental_sdbip.subdepartment.subdepartment_name %></td>
         <td>
-          <%= link_to edit_departmental_sdbip_path(departmental_sdbip),remote: true,'data-target' => "departmental-sdbip-update-modal", 'data-toggle' => 'modal', :title=>"Click to Update KPI" do %>
+        <%= link_to edit_kpis_path(departmental_sdbip),remote: true,'data-target' => "#departmental-sdbip_edit-modal", 'data-toggle' => 'modal', :title=>"Click to Update KPI" do %>
             <%= departmental_sdbip.kpi %>
           <% end %>
-          <div id="departmental-sdbip-update-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-            <div class="modal-content">
-            <div class="modal-header">
-              <h3><%= "Editing #{@departmental_sdbip.kpi}" %></h3>
-            </div>
-            <div class="modal-body">
-            <div class="row">
-                <div class="col-lg-10 col-md-offset-1">
-            <%= form_for @departmental_sdbip, remote: true, html: { style: "display:inline;" } do |f| %>
-
-                  <%= f.label :kpi, "KPI" %><br>
-                  <% if current_user.admin? %>
-                  <%= f.text_area :kpi, :class => "form-control has-error col-md-5", :readonly=> false  %>
-                  <% else %>
-                  <%= f.text_area :kpi, :class => "form-control has-error col-md-5", :readonly=> true  %>
-                  <% end %>
-                <%= f.label :department_id %><br>
-                <%= f.select :department_id, Department.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select Department"}, :id=>"selected_department_update", class: "form-control" %>
-
-                <%= f.hidden_field :department_name, id: "current_department_update" %>
-
-                <%= f.label :subdepartment_id, "Subdepartment" %><br>
-                <%= f.select :subdepartment_id, Subdepartment.all.collect {|x| [x.subdepartment_name, x.id]}, {:include_blank => "Select Subdepartment"}, :id=>"selected_subdepartment_update", class: "form-control" %>
-
-                <%= f.hidden_field :subdepartment_name, id: "current_subdepartment_update" %>
-
-                <%= f.label :kpi_ref_number, "KPI Ref Number" %><br>
-                <%= f.text_field :kpi_ref_number, :class => "form-control has-error col-md-5" %>
-
-                <%= f.label :predetermined_objective_id, "Predetermined Objectives" %><br>
-                <%= f.select :predetermined_objective_id, PredeterminedObjective.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select Predetermined Objective"}, class: "form-control" %>
-
-                <%= f.label :kpi_owner_id, "KPI Owner" %><br>
-                <%= f.select :kpi_owner_id, KpiOwner.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select KPI Owner"}, class: "form-control" %>
-
-                <%= f.label :unit_of_measurement, "Unit of Measurement" %><br>
-                <%= f.text_field :unit_of_measurement, :class => "form-control has-error col-md-5" %>
-
-                <%= f.label :mscore_classification_id, "M Score Classification" %><br>
-                <%= f.select :mscore_classification_id, MscoreClassification.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select M Score Classification"}, class: "form-control" %>
-
-                <%= f.label :idp_ref, "IDP Ref" %><br>
-                <%= f.text_field :idp_ref, :class => "form-control has-error col-md-5" %>
-
-                <%= f.label :national_outcome_id, "National Outcome" %><br>
-                <%= f.select :national_outcome_id, NationalOutcome.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select National Outcome"}, class: "form-control" %>
-
-                <%= f.label :strategic_objective_id, "Strategic Objectives" %><br>
-                <%= f.select :strategic_objective_id, StrategicObjective.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select Strategic Objective"}, class: "form-control" %>
-
-                <%= f.label :source_of_evidence, "Source of Evidence" %><br>
-                <%= f.text_field :source_of_evidence, :class => "form-control has-error col-md-5" %>
-
-                <%= f.label :baseline %><br>
-                <%= f.text_field :baseline, :class => "form-control has-error col-md-5" %>
-
-
-                <%= f.label :budget %><br>
-                <%= f.text_field :budget, :class => "form-control has-error col-md-5" %>
-
-                <%= f.label :annual_target, "Annual Target" %><br>
-                <%= f.text_field :annual_target, :class => "form-control has-error col-md-5" %>
-
-                <%= f.label :revised_target, "Revised Target" %><br>
-                <%= f.text_field :revised_target, :class => "form-control has-error col-md-5" %>
-                <%= f.label :first_quarter_target, "First Quarter Target" %><br>
-                <%= f.text_field :first_quarter_target, :class => "form-control has-error col-md-5" %>
-
-                <%= f.label :first_quarter_actual, "First Quarter Actual" %><br>
-                <%= f.text_field :first_quarter_actual, :class => "form-control has-error col-md-5" %>
-
-                <%= f.label :first_quarter_poe, "First Quarter POE" %><br>
-                <%= f.text_field :first_quarter_poe, :class => "form-control has-error col-md-5" %>
-
-                <%= f.label :second_quarter_target, "Second Quarter Target" %><br>
-                <%= f.text_field :second_quarter_target, :class => "form-control has-error col-md-5" %>
-
-                <%= f.label :second_quarter_actual, "Second Quarter Actual" %><br>
-                <%= f.text_field :second_quarter_actual, :class => "form-control has-error col-md-5" %>
-
-                <%= f.label :second_quarter_poe, "Second Quarter POE" %><br>
-                <%= f.text_field :second_quarter_poe, :class => "form-control has-error col-md-5" %>
-
-
-                <%= f.label :third_quarter_target, "Third Quarter Target" %><br>
-                <%= f.text_field :third_quarter_target, :class => "form-control has-error col-md-5" %>
-
-                <%= f.label :third_quarter_actual, "Third Quarter Actual" %><br>
-                <%= f.text_field :third_quarter_actual, :class => "form-control has-error col-md-5" %>
-
-                <%= f.label :third_quarter_poe, "Third Quarter POE" %><br>
-                <%= f.text_field :third_quarter_poe, :class => "form-control has-error col-md-5" %>
-
-
-                <%= f.label :fourth_quarter_target, "Fourth Quarter Target" %><br>
-                <%= f.text_field :fourth_quarter_target, :class => "form-control has-error col-md-5" %>
-
-                <%= f.label :fourth_quarter_actual, "Fourth Quarter Actual" %><br>
-                <%= f.text_field :fourth_quarter_actual, :class => "form-control has-error col-md-5" %>
-
-                <%= f.label :fourth_quarter_poe, "Fourth Quarter POE" %><br>
-                <%= f.text_field :fourth_quarter_poe, :class => "form-control has-error col-md-5" %>
-
-                <%= f.label :kpa_id, " KPA" %><br>
-                <%= f.select :kpa_id, Kpa.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select National KPA"}, class: "form-control" %>
-
-
-                <%= f.label :ndp_objective_id, "NDP Objectives" %><br>
-                <%= f.select :ndp_objective_id, NdpObjective.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select NDP Objective"}, class: "form-control" %>
-
-                <%= f.label :capital_project_id, "Capital Project" %><br>
-                <%= f.select :capital_project_id, CapitalProject.all.collect {|x| [x.mun_cp_ref, x.id]}, {:include_blank => "Select Capital Project"}, class: "form-control" %>
-
-                <%= f.label :kpi_concept_id, "KPI Concept" %><br>
-                <%= f.select :kpi_concept_id, KpiConcept.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select KPI Concept"}, class: "form-control" %>
-
-                <%= f.label :kpi_type_id, "KPI Type" %><br>
-                <%= f.select :kpi_type_id, KpiType.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select KPI Type"}, class: "form-control" %>
-
-                <%= f.label :impact %><br>
-                <%= f.text_field :impact, :class => "form-control has-error col-md-5" %>
-
-                <%= f.label :provincial_strategic_outcome_id, "Provincial Strategic Outcome" %><br>
-                <%= f.select :provincial_strategic_outcome_id, RiskRating.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select Provincial Strategic Outcome"}, class: "form-control" %>
-
-                <%= f.label :ward_id, "Ward" %><br>
-                <%= f.select :ward_id, Ward.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select Ward"}, class: "form-control" %>
-
-                <%= f.label :area_id, "Area" %><br>
-                <%= f.select :area_id, Area.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select Area"}, class: "form-control" %>
-                <%= f.label :performance_standard, "Performance Standard" %><br>
-                <%= f.select :performance_standard, options_for_select(["KPI Not Met", "KPI Almost Met", "KPI Met", "KPI Well Met", "KPI Extremely Well Met"]),
-                                                      {}, {:class => "form-control"} %>
-
-                <%= f.label :past_year_performance, "Past Year Performance" %><br>
-                <%= f.text_area :past_year_performance, :class => "form-control has-error col-md-5" %>
-
-                <%= f.label :reporting_category_id, "Reporting Category" %><br>
-                <%= f.select :reporting_category_id, ReportingCategory.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select Reporting Category"}, class: "form-control" %>
-
-                <%= f.label :top_layer_kpi_ref, "Top Layer KPI Ref" %><br>
-                <%= f.text_field :top_layer_kpi_ref, :class => "form-control has-error col-md-5" %>
-
-                <%= f.label :kpi_calculation_type_id, "KPI Calculation Type" %><br>
-                <%= f.select :kpi_calculation_type_id, KpiCalculationType.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select KPI Calculation Type"}, class: "form-control" %>
-                <%= f.label :start_date, "Start Date:" %><br>
-                <%= f.date_field :start_date, :class => "form-control has-error col-md-5 input-sm" %>
-
-                <%= f.label :end_date, "End Date:" %><br>
-                <%= f.date_field :end_date, :class => "form-control has-error col-md-5 input-sm" %>
-
-
-            </div>
-            </div>
-            </div>
-            <div class="modal-footer">
-              <div class="actions col-md-5">
-              <%= f.submit "Save", id: "submit_form", class: 'btn btn-primary btn-mini'%>
-              <% if current_user.admin? %>&nbsp;|&nbsp;
-              <%= link_to @departmental_sdbip, method: :delete, data: { confirm: "You sure?" }, class: "btn btn-mini" do %>
-                <span class="glyphicon glyphicon-trash"></span>Delete
-              <% end %>
-              <% end %>
-              </div>
-            </div>
-            <% end %>
-            </div>
-            </div>
+          <div id="departmental-sdbip_edit-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
 
           </div>
         </td>
-        <td><%= departmental_sdbip.department.name %></td>
-        <td><%= departmental_sdbip.subdepartment.subdepartment_name %></td>
         <td><%= departmental_sdbip.kpi_ref_number %></td>
-        <td><% if !departmental_sdbip.kpi_type_id.blank? %><%= departmental_sdbip.kpi_type.name %><% end %></td>
         <td><% if !departmental_sdbip.predetermined_objective_id.blank? %><%= departmental_sdbip.predetermined_objective.name %><% end %></td>
         <td class="kpiowner"><% if !departmental_sdbip.kpi_owner_id.blank? %><%= departmental_sdbip.kpi_owner.name %><% end %></td>
         <td class="unit_of_measurement"><%= departmental_sdbip.unit_of_measurement %></td>
-        <td class="mscore_classification"><%= departmental_sdbip.mscore_classification.name %></td>
-        <td class="idp_ref"><%= departmental_sdbip.idp_ref %></td>
-        <td class="national_outcome"><% if !departmental_sdbip.national_outcome_id.blank? %><%= departmental_sdbip.national_outcome.name %><% end %></td>
-        <td class="strategic_objectives"><%= departmental_sdbip.strategic_objective.name %></td>
         <td class="source_of_evidence"><%= departmental_sdbip.source_of_evidence %></td>
-        <td class="baseline"><%= departmental_sdbip.baseline %></td>
+        <td class="ndp_objectives"><% if !departmental_sdbip.ndp_objective_id.blank? %><%= departmental_sdbip.ndp_objective.name %><% end %></td>
+        <td class="capital-project"><% if departmental_sdbip.capital_project %><%= departmental_sdbip.capital_project.mun_cp_ref %><% end %></td>
+        <td class="reporting_category"><% if !departmental_sdbip.reporting_category_id.blank? %><%= departmental_sdbip.reporting_category.name %><% end %></td>
+        <td class="kpi_calculation_type"><% if !departmental_sdbip.kpi_calculation_type_id.blank? %><%= departmental_sdbip.kpi_calculation_type.name %><% end %></td>
+
+        <th class="first_quarter_target"><%= departmental_sdbip.first_quarter_target %></th>
+        <th class="first_quarter_target"><%= departmental_sdbip.first_quarter_actual %></th>
+        <th class="first_quarter_target"></th>
+
+        <th class="second_quarter_target"><%= departmental_sdbip.second_quarter_target %></th>
+        <th class="second_quarter_target"><%= departmental_sdbip.second_quarter_actual %></th>
+        <th class="second_quarter_target"></th>
+
+        <th class="third_quarter_target"><%= departmental_sdbip.third_quarter_target %></th>
+        <th class="third_quarter_target"><%= departmental_sdbip.third_quarter_actual %></th>
+        <th class="third_quarter_target"></th>
+
+        <th class="fourth_quarter_target"><%= departmental_sdbip.fourth_quarter_target %></th>
+        <th class="fourth_quarter_target"><%= departmental_sdbip.fourth_quarter_actual %></th>
+        <th class="fourth_quarter_target"></th>
+
         <th class="annual_target"><%= departmental_sdbip.annual_target %></th>
         <th class="revised_target"><%= departmental_sdbip.revised_target %></th>
-        <th class="first_quarter_target"><%= departmental_sdbip.first_quarter_target %></th>
-        <th class="second_quarter_target"><%= departmental_sdbip.second_quarter_target %></th>
-        <th class="third_quarter_target"><%= departmental_sdbip.third_quarter_target %></th>
-        <th class="fourth_quarter_target"><%= departmental_sdbip.fourth_quarter_target %></th>
+        <th class="annual_target"></th>
+        <th class="revised_target"></th>
+
+        <td><% if !departmental_sdbip.kpi_type_id.blank? %><%= departmental_sdbip.kpi_type.name %><% end %></td>
+        <td><% if !departmental_sdbip.kpi_target_type_id.blank? %><%= departmental_sdbip.kpi_target_type.name %><% end %></td>
+        <td class="idp_ref"><%= departmental_sdbip.idp_ref %></td>
+
+        <td class="mscore_classification"><%= departmental_sdbip.mscore_classification.name %></td>
+        <td class="national_outcome"><% if !departmental_sdbip.national_outcome_id.blank? %><%= departmental_sdbip.national_outcome.name %><% end %></td>
+        <td class="strategic_objectives"><%= departmental_sdbip.strategic_objective.name %></td>
+        <td class="baseline"><%= departmental_sdbip.baseline %></td>
         <td class="budget"><%= departmental_sdbip.budget %></td>
         <td class="performance_standard"><%= departmental_sdbip.performance_standard %></td>
         <td class="risk_rating"><% if !departmental_sdbip.risk_rating_id.blank?%><%= departmental_sdbip.risk_rating.name %><% end %></td>
         <td class="kpa"><% if !departmental_sdbip.kpa_id.blank? %><%= departmental_sdbip.kpa.name %><% end %></td>
-        <td class="ndp_objectives"><% if !departmental_sdbip.ndp_objective_id.blank? %><%= departmental_sdbip.ndp_objective.name %><% end %></td>
-        <td class="capital_project"><% if !departmental_sdbip.capital_project_id.blank? %><%= departmental_sdbip.capital_project.mun_cp_ref %><% end %></td>
+
         <td class="kpi_concept"><% if !departmental_sdbip.kpi_concept_id.blank? %><%= departmental_sdbip.kpi_concept.name %><% end %></td>
 
         <td class="impact"><%= departmental_sdbip.impact %></td>
@@ -257,16 +121,14 @@
         <td class="area"><% if !departmental_sdbip.area_id.blank? %><%= departmental_sdbip.area.name %><% end %></td>
         <td class="ward"><% if !departmental_sdbip.ward_id.blank? %><%= departmental_sdbip.ward.name %><% end %></td>
         <td class="past_year_performance"><%= departmental_sdbip.past_year_performance %></td>
-        <td class="reporting_category"><% if !departmental_sdbip.reporting_category_id.blank? %><%= departmental_sdbip.reporting_category.name %><% end %></td>
+
         <td class="top_layer_ref"><%= departmental_sdbip.top_layer_kpi_ref %></td>
-        <td class="kpi_calculation_type"><% if !departmental_sdbip.kpi_calculation_type_id.blank? %><%= departmental_sdbip.kpi_calculation_type.name %><% end %></td>
-        <td class="start_date"><%= departmental_sdbip.start_date %></td>
-        <td class="end_date"><%= departmental_sdbip.end_date %></td>
+
         <td class="created_date"><%= departmental_sdbip.created_at.strftime(' %Y-%B-%d') %></td>
         <td class="updated_date"><%= departmental_sdbip.updated_at.strftime('%d-%B-%Y') %></td>
 
       </tr>
       <% end %>
-    </tbody>
+
   </table>
 </div>

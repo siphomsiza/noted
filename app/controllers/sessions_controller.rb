@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
 
 
   def new
-    redirect_to introduction_url unless !session[:user_id]
+
   end
 
   def create

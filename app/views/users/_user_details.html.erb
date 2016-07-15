@@ -4,16 +4,19 @@
     <thead>
       <tr>
         <th ><h4>Avatar</h4></th>
-        <th ><h4>Ref</h4></th>
+        <th ><h4>ID</h4></th>
         <th ><h4>Title</h4></th>
         <th ><h4>First Name</h4></th>
         <th ><h4>Last Name</h4></th>
+        <th ><h4>Birth Date</h4></th>
+        <th ><h4>ID Number</h4></th>
+        <th ><h4>Username</h4></th>
         <th ><h4>Job Tile</h4></th>
         <th ><h4>Department</h4></th>
         <th ><h4>Location</h4></th>
         <th ><h4>Manager</h4></th>
         <th ><h4>Employee Number</h4></th>
-        <th ><h4>Employee Date</h4></th>
+        <th ><h4>Employement Date</h4></th>
         <th ><h4>Country Prefix</h4></th>
         <th ><h4>Landline</h4></th>
         <th ><h4>Mobile</h4></th>
@@ -21,11 +24,10 @@
         <th ><h4>Email</h4></th>
         <th ><h4>Gender</h4></th>
         <th ><h4>Race</h4></th>
-        <th ><h4>Disabled</h4></th>
+        <th ><h4>Disabled?</h4></th>
         <th ><h4>Date Added</h4></th>
         <th ><h4>Last Login</h4></th>
-        <th ><h4>Date Terminated</h4></th>
-        <th ><h4>Login Count</h4></th>
+        <th ><h4>Number of Login(s)</h4></th>
         <th ><h4>Status</h4></th>
       </tr>
     </thead>
@@ -37,6 +39,9 @@
         <td><%= user.title %></td>
         <td><%= user.firstname %></td>
         <td><%= user.surname %></td>
+        <td><%= user.birth_date %></td>
+        <td><%= user.id_number %></td>
+        <td><%= user.username %></td>
         <td><%= user.job_title %></td>
         <td><%= user.department %></td>
         <td><%= user.location %></td>
@@ -50,10 +55,9 @@
         <td><%= user.email %></td>
         <td><%= user.gender %></td>
         <td><%= user.race %></td>
-        <td><%= user.disabled %></td>
+        <td><% if user.disabled? %> Yes <% else %>No<% end %></td>
         <td><%= user.created_at.strftime("%Y %b %d") %></td>
         <td><% if !user.last_login.blank? %><%= user.last_login.strftime("%Y %b %d") %><% end %></td>
-        <td><% if !user.terminated_at.blank? %><%= user.terminated_at.strftime("%Y %b %d") %><% end %></td>
         <td><%= user.login_count %></td>
         <td><%= user.status %></td>
       </tr>

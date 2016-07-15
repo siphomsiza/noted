@@ -5,6 +5,9 @@ class CreateUsers < ActiveRecord::Migration
         t.string :email, index: true, unique: true
         t.string  :title
         t.string :surname
+        t.string :id_number, null: false, unique: true, limit: 13
+        t.date :birth_date
+        t.string :username, unique: true
   	    t.string  :gender
   	    t.string  :race
   	    t.string  :occupational_category

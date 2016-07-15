@@ -1,34 +1,41 @@
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+  <h3><%= "Editing #{@departmental_sdbip.kpi}" %></h3>
+</div>
+<div class="modal-body">
 <div class="row">
-    <div class="col-lg-6 col-md-offset-3">
-
+    <div class="col-lg-10 col-md-offset-1">
 <%= form_for @departmental_sdbip do |f| %>
-<% if @departmental_sdbip.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@departmental_sdbip.errors.count, "error") %> prohibited this Departmental SDBIP from being saved:</h2>
 
-    <ul>
-    <% @departmental_sdbip.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-    </ul>
-  </div>
-<% end %>
       <%= f.label :kpi, "KPI" %><br>
-  		<%= f.text_area :kpi, :class => "form-control has-error col-md-5" %>
-
+      <% if current_user.admin? %>
+      <%= f.text_area :kpi, :class => "form-control has-error col-md-5", :readonly=> false  %>
+      <% else %>
+  		<%= f.text_area :kpi, :class => "form-control has-error col-md-5", :readonly=> true  %>
+      <% end %>
 		<%= f.label :department_id %><br>
-		<%= f.select :department_id, Department.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select Department"}, :id=>"selected_department", class: "form-control" %>
+    <% if current_user.admin? %>
+    <%= f.select :department_id, Department.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select Department"}, :id=>"selected_department_edit", class: "form-control" %>
+    <% else %>
+    <%= f.select :department_id, Department.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select Department"}, :id=>"selected_department_edit",:readonly=>true, class: "form-control" %>
+    <% end %>
+    <%= f.hidden_field :department_name, id: "current_department_update" %>
 
-    <%= f.hidden_field :department_name, id: "current_department" %>
-
-		<%= f.label :subdepartment_id, "Subdepartment" %><br>
-		<%= f.select :subdepartment_id, Subdepartment.all.collect {|x| [x.subdepartment_name, x.id]}, {:include_blank => "Select Subdepartment"}, :id=>"selected_subdepartment", class: "form-control" %>
-
-    <%= f.hidden_field :subdepartment_name, id: "current_subdepartment" %>
+    <%= f.label :subdepartment_id, "Subdepartment" %><br>
+    <% if current_user.admin? %>
+    <%= f.select :subdepartment_id, Subdepartment.all.collect {|x| [x.subdepartment_name, x.id]}, {:include_blank => "Select Subdepartment"}, :id=>"selected_subdepartment_edit", class: "form-control" %>
+    <% else %>
+    <%= f.select :subdepartment_id, Subdepartment.all.collect {|x| [x.subdepartment_name, x.id]}, {:include_blank => "Select Subdepartment"}, :id=>"selected_subdepartment_edit", :readonly => true, class: "form-control" %>
+    <% end %>
+    <%= f.hidden_field :subdepartment_name, id: "current_subdepartment_update" %>
 
 		<%= f.label :kpi_ref_number, "KPI Ref Number" %><br>
+    <% if current_user.admin? %>
 		<%= f.text_field :kpi_ref_number, :class => "form-control has-error col-md-5" %>
-
+    <% else %>
+    <%= f.text_field :kpi_ref_number, :class => "form-control has-error col-md-5", readonly: true %>
+    <% end %>
 		<%= f.label :predetermined_objective_id, "Predetermined Objectives" %><br>
 		<%= f.select :predetermined_objective_id, PredeterminedObjective.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select Predetermined Objective"}, class: "form-control" %>
 
@@ -36,13 +43,20 @@
 		<%= f.select :kpi_owner_id, KpiOwner.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select KPI Owner"}, class: "form-control" %>
 
 		<%= f.label :unit_of_measurement, "Unit of Measurement" %><br>
-		<%= f.text_area :unit_of_measurement, :class => "form-control has-error col-md-5" %>
-
+    <% if current_user.admin? %>
+		<%= f.text_field :unit_of_measurement, :class => "form-control has-error col-md-5" %>
+    <% else %>
+    <%= f.text_area :unit_of_measurement, :class => "form-control has-error col-md-5",readonly: true %>
+    <% end %>
 		<%= f.label :mscore_classification_id, "M Score Classification" %><br>
 		<%= f.select :mscore_classification_id, MscoreClassification.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select M Score Classification"}, class: "form-control" %>
 
 		<%= f.label :idp_ref, "IDP Ref" %><br>
+    <% if current_user.admin? %>
 		<%= f.text_field :idp_ref, :class => "form-control has-error col-md-5" %>
+    <% else %>
+    <%= f.text_field :idp_ref, :class => "form-control has-error col-md-5", :readonly => true %>
+    <% end %>
 
 		<%= f.label :national_outcome_id, "National Outcome" %><br>
 		<%= f.select :national_outcome_id, NationalOutcome.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select National Outcome"}, class: "form-control" %>
@@ -51,22 +65,46 @@
 		<%= f.select :strategic_objective_id, StrategicObjective.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select Strategic Objective"}, class: "form-control" %>
 
 		<%= f.label :source_of_evidence, "Source of Evidence" %><br>
+    <% if current_user.admin? %>
 		<%= f.text_field :source_of_evidence, :class => "form-control has-error col-md-5" %>
+    <% else %>
+    	<%= f.text_field :source_of_evidence, :class => "form-control has-error col-md-5", :readonly => true %>
+    <% end %>
 
 		<%= f.label :baseline %><br>
+    <% if current_user.admin? %>
 		<%= f.text_field :baseline, :class => "form-control has-error col-md-5" %>
+    <% else %>
+    <%= f.text_field :baseline, :class => "form-control has-error col-md-5", :readonly => true %>
+    <% end %>
 
 		<%= f.label :budget %><br>
+    <% if current_user.admin? %>
 		<%= f.text_field :budget, :class => "form-control has-error col-md-5" %>
+    <% else %>
+    <%= f.text_field :budget, :class => "form-control has-error col-md-5", :readonly => true %>
+    <% end %>
 
 		<%= f.label :annual_target, "Annual Target" %><br>
+    <% if current_user.admin? %>
 		<%= f.text_field :annual_target, :class => "form-control has-error col-md-5" %>
+    <% else %>
+    <%= f.text_field :annual_target, :class => "form-control has-error col-md-5", :readonly => true %>
+    <% end %>
 
 		<%= f.label :revised_target, "Revised Target" %><br>
+    <% if current_user.admin? %>
 		<%= f.text_field :revised_target, :class => "form-control has-error col-md-5" %>
+    <% else %>
+    <%= f.text_field :revised_target, :class => "form-control has-error col-md-5", :readonly => true %>
+    <% end %>
 
     <%= f.label :first_quarter_target, "First Quarter Target" %><br>
+    <% if current_user.admin? %>
 		<%= f.text_field :first_quarter_target, :class => "form-control has-error col-md-5" %>
+    <% else %>
+    <%= f.text_field :first_quarter_target, :class => "form-control has-error col-md-5", :readonly => true %>
+    <% end %>
 
     <%= f.label :first_quarter_actual, "First Quarter Actual" %><br>
     <%= f.text_field :first_quarter_actual, :class => "form-control has-error col-md-5" %>
@@ -74,10 +112,12 @@
     <%= f.label :first_quarter_poe, "First Quarter POE" %><br>
     <%= f.file_field :first_quarter_poe, :class => "form-control has-error col-md-5" %>
 
-
     <%= f.label :second_quarter_target, "Second Quarter Target" %><br>
+    <% if current_user.admin? %>
     <%= f.text_field :second_quarter_target, :class => "form-control has-error col-md-5" %>
-
+    <% else %>
+    <%= f.text_field :second_quarter_target, :class => "form-control has-error col-md-5", :readonly => true %>
+    <% end %>
     <%= f.label :second_quarter_actual, "Second Quarter Actual" %><br>
     <%= f.text_field :second_quarter_actual, :class => "form-control has-error col-md-5" %>
 
@@ -86,7 +126,11 @@
 
 
     <%= f.label :third_quarter_target, "Third Quarter Target" %><br>
+    <% if current_user.admin? %>
     <%= f.text_field :third_quarter_target, :class => "form-control has-error col-md-5" %>
+    <% else %>
+    <%= f.text_field :third_quarter_target, :class => "form-control has-error col-md-5", :readonly => true %>
+    <% end %>
 
     <%= f.label :third_quarter_actual, "Third Quarter Actual" %><br>
     <%= f.text_field :third_quarter_actual, :class => "form-control has-error col-md-5" %>
@@ -96,8 +140,11 @@
 
 
     <%= f.label :fourth_quarter_target, "Fourth Quarter Target" %><br>
+    <% if current_user.admin? %>
     <%= f.text_field :fourth_quarter_target, :class => "form-control has-error col-md-5" %>
-
+    <% else %>
+      <%= f.text_field :fourth_quarter_target, :class => "form-control has-error col-md-5", :readonly => true %>
+    <% end %>
     <%= f.label :fourth_quarter_actual, "Fourth Quarter Actual" %><br>
     <%= f.text_field :fourth_quarter_actual, :class => "form-control has-error col-md-5" %>
 
@@ -106,6 +153,7 @@
 
 		<%= f.label :kpa_id, " KPA" %><br>
 		<%= f.select :kpa_id, Kpa.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select National KPA"}, class: "form-control" %>
+
 
 		<%= f.label :ndp_objective_id, "NDP Objectives" %><br>
 		<%= f.select :ndp_objective_id, NdpObjective.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select NDP Objective"}, class: "form-control" %>
@@ -117,7 +165,11 @@
 		<%= f.select :kpi_type_id, KpiType.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select KPI Type"}, class: "form-control" %>
 
 		<%= f.label :impact %><br>
+    <% if current_user.admin? %>
 		<%= f.text_field :impact, :class => "form-control has-error col-md-5" %>
+    <% else %>
+    	<%= f.text_field :impact, :class => "form-control has-error col-md-5", :readonly => true %>
+    <% end %>
 
 		<%= f.label :provincial_strategic_outcome_id, "Provincial Strategic Outcome" %><br>
 		<%= f.select :provincial_strategic_outcome_id, ProvincialStrategicOutcome.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select Provincial Strategic Outcome"}, class: "form-control" %>
@@ -132,7 +184,11 @@
                                           {}, {:class => "form-control"} %>
 
 		<%= f.label :past_year_performance, "Past Year Performance" %><br>
+    <% if current_user.admin? %>
 		<%= f.text_area :past_year_performance, :class => "form-control has-error col-md-5" %>
+    <% else %>
+    	<%= f.text_area :past_year_performance, :class => "form-control has-error col-md-5", :readonly => true %>
+    <% end %>
 
 		<%= f.label :reporting_category_id, "Reporting Category" %><br>
 		<%= f.select :reporting_category_id, ReportingCategory.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select Reporting Category"}, class: "form-control" %>
@@ -141,33 +197,34 @@
 		<%= f.select :risk_rating_id, RiskRating.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select Rating"}, class: "form-control" %>
 
 		<%= f.label :top_layer_kpi_ref, "Top Layer KPI Ref" %><br>
+    <% if current_user.admin? %>
 		<%= f.text_field :top_layer_kpi_ref, :class => "form-control has-error col-md-5" %>
-
-		<%= f.label :kpi_calculation_type_id, "KPI Calculation Type" %><br>
-		<%= f.select :kpi_calculation_type_id, KpiTargetType.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select KPI Calculation Type"}, class: "form-control" %>
-    <%= f.label :kpi_target_type_id, "KPI Target Type" %><br>
-		<%= f.select :kpi_target_type_id, KpiTargetType.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select KPI Calculation Type"}, class: "form-control" %>
-
-
-
-
-    <div class="actions col-lg-">
-      <%= f.submit "Save", :class =>'btn col-lg-3 pull-right' %>
-    </div>
-
+    <% else %>
+    <%= f.text_field :top_layer_kpi_ref, :class => "form-control has-error col-md-5", :readonly => true %>
     <% end %>
 
+		<%= f.label :kpi_calculation_type_id, "KPI Calculation Type" %><br>
+		<%= f.select :kpi_calculation_type_id, KpiCalculationType.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select KPI Calculation Type"}, class: "form-control" %>
+
+    <%= f.label :kpi_target_type_id, "KPI Target Type" %><br>
+		<%= f.select :kpi_target_type_id, KpiTargetType.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select KPI Target Type"}, class: "form-control" %>
+
+    <div class="row">
+    <div class="actions col-lg-5">
+      <% if current_user.admin? %>
+      <%= link_to @departmental_sdbip, method: :delete, data: { confirm: "You sure?" }, class: "btn btn-mini" do %>
+        <span class="glyphicon glyphicon-trash"></span>Delete
+      <% end %>&nbsp;|&nbsp;
+      <% end %><%= f.submit "Save", id: "submit_form", class: 'btn btn-mini pull-right'%>
+    </div>
+    </div>
+    <% end %>
 </div>
 </div>
-<script>
+</div>
+<div class="modal-footer">
 
-$(document).on('change','#new_selected_department', function(){
-   var select_department = $( "#new_selected_department option:selected" ).text();
-   $('#new_current_department').val(select_department);
-});
-$(document).on('change','#new_selected_subdepartment', function(){
-   var select_value = $( "#new_selected_subdepartment option:selected" ).text();
-   $('#new_current_subdepartment').val(select_value);
+</div>
 
-});
-</script>
+</div>
+</div>
