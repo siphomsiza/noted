@@ -30,12 +30,36 @@
             <%= f.text_field :surname,:autocomplete=>"off",:placeholder=>"Last Name", :class => "form-control" %>
           </div><!-- controls -->
         </section><!-- row -->
-
+        <section class="row">
+          <label class="col col-lg-4 control-label" for="lastname">Birth Date:</label>
+          <div class="controls col col-lg-8">
+          <div class="form-group">
+                              <div class="input-group date" data-provide="datepicker"
+                                   data-date-format="dd-mm-yyyy" data-date-start-view="days" data-date-min-view-mode="days">
+                                <%= f.text_field :birth_date, class: "form-control" %>
+                                <span class="input-group-addon">
+                                  <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                              </div>
+                            </div>
+          </div><!-- controls -->
+        <section class="row">
+          <label class="col col-lg-4 control-label" for="lastname">ID Number</label>
+          <div class="controls col col-lg-8">
+            <%= f.text_field :id_number,:autocomplete=>"off",:placeholder=>"Last Name", :class => "form-control" %>
+          </div><!-- controls -->
+        </section><!-- row -->
 
     </fieldset><!-- personal info -->
 
     <fieldset id="systeminfo">
       <legend>System Info</legend>
+      <section class="row">
+        <label class="col col-lg-4 control-label" for="lastname">Username</label>
+        <div class="controls col col-lg-8">
+          <%= f.text_field :username,:autocomplete=>"off",:placeholder=>"Username", :class => "form-control" %>
+        </div><!-- controls -->
+      </section><!-- row -->
       <section class="row">
         <label class="col col-lg-4 control-label" for="password">Password</label>
         <div class="controls col col-lg-8">
@@ -75,7 +99,7 @@
         <div class="controls col col-lg-8">
         <div class="form-group">
                             <div class="input-group date" data-provide="datepicker"
-                                 data-date-format="dd-mm-yyyy" data-date-start-view="months" data-date-min-view-mode="days">
+                                 data-date-format="dd-mm-yyyy" data-date-start-view="days" data-date-min-view-mode="days">
                               <%= f.text_field :employment_date, class: "form-control" %>
                               <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-calendar"></span>
@@ -103,15 +127,16 @@
       <section class="row">
       <label class="col col-lg-4 control-label" for="location">Location</label>
         <div class="controls col col-lg-8">
-          <%= f.text_field :location, :class=>"form-control" , :autocomplete=>"off",:placeholder=>"Location" %>
-
+          <div class="controls col col-lg-8">
+            <%= f.select :location, @locations.all.collect {|x| [x.name, x.name]}, {:include_blank => "Select Location"}, class: "form-control" %>
+          </div><!-- controls -->
         </div><!-- controls -->
       </section><!-- row -->
 
       <section class="row">
       <label class="col col-lg-4 control-label" for="manager">Manager</label>
         <div class="controls col col-lg-8">
-          <%= f.select :manager, User.all.collect {|x| [x.firstname, x.email]}, {:include_blank => "Select Manager"}, class: "form-control" %>
+          <%= f.select :manager, @system_user.all.collect {|x| [x.firstname, x.email]}, {:include_blank => "Select Manager"}, class: "form-control" %>
         </div><!-- controls -->
       </section><!-- row -->
 

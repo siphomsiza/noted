@@ -40,35 +40,36 @@ class DepartmentalSdbip < ActiveRecord::Base
     	collection.any? ? collection : departmental_sdbip_progresses.build
   	end
 
- def self.import(file)
- 	case File.extname(file.original_filename)
-  	when ".csv" then
-    CSV.foreach(file.path, headers: true) do |row|
-      departmental_sdbip_hash = row.to_hash
-      departmental_sdbip = DepartmentalSdbip.where(id: departmental_sdbip_hash["id"])
+	def self.import_from_file(file)
+		DepartmentalSdbip.import(file)
+	end
 
-      if departmental_sdbip.count == 1
-        departmental_sdbip.first.update_attributes(departmental_sdbip_hash)
-      else
-        DepartmentalSdbip.create!(departmental_sdbip_hash)
-      end # end if !departmental_sdbip.nil?
+class << self
+		def import(file)
+		 case File.extname(file.original_filename)
+			 when ".csv" then
+			 CSV.foreach(file.path, headers: true) do |row|
+				 departmental_sdbip_hash = row.to_hash
+				 departmental_sdbip = DepartmentalSdbip.find_or_create_by(id: departmental_sdbip_hash["id"])
+				 departmental_sdbip.save!
+			 end # end CSV.foreach
 
-    end # end CSV.foreach
+		 when ".xls" then
+			 fetch_excel_data(file)
 
-	when ".xls" then
-		fetch_excel_data(file)
+		when ".xlsx" then
+			fetch_excel_data(file)
 
-  	when ".xlsx" then
-  	 	fetch_excel_data(file)
+		when ".ods" then
+			fetch_excel_data(file)
 
-  	when ".ods" then
-  	 	fetch_excel_data(file)
+		else raise "Unknown file type: #{file.original_filename}"
 
-  	else raise "Unknown file type: #{file.original_filename}"
-  	end
+		end
+	end
+			 handle_asynchronously :import_from_file, priority: 2,run_at: Proc.new { 3.seconds.from_now }, queue: 'departmental_sdbips'
 
-  end
-
+end
 def self.fetch_excel_data(file)
 
   spreadsheet = open_spreadsheet(file)

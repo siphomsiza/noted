@@ -14,6 +14,7 @@ class CreateDepartmentalSdbips < ActiveRecord::Migration
       t.string :idp_ref
       t.integer :national_outcome_id
       t.integer :strategic_objective_id
+      t.integer  :kpi_target_type_id
       t.string :source_of_evidence
       t.string :baseline
       t.string :budget
@@ -45,7 +46,9 @@ class CreateDepartmentalSdbips < ActiveRecord::Migration
       t.integer :ward_id
       t.integer :area_id
       t.text :past_year_performance
-      t.string :performance_standard
+      t.string :performance_standard, default: "KPI Not Yet Measured", null: false
+      t.text :performance_comments
+      t.text :corrective_measures
       t.integer :reporting_category_id
       t.string :top_layer_kpi_ref
       t.integer :kpi_calculation_type_id

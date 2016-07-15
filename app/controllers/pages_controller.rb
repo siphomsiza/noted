@@ -32,7 +32,7 @@ class PagesController < ApplicationController
       #@response = @client.fetch_by_location('New York')
       #@response.units.temperature
       #@response.condition.temp
-    
+
   rescue SignalException => e
     flash[:notice] = "received Exception #{e.message}"
     puts "received Exception #{e}"

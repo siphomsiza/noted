@@ -49,6 +49,7 @@ Rails.application.routes.draw do
   get 'headings/:id/edit_revenue_by_source_headings' => 'headings#edit_revenue_by_source_headings', :as => :edit_revenue_by_source_headings
   get 'headings/:id/edit_monthly_cashflow_headings' => 'headings#edit_monthly_cashflow_headings', :as => :edit_monthly_cashflow_headings
   get 'export', to: 'departmental_sdbip_progresses#export',defaults: { format: 'csv'}
+  get 'departmental_sdbips/:id/edit_kpis' => 'departmental_sdbips#edit_kpis', :as => :edit_kpis
   post 'export', to: 'departmental_sdbip_progresses#export'
   get 'departmental_sdbips/update_subdepartments', as: 'update_subdepartments'
 

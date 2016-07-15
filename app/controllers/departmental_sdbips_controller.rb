@@ -161,6 +161,10 @@ end
     @departmental_sdbip = DepartmentalSdbip.find(params[:id])
   end
 
+  def edit_kpis
+    @departmental_sdbip = DepartmentalSdbip.find(params[:id])
+  end
+
   def update
     @departmental_sdbip = DepartmentalSdbip.find(params[:id])
     if @departmental_sdbip.update(departmental_sdbip_params)
@@ -182,8 +186,8 @@ end
       #temp = Tempfile.new(params[:file].original_filename)
       #xlsx_package.serialize temp.path
       #send_file temp.path, :filename => params[:file].original_filename, :type => "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-       DepartmentalSdbip.import(params[:file])
-       flash[:success] = "SDBIP imported successfully."
+       DepartmentalSdbip.import_from_file(params[:file])
+       flash[:success] = "SDBIP submitted successfully for processing."
        redirect_to departmental_sdbips_path
     rescue => e
        flash[:danger] = "SDBIP failed to import #{e.message}."
@@ -206,7 +210,7 @@ end
     def departmental_sdbip_params
         params.require(:departmental_sdbip).permit(:subdepartment_name,:department_name,:kpa_name,:department_id,
           :subdepartment_id, :kpi_ref_number, :mscore_classification_id,:idp_ref, :national_outcome_id, :strategic_objective_id,
-          :kpa_id,
+          :kpa_id,:kpi_target_type_id,
           :predetermined_objective_id, :ndp_objective_id,
           :capital_project_id, :kpi, :unit_of_measurement,
           :kpi_concept_id, :kpi_type_id, :risk_reg_ref,
