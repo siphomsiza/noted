@@ -78,7 +78,7 @@
         <td class="risk_rating"><% if !departmental_sdbip.risk_rating_id.blank?%><%= departmental_sdbip.risk_rating.name %><% end %></td>
         <td class="kpa"><% if !departmental_sdbip.kpa_id.blank? %><%= departmental_sdbip.kpa.name %><% end %></td>
         <td class="ndp_objectives"><% if !departmental_sdbip.ndp_objective_id.blank? %><%= departmental_sdbip.ndp_objective.name %><% end %></td>
-        <td class="capital-project"><% if CapitalProject.exists?(:departmental_sdbip_id=>departmental_sdbip.id) %><%= departmental_sdbip.capital_project.mun_cp_ref %><% end %></td>
+        <td class="capital-project"><% if departmental_sdbip.capital_project %><%= departmental_sdbip.capital_project.mun_cp_ref %><% end %></td>
         <td class="kpi_concept"><% if !departmental_sdbip.kpi_concept_id.blank? %><%= departmental_sdbip.kpi_concept.name %><% end %></td>
 
         <td class="impact"><%= departmental_sdbip.impact %></td>

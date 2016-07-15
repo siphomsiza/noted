@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   def index
 
       @roles = Role.paginate(page: params[:page],per_page: 15)
-      @system_users = User.all
+      @system_users = User.all.includes(:department)
       @user_activities = ActivityLog.where(admin: false).paginate(page: params[:page], per_page: 15)
       @super_user_activities = ActivityLog.where(admin: true).paginate(page: params[:page], per_page: 15)
       @user = User.new
@@ -105,7 +105,7 @@ end
       new_maximum_attempts = params[:attempts]
       new_maximum_attempts.to_i
       @users = User.all
-      if @users.update_all(max_login_attempts: new_maximum_attempts)
+      if @users.update_all(max_login_attempts: params[:new_maximum_attempts])
         flash[:success] = "Maximum login attempts updated successfully."
         redirect_to users_path
       end

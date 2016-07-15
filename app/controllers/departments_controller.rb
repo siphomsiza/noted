@@ -7,7 +7,7 @@ class DepartmentsController < ApplicationController
 
   def index
     @department = Department.new
-  	@departments = Department.paginate( page: params[:page],per_page: 10)
+  	@departments = Department.includes(:subdepartments).paginate(page: params[:page],per_page: 10)
   end
 
   def show

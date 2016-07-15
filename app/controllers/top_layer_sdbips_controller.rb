@@ -47,32 +47,28 @@ class TopLayerSdbipsController < ApplicationController
   def create
     @top_layer_sdbip = TopLayerSdbip.new(top_layer_sdbip_params)
 
-    respond_to do |format|
       if @top_layer_sdbip.save
         flash[:success] = 'Top layer sdbip was successfully created.'
-        format.html { redirect_to top_layer_sdbips_url }
-        format.json { render :show, status: :created, location: top_layer_sdbips_url }
+        redirect_to top_layer_sdbips_url
+
       else
         flash[:danger] = 'Top layer sdbip was not created.'
-        format.html { redirect_to top_layer_sdbips_url }
-        format.json { render json: @top_layer_sdbip.errors, status: :unprocessable_entity }
-      end
+        redirect_to top_layer_sdbips_url
     end
   end
 
   # PATCH/PUT /top_layer_sdbips/1
   # PATCH/PUT /top_layer_sdbips/1.json
   def update
-    respond_to do |format|
+
       if @top_layer_sdbip.update(top_layer_sdbip_params)
         flash[:success] = 'Top layer sdbip was successfully updated.'
-        format.html { redirect_to top_layer_sdbips_url }
-        format.json { render :show, status: :ok, location: @top_layer_sdbip }
+        redirect_to top_layer_sdbips_url
+
       else
         flash[:danger] = 'Top layer sdbip was not updated.'
-        format.html { redirect_to top_layer_sdbips_url }
-        format.json { render json: @top_layer_sdbip.errors, status: :unprocessable_entity }
-      end
+        redirect_to top_layer_sdbips_url
+
     end
   end
 
@@ -81,10 +77,7 @@ class TopLayerSdbipsController < ApplicationController
   def destroy
     @top_layer_sdbip.destroy
     flash[:success] = 'Top layer sdbip was successfully deleted.'
-    respond_to do |format|
-      format.html { redirect_to top_layer_sdbips_url }
-      format.json { head :no_content }
-    end
+      redirect_to top_layer_sdbips_url
   end
 
   private
