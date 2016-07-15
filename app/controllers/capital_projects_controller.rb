@@ -10,7 +10,7 @@ class CapitalProjectsController < ApplicationController
     @capital_project = CapitalProject.new
     @capital_projects = CapitalProject.all
       if !@capital_projects.blank?
-       @capital_projects =  @capital_projects.paginate(page: params[:page],per_page: 15)
+       @capital_projects =  @capital_projects.paginate(page: params[:page],per_page: 15).includes(:department,:subdepartment,:mscore_classification)
       end
   end
 
@@ -49,16 +49,14 @@ class CapitalProjectsController < ApplicationController
   def create
     @capital_project = CapitalProject.new(capital_project_params)
 
-    respond_to do |format|
       if @capital_project.save
         flash[:success] = 'Capital project was successfully created.'
-        format.html { redirect_to capital_projects_url }
-        format.json { render :show, status: :created, location: @capital_project }
+        redirect_to capital_projects_url
+
       else
         flash[:danger] = 'Capital project was not created.'
-        format.html { redirect_to capital_projects_url }
-        format.json { render json: @capital_project.errors, status: :unprocessable_entity }
-      end
+        redirect_to capital_projects_url
+
     end
   end
 
@@ -81,10 +79,10 @@ class CapitalProjectsController < ApplicationController
   def destroy
     @capital_project.destroy
     flash[:success]='Capital project was successfully deleted.'
-    respond_to do |format|
-      format.html { redirect_to capital_projects_url }
-      format.json { head :no_content }
-    end
+
+      redirect_to capital_projects_url
+
+
   end
 
   private

@@ -5,7 +5,7 @@ class RolesController < ApplicationController
   def index
     @role = Role.new
     @role.roles_details.build
-    @roles = Role.all
+    @roles = Role.paginate(page: params[:page],per_page: 15)
     @users = User.all
     @departments = Department.all
   end
