@@ -1,7 +1,7 @@
 <div class="table-responsive">
-	<%= will_paginate @top_layer_sdbips,:class=>"center" %>
+	
 <table class="table table-striped table-bordered">
-  <thead>
+
     <tr>
       <th>Department</th>
       <th>Reporting kpi</th>
@@ -35,11 +35,11 @@
       <th>Second quarter actual</th>
       <th>Third quarter actual</th>
       <th>Fourth quarter actual</th>
-      <th colspan="1"></th>
-    </tr>
-  </thead>
 
-  <tbody>
+    </tr>
+
+
+
     <% @top_layer_sdbips.each do |top_layer_sdbip| %>
       <tr>
         <td>
@@ -86,14 +86,10 @@
         <td><%= top_layer_sdbip.second_quarter_actual %></td>
         <td><%= top_layer_sdbip.third_quarter_actual %></td>
         <td><%= top_layer_sdbip.fourth_quarter_actual %></td>
-        <td><%= link_to edit_top_layer_sdbip_path(top_layer_sdbip), class: "btn btn-mini", :title=>"Click to update KPI" do %>
-					<span class="glyphicon glyphicon-edit"></span>&nbsp;Edit
-				<% end %>
-			</td>
 
       </tr>
     <% end %>
-  </tbody>
+
 </table>
 
 </div>

@@ -1,5 +1,7 @@
 class RevenueBySourcesController < ApplicationController
-  before_action :set_revenue_by_source, only: [:show, :edit, :update, :destroy]
+  before_action :set_revenue_by_source, only: [:show, :edit, :update, :destroy,:edit_revenue_by_sources]
+  before_action :logged_in_user, only: [:index,:show,:new,:edit,:destroy,:edit_revenue_by_sources]
+  before_action :admin_user,     only: [:index,:show,:new,:edit,:destroy,:edit_revenue_by_sources]
 
   # GET /revenue_by_sources
   # GET /revenue_by_sources.json
@@ -23,6 +25,9 @@ class RevenueBySourcesController < ApplicationController
 
   # GET /revenue_by_sources/1/edit
   def edit
+  end
+
+  def edit_revenue_by_sources
   end
 
   # POST /revenue_by_sources
@@ -78,4 +83,21 @@ class RevenueBySourcesController < ApplicationController
     def revenue_by_source_params
       params.require(:revenue_by_source).permit(:vote_number, :line_item, :July, :August, :September, :October, :November, :December, :January, :February, :March, :April, :May, :June)
     end
+
+    def logged_in_user
+        unless logged_in?
+          store_location
+          flash[:danger] = "Please log in."
+          redirect_to login_url
+        end
+      end
+
+      # Confirms an admin user.
+      def admin_user
+        #redirect_to(root_url) unless
+        current_user.admin?
+      end
+      def kpi_owner_user
+        redirect_to(root_url) unless !current_user.role.blank? || current_user.admin?
+      end
 end

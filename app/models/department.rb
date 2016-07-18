@@ -2,10 +2,11 @@ class Department < ActiveRecord::Base
 	include PublicActivity::Common
 	has_many :users
 	has_many :roles
+	has_many :capital_projects
+	has_many :departmental_administrators
 	has_many :top_layer_sdbips
 	has_many :monthly_cashflows
 	has_many :roles_details
-	has_many :capital_projects
 	has_many :departmental_sdbips
 	has_many :subdepartments, :dependent => :destroy
 	accepts_nested_attributes_for :subdepartments, allow_destroy: true

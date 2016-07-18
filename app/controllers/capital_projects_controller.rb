@@ -1,16 +1,16 @@
 class CapitalProjectsController < ApplicationController
-  before_action :set_capital_project, only: [:show, :edit, :update, :destroy]
-  before_action :logged_in_user, only: [:index,:show,:new,:edit,:destroy]
-  before_action :admin_user,     only: [:index,:show,:new,:edit,:destroy]
+  before_action :set_capital_project, only: [:show, :edit, :update, :destroy,:edit_capital_projects]
+  before_action :logged_in_user, only: [:index,:show,:new,:edit,:destroy,:edit_capital_projects]
+  before_action :admin_user,     only: [:index,:show,:new,:edit,:destroy,:edit_capital_projects]
 
   # GET /capital_projects
   # GET /capital_projects.json
   def index
 
     @capital_project = CapitalProject.new
-    @capital_projects = CapitalProject.all
+    @capital_projects = CapitalProject.find(:include=>{:subdepartment=>:department},:mscore_classification)
       if !@capital_projects.blank?
-       @capital_projects =  @capital_projects.paginate(page: params[:page],per_page: 15).includes(:department,:subdepartment,:mscore_classification)
+       @capital_projects =  @capital_projects.paginate(page: params[:page],per_page: 15).includes(:subdepartment,:mscore_classification)
       end
   end
 
@@ -42,6 +42,9 @@ class CapitalProjectsController < ApplicationController
   end
   # GET /capital_projects/1/edit
   def edit
+  end
+
+  def edit_capital_projects
   end
 
   # POST /capital_projects
@@ -93,7 +96,7 @@ class CapitalProjectsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def capital_project_params
-      params.require(:capital_project).permit(:department_id, :subdepartment_id, :mscore_classification_id, :mun_cp_ref, :idp_nummber, :vote_number, :project_name, :project_description, :funding_source, :planned_start_date, :planned_completion_date, :actual_start_date, :actual_completion_date, :ward_id, :area_id, :july, :august, :september, :october, :november, :december, :january, :february, :march, :april, :may, :june)
+      params.require(:capital_project).permit( :mscore_classification_id, :subdepartment_id,:mun_cp_ref, :idp_nummber, :vote_number, :project_name, :departmental_sdbip_id, :funding_source, :planned_start_date, :planned_completion_date, :actual_start_date, :actual_completion_date, :ward_id, :area_id)
     end
 
     def logged_in_user

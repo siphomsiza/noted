@@ -2,14 +2,14 @@
     <table class="table table-striped table-bordered">
     <thead>
       <tr>
+        <th><h4>Project Name</h4></th>
+        <th><h4>Project Description</h4></th>
         <th><h4>Department</h4></th>
         <th><h4>Subdepartment</h4></th>
         <th><h4>Mscore Classification</h4></th>
         <th><h4>Municipality CP Ref</h4></th>
         <th><h4>IDP Number</h4></th>
         <th><h4>Vote Number</h4></th>
-        <th><h4>Project Name</h4></th>
-        <th><h4>Project Description</h4></th>
         <th><h4>Funding Source</h4></th>
         <th><h4>Planned Start Date</h4></th>
         <th><h4>Planned Completion Date</h4></th>
@@ -17,33 +17,27 @@
         <th><h4>Actual Completion Date</h4></th>
         <th><h4>Ward</h4></th>
         <th><h4>Area</h4></th>
-        <th><h4>July</h4></th>
-        <th><h4>August</h4></th>
-        <th><h4>September</h4></th>
-        <th><h4>October</h4></th>
-        <th><h4>November</h4></th>
-        <th><h4>December</h4></th>
-        <th><h4>January</h4></th>
-        <th><h4>February</h4></th>
-        <th><h4>March</h4></th>
-        <th><h4>April</h4></th>
-        <th><h4>May</h4></th>
-        <th><h4>June</h4></th>
-        <th colspan="1"></th>
+
+
       </tr>
     </thead>
 
     <tbody>
       <% @capital_projects.each do |capital_project| %>
-        <tr>
-          <td><%= capital_project.department.name %></td>
+        <tr><td><%= link_to edit_capital_projects_path(capital_project),remote: true,'data-target' => "#edit-capital-project-modal", 'data-toggle' => 'modal', :title=>"Click to Update KPI" do %>
+            <%= capital_project.project_name %>
+          <% end %>
+          <div id="edit-capital-project-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+
+          </div>
+          </td>
+          <td><%= capital_project.departmental_sdbip.kpi_ref_number %></td>
+          <td><%= capital_project.subdepartment.department.name %></td>
           <td><%= capital_project.subdepartment.subdepartment_name %></td>
           <td><% if !capital_project.mscore_classification_id.blank? %><%= capital_project.mscore_classification.name %><% end %></td>
           <td><%= capital_project.mun_cp_ref %></td>
           <td><%= capital_project.idp_nummber %></td>
           <td><%= capital_project.vote_number %></td>
-          <td><%= capital_project.project_name %></td>
-          <td><%= capital_project.project_description %></td>
           <td><%= capital_project.funding_source %></td>
           <td><%= capital_project.planned_start_date %></td>
           <td><%= capital_project.planned_completion_date %></td>
@@ -51,21 +45,7 @@
           <td><%= capital_project.actual_completion_date %></td>
           <td><% if !capital_project.ward_id.blank? %><%= capital_project.ward.name %><% end %></td>
           <td><% if !capital_project.area_id.blank? %><%= capital_project.area.name %><% end %></td>
-          <td><%= capital_project.july %></td>
-          <td><%= capital_project.august %></td>
-          <td><%= capital_project.september %></td>
-          <td><%= capital_project.october %></td>
-          <td><%= capital_project.november %></td>
-          <td><%= capital_project.december %></td>
-          <td><%= capital_project.january %></td>
-          <td><%= capital_project.february %></td>
-          <td><%= capital_project.march %></td>
-          <td><%= capital_project.april %></td>
-          <td><%= capital_project.may %></td>
-          <td><%= capital_project.june %></td>
-          <td>  <%= link_to edit_capital_project_path(capital_project), class: "btn btn-mini", :title=>"Click to update KPI" do %>
-              <span class="glyphicon glyphicon-edit"></span>&nbsp;Update
-            <% end %></td>
+
 
         </tr>
       <% end %>

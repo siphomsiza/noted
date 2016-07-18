@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   has_many :activities
   belongs_to :department
+  has_many :departmental_administrators
+  has_many :departmental_administrators
   has_many :activity_logs
   has_one :role, :dependent => :destroy
   attr_accessor :remember_token, :activation_token, :reset_token

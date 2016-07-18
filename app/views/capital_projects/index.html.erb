@@ -41,7 +41,10 @@ $(function() {
 									<a href = "#view_capital_projects" data-toggle = "tab"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;View Capital Projects</a>
 								</li>
 								<li>
-									<a href = "#manage_capital_projects" data-toggle = "tab"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;Manage Capital Projects</a>
+									<a href = "#edit_capital_projects" data-toggle = "tab"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;Edit Capital Projects</a>
+								</li>
+								<li>
+									<a href = "#manage_capital_projects" data-toggle = "tab"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;Update Capital Projects</a>
 								</li>
 								<li>
 
@@ -68,6 +71,30 @@ $(function() {
 								<% elsif !@capital_projects.blank? %>
 
 								<%= render "capital_projects" %>
+
+								<% end %>
+
+							<% if !@capital_projects.blank? %>
+
+								<%= will_paginate @capital_projects %>
+
+								<% end %>
+
+							</div>
+
+							<div class = "tab-pane fade" id = "edit_capital_projects">
+
+								<% if @capital_projects.blank? && CapitalProject.blank? %>
+
+								<p> There are no capital projects currently in the system. </p>
+
+								<% elsif @capital_projects.blank? && !CapitalProject.blank? %>
+
+								<p> You currently have no capital projects. </p>
+
+								<% elsif !@capital_projects.blank? %>
+
+								<%= render "update_capital_project" %>
 
 								<% end %>
 

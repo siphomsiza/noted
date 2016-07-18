@@ -8,7 +8,7 @@ class UsersController < ApplicationController
 
       @roles = Role.paginate(page: params[:page],per_page: 15)
       @locations = MasterSetup.all
-      @system_users = User.all.includes(:department)
+      @system_users = User.all#.includes(:department)
       @user_activities = ActivityLog.where(admin: false).paginate(page: params[:page], per_page: 15)
       @super_user_activities = ActivityLog.where(admin: true).paginate(page: params[:page], per_page: 15)
       @user = User.new

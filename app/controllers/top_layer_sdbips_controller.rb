@@ -1,5 +1,7 @@
 class TopLayerSdbipsController < ApplicationController
-  before_action :set_top_layer_sdbip, only: [:show, :edit, :update, :destroy]
+  before_action :set_top_layer_sdbip, only: [:show, :edit, :edit_top_layer_sdbips,:update, :destroy]
+  before_action :logged_in_user, only: [:index,:show,:new,:edit,:destroy,:edit_top_layer_sdbips]
+  before_action :admin_user,     only: [:index,:show,:new,:edit,:destroy,:edit_top_layer_sdbips]
 
   # GET /top_layer_sdbips
   # GET /top_layer_sdbips.json
@@ -40,6 +42,9 @@ class TopLayerSdbipsController < ApplicationController
 
   # GET /top_layer_sdbips/1/edit
   def edit
+  end
+
+  def edit_top_layer_sdbips
   end
 
   # POST /top_layer_sdbips
@@ -90,4 +95,21 @@ class TopLayerSdbipsController < ApplicationController
     def top_layer_sdbip_params
       params.require(:top_layer_sdbip).permit(:department_id, :reporting_kpi, :idp_ref, :mscore_classification_id, :national_outcome_id, :kpa_id, :predetermined_objective_id, :ndp_objective_id, :strategic_objective_id, :kpi, :unit_of_measurement, :risk, :ward_id, :area_id, :kpi_owner_id, :baseline, :poe, :past_year_performance, :mtas_indicator_id, :reporting_category, :kpi_calculation_type_id, :kpi_target_type_id, :annual_target, :revised_target, :first_quarter_target, :second_quarter_target, :third_quarter_target, :fourth_quarter_target, :first_quarter_actual, :second_quarter_actual, :third_quarter_actual, :fourth_quarter_actual)
     end
+
+    def logged_in_user
+        unless logged_in?
+          store_location
+          flash[:danger] = "Please log in."
+          redirect_to login_url
+        end
+      end
+
+      # Confirms an admin user.
+      def admin_user
+        #redirect_to(root_url) unless
+        current_user.admin?
+      end
+      def kpi_owner_user
+        redirect_to(root_url) unless !current_user.role.blank? || current_user.admin?
+      end
 end

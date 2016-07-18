@@ -1,8 +1,7 @@
 
 <div class="table-responsive col-lg-12">
 
-  <table>
-    <thead>
+  <table class="table table-striped table-responsive">
       <tr>
         <th>Vote number</th>
         <th>Line item</th>
@@ -20,9 +19,9 @@
         <th>June</th>
         <th colspan="1"></th>
       </tr>
-    </thead>
 
-    <tbody>
+
+
       <% @revenue_by_sources.each do |revenue_by_source| %>
         <tr>
           <td><%= revenue_by_source.vote_number %></td>
@@ -39,13 +38,18 @@
           <td><%= revenue_by_source.april %></td>
           <td><%= revenue_by_source.may %></td>
           <td><%= revenue_by_source.june %></td>
-          <td><%= link_to edit_revenue_by_source_path(revenue_by_source) , class: "btn btn-mini", :title=>"Click to update KPI" do %>
+          <td><%= link_to edit_revenue_by_source_path(revenue_by_source),remote: true,'data-target' => "#revenue-by-sources-modal", 'data-toggle' => 'modal' , class: "btn btn-mini", :title=>"Click to update Revenue by source" do %>
               <span class="glyphicon glyphicon-edit"></span>&nbsp;Edit
-            <% end %></td>
+            <% end %>
+
+              <div id="revenue-by-sources-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+
+              </div>
+          </td>
 
         </tr>
       <% end %>
-    </tbody>
+
   </table>
 
 </div>
