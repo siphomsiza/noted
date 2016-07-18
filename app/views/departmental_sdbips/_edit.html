@@ -6,7 +6,7 @@
 <div class="modal-body">
 <div class="row">
     <div class="col-lg-10 col-md-offset-1">
-<%= form_for @departmental_sdbip do |f| %>
+<%= form_for @departmental_sdbip,:id=>'departmental-sdbip-edit-form' do |f| %>
 
       <%= f.label :kpi, "KPI" %><br>
       <% if current_user.admin? %>
@@ -180,7 +180,7 @@
 		<%= f.label :area_id, "Area" %><br>
 		<%= f.select :area_id, Area.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select Area"}, class: "form-control" %>
 		<%= f.label :performance_standard, "Performance Standard" %><br>
-    <%= f.select :performance_standard, options_for_select(["KPI Not Met", "KPI Almost Met", "KPI Met", "KPI Well Met", "KPI Extremely Well Met"]),
+    <%= f.select :performance_standard, options_for_select(["KPI Not Yet Measured","KPI Not Met", "KPI Almost Met", "KPI Met", "KPI Well Met", "KPI Extremely Well Met"]),
                                           {}, {:class => "form-control"} %>
 
 		<%= f.label :past_year_performance, "Past Year Performance" %><br>
@@ -227,3 +227,10 @@
 
 </div>
 </div>
+<script>
+  $(document).ready(function(){
+    $(function(){
+      $('#departmental-sdbip-edit-form select').prop("disabled",true);
+    });
+  });
+</script>

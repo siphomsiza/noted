@@ -1,9 +1,7 @@
 class ListsController < ApplicationController
 def index
     @list = List.new
-    @areas = Area.all
-    @wards = Ward.all
-  	@lists = List.all
+  	@lists = List.includes(:areas,:wards,:national_outcomes,:predetermined_objectives,:provincial_strategic_outcomes,:kpi_concepts,:kpi_calculation_types,:kpi_target_types,:risk_ratings,:reporting_categories)
   end
 
   def show
@@ -20,7 +18,8 @@ def index
       flash[:success] = "List was successfully created"
       redirect_to lists_path
     else
-      render "new"
+      flash[:danger] = "List was successfully created"
+      redirect_to :back
     end
   end
 
@@ -35,7 +34,8 @@ def index
        flash[:success] = "List was successfully updated"
       redirect_to lists_path
     else
-      render "edit"
+      flash[:danger] = "List was not updated"
+      redirect_to :back
     end
   end
 

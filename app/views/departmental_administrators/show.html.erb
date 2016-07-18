@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Department:</strong>
+  <%= @departmental_administrator.department_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @departmental_administrator.user_id %>
+</p>
+
+<p>
+  <strong>Can create:</strong>
+  <%= @departmental_administrator.can_create %>
+</p>
+
+<p>
+  <strong>Can edit:</strong>
+  <%= @departmental_administrator.can_edit %>
+</p>
+
+<p>
+  <strong>Can update:</strong>
+  <%= @departmental_administrator.can_update %>
+</p>
+
+<p>
+  <strong>Can approve:</strong>
+  <%= @departmental_administrator.can_approve %>
+</p>
+
+<%= link_to 'Edit', edit_departmental_administrator_path(@departmental_administrator) %> |
+<%= link_to 'Back', departmental_administrators_path %>

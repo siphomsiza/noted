@@ -46,8 +46,8 @@
     <%= f.text_area :unit_of_measurement,{class:'form-control'} %>
   </div>
   <div class="field">
-    <%= f.label :risk,"Risk:" %><br>
-    <%= f.text_area :risk,{class:'form-control'} %>
+    <%= f.label :risk,"Risk Rating:" %><br>
+    <%= f.select :risk,RiskRating.all.collect{|u| [u.name, u.id]},{},{class:'form-control'} %>
   </div>
   <div class="field">
     <%= f.label :area_id,"Area:" %><br>
@@ -80,7 +80,8 @@
   </div>
   <div class="field">
     <%= f.label :reporting_category,"Reporting Category:" %><br>
-    <%= f.text_field :reporting_category,{class:'form-control'} %>
+    <%= f.select :reporting_category, ReportingCategory.all.collect{|u| [u.name, u.id]},{},{class:'form-control'} %>
+
   </div>
   <div class="field">
     <%= f.label :kpi_calculation_type_id,"KPI Calcualtion Type:" %><br>

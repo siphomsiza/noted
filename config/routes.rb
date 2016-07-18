@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :subdepartmental_administrators
+  resources :departmental_administrators
   mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
   resources :jobtitles
   resources :activities
@@ -43,6 +45,7 @@ Rails.application.routes.draw do
   get 'roles/:id/edit_user_role' => 'roles#edit_user_role', :as => :edit_user_role
   get 'users/:id/edit_active_user' => 'users#edit_active_user', :as => :edit_active_user
   get 'users/:id/edit_user_profile' => 'users#edit_user_profile', :as => :edit_user_profile
+
   get 'headings/:id/edit_departmental_headings' => 'headings#edit_departmental_headings', :as => :edit_departmental_headings
   get 'headings/:id/edit_top_layer_headings' => 'headings#edit_top_layer_headings', :as => :edit_top_layer_headings
   get 'headings/:id/edit_capital_projects_headings' => 'headings#edit_capital_projects_headings', :as => :edit_capital_projects_headings
@@ -50,6 +53,10 @@ Rails.application.routes.draw do
   get 'headings/:id/edit_monthly_cashflow_headings' => 'headings#edit_monthly_cashflow_headings', :as => :edit_monthly_cashflow_headings
   get 'export', to: 'departmental_sdbip_progresses#export',defaults: { format: 'csv'}
   get 'departmental_sdbips/:id/edit_kpis' => 'departmental_sdbips#edit_kpis', :as => :edit_kpis
+  get 'capital_projects/:id/edit_capital_projects' => 'capital_projects#edit_capital_projects', :as => :edit_capital_projects
+  get 'monthly_cashflows/:id/edit_monthly_cashflows' => 'monthly_cashflows#edit_monthly_cashflows', :as => :edit_monthly_cashflows
+  get 'top_layer_sdbips/:id/edit_top_layer_sdbips' => 'top_layer_sdbips#edit_top_layer_sdbips', :as => :edit_top_layer_sdbips
+  get 'revenue_by_sources/:id/edit_revenue_by_sources' => 'revenue_by_sources#edit_revenue_by_sources', :as => :edit_revenue_by_sources
   post 'export', to: 'departmental_sdbip_progresses#export'
   get 'departmental_sdbips/update_subdepartments', as: 'update_subdepartments'
 

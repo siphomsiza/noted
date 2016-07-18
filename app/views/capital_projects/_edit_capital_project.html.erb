@@ -17,18 +17,7 @@
         <th><h4>Actual Completion Date</h4></th>
         <th><h4>Ward</h4></th>
         <th><h4>Area</h4></th>
-        <th><h4>July</h4></th>
-        <th><h4>August</h4></th>
-        <th><h4>September</h4></th>
-        <th><h4>October</h4></th>
-        <th><h4>November</h4></th>
-        <th><h4>December</h4></th>
-        <th><h4>January</h4></th>
-        <th><h4>February</h4></th>
-        <th><h4>March</h4></th>
-        <th><h4>April</h4></th>
-        <th><h4>May</h4></th>
-        <th><h4>June</h4></th>
+
 
       </tr>
     </thead>
@@ -42,8 +31,8 @@
 
           </div>
           </td>
-          <td><%= capital_project.project_description %></td>
-          <td><%= capital_project.department.name %></td>
+          <td><%= capital_project.departmental_sdbip.kpi_ref_number %></td>
+          <td><%= capital_project.subdepartment.department.name %></td>
           <td><%= capital_project.subdepartment.subdepartment_name %></td>
           <td><% if !capital_project.mscore_classification_id.blank? %><%= capital_project.mscore_classification.name %><% end %></td>
           <td><%= capital_project.mun_cp_ref %></td>
@@ -56,18 +45,7 @@
           <td><%= capital_project.actual_completion_date %></td>
           <td><% if !capital_project.ward_id.blank? %><%= capital_project.ward.name %><% end %></td>
           <td><% if !capital_project.area_id.blank? %><%= capital_project.area.name %><% end %></td>
-          <td><%= capital_project.july %></td>
-          <td><%= capital_project.august %></td>
-          <td><%= capital_project.september %></td>
-          <td><%= capital_project.october %></td>
-          <td><%= capital_project.november %></td>
-          <td><%= capital_project.december %></td>
-          <td><%= capital_project.january %></td>
-          <td><%= capital_project.february %></td>
-          <td><%= capital_project.march %></td>
-          <td><%= capital_project.april %></td>
-          <td><%= capital_project.may %></td>
-          <td><%= capital_project.june %></td>
+
 
         </tr>
       <% end %>

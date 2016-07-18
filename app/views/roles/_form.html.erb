@@ -15,38 +15,46 @@
 
 <%= f.label :user_id, "Select User:" %>
 <% @users_for_role = User.where('id NOT IN(SELECT (user_id) FROM roles)') %>
-<% @users_for_role = User.includes(:role).where(:roles=> {:user_id => nil} ) %>
+
 <%= f.select :user_id, @users_for_role.all.collect {|x| [x.firstname, x.id]}, {:include_blank => "Select User"}, class: "form-control" %>
 <br/>
 <div class="row">
 	<div class="col-lg-11">
+    <%= f.label :system_admin, class: "checkbox inline" do %>
+		  <%= f.check_box :system_admin,:id=>"kpi_owner_checkbox" %>
+      <span>System Admin</span>
+    <% end %>
     <%= f.label :kpi_owner, class: "checkbox inline" do %>
 		  <%= f.check_box :kpi_owner,:id=>"kpi_owner_checkbox" %>
-      <span>KPI Owner</span>
+      <span>KPI Admin</span>
     <% end %>
-    <%= f.label :subdepartmental_administrator, class: "checkbox inline" do %>
-      <%= f.check_box :subdepartmental_administrator, :id=>"subdepartmental_administrator_checkbox" %>
-      <span>Subdepartment Admin</span>
+    <%= f.label :secondary_time_user, class: "checkbox inline" do %>
+      <%= f.check_box :secondary_time_user %>
+      <span>Secondary Time Period</span>
     <% end %>
     <%= f.label :department_administrator, class: "checkbox inline" do %>
-      <%= f.check_box :departmental_administrator, :id=>"departmental_administrator_checkbox" %>
+      <%= f.check_box :departmental_administrator %>
       <span>Department Admin</span>
     <% end %>
     <%= f.label :finance_admin, class: "checkbox inline" do %>
-      <%= f.check_box :finance_admin, :id=>"finance_admin_checkbox" %>
+      <%= f.check_box :finance_admin %>
       <span>Finance Admin</span>
     <% end %>
     <%= f.label :municipal_manager, class: "checkbox inline" do %>
-      <%= f.check_box :municipal_manager, :id=>"municipal_manager_checkbox" %>
-      <span>Municipal Manager</span>
+      <%= f.check_box :municipal_manager%>
+      <span>Top Layer Admin</span>
     <% end %>
     <%= f.label :internal_auditor, class: "checkbox inline" do %>
-      <%= f.check_box :internal_auditor, :id=>"internal_auditor_checkbox" %>
-      <span>Internal Auditor</span>
+      <%= f.check_box :internal_auditor %>
+      <span>Assurance Provider</span>
     <% end %>
-    <%= f.label :auditor_general, class: "checkbox inline" do %>
-      <%= f.check_box :auditor_general, :id=>"auditor_general_checkbox" %>
-      <span>Auditor General</span>
+    <%= f.label :audit_log_reporting, class: "checkbox inline" do %>
+      <%= f.check_box :audit_log_reporting %>
+      <span>Audit Log reporting</span>
+    <% end %>
+    <%= f.label :setup_admin, class: "checkbox inline" do %>
+      <%= f.check_box :setup_admin %>
+      <span>Setup</span>
     <% end %>
 	</div>
 </div>

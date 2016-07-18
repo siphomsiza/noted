@@ -1,0 +1,70 @@
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+  <h3><%= "Editing #{@monthly_cashflow.vote_number}" %></h3>
+</div>
+<div class="modal-body">
+<div class="row">
+  <div class="row">
+      <div class="col-lg-6 col-md-offset-3">
+
+  <%= form_for(@monthly_cashflow) do |f| %>
+    <div class="field">
+      <%= f.label :month %><br>
+    <%= select_month(Date.today,{field_name: 'month',required: true},{class:'form-control'}) %>
+    </div>
+    <div class="field">
+      <%= f.label :vote_number %><br>
+      <%= f.text_field :vote_number,{class:'form-control'} %>
+    </div>
+    <div class="field">
+      <%= f.label :department_id %><br>
+      <%= f.select :department_id,options_for_select(Department.all.collect{ |u| [u.name, u.id] }),{},{class: "form-control"} %>
+    </div>
+    <div class="field">
+      <%= f.label :subdepartment_id %><br>
+      <%= f.select :subdepartment_id,Subdepartment.all.collect{ |u| [u.subdepartment_name, u.id] },{},{class: "form-control"} %>
+    </div>
+
+    <div class="field">
+      <%= f.label :mscore_classification_id %><br>
+      <%= f.select :mscore_classification_id,MscoreClassification.all.collect{ |u| [u.name, u.id] },{},{class: "form-control"}  %>
+    </div>
+    <div class="field">
+      <%= f.label :line_item %><br>
+      <%= f.text_area :line_item,{class:'form-control'} %>
+    </div>
+    <div class="field">
+      <%= f.label :operational_expenditure %><br>
+      <%= f.text_field :operational_expenditure,{class:'form-control'} %>
+    </div>
+    <div class="field">
+      <%= f.label :revenue %><br>
+      <%= f.text_field :revenue,{class:'form-control'} %>
+    </div>
+    <div class="field">
+      <%= f.label :capital_expenditure %><br>
+      <%= f.text_field :capital_expenditure,{class:'form-control'} %>
+    </div>
+    <div class="actions">
+      <%= f.submit "Save",{class:'btn  btn-primary'} %>
+    </div>
+
+  <% end %>
+  </div></div>
+
+</div>
+</div>
+<div class="modal-footer">
+  <div class="actions col-md-5">
+  <%= f.submit "Save", id: "submit_form", class: 'btn btn-mini pull-right'%>
+  <% if current_user.admin? %>&nbsp;|&nbsp;
+  <%= link_to @departmental_sdbip, method: :delete, data: { confirm: "You sure?" }, class: "btn btn-mini" do %>
+    <span class="glyphicon glyphicon-trash"></span>Delete
+  <% end %>
+  <% end %>
+  </div>
+</div>
+<% end %>
+</div>
+</div>

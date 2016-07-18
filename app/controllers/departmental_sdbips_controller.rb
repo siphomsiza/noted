@@ -180,9 +180,11 @@ end
   end
   def import
     if params[:file].nil?
-      redirect_to departmental_sdbips_path, :flash => { :danger => 'You have not selected a file'}
+      flash[:danger] = 'You have not selected a file'
+      redirect_to departmental_sdbips_path
     else
     begin
+      #FileUtils.mv(file_location, '/db/data/')
       #temp = Tempfile.new(params[:file].original_filename)
       #xlsx_package.serialize temp.path
       #send_file temp.path, :filename => params[:file].original_filename, :type => "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
@@ -194,10 +196,11 @@ end
        Rails.logger.error { "#{e.message} #{e.backtrace.join("\n")}" }
        #temp.close
        #temp.unlink
-       redirect_to departmental_sdbips_path
-
+       redirect_to :back
     end
+    #redirect_to departmental_sdbips_path
   end
+
   end
   def destroy
     @departmental_sdbip = DepartmentalSdbip.find(params[:id])

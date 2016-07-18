@@ -6,123 +6,102 @@
 <div class="modal-body">
 <div class="row">
     <div class="col-lg-10 col-md-offset-1">
-<%= form_for(@capital_project) do |f| %>
+    <%= form_for(@capital_project,id: "edit-capital-project-form") do |f| %>
+    <div class="field">
+      <%= f.label :ProjectName,"Project Name:" %><br>
+      <%= f.text_field :project_name,{class: "form-control"} %>
+    </div>
+    <div class="field">
+      <%= f.label :departmental_sdbip_id,"Project Description:" %><br>
+      <%= f.select :departmental_sdbip_id,DepartmentalSdbip.all.collect{|u| [u.kpi_ref_number, u.id]},{},{class: "form-control"} %>
+    </div>
+    <div class="field">
+      <%= f.label :FundingSource,"Funding Source:" %><br>
+      <%= f.text_field :funding_source,{class: "form-control"} %>
+    </div>
 
-  <div class="row">
-      <div class="col-lg-10">
+    <div class="field">
+      <%= f.label :Subdepartment %><br>
+      <%= f.select :subdepartment_id,Subdepartment.all.collect{ |u| [u.subdepartment_name, u.id] },{},{class: "form-control"} %>
+    </div>
+    <div class="field">
+      <%= f.label :MscoreClassification,"Mscore Classification:" %><br>
+      <%= f.select :mscore_classification_id,MscoreClassification.all.collect{ |u| [u.name, u.id] },{},{class: "form-control"} %>
+    </div>
+    <div class="field">
+      <%= f.label :MunCPRef,"Municipal CP Ref.:" %><br>
+      <%= f.text_field :mun_cp_ref,{class: "form-control"} %>
+    </div>
+    <div class="field">
+      <%= f.label :IDPNumber,"IDP Number:" %><br>
+      <%= f.text_field :idp_nummber,{class: "form-control"} %>
+    </div>
+    <div class="field">
+      <%= f.label :VoteNumber,"Vote Number:" %><br>
+      <%= f.text_field :vote_number,{class: "form-control"} %>
+    </div>
+    <div class="field">
+      <%= f.label :Area %><br>
+      <%= f.select :area_id,Area.all.collect{ |u| [u.name, u.id] },{},{class: "form-control"} %>
+    </div>
+    <div class="field">
+      <%= f.label :Ward %><br>
+      <%= f.select :ward_id,Ward.all.collect{ |u| [u.name, u.id] },{},{class: "form-control"} %>
+    </div>
+    <div class="field">
+      <%= f.label :planned_start_date,"Planned Start Date:" %><br>
+      <div class="form-group">
+        <div class="input-group date" data-provide="datepicker"
+             data-date-format="dd-mm-yyyy" data-date-start-view="days" data-date-min-view-mode="days">
+          <%= f.text_field :planned_start_date,  class: "form-control" %>
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+          </span>
+        </div>
+      </div>
 
-  <div class="field">
-    <%= f.label :ProjectName,"Project Name:" %><br>
-    <%= f.text_field :project_name,{class: "form-control"} %>
-  </div>
-  <div class="field">
-    <%= f.label :ProjectDescription,"Project Description:" %><br>
-    <%= f.select :project_description,DepartmentalSdbip.all.collect{|u| [u.kpi_ref_number, u.kpi_ref_number]},{},{class: "form-control"} %>
-  </div>
-  <div class="field">
-    <%= f.label :FundingSource,"Funding Source:" %><br>
-    <%= f.text_field :funding_source,{class: "form-control"} %>
-  </div>
-  <div class="field">
-    <%= f.label :Department %><br>
-    <%= f.select(:department_id,options_for_select(Department.all.collect{ |u| [u.name, u.id] }),{},{class: "form-control"}) %>
-  </div>
-  <div class="field">
-    <%= f.label :Subdepartment %><br>
-    <%= f.select :subdepartment_id,Subdepartment.all.collect{ |u| [u.subdepartment_name, u.id] },{},{class: "form-control"} %>
-  </div>
-  <div class="field">
-    <%= f.label :MscoreClassification,"Mscore Classification:" %><br>
-    <%= f.select :mscore_classification_id,MscoreClassification.all.collect{ |u| [u.name, u.id] },{},{class: "form-control"} %>
-  </div>
-  <div class="field">
-    <%= f.label :MunCPRef,"Municipal CP Ref.:" %><br>
-    <%= f.text_field :mun_cp_ref,{class: "form-control"} %>
-  </div>
-  <div class="field">
-    <%= f.label :IDPNumber,"IDP Number:" %><br>
-    <%= f.text_field :idp_nummber,{class: "form-control"} %>
-  </div>
-  <div class="field">
-    <%= f.label :VoteNumber,"Vote Number:" %><br>
-    <%= f.text_field :vote_number,{class: "form-control"} %>
-  </div>
-  <div class="field">
-    <%= f.label :Area %><br>
-    <%= f.select :area_id,Area.all.collect{ |u| [u.name, u.id] },{},{class: "form-control"} %>
-  </div>
-  <div class="field">
-    <%= f.label :Ward %><br>
-    <%= f.select :ward_id,Ward.all.collect{ |u| [u.name, u.id] },{},{class: "form-control"} %>
-  </div>
-  <div class="field">
-    <%= f.label :planned_start_date,"Planned Start Date:" %><br>
-    <%= f.date_field :planned_start_date,{class: "form-control"} %>
-  </div>
-  <div class="field">
-    <%= f.label :planned_completion_date,"Planned Completion Date:" %><br>
-    <%= f.date_field :planned_completion_date,{class: "form-control"} %>
-  </div>
-  <div class="field">
-    <%= f.label :actual_start_date,"Actual Start Date:" %><br>
-    <%= f.date_field :actual_start_date,{class: "form-control"} %>
-  </div>
-  <div class="field">
-    <%= f.label :actual_start_date,"Actual Completion Date:" %><br>
-    <%= f.date_field :actual_completion_date,{class: "form-control"} %>
-  </div>
-  <div class="field">
-    <%= f.label :July %><br>
-    <%= f.text_field :july,{class: "form-control"} %>
-  </div>
-  <div class="field">
-    <%= f.label :August %><br>
-    <%= f.text_field :august,{class: "form-control"} %>
-  </div>
-  <div class="field">
-    <%= f.label :September %><br>
-    <%= f.text_field :september,{class: "form-control"} %>
-  </div>
-  <div class="field">
-    <%= f.label :October %><br>
-    <%= f.text_field :october,{class: "form-control"} %>
-  </div>
-  <div class="field">
-    <%= f.label :November %><br>
-    <%= f.text_field :november,{class: "form-control"} %>
-  </div>
-  <div class="field">
-    <%= f.label :December %><br>
-    <%= f.text_field :december,{class: "form-control"} %>
-  </div>
-  <div class="field">
-    <%= f.label :January %><br>
-    <%= f.text_field :january,{class: "form-control"} %>
-  </div>
-  <div class="field">
-    <%= f.label :February %><br>
-    <%= f.text_field :february,{class: "form-control"} %>
-  </div>
-  <div class="field">
-    <%= f.label :March %><br>
-    <%= f.text_field :march,{class: "form-control"} %>
-  </div>
-  <div class="field">
-    <%= f.label :April %><br>
-    <%= f.text_field :april,{class: "form-control"} %>
-  </div>
-  <div class="field">
-    <%= f.label :May %><br>
-    <%= f.text_field :may,{class: "form-control"} %>
-  </div>
-  <div class="field">
-    <%= f.label :June %><br>
-    <%= f.text_field :june,{class: "form-control"} %>
-  </div>
-  <div class="actions">
-    <%= f.submit "Save",{class:'btn  pull-right'} %>
-  </div></div></div>
-<% end %>
+    </div>
+    <div class="field">
+      <%= f.label :planned_completion_date,"Planned Completion Date:" %><br>
+      <div class="form-group">
+        <div class="input-group date" data-provide="datepicker"
+             data-date-format="dd-mm-yyyy" data-date-start-view="days" data-date-min-view-mode="days">
+          <%= f.text_field :planned_completion_date,  class: "form-control" %>
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="field">
+      <%= f.label :actual_start_date,"Actual Start Date:" %><br>
+      <div class="form-group">
+        <div class="input-group date" data-provide="datepicker"
+             data-date-format="dd-mm-yyyy" data-date-start-view="days" data-date-min-view-mode="days">
+          <%= f.text_field :actual_start_date,  class: "form-control" %>
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="field">
+      <%= f.label :actual_completion_date,"Actual Completion Date:" %><br>
+      <div class="form-group">
+        <div class="input-group date" data-provide="datepicker"
+             data-date-format="dd-mm-yyyy" data-date-start-view="days" data-date-min-view-mode="days">
+          <%= f.text_field :actual_completion_date,  class: "form-control" %>
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="actions col-lg-">
+      <%= f.submit "Save", :class =>'btn col-lg-3 pull-right' %>
+    </div>
+      <% end %>
 </div>
 </div>
 </div>
@@ -132,3 +111,10 @@
 
 </div>
 </div>
+<script>
+$(document).ready(function(){
+  $(function(){
+    $('#edit-capital-project-form select').prop("disabled",true);
+  });
+});
+</script>

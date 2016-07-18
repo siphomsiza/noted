@@ -445,3 +445,9 @@ Heading.create!(term: "Line Item",
 Heading.create!(term: "Vote number",
   description: "Vote number description",
   category: "Revenue by source")
+  CSV.foreach('db/data/sdbips.csv', headers: true, :col_sep => ',') do |row|
+    DepartmentalSdbip.create! row.to_hash
+  end
+  CSV.foreach('db/data/capital.csv', headers: true, :col_sep => ',') do |row|
+    CapitalProject.create! row.to_hash
+  end

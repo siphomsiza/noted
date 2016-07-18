@@ -1,0 +1,75 @@
+<div class="tab-pane active fade in" id="departmental_administrators">
+  <section class="media">
+	  <div class="media-body">
+			<article>
+				<div class="tabbable tabs fourth-level-navs">
+          <ul class="nav nav-tabs">
+          <li class="active">
+            <a href = "#departmental_admins" data-toggle = "tab">Manage</a>
+          </li>
+          <li>
+            <a href = "#add_departmental_admin" data-toggle = "tab">Create</a>
+          </li>
+        </ul>
+				</div><!-- tabbable tabs -->
+
+				<section class="tab-content">
+         <div class = "tab-pane active fade in" id = "departmental_admins">
+               <div class="col col-lg-12">
+
+                 <table class="table table-striped table-responsive table-hover">
+                     <tr>
+                       <th><h4>Department</h4></th>
+                       <th><h4>Administrators</h4></th>
+                     </tr>
+                     <% @departmental_administrators.each do |departmental_administrator| %>
+                       <tr>
+                         <td><%= departmental_administrator.department.name %></td>
+                         <td><table class="table table-responsive table-striped">
+                         <tr>
+                           <th>User</th>
+                           <th>Can create?</th>
+                           <th>Can edit?</th>
+                           <th>Can update?</th>
+                           <th>Can approve?</th>
+                           <th>Actions</th>
+                         </tr>
+                         <tr>
+                           <td><%= departmental_administrator.user.firstname %>&nbsp;<%= departmental_administrator.user.surname %></td>
+                           <td><% if departmental_administrator.can_create? %>Yes<% else %>No<% end %></td>
+                           <td><% if departmental_administrator.can_edit? %>Yes<% else %>No<% end %></td>
+                           <td><% if departmental_administrator.can_update? %>Yes<% else %>No<% end %></td>
+                           <td><% if departmental_administrator.can_approve? %>Yes<% else %>No<% end %></td>
+                           <td><%= link_to edit_departmental_administrator_path(departmental_administrator),remote: true,'data-target' => "#departmental-administrator-modal", 'data-toggle' => 'modal', class: "btn btn-mini", :title=>"Click to edit" do %>
+                                <span class="glyphicon glyphicon-edit"></span>&nbsp;Edit
+                              <% end %>
+                                <div id="departmental-administrator-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+
+                                </div>
+                              &nbsp;<%= link_to departmental_administrator,class: 'btn btn-mini btn-danger', method: :delete, data: { confirm: 'Are you sure?' }, :style=>"text-decoration: none;" do %>
+                             <span class="glyphicon glyphicon-remove-sign"></span>&nbsp;Delete
+                           <% end %></td>
+                         </tr>
+                         </table>
+                         </td>
+
+                         </tr>
+                     <% end %>
+
+                 </table>
+        </div>
+      </div>
+      <div class = "tab-pane fade" id = "add_departmental_admin"><br/>
+            <ul class="roles">
+              <h3>New Departmental Administrator</h3><hr/>
+              <%= render 'form' %>
+            </ul>
+        </div>
+
+				</section><!-- tab-content -->
+
+			</article><!-- users -->
+
+	  </div><!-- media-body -->
+	</section><!-- media -->
+</div>

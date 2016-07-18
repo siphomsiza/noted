@@ -44,6 +44,7 @@ class RolesController < ApplicationController
       flash[:success] = "Role was successfully updated"
       redirect_to :back
     else
+      flash[:danger] = "Role was not updated"
       redirect_to :back
     end
   end

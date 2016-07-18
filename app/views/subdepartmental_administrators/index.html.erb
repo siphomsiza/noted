@@ -1,0 +1,93 @@
+<% provide(:title, 'Departmental Administrators') %>
+<script>
+$(function() {
+	//highlight the current nav
+	$("#applicationmanifest a:contains('SETUP')").parent().addClass('active');
+}); //jQuery is loaded
+</script>
+<div>
+
+<div class="row">
+<div class="col col-lg-">
+	<%= render 'layouts/municipality' %>
+
+<ul class="nav nav-pills nav-justified">
+<li><%= link_to "Master Setup", master_setups_path %></li>
+<li><%= link_to "System Setup", setups_path  %></li>
+<li><%= link_to "Departments", departments_path %></li>
+<li class="active"><%= link_to "Departmental Administrators", departmental_administrators_path %></li>
+<li class="disabled"><%= link_to "Top Layer Administrators", roles_path %></li>
+<li><%= link_to "Headings", headings_path %></li>
+<li><%= link_to "Lists", lists_path %></li>
+<li><%= link_to "Time Periods", sdbip_time_periods_path %></li>
+</ul>
+</div>
+</div>
+</div>
+    <div class="row">
+
+            <div class="tabbable tabs third-level-navs" id="roles-tabs">
+              <ul id = "myTab" class = "nav nav-tabs">
+								<li class="active">
+									<a href = "#subdepartmental_admins" data-toggle = "tab">Manage</a>
+								</li>
+								<li>
+                  <a href = "#add_subdepartmental_admin" data-toggle = "tab">Create</a>
+                </li>
+              </ul><!-- nav nav-tabs -->
+            </div><!-- tabbable tabs -->
+    <div id = "myTabContent" class = "tab-content">
+
+     <div class = "tab-pane active fade in" id = "subdepartmental_admins">
+           <div class="col col-lg-12">
+
+             <table class="table table-striped table-responsive table-hover">
+                 <tr>
+                   <th><h4>Sub-Department</h4></th>
+                   <th><h4>Administrators</h4></th>
+                 </tr>
+                 <% @subdepartmental_administrators.each do |subdepartmental_administrator| %>
+                   <tr>
+                     <td><%= subdepartmental_administrator.subdepartment.subdepartment_name %></td>
+                     <td><table class="table table-responsive table-striped">
+                     <tr>
+                       <th>User</th>
+                       <th>Can create</th>
+                       <th>Can edit</th>
+                       <th>Can update</th>
+                       <th>Can approve</th>
+											 <th>Actions</th>
+                     </tr>
+                     <tr>
+                       <td><%= subdepartmental_administrator.user.firstname %>&nbsp;<%= subdepartmental_administrator.user.surname %></td>
+                       <td><% if subdepartmental_administrator.can_create? %>Yes<% else %>No<% end %></td>
+                       <td><% if subdepartmental_administrator.can_edit? %>Yes<% else %>No<% end %></td>
+                       <td><% if subdepartmental_administrator.can_update? %>Yes<% else %>No<% end %></td>
+                       <td><% if subdepartmental_administrator.can_approve? %>Yes<% else %>No<% end %></td>
+											 <td><%= link_to edit_subdepartmental_administrator_path(subdepartmental_administrator),remote: true,'data-target' => "#subdepartment-modal", 'data-toggle' => 'modal', class: "btn btn-mini", :title=>"Click to edit" do %>
+						 	              <span class="glyphicon glyphicon-edit"></span>&nbsp;Edit
+						 	            <% end %>
+						 	              <div id="subdepartment-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+
+						 	              </div>
+						 							&nbsp;<%= link_to subdepartmental_administrator,class: 'btn btn-mini btn-danger', method: :delete, data: { confirm: 'Are you sure?' }, :style=>"text-decoration: none;" do %>
+						             <span class="glyphicon glyphicon-remove-sign"></span>&nbsp;Delete
+						           <% end %></td>
+										 </tr>
+                     </table>
+                     </td>
+
+                     </tr>
+                 <% end %>
+
+             </table>
+    </div>
+  </div>
+	<div class = "tab-pane fade" id = "add_subdepartmental_admin"><br/>
+				<ul class="roles">
+					<h3>New Sub-departmental Administrator</h3><hr/>
+					<%= render 'subdepartmental_administrators/form' %>
+				</ul>
+</div>
+</div>
+</div>

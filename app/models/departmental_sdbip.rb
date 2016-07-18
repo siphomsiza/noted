@@ -84,6 +84,8 @@ def self.fetch_excel_data(file)
         DepartmentalSdbip.create!(departmental_sdbip_hash)
       end
   end
+	handle_asynchronously :import_from_file, priority: 2,run_at: Proc.new { 3.seconds.from_now }, queue: 'departmental_sdbips'
+
 end
 
 def self.open_spreadsheet(file)

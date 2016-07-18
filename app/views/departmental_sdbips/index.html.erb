@@ -5,7 +5,7 @@ $(function() {
 	$("#applicationmanifest ul.navbar-nav li:eq(3)").addClass('active');
 }); //jQuery is loaded
 </script>
-
+<br/>
 <div class="row">
 <div class="col col-lg-12">
 <%= render 'layouts/municipality' %>
@@ -369,8 +369,8 @@ $(function() {
 $(document).ready(function() {
 						 $(function () {
 								 var $chk = $("#grpChkBox input:checkbox");
-								 var $tbl = $("#sdbips-table");
-								 $chk.prop('checked', true);
+								 var $tbl = $("#departmental-sdbips-table");
+								 $chk.prop('checked', false);
 								 $chk.click(function () {
 										 var colToHide = $tbl.find("." + $(this).attr("name"));
 										 $(colToHide).toggle();

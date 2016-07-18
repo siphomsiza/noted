@@ -30,7 +30,10 @@ $(function() {
 								<a href = "#view_revenue_by_sources" data-toggle = "tab"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;View Revenue By Source</a>
 							</li>
 							<li>
-								<a href = "#manage_revenue_by_sources" data-toggle = "tab"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;Manage Revenue By Source</a>
+								<a href = "#edit_revenue_by_sources" data-toggle = "tab"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;Edit Revenue By Source</a>
+							</li>
+							<li>
+								<a href = "#manage_revenue_by_sources" data-toggle = "tab"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;Update Revenue By Source</a>
 							</li>
 							<li>
 								<a href = "#new_revenue_by_source" data-toggle = "tab">
@@ -51,10 +54,36 @@ $(function() {
 							<% elsif !@revenue_by_sources.blank? %>
 							<div class="table-responsive">
 								<%= render 'revenue_by_sources'%>
-								<%= will_paginate @revenue_by_sources, :class=>"center" %>
+								<%= will_paginate @revenue_by_sources %>
 							</div>
 							<% end %>
 						</div>
+
+						<div class = "tab-pane fade" id = "edit_revenue_by_sources">
+
+							<% if @revenue_by_sources.blank? && RevenueBySource.blank? %>
+
+							<p> There are no Revenue By Source(s) currently in the system to edit. </p>
+
+							<% elsif @revenue_by_sources.blank? && !RevenueBySource.blank? %>
+
+							<p> You currently have no Revenue By Source(s) to edit. </p>
+
+							<% elsif !@revenue_by_sources.blank? %>
+
+							<div class="table-responsive">
+
+								<%= render 'update_revenue_by_source'%>
+
+								<%= will_paginate @revenue_by_sources %>
+
+							</div>
+
+							<% end %>
+
+						</div>
+
+
 						<div class = "tab-pane fade" id = "manage_revenue_by_sources">
 
 							<% if @revenue_by_sources.blank? && RevenueBySource.blank? %>
@@ -71,7 +100,7 @@ $(function() {
 
 								<%= render 'edit_revenue_by_source'%>
 
-								<%= will_paginate @revenue_by_sources, :class=>"center" %>
+								<%= will_paginate @revenue_by_sources %>
 
 							</div>
 

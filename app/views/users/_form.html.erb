@@ -136,7 +136,7 @@
       <section class="row">
       <label class="col col-lg-4 control-label" for="manager">Manager</label>
         <div class="controls col col-lg-8">
-          <%= f.select :manager, @system_user.all.collect {|x| [x.firstname, x.email]}, {:include_blank => "Select Manager"}, class: "form-control" %>
+          <%= f.select :manager, @system_users.all.collect {|x| [x.firstname, x.email]}, {:include_blank => "Select Manager"}, class: "form-control" %>
         </div><!-- controls -->
       </section><!-- row -->
 

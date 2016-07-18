@@ -32,7 +32,10 @@ $(function() {
 							<a href = "#view_top_layer_sdbips" data-toggle = "tab"><span class="glyphicon glyphicon-list-alt"></span>&nbsp; View Top Layer</a>
 						</li>
 						<li>
-							<a href = "#manage_top_layer_sdbips" data-toggle = "tab"><span class="glyphicon glyphicon-list-alt"></span>&nbsp; Manage Top Layer</a>
+							<a href = "#edit_top_layer_sdbips" data-toggle = "tab"><span class="glyphicon glyphicon-list-alt"></span>&nbsp; Edit Top Layer</a>
+						</li>
+						<li>
+							<a href = "#manage_top_layer_sdbips" data-toggle = "tab"><span class="glyphicon glyphicon-list-alt"></span>&nbsp; Update Top Layer</a>
 						</li>
 						<li>
 							<a href = "#new-top-layer-sdbip" data-toggle = "tab">
@@ -51,12 +54,12 @@ $(function() {
 						<% elsif !@top_layer_sdbips.blank? %>
 						<div class="table-responsive">
 							<%= render 'top_layer_sdbips'%>
-							<%= will_paginate @top_layer_sdbips, :class=>"center" %>
+							<%= will_paginate @top_layer_sdbips %>
 						</div>
 						<% end %>
 					</div>
 
-					<div class = "tab-pane fade" id = "manage_top_layer_sdbips">
+					<div class = "tab-pane fade" id = "edit_top_layer_sdbips">
 
 									<% if @top_layer_sdbips.blank? && TopLayerSdbip.blank? %>
 									<p> There are no Top Layer SDBIPs currently in the system to edit. <p>
@@ -64,11 +67,26 @@ $(function() {
 									<p> You currently have no Top Layer SDBIPs to edit. </p>
 									<% elsif !@top_layer_sdbips.blank? %>
 									<div class="table-responsive">
-										<%= render 'edit_top_layer_sdbip'%>
-										<%= will_paginate @top_layer_sdbips, :class=>"center" %>
+										<%= render 'update_top_layer_sdbip'%>
+										<%= will_paginate @top_layer_sdbips %>
 									</div>
 									<% end %>
 					</div>
+
+					<div class = "tab-pane fade" id = "manage_top_layer_sdbips">
+
+									<% if @top_layer_sdbips.blank? && TopLayerSdbip.blank? %>
+									<p> There are no Top Layer SDBIPs currently in the system to update. <p>
+									<% elsif @top_layer_sdbips.blank? && !TopLayerSdbip.blank? %>
+									<p> You currently have no Top Layer SDBIPs to update. </p>
+									<% elsif !@top_layer_sdbips.blank? %>
+									<div class="table-responsive">
+										<%= render 'edit_top_layer_sdbip'%>
+										<%= will_paginate @top_layer_sdbips %>
+									</div>
+									<% end %>
+					</div>
+
 					<div class = "tab-pane fade" id = "new-top-layer-sdbip">
 							<div class="row">
 								<div class="col-lg-12">

@@ -40,7 +40,10 @@ $(function() {
 					<a href = "#view_monthly_cashflows" data-toggle = "tab"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;View Monthly Cashflows</a>
 				</li>
 				<li>
-					<a href = "#manage_monthly_cashflows" data-toggle = "tab"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;Manage Monthly Cashflows</a>
+					<a href = "#edit_monthly_cashflows" data-toggle = "tab"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;Edit Monthly Cashflows</a>
+				</li>
+				<li>
+					<a href = "#manage_monthly_cashflows" data-toggle = "tab"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;Update Monthly Cashflows</a>
 				</li>
 				<li>
 					<a href = "#new_monthly_cashflow" data-toggle = "tab">
@@ -69,12 +72,37 @@ $(function() {
 
 					<%= render 'monthly_cashflows'%>
 
-					<%= will_paginate @monthly_cashflows, :class=>"center" %>
+					<%= will_paginate @monthly_cashflows %>
 
 				</div>
 
 				<% end %>
 			</div>
+
+			<div class = "tab-pane active fade" id = "edit_monthly_cashflows">
+					<br/>
+							<% if @monthly_cashflows.blank? && MonthlyCashflow.blank? %>
+
+							<p> There are no Monthly Cashflows currently in the system to edit. </p>
+
+							<% elsif @monthly_cashflows.blank? && !MonthlyCashflow.blank? %>
+
+							<p> You currently have no Monthly Cashflows to edit. </p>
+
+							<% elsif !@monthly_cashflows.blank? %>
+
+							<div class="table-responsive">
+
+								<%= render 'update_monthly_cashflow'%>
+
+								<%= will_paginate @monthly_cashflows %>
+
+							</div>
+
+							<% end %>
+
+		</div>
+
 			<div class = "tab-pane active fade" id = "manage_monthly_cashflows">
 					<br/>
 							<% if @monthly_cashflows.blank? && MonthlyCashflow.blank? %>
@@ -91,7 +119,7 @@ $(function() {
 
 								<%= render 'edit_monthly_cashflow'%>
 
-								<%= will_paginate @monthly_cashflows, :class=>"center" %>
+								<%= will_paginate @monthly_cashflows %>
 
 							</div>
 
