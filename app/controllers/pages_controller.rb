@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
   before_action :logged_in_user, only: [:about,:new,:setup,:dashboard]
   before_action :admin_user,     only: [:about,:new,:setup,:dashboard]
-  before_action :municipal_manager_user,     only: [:dashboard]
+  before_action :top_layer_administrator,     only: [:dashboard]
   def home
   end
 
@@ -57,11 +57,11 @@ class PagesController < ApplicationController
     end
 
     # Confirms the correct user.
-    def municipal_manager_user
-      redirect_to(root_url) unless (!current_user.role.blank? && current_user.role.municipal_manager?) || current_user.admin?
+    def top_layer_administrator
+      redirect_to(root_url) unless (!current_user.role.blank? && (current_user.role.top_layer_administrator? || current_user.role.assurance_provider? || current_user.role.audit_log_reporting? || current_user.role.secondary_time_period? )) || current_user.admin?
     end
     # Confirms an admin user.
     def admin_user
-      redirect_to(root_url) unless current_user.admin? || municipal_manager_user
+      redirect_to(root_url) unless current_user.admin? || top_layer_administrator
     end
 end
