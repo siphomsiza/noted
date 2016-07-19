@@ -49,7 +49,6 @@ ActiveRecord::Schema.define(version: 20160718091147) do
   create_table "capital_projects", force: :cascade do |t|
     t.integer  "subdepartment_id",         null: false
     t.integer  "mscore_classification_id", null: false
-    t.integer  "departmental_sdbip_id",    null: false
     t.string   "mun_cp_ref"
     t.string   "idp_nummber"
     t.string   "vote_number"
@@ -64,8 +63,6 @@ ActiveRecord::Schema.define(version: 20160718091147) do
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
   end
-
-  add_index "capital_projects", ["departmental_sdbip_id"], name: "index_capital_projects_on_departmental_sdbip_id", using: :btree
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   default: 0, null: false
@@ -94,17 +91,6 @@ ActiveRecord::Schema.define(version: 20160718091147) do
     t.datetime "updated_at",                    null: false
   end
 
-  create_table "departmental_sdbip_progresses", force: :cascade do |t|
-    t.string   "period"
-    t.string   "actual"
-    t.binary   "poe"
-    t.text     "corrective_measures"
-    t.text     "comments"
-    t.integer  "departmental_sdbip_id", null: false
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
-  end
-
   create_table "departmental_sdbips", force: :cascade do |t|
     t.integer  "department_id",                                                    null: false
     t.string   "department_name",                                                  null: false
@@ -119,6 +105,7 @@ ActiveRecord::Schema.define(version: 20160718091147) do
     t.string   "idp_ref"
     t.integer  "national_outcome_id"
     t.integer  "strategic_objective_id"
+    t.integer  "kpi_target_type_id"
     t.string   "source_of_evidence"
     t.string   "baseline"
     t.string   "budget"
@@ -145,7 +132,6 @@ ActiveRecord::Schema.define(version: 20160718091147) do
     t.integer  "ndp_objective_id"
     t.integer  "kpi_concept_id"
     t.integer  "kpi_type_id"
-    t.integer  "kpi_target_type_id"
     t.string   "impact"
     t.integer  "provincial_strategic_outcome_id"
     t.integer  "ward_id"
@@ -157,6 +143,8 @@ ActiveRecord::Schema.define(version: 20160718091147) do
     t.datetime "created_at",                                                       null: false
     t.datetime "updated_at",                                                       null: false
   end
+
+  add_index "departmental_sdbips", ["kpi_ref_number"], name: "index_departmental_sdbips_on_kpi_ref_number", using: :btree
 
   create_table "departments", force: :cascade do |t|
     t.string   "name",       null: false
@@ -371,38 +359,39 @@ ActiveRecord::Schema.define(version: 20160718091147) do
   end
 
   create_table "roles", force: :cascade do |t|
-    t.integer  "user_id",                                       null: false
+    t.integer  "user_id",                                 null: false
     t.integer  "kpi_owner_id"
-    t.boolean  "kpi_owner",                     default: false
-    t.boolean  "finance_admin",                 default: false
-    t.boolean  "top_layer_administrator",             default: false
-    t.boolean  "setup", default: false
-    t.boolean  "secondary_time_period",    default: false
-    t.boolean  "audit_log_reporting",              default: false
-    t.boolean  "assurance_provider",               default: false
-    t.datetime "created_at",                                    null: false
-    t.datetime "updated_at",                                    null: false
+    t.boolean  "kpi_owner",               default: false
+    t.boolean  "finance_admin",           default: false
+    t.boolean  "top_layer_administrator", default: false
+    t.boolean  "assurance_provider",      default: false
+    t.boolean  "audit_log_reporting",     default: false
+    t.boolean  "secondary_time_period",   default: false
+    t.boolean  "setup",                   default: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
   end
 
   create_table "roles_details", force: :cascade do |t|
     t.integer  "role_id",                          null: false
+    t.integer  "subdepartment_id",                 null: false
+    t.integer  "department_id",                    null: false
     t.boolean  "can_update",       default: false
     t.boolean  "can_edit",         default: false
     t.boolean  "can_create",       default: false
     t.boolean  "can_delete",       default: false
     t.boolean  "do_setup",         default: false
-    t.integer  "subdepartment_id",                 null: false
-    t.integer  "department_id",                    null: false
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
   end
 
   create_table "sdbip_time_periods", force: :cascade do |t|
-    t.string   "period",     null: false
-    t.date     "start_date", null: false
-    t.date     "end_date",   null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "period",                null: false
+    t.date     "start_date",            null: false
+    t.date     "end_date",              null: false
+    t.integer  "departmental_sdbip_id"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
   end
 
   create_table "setups", force: :cascade do |t|

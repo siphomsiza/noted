@@ -22,7 +22,8 @@ class PagesController < ApplicationController
     @sdbip_time_periods = SdbipTimePeriod.where(["end_date = ? OR end_date = ?",Date.today,Date.today.days_ago(-7)])
     @users = User.all
     @departmental_sdbips = DepartmentalSdbip.order(performance_standard: :asc)
-
+    @departmental_sdbips_kpa = DepartmentalSdbip.all
+    @departments = Department.includes(:departmental_sdbips)
     begin
 
         @client = YahooWeather::Client.new
