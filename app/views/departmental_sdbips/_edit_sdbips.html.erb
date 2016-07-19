@@ -63,12 +63,16 @@
         <td><%= departmental_sdbip.department.name %></td>
         <td><%= departmental_sdbip.subdepartment.subdepartment_name %></td>
         <td>
+          <% if (!current_user.departmental_administrator.blank? && current_user.departmental_administrator.can_edit?) || current_user.admin? %>
         <%= link_to edit_departmental_sdbip_path(departmental_sdbip),remote: true,'data-target' => "#departmental-sdbip-modal", 'data-toggle' => 'modal', :title=>"Click to Update KPI" do %>
             <%= departmental_sdbip.kpi %>
           <% end %>
           <div id="departmental-sdbip-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
 
           </div>
+          <% else %>
+            <%= departmental_sdbip.kpi %>
+          <% end %>
         </td>
         <td><%= departmental_sdbip.kpi_ref_number %></td>
         <td><% if !departmental_sdbip.predetermined_objective_id.blank? %><%= departmental_sdbip.predetermined_objective.name %><% end %></td>

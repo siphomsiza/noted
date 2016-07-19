@@ -13,33 +13,33 @@ class DepartmentalSdbipsController < ApplicationController
     if params[:subdepartment_id]
 
       if !current_user.role.blank? || current_user.admin?
-        if current_user.admin? || current_user.role.auditor_general? || current_user.role.internal_auditor? || current_user.role.municipal_manager?
+        if current_user.admin? || current_user.role.audit_log_reporting? || current_user.role.top_layer_administrator? || current_user.role.assurance_provider? || current_user.role.secondary_time_period? || current_user.role.finance_admin?
             @departmental_sdbips = DepartmentalSdbip.search(params[:subdepartment_id],params[:kpi_type_id],params[:start_date],params[:end_date]).includes(:department,:subdepartment,:kpi_type,:predetermined_objective,:kpi_owner,:mscore_classification,:national_outcome,:strategic_objective,:risk_rating,:kpa,:ndp_objective,:capital_project,:kpi_concept,:area,:ward,:reporting_category,:kpi_calculation_type)
               if !@departmental_sdbips.blank?
                @departmental_sdbips =  @departmental_sdbips.paginate(page: params[:page],per_page: 10)
               end
-        elsif current_user.role.kpi_owner? && !current_user.role.departmental_administrator?
+        elsif current_user.role.kpi_owner? && current_user.departmental_administrator.blank?
             kpi_id = current_user.role.kpi_owner_id
             @departmental_sdbips = DepartmentalSdbip.search_kpi(params[:kpi_id],params[:department_id],params[:subdepartment_id],params[:kpi_type_id],params[:start_date],params[:end_date])#.includes(:capital_project,:department,:subdepartment,:kpi_type,:kpi_owner,:kpi_concept,:kpi_calculation_type,:mscore_classification,:predetermined_objective,:kpa,:strategic_objective,:national_outcome,:ward,:area,:reporting_category,:ndp_objective,:risk_rating)
             if !@departmental_sdbips.blank?
               @departmental_sdbips = @departmental_sdbips.paginate(page: params[:page],per_page: 10)
             end
-        elsif !current_user.role.kpi_owner? && current_user.role.departmental_administrator?
+        elsif !current_user.role.kpi_owner? && !current_user.departmental_administrator.blank?
               department_id = nil
-              current_user.role.roles_details.each do |dept_id|
+              current_user.departmental_administrator.each do |dept_id|
                 department_id = dept_id.department_id
               end
               @departmental_sdbips = DepartmentalSdbip.search_departmental_kpis(params[:department_id],params[:subdepartment_id],params[:kpi_type_id],params[:start_date],params[:end_date])#.includes(:capital_project,:department,:subdepartment,:kpi_type,:kpi_owner,:kpi_concept,:kpi_calculation_type,:mscore_classification,:predetermined_objective,:kpa,:strategic_objective,:national_outcome,:ward,:area,:reporting_category,:ndp_objective,:risk_rating)
               if !@departmental_sdbips.blank?
                 @departmental_sdbipsrtmental_sdbips = @departmental_sdbips.paginate(page: params[:page],per_page: 10)
               end
-        elsif current_user.role.kpi_owner? && !current_user.role.subdepartmental_administrator?
+        elsif current_user.role.kpi_owner? && current_user.subdepartmental_administrator.blank?
                 kpi_id = current_user.role.kpi_owner_id
                 @departmental_sdbips = DepartmentalSdbip.search_subdepartment_kpis(params[:kpi_id],params[:department_id],params[:subdepartment_id],params[:kpi_type_id],params[:start_date],params[:end_date])#.includes(:capital_project,:department,:subdepartment,:kpi_type,:kpi_owner,:kpi_concept,:kpi_calculation_type,:mscore_classification,:predetermined_objective,:kpa,:strategic_objective,:national_outcome,:ward,:area,:reporting_category,:ndp_objective,:risk_rating)
                 if !@departmental_sdbips.blank?
                   @departmental_sdbips = @departmental_sdbips.paginate(page: params[:page],per_page: 10)
                 end
-        elsif !current_user.role.kpi_owner? && current_user.role.subdepartmental_administrator?
+        elsif !current_user.role.kpi_owner? && !current_user.subdepartmental_administrator.blank?
                     subdepartment_id = nil
                   current_user.role.roles_details.each do |dept_id|
                     subdepartment_id = dept_id.subdepartment_id
@@ -48,14 +48,6 @@ class DepartmentalSdbipsController < ApplicationController
                   if !@departmental_sdbips.blank?
                     @departmental_sdbips= @departmental_sdbips.paginate(page: params[:page],per_page: 10)#.includes(:capital_project,:department,:subdepartment,:kpi_type,:kpi_owner,:kpi_concept,:kpi_calculation_type,:mscore_classification,:predetermined_objective,:kpa,:strategic_objective,:national_outcome,:ward,:area,:reporting_category,:ndp_objective,:risk_rating)
                   end
-
-        elsif current_user.role.kpi_owner? && current_user.role.departmental_administrator?
-                kpi_id = current_user.role.kpi_owner_id
-                @departmental_sdbips = DepartmentalSdbip.search_kpi(params[:kpi_id],params[:department_id],params[:subdepartment_id],params[:kpi_type_id],params[:start_date],params[:end_date])#.includes(:capital_project,:department,:subdepartment,:kpi_type,:kpi_owner,:kpi_concept,:kpi_calculation_type,:mscore_classification,:predetermined_objective,:kpa,:strategic_objective,:national_outcome,:ward,:area,:reporting_category,:ndp_objective,:risk_rating)
-                if !@departmental_sdbips.blank?
-                 @departmental_sdbips= @departmental_sdbips.paginate(page: params[:page],per_page: 10)#.includes(:capital_project,:department,:subdepartment,:kpi_type,:kpi_owner,:kpi_concept,:kpi_calculation_type,:mscore_classification,:predetermined_objective,:kpa,:strategic_objective,:national_outcome,:ward,:area,:reporting_category,:ndp_objective,:risk_rating)
-                end
-
         else
 
         end
@@ -65,26 +57,26 @@ class DepartmentalSdbipsController < ApplicationController
 
            if !current_user.role.blank? || current_user.admin?
 
-             if current_user.admin? || current_user.role.auditor_general? || current_user.role.internal_auditor? || current_user.role.municipal_manager?
+             if current_user.admin? || current_user.role.audit_log_reporting? || current_user.role.top_layer_administrator? || current_user.role.assurance_provider? || current_user.role.secondary_time_period? || current_user.role.finance_admin?
                 @departmental_sdbips = DepartmentalSdbip.paginate(:per_page => 10, :page => params[:page]).includes(:capital_project,:department,:subdepartment,:kpi_type,:kpi_owner,:kpi_concept,:kpi_calculation_type,:mscore_classification,:predetermined_objective,:kpa,:strategic_objective,:national_outcome,:ward,:area,:reporting_category,:ndp_objective,:risk_rating)
 
-              elsif current_user.role.kpi_owner? && !current_user.role.departmental_administrator?
+              elsif current_user.role.kpi_owner? && current_user.departmental_administrator.blank?
                 kpi_id = current_user.role.kpi_owner_id
                 @departmental_sdbips = DepartmentalSdbip.where(kpi_owner_id: kpi_id).paginate(:per_page => 10, :page => params[:page]).includes(:capital_project,:department,:subdepartment,:kpi_type,:kpi_owner,:kpi_concept,:kpi_calculation_type,:mscore_classification,:predetermined_objective,:kpa,:strategic_objective,:national_outcome,:ward,:area,:reporting_category,:ndp_objective,:risk_rating)
 
-              elsif !current_user.role.kpi_owner? && current_user.role.departmental_administrator?
-                current_user.role.roles_details.each do |dept_id|
+              elsif !current_user.role.kpi_owner? && !current_user.departmental_administrator.blank?
+                current_user.departmental_administrator.each do |dept_id|
                   kpi_id = dept_id.department_id
                 end
                 @departmental_sdbips = DepartmentalSdbip.where(department_id: [kpi_id]).paginate(:per_page => 10, :page => params[:page]).includes(:capital_project,:department,:subdepartment,:kpi_type,:kpi_owner,:kpi_concept,:kpi_calculation_type,:mscore_classification,:predetermined_objective,:kpa,:strategic_objective,:national_outcome,:ward,:area,:reporting_category,:ndp_objective,:risk_rating)
 
-              elsif current_user.role.kpi_owner? && !current_user.role.subdepartmental_administrator?
+              elsif current_user.role.kpi_owner? && current_user.subdepartmental_administrator.blank?
                 kpi_id = nil
                   kpi_id = current_user.role.kpi_owner_id
 
                 @departmental_sdbips = DepartmentalSdbip.where(kpi_owner_id: kpi_id).paginate(:per_page => 10, :page => params[:page]).includes(:capital_project,:department,:subdepartment,:kpi_type,:kpi_owner,:kpi_concept,:kpi_calculation_type,:mscore_classification,:predetermined_objective,:kpa,:strategic_objective,:national_outcome,:ward,:area,:reporting_category,:ndp_objective,:risk_rating)
 
-              elsif current_user.role.departmental_administrator? && current_user.role.subdepartmental_administrator?
+              elsif !current_user.subdepartmental_administrator.blank?
                 department_id = nil
                 subdepartment_id = nil
                 current_user.role.roles_details.each do |dept_id|
@@ -94,24 +86,24 @@ class DepartmentalSdbipsController < ApplicationController
 
                 @departmental_sdbips = DepartmentalSdbip.where(department_id: department_id).paginate(:per_page => 10, :page => params[:page]).includes(:capital_project,:department,:subdepartment,:kpi_type,:kpi_owner,:kpi_concept,:kpi_calculation_type,:mscore_classification,:predetermined_objective,:kpa,:strategic_objective,:national_outcome,:ward,:area,:reporting_category,:ndp_objective,:risk_rating)
 
-              elsif !current_user.role.kpi_owner? && current_user.role.subdepartmental_administrator?
+              elsif !current_user.role.kpi_owner? && !current_user.subdepartmental_administrator.blank?
                 kpi_id = nil
-                current_user.role.roles_details.each do |dept_id|
+                current_user.subdepartmental_administrator.each do |dept_id|
                   kpi_id = dept_id.subdepartment_id
                 end
                 @departmental_sdbips = DepartmentalSdbip.where(subdepartment_id: kpi_id).paginate(:per_page => 10, :page => params[:page]).includes(:capital_project,:department,:subdepartment,:kpi_type,:kpi_owner,:kpi_concept,:kpi_calculation_type,:mscore_classification,:predetermined_objective,:kpa,:strategic_objective,:national_outcome,:ward,:area,:reporting_category,:ndp_objective,:risk_rating)
 
-              elsif current_user.role.kpi_owner? && current_user.role.subdepartmental_administrator?
+              elsif current_user.role.kpi_owner? && !current_user.subdepartmental_administrator.blank?
                 kpi_id = nil
-                current_user.role.roles_details.each do |dept_id|
+                current_user.subdepartmental_administrator.each do |dept_id|
                   kpi_id = dept_id.subdepartment_id
                 end
                 @departmental_sdbips = DepartmentalSdbip.where(subdepartment_id: kpi_id).paginate(:per_page => 10, :page => params[:page]).includes(:capital_project,:department,:subdepartment,:kpi_type,:kpi_owner,:kpi_concept,:kpi_calculation_type,:mscore_classification,:predetermined_objective,:kpa,:strategic_objective,:national_outcome,:ward,:area,:reporting_category,:ndp_objective,:risk_rating)
 
 
-              elsif current_user.role.kpi_owner? && current_user.role.departmental_administrator?
+              elsif current_user.role.kpi_owner? && !current_user.departmental_administrator.blank?
                 kpi_id = nil
-                current_user.role.roles_details.each do |dept_id|
+                current_user.departmental_administrator.each do |dept_id|
                   kpi_id = dept_id.department_id
                 end
                 @departmental_sdbips = DepartmentalSdbip.where(department_id: kpi_id).paginate(:per_page => 10, :page => params[:page]).includes(:capital_project,:department,:subdepartment,:kpi_type,:kpi_owner,:kpi_concept,:kpi_calculation_type,:mscore_classification,:predetermined_objective,:kpa,:strategic_objective,:national_outcome,:ward,:area,:reporting_category,:ndp_objective,:risk_rating)

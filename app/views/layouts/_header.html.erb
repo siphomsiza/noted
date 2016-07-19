@@ -10,7 +10,7 @@
             <span class="glyphicon glyphicon-home"></span>INTRODUCTION
           <% end %>
         </li>
-				<% if current_user.admin? || (!current_user.role.blank? && (current_user.role.municipal_manager? || current_user.role.internal_auditor? || current_user.role.auditor_general?))  %>
+				<% if current_user.admin? || (!current_user.role.blank? && (current_user.role.top_layer_administrator? ||current_user.role.finance_admin? || current_user.role.audit_log_reporting? || current_user.role.assurance_provider?))  %>
         <li class="<%= active_class(dashboard_path) %>">
           <%= link_to dashboard_path do %>
             <span class="glyphicon glyphicon-dashboard"></span>DASHBOARD
@@ -24,7 +24,7 @@
           <% end %>
         </li>
 				<% end %>
-				<% if current_user.admin? || (!current_user.role.blank? && (current_user.role.kpi_owner? || current_user.role.municipal_manager? || current_user.role.subdepartmental_administrator? || current_user.role.department_administrator? || current_user.role.internal_auditor? || current_user.role.auditor_general?))  %>
+				<% if current_user.admin? || (!current_user.role.blank? && (current_user.role.kpi_owner? || current_user.role.audit_log_reporting? || current_user.role.assurance_provider? || current_user.role.top_layer_administrator? || current_user.role.finance_admin? || current_user.role.secondary_time_period?))  %>
         <li class="<%= active_class(departmental_sdbips_path) %>">
           <%= link_to departmental_sdbips_path do %>
             <span class="glyphicon glyphicon-tasks"></span>SDBIP
