@@ -43,10 +43,11 @@
                               </div>
                             </div>
           </div><!-- controls -->
+        </section>
         <section class="row">
           <label class="col col-lg-4 control-label" for="lastname">ID Number</label>
           <div class="controls col col-lg-8">
-            <%= f.text_field :id_number,:autocomplete=>"off",:placeholder=>"Last Name", :class => "form-control" %>
+            <%= f.text_field :id_number,:autocomplete=>"off",:placeholder=>"ID Number",'pattern'=>"[0-9]{13}",:class => "form-control" %>
           </div><!-- controls -->
         </section><!-- row -->
 
@@ -127,9 +128,9 @@
       <section class="row">
       <label class="col col-lg-4 control-label" for="location">Location</label>
         <div class="controls col col-lg-8">
-          <div class="controls col col-lg-8">
+
             <%= f.select :location, @locations.all.collect {|x| [x.name, x.name]}, {:include_blank => "Select Location"}, class: "form-control" %>
-          </div><!-- controls -->
+
         </div><!-- controls -->
       </section><!-- row -->
 
