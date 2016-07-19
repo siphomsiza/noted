@@ -28,7 +28,7 @@
       <div class="panel-body">
         <div class="row">
           <div class="col col-lg-6">
-            <%= pie_chart @departmental_sdbips_kpa.group(:kpa_name).count,height: "300px" %>
+            <%= pie_chart @departmental_sdbips_kpa.group(:kpa_name),height: "300px" %>
           </div>
           <div class="col col-lg-6">
             <%= column_chart @departmental_sdbips_kpa.group(:kpa_name).count,height: "300px" %>
@@ -42,20 +42,18 @@
       <div class="panel-heading">
         <h3>Mkhondo Local Municipality Departments' KPIs</h3>
       </div>
-      <% @departments.each do |departmental_sdbip| %>
-      <% @departmental_sdbips_kpa.where(:department_id=>departmental_sdbip.id).each do %>
+
       <div class="panel-body">
         <div class="row">
           <div class="col col-lg-6">
 
           </div>
           <div class="col col-lg-6">
-            <%= column_chart @departmental_sdbips_kpa.group(:subdepartment_name).count,height: "300px" %>
+
           </div>
         </div>
       </div>
-      <% end %>
-      <% end %>
+
     </div>
   </div>
   <div class="row col col-lg-12">

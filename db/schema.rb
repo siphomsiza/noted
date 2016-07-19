@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 20160718091147) do
   create_table "capital_projects", force: :cascade do |t|
     t.integer  "subdepartment_id",         null: false
     t.integer  "mscore_classification_id", null: false
+    t.integer  "departmental_sdbip_id",    null: false
     t.string   "mun_cp_ref"
     t.string   "idp_nummber"
     t.string   "vote_number"

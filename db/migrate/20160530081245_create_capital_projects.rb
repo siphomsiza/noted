@@ -3,6 +3,7 @@ class CreateCapitalProjects < ActiveRecord::Migration
     create_table :capital_projects, force: :cascade do |t|
       t.integer :subdepartment_id, null: false
       t.integer :mscore_classification_id, null: false
+      t.integer :departmental_sdbip_id, null: false
       t.string :mun_cp_ref
       t.string :idp_nummber
       t.string :vote_number
@@ -15,7 +16,7 @@ class CreateCapitalProjects < ActiveRecord::Migration
       t.integer :ward_id
       t.integer :area_id
       t.timestamps null: false
-      
+
     end
 
   end
