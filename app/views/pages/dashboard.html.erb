@@ -1,205 +1,228 @@
 <% provide(:title, "Dashboard") %>
 <div>
   <%= render 'layouts/municipality' %>
-</article>
-  <h2>
-    Dashboard
-  </h2>
-  <div class="row">
-    <div class="col col-lg-12">
-      <div class="panel">
-        <div class="panel-body">
-          <div class="row">
-            <div class="col-sm-12">
-              <h2><%= @doc["location"]["city"] %>, <%= @doc["location"]["region"] %>, <%= @doc["location"]["country"] %></h2>
-              <h3><%= @doc["item"]["condition"]["date"] %></h3>
-              <h3><span><img src="<%= @doc["item"]["description"][/\"(.*?)"/,1] %>"></span><%= @doc["item"]["condition"]["text"] %></h3>
-              <h3>
-                <span class="glyphicon glyphicon-arrow-up"></span><%= ((@forecast[3]["high"].to_i - 32) / 1.8).round() %>&deg;C
-                <span class="glyphicon glyphicon-arrow-down"></span><%= ((@forecast[4]["low"].to_i - 32) / 1.8).round() %>&deg;C
-              </h3>
-              <h2><%= ((@doc["item"]["condition"]["temp"].to_i - 32) / 1.8).round() %>&deg;C</h2>
-            </div>
+  <div class="row col col-lg-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3>Mkhondo Local Municipality's KPIs</h3>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col col-lg-6">
           </div>
-          <div class="clearfix"></div>
+          <div class="col col-lg-6">
+          </div>
+        </div>
+        <div class="row">
         </div>
       </div>
     </div>
-    <div class="col col-lg-12">
-      <h3 class="sub-header"><span class="glyphicon glyphicon-user"></span>&nbsp;Users Statistics</h3>
-      <div class="row">
-        <div class="col-lg-3 col-md-6">
-          <div class="panel">
-            <div class="panel-heading">
-              <div class="row">
-                <div>
-                  <% if @users.count > 100 %>
-                  <div class="c100 p100">
-                  <% else %>
-                  <div class="c100 p<%= @users.count %>">
-                  <% end %>
-                    <span><%= @users.count %></span>
-                    <div class="slice">
-                      <div class="bar"></div>
-                      <div class="fill"></div>
-                    </div>
-                  </div>
-                </div>
-                <div>All Users</div>
-              </div>
-            </div>
+  </div>
+  <div class="row col col-lg-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3>Mkhondo Local Municipality's KPAs</h3>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col col-lg-6">
           </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-          <div class="panel">
-            <div class="panel-heading">
-              <div class="row">
-                <div>
-                  <% if @users.where(admin: true).count > 100 %>
-                  <div class="c100 p100 red">
-                    <% else %>
-                  <div class="c100 p<%= @users.where(admin: true).count %> red">
-                    <% end %>
-                    <span><%= @users.where(admin: true).count %></span>
-                    <div class="slice">
-                      <div class="bar"></div>
-                      <div class="fill"></div>
-                    </div>
-                  </div>
-                </div>
-                <div>Admin Users</div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-          <div class="panel">
-            <div class="panel-heading">
-              <div class="row">
-                <div>
-                  <% if @users.where(status: 'Active').count > 100 %>
-                  <div class="c100 p100 green">
-                    <% else %>
-                  <div class="c100 p<%= @users.where(status: 'Active').count %> green">
-                    <% end %>
-                    <span><%= @users.where(status: "Active").count %></span>
-                    <div class="slice">
-                      <div class="bar"></div>
-                      <div class="fill"></div>
-                    </div>
-                  </div>
-                </div>
-                <div>Active Users</div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-          <div class="panel">
-            <div class="panel-heading">
-              <div class="row">
-                <div>
-                  <% if @users.where(activated: false).count > 100 %>
-                  <div class="c100 p100 orange">
-                    <% else %>
-                  <div class="c100 p<%= @users.where(activated: false).count %> orange">
-                    <% end %>
-                    <span><%= @users.where(activated: false).count %></span>
-                    <div class="slice">
-                      <div class="bar"></div>
-                      <div class="fill"></div>
-                    </div>
-                  </div>
-                </div>
-                <div>Inactive Users</div>
-              </div>
-            </div>
+          <div class="col col-lg-6">
           </div>
         </div>
       </div>
     </div>
-    <div class="col col-lg-12">
-      <h3>Total Performance Standards for Mkhondo Municipality</h3>
-      <div class="panel panel-default col-md-6">
-        <div class="panel-body">
-          <% if !@departmental_sdbips.blank? %>
-          <%= pie_chart @departmental_sdbips.group(:performance_standard).count, width: "100%", height: "500px", colors: ["orange","darkblue", "limegreen", "red", "darkgreen"] %>
-          <% end %>
-        </div>
-        <!-- /.panel-body -->
+  </div>
+  <div class="row col col-lg-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3>Mkhondo Local Municipality Departments' KPIs</h3>
       </div>
-      <div class="panel panel-default col-md-6">
-        <div class="panel-body">
-          <% if !@departmental_sdbips.blank? %>
-          <%= column_chart @departmental_sdbips.group(:performance_standard,:kpa_name).count, width: "100%", height: "500px",stacked: false,:library => {colors: ["orange","darkblue", "limegreen", "red", "darkgreen"]} %>
-          <% end %>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col col-lg-6">
+          </div>
+          <div class="col col-lg-6">
+          </div>
         </div>
-        <!-- /.panel-body -->
       </div>
     </div>
-    <div class="col col-lg-12">
-      <h3>Total Performance Standards by Department</h3>
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <% if !@departmental_sdbips.blank? %>
-          <%= column_chart @departmental_sdbips.group(:performance_standard, :department_name).count, width: "80%", height: "500px", stacked: true, colors: ["orange","darkblue", "limegreen", "red", "darkgreen"]%>
-          <% end %>
-        </div>
-        <!-- /.panel-body -->
+  </div>
+  <div class="row col col-lg-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3><span class="glyphicon glyphicon-time"></span>&nbsp;SDBIP Time Periods</h3>
       </div>
-    </div>
-    <div class="col col-lg-12">
-      <h3 class="sub-header"><span class="glyphicon glyphicon-time"></span>&nbsp;SDBIP Time Periods</h3>
-      <br/>
-      <table class="table table-striped table-responsive">
-        <tr>
-          <th>Period</th>
-          <th>Start Date</th>
-          <th>Reminder Date</th>
-          <th>Closing Date</th>
-          <th>Status</th>
-        </tr>
-      <% if @sdbip_time_periods.blank? %>
-      <tr><td colspan="5"><h3 class=" label label-info">No actions overdue today or the next 7 days.</h3></td></tr>
-      <% else %>
-      <% @sdbip_time_periods.each do |time_period| %>
-      <tr>
-          <td><%= time_period.period %></td>
-          <td><%= time_period.start_date.strftime("%Y-%m-%d") %></td>
-          <td><%= time_period.end_date.days_ago(7).strftime("%Y-%m-%d") %></td>
-          <td><%= time_period.end_date.days_ago(-15).strftime("%Y-%m-%d") %></td>
-          <td><% if  time_period.end_date.strftime("%Y-%m-%d") == Date.today.strftime("%Y-%m-%d") && time_period.end_date.strftime("%Y-%m-%d") < 15.days.from_now %>
-            <label class="label label-success">Open</label>
-            <% elsif time_period.end_date.strftime("%Y-%m-%d") > 15.days.from_now %>
-            <label class="label label-danger">Closed</label>
-            <% end %></td>
-      </tr>
-      <% end %>
-      <% end %>
-    </table>
-    </div>
-    <div class="col col-lg-12">
-      <h3 class="sub-header"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;Activity Log</h3>
+      <div class="panel-body">
         <table class="table table-striped table-responsive">
-            <tr>
-              <th>User</th>
-              <th>Email</th>
-              <th>Status</th>
-              <th>Location(IP Address)</th>
-              <th>Date</th>
-            </tr>
-            <% User.where.not(current_login_ip: "").each do |activity|%>
-            <tr>
-              <td><%= activity.firstname %>&nbsp;<%= activity.surname %></td>
-              <td><%= link_to activity.email %></td>
-              <td><%= activity.status %></td>
-              <td><%= activity.current_login_ip %></td>
-              <td><%= activity.current_login_at %></td>
-            </tr>
-            <% end %>
-
+          <tr>
+            <th>Period</th>
+            <th>Start Date</th>
+            <th>Reminder Date</th>
+            <th>Closing Date</th>
+            <th>Status</th>
+          </tr>
+          <% if @sdbip_time_periods.blank? %>
+          <tr><td colspan="5"><h3 class=" label label-info">No actions overdue today or the next 7 days.</h3></td></tr>
+          <% else %>
+          <% @sdbip_time_periods.each do |time_period| %>
+          <tr>
+            <td><%= time_period.period %></td>
+            <td><%= time_period.start_date.strftime("%Y-%m-%d") %></td>
+            <td><%= time_period.end_date.days_ago(7).strftime("%Y-%m-%d") %></td>
+            <td><%= time_period.end_date.days_ago(-15).strftime("%Y-%m-%d") %></td>
+            <td>
+              <% if  time_period.end_date.strftime("%Y-%m-%d") == Date.today.strftime("%Y-%m-%d") && time_period.end_date.strftime("%Y-%m-%d") < 15.days.from_now %>
+              <label class="label label-success">Open</label>
+              <% elsif time_period.end_date.strftime("%Y-%m-%d") > 15.days.from_now %>
+              <label class="label label-danger">Closed</label>
+              <% end %></td>
+          </tr>
+          <% end %>
+        <% end %>
         </table>
-
+      </div>
+    </div>
+  </div>
+  <div class="row col col-lg-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3><span class="glyphicon glyphicon-user"></span>&nbsp;Users Statistics</h3>
+      </div>
+      <div class="panel-body">
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+          <div>
+            <% if @users.count > 100 %>
+              <div class="c100 p100">
+                <span><%= @users.count %></span>
+                <div class="slice">
+                  <div class="bar"></div>
+                  <div class="fill"></div>
+                </div>
+              </div>
+            <% else %>
+              <div class="c100 p<%= @users.count %>">
+                <span><%= @users.count %></span>
+                <div class="slice">
+                  <div class="bar"></div>
+                  <div class="fill"></div>
+                </div>
+              </div>
+            <% end %>
+            <h3>All Users</h3>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+          <div>
+            <% if @users.where(admin: true).count > 100 %>
+              <div class="c100 p100 red">
+                <span><%= @users.where(admin: true).count %></span>
+                <div class="slice">
+                  <div class="bar"></div>
+                  <div class="fill"></div>
+                </div>
+              </div>
+            <% else %>
+              <div class="c100 p<%= @users.where(admin: true).count %> red">
+                <span><%= @users.where(admin: true).count %></span>
+                <div class="slice">
+                  <div class="bar"></div>
+                  <div class="fill"></div>
+                </div>
+              </div>
+            <% end %>
+            <h3>Admin Users</h3>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+          <div>
+            <% if @users.where(status: 'Active').count > 100 %>
+              <div class="c100 p100 green">
+                <span><%= @users.where(status: "Active").count %></span>
+                <div class="slice">
+                  <div class="bar"></div>
+                  <div class="fill"></div>
+                </div>
+              </div>
+            <% else %>
+              <div class="c100 p<%= @users.where(status: 'Active').count %> green">
+                <span><%= @users.where(status: "Active").count %></span>
+                <div class="slice">
+                  <div class="bar"></div>
+                  <div class="fill"></div>
+                </div>
+              </div>
+            <% end %>
+            <h3>Active Users</h3>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+          <div>
+            <% if @users.where(activated: false).count > 100 %>
+              <div class="c100 p100 orange">
+                <span><%= @users.where(activated: false).count %></span>
+                <div class="slice">
+                  <div class="bar"></div>
+                  <div class="fill"></div>
+                </div>
+              </div>
+            <% else %>
+              <div class="c100 p<%= @users.where(activated: false).count %> orange">
+                <span><%= @users.where(activated: false).count %></span>
+                <div class="slice">
+                  <div class="bar"></div>
+                  <div class="fill"></div>
+                </div>
+              </div>
+            <% end %>
+            <h3>Inactive Users</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row col col-lg-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3><span class="glyphicon glyphicon-list-alt"></span>&nbsp;Activity Log</h3>
+      </div>
+      <div class="panel-body">
+        <table class="table table-striped table-responsive">
+          <tr>
+            <th>User</th>
+            <th>Email</th>
+            <th>Status</th>
+            <th>Location(IP Address)</th>
+            <th>Date</th>
+          </tr>
+          <% User.where.not(current_login_ip: "").each do |activity|%>
+          <tr>
+            <td><%= activity.firstname %>&nbsp;<%= activity.surname %></td>
+            <td><%= link_to activity.email %></td>
+            <td><%= activity.status %></td>
+            <td><%= activity.current_login_ip %></td>
+            <td><%= activity.current_login_at %></td>
+          </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3><%= @doc["item"]["condition"]["date"] %></h3>
+          <h3> <%= @doc["location"]["city"] %>, <%= @doc["location"]["region"] %>, <%= @doc["location"]["country"] %></h3>
+        </div>
+        <div class="panel-body">
+          <h3>
+            <span><img height="84" width="84" src="<%= @doc["item"]["description"][/\"(.*?)"/,1] %>"></span>
+            &nbsp;<%= @doc["item"]["condition"]["text"] %>,
+            &nbsp;<%= ((@doc["item"]["condition"]["temp"].to_i - 32) / 1.8).round() %>&deg;C
+          </h3>
+        </div>
+      </div>
     </div>
   </div>
 </div>
