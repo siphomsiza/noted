@@ -3,10 +3,10 @@ class RolesController < ApplicationController
   before_action :admin_user,     only: [:index,:show,:new,:edit,:destroy]
 
   def index
+
     @role = Role.new
     @role.roles_details.build
-    @roles = Role.paginate(page: params[:page],per_page: 15)
-    @users = User.all
+    @roles = Role.paginate(page: params[:page],per_page: 15).includes(:user)
     @departments = Department.all
   end
 
@@ -25,11 +25,11 @@ class RolesController < ApplicationController
     @role = Role.new(role_params)
 
     if @role.save
-      flash[:success]= "Role was successfully created"
-      redirect_to roles_path
+      flash[:success]= "Role was successfully saved"
+      redirect_to :back
     else
-      flash[:danger]= "Role was not created"
-      redirect_to roles_path
+      flash[:danger]= "Role was not saved"
+      redirect_to :back
     end
   end
 
@@ -41,10 +41,10 @@ class RolesController < ApplicationController
         @role = Role.find(params[:id])
 
     if @role.update_attributes(role_params)
-      flash[:success] = "Role was successfully updated"
+      flash[:success] = "Role was successfully saved"
       redirect_to :back
     else
-      flash[:danger] = "Role was not updated"
+      flash[:danger] = "Role was not saved"
       redirect_to :back
     end
   end
@@ -53,14 +53,14 @@ class RolesController < ApplicationController
     @role = Role.find(params[:id])
     @role.destroy
       flash[:success] = "Role was successfully deleted"
-      redirect_to roles_path
+      redirect_to :back
   end
 
   private
     def role_params
         params.require(:role).permit(:user_id, :kpi_owner_id,
-          :kpi_owner, :municipal_manager, :departmental_administrator,:subdepartmental_administrator,
-          :auditor_general,:finance_admin, :internal_auditor, :roles_details_attributes=>[:id,:department_id,:subdepartment_id,:_destroy],)
+          :kpi_owner, :top_layer_administrator, :audit_log_reporting,:setup,
+          :assurance_provider,:finance_admin, :secondary_time_period, :roles_details_attributes=>[:id,:department_id,:subdepartment_id,:_destroy],)
     end
 
     def logged_in_user

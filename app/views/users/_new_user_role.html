@@ -21,7 +21,7 @@
 <% end %>
 
 <%= f.label :user_id, "Select User:" %>
-<%= f.select :user_id, User.all.collect {|x| [x.firstname, x.id]}, {},class: "form-control" %>
+<%= f.select :user_id, User.where(:id=>params[:id]).collect {|x| [x.firstname, x.id]}, {},class: "form-control" %>
 <br/>
 
     <%= f.label :kpi_owner, class: "checkbox inline" do %>
@@ -73,13 +73,12 @@
                   $("#kpi_owner_select").hide();
                 }
             });
-            <% if @role.new_record? %>
-              toggleFields();
-              <% end %>
+            toggleFields();
         });
 
         function toggleFields(){
           $("#kpi_owner_select").hide();
+
         }
     </script>
           <div class = "modal-footer">

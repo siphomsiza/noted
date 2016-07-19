@@ -6,13 +6,13 @@ class UsersController < ApplicationController
 
   def index
 
-      @roles = Role.paginate(page: params[:page],per_page: 15)
+
       @locations = MasterSetup.all
-      @system_users = User.all#.includes(:department)
+      @system_users = User.all
       @user_activities = ActivityLog.where(admin: false).paginate(page: params[:page], per_page: 15)
       @super_user_activities = ActivityLog.where(admin: true).paginate(page: params[:page], per_page: 15)
       @user = User.new
-      @users = @system_users.paginate(page: params[:page],per_page: 15)
+      @users = @system_users.paginate(page: params[:page],per_page: 15).includes(:department)
       @admin_users = @system_users.where(admin: true).paginate( page: params[:page],per_page: 15)
       @active_users = @system_users.where(status: "Active").paginate( page: params[:page],per_page: 15)
       @inactive_users = @system_users.where(activated: false).paginate( page: params[:page],per_page: 15)

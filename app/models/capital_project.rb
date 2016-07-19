@@ -2,7 +2,6 @@ class CapitalProject < ActiveRecord::Base
   include PublicActivity::Common
   belongs_to :departmental_sdbip
   belongs_to :subdepartment
-  belongs_to :department
   belongs_to :mscore_classification
   belongs_to :area
   belongs_to :ward

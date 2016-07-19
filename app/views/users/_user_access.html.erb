@@ -16,21 +16,30 @@
       </tr>
     </thead>
     <tbody>
-      <% @roles.each do |role| %>
+      <% @users.each do |user| %>
       <tr>
-        <td><%= role.user.firstname %>&nbsp;<%= role.user.surname %></td>
-        <td><% if role.user.admin? %>Yes<% else %>No<% end %></td>
-        <td><% if role.kpi_owner? %>Yes<% else %>No<% end %></td>
-        <td><% if role.finance_admin? %>Yes<% else %>No<% end %></td>
-        <td><% if role.municipal_manager? %>Yes<% else %>No<% end %></td>
-        <td></td>
-        <td><% if role.internal_auditor? || role.auditor_general? %>Yes<% else %>No<% end %></td>
-        <td><% if role.departmental_administrator? || role.subdepartmental_administrator? %>Yes<% else %>No<% end %></td>
-        <td></td>
-        <td><%= link_to edit_user_role_path(role),remote: true,'data-target' => "#user-access-modal", 'data-toggle' => 'modal', class: "btn btn-mini", :title=>"Click to Edit user details" do %>
+        <td><%= user.firstname %>&nbsp;<%= user.surname %></td>
+        <td><% if user.admin? %>Yes<% else %>No<% end %></td>
+        <td><% if !user.role.blank? && user.role.kpi_owner? %>Yes<% else %>No<% end %></td>
+        <td><% if !user.role.blank? && user.role.finance_admin? %>Yes<% else %>No<% end %></td>
+        <td><% if !user.role.blank? && user.role.top_layer_administrator? %>Yes<% else %>No<% end %></td>
+        <td><% if !user.role.blank? && user.role.audit_log_reporting? %>Yes<% else %>No<% end %></td>
+        <td><% if !user.role.blank? && user.role.assurance_provider? %>Yes<% else %>No<% end %></td>
+        <td><% if !user.role.blank? && user.role.secondary_time_period? %>Yes<% else %>No<% end %></td>
+        <td><% if !user.role.blank? && user.role.setup? %>Yes<% else %>No<% end %></td>
+        <td><% if !user.role.blank? %>
+          <%= link_to edit_user_role_path(user),remote: true,'data-target' => "#user-access-modal", 'data-toggle' => 'modal', class: "btn btn-mini", :title=>"Click to Edit user access" do %>
             <span class="glyphicon glyphicon-edit"></span>&nbsp;Edit Access
           <% end %>
+          <% else %>
+          <%= link_to new_role_path(:id=> user.id), remote: true,'data-target' => "#new-access-modal", 'data-toggle' => 'modal', class: "btn btn-mini", :title=>"Click to Edit user access" do %>
+            <span class="glyphicon glyphicon-edit"></span>&nbsp;Edit Access
+          <% end %>
+          <% end %>
           <div id="user-access-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+
+          </div>
+          <div id="new-access-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
 
           </div>
 
