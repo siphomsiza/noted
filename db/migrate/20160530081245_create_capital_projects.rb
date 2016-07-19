@@ -15,7 +15,7 @@ class CreateCapitalProjects < ActiveRecord::Migration
       t.integer :ward_id
       t.integer :area_id
       t.timestamps null: false
-      t.references :departmental_sdbips, null: false, foreign_key: true, index: true
+      
     end
 
   end
