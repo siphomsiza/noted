@@ -41,32 +41,62 @@ $(function() {
     <div id = "myTabContent" class = "tab-content">
 
      <div class = "tab-pane active fade in" id = "sdbip_time_periods">
-           <div class="col col-lg-12">
-      <table class="table table-hover">
-        <thead>
+           <div class="col col-lg-">
+
+      <table class="table table-hover table-striped table-bordered">
+
+					<tr align="center">
+    			<td rowspan="1"></td>
+    			<th colspan="3" scope="colgroup"><h4>Primary</h4></th>
+    			<th colspan="3" scope="colgroup"><h4>Secondary</h4></th>
+					<th colspan="3" scope="colgroup"><h4>Finance</h4></th>
+					<td rowspan="1"></td>
+  				</tr>
           <tr>
             <th><h4>Period</h4></th>
-            <th><h4>Start Date</h4></th>
-            <th><h4>Reminder Date</h4></th>
-            <th><h4>Closure Date</h4></th>
             <th><h4>Status</h4></th>
+            <th><h4>Reminder</h4></th>
+            <th><h4>Closure</h4></th>
+						<th><h4>Status</h4></th>
+            <th><h4>Reminder</h4></th>
+            <th><h4>Closure</h4></th>
+						<th><h4>Status</h4></th>
+            <th><h4>Reminder</h4></th>
+            <th><h4>Closure</h4></th>
             <th colspan="1"></th>
           </tr>
-        </thead>
 
-        <tbody>
         <% @sdbip_time_periods.each do |sdbip_time_period| %>
           <tr>
+
             <td><%= sdbip_time_period.period %></td>
-            <td><%= sdbip_time_period.start_date.strftime("%Y-%m-%d") %></td>
-            <td><%= sdbip_time_period.end_date.days_ago(7) %></td>
-            <td><%= sdbip_time_period.end_date.days_ago(-15) %></td>
-            <td><% if  sdbip_time_period.end_date.strftime("%Y-%m-%d") == Date.today.strftime("%Y-%m-%d") && sdbip_time_period.end_date.strftime("%Y-%m-%d") < 15.days.from_now %>
+						<td><% if  sdbip_time_period.end_date.strftime("%d %m %Y") == Date.today.strftime("%d %m %Y") && sdbip_time_period.end_date.strftime("%d %m %Y") < 15.days.from_now %>
               <label class="label label-success">Open</label>
-              <% elsif sdbip_time_period.end_date.strftime("%Y-%m-%d") > 15.days.from_now %>
+              <% elsif sdbip_time_period.end_date.strftime("%d %m %Y") > 15.days.from_now %>
               <label class="label label-danger">Closed</label>
               <% end %>
             </td>
+            <td><%= sdbip_time_period.end_date.days_ago(7) %>&nbsp;(<%= sdbip_time_period.end_date.days_ago(7).strftime("%a")%>)</td>
+            <td><%= sdbip_time_period.end_date.days_ago(-15) %>&nbsp;(<%= sdbip_time_period.end_date.days_ago(-15).strftime("%a")%>)</td>
+
+						<td><% if  sdbip_time_period.end_date.strftime("%d %m %Y") == Date.today.strftime("%d %m %Y") && sdbip_time_period.end_date.strftime("%d %m %Y") < 15.days.from_now %>
+              <label class="label label-success">Open</label>
+              <% elsif sdbip_time_period.end_date.strftime("%d %m %Y") > 15.days.from_now %>
+              <label class="label label-danger">Closed</label>
+              <% end %>
+            </td>
+						<td><%= sdbip_time_period.end_date.days_ago(7) %>&nbsp;(<%= sdbip_time_period.end_date.days_ago(7).strftime("%a")%>)</td>
+            <td><%= sdbip_time_period.end_date.days_ago(-17) %>&nbsp;(<%= sdbip_time_period.end_date.days_ago(-17).strftime("%a")%>)</td>
+
+						<td><% if  sdbip_time_period.end_date.strftime("%d %m %Y") == Date.today.strftime("%d %m %Y") && sdbip_time_period.end_date.strftime("%d %m %Y") < 15.days.from_now %>
+              <label class="label label-success">Open</label>
+              <% elsif sdbip_time_period.end_date.strftime("%d %m %Y") > 15.days.from_now %>
+              <label class="label label-danger">Closed</label>
+              <% end %>
+            </td>
+						<td></td>
+            <td></td>
+
             <td><%= link_to edit_sdbip_time_period_path(sdbip_time_period),remote: true,'data-target' => "#time-periods-modal", 'data-toggle' => 'modal', class: 'btn btn-mini' do %>
 							<span class="glyphicon glyphicon-edit"></span>&nbsp;Edit
 							<% end %>
@@ -81,7 +111,7 @@ $(function() {
 					</td>
           </tr>
         <% end %>
-        </tbody>
+
       </table>
     </div>
       </div>
