@@ -141,6 +141,13 @@ ActiveRecord::Schema.define(version: 20160718091147) do
     t.integer  "reporting_category_id"
     t.string   "top_layer_kpi_ref"
     t.integer  "kpi_calculation_type_id"
+    t.integer  "user_id"
+    t.integer  "assurance"
+    t.binary   "poe"
+    t.decimal  "actual"
+    t.decimal  "update_status"
+    t.text     "response"
+    t.boolean  "signed_off"
     t.datetime "created_at",                                                       null: false
     t.datetime "updated_at",                                                       null: false
   end

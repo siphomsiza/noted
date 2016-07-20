@@ -59,6 +59,8 @@ Rails.application.routes.draw do
   get 'revenue_by_sources/:id/edit_revenue_by_sources' => 'revenue_by_sources#edit_revenue_by_sources', :as => :edit_revenue_by_sources
   post 'export', to: 'departmental_sdbip_progresses#export'
   get 'departmental_sdbips/update_subdepartments', as: 'update_subdepartments'
+  get 'departmental_sdbips/:id/audit_performance' => 'departmental_sdbips#audit_performance', :as => :audit_performance
+  get 'departmental_sdbips/generate_graphs' => 'departmental_sdbips#generate_graphs', :as => :generate_graphs
 
   resources :roles
   resources :setups

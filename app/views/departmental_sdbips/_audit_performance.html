@@ -1,0 +1,41 @@
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+  <h3></h3>
+</div>
+<div class="modal-body">
+
+        <%= form_for(@departmental_sdbip) do |f| %>
+
+            <%= f.label :id, "Ref" %><br/><%= f.text_field :id, class: "form-control",:readonly=> true %>
+            <%= f.label :department_id,"Department" %>
+            <%= f.label :kpi, "KPI" %><br/><%= f.text_area :kpi, class: "form-control",:readonly=> true %>
+            <%= f.label :unit_of_measurement, "Unit of Measurement" %><br/><%= f.text_area :unit_of_measurement, class: "form-control",:readonly=> true %>
+            <%= f.label :source_of_evidence, "Source of Evidence" %><br/><%= f.text_field :source_of_evidence, class: "form-control",:readonly=> true %>
+            <%= f.label :kpi_calculation_type_id, "KPI Calculation Type" %><br/><%= f.text_field :kpi_calculation_type, class: "form-control",:id=>'kpi_calc_type',:readonly=> true %>
+            <%= f.label :annual_target, "Target" %><br/><%= f.text_field :annual_target, class: "form-control",:readonly=> true %>
+            <%= f.label :actual, "Actual" %>
+            <%= f.label :performance_standard, "Result" %><br/><%= f.text_field :performance_standard, class: "form-control",:readonly=> true %>
+            <%= f.label :performance_comments, "Performance Comments" %><br/><%= f.text_area :performance_comments, class: "form-control",:readonly=> true %>
+            <%= f.label :corrective_measures, "Corrective Measures" %><br/><%= f.text_area :corrective_measures, class: "form-control",:readonly=> true %>
+            <%= f.label :poe, "Proof of Evidence" %><br/><%= f.text_field :first_quarter_poe, class: "form-control",:readonly=> true %>
+            <%= f.label :update_status, "Update Status" %><br/><%= f.text_field :update_status, class: "form-control",:readonly=> true %>
+            <%= f.label :signed_off, "Sign Off" %>
+            <%= f.label :response, "Response" %><br/><%= f.text_area :performance_comments, class: "form-control" %>
+            <%= f.label :user_id, "Update User" %><br/><%= f.text_field :user_id, class: "form-control",:readonly=> true,:id=>'user_name' %>
+            <%= f.hidden_field :assurance ,:id=>"assurance_user" %>
+
+            <%= f.submit "Save", class: 'btn col-lg-3 pull-right'%>
+
+        <% end %>
+</div>
+</div>
+</div>
+<script>
+$(document).ready(function(){
+    $('assurance_user').val(<%= current_user.id %>);
+    $('kpi_calc_type').val(<%= @departmental_sdbip.kpi_calculation_type.name %>);
+    $('user_name').val(<%= @departmental_sdbip.user.firstname %>&nbsp<%= @departmental_sdbip.user.surname %>);
+
+});
+</script>

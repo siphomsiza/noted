@@ -26,9 +26,9 @@
           <th><h4>Actual</h4></th>
           <th><h4>Results</h4></th>
 
-          <th class="third_quarter_target"><h4>Target</h4></th>
-          <th class="third_quarter_target"><h4>Actual</h4></th>
-          <th class="third_quarter_target"><h4>Results</h4></th>
+          <th><h4>Target</h4></th>
+          <th><h4>Actual</h4></th>
+          <th><h4>Results</h4></th>
 
           <th class="fourth_quarter_target"><h4>Target</h4></th>
           <th class="fourth_quarter_target"><h4>Actual</h4></th>
@@ -66,10 +66,10 @@
           <td><%= departmental_sdbip.department.name %></td>
           <td><%= departmental_sdbip.subdepartment.subdepartment_name %></td>
           <td>
-          <%= link_to edit_departmental_sdbip_path(departmental_sdbip),remote: true,'data-target' => "#perform-audit-modal", 'data-toggle' => 'modal', :title=>"Click to Update KPI" do %>
+          <%= link_to audit_performance_path(departmental_sdbip),remote: true,'data-target' => "#audit-sdbip-modal", 'data-toggle' => 'modal', :title=>"Click to Update" do %>
               <%= departmental_sdbip.kpi %>
             <% end %>
-            <div id="perform-audit-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+            <div id="audit-sdbip-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
 
             </div>
           </td>
@@ -91,9 +91,9 @@
           <th><%= departmental_sdbip.second_quarter_actual %></th>
           <th></th>
 
-          <th class="third_quarter_target"><%= departmental_sdbip.third_quarter_target %></th>
-          <th class="third_quarter_target"><%= departmental_sdbip.third_quarter_actual %></th>
-          <th class="third_quarter_target"></th>
+          <th><%= departmental_sdbip.third_quarter_target %></th>
+          <th><%= departmental_sdbip.third_quarter_actual %></th>
+          <th></th>
 
           <th class="fourth_quarter_target"><%= departmental_sdbip.fourth_quarter_target %></th>
           <th class="fourth_quarter_target"><%= departmental_sdbip.fourth_quarter_actual %></th>

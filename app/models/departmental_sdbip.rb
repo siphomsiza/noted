@@ -4,6 +4,7 @@ class DepartmentalSdbip < ActiveRecord::Base
 	#tracked owner: ->(controller, model) { controller && controller.current_user }
 	belongs_to :department
 	has_many :activities
+	belongs_to :user
 	belongs_to :list
 	belongs_to :subdepartment
 	belongs_to :kpi_owner
@@ -402,6 +403,10 @@ def self.filter_sdbip_report(sdbip_top_layer_kpi_ref_filters,sdbip_capital_proje
 		 audit_columns.push("departmental_sdbip.first_quarter_poe")
 		 audit_columns_headers.push("Proof of evidence")
 		end
+		if selected_columns.include?("KPI Target Type")
+       audit_columns.push("departmental_sdbip.kpi_calculation_type.name")
+       audit_columns_headers.push("KPI Target Type")
+      end
  $selected_array_of_values = audit_columns
  $selected_array_of_headers = audit_columns_headers
  @audit_logs = @audits

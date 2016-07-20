@@ -165,11 +165,9 @@
 		<%= f.select :kpi_type_id, KpiType.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select KPI Type"}, class: "form-control" %>
 
 		<%= f.label :impact %><br>
-    <% if current_user.admin? %>
-		<%= f.text_field :impact, :class => "form-control has-error col-md-5" %>
-    <% else %>
+    
     	<%= f.text_field :impact, :class => "form-control has-error col-md-5", :readonly => true %>
-    <% end %>
+   
 
 		<%= f.label :provincial_strategic_outcome_id, "Provincial Strategic Outcome" %><br>
 		<%= f.select :provincial_strategic_outcome_id, ProvincialStrategicOutcome.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select Provincial Strategic Outcome"}, class: "form-control" %>
@@ -184,11 +182,12 @@
                                           {}, {:class => "form-control"} %>
 
 		<%= f.label :past_year_performance, "Past Year Performance" %><br>
-    <% if current_user.admin? %>
-		<%= f.text_area :past_year_performance, :class => "form-control has-error col-md-5" %>
-    <% else %>
+
     	<%= f.text_area :past_year_performance, :class => "form-control has-error col-md-5", :readonly => true %>
-    <% end %>
+        <%= f.label :performance_comments, "Performance Comments" %><br>
+        <%= f.text_area :performance_comments, :class => "form-control has-error col-md-5" %>
+        <%= f.label :corrective_measures, "Corrective Measures" %><br>
+        <%= f.text_area :corrective_measures, :class => "form-control has-error col-md-5" %>
 
 		<%= f.label :reporting_category_id, "Reporting Category" %><br>
 		<%= f.select :reporting_category_id, ReportingCategory.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select Reporting Category"}, class: "form-control" %>
