@@ -9,10 +9,10 @@
       <div class="panel-body">
         <div class="row">
           <div class="col col-lg-6">
-            <%= pie_chart @departments_sdibps.group(:performance_standard).count,height: "300px",library: {pieSliceText:'value-and-percentage', colors: @colours} %>
+            <%= pie_chart @departmental_sdbips.group(:performance_standard).count,height: "300px",library: {pieSliceText:'value-and-percentage', colors: @colours} %>
           </div>
           <div class="col col-lg-6">
-            <%= column_chart @departments_sdibps.group(:performance_standard).count,height: "300px", colors: @colours %>
+            <%= column_chart @departmental_sdbips.group(:performance_standard).count,height: "300px", colors: @colours %>
           </div>
         </div>
         <div class="row">
@@ -44,16 +44,20 @@
       </div>
 
       <div class="panel-body">
+        <% @departments.each do |department| %>
+        <% @chart_data = @departmental_sdbips.where(:department_id=>department.id) %>
+        <% if !@chart_data.blank? %>
         <div class="row">
           <div class="col col-lg-6">
-            <%= pie_chart @departmental_sdbips_kpa.group(:department_name).count,height: "300px", colors: @colours,library: {pieSliceText:'value-and-percentage'} %>
+            <%= pie_chart @chart_data.group(:performance_standard).count,height: "300px",library: {pieSliceText:'value-and-percentage'}, colors: @colours %>
           </div>
           <div class="col col-lg-6">
-            <%= column_chart @departmental_sdbips_kpa.group(:performance_standard,:department_name).count,height: "300px", stacked: 'percent', colors: @colours %>
+            <%= column_chart @chart_data.group(:performance_standard).count,height: "300px", stacked: 'percent', colors: @colours %>
 
           </div>
         </div>
-
+        <% end %>
+        <% end %>
       </div>
 
     </div>

@@ -25,6 +25,7 @@ class PagesController < ApplicationController
     @departmental_sdbips = DepartmentalSdbip.order(performance_standard: :asc)
     @departmental_sdbips_kpa = DepartmentalSdbip.all
     @departments_sdibps = @departmental_sdbips_kpa.select(:performance_standard).order(performance_standard: :asc).uniq
+    @departments = Department.includes(:departmental_sdbips)
     $colors = []
     @departments_sdibps.each do |color|
     if color.performance_standard.include?("KPI Almost Met")
@@ -47,7 +48,7 @@ class PagesController < ApplicationController
     end
   end
     @colours = $colors
-    @departments = Department.includes(:departmental_sdbips)
+
     begin
 
         @client = YahooWeather::Client.new
