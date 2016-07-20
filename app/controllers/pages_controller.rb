@@ -21,8 +21,32 @@ class PagesController < ApplicationController
 
     @sdbip_time_periods = SdbipTimePeriod.where(["end_date = ? OR end_date = ?",Date.today,Date.today.days_ago(-7)])
     @users = User.all
+
     @departmental_sdbips = DepartmentalSdbip.order(performance_standard: :asc)
     @departmental_sdbips_kpa = DepartmentalSdbip.all
+    @departments_sdibps = @departmental_sdbips_kpa.select(:performance_standard).order(performance_standard: :asc).uniq
+    $colors = []
+    @departments_sdibps.each do |color|
+    if color.performance_standard.include?("KPI Almost Met")
+      $colors.push("orange")
+    end
+    if color.performance_standard.include?("KPI Extremely Well Met")
+      $colors.push("darkblue")
+    end
+    if color.performance_standard.include?("KPI Met")
+      $colors.push("limegreen")
+    end
+    if color.performance_standard.include?("KPI Not Met")
+      $colors.push("red")
+    end
+    if color.performance_standard.include?("KPI Not Yet Measured")
+      $colors.push("gray")
+    end
+    if color.performance_standard.include?("KPI Well Met")
+      $colors.push("darkgreen")
+    end
+  end
+    @colours = $colors
     @departments = Department.includes(:departmental_sdbips)
     begin
 

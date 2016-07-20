@@ -49,7 +49,13 @@ $(function() {
 				            <div id="collapseOne" class="panel-collapse collapse in">
 				                <div class="panel-body">
 				                    <% Area.all.each do |area| %>
-															<li><%= area.name %></li>
+															<li><%= link_to edit_list_path(area),remote: true,'data-target' => "#list-modal", 'data-toggle' => 'modal', :title=>"Click to Update" do %>
+																<span><%= area.name %></span>
+															    <div id="list-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+
+															    </div>
+															<% end %>
+															</li>
 														<% end %>
 				                </div>
 				            </div>

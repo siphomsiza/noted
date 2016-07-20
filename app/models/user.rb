@@ -1,7 +1,8 @@
 class User < ActiveRecord::Base
   has_many :activities
+  has_many :departmental_sdbips
   belongs_to :department
-  has_one :departmental_administrator
+  has_one :subdepartmental_administrator
   has_one :departmental_administrator
   has_many :activity_logs
   has_one :role, :dependent => :destroy

@@ -255,7 +255,13 @@ class DepartmentalSdbipProgressesController < ApplicationController
     @kpi_extremely_well_met_forestry = @departmental_sdbips.where("subdepartment_id = 6 AND performance_standard = 'KPI Extremely Well Met'")
 
   end
+  
+  def new
 
+  end
+  def edit
+
+  end
   def export
 
  end

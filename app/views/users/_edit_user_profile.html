@@ -7,236 +7,236 @@
   <div class="col-lg-10 col-md-offset-1">
 
     <%= form_for(@user, :id=>"createUserForm") do |f| %>
-      <%= render 'shared/error_messages', object: @user %>
+  <%= render 'shared/error_messages', object: @user %><br/>
+    <fieldset id="userinfo">
+      <legend>User Info</legend>
 
-        <fieldset id="userinfo">
-          <legend>User Info</legend>
-
-          <section class="row">
-          <label class="col col-lg-4 control-label" for="title">Title</label>
-            <div class="controls col col-lg-8">
-              <%= f.select :title, options_for_select(["Dr.", "Miss.", "Mr.", "Mrs.", "Ms.", "Prof.", "Rev."], prompt: true),
-               {:include_blank => "Select Title"}, class: "form-control" %>
-            </div><!-- controls -->
-          </section><!-- row -->
-          <section class="row">
-              <label class="col col-lg-4 control-label" for="firstname">First Name</label>
-              <div class="controls col col-lg-8">
-                <%= f.text_field :firstname, :class => "form-control" , :autocomplete=>"off",:placeholder=>"First Name" %>
-
-              </div><!-- controls -->
-            </section><!-- row -->
-
-            <section class="row">
-              <label class="col col-lg-4 control-label" for="lastname">Surname</label>
-              <div class="controls col col-lg-8">
-                <%= f.text_field :surname,:autocomplete=>"off",:placeholder=>"Last Name", :class => "form-control" %>
-              </div><!-- controls -->
-            </section><!-- row -->
-            <section class="row">
-              <label class="col col-lg-4 control-label" for="lastname">Birth Date:</label>
-              <div class="controls col col-lg-8">
-              <div class="form-group">
-                                  <div class="input-group date" data-provide="datepicker"
-                                       data-date-format="dd-mm-yyyy" data-date-start-view="days" data-date-min-view-mode="days">
-                                    <%= f.text_field :birth_date, class: "form-control" %>
-                                    <span class="input-group-addon">
-                                      <span class="glyphicon glyphicon-calendar"></span>
-                                    </span>
-                                  </div>
-                                </div>
-              </div><!-- controls -->
-            <section class="row">
-              <label class="col col-lg-4 control-label" for="lastname">ID Number</label>
-              <div class="controls col col-lg-8">
-                <%= f.text_field :id_number,:autocomplete=>"off",:placeholder=>"Last Name", :class => "form-control" %>
-              </div><!-- controls -->
-            </section><!-- row -->
-
-        </fieldset><!-- personal info -->
-
-        <fieldset id="systeminfo">
-          <legend>System Info</legend>
-          <section class="row">
-            <label class="col col-lg-4 control-label" for="lastname">Username</label>
-            <div class="controls col col-lg-8">
-              <%= f.text_field :username,:autocomplete=>"off",:placeholder=>"Username", :class => "form-control" %>
-            </div><!-- controls -->
-          </section><!-- row -->
-          <section class="row">
-            <label class="col col-lg-4 control-label" for="password">Password</label>
-            <div class="controls col col-lg-8">
-               <%= f.password_field :password, class: 'form-control' %>
-
-            </div><!-- controls -->
-          </section><!-- row -->
-          <section class="row">
-            <label class="col col-lg-4 control-label" for="confirmpassword">Confirm Password</label>
-            <div class="controls col col-lg-8">
-               <%= f.password_field :password_confirmation, class: 'form-control' %>
-            </div><!-- controls -->
-          </section><!-- row -->
-          <section class="row">
-            <div class="controls col col-lg-4 control-label" for="systemadministrator">
-              <% if current_user.admin? %>
-              <%= f.label :admin, class: "checkbox inline" do %>
-                <%= f.check_box :admin,:id=>"admin_checkbox" %>
-                <span class="control-label labels"><strong>System Administrator</strong></span>
-              <% end %>
-            <% end %>
-          </div>
-        </section>
-        </fieldset><!-- system info -->
-
-        <fieldset id="employmentinfo">
-          <legend>Employment Info</legend>
-          <section class="row">
-            <label class="col col-lg-4 control-label" for="employeenumber">Employee Number</label>
-            <div class="controls col col-lg-8">
-             <%= f.text_field :employee_number, :class=>"form-control", :autocomplete=>"off",:placeholder=>"Employee Number" %>
-            </div><!-- controls -->
-          </section><!-- row -->
-
-          <section class="row">
-            <label class="col col-lg-4 control-label" for="employmentdate">Employment Date</label>
-            <div class="controls col col-lg-8">
-            <div class="form-group">
-                                <div class="input-group date" data-provide="datepicker"
-                                     data-date-format="dd-mm-yyyy" data-date-start-view="days" data-date-min-view-mode="days">
-                                  <%= f.text_field :employment_date, class: "form-control" %>
-                                  <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-calendar"></span>
-                                  </span>
-                                </div>
-                              </div>
-            </div><!-- controls -->
-          </section><!-- row -->
-
-          <section class="row">
-          <label class="col col-lg-4 control-label" for="jobtitle">Job Title</label>
-            <div class="controls col col-lg-8">
-              <%= f.select :job_title, Jobtitle.all.collect {|x| [x.title, x.title]}, {:include_blank => "Select KPI Owner"}, class: "form-control" %>
-            </div><!-- controls -->
-          </section><!-- row -->
-
-          <section class="row">
-          <label class="col col-lg-4 control-label" for="department">Department</label>
-            <div class="controls col col-lg-8">
-             <%= f.select :department_id, Department.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select Department"}, class: "form-control" %>
-
-            </div><!-- controls -->
-          </section><!-- row -->
-
-          <section class="row">
-          <label class="col col-lg-4 control-label" for="location">Location</label>
+      <section class="row">
+      <label class="col col-lg-4 control-label" for="title">Title</label>
+        <div class="controls col col-lg-8">
+          <%= f.select :title, options_for_select(["Dr.", "Miss.", "Mr.", "Mrs.", "Ms.", "Prof.", "Rev."], prompt: true),
+           {:include_blank => "Select Title"}, class: "form-control" %>
+        </div><!-- controls -->
+      </section><!-- row -->
+      <section class="row">
+          <label class="col col-lg-4 control-label" for="firstname">First Name</label>
           <div class="controls col col-lg-8">
-            <%= f.select :location, @locations.all.collect {|x| [x.name, x.name]}, {:include_blank => "Select Location"}, class: "form-control" %>
+            <%= f.text_field :firstname, :class => "form-control" , :autocomplete=>"off",:placeholder=>"First Name" %>
+
           </div><!-- controls -->
-          </section><!-- row -->
+        </section><!-- row -->
 
-          <section class="row">
-          <label class="col col-lg-4 control-label" for="manager">Manager</label>
-            <div class="controls col col-lg-8">
-              <%= f.select :manager, User.all.collect {|x| [x.firstname, x.email]}, {:include_blank => "Select Manager"}, class: "form-control" %>
-            </div><!-- controls -->
-          </section><!-- row -->
+        <section class="row">
+          <label class="col col-lg-4 control-label" for="lastname">Surname</label>
+          <div class="controls col col-lg-8">
+            <%= f.text_field :surname,:autocomplete=>"off",:placeholder=>"Last Name", :class => "form-control" %>
+          </div><!-- controls -->
+        </section><!-- row -->
+        <section class="row">
+          <label class="col col-lg-4 control-label" for="lastname">Birth Date:</label>
+          <div class="controls col col-lg-8">
+          <div class="form-group">
+                              <div class="input-group date" data-provide="datepicker"
+                                   data-date-format="dd-mm-yyyy" data-date-start-view="days" data-date-min-view-mode="days">
+                                <%= f.text_field :birth_date, class: "form-control" %>
+                                <span class="input-group-addon">
+                                  <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                              </div>
+                            </div>
+          </div><!-- controls -->
+        </section>
+        <section class="row">
+          <label class="col col-lg-4 control-label" for="lastname">ID Number</label>
+          <div class="controls col col-lg-8">
+            <%= f.text_field :id_number,:autocomplete=>"off",:placeholder=>"ID Number",'pattern'=>"[0-9]{13}",:class => "form-control" %>
+          </div><!-- controls -->
+        </section><!-- row -->
 
-        </fieldset><!-- employment info -->
+    </fieldset><!-- personal info -->
 
-        <fieldset id="contactdetails">
-          <legend>Contact Details</legend>
-          <section class="row">
-            <label class="col col-lg-4 control-label" for="countryprefix">Country Prefix</label>
-            <div class="controls col col-lg-8">
-              <%= f.text_field :country_prefix, :class=>"form-control" , :autocomplete=>"off",:placeholder=>"+27" %>
-            </div><!-- controls -->
-          </section><!-- row -->
+    <fieldset id="systeminfo">
+      <legend>System Info</legend>
+      <section class="row">
+        <label class="col col-lg-4 control-label" for="lastname">Username</label>
+        <div class="controls col col-lg-8">
+          <%= f.text_field :username,:autocomplete=>"off",:placeholder=>"Username", :class => "form-control" %>
+        </div><!-- controls -->
+      </section><!-- row -->
+      <section class="row">
+        <label class="col col-lg-4 control-label" for="password">Password</label>
+        <div class="controls col col-lg-8">
+           <%= f.password_field :password, class: 'form-control' %>
 
-          <section class="row">
-            <label class="col col-lg-4 control-label" for="landline">Landline/Office</label>
-            <div class="controls col col-lg-8">
-              <%= f.text_field :landline, :class=>"form-control" , :autocomplete=>"off", :placeholder=>"(015) 234 2345" %>
+        </div><!-- controls -->
+      </section><!-- row -->
+      <section class="row">
+        <label class="col col-lg-4 control-label" for="confirmpassword">Confirm Password</label>
+        <div class="controls col col-lg-8">
+           <%= f.password_field :password_confirmation, class: 'form-control' %>
+        </div><!-- controls -->
+      </section><!-- row -->
+      <section class="row">
+        <div class="controls col col-lg-4 control-label" for="systemadministrator">
+          <% if current_user.admin? %>
+          <%= f.label :admin, class: "checkbox inline" do %>
+            <%= f.check_box :admin,:id=>"admin_checkbox" %>
+            <span class="control-label labels"><strong>System Administrator</strong></span>
+          <% end %>
+        <% end %>
+      </div>
+    </section>
+    </fieldset><!-- system info -->
 
-            </div><!-- controls -->
-          </section><!-- row -->
-
-          <section class="row">
-            <label class="col col-lg-4 control-label" for="mobile">Mobile/Cellphone</label>
-            <div class="controls col col-lg-8">
-              <%= f.text_field :mobile, :class=>"form-control" , :autocomplete=>"off", :placeholder=>"072 234 4567" %>
-            </div><!-- controls -->
-          </section><!-- row -->
-
-          <section class="row">
-            <label class="col col-lg-4 control-label" for="fax">Fax</label>
-            <div class="controls col col-lg-8">
-              <%= f.text_field :fax, :class=>"form-control" , :autocomplete=>"off", :placeholder=>"086 845 6273" %>
-
-            </div><!-- controls -->
-          </section><!-- row -->
-
-          <section class="row">
-            <label class="col col-lg-4 control-label" for="email">Email</label>
-            <div class="controls col col-lg-8">
-              <%= f.email_field :email, class: "form-control", :autocomplete=>"off",:placeholder=>"email@example.com" %>
-            </div><!-- controls -->
-          </section><!-- row -->
-
-        </fieldset><!-- contact details -->
-
-        <fieldset id="statutoryrequirements">
-          <legend>Statutory Requirements</legend>
-
-          <section class="row">
-          <label class="col col-lg-4 control-label" for="gender">Gender</label>
-            <div class="controls col col-lg-8">
-              <%= f.select :gender, options_for_select(["Female", "Male"]),
-              {:include_blank => "Select Gender"}, class: "form-control" %>
-
-            </div><!-- controls -->
-          </section><!-- row -->
-
-          <section class="row">
-          <label class="col col-lg-4 control-label" for="race">Race</label>
-            <div class="controls col col-lg-8">
-              <%= f.select :race, options_for_select(["African", "Coloured", "Indian", "White"]),
-              {:include_blank => "Select Race"}, class: "form-control" %>
-            </div><!-- controls -->
-          </section><!-- row -->
-
-          <section class="row">
-          <label class="col col-lg-4 control-label" for="occupationalcategory">Occupational Category</label>
-            <div class="controls col col-lg-8">
-              <%= f.text_field :occupational_category, :class=>"form-control" , :autocomplete=>"off",:placeholder=>"Occupational Category" %>
-            </div><!-- controls -->
-          </section><!-- row -->
-
-
-            <section class="row">
-              <div class="controls col col-lg-4 control-label" for="disabled">
-                <%= f.label :disabled, class: "checkbox inline" do %>
-                  <%= f.check_box :disabled,:id=>"disablity_checkbox" %>
-                  <span class="control-label labels"><strong>Disabled</strong></span>
-              <% end %>
-            </div>
-          </section><!-- row -->
-
-      <section class="row" id="disability_description_fields">
-            <label class="col col-lg-4 control-label" for="disabilitydescription">Disability Description</label>
-            <div class="controls col col-lg-8">
-              <%= f.text_field :disability_description, :class=>"form-control" , :autocomplete=>"off",:id=>'disablity_description' %>
-            </div><!-- controls -->
+    <fieldset id="employmentinfo">
+      <legend>Employment Info</legend>
+      <section class="row">
+        <label class="col col-lg-4 control-label" for="employeenumber">Employee Number</label>
+        <div class="controls col col-lg-8">
+         <%= f.text_field :employee_number, :class=>"form-control", :autocomplete=>"off",:placeholder=>"Employee Number" %>
+        </div><!-- controls -->
       </section><!-- row -->
 
-        </fieldset>
+      <section class="row">
+        <label class="col col-lg-4 control-label" for="employmentdate">Employment Date</label>
+        <div class="controls col col-lg-8">
+        <div class="form-group">
+                            <div class="input-group date" data-provide="datepicker"
+                                 data-date-format="dd-mm-yyyy" data-date-start-view="days" data-date-min-view-mode="days">
+                              <%= f.text_field :employment_date, class: "form-control" %>
+                              <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                              </span>
+                            </div>
+                          </div>
+        </div><!-- controls -->
+      </section><!-- row -->
+
+      <section class="row">
+      <label class="col col-lg-4 control-label" for="jobtitle">Job Title</label>
+        <div class="controls col col-lg-8">
+          <%= f.select :job_title, Jobtitle.all.collect {|x| [x.title, x.title]}, {:include_blank => "Select KPI Owner"}, class: "form-control" %>
+        </div><!-- controls -->
+      </section><!-- row -->
+
+      <section class="row">
+      <label class="col col-lg-4 control-label" for="department">Department</label>
+        <div class="controls col col-lg-8">
+         <%= f.select :department_id, Department.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select Department"}, class: "form-control" %>
+
+        </div><!-- controls -->
+      </section><!-- row -->
+
+      <section class="row">
+      <label class="col col-lg-4 control-label" for="location">Location</label>
+        <div class="controls col col-lg-8">
+
+            <%= f.select :location, Region.all.collect {|x| [x.name, x.name]}, {:include_blank => "Select Location"}, class: "form-control" %>
+
+        </div><!-- controls -->
+      </section><!-- row -->
+
+      <section class="row">
+      <label class="col col-lg-4 control-label" for="manager">Manager</label>
+        <div class="controls col col-lg-8">
+          <%= f.select :manager, User.all.collect {|x| [x.firstname, x.email]}, {:include_blank => "Select Manager"}, class: "form-control" %>
+        </div><!-- controls -->
+      </section><!-- row -->
+
+    </fieldset><!-- employment info -->
+
+    <fieldset id="contactdetails">
+      <legend>Contact Details</legend>
+      <section class="row">
+        <label class="col col-lg-4 control-label" for="countryprefix">Country Prefix</label>
+        <div class="controls col col-lg-8">
+          <%= f.text_field :country_prefix, :class=>"form-control" , :autocomplete=>"off",:placeholder=>"+27" %>
+        </div><!-- controls -->
+      </section><!-- row -->
+
+      <section class="row">
+        <label class="col col-lg-4 control-label" for="landline">Landline/Office</label>
+        <div class="controls col col-lg-8">
+          <%= f.text_field :landline, :class=>"form-control" , :autocomplete=>"off", :placeholder=>"(015) 234 2345" %>
+
+        </div><!-- controls -->
+      </section><!-- row -->
+
+      <section class="row">
+        <label class="col col-lg-4 control-label" for="mobile">Mobile/Cellphone</label>
+        <div class="controls col col-lg-8">
+          <%= f.text_field :mobile, :class=>"form-control" , :autocomplete=>"off", :placeholder=>"072 234 4567" %>
+        </div><!-- controls -->
+      </section><!-- row -->
+
+      <section class="row">
+        <label class="col col-lg-4 control-label" for="fax">Fax</label>
+        <div class="controls col col-lg-8">
+          <%= f.text_field :fax, :class=>"form-control" , :autocomplete=>"off", :placeholder=>"086 845 6273" %>
+
+        </div><!-- controls -->
+      </section><!-- row -->
+
+      <section class="row">
+        <label class="col col-lg-4 control-label" for="email">Email</label>
+        <div class="controls col col-lg-8">
+          <%= f.email_field :email, class: "form-control", :autocomplete=>"off",:placeholder=>"email@example.com" %>
+        </div><!-- controls -->
+      </section><!-- row -->
+
+    </fieldset><!-- contact details -->
+
+    <fieldset id="statutoryrequirements">
+      <legend>Statutory Requirements</legend>
+
+      <section class="row">
+      <label class="col col-lg-4 control-label" for="gender">Gender</label>
+        <div class="controls col col-lg-8">
+          <%= f.select :gender, options_for_select(["Female", "Male"]),
+          {:include_blank => "Select Gender"}, class: "form-control" %>
+
+        </div><!-- controls -->
+      </section><!-- row -->
+
+      <section class="row">
+      <label class="col col-lg-4 control-label" for="race">Race</label>
+        <div class="controls col col-lg-8">
+          <%= f.select :race, options_for_select(["African", "Coloured", "Indian", "White"]),
+          {:include_blank => "Select Race"}, class: "form-control" %>
+        </div><!-- controls -->
+      </section><!-- row -->
+
+      <section class="row">
+      <label class="col col-lg-4 control-label" for="occupationalcategory">Occupational Category</label>
+        <div class="controls col col-lg-8">
+          <%= f.text_field :occupational_category, :class=>"form-control" , :autocomplete=>"off",:placeholder=>"Occupational Category" %>
+        </div><!-- controls -->
+      </section><!-- row -->
+
+
         <section class="row">
-          <div class="col-lg-">
-            <div class="col-lg-2 pull-right">
-              <%= f.submit "Save",class: 'btn pull-right'%>
-            </div>
+          <div class="controls col col-lg-4 control-label" for="disabled">
+            <%= f.label :disabled, class: "checkbox inline" do %>
+              <%= f.check_box :disabled,:id=>"disablity_checkbox" %>
+              <span class="control-label labels"><strong>Disabled</strong></span>
+          <% end %>
         </div>
-        </section><!-- row -->
-     <% end %>
+      </section><!-- row -->
+
+  <section class="row" id="disability_description_fields">
+        <label class="col col-lg-4 control-label" for="disabilitydescription">Disability Description</label>
+        <div class="controls col col-lg-8">
+          <%= f.text_field :disability_description, :class=>"form-control" , :autocomplete=>"off",:id=>'disablity_description' %>
+        </div><!-- controls -->
+  </section><!-- row -->
+
+    </fieldset>
+    <section class="row">
+      <div class="col-lg-12">
+          <%= f.submit "Save",class: 'btn col-lg-2 pull-right'%>
+    </div>
+    </section><!-- row -->
+ <% end %>
 
 
   </div>
