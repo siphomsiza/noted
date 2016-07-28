@@ -84,9 +84,9 @@ $(function() {
 	              <label class="label label-danger">Closed</label>
 	              <% end %>
             </td>
-            <td><%= sdbip_time_period.primary_reminder %>&nbsp;(<%= sdbip_time_period.primary_reminder).strftime("%a")%>)</td>
+            <td><%= sdbip_time_period.primary_reminder %>&nbsp;(<%= (sdbip_time_period.primary_reminder).strftime("%a")%>)</td>
 
-            <td><%= sdbip_time_period.primary_closure %>&nbsp;(<%= sdbip_time_period.primary_closure).strftime("%a")%>)</td>
+            <td><%= sdbip_time_period.primary_closure %>&nbsp;(<%= (sdbip_time_period.primary_closure).strftime("%a")%>)</td>
 
 						<td>
 						<% if  sdbip_time_period.secondary_status? %>
@@ -95,8 +95,8 @@ $(function() {
 							<label class="label label-danger">Closed</label>
               <% end %>
             </td>
-						<td><%= sdbip_time_period.secondary_reminder %>&nbsp;(<%= sdbip_time_period.secondary_reminder).strftime("%a")%>)</td>
-            <td><%= sdbip_time_period.secondary_closure %>&nbsp;(<%= sdbip_time_period.secondary_closure).strftime("%a")%>)</td>
+						<td><%= sdbip_time_period.secondary_reminder %>&nbsp;(<%= (sdbip_time_period.secondary_reminder).strftime("%a")%>)</td>
+            <td><%= sdbip_time_period.secondary_closure %>&nbsp;(<%= (sdbip_time_period.secondary_closure).strftime("%a")%>)</td>
 
 						<td>
             </td>
