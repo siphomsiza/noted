@@ -53,7 +53,7 @@
                 <!--populating the columns and rows with data  -->
                 <% @departments.each do |department_value| %>
                   <td><%= @departmental_sdbips.where(:performance_standard=> "KPI Not Yet Measured", :department_id => department_value.id ).count %>&nbsp;
-                    (<%= number_with_precision(@departmental_sdbips.where(:performance_standard=> "KPI Not Yet Measured").count * 100 / (@departmental_sdbips.where(:department_id => department_value.id ).count.nonzero? || 1 )) %>%)
+                    (<%= number_with_precision(@departmental_sdbips.where(:performance_standard=> "KPI Not Yet Measured", :department_id => department_value.id).count * 100 / (@departmental_sdbips.where(:department_id => department_value.id ).count.nonzero? || 1 )) %>%)
                   </td>
                 <% end %>
             </tr>
@@ -64,7 +64,7 @@
 
                 <% @departments.each do |department_value| %>
                   <td><%= @departmental_sdbips.where(:performance_standard=> "KPI Not Met", :department_id => department_value.id ).count %>&nbsp;
-                    (<%= number_with_precision(@departmental_sdbips.where(:performance_standard=> "KPI Not Met").count * 100 / (@departmental_sdbips.where(:department_id => department_value.id ).count.nonzero? || 1 )) %>%)</td>
+                    (<%= number_with_precision(@departmental_sdbips.where(:performance_standard=> "KPI Not Met", :department_id => department_value.id).count * 100 / (@departmental_sdbips.where(:department_id => department_value.id ).count.nonzero? || 1 )) %>%)</td>
                 <% end %>
             </tr>
             <tr>
@@ -74,7 +74,7 @@
 
                 <% @departments.each do |department_value| %>
                   <td><%= @departmental_sdbips.where(:performance_standard=> "KPI Almost Met", :department_id => department_value.id ).count %>&nbsp;
-                    (<%= number_with_precision(@departmental_sdbips.where(:performance_standard=> "KPI Almost Met").count * 100 / (@departmental_sdbips.where(:department_id => department_value.id ).count.nonzero? || 1 )) %>%)</td>
+                    (<%= number_with_precision(@departmental_sdbips.where(:performance_standard=> "KPI Almost Met", :department_id => department_value.id).count * 100 / (@departmental_sdbips.where(:department_id => department_value.id ).count.nonzero? || 1 )) %>%)</td>
                 <% end %>
             </tr>
             <tr>
@@ -83,7 +83,7 @@
                 (<%= number_with_precision(@departmental_sdbips.where(:performance_standard=> "KPI Met").count * 100 / (@departmental_sdbips.count.nonzero? || 1 )) %>%)</td>
                 <% @departments.each do |department_value| %>
                   <td><%= @departmental_sdbips.where(:performance_standard=> "KPI Met", :department_id => department_value.id ).count %>&nbsp;
-                    (<%= number_with_precision(@departmental_sdbips.where(:performance_standard=> "KPI Met").count * 100 / (@departmental_sdbips.where(:department_id => department_value.id ).count.nonzero? || 1 )) %>%)</td>
+                    (<%= number_with_precision(@departmental_sdbips.where(:performance_standard=> "KPI Met", :department_id => department_value.id).count * 100 / (@departmental_sdbips.where(:department_id => department_value.id ).count.nonzero? || 1 )) %>%)</td>
                 <% end %>
             </tr>
             <tr>
@@ -92,7 +92,7 @@
                 (<%= number_with_precision(@departmental_sdbips.where(:performance_standard=> "KPI Well Met").count * 100 / (@departmental_sdbips.count.nonzero? || 1 )) %>%)</td>
                 <% @departments.each do |department_value| %>
                   <td><%= @departmental_sdbips.where(:performance_standard=> "KPI Well Met", :department_id => department_value.id ).count %>&nbsp;
-                    (<%= number_with_precision(@departmental_sdbips.where(:performance_standard=> "KPI Well Met").count * 100 / (@departmental_sdbips.where(:department_id => department_value.id ).count.nonzero? || 1 )) %>%)</td>
+                    (<%= number_with_precision(@departmental_sdbips.where(:performance_standard=> "KPI Well Met", :department_id => department_value.id).count * 100 / (@departmental_sdbips.where(:department_id => department_value.id ).count.nonzero? || 1 )) %>%)</td>
                 <% end %>
             </tr>
             <tr>
@@ -101,7 +101,7 @@
                 (<%= number_with_precision(@departmental_sdbips.where(:performance_standard=> "KPI Extremely Well Met").count * 100 / (@departmental_sdbips.count.nonzero? || 1 )) %>%)</td>
                 <% @departments.each do |department_value| %>
                   <td><%= @departmental_sdbips.where(:performance_standard=> "KPI Extremely Well Met", :department_id => department_value.id ).count %>&nbsp;
-                    (<%= number_with_precision(@departmental_sdbips.where(:performance_standard=> "KPI Extremely Well Met").count * 100 / (@departmental_sdbips.where(:department_id => department_value.id ).count.nonzero? || 1 )) %>%)</td>
+                    (<%= number_with_precision(@departmental_sdbips.where(:performance_standard=> "KPI Extremely Well Met", :department_id => department_value.id).count * 100 / (@departmental_sdbips.where(:department_id => department_value.id ).count.nonzero? || 1 )) %>%)</td>
                 <% end %>
             </tr>
             <tr>
@@ -117,6 +117,7 @@
       </div>
     </div>
   </div>
+  <% if @include_sub_graphs == "true" %>
   <div class="row col col-lg-12">
     <div class="panel panel-default">
       <div class="panel-heading">
@@ -145,6 +146,7 @@
 
     </div>
   </div>
+  <% end %>
 <% elsif @graph_value > 0 && !@graph_value.blank? %>
 <div class="row col col-lg-12">
   <div class=" panel-default">
@@ -155,14 +157,129 @@
       <% @chart_data = @department.departmental_sdbips#.where(:subdepartment_id=>subdepartment.id) %>
       <% if !@chart_data.blank? %>
       <div class="row">
-        <div class="col col-lg-12">
-          <%= column_chart @chart_data.group(:performance_standard,:subdepartment_name).count,width: "500px",height: "300px", stacked: 'percent', colors: @colours %>
+        <div class="col col-lg-6">
+          <%= pie_chart @chart_data.group(:performance_standard).count,width: "500px",height: "300px", stacked: 'percent', colors: @colours %>
+        </div>
+        <div class="col col-lg-6">
+          <%= column_chart @chart_data.group(:performance_standard).count,width: "500px",height: "300px", stacked: 'percent', colors: @colours %>
         </div>
     </div>
       <% end %>
+      <div class="row">
+        <div class="col col-lg-10 col-lg-offset-1">
+          <table class="table table-striped table-responsive table-hover table-bordered">
+            <tr>
+            <th colspan="1" rowspan="2"></th>
+            <th colspan="1" rowspan="2"><h4><%= @department.name %></h4></th>
+            <th colspan="<%= @department.subdepartments.count %>" scope="colgroup"><h4>Sub-Department</h4></th>
+            </tr>
+            <tr>
+              <% @department.subdepartments.each do |subdepartment| %>
+              <th><h5><%= subdepartment.subdepartment_name %></h5></th>
+              <% end %>
+            </tr>
+
+            <tr>
+              <td><span class="glyphicon glyphicon-stop babypink"></span>KPI Not Yet Measured</td>
+              <td><%= @department.departmental_sdbips.where(:performance_standard=> "KPI Not Yet Measured").count %>&nbsp;
+                (<%= (@department.departmental_sdbips.where(:performance_standard=> "KPI Not Yet Measured").count * 100 / (@department.departmental_sdbips.count.nonzero? || 1 )) %>%)</td>
+                <!--populating the columns and rows with data  -->
+                <% @department.subdepartments.each do |subdepartment_value| %>
+                  <td><%= @department.departmental_sdbips.where(:performance_standard=> "KPI Not Yet Measured", :subdepartment_id => subdepartment_value.id ).count %>&nbsp;
+                    (<%= (@department.departmental_sdbips.where(:performance_standard=> "KPI Not Yet Measured", :subdepartment_id => subdepartment_value.id).count * 100 / (@department.departmental_sdbips.where(:subdepartment_id => subdepartment_value.id ).count.nonzero? || 1 )) %>%)
+                  </td>
+                <% end %>
+            </tr>
+            <tr>
+              <td><span class="glyphicon glyphicon-stop red"></span>KPI Not Met</td>
+              <td><%= @department.departmental_sdbips.where(:performance_standard=> "KPI Not Met").count %>&nbsp;
+                (<%= (@department.departmental_sdbips.where(:performance_standard=> "KPI Not Met").count * 100 / (@department.departmental_sdbips.count.nonzero? || 1 )) %>%)</td>
+
+                <% @department.subdepartments.each do |subdepartment_value| %>
+                  <td><%= @department.departmental_sdbips.where(:performance_standard=> "KPI Not Met", :department_id => subdepartment_value.id ).count %>&nbsp;
+                    (<%= (@department.departmental_sdbips.where(:performance_standard=> "KPI Not Met", :subdepartment_id => subdepartment_value.id).count * 100 / (@department.departmental_sdbips.where(:subdepartment_id => subdepartment_value.id ).count.nonzero? || 1 )) %>%)</td>
+                <% end %>
+            </tr>
+            <tr>
+              <td><span class="glyphicon glyphicon-stop orange"></span>KPI Almost Met</td>
+              <td><%= @department.departmental_sdbips.where(:performance_standard=> "KPI Almost Met").count %>&nbsp;
+                (<%= (@department.departmental_sdbips.where(:performance_standard=> "KPI Almost Met").count * 100 / (@department.departmental_sdbips.count.nonzero? || 1 )) %>%)</td>
+
+                <% @department.subdepartments.each do |subdepartment_value| %>
+                  <td><%= @department.departmental_sdbips.where(:performance_standard=> "KPI Almost Met", :subdepartment_id => subdepartment_value.id ).count %>&nbsp;
+                    (<%= (@department.departmental_sdbips.where(:performance_standard=> "KPI Almost Met", :subdepartment_id => subdepartment_value.id).count * 100 / (@department.departmental_sdbips.where(:subdepartment_id => subdepartment_value.id ).count.nonzero? || 1 )) %>%)</td>
+                <% end %>
+            </tr>
+            <tr>
+              <td><span class="glyphicon glyphicon-stop limegreen"></span>KPI Met</td>
+              <td><%= @department.departmental_sdbips.where(:performance_standard=> "KPI Met").count %>&nbsp;
+                (<%= (@department.departmental_sdbips.where(:performance_standard=> "KPI Met").count * 100 / (@department.departmental_sdbips.count.nonzero? || 1 )) %>%)</td>
+                <% @department.subdepartments.each do |subdepartment_value| %>
+                  <td><%= @department.departmental_sdbips.where(:performance_standard=> "KPI Met", :subdepartment_id => subdepartment_value.id ).count %>&nbsp;
+                    (<%= (@department.departmental_sdbips.where(:performance_standard=> "KPI Met", :subdepartment_id => subdepartment_value.id).count * 100 / (@department.departmental_sdbips.where(:subdepartment_id => subdepartment_value.id ).count.nonzero? || 1 )) %>%)</td>
+                <% end %>
+            </tr>
+            <tr>
+              <td><span class="glyphicon glyphicon-stop darkgreen"></span>KPI Well Met</td>
+              <td><%= @department.departmental_sdbips.where(:performance_standard=> "KPI Well Met").count %>&nbsp;
+                (<%= (@department.departmental_sdbips.where(:performance_standard=> "KPI Well Met").count * 100 / (@departmental_sdbips.count.nonzero? || 1 )) %>%)</td>
+                <% @department.subdepartments.each do |subdepartment_value| %>
+                  <td><%= @department.departmental_sdbips.where(:performance_standard=> "KPI Well Met", :department_id => subdepartment_value.id ).count %>&nbsp;
+                    (<%= (@department.departmental_sdbips.where(:performance_standard=> "KPI Well Met", :subdepartment_id => subdepartment_value.id).count * 100 / (@department.departmental_sdbips.where(:subdepartment_id => subdepartment_value.id ).count.nonzero? || 1 )) %>%)</td>
+                <% end %>
+            </tr>
+            <tr>
+              <td><span class="glyphicon glyphicon-stop darkblue"></span>KPI Extremely Well Met</td>
+              <td><%= @department.departmental_sdbips.where(:performance_standard=> "KPI Extremely Well Met").count %>&nbsp;
+                (<%= (@department.departmental_sdbips.where(:performance_standard=> "KPI Extremely Well Met").count * 100 / (@department.departmental_sdbips.count.nonzero? || 1 )) %>%)</td>
+                <% @department.subdepartments.each do |subdepartment_value| %>
+                  <td><%= @department.departmental_sdbips.where(:performance_standard=> "KPI Extremely Well Met", :subdepartment_id => subdepartment_value.id ).count %>&nbsp;
+                    (<%= (@department.departmental_sdbips.where(:performance_standard=> "KPI Extremely Well Met", :subdepartment_id => subdepartment_value.id).count * 100 / (@department.departmental_sdbips.where(:subdepartment_id => subdepartment_value.id ).count.nonzero? || 1 )) %>%)</td>
+                <% end %>
+            </tr>
+            <tr>
+              <td>Total:</td>
+              <td><%= @department.departmental_sdbips.count %></td>
+              <% @department.subdepartments.each do |department_sdbip_count| %>
+              <td><%= department_sdbip_count.departmental_sdbips.where(subdepartment_id: department_sdbip_count.id ).count %></td>
+              <% end %>
+            </tr>
+          </table>
+        </div>
+      </div>
 
     </div>
 </div>
+<% if @include_sub_graphs == "true" %>
+<div class="row col col-lg-12">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3><%= @department.name %>&nbsp;KPIs per Sub-department</h3>
+    </div>
+
+    <div class="panel-body">
+      <% @department.subdepartments.each do |subdepartment| %>
+      <% @chart_data = @department.departmental_sdbips.where(:subdepartment_id=>subdepartment.id) %>
+      <% if !@chart_data.blank? %>
+      <div class="well well-lg">
+        <h4 align="center"><%= subdepartment.subdepartment_name %></h4>
+      <div class="row">
+        <div class="col col-lg-6">
+          <%= pie_chart @chart_data.group(:performance_standard).count,height: "300px",library: {pieSliceText:'value-and-percentage'}, colors: @colours %>
+        </div>
+        <div class="col col-lg-6">
+          <%= column_chart @chart_data.group(:performance_standard).count,height: "300px", stacked: 'percent', colors: @colours %>
+
+        </div>
+      </div>
+    </div>
+      <% end %>
+      <% end %>
+    </div>
+
+  </div>
+</div>
+<% end %>
 <% end %>
             </div>
             <div class="modal-footer">

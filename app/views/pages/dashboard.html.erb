@@ -97,7 +97,6 @@
             </table>
           </div>
           </div>
-
       </div>
     </div>
   </div>
@@ -167,15 +166,24 @@
           <% @sdbip_time_periods.each do |time_period| %>
           <tr>
           <td><%= time_period.period.strftime("%d %B %Y") %></td>
-          <td><%= time_period.period.days_ago(-time_period.primary_reminder).strftime("%d %B %Y") %></td>
-          <td><%= time_period.period.days_ago(-time_period.primary_closure).strftime("%d %B %Y") %></td>
-          <td><%= time_period.period.days_ago(-time_period.secondary_closure).strftime("%d %B %Y") %></td>
           <td>
-          <% if  time_period.period.strftime("%d %m %Y") == Date.today.strftime("%d %m %Y") && time_period.period <= time_period.period.days_ago(-time_period.secondary_closure) %>
+          <% if !time_period.primary_reminder.blank? %>
+            <%= time_period.primary_reminder.strftime("%d %B %Y") %>
+            <% end %>
+          </td>
+          <td>
+          <% if !time_period.primary_closure.blank? %>
+            <%= time_period.primary_closure).strftime("%d %B %Y") %>
+          <% end %>
+        </td>
+          <td><% if !time_period.secondary_closure.blank? %>
+            <%= time_period.secondary_closure).strftime("%d %B %Y") %><% end %></td>
+          <td>
+          <% if  time_period.primary_status? || time_period.secondary_status? %>
 
             <label class="label label-success">Open</label>
 
-            <% elsif (time_period.period > time_period.period.days_ago(-time_period.secondary_closure)) || (( time_period.period.strftime("%d %m %Y") > Date.today.strftime("%d %m %Y")) && time_period.period < time_period.period.days_ago(-time_period.secondary_closure)) %>
+            <% else %>
 
             <label class="label label-danger">Closed</label>
 

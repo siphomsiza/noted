@@ -61,9 +61,10 @@ class SdbipTimePeriodsController < ApplicationController
   end
 
   def update
-        @sdbip_time_period = SdbipTimePeriod.find(params[:id])
-
+      @sdbip_time_period = SdbipTimePeriod.find(params[:id])
     if @sdbip_time_period.update_attributes(sdbip_time_period_params)
+      reminder_date = (@sdbip_time_period.primary_reminder - Date.now)* 24 * 60
+      SendTimePeriodReminderEmailJob.set(wait: reminder_date.minutes).perform_later
       flash[:success]="Sdbip Time Period was successfully updated."
       redirect_to sdbip_time_periods_path
     else

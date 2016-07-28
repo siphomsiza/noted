@@ -218,6 +218,7 @@ class DepartmentalSdbipProgressesController < ApplicationController
   def generate_graphs
 
       @graph_value = params[:data_value].to_i
+      @include_sub_graphs = params[:include_sub_graph]
       if !params[:data_value].blank? && params[:data_value].to_i == 0
         @departmental_sdbips = DepartmentalSdbip.includes(:department)
         @departmental_sdbips_kpa = @departmental_sdbips

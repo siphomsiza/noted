@@ -9,10 +9,10 @@ class CreateSdbipTimePeriods < ActiveRecord::Migration
       t.date :secondary_closure
       t.date :finance_reminder
       t.date :finance_closure
-      t.boolean :primary_status, :default => false
-      t.boolean :secondary_status, :default => false
-      t.boolean :finance_status, :default => false
+      t.boolean :primary_status, :default => true
+      t.boolean :secondary_status, :default => true
+      t.boolean :finance_status, :default => true
       t.timestamps null: false
     end
-  end
+  end  
 end
