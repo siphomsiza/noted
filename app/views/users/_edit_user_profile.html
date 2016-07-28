@@ -209,7 +209,9 @@
       <section class="row">
       <label class="col col-lg-4 control-label" for="occupationalcategory">Occupational Category</label>
         <div class="controls col col-lg-8">
-          <%= f.text_field :occupational_category, :class=>"form-control" , :autocomplete=>"off",:placeholder=>"Occupational Category" %>
+          <%= f.select :occupational_category, options_for_select(["Top Management", "Senior Manager, Professionally Qualified, Experienced and Specialist", "Middle Management", "Skilled Technician and Academically Qualified Worker",
+            "Junior Management, Supervisor, Foreman and Superintendent","Semi-skilled and Discretionary Decision Making","Unskilled and Defined Decision Making"]),
+          {:include_blank => "Select Occupational Category"}, class: "form-control" %>
         </div><!-- controls -->
       </section><!-- row -->
 

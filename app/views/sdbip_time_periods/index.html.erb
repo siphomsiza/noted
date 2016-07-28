@@ -40,7 +40,7 @@ $(function() {
 						        <button class="btn pull-right" data-toggle="modal" data-target="#importTimePeriodsModal" title="Click to upload Time Periods.">
 						          <span class="glyphicon glyphicon-upload"></span>&nbsp;Import Time Periods</button>&nbsp;
 											<button class="btn pull-right" data-toggle="modal" data-target="#updateTimePeriodsModal" title="Click to update all automatic Time Periods.">
-												<span class="glyphicon glyphicon-edit"></span>&nbsp;Update Time Periods</button>&nbsp;
+												<span class="glyphicon glyphicon-edit"></span>&nbsp;Update All Automatic Time Periods</button>&nbsp;
 						      <% end %>
 								</li>
               </ul><!-- nav nav-tabs -->
@@ -84,9 +84,19 @@ $(function() {
 	              <label class="label label-danger">Closed</label>
 	              <% end %>
             </td>
-            <td><%= sdbip_time_period.primary_reminder %>&nbsp;(<%= (sdbip_time_period.primary_reminder).strftime("%a")%>)</td>
+            <td>
+						<% if !sdbip_time_period.primary_reminder.blank? %>
+							<%= sdbip_time_period.primary_reminder.strftime('%d %B %Y') %>&nbsp;
+							(<%= (sdbip_time_period.primary_reminder).strftime("%a")%>)
+						<% end %>
+					</td>
 
-            <td><%= sdbip_time_period.primary_closure %>&nbsp;(<%= (sdbip_time_period.primary_closure).strftime("%a")%>)</td>
+            <td>
+						<% if !sdbip_time_period.primary_closure.blank? %>
+							<%= sdbip_time_period.primary_closure.strftime('%d %B %Y') %>&nbsp;
+							(<%= (sdbip_time_period.primary_closure).strftime("%a")%>)
+							<% end %>
+						</td>
 
 						<td>
 						<% if  sdbip_time_period.secondary_status? %>
@@ -95,8 +105,18 @@ $(function() {
 							<label class="label label-danger">Closed</label>
               <% end %>
             </td>
-						<td><%= sdbip_time_period.secondary_reminder %>&nbsp;(<%= (sdbip_time_period.secondary_reminder).strftime("%a")%>)</td>
-            <td><%= sdbip_time_period.secondary_closure %>&nbsp;(<%= (sdbip_time_period.secondary_closure).strftime("%a")%>)</td>
+						<td>
+						<% if !sdbip_time_period.secondary_reminder.blank? %>
+							<%= sdbip_time_period.secondary_reminder.strftime('%d %B %Y') %>&nbsp;
+							(<%= (sdbip_time_period.secondary_reminder).strftime("%a")%>)
+							<% end %>
+						</td>
+            <td>
+						<% if !sdbip_time_period.secondary_closure.blank? %>
+							<%= sdbip_time_period.secondary_closure.strftime('%d %B %Y') %>&nbsp;
+							(<%= (sdbip_time_period.secondary_closure).strftime("%a")%>)
+							<% end %>
+						</td>
 
 						<td>
             </td>
