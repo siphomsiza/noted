@@ -1,7 +1,7 @@
 class RolesController < ApplicationController
-  before_action :logged_in_user, only: [:index,:show,:new,:edit,:destroy]
-  before_action :admin_user,     only: [:index,:show,:new,:edit,:destroy]
-
+  before_action :logged_in_user, only: [:index,:show,:new,:edit,:grant_new_user_access,:grant_user_access,:destroy,:edit_user_role,:new_user_role,:edit_user_access]
+  before_action :admin_user,     only: [:index,:show,:new,:grant_new_user_access,:grant_user_access,:edit,:destroy,:edit_user_role,:new_user_role,:edit_user_access]
+  before_action :set_role, only: [:show, :edit, :update,:grant_user_access, :destroy,:edit_user_role,:edit_user_access]
   def index
 
     @role = Role.new
@@ -11,11 +11,25 @@ class RolesController < ApplicationController
   end
 
   def show
-    @role = Role.find(params[:id])
+
   end
   def edit_user_role
-    @role = Role.find(params[:id])
+
   end
+  def grant_user_access
+
+  end
+  def grant_new_user_access
+    @role = Role.new
+  end
+  def new_user_role
+   @role = Role.new
+  end
+
+  def edit_user_access
+
+  end
+
   def new
     @role = Role.new
     @role.roles_details.build
@@ -34,7 +48,7 @@ class RolesController < ApplicationController
   end
 
   def edit
-    @role = Role.find(params[:id])
+
   end
 
   def update
@@ -58,9 +72,13 @@ class RolesController < ApplicationController
 
   private
     def role_params
-        params.require(:role).permit(:user_id, :kpi_owner_id,
+        params.require(:role).permit(:user_id,
           :kpi_owner, :top_layer_administrator, :audit_log_reporting,:setup,
           :assurance_provider,:finance_admin, :secondary_time_period, :roles_details_attributes=>[:id,:department_id,:subdepartment_id,:_destroy],)
+    end
+
+    def set_role
+      @role = Role.find(params[:id])
     end
 
     def logged_in_user

@@ -58,4 +58,14 @@ module SessionsHelper
   def store_location
     session[:forwarding_url] = request.url if request.get?
   end
+
+  def authenticate
+  if session[:logged_in]
+    reset_session if session[:last_seen] < 30.seconds.ago
+    session[:last_seen] = Time.now
+  else
+    #... authenticate
+    session[:last_seen] = Time.now
+  end
+end
 end

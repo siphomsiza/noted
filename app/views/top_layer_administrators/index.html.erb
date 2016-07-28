@@ -1,42 +1,46 @@
-<% provide(:title, "Top Layer Administrators") %>
+<% provide(:title, 'Top Layer Administrators') %>
 <script>
 $(function() {
 	//highlight the current nav
 	$("#applicationmanifest a:contains('SETUP')").parent().addClass('active');
 }); //jQuery is loaded
 </script>
-<div id="top">
-  <h2>
-                  Top Layer Administrators
-  </h2>
+<div>
 
-<br/>
 <div class="row">
 <div class="col col-lg-">
-<ul class="nav nav-pills  nav-justified">
+	<%= render 'layouts/municipality' %>
+
+<ul class="nav nav-pills nav-justified">
 <li><%= link_to "Master Setup", master_setups_path %></li>
-<li><%= link_to "System Setup", setups_path %></li>
+<li><%= link_to "System Setup", setups_path  %></li>
 <li><%= link_to "Departments", departments_path %></li>
-<li><%= link_to "Departmental Administrators", roles_path %></li>
-<li class ="active"><%= link_to "Top Layer Administrators", roles_path %></li>
+<li><%= link_to "Departmental Administrators", departmental_administrators_path %></li>
+<li  class="active"><%= link_to "Top Layer Administrators", top_layer_administrators_path %></li>
 <li><%= link_to "Headings", headings_path %></li>
 <li><%= link_to "Lists", lists_path %></li>
 <li><%= link_to "Time Periods", sdbip_time_periods_path %></li>
-</ul></div></div></div>
-
+</ul>
+</div>
+</div>
+</div>
     <div class="row">
-         <div class="tabbable tabs third-level-navs" id="setup-tabs">
-              <ul id = "myTab" class = "nav nav-tabs">
-                <li>
-                  <a href = "#setup" data-toggle = "tab">Tab 1</a>
-                </li>
-                <li>
-                  <a href = "#add_setup" data-toggle = "tab">Tab 2</a>
-                </li>
-                 <li>
-                  <a href = "#Job_Title" data-toggle = "tab">Tab 3</a>
-                </li>
 
+			<div class="tabbable tabs third-level-navs" id="roles-tabs">
+				<ul id = "myTab" class = "nav nav-tabs">
+					<li class="active">
+						<a href = "#manage_administrators" data-toggle = "tab">Manage</a>
+					</li>
+					<li>
+						<a href = "#add_administrator" data-toggle = "tab">Create</a>
+					</li>
+				
+				</ul><!-- nav nav-tabs -->
+			</div><!-- tabbable tabs -->
 
-              </ul><!-- nav nav-tabs -->
-            </div><!-- tabbable tabs -->
+			<section class="tab-content">
+				<%= render 'manage_administrators' %>
+				<%= render 'add_administrators' %>
+			</section>
+
+	</div>

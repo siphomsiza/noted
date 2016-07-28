@@ -3,12 +3,9 @@
     <div class="modal-header">
       <h3><%= "Editing #{@department.name}" %></h3>
     </div>
-    <div class="modal-body">
-
-      <div class="col-lg-10 col-lg-offset-1">
-
-      <%= form_for(@department) do |f| %>
-  <%= render 'shared/departmental_error_messages', object: @user %>
+    <div class="modal-body col-lg-10 col-lg-offset-1">
+<%= form_for(@department) do |f| %>
+  <%= render 'shared/departmental_error_messages', object: @department %>
   <div class="row">
     <div class="col-lg-">
       <div class="field col-lg-">
@@ -25,33 +22,36 @@
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-lg-">
+      <div class="row">
+        <div class="col-lg-">
         <div class="field col-lg-">
           <%= f.label :fax_no,"Department Fax no.:" %>
           <%= f.phone_field :fax_no, :area_code => true, :delimiter => ' ',:class=>"form-control",:autocomplete=>"off" %>
         </div>
       </div>
     </div>
+
+    <div class="row"><div class="col-lg-">
+
     <%= f.fields_for :subdepartments do |subdepartments_for_form| %>
 
-    <div class="row">
-      <div class="col-lg-">
       <%= render 'subdepartment_fields', f: subdepartments_for_form %>
-    </div>
-  </div>
 
   <% end %>
   <%= link_to_add_fields "Add Subdepartment", f, :subdepartments %>
+</div></div>
 
-      <%= f.submit "Save Department",class: "btn  pull-right" %>
+
+<div class="row">
+  <div class="col-lg-">
+    <div class="actions col-lg-3 pull-right">
+      <%= f.submit "Save", :class =>'btn btn-mini' %>
+   </div>
+</div>
+</div>
 
   <% end %>
-    </div>
 
-  </div>
-
-  <div class="modal-footer">
   </div>
 
 </div>

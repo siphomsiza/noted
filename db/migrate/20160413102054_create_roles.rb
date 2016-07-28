@@ -2,7 +2,6 @@ class CreateRoles < ActiveRecord::Migration
   def change
     create_table :roles, force: :cascade do |t|
       t.integer :user_id, null: false, foreign_key: true
-      t.integer :kpi_owner_id, foreign_key: true
       t.boolean :kpi_owner, default: false
       t.boolean :finance_admin, default: false
       t.boolean :top_layer_administrator, default: false

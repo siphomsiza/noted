@@ -1,4 +1,5 @@
 class CapitalProjectsController < ApplicationController
+  #before_filter :authenticate
   before_action :set_capital_project, only: [:show, :edit, :update, :destroy,:edit_capital_projects]
   before_action :logged_in_user, only: [:index,:show,:new,:edit,:destroy,:edit_capital_projects]
   before_action :admin_user,     only: [:index,:show,:new,:edit,:destroy,:edit_capital_projects]

@@ -18,18 +18,18 @@ class CreateDepartmentalSdbips < ActiveRecord::Migration
       t.string :source_of_evidence
       t.string :baseline
       t.string :budget
-      t.integer :annual_target
-      t.integer :revised_target
-      t.integer :first_quarter_target
-      t.integer :second_quarter_target
-      t.integer :third_quarter_target
-      t.integer :fourth_quarter_target
+      t.decimal :annual_target, default: 0.0
+      t.decimal :revised_target
+      t.decimal :first_quarter_target
+      t.decimal :second_quarter_target
+      t.decimal :third_quarter_target
+      t.decimal :fourth_quarter_target
       t.text    :performance_comments
       t.text    :corrective_measures
-      t.integer :first_quarter_actual
-      t.integer :second_quarter_actual
-      t.integer :third_quarter_actual
-      t.integer :fourth_quarter_actual
+      t.decimal :first_quarter_actual
+      t.decimal :second_quarter_actual
+      t.decimal :third_quarter_actual
+      t.decimal :fourth_quarter_actual
       t.binary  :first_quarter_poe
       t.binary  :second_quarter_poe
       t.binary  :third_quarter_poe
@@ -52,13 +52,6 @@ class CreateDepartmentalSdbips < ActiveRecord::Migration
       t.integer :reporting_category_id
       t.string :top_layer_kpi_ref
       t.integer :kpi_calculation_type_id
-      t.integer   :user_id
-      t.integer   :assurance
-      t.binary    :poe
-      t.decimal   :actual
-      t.decimal   :update_status
-      t.text      :response
-      t.boolean   :signed_off
       t.timestamps null: false
     end
   end

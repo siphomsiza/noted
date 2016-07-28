@@ -1,87 +1,70 @@
 <div class="modal-dialog">
 <div class="modal-content">
 <div class="modal-header">
-  <h3><%= "Editing #{@role.user.firstname}'s role" %></h3>
+  <h3>Editing User Access</h3>
 </div>
 <div class="modal-body">
 <div class="row">
-<div class="col-lg-10 col-md-offset-1">
-  <%= form_for(@role) do |f| %>
-  <% if @role.errors.any? %>
-    <div id="error_explanation">
-      <div class="alert alert-danger">
-        The form contains <%= pluralize(@role.errors.count, "error") %>.
-      </div>
-      <ul>
-      <% @role.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+    <div class="col-lg-10 col-md-offset-1">
+<%= form_for(@role) do |f| %>
+<% if @role.errors.any? %>
+  <div id="error_explanation">
+    <div class="alert alert-danger">
+      The form contains <%= pluralize(@role.errors.count, "error") %>.
     </div>
-  <% end %>
+    <ul>
+    <% @role.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
 
-  <%= f.label :user_id, "Select User:" %>
-  <% @users_for_role = User.where('id NOT IN(SELECT (user_id) FROM roles)') %>
-  <% @users_for_role = User.all %>
-  <%= f.select :user_id, @users_for_role.all.collect {|x| [x.firstname, x.id]}, {:include_blank => "Select User"}, class: "form-control" %>
-  <br/>
-  <div class="row">
-  	<div class="col-lg-11">
-      <%= f.label :kpi_owner, class: "checkbox inline" do %>
-  		  <%= f.check_box :kpi_owner %>
-        <span>KPI Owner</span>
-      <% end %>
-      <%= f.label :subdepartmental_administrator, class: "checkbox inline" do %>
-        <%= f.check_box :subdepartmental_administrator, :id=>"subdepartmental-administrator-checkbox" %>
-        <span>Subdepartment Admin</span>
-      <% end %>
-      <%= f.label :department_administrator, class: "checkbox inline" do %>
-        <%= f.check_box :departmental_administrator, :id=>"departmental-administrator-checkbox" %>
-        <span>Department Admin</span>
-      <% end %>
-      <%= f.label :finance_admin, class: "checkbox inline" do %>
-        <%= f.check_box :finance_admin, :id=>"finance-admin-checkbox" %>
-        <span>Finance Admin</span>
-      <% end %>
-      <%= f.label :municipal_manager, class: "checkbox inline" do %>
-        <%= f.check_box :municipal_manager, :id=>"municipal-manager-checkbox" %>
-        <span>Municipal Manager</span>
-      <% end %>
-      <%= f.label :internal_auditor, class: "checkbox inline" do %>
-        <%= f.check_box :internal_auditor, :id=>"internal-auditor-checkbox" %>
-        <span>Internal Auditor</span>
-      <% end %>
-      <%= f.label :auditor_general, class: "checkbox inline" do %>
-        <%= f.check_box :auditor_general, :id=>"auditor-general-checkbox" %>
-        <span>Auditor General</span>
-      <% end %>
-  	</div>
-  </div><br/>
+<%= f.label :user_id, "Select User:" %>
+<%= f.select :user_id, User.all.collect {|x| [x.firstname, x.id]}, {},class: "form-control" %>
+<br/>
 
-  <%= f.label :kpi_owner_id,"Select KPI Owner Title:" %>
-  <%= f.select :kpi_owner_id, KpiOwner.all.collect {|x| [x.name, x.id]},{}, {class: "form-control"} %>
+    <%= f.label :kpi_owner, class: "checkbox inline" do %>
+      <%= f.check_box :kpi_owner,:id=>"kpi_owner_checkbox" %>
+      <span>KPI Admin</span>
+    <% end %>
 
-  <%= f.fields_for :roles_details do |role_details_for_form| %>
-    <div class="row"><div class="col-lg-12">
-       <%= render 'roles_detail_fields', f: role_details_for_form %>
-    </div></div>
-  <% end %>
+    <%= f.label :finance_admin, class: "checkbox inline" do %>
+      <%= f.check_box :finance_admin %>
+      <span>Finance Admin</span>
+    <% end %>
+    <%= f.label :top_layer_administrator, class: "checkbox inline" do %>
+      <%= f.check_box :top_layer_administrator %>
+      <span>Top Layer Admin</span>
+    <% end %>
+    <%= f.label :audit_log_reporting, class: "checkbox inline" do %>
+      <%= f.check_box :audit_log_reporting %>
+      <span>Audit Log Reporting</span>
+    <% end %>
+    <%= f.label :assurance_provider, class: "checkbox inline" do %>
+      <%= f.check_box :assurance_provider %>
+      <span>Assurance Provider</span>
+    <% end %>
+    <%= f.label :secondary_time_period, class: "checkbox inline" do %>
+      <%= f.check_box :secondary_time_period %>
+      <span>Secondary Time Period</span>
+    <% end %>
+    <%= f.label :setup, class: "checkbox inline" do %>
+      <%= f.check_box :setup %>
+      <span>Setup</span>
+    <% end %>
 
-  <%= link_to_add_fields "Add Department/Subdepartment", f, :roles_details %>
-    <hr>
-    <div class="actions col-lg-3 pull-right">
-      <%= f.submit "Save",:class =>'btn pull-right' %>
+<div class="actions">
+<%= f.submit "Save", :class =>'btn col-lg-3 pull-right' %>
+</div>
+
+<% end %>
+
+      <div class = "modal-footer">
+
+        </div>
     </div>
-
-  <% end %>
-  <hr/>
-
 </div>
 </div>
-</div>
-<div class="modal-footer">
-
-</div>
-
 </div>
 </div>

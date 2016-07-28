@@ -2,6 +2,7 @@ class Department < ActiveRecord::Base
 	include PublicActivity::Common
 	has_many :users
 	has_many :departmental_administrators
+	has_many :top_layer_administrators
 	has_many :roles
 	has_many :top_layer_sdbips
 	has_many :monthly_cashflows

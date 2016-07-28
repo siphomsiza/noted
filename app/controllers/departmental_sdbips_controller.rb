@@ -1,12 +1,12 @@
 class DepartmentalSdbipsController < ApplicationController
-  before_action :logged_in_user, only: [:index, :edit, :update,:show,:audit_performance,:generate_graphs]
-  before_action :admin_user,     only: [:new, :index,:edit,:update, :destroy,:show]
-  before_action :kpi_owner_user,     only: [:index,:edit,:update, :index,:show]
+  #before_filter :authenticate
+  before_action :logged_in_user, only: [:index, :restore_kpi, :edit, :update,:show,:audit_performance,:generate_graphs]
+  before_action :admin_user,     only: [:new, :restore_kpi, :index,:edit,:update, :destroy,:show]
   def index
 
     @departmental_sdbip = DepartmentalSdbip.new
     @departments = Department.includes(:subdepartments)
-
+    @deleted_kpis =  DepartmentalKpi.paginate(page: params[:page],per_page: 10)
     @departmental_sdbips_to_file = DepartmentalSdbip.order(:department_id,:subdepartment_id)
     @subdepartments = Subdepartment.where("department_id = ?", Department.first.id)
     @kpitypes = KpiType.all
@@ -14,13 +14,13 @@ class DepartmentalSdbipsController < ApplicationController
 
       if !current_user.role.blank? || current_user.admin?
         if current_user.admin? || current_user.role.audit_log_reporting? || current_user.role.top_layer_administrator? || current_user.role.assurance_provider? || current_user.role.secondary_time_period? || current_user.role.finance_admin?
-            @departmental_sdbips = DepartmentalSdbip.search(params[:subdepartment_id],params[:kpi_type_id],params[:start_date],params[:end_date]).includes(:department,:subdepartment,:kpi_type,:predetermined_objective,:kpi_owner,:mscore_classification,:national_outcome,:strategic_objective,:risk_rating,:kpa,:ndp_objective,:capital_project,:kpi_concept,:area,:ward,:reporting_category,:kpi_calculation_type)
+            @departmental_sdbips = DepartmentalSdbip.search(params[:subdepartment_id],params[:kpi_type_id],params[:start_date],params[:end_date]).includes(:department,:subdepartment,:kpi_type,:kpi_owner,:mscore_classification,:national_outcome,:strategic_objective,:risk_rating,:kpa,:ndp_objective,:capital_project,:kpi_concept,:area,:ward,:reporting_category,:kpi_calculation_type)
               if !@departmental_sdbips.blank?
                @departmental_sdbips =  @departmental_sdbips.paginate(page: params[:page],per_page: 10)
               end
         elsif current_user.role.kpi_owner? && current_user.departmental_administrator.blank?
             kpi_id = current_user.role.kpi_owner_id
-            @departmental_sdbips = DepartmentalSdbip.search_kpi(params[:kpi_id],params[:department_id],params[:subdepartment_id],params[:kpi_type_id],params[:start_date],params[:end_date])#.includes(:capital_project,:department,:subdepartment,:kpi_type,:kpi_owner,:kpi_concept,:kpi_calculation_type,:mscore_classification,:predetermined_objective,:kpa,:strategic_objective,:national_outcome,:ward,:area,:reporting_category,:ndp_objective,:risk_rating)
+            @departmental_sdbips = DepartmentalSdbip.search_kpi(params[:kpi_id],params[:department_id],params[:subdepartment_id],params[:kpi_type_id],params[:start_date],params[:end_date])#.includes(:capital_project,:department,:subdepartment,:kpi_type,:kpi_owner,:kpi_concept,:kpi_calculation_type,:mscore_classification,:kpa,:strategic_objective,:national_outcome,:ward,:area,:reporting_category,:ndp_objective,:risk_rating)
             if !@departmental_sdbips.blank?
               @departmental_sdbips = @departmental_sdbips.paginate(page: params[:page],per_page: 10)
             end
@@ -29,13 +29,13 @@ class DepartmentalSdbipsController < ApplicationController
               current_user.departmental_administrator.each do |dept_id|
                 department_id = dept_id.department_id
               end
-              @departmental_sdbips = DepartmentalSdbip.search_departmental_kpis(params[:department_id],params[:subdepartment_id],params[:kpi_type_id],params[:start_date],params[:end_date])#.includes(:capital_project,:department,:subdepartment,:kpi_type,:kpi_owner,:kpi_concept,:kpi_calculation_type,:mscore_classification,:predetermined_objective,:kpa,:strategic_objective,:national_outcome,:ward,:area,:reporting_category,:ndp_objective,:risk_rating)
+              @departmental_sdbips = DepartmentalSdbip.search_departmental_kpis(params[:department_id],params[:subdepartment_id],params[:kpi_type_id],params[:start_date],params[:end_date])#.includes(:capital_project,:department,:subdepartment,:kpi_type,:kpi_owner,:kpi_concept,:kpi_calculation_type,:mscore_classification,:kpa,:strategic_objective,:national_outcome,:ward,:area,:reporting_category,:ndp_objective,:risk_rating)
               if !@departmental_sdbips.blank?
                 @departmental_sdbipsrtmental_sdbips = @departmental_sdbips.paginate(page: params[:page],per_page: 10)
               end
         elsif current_user.role.kpi_owner? && current_user.subdepartmental_administrator.blank?
                 kpi_id = current_user.role.kpi_owner_id
-                @departmental_sdbips = DepartmentalSdbip.search_subdepartment_kpis(params[:kpi_id],params[:department_id],params[:subdepartment_id],params[:kpi_type_id],params[:start_date],params[:end_date])#.includes(:capital_project,:department,:subdepartment,:kpi_type,:kpi_owner,:kpi_concept,:kpi_calculation_type,:mscore_classification,:predetermined_objective,:kpa,:strategic_objective,:national_outcome,:ward,:area,:reporting_category,:ndp_objective,:risk_rating)
+                @departmental_sdbips = DepartmentalSdbip.search_subdepartment_kpis(params[:kpi_id],params[:department_id],params[:subdepartment_id],params[:kpi_type_id],params[:start_date],params[:end_date])#.includes(:capital_project,:department,:subdepartment,:kpi_type,:kpi_owner,:kpi_concept,:kpi_calculation_type,:mscore_classification,:kpa,:strategic_objective,:national_outcome,:ward,:area,:reporting_category,:ndp_objective,:risk_rating)
                 if !@departmental_sdbips.blank?
                   @departmental_sdbips = @departmental_sdbips.paginate(page: params[:page],per_page: 10)
                 end
@@ -44,9 +44,9 @@ class DepartmentalSdbipsController < ApplicationController
                   current_user.role.roles_details.each do |dept_id|
                     subdepartment_id = dept_id.subdepartment_id
                   end
-                  @departmental_sdbips = DepartmentalSdbip.search_subdepartment_kpis(params[:department_id],params[:subdepartment_id],params[:kpi_type_id],params[:start_date],params[:end_date])#.includes(:capital_project,:department,:subdepartment,:kpi_type,:kpi_owner,:kpi_concept,:kpi_calculation_type,:mscore_classification,:predetermined_objective,:kpa,:strategic_objective,:national_outcome,:ward,:area,:reporting_category,:ndp_objective,:risk_rating)
+                  @departmental_sdbips = DepartmentalSdbip.search_subdepartment_kpis(params[:department_id],params[:subdepartment_id],params[:kpi_type_id],params[:start_date],params[:end_date])#.includes(:capital_project,:department,:subdepartment,:kpi_type,:kpi_owner,:kpi_concept,:kpi_calculation_type,:mscore_classification,:kpa,:strategic_objective,:national_outcome,:ward,:area,:reporting_category,:ndp_objective,:risk_rating)
                   if !@departmental_sdbips.blank?
-                    @departmental_sdbips= @departmental_sdbips.paginate(page: params[:page],per_page: 10)#.includes(:capital_project,:department,:subdepartment,:kpi_type,:kpi_owner,:kpi_concept,:kpi_calculation_type,:mscore_classification,:predetermined_objective,:kpa,:strategic_objective,:national_outcome,:ward,:area,:reporting_category,:ndp_objective,:risk_rating)
+                    @departmental_sdbips= @departmental_sdbips.paginate(page: params[:page],per_page: 10)#.includes(:capital_project,:department,:subdepartment,:kpi_type,:kpi_owner,:kpi_concept,:kpi_calculation_type,:mscore_classification,:kpa,:strategic_objective,:national_outcome,:ward,:area,:reporting_category,:ndp_objective,:risk_rating)
                   end
         else
 
@@ -58,23 +58,23 @@ class DepartmentalSdbipsController < ApplicationController
            if !current_user.role.blank? || current_user.admin?
 
              if current_user.admin? || current_user.role.audit_log_reporting? || current_user.role.top_layer_administrator? || current_user.role.assurance_provider? || current_user.role.secondary_time_period? || current_user.role.finance_admin?
-                @departmental_sdbips = DepartmentalSdbip.paginate(:per_page => 10, :page => params[:page]).includes(:capital_project,:department,:subdepartment,:kpi_type,:kpi_owner,:kpi_concept,:kpi_calculation_type,:mscore_classification,:predetermined_objective,:kpa,:strategic_objective,:national_outcome,:ward,:area,:reporting_category,:ndp_objective,:risk_rating)
+                @departmental_sdbips = DepartmentalSdbip.paginate(:per_page => 10, :page => params[:page]).includes(:capital_project,:department,:subdepartment,:kpi_type,:kpi_owner,:kpi_concept,:kpi_calculation_type,:mscore_classification,:kpa,:strategic_objective,:national_outcome,:ward,:area,:reporting_category,:ndp_objective,:risk_rating,:kpi_results,:assurances)
 
               elsif current_user.role.kpi_owner? && current_user.departmental_administrator.blank?
                 kpi_id = current_user.role.kpi_owner_id
-                @departmental_sdbips = DepartmentalSdbip.where(kpi_owner_id: kpi_id).paginate(:per_page => 10, :page => params[:page]).includes(:capital_project,:department,:subdepartment,:kpi_type,:kpi_owner,:kpi_concept,:kpi_calculation_type,:mscore_classification,:predetermined_objective,:kpa,:strategic_objective,:national_outcome,:ward,:area,:reporting_category,:ndp_objective,:risk_rating)
+                @departmental_sdbips = DepartmentalSdbip.where(kpi_owner_id: kpi_id).paginate(:per_page => 10, :page => params[:page]).includes(:capital_project,:department,:subdepartment,:kpi_type,:kpi_owner,:kpi_concept,:kpi_calculation_type,:mscore_classification,:kpa,:strategic_objective,:national_outcome,:ward,:area,:reporting_category,:ndp_objective,:risk_rating)
 
               elsif !current_user.role.kpi_owner? && !current_user.departmental_administrator.blank?
                 current_user.departmental_administrator.each do |dept_id|
                   kpi_id = dept_id.department_id
                 end
-                @departmental_sdbips = DepartmentalSdbip.where(department_id: [kpi_id]).paginate(:per_page => 10, :page => params[:page]).includes(:capital_project,:department,:subdepartment,:kpi_type,:kpi_owner,:kpi_concept,:kpi_calculation_type,:mscore_classification,:predetermined_objective,:kpa,:strategic_objective,:national_outcome,:ward,:area,:reporting_category,:ndp_objective,:risk_rating)
+                @departmental_sdbips = DepartmentalSdbip.where(department_id: [kpi_id]).paginate(:per_page => 10, :page => params[:page]).includes(:capital_project,:department,:subdepartment,:kpi_type,:kpi_owner,:kpi_concept,:kpi_calculation_type,:mscore_classification,:kpa,:strategic_objective,:national_outcome,:ward,:area,:reporting_category,:ndp_objective,:risk_rating)
 
               elsif current_user.role.kpi_owner? && current_user.subdepartmental_administrator.blank?
                 kpi_id = nil
                   kpi_id = current_user.role.kpi_owner_id
 
-                @departmental_sdbips = DepartmentalSdbip.where(kpi_owner_id: kpi_id).paginate(:per_page => 10, :page => params[:page]).includes(:capital_project,:department,:subdepartment,:kpi_type,:kpi_owner,:kpi_concept,:kpi_calculation_type,:mscore_classification,:predetermined_objective,:kpa,:strategic_objective,:national_outcome,:ward,:area,:reporting_category,:ndp_objective,:risk_rating)
+                @departmental_sdbips = DepartmentalSdbip.where(kpi_owner_id: kpi_id).paginate(:per_page => 10, :page => params[:page]).includes(:capital_project,:department,:subdepartment,:kpi_type,:kpi_owner,:kpi_concept,:kpi_calculation_type,:mscore_classification,:kpa,:strategic_objective,:national_outcome,:ward,:area,:reporting_category,:ndp_objective,:risk_rating)
 
               elsif !current_user.subdepartmental_administrator.blank?
                 department_id = nil
@@ -84,21 +84,21 @@ class DepartmentalSdbipsController < ApplicationController
                   subdepartment_id = dept_id.subdepartment_id
                 end
 
-                @departmental_sdbips = DepartmentalSdbip.where(department_id: department_id).paginate(:per_page => 10, :page => params[:page]).includes(:capital_project,:department,:subdepartment,:kpi_type,:kpi_owner,:kpi_concept,:kpi_calculation_type,:mscore_classification,:predetermined_objective,:kpa,:strategic_objective,:national_outcome,:ward,:area,:reporting_category,:ndp_objective,:risk_rating)
+                @departmental_sdbips = DepartmentalSdbip.where(department_id: department_id).paginate(:per_page => 10, :page => params[:page]).includes(:capital_project,:department,:subdepartment,:kpi_type,:kpi_owner,:kpi_concept,:kpi_calculation_type,:mscore_classification,:kpa,:strategic_objective,:national_outcome,:ward,:area,:reporting_category,:ndp_objective,:risk_rating)
 
               elsif !current_user.role.kpi_owner? && !current_user.subdepartmental_administrator.blank?
                 kpi_id = nil
                 current_user.subdepartmental_administrator.each do |dept_id|
                   kpi_id = dept_id.subdepartment_id
                 end
-                @departmental_sdbips = DepartmentalSdbip.where(subdepartment_id: kpi_id).paginate(:per_page => 10, :page => params[:page]).includes(:capital_project,:department,:subdepartment,:kpi_type,:kpi_owner,:kpi_concept,:kpi_calculation_type,:mscore_classification,:predetermined_objective,:kpa,:strategic_objective,:national_outcome,:ward,:area,:reporting_category,:ndp_objective,:risk_rating)
+                @departmental_sdbips = DepartmentalSdbip.where(subdepartment_id: kpi_id).paginate(:per_page => 10, :page => params[:page]).includes(:capital_project,:department,:subdepartment,:kpi_type,:kpi_owner,:kpi_concept,:kpi_calculation_type,:mscore_classification,:kpa,:strategic_objective,:national_outcome,:ward,:area,:reporting_category,:ndp_objective,:risk_rating)
 
               elsif current_user.role.kpi_owner? && !current_user.subdepartmental_administrator.blank?
                 kpi_id = nil
                 current_user.subdepartmental_administrator.each do |dept_id|
                   kpi_id = dept_id.subdepartment_id
                 end
-                @departmental_sdbips = DepartmentalSdbip.where(subdepartment_id: kpi_id).paginate(:per_page => 10, :page => params[:page]).includes(:capital_project,:department,:subdepartment,:kpi_type,:kpi_owner,:kpi_concept,:kpi_calculation_type,:mscore_classification,:predetermined_objective,:kpa,:strategic_objective,:national_outcome,:ward,:area,:reporting_category,:ndp_objective,:risk_rating)
+                @departmental_sdbips = DepartmentalSdbip.where(subdepartment_id: kpi_id).paginate(:per_page => 10, :page => params[:page]).includes(:capital_project,:department,:subdepartment,:kpi_type,:kpi_owner,:kpi_concept,:kpi_calculation_type,:mscore_classification,:kpa,:strategic_objective,:national_outcome,:ward,:area,:reporting_category,:ndp_objective,:risk_rating)
 
 
               elsif current_user.role.kpi_owner? && !current_user.departmental_administrator.blank?
@@ -106,7 +106,7 @@ class DepartmentalSdbipsController < ApplicationController
                 current_user.departmental_administrator.each do |dept_id|
                   kpi_id = dept_id.department_id
                 end
-                @departmental_sdbips = DepartmentalSdbip.where(department_id: kpi_id).paginate(:per_page => 10, :page => params[:page]).includes(:capital_project,:department,:subdepartment,:kpi_type,:kpi_owner,:kpi_concept,:kpi_calculation_type,:mscore_classification,:predetermined_objective,:kpa,:strategic_objective,:national_outcome,:ward,:area,:reporting_category,:ndp_objective,:risk_rating)
+                @departmental_sdbips = DepartmentalSdbip.where(department_id: kpi_id).paginate(:per_page => 10, :page => params[:page]).includes(:capital_project,:department,:subdepartment,:kpi_type,:kpi_owner,:kpi_concept,:kpi_calculation_type,:mscore_classification,:kpa,:strategic_objective,:national_outcome,:ward,:area,:reporting_category,:ndp_objective,:risk_rating)
 
               else
 
@@ -121,7 +121,8 @@ class DepartmentalSdbipsController < ApplicationController
     format.xls  { send_data @departmental_sdbips_to_file.to_csv(col_sep: "\t") }
     end
 end
-
+  def restore_kpi
+  end
   def show
     @departmental_sdbip = DepartmentalSdbip.find(params[:id])
   end
@@ -148,113 +149,13 @@ end
       format.js
     end
   end
-  def generate_graphs
-    #if params[]
-      @departmental_sdbips = DepartmentalSdbip.order(performance_standard: :asc)
 
-
-    @kpi_not_yet_measured = DepartmentalSdbip.where("performance_standard = ?", "KPI Not Yet Measured")
-    @kpi_measured = DepartmentalSdbip.where("performance_standard != ?", "KPI Measured")
-    @kpi_not_met = DepartmentalSdbip.where("performance_standard = ?", "KPI Not Met")
-    @kpi_almost_met = DepartmentalSdbip.where("performance_standard = ?", "KPI Almost Met")
-    @kpi_met = DepartmentalSdbip.where("performance_standard = ?", "KPI Met")
-    @kpi_well_met = DepartmentalSdbip.where("performance_standard = ?", "KPI Well Met")
-    @kpi_extremely_well_met = DepartmentalSdbip.where("performance_standard = ?", "KPI Extremely Well Met")
-
-    @get_all_kpis = DepartmentalSdbip.all
-
-    @get_performance_standard = DepartmentalSdbip.where("performance_standard = ?", @performance_standard)
-
-    @get_municipal_manager = DepartmentalSdbip.where("department_id = ?", 1)
-    @get_financial_services = DepartmentalSdbip.where("department_id = ?", 2)
-    @get_community_services = DepartmentalSdbip.where("department_id = ?", 3)
-    @get_corporate_services = DepartmentalSdbip.where("department_id = ?", 4)
-    @get_technical_services = DepartmentalSdbip.where("department_id = ?", 5)
-    @get_planning_and_development = DepartmentalSdbip.where("department_id = ?", 6)
-
-    @get_basic_service_delivery = DepartmentalSdbip.where("kpa_id = ?", 1)
-    @get_good_governance = DepartmentalSdbip.where("kpa_id = ?", 2)
-    @get_economic_development = DepartmentalSdbip.where("kpa_id = ?", 3)
-    @get_financial_viability = DepartmentalSdbip.where("kpa_id = ?", 4)
-    @get_municipal_transformation = DepartmentalSdbip.where("kpa_id = ?", 5)
-
-    @kpi_not_met_municipal_manager = DepartmentalSdbip.where("department_id = 1 AND performance_standard = 'KPI Not Met'")
-    @kpi_almost_met_municipal_manager = DepartmentalSdbip.where("department_id = 1 AND performance_standard = 'KPI Almost Met'")
-    @kpi_met_municipal_manager = DepartmentalSdbip.where("department_id = 1 AND performance_standard = 'KPI Met'")
-    @kpi_well_met_municipal_manager = DepartmentalSdbip.where("department_id = 1 AND performance_standard = 'KPI Well Met'")
-    @kpi_extremely_well_met_municipal_manager = DepartmentalSdbip.where("department_id = 1 AND performance_standard = 'KPI Extremely Well Met'")
-
-    @kpi_not_met_financial_services = DepartmentalSdbip.where("department_id = 2 AND performance_standard = 'KPI Not Met'")
-    @kpi_almost_met_financial_services = DepartmentalSdbip.where("department_id = 2 AND performance_standard = 'KPI Almost Met'")
-    @kpi_met_financial_services = DepartmentalSdbip.where("department_id = 2 AND performance_standard = 'KPI Met'")
-    @kpi_well_met_financial_services = DepartmentalSdbip.where("department_id = 2 AND performance_standard = 'KPI Well Met'")
-    @kpi_extremely_well_met_financial_services = DepartmentalSdbip.where("department_id = 2 AND performance_standard = 'KPI Extremely Well Met'")
-
-    @kpi_not_met_community_services = DepartmentalSdbip.where("department_id = 3 AND performance_standard = 'KPI Not Met'")
-    @kpi_almost_met_community_services = DepartmentalSdbip.where("department_id = 3 AND performance_standard = 'KPI Almost Met'")
-    @kpi_met_community_services = DepartmentalSdbip.where("department_id = 3 AND performance_standard = 'KPI Met'")
-    @kpi_well_met_community_services = DepartmentalSdbip.where("department_id = 3 AND performance_standard = 'KPI Well Met'")
-    @kpi_extremely_well_met_community_services = DepartmentalSdbip.where("department_id = 3 AND performance_standard = 'KPI Extremely Well Met'")
-
-    @kpi_not_met_corporate_services = DepartmentalSdbip.where("department_id = 4 AND performance_standard = 'KPI Not Met'")
-    @kpi_almost_met_corporate_services = DepartmentalSdbip.where("department_id = 4 AND performance_standard = 'KPI Almost Met'")
-    @kpi_met_corporate_services = DepartmentalSdbip.where("department_id = 4 AND performance_standard = 'KPI Met'")
-    @kpi_well_met_corporate_services = DepartmentalSdbip.where("department_id = 4 AND performance_standard = 'KPI Well Met'")
-    @kpi_extremely_well_met_corporate_services = DepartmentalSdbip.where("department_id = 4 AND performance_standard = 'KPI Extremely Well Met'")
-
-    @kpi_not_met_technical_services = DepartmentalSdbip.where("department_id = 5 AND performance_standard = 'KPI Not Met'")
-    @kpi_almost_met_technical_services = DepartmentalSdbip.where("department_id = 5 AND performance_standard = 'KPI Almost Met'")
-    @kpi_met_technical_services = DepartmentalSdbip.where("department_id = 5 AND performance_standard = 'KPI Met'")
-    @kpi_well_met_technical_services = DepartmentalSdbip.where("department_id = 5 AND performance_standard = 'KPI Well Met'")
-    @kpi_extremely_well_met_technical_services = DepartmentalSdbip.where("department_id = 5 AND performance_standard = 'KPI Extremely Well Met'")
-
-    @kpi_not_met_planning_and_development = DepartmentalSdbip.where("department_id = 6 AND performance_standard = 'KPI Not Met'")
-    @kpi_almost_met_planning_and_development = DepartmentalSdbip.where("department_id = 6 AND performance_standard = 'KPI Almost Met'")
-    @kpi_met_planning_and_development = DepartmentalSdbip.where("department_id = 6 AND performance_standard = 'KPI Met'")
-    @kpi_well_met_planning_and_development = DepartmentalSdbip.where("department_id = 6 AND performance_standard = 'KPI Well Met'")
-    @kpi_extremely_well_met_planning_and_development = DepartmentalSdbip.where("department_id = 6 AND performance_standard = 'KPI Extremely Well Met'")
-
-    @kpi_not_met_basic_service_delivery = DepartmentalSdbip.where("kpa_id = 1 AND performance_standard = 'KPI Not Met'")
-    @kpi_almost_met_basic_service_delivery = DepartmentalSdbip.where("kpa_id = 1 AND performance_standard = 'KPI Almost Met'")
-    @kpi_met_basic_service_delivery = DepartmentalSdbip.where("kpa_id = 1 AND performance_standard = 'KPI Met'")
-    @kpi_well_met_basic_service_delivery  = DepartmentalSdbip.where("kpa_id = 1 AND performance_standard = 'KPI Well Met'")
-    @kpi_extremely_well_met_basic_service_delivery= DepartmentalSdbip.where("kpa_id = 1 AND performance_standard = 'KPI Extremely Well Met'")
-
-    @kpi_not_met_good_governance = DepartmentalSdbip.where("kpa_id = 2 AND performance_standard = 'KPI Not Met'")
-    @kpi_almost_met_good_governance = DepartmentalSdbip.where("kpa_id = 2 AND performance_standard = 'KPI Almost Met'")
-    @kpi_met_good_governance = DepartmentalSdbip.where("kpa_id = 2 AND performance_standard = 'KPI Met'")
-    @kpi_well_met_good_governance  = DepartmentalSdbip.where("kpa_id = 2 AND performance_standard = 'KPI Well Met'")
-    @kpi_extremely_well_met_good_governance = DepartmentalSdbip.where("kpa_id = 2 AND performance_standard = 'KPI Extremely Well Met'")
-
-    @kpi_not_met_economic_development = DepartmentalSdbip.where("kpa_id = 3 AND performance_standard = 'KPI Not Met'")
-    @kpi_almost_met_economic_development = DepartmentalSdbip.where("kpa_id = 3 AND performance_standard = 'KPI Almost Met'")
-    @kpi_met_economic_development = DepartmentalSdbip.where("kpa_id = 3 AND performance_standard = 'KPI Met'")
-    @kpi_well_met_economic_development  = DepartmentalSdbip.where("kpa_id = 3 AND performance_standard = 'KPI Well Met'")
-    @kpi_extremely_well_met_economic_development = DepartmentalSdbip.where("kpa_id = 2 AND performance_standard = 'KPI Extremely Well Met'")
-
-    @kpi_not_met_financial_viability = DepartmentalSdbip.where("kpa_id = 4 AND performance_standard = 'KPI Not Met'")
-    @kpi_almost_met_financial_viability = DepartmentalSdbip.where("kpa_id = 4 AND performance_standard = 'KPI Almost Met'")
-    @kpi_met_financial_viability = DepartmentalSdbip.where("kpa_id = 4 AND performance_standard = 'KPI Met'")
-    @kpi_well_met_financial_viability  = DepartmentalSdbip.where("kpa_id = 4 AND performance_standard = 'KPI Well Met'")
-    @kpi_extremely_well_met_financial_viability = DepartmentalSdbip.where("kpa_id = 4 AND performance_standard = 'KPI Extremely Well Met'")
-
-    @kpi_not_met_municipal_transformation = DepartmentalSdbip.where("kpa_id = 5 AND performance_standard = 'KPI Not Met'")
-    @kpi_almost_met_municipal_transformation = DepartmentalSdbip.where("kpa_id = 5 AND performance_standard = 'KPI Almost Met'")
-    @kpi_met_municipal_transformation = DepartmentalSdbip.where("kpa_id = 5 AND performance_standard = 'KPI Met'")
-    @kpi_well_met_municipal_transformation = DepartmentalSdbip.where("kpa_id = 5 AND performance_standard = 'KPI Well Met'")
-    @kpi_extremely_well_met_municipal_transformation = DepartmentalSdbip.where("kpa_id = 5 AND performance_standard = 'KPI Extremely Well Met'")
-
-    #selected_array_of_values = selected_values
-    #@selected_headers = selected_headings
-    #@departmental_sdbip_progresses = @sdbip_progresses
-  #end
-
-  end
   def audit_performance
      @departmental_sdbip = DepartmentalSdbip.find(params[:id])
   end
   def edit
     @departmental_sdbip = DepartmentalSdbip.find(params[:id])
+
   end
 
   def edit_kpis
@@ -263,10 +164,13 @@ end
 
   def update
     @departmental_sdbip = DepartmentalSdbip.find(params[:id])
+    #@departmental_sdbip.kpi_results.user_id = current_user.id
+    #@departmental_sdbip.assurances.user_id = current_user.id
+
     if @departmental_sdbip.update(departmental_sdbip_params)
         #audit_log(departmental_sdbip_id)
         flash[:success] = "KPI was successfully updated"
-        redirect_to departmental_sdbips_path
+        redirect_to :back
     else
       flash[:danger] = "KPI was not updated"
       redirect_to :back
@@ -317,7 +221,7 @@ end
           :reporting_category_id, :provincial_strategic_outcome_id,
           :source_of_evidence, :annual_target,:first_quarter_target,:second_quarter_target,:third_quarter_target,:fourth_quarter_target,:first_quarter_actual,:second_quarter_actual,:third_quarter_actual,:fourth_quarter_actual,:first_quarter_poe,:second_quarter_poe,:third_quarter_poe,:fourth_quarter_poe, :budget, :impact, :top_layer_kpi_ref,
            :kpi_calculation_type_id,
-          :kpi_target_type_id, :annual_target, :revised_target,:actual,:poe,:update_status,:assurance,:user_id,:signed_off,:response)
+          :kpi_target_type_id, :annual_target, :revised_target, :assurances_attributes=>[:departmental_sdbip_id,:user_id,:signed_off,:response,:kpi_result_id,:poe], :kpi_results_attributes => [:departmental_sdbip_id,:target,:actual,:kpi_performance_standard,:user_id,:performance_comments,:corrective_measures,:attachments_attributes => [ :kpi_result_id,:name,:_destroy]])
     end
     def logged_in_user
       unless logged_in?
@@ -332,10 +236,11 @@ end
       end
     # Confirms an admin user.
     def admin_user
-      current_user.admin?
+      redirect_to(root_url) unless current_user.admin?# || correct_user?
     end
-    def kpi_owner_user
-      redirect_to(root_url) unless !current_user.role.blank? || current_user.admin?
+    def
+    def correct_user
+       !current_user.role.blank? && (current_user.role.audit_log_reporting? || current_user.role.assurance_provider? || !current_user.kpi_owner.blank? && current_user.role.kpi_owner? || !current_user.departmental_administrator.blank? || !current_user.subdepartmental_administrator.blank? )
     end
 
 end

@@ -20,7 +20,7 @@ $(function() {
       <li><a href="#revenue_by_source_report" data-toggle="tab">Revenue By Source</a></li>
 		 <li><a href="#charts_per_department" data-toggle="tab">YTD Dashboard</a></li>
 		 <% if current_user.admin? %>
-		  <li><a href="#audit_logs" data-toggle="tab">Audit Log Report</a></li>
+		  <li><a href="#audit_logs" data-toggle="tab">Assurance</a></li>
 			<% end %>
 </ul><!-- nav nav-tabs -->
 	</div><!-- tabbable tabs -->
@@ -70,7 +70,7 @@ function unique(list) {
 
           	}
 					else{
-						
+
           	result.push(e);
           	}
         }

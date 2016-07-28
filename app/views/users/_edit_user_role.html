@@ -25,13 +25,10 @@
 <br/>
 
     <%= f.label :kpi_owner, class: "checkbox inline" do %>
-		  <%= f.check_box :kpi_owner,:id=>"kpi_owner_checkbox" %>
+		  <%= f.check_box :kpi_owner %>
       <span>KPI Admin</span>
     <% end %>
-    <div id="kpi_owner_select">
-      <%= f.label :kpi_owner_id,"Select KPI Admin Title:" %>
-      <%= f.select :kpi_owner_id, KpiOwner.all.collect {|x| [x.name, x.id]},{}, {class: "form-control"} %>
-    </div>
+
     <%= f.label :finance_admin, class: "checkbox inline" do %>
 		  <%= f.check_box :finance_admin %>
       <span>Finance Admin</span>
@@ -63,26 +60,7 @@
 
 <% end %>
 
-<script type="text/javascript">
-        $(document).ready(function(){
-            $('input[type="checkbox"]').click(function(){
-                if($('#kpi_owner_checkbox').prop("checked") == true){
-                    $('#kpi_owner_select').show();
-                }
-                if($('#kpi_owner_checkbox').prop("checked") == false){
-                  $("#kpi_owner_select").hide();
-                }
-            });
-            <% if @role.new_record? %>
-              toggleFields();
-              <% end %>
-        });
-
-        function toggleFields(){
-          $("#kpi_owner_select").hide();
-        }
-    </script>
-          <div class = "modal-footer">
+      <div class = "modal-footer">
 
         </div>
     </div>

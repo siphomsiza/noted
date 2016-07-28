@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  departmental_sdbip_id: 1
+  user_id: 1
+  target: 9.99
+  actual: 9.99
+  corrective_measures: MyText
+  performance_comments: MyText
+  performance_standard: MyString
+
+two:
+  departmental_sdbip_id: 1
+  user_id: 1
+  target: 9.99
+  actual: 9.99
+  corrective_measures: MyText
+  performance_comments: MyText
+  performance_standard: MyString

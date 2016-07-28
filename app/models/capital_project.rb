@@ -5,7 +5,7 @@ class CapitalProject < ActiveRecord::Base
   belongs_to :mscore_classification
   belongs_to :area
   belongs_to :ward
-
+  has_one :monthly_cashflow
   validates :subdepartment, :mscore_classification, :project_name,:departmental_sdbip_id, :presence => true
 
   def self.import(file)

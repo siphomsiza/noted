@@ -7,15 +7,15 @@
 <div class="modal-body">
   <div class="panel panel-default col-md-6">
       <div class="panel-body">
-        <%= column_chart @departmental_sdbips.group(:performance_standard,:subdepartment_name).count, width: "400px", height: "400px", stacked: true, colors: ["orange","darkblue", "limegreen", "red", "darkgreen"] %>
+        <%= pie_chart @departmental_sdbips.group(:performance_standard).count, width: "400px", height: "400px", colors: @colours %>
+
       </div>
       <!-- /.panel-body -->
     </div>
 
    <div class="panel panel-default col-md-6">
       <div class="panel-body">
-
-        <%= pie_chart @departmental_sdbips.group(:performance_standard).count, width: "400px", height: "400px", colors: ["orange","darkblue", "limegreen", "red", "darkgreen"] %>
+        <%= column_chart @departmental_sdbips.group(:performance_standard,:subdepartment_name).count, width: "400px", height: "400px", stacked: true, colors: @colours %>
       </div>
       <!-- /.panel-body -->
     </div>

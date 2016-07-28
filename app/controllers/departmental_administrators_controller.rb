@@ -5,11 +5,14 @@ class DepartmentalAdministratorsController < ApplicationController
   # GET /departmental_administrators
   # GET /departmental_administrators.json
   def index
+    @subdepartments = Subdepartment.includes(subdepartmental_administrators:[:user])
+    @departments = Department.includes(top_layer_administrators:[:user],departmental_administrators:[:user])
+    @kpi_owners = KpiOwner.includes(:user).paginate(page: params[:page],per_page: 10)
+    @top_layer_administrator = TopLayerAdministrator.new
+    #@departments = Department.includes(:top_layer_administrators).paginate(page: params[:page],per_page: 10)
+    @kpi_owner = KpiOwner.new
     @departmental_administrator = DepartmentalAdministrator.new
-    @departmental_administrators = DepartmentalAdministrator.includes(:user,:department)
     @subdepartmental_administrator = SubdepartmentalAdministrator.new
-    @subdepartmental_administrators = SubdepartmentalAdministrator.includes(:user,:subdepartment)
-
   end
 
   # GET /departmental_administrators/1
@@ -30,12 +33,13 @@ class DepartmentalAdministratorsController < ApplicationController
   # POST /departmental_administrators.json
   def create
     @departmental_administrator = DepartmentalAdministrator.new(departmental_administrator_params)
-
+    begin
       if @departmental_administrator.save
         flash[:success] = 'Departmental administrator was successfully created.'
         redirect_to departmental_administrators_url
-      else
-        flash[:danger] = 'Departmental administrator was not created.'
+      end
+    rescue => e
+        flash[:danger] = "Departmental administrator was not created #{e.message}."
         redirect_to departmental_administrators_url
      end
   end

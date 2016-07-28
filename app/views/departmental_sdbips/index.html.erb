@@ -1,4 +1,4 @@
-<% provide(:title, 'All Departmental SDBIPs') %>
+<% provide(:title, 'Departmental SDBIPs') %>
 <script>
 $(function() {
 	//highlight the current nav
@@ -29,8 +29,6 @@ $(function() {
 </div>
 
 <div class="row">
-
-
 					<div class="col col-lg-12">
 
 						<div class="tabbable tabs third-level-navs" id="departmental_sdbips-tabs">
@@ -40,35 +38,32 @@ $(function() {
 								<li class="active">
 									<a href = "#view_sdbips" data-toggle = "tab"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;View KPIs</a>
 								</li>
-								<% if current_user.admin? %>
+								<% if current_user.admin? || (current_user.subdepartmental_administrator.blank? && current_user.subdepartmental_administrator.can_edit?) || (current_user.departmental_administrator.blank? && current_user.departmental_administrator.can_edit?) %>
 								<li>
-									<a href = "#edit_kpis" data-toggle = "tab"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;Edit KPIs</a>
+									<a href = "#edit_kpis" data-toggle = "tab"><span class="glyphicon glyphicon-pencil"></span>&nbsp;Edit KPIs</a>
 								</li>
 								<% end %>
 								<li>
-									<a href = "#manage_sdbips" data-toggle = "tab"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;Update KPIs</a>
+									<a href = "#manage_sdbips" data-toggle = "tab"><span class="glyphicon glyphicon-edit"></span>&nbsp;Update KPIs</a>
 								</li>
 								<li>
 									<a href = "#new_sdbip" data-toggle = "tab">
 										<span class="glyphicon glyphicon-plus-sign"></span>&nbsp;Add KPI
 									</a>
 								</li>
-							</ul><!-- nav nav-tabs -->
-						</div><!-- tabbable tabs -->
-
-						<div id = "myTabContent" class = "tab-content">
-
-							<div class = "tab-pane active fade in" id = "view_sdbips">
-								<ul class="sdbips">
-									<% if @departmental_sdbips.blank? && DepartmentalSdbip.blank? %>
-									<p> There are no Departmental SDBIPs currently in the system </p>
-									<% elsif @departmental_sdbips.blank? && !DepartmentalSdbip.blank? %>
-									<p> You currently have no Departmental SDBIP </p>
-									<% else %>
-									<div class="row">
-										<div class="col col-lg-12"><br/>
-									<div class="btn-group pull-right">
-												<button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
+								<% if current_user.admin? %>
+								<li>
+									<a href = "#deleted_sdbip" data-toggle = "tab">
+										<span class="glyphicon glyphicon-trash"></span>&nbsp;Deleted KPIs
+									</a>
+								</li>
+								<% end %>
+								<li class="btn-group pull-right">
+									<% if current_user.admin? %>
+													<button class="btn btn-sm" data-toggle="modal" data-target="#importModal" title="Click to upload SDBIP.">
+														<span class="glyphicon glyphicon-upload"></span>&nbsp;Import SDBIP</button>&nbsp;&nbsp;
+									<% end %>
+												<button type="button" class="btn btn-sm dropdown-toggle" data-toggle="dropdown">
 													<span class="glyphicon glyphicon-download"></span>&nbsp;Export SDBIP
 													<span class="caret"></span>
 												</button>
@@ -76,13 +71,22 @@ $(function() {
 													<li><%= link_to "CSV format", departmental_sdbips_path(format: "csv") %></li>
 													<li><%= link_to "Excel format", departmental_sdbips_path(format: "xls") %></li>
 												</ul>
-											</div><br/>
-											<hr/>
-										</div>
+								</li>
+							</ul><!-- nav nav-tabs -->
+						</div><!-- tabbable tabs -->
 
+						<div id = "myTabContent" class = "tab-content">
+
+							<div class = "tab-pane active fade in" id = "view_sdbips">
+							<br/>
+									<% if @departmental_sdbips.blank? && DepartmentalSdbip.blank? %>
+									<p> There are no Departmental SDBIPs currently in the system </p>
+									<% elsif @departmental_sdbips.blank? && !DepartmentalSdbip.blank? %>
+									<p> You currently have no Departmental SDBIP </p>
+									<% else %>
 									<%= form_tag departmental_sdbips_path, method: :get do |f| %>
 										<div class="row">
-											<div class="col-lg-12">
+											<div class="col col-lg-12">
 												<div class="col-lg-3">
 													<label class="col control-label">Who:</label>&nbsp;<%= select_tag :subdepartment_id, grouped_options_for_select(@departments.map{ |group| [group.name, group.subdepartments.map{ |c| [c.subdepartment_name, c.id] } ] }),{class:'form-control'} %>
 												</div>
@@ -126,162 +130,22 @@ $(function() {
 										<span class="glyphicon glyphicon-filter"></span>&nbsp;Custom View
 									</button>
 								</h3>
-								<div id="grpChkBox" class="collapse"><hr/>
-											<div class="row">
-								<div class="col-lg-12">
-								<div class="checkbox col-lg-2">
-								<label><input type="checkbox" id="kpi-owner-checkbox" name="ref" value="">&nbsp,&nbsp;&nbsp;&nbsp;Ref</label>
-								</div>
-							<div class="checkbox  col-lg-2">
-								<label><input type="checkbox" id="unit-of-measurement" name="department" value="">&nbsp,&nbsp;&nbsp;&nbsp;Department</label>
-							</div>
-							<div class="checkbox col-lg-2"><label><input type="checkbox" id="source-of-evidence" name="sub-department" value="">&nbsp,&nbsp;&nbsp;&nbsp;Sub-Department</label> </div>
-							<div class="checkbox col-lg-2"> <label><input type="checkbox" id="ndp-objectives" name="kpi" value="">&nbsp,&nbsp;&nbsp;&nbsp;KPI</label> </div>
-							<div class="checkbox col-lg-2">
-								<label><input type="checkbox" id="capital-project" name="kpi-ref" value="">&nbsp,&nbsp;&nbsp;&nbsp;KPI Ref</label>
-							</div>
-							<div class="checkbox col-lg-2">
-								<label><input type="checkbox" id="reporting-category" name="predetermined-objectives" value="" >&nbsp,&nbsp;&nbsp;&nbsp;Predetermined Objectives</label>
-							</div>
-							</div>
-							</div>
+								<%= render 'custom_view' %>
+
 								<div class="row">
-								<div class="col-lg-12">
-								<div class="checkbox col-lg-2">
-								<label><input type="checkbox" id="kpi-owner-checkbox" name="kpi-owner" value="">&nbsp,&nbsp;&nbsp;&nbsp;KPI Owner</label>
-								</div>
-							<div class="checkbox  col-lg-2">
-								<label><input type="checkbox" id="unit-of-measurement" name="unit-of-measurement" value="">&nbsp,&nbsp;&nbsp;&nbsp;Unit of Measurement</label>
-							</div>
-							<div class="checkbox col-lg-2"><label><input type="checkbox" id="source-of-evidence" name="source-of-evidence" value="">&nbsp,&nbsp;&nbsp;&nbsp;Source of Evidence</label> </div>
-							<div class="checkbox col-lg-2"> <label><input type="checkbox" id="ndp-objectives" name="ndp-objectives" value="">&nbsp,&nbsp;&nbsp;&nbsp;NDP Objectives</label> </div>
-							<div class="checkbox col-lg-2">
-								<label><input type="checkbox" id="capital-project" name="capital-project" value="">&nbsp,&nbsp;&nbsp;&nbsp;Capital Project</label>
-							</div>
-							<div class="checkbox col-lg-2">
-								<label><input type="checkbox" id="reporting-category" name="reporting-category" value="">&nbsp,&nbsp;&nbsp;&nbsp;Reporting Category</label>
-							</div>
-							</div>
-							</div>
-							<div class="row">
-							<div class="col-lg-12">
-							<div class="checkbox col-lg-2">
-								<label><input type="checkbox" id="strategic-objectives" name="strategic-objectives" value="">&nbsp,&nbsp;&nbsp;&nbsp;Strategic Objectives</label>
-							</div>
-							<div class="checkbox col-lg-2">
-								<label><input type="checkbox" id="mscore-classification" name="mscore-classification" value="">&nbsp,&nbsp;&nbsp;&nbsp;M-score Classification</label>
-							</div>
-
-							<div class="checkbox col-lg-2">
-								<label><input type="checkbox" id="baseline" name="baseline" value="">&nbsp,&nbsp;&nbsp;&nbsp;Baseline</label>
-							</div>
-							<div class="checkbox col-lg-2">
-								<label><input type="checkbox" id="risk-rating" name="risk-rating" value="">&nbsp,&nbsp;&nbsp;&nbsp;Risk Rating</label>
-							</div>
-							<div class="checkbox col-lg-2">
-								<label><input type="checkbox" id="idp-ref" name="idp-ref" value="">&nbsp,&nbsp;&nbsp;&nbsp;IDP Ref</label>
-							</div>
-							<div class="checkbox col-lg-2">
-								<label><input type="checkbox" id="kpi-concept" name="kpi-concept" value="">&nbsp,&nbsp;&nbsp;&nbsp;KPI Concept</label>
-							</div>
-							</div>
-							</div>
-							<div class="row">
-							<div class="col-lg-12">
-								<div class="checkbox col-lg-2">
-									<label><input type="checkbox" id="annual-target" name="annual-target" value="">&nbsp,&nbsp;&nbsp;&nbsp;Annual Target</label>
-								</div>
-								<div class="checkbox col-lg-2">
-									<label><input type="checkbox" id="revised-target" name="revised-target" value="">&nbsp,&nbsp;&nbsp;&nbsp;Revised Target</label>
-								</div>
-							<div class="checkbox col-lg-2">
-								<label><input type="checkbox" id="first-quarter-target" name="first-quarter-target" value="">&nbsp,&nbsp;&nbsp;&nbsp;1st Quarter</label>
-							</div>
-							<div class="checkbox col-lg-2">
-								<label><input type="checkbox" id="second-quarter-target" name="second-quarter-target" value="">&nbsp,&nbsp;&nbsp;&nbsp;2nd Quarter</label>
-							</div>
-							<div class="checkbox col-lg-2">
-								<label><input type="checkbox" id="third-quarter-target" name="third-quarter-target" value="">&nbsp,&nbsp;&nbsp;&nbsp;3rd Quarter</label>
-							</div>
-							<div class="checkbox col-lg-2">
-								<label><input type="checkbox" id="fourth-quarter-target" name="fourth-quarter-target" value="">&nbsp,&nbsp;&nbsp;&nbsp;4th Quarter</label>
-							</div>
-
-							</div>
-					</div>
-
-							<div class="row">
-							<div class="col-lg-12">
-
-							<div class="checkbox col-lg-2">
-								<label><input type="checkbox" id="national-outcome" name="national-outcome" value="">&nbsp,&nbsp;&nbsp;&nbsp;National Outcome</label>
-							</div>
-
-							<div class="checkbox col-lg-2">
-								<label><input type="checkbox" id="impact" name="impact" value="">&nbsp,&nbsp;&nbsp;&nbsp;Impact</label>
-							</div>
-
-							<div class="checkbox col-lg-2">
-								<label><input type="checkbox" id="provincial-strategic-outcome" name="provincial-strategic-outcome" value="">&nbsp,&nbsp;&nbsp;&nbsp;Provincial Strategic Outcome</label>
-							</div>
-
-							<div class="checkbox col-lg-2">
-								<label><input type="checkbox" id="performance-standard" name="performance-standard" value="">&nbsp,&nbsp;&nbsp;&nbsp;Performance Standard</label>
-							</div>
-
-							<div class="checkbox col-lg-2">
-								<label><input type="checkbox" id="area" name="area" value="">&nbsp,&nbsp;&nbsp;&nbsp;Area</label>
-							</div>
-
-							<div class="checkbox col-lg-2">
-								<label><input type="checkbox" id="ward" name="ward" value="">&nbsp,&nbsp;&nbsp;&nbsp;Ward</label>
-							</div>
-						</div>
-					</div>
-
-							<div class="row">
-							<div class="col-lg-12">
-
-							<div class="checkbox col-lg-2">
-								<label><input type="checkbox" id="past-year-performance" name="past-year-performance" value="">&nbsp,&nbsp;&nbsp;&nbsp;Past Year performance</label>
-							</div>
-
-							<div class="checkbox col-lg-2">
-								<label><input type="checkbox" id="top-layer-ref" name="top-layer-ref" value="">&nbsp,&nbsp;&nbsp;&nbsp;Top layer KPI Ref</label>
-							</div>
-							<div class="checkbox col-lg-2">
-								<label><input type="checkbox" id="kpi-calculation-type" name="kpi-calculation-type" value="">&nbsp,&nbsp;&nbsp;&nbsp;KPI Calculation Type</label>
-							</div>
-							<div class="checkbox col-lg-2">
-								<label><input type="checkbox" id="created-date" name="created-date" value="">&nbsp,&nbsp;&nbsp;&nbsp;Created Date</label>
-							</div>
-							<div class="checkbox col-lg-2">
-								<label><input type="checkbox" name="updated-date" id="updated-date" value="">&nbsp,&nbsp;&nbsp;&nbsp;Updated Date</label>
-
-							</div>
-							<div class="checkbox col-lg-2">
-
-							</div>
-
-					</div>
-			</div>
-
-							</div>
-							</div>
-
-								<% end %>	<br/>
-									<div class="col col-lg-12">
+										<div class="col col-lg-12"><br/>
 
 										<% if !@departmental_sdbips.blank? %>
 
 											<%= render "sdbips" %>
-											<%= will_paginate @departmental_sdbips, :class=>"center" %>
+											<%= will_paginate %>
 
 											<% end %>
 									</div>
-								</ul>
+								</div>
+								<% end %>
 
-							</div>
+				</div>
 							<% if current_user.admin? %>
 							<div class = "tab-pane fade" id = "edit_kpis">
 
@@ -294,8 +158,11 @@ $(function() {
 									<div class="col col-lg-12">
 
 										<% if !@departmental_sdbips.blank? %>
+										<br/>
+											<%= render 'filter' %>
+											<br/>
 											<%= render "update_sdbips" %>
-											<%= will_paginate @departmental_sdbips, :class=>"center" %>
+											<%= will_paginate %>
 										<% else %>
 											<p>There are no kpis for edit.</p>
 										<% end %>
@@ -316,8 +183,11 @@ $(function() {
 									<div class="col col-lg-12">
 
 										<% if !@departmental_sdbips.blank? %>
+										<br/>
+										<%= render 'filter' %>
+										<br/>
 											<%= render "edit_sdbips" %>
-											<%= will_paginate @departmental_sdbips, :class=>"center" %>
+											<%= will_paginate %>
 										<% else %>
 											<p>There are no kpis for update.</p>
 										<% end %>
@@ -327,21 +197,21 @@ $(function() {
 									<% end %>
 							</div>
 							<div class = "tab-pane fade" id = "new_sdbip">
-								<% if current_user.admin? %>
-								<div class="row"><br/>
-									<div class="col col-lg-12">
-												<button class="btn pull-right" data-toggle="modal" data-target="#importModal" title="Click to upload SDBIP.">
-													<span class="glyphicon glyphicon-upload"></span>&nbsp;Import SDBIP</button>&nbsp;
-											</div>
-								</div>
-								<% end %>
-											<hr/>
-
 											<h2>New Departmental KPI</h2>
 									<% if current_user.admin? %>
 											<%= render 'form' %>
 									<% else %>
 										<p align="center">You're not eligible to create SDBIPs.</p>
+									<% end %>
+							</div>
+							<div class = "tab-pane fade" id = "deleted_sdbip">
+											<h2>Deleted Departmental KPIs</h2>
+									<% if current_user.admin? %>
+									<% if !@deleted_kpis.blank? %>
+											<%= render 'deleted_kpis' %>
+									<% else %>
+									<p>There are currently no deleted KPIs.</p>
+									<% end %>
 									<% end %>
 							</div>
 
@@ -385,14 +255,43 @@ $(function() {
 
 <script>
 $(document).ready(function() {
+  $(".first-quarter-target").hide();
+	$(".second-quarter-target").hide();
+	$(".third-quarter-target").hide();
+	$(".fourth-quarter-target").hide();
+	$(".kpi-type").hide();
+	$(".kpi-target-type").hide();
+	$(".idf-ref").hide();
+	$(".mscore-classification").hide();
+	$(".national-outcome").hide();
+	$(".strategic-objectives").hide();
+	$(".baseline").hide();
+	$(".performance-standard").hide();
+	$(".risk-rating").hide();
+	$(".kpa").hide();
+	$(".kpi-concept").hide();
+	$(".impact").hide();
+	$(".provincial-strategic-outcome").hide();
+	$(".area").hide();
+	$(".ward").hide();
+	$(".past-year-performance").hide();
+	$(".top-layer-ref").hide();
+	$(".created-date").hide();
+	$(".budget").hide();
+		$(".idp-ref").hide();
+	$(".updated-date").hide();
+	$(".annual-target").hide();
+	$(".revised-target").hide();
+
 	$(function () {
-		var $chk = $("#grpChkBox input:checkbox");
-		var $tbl = $("#sdbips-table");
-		$chk.prop('checked', false);
-		$chk.click(function () {
-			var colToHide = $tbl.find("." + $(this).attr("name"));
+		var chk = $("#grpChkBox input:checkbox");
+		var tbl = $("#sdbips-table");
+		chk.prop('checked', false);
+		chk.click(function () {
+			var colToHide = tbl.find("." + $(this).attr("name"));
 			$(colToHide).toggle();
 		});
 	});
+
 });
 </script>

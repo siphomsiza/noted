@@ -1,4 +1,4 @@
-<% provide(:title, 'Departmental Administrators') %>
+<% provide(:title, 'Administrators') %>
 <script>
 $(function() {
 	//highlight the current nav
@@ -15,8 +15,7 @@ $(function() {
 <li><%= link_to "Master Setup", master_setups_path %></li>
 <li><%= link_to "System Setup", setups_path  %></li>
 <li><%= link_to "Departments", departments_path %></li>
-<li class="active"><%= link_to "Departmental Administrators", departmental_administrators_path %></li>
-<li class="disabled"><%= link_to "Top Layer Administrators", roles_path %></li>
+<li class="active"><%= link_to "Administrators", departmental_administrators_path %></li>
 <li><%= link_to "Headings", headings_path %></li>
 <li><%= link_to "Lists", lists_path %></li>
 <li><%= link_to "Time Periods", sdbip_time_periods_path %></li>
@@ -29,17 +28,25 @@ $(function() {
 			<div class="tabbable tabs third-level-navs" id="roles-tabs">
 				<ul id = "myTab" class = "nav nav-tabs">
 					<li class="active">
+						<a href = "#top_layer_administrators" data-toggle = "tab">Top Layer Administrators</a>
+					</li>
+					<li>
 						<a href = "#departmental_administrators" data-toggle = "tab">Departmental Administrators</a>
 					</li>
 					<li>
 						<a href = "#subdepartmental_administrators" data-toggle = "tab">Subdepartmental Administrators</a>
 					</li>
+					<li>
+						<a href = "#kpi-owners" data-toggle = "tab">KPI Owners</a>
+					</li>
 				</ul><!-- nav nav-tabs -->
 			</div><!-- tabbable tabs -->
 
 			<section class="tab-content">
+				<%= render 'manage_top_layer_administrators'%>
 				<%= render 'manage_departmental_administrators' %>
 				<%= render 'manage_subdepartmental_administrators' %>
+				<%= render 'manage_kpi_owners' %>
 			</section>
 
 	</div>

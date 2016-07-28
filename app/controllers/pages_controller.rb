@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  before_action :logged_in_user, only: [:about,:new,:setup,:dashboard]
+  before_action :logged_in_user, only: [:about,:new,:setup,:dashboard,:introduction]
   before_action :admin_user,     only: [:about,:new,:setup,:dashboard]
   before_action :top_layer_administrator,     only: [:dashboard]
   def home
@@ -19,7 +19,7 @@ class PagesController < ApplicationController
   end
   def dashboard
 
-    @sdbip_time_periods = SdbipTimePeriod.where(["end_date = ? OR end_date = ?",Date.today,Date.today.days_ago(-7)])
+    @sdbip_time_periods = SdbipTimePeriod.where(["period >= ? OR period <= ?",Date.today,Date.today.days_ago(-7)])
     @users = User.all
 
     @departmental_sdbips = DepartmentalSdbip.order(performance_standard: :asc)
@@ -41,7 +41,7 @@ class PagesController < ApplicationController
       $colors.push("red")
     end
     if color.performance_standard.include?("KPI Not Yet Measured")
-      $colors.push("gray")
+      $colors.push("#F4C2C2")
     end
     if color.performance_standard.include?("KPI Well Met")
       $colors.push("darkgreen")

@@ -1,34 +1,48 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:index, :edit, :update, :destroy,:edit_new_user,:edit_active_user]
+  before_action :logged_in_user, only: [:index, :edit,:set_super_user, :update, :destroy,:edit_new_user,:edit_active_user,:set_new_password]
   before_action :correct_user,   only: [:edit, :update,:show]
   before_action :admin_user,     only: [:edit, :update,:destroy,:index,:show,:edit_new_user,:edit_active_user]
-  before_action :set_user, only: [:show, :edit, :update, :destroy,:deactivate,:set_admin,:set_normal_user,:terminate,:restore,:lock_user,:unlock_user,:activate,:edit_new_user,:edit_active_user,:edit_user_profile]
+  before_action :set_user, only: [:show, :edit, :update,:destroy,:deactivate,:set_admin,:set_normal_user,:terminate,:restore,:lock_user,:unlock_user,:activate,:edit_new_user,:edit_active_user,:edit_user_profile]
 
   def index
 
-
-      @locations = MasterSetup.all
       @system_users = User.all
       @user_activities = ActivityLog.where(admin: false).paginate(page: params[:page], per_page: 15)
       @super_user_activities = ActivityLog.where(admin: true).paginate(page: params[:page], per_page: 15)
       @user = User.new
       @users = @system_users.paginate(page: params[:page],per_page: 15).includes(:department)
       @admin_users = @system_users.where(admin: true).paginate( page: params[:page],per_page: 15)
-      @active_users = @system_users.where(status: "Active").paginate( page: params[:page],per_page: 15)
+      @active_users = @system_users.where(activated: true).paginate( page: params[:page],per_page: 15)
       @inactive_users = @system_users.where(activated: false).paginate( page: params[:page],per_page: 15)
       @terminated_users = @system_users.where(terminated: true).paginate(page: params[:page],per_page: 15)
       @new_users = @system_users.where(activated: false).paginate(page: params[:page],per_page: 15)
       @locked_users = @system_users.where("login_attempts >= max_login_attempts").paginate(page: params[:page],per_page: 15)
       @user_login_attempts = @system_users.where("login_count > ? OR login_attempts > ?", 0,0).paginate(page: params[:page],per_page: 15)
-  end
 
+  end
+  def set_new_password
+    @user = User.find(current_user.id)
+  end
   def show
 
   end
 
+  def set_super_user
+    if params[:user_id] && !params[:user_id].blank?
+      @user = User.find(params[:user_id])
+      if @user.update_columns(super_admin: true)
+        flash[:success] = "#{@user.firstname} #{@user.surname} set to super user/admin successfully."
+        redirect_to users_path
+      end
+    else
+      flash[:warning] = "failed to set #{@user.firstname} #{@user.surname} as super user/admin."
+      redirect_to users_path
+    end
+  end
+
   def new
     @user = User.new
-    if @user.update_columns(:new => true, :added_at => Time.zone.now,:status => "new")
+    if @user.update_columns(:new => true, :added_at => Time.zone.now,:status => "New")
       redirect_to users_path
     end
 
@@ -64,15 +78,15 @@ end
   def update
 
     if @user.update_attributes(user_params)
-      flash[:success] = "Profile updated"
+      flash[:success] = "User details updated successfully"
       if admin_user && !correct_user
         redirect_to :back
       elsif !admin_user && correct_user
-        redirect_to :back
+        redirect_to introduction_url
       end
     else
       flash[:danger] = "Profile not updated."
-      redirect_to users_url
+      redirect_to :back
     end
   end
 
@@ -85,7 +99,7 @@ end
   def deactivate
 
     if @user.update_columns(:activated => false, :activated_at => Time.zone.now)
-      flash[:success] = "Account deactivated successfully."
+      flash[:success] = "#{@user.firstname} #{@user.surname}'s account deactivated successfully."
       redirect_to users_path
     end
 
@@ -94,10 +108,10 @@ end
   def set_admin
 
     if @user.update_columns(:admin => true)
-      flash[:success] = "#{@user.firstname} set as System Administrator."
+      flash[:success] = "#{@user.firstname}  #{@user.surname} set as System Administrator."
       redirect_to users_path
     else
-      flash[:danger] = "Failed to set #{@user.firstname} as System Administrator."
+      flash[:danger] = "Failed to set #{@user.firstname}  #{@user.surname} as System Administrator."
       redirect_to :back
     end
   end
@@ -121,7 +135,7 @@ end
       flash[:success] = "User removed as System Administrator successfully."
       redirect_to users_path
     else
-      flash[:danger] = "Failed to remove #{@user.firstname} as System Administrator."
+      flash[:danger] = "Failed to remove #{@user.firstname}  #{@user.surname} as System Administrator."
       redirect_to :back
     end
   end
@@ -150,6 +164,7 @@ end
       max_attempts.to_i
       max_attempts += 1
       if @user.update_columns(:login_attempts=>max_attempts, :activated=> false, :status => "Locked")
+        @user.send_locked_account_email
         flash[:success] = "#{@user.firstname}'s account locked successfully."
         redirect_to users_path
       else
@@ -160,7 +175,8 @@ end
     end
     def unlock_user
 
-      if @user.update_columns(:login_attempts=>0, :activated => true, :status => "Activated")
+      if @user.update_columns(:login_attempts=>0, :activated => true, :status => "Active")
+        @user.send_unlocked_account_email
         flash[:success] = "Unlocked #{@user.firstname}'s account successfully."
         redirect_to users_path
       else

@@ -84,10 +84,31 @@ class DepartmentalSdbipProgressesController < ApplicationController
 
      ####Graphs###
     @departmental_sdbip_progresses = @departmental_sdbip_progresses
-    
+
     @departmental_sdbips = DepartmentalSdbip.order(performance_standard: :asc)
-
-
+    @departments_sdibps = @departmental_sdbips.select(:performance_standard).uniq
+    $colors = []
+    @departments_sdibps.each do |color|
+    if color.performance_standard.include?("KPI Almost Met")
+      $colors.push("orange")
+    end
+    if color.performance_standard.include?("KPI Extremely Well Met")
+      $colors.push("darkblue")
+    end
+    if color.performance_standard.include?("KPI Met")
+      $colors.push("limegreen")
+    end
+    if color.performance_standard.include?("KPI Not Met")
+      $colors.push("red")
+    end
+    if color.performance_standard.include?("KPI Not Yet Measured")
+      $colors.push("#F4C2C2")
+    end
+    if color.performance_standard.include?("KPI Well Met")
+      $colors.push("darkgreen")
+    end
+  end
+    @colours = $colors
     @kpi_not_yet_measured = DepartmentalSdbip.where("performance_standard = ?", "KPI Not Yet Measured")
 
     @kpi_measured = DepartmentalSdbip.where("performance_standard != ?", "KPI Measured")
@@ -194,7 +215,48 @@ class DepartmentalSdbipProgressesController < ApplicationController
       end
     end
   end
+  def generate_graphs
 
+      @graph_value = params[:data_value].to_i
+      if !params[:data_value].blank? && params[:data_value].to_i == 0
+        @departmental_sdbips = DepartmentalSdbip.includes(:department)
+        @departmental_sdbips_kpa = @departmental_sdbips
+        @departments = Department.includes(:departmental_sdbips)
+      end
+
+      if !params[:data_value].blank? && params[:data_value].to_i > 0
+          @department = Department.includes(:subdepartments,:departmental_sdbips).find(params[:data_value].to_i)
+          @departmental_sdbips = @department.departmental_sdbips
+      end
+
+    if !@departmental_sdbips.blank?
+      @departmental_sdbips = @departmental_sdbips.order(performance_standard: :asc)
+      $colors = []
+      @departments_sdibps = DepartmentalSdbip.select(:performance_standard).uniq
+      @departments_sdibps.each do |color|
+      if color.performance_standard.include?("KPI Almost Met")
+        $colors.push("orange")
+      end
+      if color.performance_standard.include?("KPI Extremely Well Met")
+        $colors.push("darkblue")
+      end
+      if color.performance_standard.include?("KPI Met")
+        $colors.push("limegreen")
+      end
+      if color.performance_standard.include?("KPI Not Met")
+        $colors.push("red")
+      end
+      if color.performance_standard.include?("KPI Not Yet Measured")
+        $colors.push("#F4C2C2")
+      end
+      if color.performance_standard.include?("KPI Well Met")
+        $colors.push("darkgreen")
+      end
+    end
+  end
+      @colours = $colors
+
+  end
   def show
 
   	@departmental_sdbips = DepartmentalSdbip.where('department_id = ?' ,params[:id]).order(performance_standard: :asc)
@@ -255,7 +317,7 @@ class DepartmentalSdbipProgressesController < ApplicationController
     @kpi_extremely_well_met_forestry = @departmental_sdbips.where("subdepartment_id = 6 AND performance_standard = 'KPI Extremely Well Met'")
 
   end
-  
+
   def new
 
   end

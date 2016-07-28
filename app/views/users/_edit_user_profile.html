@@ -60,7 +60,7 @@
       <section class="row">
         <label class="col col-lg-4 control-label" for="lastname">Username</label>
         <div class="controls col col-lg-8">
-          <%= f.text_field :username,:autocomplete=>"off",:placeholder=>"Username", :class => "form-control" %>
+          <%= f.text_field :username,:autocomplete=>"off",:placeholder=>"Username", :class => "form-control",:readonly=>true %>
         </div><!-- controls -->
       </section><!-- row -->
       <section class="row">
@@ -78,7 +78,7 @@
       </section><!-- row -->
       <section class="row">
         <div class="controls col col-lg-4 control-label" for="systemadministrator">
-          <% if current_user.admin? %>
+          <% if current_user.admin? && !current_user?(@user) && !@user.admin? %>
           <%= f.label :admin, class: "checkbox inline" do %>
             <%= f.check_box :admin,:id=>"admin_checkbox" %>
             <span class="control-label labels"><strong>System Administrator</strong></span>
@@ -115,7 +115,7 @@
       <section class="row">
       <label class="col col-lg-4 control-label" for="jobtitle">Job Title</label>
         <div class="controls col col-lg-8">
-          <%= f.select :job_title, Jobtitle.all.collect {|x| [x.title, x.title]}, {:include_blank => "Select KPI Owner"}, class: "form-control" %>
+          <%= f.select :job_title, Jobtitle.all.collect {|x| [x.title, x.title]}, {:include_blank => "Select Job Title"}, class: "form-control" %>
         </div><!-- controls -->
       </section><!-- row -->
 

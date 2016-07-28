@@ -59,11 +59,17 @@
       </tr>
     <% @departmental_sdbips.each do |departmental_sdbip| %>
       <tr>
-        <td class="ref"><%= departmental_sdbip.id %></td>
+        <td class="ref">D<%= departmental_sdbip.id %></td>
         <td class="department"><%= departmental_sdbip.department.name %></td>
         <td class="subdepartment"><%= departmental_sdbip.subdepartment.subdepartment_name %></td>
         <td class="kpi">
-            <%= departmental_sdbip.kpi %>
+
+            <%= link_to departmental_sdbip_path(departmental_sdbip),remote: true,'data-target' => "#show-departmental-sdbip-modal", 'data-toggle' => 'modal', :title=>"Click to View KPI details" do %>
+                <%= departmental_sdbip.kpi %>
+              <% end %>
+              <div id="show-departmental-sdbip-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+
+              </div>
         </td>
         <td class="kpi-ref"><%= departmental_sdbip.kpi_ref_number %></td>
         <td class="predetermined-objectives"><% if !departmental_sdbip.predetermined_objective_id.blank? %><%= departmental_sdbip.predetermined_objective.name %><% end %></td>
@@ -96,8 +102,8 @@
         <th class="annual-target"></th>
         <th class="revised-target"></th>
 
-        <td><% if !departmental_sdbip.kpi_type_id.blank? %><%= departmental_sdbip.kpi_type.name %><% end %></td>
-        <td><% if !departmental_sdbip.kpi_target_type_id.blank? %><%= departmental_sdbip.kpi_target_type.name %><% end %></td>
+        <td class="kpi-type"><% if !departmental_sdbip.kpi_type_id.blank? %><%= departmental_sdbip.kpi_type.name %><% end %></td>
+        <td class="kpi-target-type"><% if !departmental_sdbip.kpi_target_type_id.blank? %><%= departmental_sdbip.kpi_target_type.name %><% end %></td>
         <td class="idp-ref"><%= departmental_sdbip.idp_ref %></td>
 
         <td class="mscore-classification"><%= departmental_sdbip.mscore_classification.name %></td>

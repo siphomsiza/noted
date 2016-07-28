@@ -1,0 +1,45 @@
+<%= f.fields_for :kpi_results do |kpi_result_for_form| %>
+<table class="table table-striped">
+  <tr>
+    <th>Target</th><td><%= f.text_field :target,{:class=>"form-control", :readonly => true,:id=>"kpi-target"} %>
+
+    </td>
+  </tr>
+  <tr>
+    <th>Actual</th><td><%= f.text_field :actual, :class => "form-control has-error col-md-5", :id=>'kpi-actual',:required => true %>
+</td>
+  </tr>
+  <tr>
+    <th>Result(s)</th><td>
+    <%= f.select(:kpi_performance_standard,options_for_select(["KPI Not Yet Measured","KPI Not Met", "KPI Almost Met", "KPI Met", "KPI Well Met", "KPI Extremely Well Met"]),{}, :class => "form-control has-error col-md-5",:id=>"kpi-result",:disabled=>"disabled") %>
+  </td>
+  </tr>
+  <tr>
+    <th>Performance Comments</th><td>
+    <%= f.text_area :performance_comments, :class => "form-control has-error col-md-5" %>
+
+  </td>
+  </tr>
+
+  <tr>
+    <th>Corrective Measures</th><td>  <%= f.text_area :corrective_measures, :class => "form-control has-error col-md-5" %></td>
+  </tr>
+  <tr>
+    <th>Proof of Evidence</th><td><%= @departmental_sdbip.source_of_evidence %></td>
+  </tr>
+  <tr>
+    <th>Attachment(s)</th><td>
+
+      <%= f.hidden_field :_destroy %>
+      <%= f.fields_for :attachments do |attachment_for_form| %>
+
+      <%= render 'attachment_fields', f: attachment_for_form %>
+
+      <% end %>
+    <%= link_to_add_fields "Upload Attachment", f, :attachments %></td>
+  </tr>
+</table>
+<%= f.hidden_field :user_id,:id=>"update-user" %>
+<%= f.hidden_field :_destroy %>
+
+<% end %>

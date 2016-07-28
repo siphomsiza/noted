@@ -1,9 +1,9 @@
 class SessionsController < ApplicationController
 #load_and_authorize_resource
-
+#skip_before_filter  :verify_authenticity_token
 
   def new
-
+    redirect_to introduction_url unless !session[:user_id]
   end
 
   def create
@@ -12,13 +12,14 @@ class SessionsController < ApplicationController
       if user.activated? && !user.terminated? && user.login_attempts < user.max_login_attempts
         log_in user
             @user = current_user
-            if @user.update_columns(:status => "Active",:current_login_at => Time.zone.now, :current_login_ip => request.env['REMOTE_ADDR'])
+            if @user.update_columns(:current_login_at => Time.zone.now, :current_login_ip => request.env['REMOTE_ADDR'])
                 @user.increment!(:login_count)
                 note = "user logged in to the system."
                 record_activity(note)
             end
         params[:session][:remember_me] == '1' ? remember(user) : forget(user)
-        redirect_back_or introduction_url
+            redirect_back_or introduction_url
+
       elsif !user.activated?
         message  = "Account not activated. "
         message += "Check your email for the activation link."

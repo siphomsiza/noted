@@ -3,12 +3,12 @@
     <br/>
     <h3>Generate Graph Report</h3>
     <div class="panel panel-default col-lg-12">
-  <%= form_tag generate_graphs_path,remote: true, method: :get do %>
     <fieldset id="select-info">
 	    <legend><br/>1. Select the filters you wish to apply:</legend>
       <div class="form-group col col-lg-12">
-        <label>[Sub-]Department:</label>
-        <%= select_tag :department_id, options_for_select([["--Select Department--","-1"],["Entire Municipality","0"]] + Department.all.collect {|p| [ p.name, p.id ] }),{:class=>'form-control'} %>
+        <label>Department:</label>
+        <%= select_tag :department_id_selection, options_for_select([["--select option--"],["Entire Municipality",0]] + Department.all.collect {|p| [ p.name, p.id ] }),{:class=>'form-control',:id=>"department-choice"} %>
+        <%= hidden_field_tag :department_id,nil,:id=>"department-value"%>
       </div>
       <div class="form-group row col col-lg-12">
         <div class='col-lg-4'>
@@ -36,14 +36,6 @@
           </div>
         </div>
       </div>
-        <div class="form-group col col-lg-12"><br/>
-          <label class="control-label">Reporting Category:</label>
-          <%= select_tag :reporting_category, options_for_select(["--Select Reporting Category--"] + ReportingCategory.all.collect {|p| [ p.name, p.id ] }),{:class=>'form-control'} %>
-        </div>
-        <div class="form-group col col-lg-12">
-          <label class="control-label">KPI Filter:</label>
-          <%= select_tag :performance_standard, options_for_select(["KPI Not Yet Measured","KPI Not Met", "KPI Almost Met", "KPI Met", "KPI Well Met", "KPI Extremely Well Met"]),{:class=>'form-control'} %>
-        </div>
 	  </fieldset><!-- personal info -->
 
     <fieldset id="choose-group">
@@ -51,40 +43,56 @@
       <div class="form-group col col-lg-12">
         <div class="col-lg-3">
       <%= label_tag :include_sub_graphs, class: "checkbox inline" do %>
-        <%= check_box_tag :include_sub_graphs %>
+        <%= check_box_tag :include_sub_graphs_choice %>
         <span class="control-label">Include Sub-graphs</span>
       <% end %>
     </div>
     </div>
     <div class="form-group col col-lg-12">
       <label class="control-label">Group By:</label>
-      <%= select_tag :group_by, options_for_select([["Directorate","0"],["Sub-Directorate","1"],["Performance Standard","2"],["KPA","3"]]),{:class=>'form-control'} %>
+      <%= select_tag :group_by_selection, options_for_select([["Department","0"],["Performance Standard","1"],["KPA","2"]]),{:class=>'form-control'} %>
     </div>
 
     <div class="form-group col col-lg-12">
       <label class="control-label">Graph Type:</label>
-      <%= select_tag :graph_type, options_for_select([["--Select Graph Type--",""],["Bar Graph","0"],["Pie Chart","1"]]),{:required=>true,:class=>'form-control'} %>
+      <%= select_tag :graph_type_selection, options_for_select([["Bar Graph","0"],["Pie Chart","1"]]),{:required=>true,:class=>'form-control'} %>
     </div>
 
-	  </fieldset><!-- personal info -->
+	  </fieldset>
 
     <fieldset id="generate-report">
 	    <legend>3. Generate the report:</legend>
       <div class="form-group col col-lg-12">
-        <label class="control-label">Report Title:</label>
-        <div>
-          <%= text_field_tag :file_name,nil,{:class => "form-control"}%>
-
+        <%= link_to "#", :remote => true, 'data-target'=> '#audit-log-modal', 'data-toggle' => 'modal', :class=> 'btn btn-mini col-lg-2 pull-right',:id=>"page_button" do %>
+        <span>Generate</span>
+        <% end %>
+        <div class="modal fade" id="audit-log-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         </div>
       </div>
-      <div class="form-group col col-lg-12">
-        <%= submit_tag "Generate",{ 'data-target'=>"audit_log-modal", 'data-toggle'=>"modal",:class=>"btn btn-midi col-lg-2 pull-right"} %>&nbsp;&nbsp;
-        </div>
-	  </fieldset><!-- personal info -->
-	<% end %>
+	  </fieldset>
 </div>
 </div>
 </div>
+<script>
+$(document).ready(function() {
+  var select_value;
+  $(function(){
 
-<div class="modal fade" id="audit_log-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-</div>
+        $(document).on('change','#department-choice', function(){
+           select_value = $(this).val();
+           $('#department-value').val(select_value);
+           //alert(select_value);
+        });
+        $('#page_button').click(function() {
+          //alert(select_value);
+          $.ajax({
+               url : "/departmental_sdbip_progresses/generate_graphs",
+               type : "get",
+               data : { data_value: select_value }
+           });
+        });
+
+  });
+
+});
+</script>
