@@ -1,7 +1,11 @@
 class User < ActiveRecord::Base
   has_many :activities
-  has_many :departmental_sdbips
   belongs_to :department
+  has_one :jobtitle
+  has_many :kpi_results
+  has_many :assurances
+  has_many :attachments
+  has_many :kpi_owners
   has_one :subdepartmental_administrator
   has_one :departmental_administrator
   has_many :activity_logs
@@ -57,6 +61,14 @@ class User < ActiveRecord::Base
   # Sends activation email.
   def send_activation_email
     UserMailer.account_activation(self).deliver_now
+  end
+
+  def send_unlocked_account_email
+    UserMailer.account_unlocked(self).deliver_now
+  end
+
+  def send_locked_account_email
+    UserMailer.account_locked(self).deliver_now
   end
 
   # Sets the password reset attributes.

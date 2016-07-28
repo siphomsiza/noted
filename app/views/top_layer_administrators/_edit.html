@@ -1,0 +1,59 @@
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+  <h3><%= "Editing #{@subdepartmental_administrator.user.firstname}" %></h3>
+</div>
+<div class="modal-body">
+<div class="row">
+<div class="col-lg-10 col-md-offset-1">
+
+  <%= form_for(@top_layer_administrator) do |f| %>
+    <% if @top_layer_administrator.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@top_layer_administrator.errors.count, "error") %> prohibited this top_layer_administrator from being saved:</h2>
+
+        <ul>
+        <% @top_layer_administrator.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :user_id %><br>
+      <% @users_for_departmental_administrators = User.where('id NOT IN(SELECT (user_id) FROM top_layer_administrators)') %>
+      <%= f.select :user_id, @users_for_departmental_administrators.all.collect {|x| [x.firstname, x.id]}, {:include_blank => "Select User"}, class: "form-control" %>
+    </div>
+    <%= f.label :can_create, class: "checkbox inline" do %>
+      <%= f.check_box :can_create %>
+      <span>Create</span>
+    <% end %>
+    <%= f.label :can_edit, class: "checkbox inline" do %>
+      <%= f.check_box :can_edit %>
+      <span>Edit</span>
+    <% end %>
+    <%= f.label :can_update, class: "checkbox inline" do %>
+      <%= f.check_box :can_update %>
+      <span>Update</span>
+    <% end %>
+    <%= f.label :can_approve, class: "checkbox inline" do %>
+      <%= f.check_box :can_approve %>
+      <span>Approve</span>
+    <% end %>
+
+    <div class="actions">
+      <%= f.submit "Save", class: "btn col-lg-3 pull-right" %>
+    </div>
+  <% end %>
+
+
+</div>
+</div>
+</div>
+<div class="modal-footer">
+
+</div>
+
+</div>
+</div>

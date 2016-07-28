@@ -4,12 +4,12 @@
       <tr>
         <th><h4>Department</h4></th>
         <th><h4>Subdepartment</h4></th>
+        <th><h4>Project Name</h4></th>
+        <th><h4>Project Description</h4></th>
+        <th><h4>Vote Number</h4></th>
         <th><h4>Mscore Classification</h4></th>
         <th><h4>Municipality CP Ref</h4></th>
         <th><h4>IDP Number</h4></th>
-        <th><h4>Vote Number</h4></th>
-        <th><h4>Project Name</h4></th>
-        <th><h4>Project Description</h4></th>
         <th><h4>Funding Source</h4></th>
         <th><h4>Planned Start Date</h4></th>
         <th><h4>Planned Completion Date</h4></th>
@@ -26,12 +26,23 @@
         <tr>
           <td><%= capital_project.subdepartment.department.name %></td>
           <td><%= capital_project.subdepartment.subdepartment_name %></td>
+
+          <td>
+            <%= link_to capital_project_path(capital_project),remote: true,'data-target' => "#show-capital-project-modal", 'data-toggle' => 'modal', :title=>"Click to View Capital Project details" do %>
+                <%= capital_project.project_name %>
+              <% end %>
+              <div id="show-capital-project-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+
+              </div>
+
+          </td>
+
+          <td><%= capital_project.departmental_sdbip.kpi_ref_number %></td>
+            <td><%= capital_project.vote_number %></td>
           <td><% if !capital_project.mscore_classification_id.blank? %><%= capital_project.mscore_classification.name %><% end %></td>
           <td><%= capital_project.mun_cp_ref %></td>
           <td><%= capital_project.idp_nummber %></td>
-          <td><%= capital_project.vote_number %></td>
-          <td><%= capital_project.project_name %></td>
-          <td><%= capital_project.departmental_sdbip.kpi_ref_number %></td>
+
           <td><%= capital_project.funding_source %></td>
           <td><%= capital_project.planned_start_date %></td>
           <td><%= capital_project.planned_completion_date %></td>

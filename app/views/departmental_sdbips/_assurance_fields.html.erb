@@ -1,0 +1,21 @@
+
+<%= f.fields_for :assurances do |assurance_for_form| %>
+<table class="table table-responsive table-striped">
+  <tr>
+    <th>Sign-Off:</th>
+    <td><%= f.label :signed_off, class: "checkbox inline" do %>
+        <%= f.check_box :signed_off %>
+      <span></span>
+    <% end %></td>
+  </tr>
+  <tr>
+    <th>Response:</th>
+    <td><%= f.text_area :response, class: "form-control" %></td>
+  </tr>
+</table>
+<%= f.hidden_field :kpi_result_id,:id=>"kpi-result-id" %>
+<%= f.hidden_field :user_id,:id=>"assurance-user" %>
+<%= f.hidden_field :_destroy %>
+<%= link_to "Remove Assurance Fields", '#', class: "btn remove_fields" %> |
+
+<% end %>

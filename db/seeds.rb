@@ -21,7 +21,7 @@ User.create!( firstname: "Sandiswa",
               support: false,
               standard_user: false,
               assurance: false,
-              activated: true,status: "Activated",
+              activated: true,status: "Active",
               activated_at: Time.zone.now)
 
 User.create!( firstname: "Arms",
@@ -35,7 +35,7 @@ User.create!( firstname: "Arms",
               landline: "+27 11 484-1253/8223",
               location: "1st Floor, St David's Place, Parktown,Johannesburg, South Africa, 2193",
               password_confirmation: "sableassets",
-              admin: true,status: "Activated",
+              admin: true,status: "Active",
               support: false,
               standard_user: false,
               assurance: false,
@@ -56,7 +56,7 @@ mobile=Faker::PhoneNumber.cell_phone
               password_confirmation: password, title: title,
               id_number: Faker::Number.number(13),
               birth_date: Time.now.strftime("/%dd%mm/%YYYY"),
-              status: "Activated",
+              status: "Active",
               activated: true,
               activated_at: Time.zone.now)
 end
@@ -130,6 +130,9 @@ end
 
 CSV.foreach('db/data/kpi_concept.csv', headers: true, :col_sep => ',') do |row|
   KpiConcept.create! row.to_hash
+end
+CSV.foreach('db/data/jobs.csv', headers: true, :col_sep => ',') do |row|
+  Jobtitle.create! row.to_hash
 end
 CSV.foreach('db/data/kpi_owners.csv', headers: true, :col_sep => ',') do |row|
   KpiOwner.create! row.to_hash

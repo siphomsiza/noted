@@ -22,6 +22,7 @@ class DepartmentsController < ApplicationController
     @users = User.all
   	@department = Department.new(department_params)
   	if @department.save
+      flash[:success] = 'Department was successfully created.'
   		redirect_to departments_path
 
       else

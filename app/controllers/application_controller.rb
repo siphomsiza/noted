@@ -33,6 +33,9 @@ class ApplicationController < ActionController::Base
       @audit_log.save
     end
   end
+  def authenticate
+   redirect_to root_url if session[:session_key].nil?
+ end
   private
   def current_user
     @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]

@@ -1,0 +1,48 @@
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+  <h3><%= "Add #{@kpi_owner.name } Admin" %></h3>
+</div>
+<div class="modal-body">
+<div class="row">
+<div class="col-lg-10 col-md-offset-1">
+
+  <%= form_for(@kpi_owner) do |f| %>
+    <% if @kpi_owner.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@kpi_owner.errors.count, "error") %> prohibited this KPI Owner from being saved:</h2>
+
+        <ul>
+        <% @kpi_owner.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :name,"KPI Owner:" %><br>
+      <%= f.select(:name,options_for_select(KpiOwner.where(id: params[:id]).all.collect{ |u| [u.name, u.name] }),{},{class: 'form-control'}) %>
+
+    </div>
+    <div class="field">
+      <%= f.label :user_id,"Administrator:" %><br>
+      <%= f.select :user_id, User.all.collect {|x| [x.firstname, x.id]}, {:include_blank => "Select User"}, class: "form-control" %>
+    </div>
+    <%= f.label :can_update, class: "checkbox inline" do %>
+      <%= f.check_box :can_update %>
+      <span>Update</span>
+    <% end %>
+    <div class="actions">
+      <%= f.submit "Save",class: "btn col-lg-3 pull-right" %>
+    </div>
+  <% end %>
+
+
+</div>
+</div>
+</div>
+
+
+</div>
+</div>

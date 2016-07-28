@@ -1,5 +1,5 @@
 <div id="perform-audit" class="tab-pane active fade in">
-  <h3>Perform Audit</h3>
+  <h3>Assurance</h3>
   <hr/>
   <div class="table-responsive">
     <table class="table table-striped table-bordered">
@@ -17,48 +17,6 @@
           <th><h4>Capital Project</h4></th>
           <th><h4>Reporting Category</h4></th>
           <th><h4>KPI Calculation Type</h4></th>
-
-          <th><h4>Target</h4></th>
-          <th><h4>Actual</h4></th>
-          <th><h4>Results</h4></th>
-
-          <th><h4>Target</h4></th>
-          <th><h4>Actual</h4></th>
-          <th><h4>Results</h4></th>
-
-          <th><h4>Target</h4></th>
-          <th><h4>Actual</h4></th>
-          <th><h4>Results</h4></th>
-
-          <th class="fourth_quarter_target"><h4>Target</h4></th>
-          <th class="fourth_quarter_target"><h4>Actual</h4></th>
-          <th class="fourth_quarter_target"><h4>Results</h4></th>
-
-          <th class="annual_target"><h4>Annual Target</h4></th>
-          <th class="revised_target"><h4>Revised Target</h4></th>
-          <th class="annual_target"><h4>Actual</h4></th>
-          <th class="revised_target"><h4>Results</h4></th>
-
-          <th class="kpi_type"><h4>KPI Type</h4></th>
-          <th class="kpi_target_type"><h4>KPI Target Type</h4></th>
-          <th class="idp_ref"><h4>IDP Ref</h4></th>
-          <th class="mscore_classification"><h4>M Score Classification</h4></th>
-          <th class="national_outcome"><h4>National Outcome</h4></th>
-          <th class="strategic_objectives"><h4>Strategic Objective</h4></th>
-          <th class="baseline"><h4>Baseline</h4></th>
-          <th class="budget"><h4>Budget</h4></th>
-          <th class="performance_standard"><h4>Performance Standard</h4></th>
-          <th class="risk_rating"><h4>Risk Rating</h4></th>
-          <th class="kpa"><h4>KPA</h4></th>
-          <th class="kpi_concept"><h4>KPI Concept</h4></th>
-          <th class="impact"><h4>Impact</h4></th>
-          <th class="provincial_strategic_outcome"><h4>Provincial Strategic Outcome</h4></th>
-          <th class="area"><h4>Area</h4></th>
-          <th class="ward"><h4>Ward</h4></th>
-          <th class="past_year_performance"><h4>Past Year Performance</h4></th>
-          <th class="top_layer_ref"><h4>Top Layer KPI Ref</h4></th>
-          <th class="created_date"><h4>Create Date</h4></th>
-          <th class="updated_date"><h4>Update Date</h4></th>
         </tr>
       <% @departmental_sdbips.each do |departmental_sdbip| %>
         <tr>
@@ -82,54 +40,6 @@
           <td><% if departmental_sdbip.capital_project %><%= departmental_sdbip.capital_project.mun_cp_ref %><% end %></td>
           <td><% if !departmental_sdbip.reporting_category_id.blank? %><%= departmental_sdbip.reporting_category.name %><% end %></td>
           <td><% if !departmental_sdbip.kpi_calculation_type_id.blank? %><%= departmental_sdbip.kpi_calculation_type.name %><% end %></td>
-
-          <th><%= departmental_sdbip.first_quarter_target %></th>
-          <th><%= departmental_sdbip.first_quarter_actual %></th>
-          <th></th>
-
-          <th><%= departmental_sdbip.second_quarter_target %></th>
-          <th><%= departmental_sdbip.second_quarter_actual %></th>
-          <th></th>
-
-          <th><%= departmental_sdbip.third_quarter_target %></th>
-          <th><%= departmental_sdbip.third_quarter_actual %></th>
-          <th></th>
-
-          <th class="fourth_quarter_target"><%= departmental_sdbip.fourth_quarter_target %></th>
-          <th class="fourth_quarter_target"><%= departmental_sdbip.fourth_quarter_actual %></th>
-          <th class="fourth_quarter_target"></th>
-
-          <th class="annual_target"><%= departmental_sdbip.annual_target %></th>
-          <th class="revised_target"><%= departmental_sdbip.revised_target %></th>
-          <th class="annual_target"></th>
-          <th class="revised_target"></th>
-
-          <td><% if !departmental_sdbip.kpi_type_id.blank? %><%= departmental_sdbip.kpi_type.name %><% end %></td>
-          <td><% if !departmental_sdbip.kpi_target_type_id.blank? %><%= departmental_sdbip.kpi_target_type.name %><% end %></td>
-          <td class="idp_ref"><%= departmental_sdbip.idp_ref %></td>
-
-          <td class="mscore_classification"><%= departmental_sdbip.mscore_classification.name %></td>
-          <td class="national_outcome"><% if !departmental_sdbip.national_outcome_id.blank? %><%= departmental_sdbip.national_outcome.name %><% end %></td>
-          <td class="strategic_objectives"><%= departmental_sdbip.strategic_objective.name %></td>
-          <td class="baseline"><%= departmental_sdbip.baseline %></td>
-          <td class="budget"><%= departmental_sdbip.budget %></td>
-          <td class="performance_standard"><%= departmental_sdbip.performance_standard %></td>
-          <td class="risk_rating"><% if !departmental_sdbip.risk_rating_id.blank?%><%= departmental_sdbip.risk_rating.name %><% end %></td>
-          <td class="kpa"><% if !departmental_sdbip.kpa_id.blank? %><%= departmental_sdbip.kpa.name %><% end %></td>
-
-          <td class="kpi_concept"><% if !departmental_sdbip.kpi_concept_id.blank? %><%= departmental_sdbip.kpi_concept.name %><% end %></td>
-
-          <td class="impact"><%= departmental_sdbip.impact %></td>
-          <td class="provincial_strategic_outcome"><% if !departmental_sdbip.provincial_strategic_outcome_id.blank? %><%= departmental_sdbip.provincial_strategic_outcome.name %><% end %></td>
-          <td class="area"><% if !departmental_sdbip.area_id.blank? %><%= departmental_sdbip.area.name %><% end %></td>
-          <td class="ward"><% if !departmental_sdbip.ward_id.blank? %><%= departmental_sdbip.ward.name %><% end %></td>
-          <td class="past_year_performance"><%= departmental_sdbip.past_year_performance %></td>
-
-          <td class="top_layer_ref"><%= departmental_sdbip.top_layer_kpi_ref %></td>
-
-          <td class="created_date"><%= departmental_sdbip.created_at.strftime(' %Y-%B-%d') %></td>
-          <td class="updated_date"><%= departmental_sdbip.updated_at.strftime('%d-%B-%Y') %></td>
-
         </tr>
         <% end %>
 

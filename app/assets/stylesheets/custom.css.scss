@@ -297,6 +297,11 @@ input {
 #municipal-kpa,
 #ndp-objectives,
 #capital-project,
+#ref,
+#department,
+#sub-department,
+#ndp-objectives,
+#kpi-ref,
 #kpi-concept,
 #kpi-type,
 #impact,
@@ -585,9 +590,12 @@ input {
 	}
 
   #importModal .modal-dialog  {width:600px; padding-top: 25px; outline: none;}
-  #departmental_sdbip-modal .modal-dialog  {width:600px; padding-top: 25px; outline: none;}
+  #departmental-sdbip-modal .modal-dialog  {width:700px; padding-top: 25px; outline: none;}
   #capital_projectModal .modal-dialog  {width:600px; padding-top: 25px; outline: none;}
+  #show-capital-project-modal .modal-dialog{width: 1000px; padding-top: 25px; outline: none;}
+  #show-departmental-sdbip-modal .modal-dialog{width: 1000px; padding-top: 25px; outline: none;}
   #ytd-modal .modal-dialog {width: 1000px; padding-top: 25px; outline: none;}
+  #audit-log-modal .modal-dialog {width: 1100px;padding-top: 25px; outline: none;}
 }
 @media screen and (min-width: 300px) {
   #columnsModal .modal-dialog  {width:300px; padding-top: 20px; padding-right: 0px; outline: none;}
@@ -1752,7 +1760,24 @@ input {
   margin-bottom: 0 auto;
 }
 }
-
+.red{
+  color: red;
+}
+.orange{
+  color: orange;
+}
+.babypink{
+  color: #F4C2C2;
+}
+.darkgreen{
+  color: darkgreen;
+}
+.limegreen{
+  color: limegreen;
+}
+.darkblue{
+  color: darkblue;
+}
 #kpi-owner-checkbox,
 #unit-of-measurement,
 #mscore-classification,

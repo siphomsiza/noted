@@ -1,7 +1,33 @@
 <div class="tab-pane" id="security_settings">
-  <button class="btn " data-toggle="modal" data-target="#set_maximum_attempts" >Set Maximum Attempts</button>
+  <button class="btn btn-mini" data-toggle="modal" data-target="#set_maximum_attempts" >Set Maximum Attempts</button>
+  <button class="btn btn-mini" data-toggle="modal" data-target="#super-user-modal" >Set Super User</button>
 </div>
-<!-- Modal -->
+<!-- Set super user Modal -->
+<div class="modal fade" id="super-user-modal" tabindex="-1" role="dialog"
+aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+<div class="modal-content">
+  <%= form_tag(:controller => "users", :action=>"set_super_user") do %>
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+<h4 class="modal-title" id="myModalLabel">Set Super User</h4>
+</div>
+<div class="modal-body">
+<%= label_tag :user_id,"Select User:" %>
+<%= select_tag :user_id, options_for_select(User.where.not(id: current_user.id).all.collect {|x| [x.firstname, x.id]}), {:include_blank => "Select User", class: "form-control"} %>
+
+</div>
+<div class="modal-footer">
+
+<%= submit_tag "Save",:class => "btn col-lg-3 pull-right" %>
+
+</div>
+<% end %>
+</div><!-- /.modal-content -->
+</div><!-- /.modal -->
+</div>
+
+<!-- Maximum attempts Modal -->
 <div class="modal fade" id="set_maximum_attempts" tabindex="-1" role="dialog"
 aria-labelledby="myModalLabel" aria-hidden="true">
 <div class="modal-dialog">
@@ -13,7 +39,7 @@ aria-labelledby="myModalLabel" aria-hidden="true">
 </div>
 <div class="modal-body">
 <%= label_tag :Maximum_Login_Attempts,"Maximum Login Attempts:" %>
-<%= text_field_tag :attempts,nil,{:class=>"form-control"} %>
+<%= text_field_tag :attempts,nil,{:class=>"form-control",:pattern=>"[0-9]"} %>
 </div>
 <div class="modal-footer">
 

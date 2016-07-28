@@ -35,6 +35,7 @@ class CreateUsers < ActiveRecord::Migration
         t.string  :reset_digest
         t.string  :active_log
     	  t.datetime  :reset_sent_at
+        t.boolean  :super_admin, default: false
     	  t.boolean  :admin, default: false
         t.boolean  :support, default: false
         t.boolean  :standard_user, default: false

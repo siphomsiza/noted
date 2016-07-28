@@ -32,16 +32,23 @@ $(function() {
 							<a href = "#view_top_layer_sdbips" data-toggle = "tab"><span class="glyphicon glyphicon-list-alt"></span>&nbsp; View Top Layer</a>
 						</li>
 						<li>
-							<a href = "#edit_top_layer_sdbips" data-toggle = "tab"><span class="glyphicon glyphicon-list-alt"></span>&nbsp; Edit Top Layer</a>
+							<a href = "#edit_top_layer_sdbips" data-toggle = "tab"><span class="glyphicon glyphicon-pencil"></span>&nbsp; Edit Top Layer</a>
 						</li>
 						<li>
-							<a href = "#manage_top_layer_sdbips" data-toggle = "tab"><span class="glyphicon glyphicon-list-alt"></span>&nbsp; Update Top Layer</a>
+							<a href = "#manage_top_layer_sdbips" data-toggle = "tab"><span class="glyphicon glyphicon-edit"></span>&nbsp; Update Top Layer</a>
 						</li>
 						<li>
 							<a href = "#new-top-layer-sdbip" data-toggle = "tab">
 								<span class="glyphicon glyphicon-plus-sign"></span>&nbsp; Add Top Layer
 							</a>
 						</li>
+						<% if current_user.admin? %>
+						<li class="pull-right">
+							<button class="btn btn-sm  pull-right" data-toggle="modal" data-target="#top_layerModal" title="Click to upload Top Layer SDBIPs.">
+								<span class="glyphicon glyphicon-upload"></span>&nbsp;Import Top Layer SDBIP
+							</button>
+						</li>
+						<% end %>
 					</ul><!-- nav nav-tabs -->
 				</div><!-- tabbable tabs -->
 
@@ -88,18 +95,8 @@ $(function() {
 					</div>
 
 					<div class = "tab-pane fade" id = "new-top-layer-sdbip">
-							<div class="row">
-								<div class="col-lg-12">
-											<% if current_user.admin? %><br/>
-												<button class="btn  pull-right" data-toggle="modal" data-target="#top_layerModal" title="Click to upload Top Layer SDBIPs.">
-													<span class="glyphicon glyphicon-upload"></span>&nbsp;Import Top Layer SDBIP
-												</button>
-											<% end %>
-								</div>
-							</div>
-										<hr/>
 										<h2>New Top Layer SDBIP</h2>
-							<%= render 'form' %>
+										<%= render 'form' %>
 					</div>
 				</div>
 		</div>

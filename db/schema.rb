@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160718091147) do
+ActiveRecord::Schema.define(version: 20160725115052) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,24 @@ ActiveRecord::Schema.define(version: 20160718091147) do
     t.integer  "list_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "assurances", force: :cascade do |t|
+    t.integer  "departmental_sdbip_id", null: false
+    t.integer  "user_id"
+    t.boolean  "signed_off"
+    t.text     "response"
+    t.integer  "kpi_result_id",         null: false
+    t.binary   "poe"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
+
+  create_table "attachments", force: :cascade do |t|
+    t.integer  "kpi_result_id", null: false
+    t.string   "poe"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "capital_projects", force: :cascade do |t|
@@ -92,7 +110,7 @@ ActiveRecord::Schema.define(version: 20160718091147) do
     t.datetime "updated_at",                    null: false
   end
 
-  create_table "departmental_sdbips", force: :cascade do |t|
+  create_table "departmental_kpis", force: :cascade do |t|
     t.integer  "department_id",                                                    null: false
     t.string   "department_name",                                                  null: false
     t.string   "subdepartment_name",                                               null: false
@@ -141,13 +159,59 @@ ActiveRecord::Schema.define(version: 20160718091147) do
     t.integer  "reporting_category_id"
     t.string   "top_layer_kpi_ref"
     t.integer  "kpi_calculation_type_id"
-    t.integer  "user_id"
-    t.integer  "assurance"
-    t.binary   "poe"
-    t.decimal  "actual"
-    t.decimal  "update_status"
-    t.text     "response"
-    t.boolean  "signed_off"
+    t.datetime "created_at",                                                       null: false
+    t.datetime "updated_at",                                                       null: false
+  end
+
+  create_table "departmental_sdbips", force: :cascade do |t|
+    t.integer  "department_id",                                                    null: false
+    t.string   "department_name",                                                  null: false
+    t.string   "subdepartment_name",                                               null: false
+    t.integer  "subdepartment_id",                                                 null: false
+    t.string   "kpi_ref_number"
+    t.integer  "predetermined_objective_id"
+    t.integer  "kpi_owner_id"
+    t.text     "kpi"
+    t.string   "unit_of_measurement"
+    t.integer  "mscore_classification_id"
+    t.string   "idp_ref"
+    t.integer  "national_outcome_id"
+    t.integer  "strategic_objective_id"
+    t.integer  "kpi_target_type_id"
+    t.string   "source_of_evidence"
+    t.string   "baseline"
+    t.string   "budget"
+    t.decimal  "annual_target",                   default: 0.0
+    t.decimal  "revised_target"
+    t.decimal  "first_quarter_target"
+    t.decimal  "second_quarter_target"
+    t.decimal  "third_quarter_target"
+    t.decimal  "fourth_quarter_target"
+    t.text     "performance_comments"
+    t.text     "corrective_measures"
+    t.decimal  "first_quarter_actual"
+    t.decimal  "second_quarter_actual"
+    t.decimal  "third_quarter_actual"
+    t.decimal  "fourth_quarter_actual"
+    t.binary   "first_quarter_poe"
+    t.binary   "second_quarter_poe"
+    t.binary   "third_quarter_poe"
+    t.binary   "fourth_quarter_poe"
+    t.string   "performance_standard",            default: "KPI Not Yet Measured", null: false
+    t.integer  "risk_rating_id"
+    t.integer  "kpa_id"
+    t.string   "kpa_name"
+    t.integer  "ndp_objective_id"
+    t.integer  "kpi_concept_id"
+    t.integer  "kpi_type_id"
+    t.string   "impact"
+    t.integer  "provincial_strategic_outcome_id"
+    t.integer  "ward_id"
+    t.integer  "area_id"
+    t.text     "past_year_performance"
+    t.integer  "reporting_category_id"
+    t.string   "top_layer_kpi_ref"
+    t.integer  "kpi_calculation_type_id"
     t.datetime "created_at",                                                       null: false
     t.datetime "updated_at",                                                       null: false
   end
@@ -212,10 +276,23 @@ ActiveRecord::Schema.define(version: 20160718091147) do
   end
 
   create_table "kpi_owners", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "list_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "user_id"
+    t.string   "name",                       null: false
+    t.boolean  "can_update", default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  create_table "kpi_results", force: :cascade do |t|
+    t.integer  "departmental_sdbip_id"
+    t.integer  "user_id"
+    t.decimal  "target"
+    t.decimal  "actual"
+    t.text     "corrective_measures"
+    t.text     "performance_comments"
+    t.string   "kpi_performance_standard"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
   create_table "kpi_target_types", force: :cascade do |t|
@@ -368,7 +445,6 @@ ActiveRecord::Schema.define(version: 20160718091147) do
 
   create_table "roles", force: :cascade do |t|
     t.integer  "user_id",                                 null: false
-    t.integer  "kpi_owner_id"
     t.boolean  "kpi_owner",               default: false
     t.boolean  "finance_admin",           default: false
     t.boolean  "top_layer_administrator", default: false
@@ -394,12 +470,18 @@ ActiveRecord::Schema.define(version: 20160718091147) do
   end
 
   create_table "sdbip_time_periods", force: :cascade do |t|
-    t.string   "period",                null: false
-    t.date     "start_date",            null: false
-    t.date     "end_date",              null: false
-    t.integer  "departmental_sdbip_id"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
+    t.date     "period",                             null: false
+    t.date     "primary_reminder"
+    t.date     "secondary_reminder"
+    t.date     "primary_closure"
+    t.date     "secondary_closure"
+    t.date     "finance_reminder"
+    t.date     "finance_closure"
+    t.boolean  "primary_status",     default: false
+    t.boolean  "secondary_status",   default: false
+    t.boolean  "finance_status",     default: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
   end
 
   create_table "setups", force: :cascade do |t|
@@ -443,8 +525,14 @@ ActiveRecord::Schema.define(version: 20160718091147) do
   end
 
   create_table "top_layer_administrators", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "user_id",                       null: false
+    t.integer  "department_id",                 null: false
+    t.boolean  "can_edit",      default: false
+    t.boolean  "can_create",    default: false
+    t.boolean  "can_approve",   default: false
+    t.boolean  "can_update",    default: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
   end
 
   create_table "top_layer_sdbips", force: :cascade do |t|
@@ -519,6 +607,7 @@ ActiveRecord::Schema.define(version: 20160718091147) do
     t.string   "reset_digest"
     t.string   "active_log"
     t.datetime "reset_sent_at"
+    t.boolean  "super_admin",                       default: false
     t.boolean  "admin",                             default: false
     t.boolean  "support",                           default: false
     t.boolean  "standard_user",                     default: false

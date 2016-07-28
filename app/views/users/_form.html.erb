@@ -19,7 +19,7 @@
       <section class="row">
           <label class="col col-lg-4 control-label" for="firstname">First Name</label>
           <div class="controls col col-lg-8">
-            <%= f.text_field :firstname, :class => "form-control" , :autocomplete=>"off",:placeholder=>"First Name" %>
+            <%= f.text_field :firstname, :class => "form-control" , :autocomplete=>"off",:placeholder=>"First Name",:id=>"user_first_name" %>
 
           </div><!-- controls -->
         </section><!-- row -->
@@ -27,7 +27,7 @@
         <section class="row">
           <label class="col col-lg-4 control-label" for="lastname">Surname</label>
           <div class="controls col col-lg-8">
-            <%= f.text_field :surname,:autocomplete=>"off",:placeholder=>"Last Name", :class => "form-control" %>
+            <%= f.text_field :surname,:autocomplete=>"off",:placeholder=>"Last Name", :class => "form-control",:id=>"user_last_name" %>
           </div><!-- controls -->
         </section><!-- row -->
         <section class="row">
@@ -35,7 +35,7 @@
           <div class="controls col col-lg-8">
           <div class="form-group">
                               <div class="input-group date" data-provide="datepicker"
-                                   data-date-format="dd-mm-yyyy" data-date-start-view="days" data-date-min-view-mode="days">
+                                   data-date-format="dd-mm-yyyy" data-date-start-view="years" data-date-min-view-mode="days">
                                 <%= f.text_field :birth_date, class: "form-control" %>
                                 <span class="input-group-addon">
                                   <span class="glyphicon glyphicon-calendar"></span>
@@ -58,7 +58,7 @@
       <section class="row">
         <label class="col col-lg-4 control-label" for="lastname">Username</label>
         <div class="controls col col-lg-8">
-          <%= f.text_field :username,:autocomplete=>"off",:placeholder=>"Username", :class => "form-control" %>
+          <%= f.text_field :username,:autocomplete=>"off",:placeholder=>"Username", :class => "form-control",:id=> "user_login_name",:readonly=>true %>
         </div><!-- controls -->
       </section><!-- row -->
       <section class="row">
@@ -113,7 +113,7 @@
       <section class="row">
       <label class="col col-lg-4 control-label" for="jobtitle">Job Title</label>
         <div class="controls col col-lg-8">
-          <%= f.select :job_title, Jobtitle.all.collect {|x| [x.title, x.title]}, {:include_blank => "Select KPI Owner"}, class: "form-control" %>
+          <%= f.select :job_title, Jobtitle.all.collect {|x| [x.title, x.title]}, {:include_blank => "Select Job Title"}, class: "form-control" %>
         </div><!-- controls -->
       </section><!-- row -->
 
@@ -129,7 +129,7 @@
       <label class="col col-lg-4 control-label" for="location">Location</label>
         <div class="controls col col-lg-8">
 
-            <%= f.select :location, @locations.all.collect {|x| [x.name, x.name]}, {:include_blank => "Select Location"}, class: "form-control" %>
+            <%= f.select :location, Region.all.collect {|x| [x.name, x.name]}, {:include_blank => "Select Location"}, class: "form-control" %>
 
         </div><!-- controls -->
       </section><!-- row -->
@@ -240,3 +240,33 @@
 </div><!-- media-body -->
 </section><!-- media -->
 </div>
+<script>
+$(document).ready(function(){
+  $("#user_last_name").blur(function() {
+    if($("#user_first_name").val() != " "){
+      $mystring= $("#user_first_name").val();
+      var words = $mystring.split(' ');
+      $output=" ";
+      $surname = $("#user_last_name").val().toLowerCase();
+
+      $.each(words, function() {
+	       $output += this.substring(0,1).toLowerCase();
+       });
+        $("#user_login_name").val($output+$surname);
+    }
+  });
+  $("#user_first_name").blur(function() {
+    if($("#user_last_name").val() != " "){
+      $mystring= $("#user_first_name").val();
+      var words = $mystring.split(' ');
+      $output=" ";
+      $surname = $("#user_last_name").val().toLowerCase();
+
+      $.each(words, function() {
+         $output += this.substring(0,1).toLowerCase();
+       });
+        $("#user_login_name").val($output+$surname);
+    }
+  });
+});
+</script>

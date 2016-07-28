@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :top_layer_administrators
+  resources :kpi_owners
   resources :subdepartmental_administrators
   resources :departmental_administrators
   mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
@@ -43,8 +45,16 @@ Rails.application.routes.draw do
   get 'activate', to: 'users#activate'
   get 'users/:id/edit_new_user' => 'users#edit_new_user', :as => :edit_new_user
   get 'roles/:id/edit_user_role' => 'roles#edit_user_role', :as => :edit_user_role
+  get 'roles/:id/grant_user_access' => 'roles#grant_user_access', :as => :grant_user_access
+  get 'roles/:id/edit_user_access' => 'roles#edit_user_access', :as => :edit_user_access
+  get 'roles/:id/grant_new_user_access' => 'roles#grant_new_user_access', :as => :grant_new_user_access
+  get 'roles/:id/new_user_role' => 'roles#new_user_role', :as => :new_user_role
+  get 'kpi_owners/:id/add_admin' => 'kpi_owners#add_admin', :as => :add_admin
+
   get 'users/:id/edit_active_user' => 'users#edit_active_user', :as => :edit_active_user
   get 'users/:id/edit_user_profile' => 'users#edit_user_profile', :as => :edit_user_profile
+  get 'users/:id/set_new_password' => 'users#set_new_password', :as => :set_new_password
+  get 'set_super_user' => 'users#set_super_user', :as => :set_super_user
 
   get 'headings/:id/edit_departmental_headings' => 'headings#edit_departmental_headings', :as => :edit_departmental_headings
   get 'headings/:id/edit_top_layer_headings' => 'headings#edit_top_layer_headings', :as => :edit_top_layer_headings
@@ -60,8 +70,9 @@ Rails.application.routes.draw do
   post 'export', to: 'departmental_sdbip_progresses#export'
   get 'departmental_sdbips/update_subdepartments', as: 'update_subdepartments'
   get 'departmental_sdbips/:id/audit_performance' => 'departmental_sdbips#audit_performance', :as => :audit_performance
-  get 'departmental_sdbips/generate_graphs' => 'departmental_sdbips#generate_graphs', :as => :generate_graphs
-
+  get 'departmental_sdbips/restore_kpi' => 'departmental_sdbips#restore_kpi', :as => :restore_kpi
+  get 'departmental_sdbip_progresses/generate_graphs' => 'departmental_sdbip_progresses#generate_graphs', :as => :generate_graphs
+  post 'sdbip_time_periods/update_time_periods' => 'sdbip_time_periods#update_time_periods', :as => :update_time_periods
   resources :roles
   resources :setups
   resources :departments

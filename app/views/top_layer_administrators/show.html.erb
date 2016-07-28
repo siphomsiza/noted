@@ -1,48 +1,29 @@
-<% provide(:title, 'SDBIP Time Period') %>
-<script>
-$(function() {
-	//highlight the current nav
-	$("#applicationmanifest a:contains('SETUP')").parent().addClass('active');
-}); //jQuery is loaded
-</script>
-<div>
-  <h2>
-    <%= @sdbip_time_period.period %>&nbsp;(month ending <%= @sdbip_time_period.end_date.strftime("%Y-%B-%d") %>) Time Period</h3>
-  </h2>
-  <div class="row">
-    <div class="col col-md-6 col-md-offset-3">
-      <small>Create Date </small>
-      <small><%= @sdbip_time_period.created_at.strftime("%d %b %Y") %></small>
+<p id="notice"><%= notice %></p>
 
+<p>
+  <strong>User:</strong>
+  <%= @top_layer_administrator.user_id %>
+</p>
 
-      <small>Update Date </small>
-      <small><%= @sdbip_time_period.updated_at.strftime("%d %b %Y ") %></small>
-      <hr/>
-<strong>Period: </strong>
-<output><%= @sdbip_time_period.period %>&nbsp;(month ending <%= @sdbip_time_period.end_date.strftime("%Y-%B-%d") %>)</output>
+<p>
+  <strong>Can edit:</strong>
+  <%= @top_layer_administrator.can_edit %>
+</p>
 
+<p>
+  <strong>Can create:</strong>
+  <%= @top_layer_administrator.can_create %>
+</p>
 
-      <strong>Start Date</strong>
-      <output><%= @sdbip_time_period.start_date.strftime("%d %b %Y") %></output>
+<p>
+  <strong>Can approve:</strong>
+  <%= @top_layer_administrator.can_approve %>
+</p>
 
+<p>
+  <strong>Can update:</strong>
+  <%= @top_layer_administrator.can_update %>
+</p>
 
-<strong>Reminder</strong>
-<output><%= @sdbip_time_period.end_date.days_ago(7) %></output>
-
-<strong>Closure Date</strong>
-<output><%= @sdbip_time_period.end_date.days_ago(-15) %></output>
-
-
-<strong>Status</strong>
-<output><% if  @sdbip_time_period.end_date.strftime("%Y-%m-%d") == Date.today.strftime("%Y-%m-%d") && @sdbip_time_period.end_date.strftime("%Y-%m-%d") < 15.days.from_now %>
-  <label class="label label-success">Open</label>
-  <% elsif @sdbip_time_period.end_date.strftime("%Y-%m-%d") > 15.days.from_now %>
-  <label class="label label-danger">Closed</label>
-  <% end %></output>
-
-
-
-      <%= link_to "Edit", edit_sdbip_time_period_path, class: 'btn btn-mini' %> | <%= link_to "Back", sdbip_time_periods_path, class: 'btn btn-mini' %>
-    </div>
-  </div>
-</div>
+<%= link_to 'Edit', edit_top_layer_administrator_path(@top_layer_administrator) %> |
+<%= link_to 'Back', top_layer_administrators_path %>

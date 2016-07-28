@@ -1,28 +1,41 @@
-<%= form_for :top_layer_administrators do |f| %>
-<% if @role.errors.any? %>
-  <div id="error_explanation">
-    <div class="alert alert-danger">
-      The form contains <%= pluralize(@role.errors.count, "error") %>.
+<div class="col-lg-6 col-lg-offset-3"><br/>
+  <%= form_for(@top_layer_administrator) do |f| %>
+  <% if @top_layer_administrator.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@top_layer_administrator.errors.count, "error") %> prohibited this top_layer_administrator from being saved:</h2>
+
+      <ul>
+      <% @top_layer_administrator.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
     </div>
-    <ul>
-    <% @role.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-    </ul>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :user_id %><br>
+    <% @users_for_departmental_administrators = User.where('id NOT IN(SELECT (user_id) FROM top_layer_administrators)') %>
+    <%= f.select :user_id, @users_for_departmental_administrators.all.collect {|x| [x.firstname, x.id]}, {:include_blank => "Select User"}, class: "form-control" %>
+  </div>
+  <%= f.label :can_create, class: "checkbox inline" do %>
+    <%= f.check_box :can_create %>
+    <span>Create</span>
+  <% end %>
+  <%= f.label :can_edit, class: "checkbox inline" do %>
+    <%= f.check_box :can_edit %>
+    <span>Edit</span>
+  <% end %>
+  <%= f.label :can_update, class: "checkbox inline" do %>
+    <%= f.check_box :can_update %>
+    <span>Update</span>
+  <% end %>
+  <%= f.label :can_approve, class: "checkbox inline" do %>
+    <%= f.check_box :can_approve %>
+    <span>Approve</span>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit "Save", class: "btn col-lg-3 pull-right" %>
   </div>
 <% end %>
-
-<%= f.label :user_id, "Select User:" %>
-<%= f.select :user_id, User.all.collect {|x| [x.firstname, x.id]}, {:include_blank => "Select User"}, class: "form-control" %>
-<br/>
-<div class="row">
-	<div class="col-lg-11">
-    <%= f.label :department_administrator, class: "checkbox inline" do %>
-      <%= f.check_box :departmental_administrator, :id=>"departmental_administrator_checkbox" %>
-      <span>Department Admin</span>
-    <% end %>
-    <%= f.label :municipal_manager, class: "checkbox inline" do %>
-      <%= f.check_box :municipal_manager, :id=>"municipal_manager_checkbox" %>
-      <span>Municipal Manager</span>
-    <% end %>
-  <% end %>
+</div>

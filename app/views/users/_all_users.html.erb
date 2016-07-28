@@ -7,10 +7,10 @@
         <th><h4>Ref</h4></th>
         <th><h4>First Name</h4></th>
         <th><h4>Last Name</h4></th>
-        <th><h4>Email</h4></th>
         <th><h4>Date Added</h4></th>
         <th><h4>Last Login</h4></th>
         <th><h4>Status</h4></th>
+        <th><h4>Date Terminated</h4></th>
         <th><h4>Actions</h4></th>
       </tr>
     </thead>
@@ -21,10 +21,11 @@
         <td><%= user.id %></td>
         <td><%= user.firstname %></td>
         <td><%= user.surname %></td>
-        <td><%= user.email %></td>
-        <td><%= user.created_at.strftime("%Y %b %d") %></td>
-        <td><% if !user.last_login.blank? %><%= user.last_login.strftime("%Y %b %d") %><% end %></td>
+        <td><%= user.created_at.strftime("%Y %b %d %H:%M:%S") %></td>
+        <td><% if !user.last_login.blank? %><%= user.last_login.strftime("%Y %b %d %H:%M:%S") %><% end %></td>
         <td><%= user.status%></td>
+        <td><% if !user.terminated_at.blank? %><%= user.terminated_at.strftime("%Y %b %d %H:%M:%S") %><% end %></td>
+
         <td>
           <% if !user.terminated? %>
           <%= link_to edit_user_path(user),remote: true,'data-target' => "#user-modal", 'data-toggle' => 'modal', class: "btn btn-sm", :title=>"Click to Edit user details" do %>
@@ -33,16 +34,27 @@
             <div id="user-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
 
             </div>
-            <% if current_user.admin? && !current_user?(user) %> |
-          <%= link_to "#", class: "btn btn-sm" do %>
-            <span class="glyphicon glyphicon-edit"></span>&nbsp;Edit Access
-          <% end %><% end %>
-          <% if current_user.admin? && !current_user?(user) %> |
+            <% if current_user.admin? && !current_user?(user) && !user.admin? && !user.role.blank? %> |
+            <%= link_to edit_user_access_path(user),remote: true,'data-target' => "#user-role-modal", 'data-toggle' => 'modal', class: "btn btn-sm", :title=>"Click to edit user access" do %>
+                                <span class="glyphicon glyphicon-edit"></span>&nbsp;Edit Access
+                              <% end %>
+                <div id="user-role-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+
+                </div>
+          <% elsif current_user.admin? && !current_user?(user) && !user.admin? && user.role.blank? %>
+            <%= link_to new_user_role_path(:id=>user.id),remote: true,'data-target' => "#new-user-role-modal", 'data-toggle' => 'modal', class: "btn btn-sm", :title=>"Click to edit user access" do %>
+                                <span class="glyphicon glyphicon-edit"></span>&nbsp;Edit Access
+                              <% end %>
+                <div id="new-user-role-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+
+                </div>
+          <% end %>
+          <% if current_user.admin? && !current_user?(user)  %> |
           <%= link_to "",'data-target' => "#reset-password", 'data-toggle' => 'modal', class: "btn btn-sm", :title=>"Click to change your password" do %>
               <span class="glyphicon glyphicon-lock"></span>&nbsp;Reset Password
             <% end %>
           <% end %>
-          <% if current_user.admin? && !current_user?(user) %>
+          <% if current_user.admin? && !current_user?(user) && !user.admin? %>
            |
           <%= link_to user, data:{confirm: 'Are you sure?'} , :method => :delete, class: "btn btn-sm" do %><span class="glyphicon glyphicon-trash"></span>&nbsp;
             Delete

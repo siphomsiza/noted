@@ -4,11 +4,9 @@ class DepartmentalSdbip < ActiveRecord::Base
 	#tracked owner: ->(controller, model) { controller && controller.current_user }
 	belongs_to :department
 	has_many :activities
-	belongs_to :user
 	belongs_to :list
 	belongs_to :subdepartment
 	belongs_to :kpi_owner
-	belongs_to :predetermined_objective
 	belongs_to :mscore_classification
 	belongs_to :national_outcome
 	belongs_to :strategic_objective
@@ -30,17 +28,23 @@ class DepartmentalSdbip < ActiveRecord::Base
 	belongs_to :departmental_idp_objective
 	has_one :capital_project
 	belongs_to :sdbip_time_period
-	belongs_to :sdbip_report
-	has_many :departmental_sdbip_progresses, :dependent => :destroy
-	accepts_nested_attributes_for :departmental_sdbip_progresses,allow_destroy: true
-	validates :department_name,:subdepartment_name,:kpi,:kpi_ref_number,:predetermined_objective_id,:mscore_classification_id,:national_outcome_id,:strategic_objective_id,:presence=> true
-  #validate :extension_white_list
+	has_many :kpi_results, :dependent => :destroy
+	accepts_nested_attributes_for :kpi_results, allow_destroy: true
+	has_many :assurances, :dependent => :destroy
+	accepts_nested_attributes_for :assurances, allow_destroy: true
 
-	def subdepartment_for_form
-    	collection = departmental_sdbip_progresses.where(departmental_sdbip_id: id)
-    	collection.any? ? collection : departmental_sdbip_progresses.build
-  	end
+	validates :department_name,:subdepartment_name,:kpi,:kpi_ref_number,:mscore_classification_id,:national_outcome_id,:strategic_objective_id,:presence=> true
 
+	def kpi_result_for_form
+    collection = kpi_results.where(departmental_sdbip_id: id)
+    collection.any? ? collection : kpi_results.build
+  end
+	def assurance_for_form
+    collection = assurances.where(departmental_sdbip_id: id)
+    collection.any? ? collection : assurances.build
+  end
+
+	#validate :extension_white_list
 	def self.import_from_file(file)
 		DepartmentalSdbip.import(file)
 	end
@@ -440,7 +444,8 @@ end
 			column_names = ["KPI Ref no.","KPI","Department","Subdepartment","KPA","KPI Type","KPI Owner","Strategic Objectives","Baseline","Annual Target","Revised Target","1st Quarter Target","2nd Quarter Target","3rd Quarter Target","4th Quarter Target","Area","Ward","Source of Evidence","Unit of Measurement"]
     	csv << column_names
     	all.each do |departmental_sdbip|
-      	csv << departmental_sdbip.attributes.values_at(*column_names)#[departmental_sdbip.kpi_ref_number, departmental_sdbip.kpi,departmental_sdbip.department.name, departmental_sdbip.subdepartment.subdepartment_name,departmental_sdbip.kpa.name,departmental_sdbip.kpi_type.name,departmental_sdbip.kpi_owner.name,departmental_sdbip.strategic_objective.name,departmental_sdbip.baseline,departmental_sdbip.annual_target,departmental_sdbip.revised_target,departmental_sdbip.first_quarter_target,departmental_sdbip.second_quarter_target,departmental_sdbip.third_quarter_target,departmental_sdbip.fourth_quarter_target, departmental_sdbip.area.name,departmental_sdbip.ward.name,departmental_sdbip.source_of_evidence,departmental_sdbip.unit_of_measurement]
+				#departmental_sdbip.attributes.values_at(*column_names)#
+      	csv << [departmental_sdbip.kpi_ref_number, departmental_sdbip.kpi,departmental_sdbip.department.name, departmental_sdbip.subdepartment.subdepartment_name,departmental_sdbip.kpa.name,departmental_sdbip.kpi_type.name,departmental_sdbip.kpi_owner.name,departmental_sdbip.strategic_objective.name,departmental_sdbip.baseline,departmental_sdbip.annual_target,departmental_sdbip.revised_target,departmental_sdbip.first_quarter_target,departmental_sdbip.second_quarter_target,departmental_sdbip.third_quarter_target,departmental_sdbip.fourth_quarter_target, departmental_sdbip.area.name,departmental_sdbip.ward.name,departmental_sdbip.source_of_evidence,departmental_sdbip.unit_of_measurement]
     	end
   	end
 	end

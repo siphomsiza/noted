@@ -1,0 +1,39 @@
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover">
+      <tr>
+        <th><h4>Department</h4></th>
+        <th><h4>Subdepartment</h4></th>
+        <th><h4>KPI</h4></th>
+        <th><h4>KPI Ref Number</h4></th>
+        <th><h4>Predetermined Objectives</h4></th>
+        <th><h4>KPI Owner</h4></th>
+        <th><h4>Unit of Measurement</h4></th>
+        <th><h4>Source of Evidence</h4></th>
+        <th><h4>NDP Objective</h4></th>
+        <th><h4>Capital Project</h4></th>
+        <th><h4>Reporting Category</h4></th>
+        <th><h4>KPI Calculation Type</h4></th>
+        <th><h4>Action</h4></th>
+
+      </tr>
+    <% @deleted_kpis.each do |deleted_kpi| %>
+      <tr>
+        <td><%= deleted_kpi.department.name %></td>
+        <td><%= deleted_kpi.subdepartment.subdepartment_name %></td>
+        <td><%= deleted_kpi.kpi %></td>
+        <td><%= deleted_kpi.kpi_ref_number %></td>
+        <td><% if !deleted_kpi.predetermined_objective_id.blank? %><%= departmental_sdbip.predetermined_objective.name %><% end %></td>
+        <td><% if !deleted_kpi.kpi_owner_id.blank? %><%= departmental_sdbip.kpi_owner.name %><% end %></td>
+        <td><%= deleted_kpi.unit_of_measurement %></td>
+        <td><%= deleted_kpi.source_of_evidence %></td>
+        <td><% if !deleted_kpi.ndp_objective_id.blank? %><%= departmental_sdbip.ndp_objective.name %><% end %></td>
+        <td><% if deleted_kpi.capital_project %><%= departmental_sdbip.capital_project.mun_cp_ref %><% end %></td>
+        <td><% if !deleted_kpi.reporting_category_id.blank? %><%= departmental_sdbip.reporting_category.name %><% end %></td>
+        <td><% if !deleted_kpi.kpi_calculation_type_id.blank? %><%= departmental_sdbip.kpi_calculation_type.name %><% end %></td>
+        <td></td>
+
+      </tr>
+      <% end %>
+
+  </table>
+</div>

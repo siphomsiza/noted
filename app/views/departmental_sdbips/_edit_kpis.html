@@ -165,9 +165,9 @@
 		<%= f.select :kpi_type_id, KpiType.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select KPI Type"}, class: "form-control" %>
 
 		<%= f.label :impact %><br>
-    
+
     	<%= f.text_field :impact, :class => "form-control has-error col-md-5", :readonly => true %>
-   
+
 
 		<%= f.label :provincial_strategic_outcome_id, "Provincial Strategic Outcome" %><br>
 		<%= f.select :provincial_strategic_outcome_id, ProvincialStrategicOutcome.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select Provincial Strategic Outcome"}, class: "form-control" %>
@@ -220,6 +220,7 @@
     <% end %>
 </div>
 </div>
+<%= render 'results' %>
 </div>
 <div class="modal-footer">
 
@@ -227,10 +228,3 @@
 
 </div>
 </div>
-<script>
-  $(document).ready(function(){
-      $(function(){
-          $('#edit-departmental-sdbip-form select').prop("disabled",true);
-      });
-  });
-</script>

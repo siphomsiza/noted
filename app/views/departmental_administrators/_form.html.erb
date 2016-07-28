@@ -20,7 +20,7 @@
   <div class="field">
     <%= f.label :user_id %><br>
     <% @users_for_departmental_administrators = User.where('id NOT IN(SELECT (user_id) FROM departmental_administrators)') %>
-    <%= f.select :user_id, @users_for_departmental_administrators.all.collect {|x| [x.firstname, x.id]}, {:include_blank => "Select User"}, class: "form-control" %>
+    <%= f.select :user_id, @users_for_departmental_administrators.all.collect {|x| [x.firstname, x.id]}, {:include_blank => "Select User"}, {required: true,class: "form-control"} %>
   </div>
   <%= f.label :can_create, class: "checkbox inline" do %>
     <%= f.check_box :can_create %>

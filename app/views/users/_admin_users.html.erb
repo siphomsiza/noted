@@ -22,12 +22,12 @@
         <td><%= user.email %></td>
         <td><% if user.admin? %> Yes <% else %> No <% end %></td>
         <td>
-          <% if !user.admin? %>
+          <% if !user.super_admin? %>
           <%= link_to  controller: "users",action: "set_admin", id: user.id,method: "get",:data =>{confirm: "Set this user to Super User?"}, :class => "btn btn-sm" do %>
             Add as Administrator
           <% end %>
           <% end %>
-          <% if user.admin? && !current_user?(user) %>
+          <% if user.super_admin? && !current_user?(user) %>
           <%= link_to  controller: "users",action: "set_normal_user", id: user.id, method: "get",:data =>{confirm: "Remove this user as Super User?"}, :class => "btn btn-sm" do %>
             Remove user as Administrator
           <% end %>
