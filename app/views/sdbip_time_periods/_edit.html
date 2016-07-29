@@ -1,43 +1,150 @@
 <div class="modal-dialog">
   <div class="modal-content">
     <div class="modal-header">
-      <h3>Editing Time Period</h3>
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h3><%= "Month Ending #{@sdbip_time_period.period.strftime('%d %B %Y')}"%></h3>
     </div>
     <div class="modal-body">
-      <div class="col-lg-10 col-md-offset-1">
-        <br/>
+      <div class="col col-lg-10 col-lg-offset-1">
         <%= form_for @sdbip_time_period do |f| %>
-      <%= f.label :period %><br>
-      <div class="form-group">
-        <div class="input-group date" data-provide="datepicker"
-             data-date-format="dd-mm-yyyy" data-date-start-view="days" data-date-min-view-mode="days">
-          <%= f.text_field :period,  class: "form-control", :readonly=> true %>
-          <span class="input-group-addon">
-            <span class="glyphicon glyphicon-calendar"></span>
-          </span>
+        <br/>
+      <fieldset>
+        <legend><%= f.label :Primary %>
+          <% if @sdbip_time_period.primary_status? %>
+          <div class="col pull-right">
+          <%= link_to controller: :sdbip_time_periods, action: :close_primary, id: @sdbip_time_period.id, method: :post,class: 'btn btn-sm pull-right' do %>
+              Close
+          <% end %>
         </div>
-      </div>
-
-    	<%= f.label :primary_reminder %><br>
-      <div class="form-group">
-          <%= f.text_field :primary_reminder, class: "form-control",pattern: "[0-9]+", autocomplete: "off", required: true %>
-      </div>
-      <%= f.label :primary_closure %><br>
-
-      <div class="form-group">
-          <%= f.text_field :primary_closure, class: "form-control",pattern: "[0-9]+", autocomplete: "off", required: true %>
-      </div>
-        <%= f.label :secondary_reminder %><br>
-      <div class="form-group">
-          <%= f.text_field :secondary_reminder, class: "form-control",pattern: "[0-9]+", autocomplete: "off", required: true %>
-      </div>
-      <%= f.label :secondary_closure %><br>
-
-      <div class="form-group">
-            <%= f.text_field :secondary_closure, class: "form-control",pattern: "[0-9]+", autocomplete: "off", required: true %>
-      </div>
-      <div class="actions col-lg-3 pull-right">
-        <%= f.submit "Save", :class =>'btn btn-mini' %>
+          <% end %>
+        </legend>
+        <section class="row">
+            <label class="col col-lg-4 control-label" for="status">Status</label>
+            <div class="controls col col-lg-8">
+              <% if @sdbip_time_period.primary_status? %>
+              <%= f.text_field :primary_status,:class => "form-control" , :autocomplete=>"off",readonly: true,:id=>"primary_status" %>
+              <% else %>
+              <%= text_field_tag :primary_status,nil, :class => "form-control" , :autocomplete=>"off",readonly: true,:id=>"primary_status" %>
+              <% end %>
+            </div><!-- controls -->
+          </section><!-- row -->
+          <% if @sdbip_time_period.primary_status? %>
+        <section class="row">
+        <label class="col col-lg-4 control-label" for="reminder">Reminder</label>
+          <div class="form-group controls col col-lg-8">
+            <div class="input-group date" data-provide="datepicker"
+                 data-date-format="dd-mm-yyyy" data-date-start-view="days" data-date-min-view-mode="days">
+              <%= f.text_field :primary_reminder,  class: "form-control" %>
+              <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar"></span>
+              </span>
+            </div>
+          </div>
+        </section><!-- row -->
+        <section class="row">
+          <label class="col col-lg-4 control-label" for="closure">Closure</label>
+          <div class="form-group controls col col-lg-8">
+            <div class="input-group date" data-provide="datepicker"
+                 data-date-format="dd-mm-yyyy" data-date-start-view="days" data-date-min-view-mode="days">
+              <%= f.text_field :primary_closure,  class: "form-control" %>
+              <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar"></span>
+              </span>
+            </div>
+          </div>
+          </section><!-- row -->
+          <% end %>
+      </fieldset><!-- info -->
+      <fieldset>
+        <legend><%= f.label :Secondary %>
+          <% if @sdbip_time_period.secondary_status? %>
+          <%= link_to controller: :sdbip_time_periods, action: :close_secondary, id: @sdbip_time_period.id, method: :post,class: 'btn btn-sm pull-right' do %>
+              Close
+          <% end %>
+          <% end %>
+        </legend>
+        <section class="row">
+            <label class="col col-lg-4 control-label" for="status">Status</label>
+            <div class="controls col col-lg-8">
+              <% if @sdbip_time_period.secondary_status? %>
+              <%= f.text_field :secondary_status, :class => "form-control" , :autocomplete=>"off",readonly: true,:id=>"secondary_status" %>
+              <% else %>
+              <%= text_field_tag :secondary_status,nil, :class => "form-control" , :autocomplete=>"off",readonly: true,:id=>"secondary_status" %>
+              <% end %>
+            </div><!-- controls -->
+          </section><!-- row -->
+            <% if @sdbip_time_period.secondary_status? %>
+        <section class="row">
+        <label class="col col-lg-4 control-label" for="reminder">Reminder</label>
+          <div class="form-group controls col col-lg-8">
+            <div class="input-group date" data-provide="datepicker"
+                 data-date-format="dd-mm-yyyy" data-date-start-view="days" data-date-min-view-mode="days">
+              <%= f.text_field :secondary_reminder,  class: "form-control" %>
+              <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar"></span>
+              </span>
+            </div>
+          </div>
+        </section><!-- row -->
+        <section class="row">
+          <label class="col col-lg-4 control-label" for="closure">Closure</label>
+          <div class="form-group controls col col-lg-8">
+            <div class="input-group date" data-provide="datepicker"
+                 data-date-format="dd-mm-yyyy" data-date-start-view="days" data-date-min-view-mode="days">
+              <%= f.text_field :secondary_closure,  class: "form-control" %>
+              <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar"></span>
+              </span>
+            </div>
+          </div>
+          </section><!-- row -->
+          <% end %>
+      </fieldset><!-- info -->
+      <fieldset>
+        <legend><%= f.label :Finance %>
+          <div class="col pull-right">
+            <% if @sdbip_time_period.finance_status? %>
+            <%= link_to controller: :sdbip_time_periods, action: :close_finance, id: @sdbip_time_period.id, method: :post,class: 'btn btn-sm pull-right' do %>
+                Close
+            <% end %>
+            <% end %>
+          </div>
+        </legend>
+        <section class="row">
+            <label class="col col-lg-4 control-label" for="status">Status</label>
+            <div class="controls col col-lg-8">
+              <%= f.text_field :finance_status, :class => "form-control" , :autocomplete=>"off",readonly: true,:id=>"finance_status" %>
+            </div><!-- controls -->
+          </section><!-- row -->
+            <% if @sdbip_time_period.finance_status? %>
+        <section class="row">
+        <label class="col col-lg-4 control-label" for="reminder">Reminder</label>
+          <div class="form-group controls col col-lg-8">
+            <div class="input-group date" data-provide="datepicker"
+                 data-date-format="dd-mm-yyyy" data-date-start-view="days" data-date-min-view-mode="days">
+              <%= f.text_field :finance_reminder,  class: "form-control" %>
+              <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar"></span>
+              </span>
+            </div>
+          </div>
+        </section><!-- row -->
+        <section class="row">
+          <label class="col col-lg-4 control-label" for="closure">Closure</label>
+          <div class="form-group controls col col-lg-8">
+            <div class="input-group date" data-provide="datepicker"
+                 data-date-format="dd-mm-yyyy" data-date-start-view="days" data-date-min-view-mode="days">
+              <%= f.text_field :finance_closure,  class: "form-control" %>
+              <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar"></span>
+              </span>
+            </div>
+          </div>
+          </section><!-- row -->
+          <% end %>
+      </fieldset><!-- info -->
+      <div class="actions">
+        <%= f.submit "Save", :class =>'btn btn-mini col-lg-3 pull-right' %>
       </div>
       <% end %>
 </div>
@@ -46,3 +153,29 @@
 </div>
 </div>
 </div>
+<script>
+$(document).ready(function(){
+	var status_primary = <%= @sdbip_time_period.primary_status %>;
+  var status_secondary = <%= @sdbip_time_period.secondary_status %>;
+  var status_finance = <%= @sdbip_time_period.finance_status %>;
+  //
+	if(status_primary == true){
+		$("#primary_status").val("Open");
+	}else{
+		$("#primary_status").val("Closed");
+	}
+  //
+  if(status_secondary == true){
+		$("#secondary_status").val("Open");
+	}else{
+		$("#secondary_status").val("Closed");
+	}
+  //
+  if(status_finance == true){
+		$("#finance_status").val("Open");
+	}else{
+		$("#finance_status").val("Closed");
+	}
+
+});
+</script>

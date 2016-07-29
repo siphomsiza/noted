@@ -7,17 +7,6 @@
       <div class="col-lg-10 col-md-offset-1">
         <br/>
         <%= form_for @sdbip_time_period do |f| %>
-      <%= f.label :period %><br>
-      <div class="form-group">
-        <div class="input-group date" data-provide="datepicker"
-             data-date-format="dd-mm-yyyy" data-date-start-view="days" data-date-min-view-mode="days">
-          <%= f.text_field :period,  class: "form-control", :readonly=> true %>
-          <span class="input-group-addon">
-            <span class="glyphicon glyphicon-calendar"></span>
-          </span>
-        </div>
-      </div>
-
     	<%= f.label :primary_reminder %><br>
       <div class="form-group">
           <%= f.text_field :primary_reminder, class: "form-control",pattern: "[0-9]+", autocomplete: "off", required: true %>

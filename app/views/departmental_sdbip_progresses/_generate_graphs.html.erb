@@ -40,12 +40,12 @@
     <fieldset id="choose-group">
 	    <legend>2. Select the layout:</legend>
       <div class="form-group col col-lg-12">
-        <div class="col-lg-3">
-      <%= label_tag :include_sub_graphs, class: "checkbox inline" do %>
-        <%= check_box_tag :include_sub_graphs_choice, :id=>'include-sub-graphs' %>
-        <span class="control-label">Include Sub-graphs</span>
-      <% end %>
-    </div>
+        <div class="checkbox col col-lg-3">
+          <label>
+            <input type="checkbox" style="margin-left: 0;" id="include-sub-graphs">&nbsp;&nbsp;&nbsp;&nbsp;Include Sub-graphs
+          </label>
+        </div>
+
     </div>
     <div class="form-group col col-lg-12">
       <label class="control-label">Group By:</label>
@@ -74,7 +74,7 @@
 </div>
 <script>
 $(document).ready(function() {
-  var select_value,sub_graphs;
+  var select_value,sub_graphs=false;
   $(function(){
 
         $(document).on('change','#department-choice', function(){
@@ -83,15 +83,14 @@ $(document).ready(function() {
         });
         $('input[type="checkbox"]').click(function(){
               if($('#include-sub-graphs').prop("checked") == true){
-                        sub_graphs = $("#include-sub-graphs").val();
-                      }
-                      if($('#include-sub-graphs').prop("checked") == false){
-                        sub_graphs = $("#include-sub-graphs").val();
-                      }
-              });
+                  sub_graphs = true;
+              }
+              if($('#include-sub-graphs').prop("checked") == false){
+                sub_graphs = false;
 
+              }
+          });
         $('#page_button').click(function() {
-          //alert(select_value);
           $.ajax({
                url : "/departmental_sdbip_progresses/generate_graphs",
                type : "get",

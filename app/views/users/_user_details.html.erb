@@ -1,6 +1,7 @@
 <div class="tab-pane active fade in" id="user_details">
-  <div class="table-responsive col-lg-8">
-  <table class="table table-striped table-condensed">
+  <div class="row col col-lg-12">
+  <div class="table-responsive col-lg-7">
+  <table class="table table-striped table-condensed table-hover">
     <thead>
       <tr>
         <th ><h4>Avatar</h4></th>
@@ -64,6 +65,12 @@
       <% end %>
     </tbody>
   </table>
-  <%= will_paginate @users %>
 </div>
+</div>
+<div class="row">
+  <div class="col col-lg-12">
+      <%= will_paginate %>
+  </div>
+</div>
+
 </div>

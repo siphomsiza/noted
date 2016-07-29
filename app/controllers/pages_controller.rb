@@ -19,7 +19,7 @@ class PagesController < ApplicationController
   end
   def dashboard
 
-    @sdbip_time_periods = SdbipTimePeriod.where(["period >= ? OR period <= ?",Date.today,Date.today.days_ago(-7)])
+    @sdbip_time_periods = SdbipTimePeriod.where(["period >= ? AND period <= ?",Date.today,Date.today.days_ago(-7)])
     @users = User.all
 
     @departmental_sdbips = DepartmentalSdbip.order(performance_standard: :asc)

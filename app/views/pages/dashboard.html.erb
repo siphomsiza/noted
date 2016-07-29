@@ -173,11 +173,11 @@
           </td>
           <td>
           <% if !time_period.primary_closure.blank? %>
-            <%= time_period.primary_closure).strftime("%d %B %Y") %>
+            <%= time_period.primary_closure.strftime("%d %B %Y") %>
           <% end %>
         </td>
           <td><% if !time_period.secondary_closure.blank? %>
-            <%= time_period.secondary_closure).strftime("%d %B %Y") %><% end %></td>
+            <%= time_period.secondary_closure.strftime("%d %B %Y") %><% end %></td>
           <td>
           <% if  time_period.primary_status? || time_period.secondary_status? %>
 
@@ -318,23 +318,6 @@
           </tr>
           <% end %>
         </table>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-6 col-md-offset-3">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3><%= @doc["item"]["condition"]["date"] %></h3>
-          <h3> <%= @doc["location"]["city"] %>, <%= @doc["location"]["region"] %>, <%= @doc["location"]["country"] %></h3>
-        </div>
-        <div class="panel-body">
-          <h3>
-            <span><img height="84" width="84" src="<%= @doc["item"]["description"][/\"(.*?)"/,1] %>"></span>
-            &nbsp;<%= @doc["item"]["condition"]["text"] %>,
-            &nbsp;<%= ((@doc["item"]["condition"]["temp"].to_i - 32) / 1.8).round() %>&deg;C
-          </h3>
-        </div>
       </div>
     </div>
   </div>

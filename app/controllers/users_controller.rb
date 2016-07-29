@@ -5,7 +5,20 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update,:destroy,:deactivate,:set_admin,:set_normal_user,:terminate,:restore,:lock_user,:unlock_user,:activate,:edit_new_user,:edit_active_user,:edit_user_profile]
 
   def index
+    begin
 
+        @client = YahooWeather::Client.new
+        @response = @client.fetch(1582504)
+        @doc = @response.doc
+        @forecast = @doc["item"]["forecast"]
+      #@response = @client.fetch_by_location('New York')
+      #@response.units.temperature
+      #@response.condition.temp
+
+  rescue SignalException => e
+    flash[:notice] = "received Exception #{e.message}"
+    puts "received Exception #{e}"
+  end
       @system_users = User.all
       @user_activities = ActivityLog.where(admin: false).paginate(page: params[:page], per_page: 15)
       @super_user_activities = ActivityLog.where(admin: true).paginate(page: params[:page], per_page: 15)
