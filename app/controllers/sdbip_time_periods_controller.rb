@@ -87,6 +87,7 @@ class SdbipTimePeriodsController < ApplicationController
         new_secondary_closure = time_period.period.days_ago(-params[:secondary_closure].to_i)
         @time_period = SdbipTimePeriod.find(time_period.id)
         @time_period.update_columns(:primary_reminder => new_primary_reminder,:primary_closure=>new_primary_closure,:secondary_reminder=>new_secondary_reminder,:secondary_closure=>new_secondary_closure)
+        
       end
         flash[:success] = "All automatic time periods updated successfully."
         redirect_to :back
