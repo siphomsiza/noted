@@ -9,23 +9,23 @@
 <%= form_for @departmental_sdbip, id: "edit-departmental-sdbip-form" do |f| %>
 
       <%= f.label :kpi, "KPI" %><br>
-      
+
       <%= f.text_area :kpi, :class => "form-control has-error col-md-5", :readonly=> false  %>
-      
+
 		<%= f.label :department_id %><br>
-    
+
     <%= f.select :department_id, Department.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select Department"}, :id=>"selected_department_edit", class: "form-control" %>
-    
+
     <%= f.hidden_field :department_name, id: "current_department_update" %>
 
     <%= f.label :subdepartment_id, "Subdepartment" %><br>
-    
+
     <%= f.select :subdepartment_id, Subdepartment.all.collect {|x| [x.subdepartment_name, x.id]}, {:include_blank => "Select Subdepartment"}, :id=>"selected_subdepartment_edit", class: "form-control" %>
 
     <%= f.hidden_field :subdepartment_name, id: "current_subdepartment_update" %>
 
 		<%= f.label :kpi_ref_number, "KPI Ref Number" %><br>
-    
+
 		<%= f.text_field :kpi_ref_number, :class => "form-control has-error col-md-5" %>
 
 		<%= f.label :predetermined_objective_id, "Predetermined Objectives" %><br>
@@ -35,14 +35,14 @@
 		<%= f.select :kpi_owner_id, KpiOwner.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select KPI Owner"}, class: "form-control" %>
 
 		<%= f.label :unit_of_measurement, "Unit of Measurement" %><br>
-    
+
 		<%= f.text_field :unit_of_measurement, :class => "form-control has-error col-md-5" %>
 
 		<%= f.label :mscore_classification_id, "M Score Classification" %><br>
 		<%= f.select :mscore_classification_id, MscoreClassification.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select M Score Classification"}, class: "form-control" %>
 
 		<%= f.label :idp_ref, "IDP Ref" %><br>
-    
+
 		<%= f.text_field :idp_ref, :class => "form-control has-error col-md-5" %>
 
 
@@ -53,36 +53,36 @@
 		<%= f.select :strategic_objective_id, StrategicObjective.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select Strategic Objective"}, class: "form-control" %>
 
 		<%= f.label :source_of_evidence, "Source of Evidence" %><br>
-    
+
 		<%= f.text_field :source_of_evidence, :class => "form-control has-error col-md-5" %>
-    
+
 
 		<%= f.label :baseline %><br>
-    
+
 		<%= f.text_field :baseline, :class => "form-control has-error col-md-5" %>
 
 
 		<%= f.label :budget %><br>
-    
+
 		<%= f.text_field :budget, :class => "form-control has-error col-md-5" %>
-    
+
 
         <%= f.label :Target %><br>
 
 		<%= f.text_field :target, :class => "form-control has-error col-md-5" %>
 
 		<%= f.label :annual_target, "Annual Target" %><br>
-    
+
 		<%= f.text_field :annual_target, :class => "form-control has-error col-md-5" %>
 
 
 		<%= f.label :revised_target, "Revised Target" %><br>
-    
+
 		<%= f.text_field :revised_target, :class => "form-control has-error col-md-5" %>
-    
+
 
     <%= f.label :first_quarter_target, "First Quarter Target" %><br>
-    
+
 		<%= f.text_field :first_quarter_target, :class => "form-control has-error col-md-5" %>
 
     <%= f.label :first_quarter_actual, "First Quarter Actual" %><br>
@@ -92,7 +92,7 @@
     <%= f.file_field :first_quarter_poe, :class => "form-control has-error col-md-5" %>
 
     <%= f.label :second_quarter_target, "Second Quarter Target" %><br>
-    
+
     <%= f.text_field :second_quarter_target, :class => "form-control has-error col-md-5" %>
 
     <%= f.label :second_quarter_actual, "Second Quarter Actual" %><br>
@@ -103,9 +103,9 @@
 
 
     <%= f.label :third_quarter_target, "Third Quarter Target" %><br>
-    
+
     <%= f.text_field :third_quarter_target, :class => "form-control has-error col-md-5" %>
-    
+
 
     <%= f.label :third_quarter_actual, "Third Quarter Actual" %><br>
     <%= f.text_field :third_quarter_actual, :class => "form-control has-error col-md-5" %>
@@ -115,7 +115,7 @@
 
 
     <%= f.label :fourth_quarter_target, "Fourth Quarter Target" %><br>
-    
+
     <%= f.text_field :fourth_quarter_target, :class => "form-control has-error col-md-5" %>
 
     <%= f.label :fourth_quarter_actual, "Fourth Quarter Actual" %><br>
@@ -139,7 +139,7 @@
 
 		<%= f.label :impact %><br>
 
-    	<%= f.text_field :impact, :class => "form-control has-error col-md-5", :readonly => true %>
+    	<%= f.text_field :impact, :class => "form-control has-error col-md-5" %>
 
 
 		<%= f.label :provincial_strategic_outcome_id, "Provincial Strategic Outcome" %><br>
@@ -169,7 +169,7 @@
 		<%= f.select :risk_rating_id, RiskRating.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select Rating"}, class: "form-control" %>
 
 		<%= f.label :top_layer_kpi_ref, "Top Layer KPI Ref" %><br>
-    
+
 		<%= f.text_field :top_layer_kpi_ref, :class => "form-control has-error col-md-5" %>
 
 		<%= f.label :kpi_calculation_type_id, "KPI Calculation Type" %><br>
@@ -180,7 +180,7 @@
 
     <div class="row">
     <div class="actions col-lg-5">
-      
+      <% if current_user.admin? %>
       <%= link_to @departmental_sdbip, method: :delete, data: { confirm: "You sure?" }, class: "btn btn-mini" do %>
         <span class="glyphicon glyphicon-trash"></span>Delete
       <% end %>&nbsp;|&nbsp;

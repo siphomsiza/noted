@@ -18,7 +18,7 @@
               <tr><th><h4>Department</h4></th><td><%= @departmental_sdbip.department.name %></td></tr>
               <tr><th><h4>Subdepartment</h4></th><td><%= @departmental_sdbip.subdepartment.subdepartment_name %></td></tr>
               <tr><th><h4>KPI Ref Number</h4></th><td><%= @departmental_sdbip.kpi_ref_number %></td></tr>
-              <tr><th><h4>Predetermined Objective</h4></th><td><% if !departmental_sdbip.predetermined_objective_id.blank? %><%= departmental_sdbip.predetermined_objective.name %><% end %></td></tr>
+              <tr><th><h4>Predetermined Objective</h4></th><td><% if !@departmental_sdbip.predetermined_objective_id.blank? %><%= @departmental_sdbip.predetermined_objective.name %><% end %></td></tr>
               <tr><th><h4>KPI Owner</h4></th><td><%= @departmental_sdbip.kpi_owner.name %></td></tr>
               <tr><th><h4>Unit of Measurement</h4></th><td><%= @departmental_sdbip.unit_of_measurement %></td></tr>
               <tr><th><h4>M Score Classification</h4></th><td><%= @departmental_sdbip.mscore_classification.name %></td></tr>
