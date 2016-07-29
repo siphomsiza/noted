@@ -7,7 +7,7 @@
 <div class="row">
     <div class="col-lg-10 col-md-offset-1">
 <%= form_for @departmental_sdbip, html: {multipart: true} do |f| %>
-
+<%= f.hidden_field :performance_standard,:id=>"over-all-performance"%>
 <div class="row">
   <%= f.fields_for :kpi_results do |kpi_result_for_form| %>
 
@@ -64,15 +64,20 @@ $(document).ready(function(){
   var selected_value = <%= current_user.id %>;
   $("#update-user").val(selected_value);
   $("#assurance-user").val(selected_value);
-  //$("#kpi-result-id").val(selected_kpi);
   var target = <%= @departmental_sdbip.annual_target %>;
+  var over_actual = <%= @departmental_sdbip.kpi_results.to_a.sum(&:actual) %>;
   $("#kpi-target").val(target);
   $( "#kpi-actual" ).blur(function() {
   var target_value= parseFloat(target) || 0;
   var actual_value = parseFloat($('#kpi-actual').val()) || 0;
+  var over_all_actual = parseFloat(over_actual) || 0;
+  over_all_actual += actual_value
   var percentages=0;
+  var over_all_percentages=0;
   if(target_value > 0){
     percentages = (actual_value/target_value) * 100;
+    over_all_percentages = (over_all_actual/target_value) * 100;
+    //KPI performance standard
     if(percentages >= 0 && percentages < 49 ){
       $("#kpi-result").val("KPI Not Met");
     }
@@ -88,10 +93,29 @@ $(document).ready(function(){
     if(percentages >= 150 ){
       $("#kpi-result").val("KPI Extremely Well Met");
     }
+    //Over all KPI performance Standard
+    if(over_all_percentages >= 0 && over_all_percentages < 49 ){
+      $("#over-all-performance").val("KPI Not Met");
+    }
+    if(over_all_percentages >= 50 && over_all_percentages < 99 ){
+      $("#over-all-performance").val("KPI Almost Met");
+    }
+    if(over_all_percentages >= 100 && over_all_percentages < 130 ){
+      $("#over-all-performance").val("KPI Met");
+    }
+    if(over_all_percentages >= 130 && over_all_percentages <= 149 ){
+      $("#over-all-performance").val("KPI Well Met");
+    }
+    if(over_all_percentages >= 150 ){
+      $("#over-all-performance").val("KPI Extremely Well Met");
+    }
 
   }else {
     $("#kpi-result").val("KPI Not Met");
+    $("#over-all-performance").val("KPI Not Met");
+
   }
+
 
   });
 

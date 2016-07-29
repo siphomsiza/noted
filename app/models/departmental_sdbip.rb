@@ -33,7 +33,7 @@ class DepartmentalSdbip < ActiveRecord::Base
 	has_many :assurances, :dependent => :destroy
 	accepts_nested_attributes_for :assurances, allow_destroy: true
 
-	validates :department_name,:subdepartment_name,:kpi,:kpi_ref_number,:mscore_classification_id,:national_outcome_id,:strategic_objective_id,:presence=> true
+	validates :department_name,:subdepartment_name,:kpi,:kpi_ref_number,:presence=> true
 
 	def kpi_result_for_form
     collection = kpi_results.where(departmental_sdbip_id: id)

@@ -6,6 +6,20 @@ class MonthlyCashflowsController < ApplicationController
   # GET /monthly_cashflows
   # GET /monthly_cashflows.json
   def index
+    begin
+
+        @client = YahooWeather::Client.new
+        @response = @client.fetch(1582504)
+        @doc = @response.doc
+        @forecast = @doc["item"]["forecast"]
+      #@response = @client.fetch_by_location('New York')
+      #@response.units.temperature
+      #@response.condition.temp
+
+  rescue SignalException => e
+    flash[:notice] = "received Exception #{e.message}"
+    puts "received Exception #{e}"
+  end
     @monthly_cashflow = MonthlyCashflow.new
     @monthly_cashflows = MonthlyCashflow.all
     if !@monthly_cashflows.blank?

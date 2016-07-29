@@ -1,8 +1,14 @@
 <header class="clearfix">
 	<section id="branding">
 		<%= link_to image_tag("ks-horizontal.jpg", alt: "Keystone Municipal Performance Management System logo") %>
+		<span class="pull-right"><h5><%= @doc["location"]["city"] %>, <%= @doc["location"]["region"] %>, <%= @doc["location"]["country"] %></h5>
+		<h5>
+			<span><img height="34" width="34" src="<%= @doc["item"]["description"][/\"(.*?)"/,1] %>"></span>
+			&nbsp;<%= @doc["item"]["condition"]["text"] %>,
+			&nbsp;<%= ((@doc["item"]["condition"]["temp"].to_i - 32) / 1.8).round() %>&deg;C
+		</h5>
+	</span>
 	</section><!-- branding -->
-
 	<section class="navbar">
 		<ul class="nav navbar-nav navbar-left">
         <li class="<%= active_class(introduction_path) %>">

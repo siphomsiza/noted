@@ -449,15 +449,24 @@ Heading.create!(term: "Vote number",
   description: "Vote number description",
   category: "Revenue by source")
 
-  12.times do |x|
-    i=0
-    month_number = 7 + i # user-provided month number
+$i=0
+$num = 12
+while $i < $num  do
+  month_number = 7 + $i
+  if month_number <= 12
+  month_beginning = Date.new(Date.today.year, month_number)
+  month_ending = month_beginning.end_of_month
+  period = month_ending.strftime("%d-%b-%YYYY")
+  else
+    month_number -= 12
     month_beginning = Date.new(Date.today.year, month_number)
-    month_ending = month_beginning.end_of_month# + "-" + month_beginning.strftime("%MM") + "-" + month_beginning.strftime("%YYYY")
-    #period = Date.new(Date.today.year,month_number,month_ending).strftime("%dd-%M-%YYYY")
-    #SdbipTimePeriod.create!(period: period)
-    i+=1
+    month_beginning += 1.year
+    month_ending = month_beginning.end_of_month
+    period = month_ending.strftime("%d-%b-%YYYY")
   end
+  SdbipTimePeriod.create!(period: period)
+   $i +=1
+end
   CSV.foreach('db/data/capital.csv', headers: true, :col_sep => ',') do |row|
     CapitalProject.create! row.to_hash
   end

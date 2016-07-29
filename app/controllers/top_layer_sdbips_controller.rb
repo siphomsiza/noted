@@ -6,7 +6,20 @@ class TopLayerSdbipsController < ApplicationController
   # GET /top_layer_sdbips
   # GET /top_layer_sdbips.json
   def index
+    begin
 
+        @client = YahooWeather::Client.new
+        @response = @client.fetch(1582504)
+        @doc = @response.doc
+        @forecast = @doc["item"]["forecast"]
+      #@response = @client.fetch_by_location('New York')
+      #@response.units.temperature
+      #@response.condition.temp
+
+  rescue SignalException => e
+    flash[:notice] = "received Exception #{e.message}"
+    puts "received Exception #{e}"
+  end
     @top_layer_sdbip = TopLayerSdbip.new
     @top_layer_sdbips = TopLayerSdbip.all
     if !@top_layer_sdbips.blank?

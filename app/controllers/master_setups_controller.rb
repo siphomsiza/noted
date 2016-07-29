@@ -5,6 +5,20 @@ class MasterSetupsController < ApplicationController
   # GET /master_setups
   # GET /master_setups.json
   def index
+    begin
+
+        @client = YahooWeather::Client.new
+        @response = @client.fetch(1582504)
+        @doc = @response.doc
+        @forecast = @doc["item"]["forecast"]
+      #@response = @client.fetch_by_location('New York')
+      #@response.units.temperature
+      #@response.condition.temp
+
+  rescue SignalException => e
+    flash[:notice] = "received Exception #{e.message}"
+    puts "received Exception #{e}"
+  end
     @jobtitle = Jobtitle.new
     @job_titles = Jobtitle.all
     @master_setup = MasterSetup.new

@@ -3,7 +3,20 @@ class DepartmentalSdbipsController < ApplicationController
   before_action :logged_in_user, only: [:index, :restore_kpi, :edit, :update,:show,:audit_performance,:generate_graphs]
   before_action :admin_user,     only: [:new, :restore_kpi, :index,:edit,:update, :destroy,:show]
   def index
+    begin
 
+        @client = YahooWeather::Client.new
+        @response = @client.fetch(1582504)
+        @doc = @response.doc
+        @forecast = @doc["item"]["forecast"]
+      #@response = @client.fetch_by_location('New York')
+      #@response.units.temperature
+      #@response.condition.temp
+
+  rescue SignalException => e
+    flash[:notice] = "received Exception #{e.message}"
+    puts "received Exception #{e}"
+  end
     @departmental_sdbip = DepartmentalSdbip.new
     @departments = Department.includes(:subdepartments)
     @deleted_kpis =  DepartmentalKpi.paginate(page: params[:page],per_page: 10)
@@ -219,7 +232,7 @@ end
           :kpi_owner_id, :baseline, :past_year_performance,
           :performance_standard, :proof_of_evidence, :mtas_indicator,
           :reporting_category_id, :provincial_strategic_outcome_id,
-          :source_of_evidence, :annual_target,:first_quarter_target,:second_quarter_target,:third_quarter_target,:fourth_quarter_target,:first_quarter_actual,:second_quarter_actual,:third_quarter_actual,:fourth_quarter_actual,:first_quarter_poe,:second_quarter_poe,:third_quarter_poe,:fourth_quarter_poe, :budget, :impact, :top_layer_kpi_ref,
+          :source_of_evidence, :target, :annual_target,:first_quarter_target,:second_quarter_target,:third_quarter_target,:fourth_quarter_target,:first_quarter_actual,:second_quarter_actual,:third_quarter_actual,:fourth_quarter_actual,:first_quarter_poe,:second_quarter_poe,:third_quarter_poe,:fourth_quarter_poe, :budget, :impact, :top_layer_kpi_ref,
            :kpi_calculation_type_id,
           :kpi_target_type_id, :annual_target, :revised_target, :assurances_attributes=>[:departmental_sdbip_id,:user_id,:signed_off,:response,:kpi_result_id,:poe], :kpi_results_attributes => [:departmental_sdbip_id,:target,:actual,:kpi_performance_standard,:user_id,:performance_comments,:corrective_measures,:attachments_attributes => [ :kpi_result_id,:name,:_destroy]])
     end

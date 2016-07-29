@@ -1,6 +1,7 @@
 <div class="modal-dialog">
   <div class="modal-content">
     <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
       <h3><%= "Editing #{@department.name}" %></h3>
     </div>
     <div class="modal-body col-lg-10 col-lg-offset-1">
@@ -31,7 +32,8 @@
       </div>
     </div>
 
-    <div class="row"><div class="col-lg-">
+    <div class="row">
+    <div class="col-lg-">
 
     <%= f.fields_for :subdepartments do |subdepartments_for_form| %>
 
@@ -39,7 +41,8 @@
 
   <% end %>
   <%= link_to_add_fields "Add Subdepartment", f, :subdepartments %>
-</div></div>
+    </div>
+    </div>
 
 
 <div class="row">

@@ -85,14 +85,14 @@ $(function() {
 	              <% end %>
             </td>
             <td>
-						<% if !sdbip_time_period.primary_reminder.blank? %>
+						<% if !sdbip_time_period.primary_reminder.blank? && sdbip_time_period.primary_reminder > Date.today %>
 							<%= sdbip_time_period.primary_reminder.strftime('%d %B %Y') %>&nbsp;
 							(<%= (sdbip_time_period.primary_reminder).strftime("%a")%>)
 						<% end %>
 					</td>
 
             <td>
-						<% if !sdbip_time_period.primary_closure.blank? %>
+						<% if !sdbip_time_period.primary_closure.blank? && sdbip_time_period.primary_closure.strftime("%dd-%B-%YYY") > Date.today.strftime("%dd-%B-%YYY") %>
 							<%= sdbip_time_period.primary_closure.strftime('%d %B %Y') %>&nbsp;
 							(<%= (sdbip_time_period.primary_closure).strftime("%a")%>)
 							<% end %>
@@ -106,13 +106,13 @@ $(function() {
               <% end %>
             </td>
 						<td>
-						<% if !sdbip_time_period.secondary_reminder.blank? %>
+						<% if !sdbip_time_period.secondary_reminder.blank? && sdbip_time_period.secondary_reminder > Date.today %>
 							<%= sdbip_time_period.secondary_reminder.strftime('%d %B %Y') %>&nbsp;
 							(<%= (sdbip_time_period.secondary_reminder).strftime("%a")%>)
 							<% end %>
 						</td>
             <td>
-						<% if !sdbip_time_period.secondary_closure.blank? %>
+						<% if !sdbip_time_period.secondary_closure.blank? && sdbip_time_period.secondary_closure > Date.today %>
 							<%= sdbip_time_period.secondary_closure.strftime('%d %B %Y') %>&nbsp;
 							(<%= (sdbip_time_period.secondary_closure).strftime("%a")%>)
 							<% end %>

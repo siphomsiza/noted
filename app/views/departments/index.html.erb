@@ -5,11 +5,9 @@ $(function() {
 	$("#applicationmanifest a:contains('SETUP')").parent().addClass('active');
 }); //jQuery is loaded
 </script>
-<div>
 <div class="row">
 <div class="col col-lg-">
 	<%= render 'layouts/municipality' %>
-
 <ul class="nav nav-pills nav-justified">
 <li><%= link_to "Master Setup", master_setups_path %></li>
 				<li>
@@ -25,7 +23,6 @@ $(function() {
 			</ul>
 		</div>
 	</div>
-</div>
  <div class="row">
 
             <div class="tabbable tabs third-level-navs" id="departments-tabs">
@@ -43,7 +40,6 @@ $(function() {
 
      <div class = "tab-pane active fade in" id = "departments">
       <table class="table table-hover table-striped">
-        <thead>
           <tr>
           <th>&nbsp;</th>
             <th><h4>Department</h4></th>
@@ -52,8 +48,6 @@ $(function() {
             <th><h4>Fax Number</h4></th>
             <th><h4>Actions</h4></th>
           </tr>
-        </thead>
-        <tbody>
         <% @departments.each do |department| %>
           <tr class="<%= cycle('odd', 'even') %>">
            <td><%= department.id %></td>
@@ -87,15 +81,14 @@ $(function() {
             </td>
           </tr>
         <% end %>
-        </tbody>
       </table>
-      <%= will_paginate @departments, :remote=>true, :class=>"center" %>
+      <%= will_paginate %>
   </div>
 	<div class="tab-pane fade" id="add_departments">
 		<br/>
 		<h3>New Department</h3>
 		<hr/>
-		<%= render "form" %>
+		<%= render 'form' %>
 	</div>
 </div>
 </div>

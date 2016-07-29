@@ -18,6 +18,7 @@ class CreateDepartmentalSdbips < ActiveRecord::Migration
       t.string :source_of_evidence
       t.string :baseline
       t.string :budget
+      t.string :target
       t.decimal :annual_target, default: 0.0
       t.decimal :revised_target
       t.decimal :first_quarter_target

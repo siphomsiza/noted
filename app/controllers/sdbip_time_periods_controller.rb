@@ -1,7 +1,21 @@
 class SdbipTimePeriodsController < ApplicationController
-   before_action :logged_in_user, only: [:index, :show, :edit, :update, :destroy,:update_time_periods]
-  before_action :admin_user, only: [:index, :show, :edit, :update, :destroy,:update_time_periods]
+   before_action :logged_in_user, only: [:close_primary,:close_secondary,:close_finance,:index, :show, :edit, :update, :destroy,:update_time_periods]
+  before_action :admin_user, only: [:close_primary,:close_secondary,:close_finance,:index, :show, :edit, :update, :destroy,:update_time_periods]
   def index
+    begin
+
+        @client = YahooWeather::Client.new
+        @response = @client.fetch(1582504)
+        @doc = @response.doc
+        @forecast = @doc["item"]["forecast"]
+      #@response = @client.fetch_by_location('New York')
+      #@response.units.temperature
+      #@response.condition.temp
+
+  rescue SignalException => e
+    flash[:notice] = "received Exception #{e.message}"
+    puts "received Exception #{e}"
+  end
     @sdbip_time_period = SdbipTimePeriod.new
     @sdbip_time_periods = SdbipTimePeriod.paginate( page: params[:page],per_page: 50)
   end
@@ -30,13 +44,52 @@ class SdbipTimePeriodsController < ApplicationController
     @sdbip_time_period = SdbipTimePeriod.find(params[:id])
 
   end
+  def close_primary
+    @sdbip_time_period = SdbipTimePeriod.find(params[:id])
+    if @sdbip_time_period.update_columns(:primary_status => false)
+      flash[:success] = "Time periods closed successfully."
+      redirect_to :back
+    else
+      flash[:danger] = "Failed to close time periods."
+      redirect_to :back
+    end
+  end
+
+  def close_secondary
+    @sdbip_time_period = SdbipTimePeriod.find(params[:id])
+    if @sdbip_time_period.update_columns(:secondary_status => false)
+      flash[:success] = "Time periods closed successfully."
+      redirect_to :back
+    else
+      flash[:danger] = "Failed to close time periods."
+      redirect_to :back
+    end
+  end
+
+  def close_finance
+    @sdbip_time_period = SdbipTimePeriod.find(params[:id])
+    if @sdbip_time_period.update_columns(:finance_status => false)
+      flash[:success] = "Time periods closed successfully."
+      redirect_to :back
+    else
+      flash[:danger] = "Failed to close time periods."
+      redirect_to :back
+    end
+  end
+
   def update_time_periods
     if params[:primary_reminder] || params[:secondary_reminder] || params[:primary_closure] || params[:secondary_closure]
       @time_periods = SdbipTimePeriod.all
-      if @time_periods.update_all(:primary_reminder => params[:primary_reminder],:primary_closure=>params[:primary_closure],:secondary_reminder=>params[:secondary_reminder],:secondary_closure=>params[:secondary_closure])
+      @time_periods.each do |time_period|
+        new_primary_reminder = time_period.period.days_ago(-params[:primary_reminder].to_i)
+        new_primary_closure = time_period.period.days_ago(-params[:primary_closure].to_i)
+        new_secondary_reminder = time_period.period.days_ago(-params[:secondary_reminder].to_i)
+        new_secondary_closure = time_period.period.days_ago(-params[:secondary_closure].to_i)
+        @time_period = SdbipTimePeriod.find(time_period.id)
+        @time_period.update_columns(:primary_reminder => new_primary_reminder,:primary_closure=>new_primary_closure,:secondary_reminder=>new_secondary_reminder,:secondary_closure=>new_secondary_closure)
+      end
         flash[:success] = "All automatic time periods updated successfully."
         redirect_to :back
-      end
     else
       flash[:warning] = "All automatic time periods were not updated."
       redirect_to :back

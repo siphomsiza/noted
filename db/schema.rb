@@ -181,6 +181,7 @@ ActiveRecord::Schema.define(version: 20160725115052) do
     t.string   "source_of_evidence"
     t.string   "baseline"
     t.string   "budget"
+    t.string   "target"
     t.decimal  "annual_target",                   default: 0.0
     t.decimal  "revised_target"
     t.decimal  "first_quarter_target"
@@ -470,7 +471,7 @@ ActiveRecord::Schema.define(version: 20160725115052) do
   end
 
   create_table "sdbip_time_periods", force: :cascade do |t|
-    t.date     "period",                             null: false
+    t.date     "period",                            null: false
     t.date     "primary_reminder"
     t.date     "secondary_reminder"
     t.date     "primary_closure"
@@ -480,8 +481,8 @@ ActiveRecord::Schema.define(version: 20160725115052) do
     t.boolean  "primary_status",     default: true
     t.boolean  "secondary_status",   default: true
     t.boolean  "finance_status",     default: true
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
   end
 
   create_table "setups", force: :cascade do |t|
