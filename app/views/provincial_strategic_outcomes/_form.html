@@ -1,0 +1,39 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times; </button>
+      <% if @provincial_strategic_outcome.new_record? %>
+        <h3>Configure Provincial Strategic Outcome</h3>
+      <% else %>
+        <h3><%= "Editing #{@provincial_strategic_outcome.name}" %>/h3>
+      <% end %>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col col-lg-10  col-lg-10 col-lg-offset-1">
+          <%= form_for(@provincial_strategic_outcome) do |f| %>
+  <% if @provincial_strategic_outcome.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@provincial_strategic_outcome.errors.count, "error") %> prohibited this provincial_strategic_outcome from being saved:</h2>
+
+      <ul>
+      <% @provincial_strategic_outcome.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name,"Provincial Strategic Outcome:" %><br>
+    <%= f.text_area :name,:class=>'form-control' %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Save",class:'btn col-lg-3 pull-right' %>
+  </div>
+<% end %>
+</div>
+</div>
+</div>
+</div>
+</div>

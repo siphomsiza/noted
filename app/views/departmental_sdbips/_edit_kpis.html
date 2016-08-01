@@ -190,7 +190,14 @@
     <% end %>
 </div>
 </div>
+<br/>
+<div class="row">
+    <div class="col-lg-10 col-md-offset-1">
+<% if @departmental_sdbip.kpi_results.any? %>
 <%= render 'results' %>
+<% end %>
+</div>
+</div>
 </div>
 <div class="modal-footer">
 

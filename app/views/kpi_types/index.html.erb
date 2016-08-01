@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Kpi Types</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @kpi_types.each do |kpi_type| %>
+      <tr>
+        <td><%= kpi_type.name %></td>
+        <td><%= link_to 'Show', kpi_type %></td>
+        <td><%= link_to 'Edit', edit_kpi_type_path(kpi_type) %></td>
+        <td><%= link_to 'Destroy', kpi_type, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Kpi type', new_kpi_type_path %>

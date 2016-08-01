@@ -1,0 +1,39 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times; </button>
+      <% if @predetermined_objective.new_record? %>
+        <h3>Configure Predetermined Objective</h3>
+      <% else %>
+        <h3><%= "Editing #{@predetermined_objective.name}" %></h3>
+      <% end %>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col col-lg-10  col-lg-10 col-lg-offset-1">
+          <%= form_for(@predetermined_objective) do |f| %>
+  <% if @predetermined_objective.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@predetermined_objective.errors.count, "error") %> prohibited this predetermined_objective from being saved:</h2>
+
+      <ul>
+      <% @predetermined_objective.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name,"Pre-determined Objective:" %><br>
+    <%= f.text_area :name,class: 'form-control' %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Save", class: 'btn col-lg-3 pull-right' %>
+  </div>
+<% end %>
+</div>
+</div>
+</div>
+</div>
+</div>

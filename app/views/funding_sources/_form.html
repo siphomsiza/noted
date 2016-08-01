@@ -1,0 +1,39 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times; </button>
+      <% if @funding_source.new_record? %>
+        <h3>Configure Funding Source</h3>
+      <% else %>
+        <h3><%= "Editing #{@funding_source.name}" %></h3>
+      <% end %>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col col-lg-10 col-lg-offset-1">
+<%= form_for(@funding_source) do |f| %>
+  <% if @funding_source.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@funding_source.errors.count, "error") %> prohibited this funding_source from being saved:</h2>
+
+      <ul>
+      <% @funding_source.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name,"Funding Source Name:" %><br>
+    <%= f.text_field :name,:class=>"form-control", :autocomplete=>"off" %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Save", class: 'btn col-lg-3 pull-right' %>
+  </div>
+<% end %>
+</div>
+</div>
+</div>
+</div>
+</div>

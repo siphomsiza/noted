@@ -1,5 +1,23 @@
 Rails.application.routes.draw do
 
+  resources :mtas_indicators
+  resources :predetermined_objectives
+  resources :provincial_strategic_outcomes
+  resources :ndp_objectives
+  resources :strategic_objectives
+  resources :reporting_categories
+  resources :risk_ratings
+  resources :national_outcomes
+  resources :kpas
+  resources :kpi_types
+  resources :kpi_concepts
+  resources :kpi_target_types
+  resources :kpi_calculation_types
+  resources :pi_calculation_types
+  resources :mscore_classifications
+  resources :funding_sources
+  resources :wards
+  resources :areas
   resources :top_layer_administrators
   resources :kpi_owners
   resources :subdepartmental_administrators
@@ -13,7 +31,7 @@ Rails.application.routes.draw do
       collection {post :import}
   end
   root             'sessions#new'
-
+  resources :lists
   get 'dashboard' => 'pages#dashboard'
   get 'introduction'    => 'pages#introduction'
   get 'help'    => 'pages#help'
@@ -70,8 +88,9 @@ Rails.application.routes.draw do
   post 'export', to: 'departmental_sdbip_progresses#export'
   get 'departmental_sdbips/update_subdepartments', as: 'update_subdepartments'
   get 'departmental_sdbips/:id/audit_performance' => 'departmental_sdbips#audit_performance', :as => :audit_performance
-  get 'departmental_sdbips/restore_kpi' => 'departmental_sdbips#restore_kpi', :as => :restore_kpi
+  get 'departmental_sdbips/:id/restore_kpi' => 'departmental_sdbips#restore_kpi', :as => :restore_kpi
   get 'departmental_sdbip_progresses/generate_graphs' => 'departmental_sdbip_progresses#generate_graphs', :as => :generate_graphs
+
   post 'sdbip_time_periods/update_time_periods' => 'sdbip_time_periods#update_time_periods', :as => :update_time_periods
   get 'sdbip_time_periods/close_primary' => 'sdbip_time_periods#close_primary', :as => :close_primary
   get 'sdbip_time_periods/close_secondary' => 'sdbip_time_periods#close_secondary', :as => :close_secondary
@@ -92,11 +111,11 @@ Rails.application.routes.draw do
   resources :departmental_sdbip_progresses do
 
   end
-  resources :kpi_calculation_types
+
   resources :sdbip_time_periods do
     collection {post :import}
   end
-  resources :kpi_target_types
+
   resources :monthly_cashflows do
     collection {post :import}
   end
@@ -104,8 +123,6 @@ Rails.application.routes.draw do
   resources :users
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
-
-  resources :lists
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

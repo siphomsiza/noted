@@ -1,76 +1,72 @@
 class KpiCalculationTypesController < ApplicationController
-  before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
-  before_action :correct_user,   only: [:edit, :update]
-  before_action :admin_user,     only: :destroy
+  before_action :set_kpi_calculation_type, only: [:show, :edit, :update, :destroy]
+
+  # GET /kpi_calculation_types
+  # GET /kpi_calculation_types.json
   def index
     @kpi_calculation_types = KpiCalculationType.all
   end
 
+  # GET /kpi_calculation_types/1
+  # GET /kpi_calculation_types/1.json
   def show
-    @kpi_calculation_type = KpiCalculationType.find(params[:id])
-    @roles = KpiCalculationType.includes(:role).all
   end
 
+  # GET /kpi_calculation_types/new
   def new
     @kpi_calculation_type = KpiCalculationType.new
   end
 
+  # GET /kpi_calculation_types/1/edit
+  def edit
+  end
+
+  # POST /kpi_calculation_types
+  # POST /kpi_calculation_types.json
   def create
     @kpi_calculation_type = KpiCalculationType.new(kpi_calculation_type_params)
-    if @kpi_calculation_type.save
-      redirect_to kpi_calculation_types_path, :notice => "KPI Calculation Type was successfully created"
-    else
-      render "new"
-    end
+
+      if @kpi_calculation_type.save
+        flash[:success] =  'KPI Calculation Type was successfully created.'
+        redirect_to :back
+      else
+        flash[:danger] =  'KPI Calculation Type was not created.'
+        redirect_to :back
+      end
   end
 
-  def edit
-    @kpi_calculation_type = KpiCalculationType.find(params[:id])
-  end
-
+  # PATCH/PUT /kpi_calculation_types/1
+  # PATCH/PUT /kpi_calculation_types/1.json
   def update
-    @kpi_calculation_type = KpiCalculationType.find(params[:id])
 
-    if @kpi_calculation_type.update_attributes(kpi_calculation_type_params)
-      redirect_to kpi_calculation_types_path, :notice => "KPI Calculation Type was successfully updated"
-    else
-      render "edit"
-    end
+      if @kpi_calculation_type.update(kpi_calculation_type_params)
+        flash[:success] =  'KPI Calculation Type was successfully updated.'
+        redirect_to :back
+      else
+        flash[:danger] =  'KPI Calculation Type was not updated.'
+        redirect_to :back
+      end
+
   end
 
+  # DELETE /kpi_calculation_types/1
+  # DELETE /kpi_calculation_types/1.json
   def destroy
-    @kpi_calculation_type = KpiCalculationType.find(params[:id])
     @kpi_calculation_type.destroy
 
-    redirect_to kpi_calculation_types_path
+    flash[:success] =  'KPI Calculation Type was successfully deleted.'
+    redirect_to :back
+
   end
 
   private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_kpi_calculation_type
+      @kpi_calculation_type = KpiCalculationType.find(params[:id])
+    end
+
+    # Never trust parameters from the scary internet, only allow the white list through.
     def kpi_calculation_type_params
-        params.require(:kpi_calculation_type).permit( :name, :sdbip_id,
-          :description)
-    end
-
-    # Before filters
-
-    # Confirms a logged-in user.
-    def logged_in_user
-      unless logged_in?
-        store_location
-        flash[:danger] = "Please log in."
-        redirect_to login_url
-      end
-    end
-
-    # Confirms the correct user.
-    def correct_user
-      @user = User.find(params[:id])
-      # TO DO: Do this properly
-      #redirect_to(root_url) unless current_user?(@user)
-    end
-
-    # Confirms an admin user.
-    def admin_user
-      redirect_to(root_url) unless current_user.admin?
+      params.require(:kpi_calculation_type).permit(:name, :code)
     end
 end

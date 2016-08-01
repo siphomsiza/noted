@@ -1,0 +1,20 @@
+<fieldset>
+<div class="field">
+  <%= f.label :name,"Ward Name:" %><br>
+  <%= f.text_field :name, :class=>"form-control" %>
+</div>
+<div class="row">
+  <div class="col col-lg-">
+<div class="field col-lg-6">
+  <%= f.label :ward_no,"Ward No.:" %><br>
+  <%= f.text_field :ward_no, :class=>"form-control" %>
+</div>
+<div class="field col-lg-6">
+  <%= f.label :mun_ref,"Municipal Ref.:" %><br>
+  <%= f.text_field :mun_ref, :class=>"form-control" %>
+</div>
+</div>
+</div>
+<%= f.hidden_field :_destroy %>
+<%= link_to "Remove Ward", '#', class: "btn remove_fields" %> |
+</fieldset>

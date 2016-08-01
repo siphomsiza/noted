@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @kpi_calculation_type.name %>
+</p>
+
+<p>
+  <strong>Code:</strong>
+  <%= @kpi_calculation_type.code %>
+</p>
+
+<%= link_to 'Edit', edit_kpi_calculation_type_path(@kpi_calculation_type) %> |
+<%= link_to 'Back', kpi_calculation_types_path %>

@@ -2,7 +2,7 @@
 <div class="modal-content">
 <div class="modal-header">
   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-  <h3>YTD Graphs</h3>
+  <h3><%= "YTD Graphs For #{@department.name}" %></h3>
 </div>
 <div class="modal-body">
   <div class="panel panel-default col-md-6">
@@ -30,24 +30,17 @@
         <% end %>
     </thead>
     	<tr>
-
           <th>KPI Not Yet Measured</th>
-
-
           <td><%= @kpi_not_yet_measured_municipal_manager_office.count %>
-
             <% if @all_peformance_standard_municipal_manager_office.count > 0 %>
             (<%= (@kpi_not_yet_measured_municipal_manager_office.count * 100)/@all_peformance_standard_municipal_manager_office.count %> %)
             <% end %>
           </td>
-
           <td><%= @kpi_not_yet_measured_internal_audit.count %>
-
             <% if @all_peformance_standard_internal_audit.count > 0 %>
             (<%= (@kpi_not_yet_measured_internal_audit.count * 100)/@all_peformance_standard_internal_audit.count %> %)
             <% end %>
           </td>
-
           <td><%= @kpi_not_yet_measured_performance_management_unit.count %>
 
             <% if @all_peformance_standard_performance_management_unit.count > 0 %>

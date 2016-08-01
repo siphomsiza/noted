@@ -1,6 +1,7 @@
 class CreateKpiResults < ActiveRecord::Migration
   def change
     create_table :kpi_results do |t|
+      t.date :period
       t.integer :departmental_sdbip_id
       t.integer :user_id
       t.decimal :target

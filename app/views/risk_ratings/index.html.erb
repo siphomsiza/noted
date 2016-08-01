@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Risk Ratings</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Code</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @risk_ratings.each do |risk_rating| %>
+      <tr>
+        <td><%= risk_rating.name %></td>
+        <td><%= risk_rating.code %></td>
+        <td><%= link_to 'Show', risk_rating %></td>
+        <td><%= link_to 'Edit', edit_risk_rating_path(risk_rating) %></td>
+        <td><%= link_to 'Destroy', risk_rating, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Risk rating', new_risk_rating_path %>

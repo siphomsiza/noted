@@ -1,0 +1,43 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times; </button>
+      <% if @kpi_calculation_type.new_record? %>
+        <h3>Configure KPI Calculation Type</h3>
+      <% else %>
+        <h3><%= "Editing #{@kpi_calculation_type.name}" %></h3>
+      <% end %>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col col-lg-10 col-lg-offset-1">
+        <%= form_for(@kpi_calculation_type) do |f| %>
+  <% if @kpi_calculation_type.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@kpi_calculation_type.errors.count, "error") %> prohibited this kpi_calculation_type from being saved:</h2>
+
+      <ul>
+      <% @kpi_calculation_type.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name, :class=>'form-control' %>
+  </div>
+  <div class="field">
+    <%= f.label :code %><br>
+    <%= f.text_field :code, :class=>'form-control' %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Save", class: 'btn col-lg-3 pull-right' %>
+  </div>
+<% end %>
+</div>
+</div>
+</div>
+</div>
+</div>

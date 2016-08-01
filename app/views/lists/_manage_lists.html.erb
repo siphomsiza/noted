@@ -1,0 +1,214 @@
+<div class="row">
+  <div class="col col-lg-10 col-lg-offset-1">
+  <table class="table table-striped table-hover">
+  <tr>
+    <th>Area(s)</th>
+    <td></td>
+    <td>
+      <%= link_to new_area_path,remote: true,'data-target' => "#areas-modal", 'data-toggle' => 'modal', class: "btn btn-sm" do %>
+        <span class="glyphicon glyphicon-wrench"></span>&nbsp;Configure
+      <% end %>
+
+      <div id="areas-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+
+      </div>
+    </td>
+  </tr>
+
+  <tr>
+    <th>Funding Source(s)</th><td></td>
+    <td>
+      <%= link_to new_funding_source_path,remote: true,'data-target' => "#funding-source-modal", 'data-toggle' => 'modal', class: "btn btn-sm" do %>
+        <span class="glyphicon glyphicon-wrench"></span>&nbsp;Configure
+      <% end %>
+
+      <div id="funding-source-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+
+      </div>
+    </td>
+  </tr>
+
+  <tr>
+    <th>GFS Classification(s)</th><td></td>
+    <td>
+      <%= link_to new_mscore_classification_path,remote: true,'data-target' => "#mscore-classification-modal", 'data-toggle' => 'modal', class: "btn btn-sm" do %>
+        <span class="glyphicon glyphicon-wrench"></span>&nbsp;Configure
+      <% end %>
+
+      <div id="mscore-classification-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+
+      </div>
+    </td>
+  </tr>
+
+  <tr>
+    <th>KPA(s)</th><td></td>
+    <td>
+      <%= link_to new_kpa_path,remote: true,'data-target' => "#kpa-modal", 'data-toggle' => 'modal', class: "btn btn-sm" do %>
+        <span class="glyphicon glyphicon-wrench"></span>&nbsp;Configure
+      <% end %>
+
+      <div id="kpa-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+
+      </div>
+    </td>
+  </tr>
+
+  <tr>
+    <th>KPI Calculation Type(s)</th><td></td>
+    <td>
+      <%= link_to new_kpi_calculation_type_path,remote: true,'data-target' => "#kpi-calculation-type-modal", 'data-toggle' => 'modal', class: "btn btn-sm" do %>
+        <span class="glyphicon glyphicon-wrench"></span>&nbsp;Configure
+      <% end %>
+
+      <div id="kpi-calculation-type-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+
+      </div>
+    </td>
+  </tr>
+
+  <tr>
+    <th>KPI Concept(s)</th><td></td>
+    <td>
+      <%= link_to new_kpi_concept_path,remote: true,'data-target' => "#kpi-concept-modal", 'data-toggle' => 'modal', class: "btn btn-sm" do %>
+        <span class="glyphicon glyphicon-wrench"></span>&nbsp;Configure
+      <% end %>
+
+      <div id="kpi-concept-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <th>KPI Target Type(s)</th><td></td>
+    <td>
+      <%= link_to new_kpi_target_type_path,remote: true,'data-target' => "#kpi-target-type-modal", 'data-toggle' => 'modal', class: "btn btn-sm" do %>
+        <span class="glyphicon glyphicon-wrench"></span>&nbsp;Configure
+      <% end %>
+
+      <div id="kpi-target-type-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+
+      </div>
+    </td>
+  </tr>
+
+  <tr>
+    <th>KPI Type(s)</th><td></td>
+    <td>
+      <%= link_to new_kpi_type_path,remote: true,'data-target' => "#kpi-type-modal", 'data-toggle' => 'modal', class: "btn btn-sm" do %>
+        <span class="glyphicon glyphicon-wrench"></span>&nbsp;Configure
+      <% end %>
+
+      <div id="kpi-type-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+
+      </div>
+    </td>
+  </tr>
+
+  <tr>
+    <th>Mtas Indicator(s)</th><td></td>
+    <td>
+      <%= link_to new_mtas_indicator_path,remote: true,'data-target' => "#mtas-indicator-modal", 'data-toggle' => 'modal', class: "btn btn-sm" do %>
+        <span class="glyphicon glyphicon-wrench"></span>&nbsp;Configure
+      <% end %>
+
+      <div id="mtas-indicator-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+
+      </div>
+    </td>
+  </tr>
+
+  <tr>
+    <th>National Outcome(s)</th><td></td>
+    <td>
+      <%= link_to new_national_outcome_path,remote: true,'data-target' => "#national-outcome-modal", 'data-toggle' => 'modal', class: "btn btn-sm" do %>
+        <span class="glyphicon glyphicon-wrench"></span>&nbsp;Configure
+      <% end %>
+
+      <div id="national-outcome-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+
+      </div>
+    </td>
+  </tr>
+
+  <tr>
+    <th>NDP Objective(s)</th><td></td>
+    <td>
+      <%= link_to new_ndp_objective_path,remote: true,'data-target' => "#ndp-objective-modal", 'data-toggle' => 'modal', class: "btn btn-sm" do %>
+        <span class="glyphicon glyphicon-wrench"></span>&nbsp;Configure
+      <% end %>
+
+      <div id="ndp-objective-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+
+      </div>
+    </td>
+  </tr>
+
+  <tr>
+    <th>Pre-determined Objective(s)</th><td></td>
+    <td>
+      <%= link_to new_predetermined_objective_path,remote: true,'data-target' => "#predetermined-objective-modal", 'data-toggle' => 'modal', class: "btn btn-sm" do %>
+        <span class="glyphicon glyphicon-wrench"></span>&nbsp;Configure
+      <% end %>
+
+      <div id="predetermined-objective-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+
+      </div>
+    </td>
+  </tr>
+
+  <tr>
+    <th>Provincial Strategic Outcome(s)</th><td></td>
+    <td>
+      <%= link_to new_provincial_strategic_outcome_path,remote: true,'data-target' => "#provincial-strategic-outcome-modal", 'data-toggle' => 'modal', class: "btn btn-sm" do %>
+        <span class="glyphicon glyphicon-wrench"></span>&nbsp;Configure
+      <% end %>
+
+      <div id="provincial-strategic-outcome-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+
+      </div>
+    </td>
+  </tr>
+
+  <tr>
+    <th>Reporting Category</th><td></td>
+    <td>
+      <%= link_to new_reporting_category_path,remote: true,'data-target' => "#reporting-category-modal", 'data-toggle' => 'modal', class: "btn btn-sm" do %>
+        <span class="glyphicon glyphicon-wrench"></span>&nbsp;Configure
+      <% end %>
+
+      <div id="reporting-category-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+
+      </div>
+    </td>
+  </tr>
+
+  <tr>
+    <th>Risk Rating(s)</th><td></td>
+    <td>
+      <%= link_to new_risk_rating_path,remote: true,'data-target' => "#risk-rating-modal", 'data-toggle' => 'modal', class: "btn btn-sm" do %>
+        <span class="glyphicon glyphicon-wrench"></span>&nbsp;Configure
+      <% end %>
+
+      <div id="risk-rating-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+
+      </div>
+    </td>
+  </tr>
+
+  <tr>
+    <th>Strategic Objective(s)</th><td></td>
+    <td>
+      <%= link_to new_strategic_objective_path,remote: true,'data-target' => "#strategic-objective-modal", 'data-toggle' => 'modal', class: "btn btn-sm" do %>
+        <span class="glyphicon glyphicon-wrench"></span>&nbsp;Configure
+      <% end %>
+
+      <div id="strategic-objective-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+
+      </div>
+    </td>
+  </tr>
+
+</table>
+</div>
+</div>
