@@ -456,15 +456,23 @@ while $i < $num  do
   if month_number <= 12
   month_beginning = Date.new(Date.today.year, month_number)
   month_ending = month_beginning.end_of_month
-  period = month_ending.strftime("%d-%b-%YYYY")
+  period = month_ending.strftime("%d-%b-%Y")
+  primary_reminder = period.to_date + 7.days
+  primary_closure = period.to_date + 14.days
+  secondary_reminder = period.to_date + 7.days
+  secondary_closure = period.to_date + 16.days
   else
     month_number -= 12
     month_beginning = Date.new(Date.today.year, month_number)
     month_beginning += 1.year
     month_ending = month_beginning.end_of_month
-    period = month_ending.strftime("%d-%b-%YYYY")
+    period = month_ending.strftime("%d-%b-%Y")
+    primary_reminder = period.to_date + 7.days
+    primary_closure = period.to_date + 14.days
+    secondary_reminder = period.to_date + 7.days
+    secondary_closure = period.to_date + 16.days
   end
-  SdbipTimePeriod.create!(period: period)
+  SdbipTimePeriod.create!(period: period,primary_reminder: primary_reminder,primary_closure: primary_closure, secondary_reminder: secondary_reminder,secondary_closure: secondary_closure)
    $i +=1
 end
   CSV.foreach('db/data/capital.csv', headers: true, :col_sep => ',') do |row|
