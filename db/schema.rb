@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 20160731141316) do
     t.integer  "user_id"
     t.boolean  "signed_off"
     t.text     "response"
-    t.integer  "kpi_result_id",         null: false
+    t.integer  "kpi_result_id"
     t.binary   "poe"
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
