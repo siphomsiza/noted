@@ -170,7 +170,6 @@ end
 
   def audit_performance
      @departmental_sdbip = DepartmentalSdbip.find(params[:id])
-     #@departmental_sdbip.includes(:kpi_results)
      if @departmental_sdbip.assurances.where("extract(month from created_at) = ? AND extract(year from created_at) = ? AND departmental_sdbip_id = ? ",Date.today.month,Date.today.year,@departmental_sdbip.id).any?
      else
        @departmental_sdbip.assurances.build

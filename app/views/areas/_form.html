@@ -40,7 +40,11 @@
 
 <br/>
   <div class="actions">
+
     <%= f.submit "Save", class: 'btn col-lg-3 pull-right' %>
+    <% if !@area.new_record? %>
+      <%= link_to "Delete",area_path(@area),method: :delete, data: {confirm: "Are you sure to delete this area together with it's wards?"}, :class=>'btn col-lg-3 pull-right'%>
+    <% end %>
   </div>
 <% end %>
 </div>

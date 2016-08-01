@@ -22,11 +22,7 @@
       <th>Actual</th><td><%= f.text_field :actual, :class => "form-control has-error col-md-5",:autocomplete=>'off', :id=>'kpi-actual',:required => true %>
   </td>
     </tr>
-    <tr>
-      <th>Result(s)</th><td>
-      <%= f.text_field(:kpi_performance_standard,:class => "form-control has-error col-md-5",:id=>"kpi-result",:readonly=>true) %>
-    </td>
-    </tr>
+      <%= f.hidden_field(:kpi_performance_standard,:class => "form-control has-error col-md-5",:id=>"kpi-result",:readonly=>true) %>
     <tr>
       <th>Performance Comments</th><td>
       <%= f.text_area :performance_comments, :class => "form-control has-error col-md-5" %>
