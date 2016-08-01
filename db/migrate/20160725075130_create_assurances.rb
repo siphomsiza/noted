@@ -5,7 +5,7 @@ class CreateAssurances < ActiveRecord::Migration
       t.integer :user_id
       t.boolean :signed_off
       t.text :response
-      t.integer :kpi_result_id,            null: false
+      t.integer :kpi_result_id
       t.binary :poe
 
       t.timestamps null: false

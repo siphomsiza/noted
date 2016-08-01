@@ -1,7 +1,7 @@
 <div class="modal-dialog">
 <div class="modal-content">
 <div class="modal-header">
-  <h3></h3>
+  <h3>Assurance</h3>
 </div>
 <div class="modal-body">
 <div class="row">
@@ -19,7 +19,7 @@
                 <%= render 'assurance_fields', f: assurance_for_form %>
 
           <% end %>
-          
+
             <br/>
             <%= f.submit "Save", class: 'btn col-lg-3 pull-right'%>
           <% end %>
@@ -29,3 +29,10 @@
 </div>
 </div>
 </div>
+<script>
+$(document).ready(function(){
+  var selected_value = <%= current_user.id %>;
+  $("#assurance-user").val(selected_value);
+});
+
+</script>

@@ -273,10 +273,12 @@ class DepartmentalSdbipProgressesController < ApplicationController
 
   end
   def show
-    @department = Department.where('id = ?' ,params[:id])
-  	@departmental_sdbips = DepartmentalSdbip.where('department_id = ?' ,params[:id]).order(performance_standard: :asc)
+
+    @departmental_sdbips = DepartmentalSdbip.where(department_id: params[:id]).order(performance_standard: :asc)
+    @departments_sdibps = @departmental_sdbips.select(:performance_standard).order(performance_standard: :asc).uniq
+    @department = Department.includes(:departmental_sdbips).find(params[:id])
+
     $colors = []
-    @departments_sdibps = @departmental_sdbips.select(:performance_standard).uniq
     @departments_sdibps.each do |color|
     if color.performance_standard.include?("KPI Almost Met")
       $colors.push("orange")
@@ -298,60 +300,6 @@ class DepartmentalSdbipProgressesController < ApplicationController
     end
   end
     @colours = $colors
-    @subdepartments = Subdepartment.where(department_id: params[:id])
-
-    #@departmental_sdbips = DepartmentalSdbip.all
-    @get_all_kpis = DepartmentalSdbip.all
-
-     @all_peformance_standard_unspecified = DepartmentalSdbip.where("subdepartment_id = 1")
-     @all_peformance_standard_municipal_manager_office = DepartmentalSdbip.where("subdepartment_id = 2")
-     @all_peformance_standard_internal_audit = DepartmentalSdbip.where("subdepartment_id = 3")
-     @all_peformance_standard_performance_management_unit = DepartmentalSdbip.where("subdepartment_id = 4")
-     @all_peformance_standard_legal_services = DepartmentalSdbip.where("subdepartment_id = 5")
-     @all_peformance_standard_forestry = DepartmentalSdbip.where("subdepartment_id = 6")
-
-        #kpis_Municipal_manager
-    @kpi_not_yet_measured_unspecified = DepartmentalSdbip.where("subdepartment_id = 1 AND performance_standard = 'KPI Not Yet Measured'")
-    @kpi_not_yet_measured_municipal_manager_office = DepartmentalSdbip.where("subdepartment_id = 2 AND performance_standard = 'KPI Not Yet Measured'")
-    @kpi_not_yet_measured_internal_audit = DepartmentalSdbip.where("subdepartment_id = 3 AND performance_standard = 'KPI Not Yet Measured'")
-    @kpi_not_yet_measured_performance_management_unit = DepartmentalSdbip.where("subdepartment_id = 4 AND performance_standard = 'KPI Not Yet Measured'")
-    @kpi_not_yet_measured_legal_services = DepartmentalSdbip.where("subdepartment_id = 5 AND performance_standard = 'KPI Not Yet Measured'")
-    @kpi_not_yet_measured_forestry = DepartmentalSdbip.where("subdepartment_id = 6 AND performance_standard = 'KPI Not Yet Measured'")
-
-    @kpi_not_met_unspecified = @departmental_sdbips.where("subdepartment_id = 1 AND performance_standard = 'KPI Not Met'")
-    @kpi_not_met_municipal_manager_office = @departmental_sdbips.where("subdepartment_id = 2 AND performance_standard = 'KPI Not Met'")
-    @kpi_not_met_internal_audit = @departmental_sdbips.where("subdepartment_id = 3 AND performance_standard = 'KPI Not Met'")
-    @kpi_not_met_performance_management_unit = @departmental_sdbips.where("subdepartment_id = 4 AND performance_standard = 'KPI Not Met'")
-    @kpi_not_met_legal_services = @departmental_sdbips.where("subdepartment_id = 5 AND performance_standard = 'KPI Not Met'")
-    @kpi_not_met_forestry = @departmental_sdbips.where("subdepartment_id = 6 AND performance_standard = 'KPI Not Met'")
-
-    @kpi_almost_met_unspecified = @departmental_sdbips.where("subdepartment_id = 1 AND performance_standard = 'KPI Almost Met'")
-    @kpi_almost_met_municipal_manager_office = @departmental_sdbips.where("subdepartment_id = 2 AND performance_standard = 'KPI Almost Met'")
-    @kpi_almost_met_internal_audit = @departmental_sdbips.where("subdepartment_id = 3 AND performance_standard = 'KPI Almost Met'")
-    @kpi_almost_met_performance_management_unit = @departmental_sdbips.where("subdepartment_id = 4 AND performance_standard = 'KPI Almost Met'")
-    @kpi_almost_met_legal_services = @departmental_sdbips.where("subdepartment_id = 5 AND performance_standard = 'KPI Almost Met'")
-    @kpi_almost_met_forestry = @departmental_sdbips.where("subdepartment_id = 6 AND performance_standard = 'KPI Almost Met'")
-
-    @kpi_met_unspecified = @departmental_sdbips.where("subdepartment_id = 1  AND performance_standard = 'KPI Met'")
-    @kpi_met_municipal_manager_office = @departmental_sdbips.where("subdepartment_id = 2 AND performance_standard = 'KPI Met'")
-    @kpi_met_internal_audit = @departmental_sdbips.where("subdepartment_id = 3 AND performance_standard = 'KPI Met'")
-    @kpi_met_performance_management_unit = @departmental_sdbips.where("subdepartment_id = 4 AND performance_standard = 'KPI Met'")
-    @kpi_met_legal_services = @departmental_sdbips.where("subdepartment_id = 5 AND performance_standard = 'KPI Met'")
-    @kpi_met_forestry = @departmental_sdbips.where("subdepartment_id = 6 AND performance_standard = 'KPI Met'")
-
-    @kpi_well_met_unspecified = @departmental_sdbips.where("subdepartment_id = 1 AND performance_standard = 'KPI Well Met'")
-    @kpi_well_met_municipal_manager_office = @departmental_sdbips.where("subdepartment_id = 2 AND performance_standard = 'KPI Well Met'")
-    @kpi_well_met_internal_audit = @departmental_sdbips.where("subdepartment_id = 3 AND performance_standard = 'KPI Well Met'")
-    @kpi_well_met_performance_management_unit = @departmental_sdbips.where("subdepartment_id = 4 AND performance_standard = 'KPI Well Met'")
-    @kpi_well_met_legal_services = @departmental_sdbips.where("subdepartment_id = 5 AND performance_standard = 'KPI Well Met'")
-    @kpi_well_met_forestry = @departmental_sdbips.where("subdepartment_id = 6 AND performance_standard = 'KPI Well Met'")
-
-    @kpi_extremely_well_met_unspecified = @departmental_sdbips.where("subdepartment_id = 1 AND performance_standard = 'KPI Extremely Well Met'")
-    @kpi_extremely_well_met_municipal_manager_office = @departmental_sdbips.where("subdepartment_id = 2 AND performance_standard = 'KPI Extremely Well Met'")
-    @kpi_extremely_well_met_internal_audit = @departmental_sdbips.where("subdepartment_id = 3 AND performance_standard = 'KPI Extremely Well Met'")
-    @kpi_extremely_well_met_performance_management_unit = @departmental_sdbips.where("subdepartment_id = 4 AND performance_standard = 'KPI Extremely Well Met'")
-    @kpi_extremely_well_met_legal_services = @departmental_sdbips.where("subdepartment_id = 5 AND performance_standard = 'KPI Extremely Well Met'")
-    @kpi_extremely_well_met_forestry = @departmental_sdbips.where("subdepartment_id = 6 AND performance_standard = 'KPI Extremely Well Met'")
 
   end
 
