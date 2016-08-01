@@ -10,7 +10,7 @@
             <%= render 'kpi_details' %>
             <% if @departmental_sdbip.kpi_results.any? %>
             <% @departmental_sdbip.kpi_results.each do |result| %>
-            <% if result.assurance? && result.assurance.where.not(:kpi_result_id) %>
+            <% if !result.assurance.blank? && result.assurance.where.not(:kpi_result_id) %>
                 <%= render 'audited_results' %>
             <% end %>
             <% end %>
@@ -19,7 +19,7 @@
                 <%= render 'assurance_fields', f: assurance_for_form %>
 
           <% end %>
-          <%= link_to_add_fields "Add Assurance Fields", f, :assurances %>
+          
             <br/>
             <%= f.submit "Save", class: 'btn col-lg-3 pull-right'%>
           <% end %>

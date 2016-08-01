@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160725115052) do
+ActiveRecord::Schema.define(version: 20160731141316) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,7 +41,6 @@ ActiveRecord::Schema.define(version: 20160725115052) do
 
   create_table "areas", force: :cascade do |t|
     t.string   "name"
-    t.integer  "list_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -128,18 +127,19 @@ ActiveRecord::Schema.define(version: 20160725115052) do
     t.string   "source_of_evidence"
     t.string   "baseline"
     t.string   "budget"
-    t.integer  "annual_target"
-    t.integer  "revised_target"
-    t.integer  "first_quarter_target"
-    t.integer  "second_quarter_target"
-    t.integer  "third_quarter_target"
-    t.integer  "fourth_quarter_target"
+    t.string   "target"
+    t.decimal  "annual_target",                   default: 0.0
+    t.decimal  "revised_target"
+    t.decimal  "first_quarter_target"
+    t.decimal  "second_quarter_target"
+    t.decimal  "third_quarter_target"
+    t.decimal  "fourth_quarter_target"
     t.text     "performance_comments"
     t.text     "corrective_measures"
-    t.integer  "first_quarter_actual"
-    t.integer  "second_quarter_actual"
-    t.integer  "third_quarter_actual"
-    t.integer  "fourth_quarter_actual"
+    t.decimal  "first_quarter_actual"
+    t.decimal  "second_quarter_actual"
+    t.decimal  "third_quarter_actual"
+    t.decimal  "fourth_quarter_actual"
     t.binary   "first_quarter_poe"
     t.binary   "second_quarter_poe"
     t.binary   "third_quarter_poe"
@@ -162,6 +162,8 @@ ActiveRecord::Schema.define(version: 20160725115052) do
     t.datetime "created_at",                                                       null: false
     t.datetime "updated_at",                                                       null: false
   end
+
+  add_index "departmental_kpis", ["kpi_ref_number"], name: "index_departmental_kpis_on_kpi_ref_number", using: :btree
 
   create_table "departmental_sdbips", force: :cascade do |t|
     t.integer  "department_id",                                                    null: false
@@ -232,7 +234,6 @@ ActiveRecord::Schema.define(version: 20160725115052) do
 
   create_table "funding_sources", force: :cascade do |t|
     t.string   "name"
-    t.integer  "list_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -252,9 +253,8 @@ ActiveRecord::Schema.define(version: 20160725115052) do
   end
 
   create_table "kpas", force: :cascade do |t|
-    t.string   "name"
-    t.string   "code"
-    t.integer  "list_id"
+    t.string   "name",       null: false
+    t.string   "code",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -263,7 +263,6 @@ ActiveRecord::Schema.define(version: 20160725115052) do
     t.string   "name"
     t.string   "code"
     t.text     "description"
-    t.integer  "list_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
@@ -271,7 +270,6 @@ ActiveRecord::Schema.define(version: 20160725115052) do
   create_table "kpi_concepts", force: :cascade do |t|
     t.string   "name"
     t.string   "code"
-    t.integer  "list_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -285,6 +283,7 @@ ActiveRecord::Schema.define(version: 20160725115052) do
   end
 
   create_table "kpi_results", force: :cascade do |t|
+    t.date     "period"
     t.integer  "departmental_sdbip_id"
     t.integer  "user_id"
     t.decimal  "target"
@@ -299,21 +298,13 @@ ActiveRecord::Schema.define(version: 20160725115052) do
   create_table "kpi_target_types", force: :cascade do |t|
     t.string   "name"
     t.string   "code"
-    t.integer  "list_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "kpi_types", force: :cascade do |t|
     t.string   "name"
-    t.string   "code"
-    t.integer  "list_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "list_setups", force: :cascade do |t|
-    t.string   "name"
+    t.string   "code",       null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -348,7 +339,6 @@ ActiveRecord::Schema.define(version: 20160725115052) do
 
   create_table "mscore_classifications", force: :cascade do |t|
     t.string   "name"
-    t.integer  "list_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -376,29 +366,25 @@ ActiveRecord::Schema.define(version: 20160725115052) do
   end
 
   create_table "national_outcomes", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "list_id"
+    t.text     "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "ndp_objectives", force: :cascade do |t|
     t.string   "name"
-    t.integer  "list_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "predetermined_objectives", force: :cascade do |t|
     t.string   "name"
-    t.integer  "list_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "provincial_strategic_outcomes", force: :cascade do |t|
     t.string   "name"
-    t.integer  "list_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -412,7 +398,6 @@ ActiveRecord::Schema.define(version: 20160725115052) do
 
   create_table "reporting_categories", force: :cascade do |t|
     t.string   "name"
-    t.integer  "list_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -439,7 +424,6 @@ ActiveRecord::Schema.define(version: 20160725115052) do
   create_table "risk_ratings", force: :cascade do |t|
     t.string   "name"
     t.string   "code"
-    t.integer  "list_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -502,7 +486,6 @@ ActiveRecord::Schema.define(version: 20160725115052) do
 
   create_table "strategic_objectives", force: :cascade do |t|
     t.string   "name"
-    t.integer  "list_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -627,9 +610,9 @@ ActiveRecord::Schema.define(version: 20160725115052) do
 
   create_table "wards", force: :cascade do |t|
     t.string   "name"
-    t.integer  "ward_no",    null: false
-    t.string   "mun_ref"
+    t.string   "ward_no"
     t.integer  "area_id"
+    t.string   "mun_ref"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

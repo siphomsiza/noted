@@ -32,59 +32,59 @@
               <tr>
                 <td><span class="glyphicon glyphicon-stop babypink"></span>KPI Not Yet Measured</td>
                 <td><%= @departmental_sdbips.where(:performance_standard=> "KPI Not Yet Measured").count %>&nbsp;
-                  (<%= number_with_precision(@departmental_sdbips.where(:performance_standard=> "KPI Not Yet Measured").count * 100 / (@departmental_sdbips.count.nonzero? || 1 )) %>%)</td>
+                  (<%= number_to_percentage(@departmental_sdbips.where(:performance_standard=> "KPI Not Yet Measured").count.to_f * 100 / (@departmental_sdbips.count.nonzero? || 1 ),precision: 2) %>)</td>
                   <!--populating the columns and rows with data  -->
                   <% @departments.each do |department_value| %>
                     <td><%= @departmental_sdbips.where(:performance_standard=> "KPI Not Yet Measured", :department_id => department_value.id ).count %>&nbsp;
-                      (<%= number_with_precision(@departmental_sdbips.where(:performance_standard=> "KPI Not Yet Measured", :department_id => department_value.id).count * 100 / (@departmental_sdbips.where(:department_id => department_value.id ).count.nonzero? || 1 )) %>%)
+                      (<%= number_to_percentage(@departmental_sdbips.where(:performance_standard=> "KPI Not Yet Measured", :department_id => department_value.id).count.to_f * 100 / (@departmental_sdbips.where(:department_id => department_value.id ).count.nonzero? || 1 ),precision: 2) %>)
                     </td>
                   <% end %>
               </tr>
               <tr>
                 <td><span class="glyphicon glyphicon-stop red"></span>KPI Not Met</td>
                 <td><%= @departmental_sdbips.where(:performance_standard=> "KPI Not Met").count %>&nbsp;
-                  (<%= number_with_precision(@departmental_sdbips.where(:performance_standard=> "KPI Not Met").count * 100 / (@departmental_sdbips.count.nonzero? || 1 )) %>%)</td>
+                  (<%= number_to_percentage(@departmental_sdbips.where(:performance_standard=> "KPI Not Met").count.to_f * 100 / (@departmental_sdbips.count.nonzero? || 1 ),precision: 2) %>)</td>
 
                   <% @departments.each do |department_value| %>
                     <td><%= @departmental_sdbips.where(:performance_standard=> "KPI Not Met", :department_id => department_value.id ).count %>&nbsp;
-                      (<%= number_with_precision(@departmental_sdbips.where(:performance_standard=> "KPI Not Met", :department_id => department_value.id).count * 100 / (@departmental_sdbips.where(:department_id => department_value.id ).count.nonzero? || 1 )) %>%)</td>
+                      (<%= number_to_percentage(@departmental_sdbips.where(:performance_standard=> "KPI Not Met", :department_id => department_value.id).count.to_f * 100 / (@departmental_sdbips.where(:department_id => department_value.id ).count.nonzero? || 1 ),precision: 2) %>)</td>
                   <% end %>
               </tr>
               <tr>
                 <td><span class="glyphicon glyphicon-stop orange"></span>KPI Almost Met</td>
                 <td><%= @departmental_sdbips.where(:performance_standard=> "KPI Almost Met").count %>&nbsp;
-                  (<%= number_with_precision(@departmental_sdbips.where(:performance_standard=> "KPI Almost Met").count * 100 / (@departmental_sdbips.count.nonzero? || 1 )) %>%)</td>
+                  (<%= number_to_percentage(@departmental_sdbips.where(:performance_standard=> "KPI Almost Met").count.to_f * 100 / (@departmental_sdbips.count.nonzero? || 1 ),precision: 2) %>)</td>
 
                   <% @departments.each do |department_value| %>
                     <td><%= @departmental_sdbips.where(:performance_standard=> "KPI Almost Met", :department_id => department_value.id ).count %>&nbsp;
-                      (<%= number_with_precision(@departmental_sdbips.where(:performance_standard=> "KPI Almost Met", :department_id => department_value.id).count * 100 / (@departmental_sdbips.where(:department_id => department_value.id ).count.nonzero? || 1 )) %>%)</td>
+                      (<%= number_to_percentage(@departmental_sdbips.where(:performance_standard=> "KPI Almost Met", :department_id => department_value.id).count.to_f * 100 / (@departmental_sdbips.where(:department_id => department_value.id ).count.nonzero? || 1 ),precision: 2) %>)</td>
                   <% end %>
               </tr>
               <tr>
                 <td><span class="glyphicon glyphicon-stop limegreen"></span>KPI Met</td>
                 <td><%= @departmental_sdbips.where(:performance_standard=> "KPI Met").count %>&nbsp;
-                  (<%= number_with_precision(@departmental_sdbips.where(:performance_standard=> "KPI Met").count * 100 / (@departmental_sdbips.count.nonzero? || 1 )) %>%)</td>
+                  (<%= number_to_percentage(@departmental_sdbips.where(:performance_standard=> "KPI Met").count.to_f * 100 / (@departmental_sdbips.count.nonzero? || 1 ),precision: 2) %>)</td>
                   <% @departments.each do |department_value| %>
                     <td><%= @departmental_sdbips.where(:performance_standard=> "KPI Met", :department_id => department_value.id ).count %>&nbsp;
-                      (<%= number_with_precision(@departmental_sdbips.where(:performance_standard=> "KPI Met", :department_id => department_value.id).count * 100 / (@departmental_sdbips.where(:department_id => department_value.id ).count.nonzero? || 1 )) %>%)</td>
+                      (<%= number_to_percentage(@departmental_sdbips.where(:performance_standard=> "KPI Met", :department_id => department_value.id).count.to_f * 100 / (@departmental_sdbips.where(:department_id => department_value.id ).count.nonzero? || 1 ),precision: 2) %>)</td>
                   <% end %>
               </tr>
               <tr>
                 <td><span class="glyphicon glyphicon-stop darkgreen"></span>KPI Well Met</td>
                 <td><%= @departmental_sdbips.where(:performance_standard=> "KPI Well Met").count %>&nbsp;
-                  (<%= number_with_precision(@departmental_sdbips.where(:performance_standard=> "KPI Well Met").count * 100 / (@departmental_sdbips.count.nonzero? || 1 )) %>%)</td>
+                  (<%= number_to_percentage(@departmental_sdbips.where(:performance_standard=> "KPI Well Met").count.to_f * 100 / (@departmental_sdbips.count.nonzero? || 1 ),precision: 2) %>)</td>
                   <% @departments.each do |department_value| %>
                     <td><%= @departmental_sdbips.where(:performance_standard=> "KPI Well Met", :department_id => department_value.id ).count %>&nbsp;
-                      (<%= number_with_precision(@departmental_sdbips.where(:performance_standard=> "KPI Well Met", :department_id => department_value.id).count * 100 / (@departmental_sdbips.where(:department_id => department_value.id ).count.nonzero? || 1 )) %>%)</td>
+                      (<%= number_to_percentage(@departmental_sdbips.where(:performance_standard=> "KPI Well Met", :department_id => department_value.id).count.to_f * 100 / (@departmental_sdbips.where(:department_id => department_value.id ).count.nonzero? || 1 ),precision: 2) %>)</td>
                   <% end %>
               </tr>
               <tr>
                 <td><span class="glyphicon glyphicon-stop darkblue"></span>KPI Extremely Well Met</td>
                 <td><%= @departmental_sdbips.where(:performance_standard=> "KPI Extremely Well Met").count %>&nbsp;
-                  (<%= number_with_precision(@departmental_sdbips.where(:performance_standard=> "KPI Extremely Well Met").count * 100 / (@departmental_sdbips.count.nonzero? || 1 )) %>%)</td>
+                  (<%= number_to_percentage(@departmental_sdbips.where(:performance_standard=> "KPI Extremely Well Met").count.to_f * 100 / (@departmental_sdbips.count.nonzero? || 1 ),precision: 2) %>)</td>
                   <% @departments.each do |department_value| %>
                     <td><%= @departmental_sdbips.where(:performance_standard=> "KPI Extremely Well Met", :department_id => department_value.id ).count %>&nbsp;
-                      (<%= number_with_precision(@departmental_sdbips.where(:performance_standard=> "KPI Extremely Well Met", :department_id => department_value.id).count * 100 / (@departmental_sdbips.where(:department_id => department_value.id ).count.nonzero? || 1 )) %>%)</td>
+                      (<%= number_to_percentage(@departmental_sdbips.where(:performance_standard=> "KPI Extremely Well Met", :department_id => department_value.id).count.to_f * 100 / (@departmental_sdbips.where(:department_id => department_value.id ).count.nonzero? || 1 ),precision: 2) %>)</td>
                   <% end %>
               </tr>
               <tr>
@@ -127,6 +127,7 @@
         <% @departments.each do |department| %>
         <% @chart_data = @departmental_sdbips.where(:department_id=>department.id) %>
         <% if !@chart_data.blank? %>
+        
         <div class="well well-lg">
           <h4 align="center"><%= department.name %></h4>
         <div class="row">

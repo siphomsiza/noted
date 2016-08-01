@@ -1,0 +1,50 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times; </button>
+      <% if @area.new_record? %>
+        <h3>Configure Area</h3>
+      <% else %>
+        <h3><%= "Editing #{@area.name}" %></h3>
+      <% end %>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col col-lg-10  col-lg-10 col-lg-offset-1">
+      <%= form_for(@area) do |f| %>
+  <% if @area.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@area.errors.count, "error") %> prohibited this area from being saved:</h2>
+
+      <ul>
+      <% @area.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name,"Area Name:" %><br>
+    <%= f.text_field :name, :class=>"form-control" %>
+  </div>
+  <div class="field">
+  <%= f.fields_for :wards do |ward_for_form| %>
+
+    <%= render 'ward_fields', f: ward_for_form %>
+
+<% end %>
+
+<%= link_to_add_fields "Add Ward", f, :wards %>
+</div>
+
+<br/>
+  <div class="actions">
+    <%= f.submit "Save", class: 'btn col-lg-3 pull-right' %>
+  </div>
+<% end %>
+</div>
+</div>
+</div>
+</div>
+</div>

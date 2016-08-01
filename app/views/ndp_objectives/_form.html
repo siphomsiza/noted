@@ -1,0 +1,39 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times; </button>
+      <% if @ndp_objective.new_record? %>
+        <h3>Configure NDP Objective</h3>
+      <% else %>
+        <h3><%= "Editing #{@ndp_objective.name}" %></h3>
+      <% end %>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col col-lg-10  col-lg-10 col-lg-offset-1">
+          <%= form_for(@ndp_objective) do |f| %>
+  <% if @ndp_objective.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@ndp_objective.errors.count, "error") %> prohibited this ndp_objective from being saved:</h2>
+
+      <ul>
+      <% @ndp_objective.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name,"NDP Objective:" %><br>
+    <%= f.text_field :name, :class=>'form-control',:autocomplete=>'off' %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Save", class: 'btn col-lg-3 pull-right'%>
+  </div>
+<% end %>
+</div>
+</div>
+</div>
+</div>
+</div>

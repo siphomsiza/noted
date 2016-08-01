@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @risk_rating.name %>
+</p>
+
+<p>
+  <strong>Code:</strong>
+  <%= @risk_rating.code %>
+</p>
+
+<%= link_to 'Edit', edit_risk_rating_path(@risk_rating) %> |
+<%= link_to 'Back', risk_ratings_path %>

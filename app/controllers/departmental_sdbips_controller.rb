@@ -135,6 +135,11 @@ class DepartmentalSdbipsController < ApplicationController
     end
 end
   def restore_kpi
+    @deleted_kpi = DepartmentalKpi.find(params[:id])
+    DepartmentalSdbip.create(@deleted_kpi.attributes).save if @deleted_kpi
+    @deleted_kpi.destroy
+    flash[:success] = "KPI was successfully restored."
+    redirect_to departmental_sdbips_path
   end
   def show
     @departmental_sdbip = DepartmentalSdbip.find(params[:id])
@@ -165,10 +170,18 @@ end
 
   def audit_performance
      @departmental_sdbip = DepartmentalSdbip.find(params[:id])
+     #@departmental_sdbip.includes(:kpi_results)
+     if @departmental_sdbip.assurances.where("extract(month from created_at) = ? AND extract(year from created_at) = ? AND departmental_sdbip_id = ? ",Date.today.month,Date.today.year,@departmental_sdbip.id).any?
+     else
+       @departmental_sdbip.assurances.build
+     end
   end
   def edit
     @departmental_sdbip = DepartmentalSdbip.find(params[:id])
-
+    if @departmental_sdbip.kpi_results.where("extract(month from period) = ? AND extract(year from period) = ? AND departmental_sdbip_id = ? ",Date.today.month,Date.today.year,@departmental_sdbip.id).any?
+    else
+      @departmental_sdbip.kpi_results.build
+    end
   end
 
   def edit_kpis
@@ -215,6 +228,7 @@ end
   end
   def destroy
     @departmental_sdbip = DepartmentalSdbip.find(params[:id])
+    DepartmentalKpi.create(@departmental_sdbip.attributes).save if @departmental_sdbip
     @departmental_sdbip.destroy
     flash[:success] = "KPI deleted successfully."
     redirect_to departmental_sdbips_path
@@ -234,7 +248,7 @@ end
           :reporting_category_id, :provincial_strategic_outcome_id,
           :source_of_evidence, :target, :annual_target,:first_quarter_target,:second_quarter_target,:third_quarter_target,:fourth_quarter_target,:first_quarter_actual,:second_quarter_actual,:third_quarter_actual,:fourth_quarter_actual,:first_quarter_poe,:second_quarter_poe,:third_quarter_poe,:fourth_quarter_poe, :budget, :impact, :top_layer_kpi_ref,
            :kpi_calculation_type_id,
-          :kpi_target_type_id, :annual_target, :revised_target, :assurances_attributes=>[:departmental_sdbip_id,:user_id,:signed_off,:response,:kpi_result_id,:poe], :kpi_results_attributes => [:departmental_sdbip_id,:target,:actual,:kpi_performance_standard,:user_id,:performance_comments,:corrective_measures,:attachments_attributes => [ :kpi_result_id,:name,:_destroy]])
+          :kpi_target_type_id, :annual_target, :revised_target, :assurances_attributes=>[:id,:user_id,:signed_off,:response,:kpi_result_id,:poe], :kpi_results_attributes => [:id,:target,:actual,:kpi_performance_standard,:user_id,:performance_comments,:corrective_measures,:_destroy,:period,:attachments_attributes => [ :id,:name,:_destroy]])
     end
     def logged_in_user
       unless logged_in?

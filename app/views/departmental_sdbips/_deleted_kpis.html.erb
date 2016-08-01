@@ -22,15 +22,15 @@
         <td><%= deleted_kpi.subdepartment.subdepartment_name %></td>
         <td><%= deleted_kpi.kpi %></td>
         <td><%= deleted_kpi.kpi_ref_number %></td>
-        <td><% if !deleted_kpi.predetermined_objective_id.blank? %><%= departmental_sdbip.predetermined_objective.name %><% end %></td>
-        <td><% if !deleted_kpi.kpi_owner_id.blank? %><%= departmental_sdbip.kpi_owner.name %><% end %></td>
+        <td><% if !deleted_kpi.predetermined_objective_id.blank? %><%= deleted_kpi.predetermined_objective.name %><% end %></td>
+        <td><% if !deleted_kpi.kpi_owner_id.blank? %><%= deleted_kpi.kpi_owner.name %><% end %></td>
         <td><%= deleted_kpi.unit_of_measurement %></td>
         <td><%= deleted_kpi.source_of_evidence %></td>
-        <td><% if !deleted_kpi.ndp_objective_id.blank? %><%= departmental_sdbip.ndp_objective.name %><% end %></td>
-        <td><% if deleted_kpi.capital_project %><%= departmental_sdbip.capital_project.mun_cp_ref %><% end %></td>
-        <td><% if !deleted_kpi.reporting_category_id.blank? %><%= departmental_sdbip.reporting_category.name %><% end %></td>
-        <td><% if !deleted_kpi.kpi_calculation_type_id.blank? %><%= departmental_sdbip.kpi_calculation_type.name %><% end %></td>
+        <td><% if !deleted_kpi.ndp_objective_id.blank? %><%= deleted_kpi.ndp_objective.name %><% end %></td>
         <td></td>
+        <td><% if !deleted_kpi.reporting_category_id.blank? %><%= deleted_kpi.reporting_category.name %><% end %></td>
+        <td><% if !deleted_kpi.kpi_calculation_type_id.blank? %><%= deleted_kpi.kpi_calculation_type.name %><% end %></td>
+        <td><%= link_to "Restore KPI", restore_kpi_path(deleted_kpi), :class=>'btn btn-sm'%></td>
 
       </tr>
       <% end %>

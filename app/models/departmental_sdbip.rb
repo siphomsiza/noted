@@ -7,6 +7,7 @@ class DepartmentalSdbip < ActiveRecord::Base
 	belongs_to :list
 	belongs_to :subdepartment
 	belongs_to :kpi_owner
+	belongs_to :predetermined_objective
 	belongs_to :mscore_classification
 	belongs_to :national_outcome
 	belongs_to :strategic_objective

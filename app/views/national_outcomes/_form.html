@@ -1,0 +1,39 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times; </button>
+      <% if @national_outcome.new_record? %>
+        <h3>Configure National Outcome</h3>
+      <% else %>
+        <h3><%= "Editing #{@national_outcome.name}" %></h3>
+      <% end %>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col col-lg-10 col-lg-offset-1">
+          <%= form_for(@national_outcome) do |f| %>
+  <% if @national_outcome.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@national_outcome.errors.count, "error") %> prohibited this national_outcome from being saved:</h2>
+
+      <ul>
+      <% @national_outcome.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name,"National Outcome" %><br>
+    <%= f.text_area :name,:class=>"form-control" %>
+  </div>
+  <div class="actions">
+    <%= f.submit "Save",:class=>'btn col-lg-3 pull-right' %>
+  </div>
+<% end %>
+</div>
+</div>
+</div>
+</div>
+</div>

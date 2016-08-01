@@ -48,14 +48,16 @@ $(function() {
 				            <div id="collapseOne" class="panel-collapse collapse in">
 				                <div class="panel-body">
 				                    <% Area.all.each do |area| %>
-															<li><%= link_to edit_list_path(area),remote: true,'data-target' => "#list-modal", 'data-toggle' => 'modal', :title=>"Click to Update" do %>
+															<li>
+																<%= link_to edit_area_path(area),remote: true,'data-target' => "#edit-area-modal", 'data-toggle' => 'modal', :title=>"Click to Update" do %>
 																<span><%= area.name %></span>
-															    <div id="list-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
 
-															    </div>
 															<% end %>
 															</li>
 														<% end %>
+														<div id="edit-area-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+
+														</div>
 				                </div>
 				            </div>
 				        </div>
@@ -68,8 +70,16 @@ $(function() {
 				            <div id="collapseTwo" class="panel-collapse collapse">
 				                <div class="panel-body">
 													<% FundingSource.all.each do |funding_source| %>
-														<li><%= funding_source.name %></li>
+														<li>
+															<%= link_to edit_funding_source_path(funding_source),remote: true,'data-target' => "#edit-funding-source-modal", 'data-toggle' => 'modal', :title=>"Click to Update" do %>
+															<span><%= funding_source.name %></span>
+
+														<% end %>
+														</li>
 													<% end %>
+													<div id="edit-funding-source-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+
+													</div>
 				                </div>
 				            </div>
 				        </div>
@@ -81,9 +91,18 @@ $(function() {
 				            </div>
 				            <div id="collapseThree" class="panel-collapse collapse">
 				                <div class="panel-body">
+
 													<% MscoreClassification.all.each do |mscore_classification| %>
-														<li><%= mscore_classification.name %></li>
+													<li>
+														<%= link_to edit_mscore_classification_path(mscore_classification),remote: true,'data-target' => "#edit-mscore-classification-modal", 'data-toggle' => 'modal', :title=>"Click to Update" do %>
+														<span><%= mscore_classification.name %></span>
+
 													<% end %>
+													</li>
+												<% end %>
+												<div id="edit-mscore-classification-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+
+												</div>
 				                </div>
 				            </div>
 				        </div>
@@ -96,8 +115,16 @@ $(function() {
 				            <div id="collapseFour" class="panel-collapse collapse">
 				                <div class="panel-body">
 													<% Kpa.all.each do |kpa| %>
-														<li><%= kpa.name %></li>
+													<li>
+														<%= link_to edit_kpa_path(kpa),remote: true,'data-target' => "#edit-kpa-modal", 'data-toggle' => 'modal', :title=>"Click to Update" do %>
+														<span><%= kpa.name %></span>
+
 													<% end %>
+													</li>
+												<% end %>
+												<div id="edit-kpa-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+
+												</div>
 				                </div>
 				            </div>
 				        </div>
@@ -111,8 +138,16 @@ $(function() {
 				            <div id="collapseFive" class="panel-collapse collapse">
 				                <div class="panel-body">
 				                    <% KpiCalculationType.all.each do |kpi_calculation_type| %>
-  															<li><%= kpi_calculation_type.name %></li>
+														<li>
+															<%= link_to edit_kpi_calculation_type_path(kpi_calculation_type),remote: true,'data-target' => "#edit-kpi-calculation-type-modal", 'data-toggle' => 'modal', :title=>"Click to Update" do %>
+															<span><%= kpi_calculation_type.name %></span>
+
 														<% end %>
+														</li>
+													<% end %>
+													<div id="edit-kpi-calculation-type-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+
+													</div>
 				                </div>
 				            </div>
 				        </div>
@@ -125,8 +160,16 @@ $(function() {
 				            <div id="collapseSix" class="panel-collapse collapse">
 				                <div class="panel-body">
 				                    <% KpiConcept.all.each do |kpi_concept| %>
-  														<li><%= kpi_concept.name %></li>
+														<li>
+															<%= link_to edit_kpi_concept_path(kpi_concept),remote: true,'data-target' => "#edit-kpi-concept-modal", 'data-toggle' => 'modal', :title=>"Click to Update" do %>
+															<span><%= kpi_concept.name %></span>
+
 														<% end %>
+														</li>
+													<% end %>
+													<div id="edit-kpi-concept-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+
+													</div>
 				                </div>
 				            </div>
 				        </div>
@@ -153,8 +196,16 @@ $(function() {
 				            <div id="collapseSeven" class="panel-collapse collapse">
 				                <div class="panel-body">
 				                    <% KpiTargetType.all.each do |kpi_target_type| %>
-  														<li><%= kpi_target_type.name %></li>
+														<li>
+															<%= link_to edit_kpi_target_type_path(kpi_target_type),remote: true,'data-target' => "#edit-kpi-target-type-modal", 'data-toggle' => 'modal', :title=>"Click to Update" do %>
+															<span><%= kpi_target_type.name %></span>
+
 														<% end %>
+														</li>
+													<% end %>
+													<div id="edit-kpi-target-type-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+
+													</div>
 				                </div>
 				            </div>
 				        </div>
@@ -168,8 +219,16 @@ $(function() {
 				            <div id="collapseEight" class="panel-collapse collapse">
 				                <div class="panel-body">
 				                    <% KpiType.all.each do |kpi_type| %>
-  														<li><%= kpi_type.name %></li>
+														<li>
+															<%= link_to edit_kpi_type_path(kpi_type),remote: true,'data-target' => "#edit-kpi-type-modal", 'data-toggle' => 'modal', :title=>"Click to Update" do %>
+															<span><%= kpi_type.name %></span>
+
 														<% end %>
+														</li>
+													<% end %>
+													<div id="edit-kpi-type-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+
+													</div>
 				                </div>
 				            </div>
 				        </div>
@@ -183,8 +242,16 @@ $(function() {
 				            <div id="collapseNine" class="panel-collapse collapse">
 				                <div class="panel-body">
 				                    <% NationalOutcome.all.each do |national_outcome| %>
-  														<li><%= national_outcome.name %></li>
+														<li>
+															<%= link_to edit_national_outcome_path(national_outcome),remote: true,'data-target' => "#edit-national-outcome-modal", 'data-toggle' => 'modal', :title=>"Click to Update" do %>
+															<span><%= national_outcome.name %></span>
+
 														<% end %>
+														</li>
+													<% end %>
+													<div id="edit-national-outcome-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+
+													</div>
 				                </div>
 				            </div>
 				        </div>
@@ -197,8 +264,16 @@ $(function() {
 				            <div id="collapseTen" class="panel-collapse collapse">
 				                <div class="panel-body">
 				                    <% NdpObjective.all.each do |ndp_objective| %>
-  														<li><%= ndp_objective.name %></li>
+														<li>
+															<%= link_to edit_ndp_objective_path(ndp_objective),remote: true,'data-target' => "#edit-ndp-objective-modal", 'data-toggle' => 'modal', :title=>"Click to Update" do %>
+															<span><%= ndp_objective.name %></span>
+
 														<% end %>
+														</li>
+													<% end %>
+													<div id="edit-ndp-objective-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+
+													</div>
 				                </div>
 				            </div>
 				        </div>
@@ -212,8 +287,16 @@ $(function() {
 				            <div id="collapseEleven" class="panel-collapse collapse">
 				                <div class="panel-body">
 				                    <% PredeterminedObjective.all.each do |predetermined_objective| %>
-  															<li><%= predetermined_objective.name %></li>
+														<li>
+															<%= link_to edit_predetermined_objective_path(predetermined_objective),remote: true,'data-target' => "#edit-predetermined-objective-modal", 'data-toggle' => 'modal', :title=>"Click to Update" do %>
+															<span><%= predetermined_objective.name %></span>
+
 														<% end %>
+														</li>
+													<% end %>
+													<div id="edit-predetermined-objective-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+
+													</div>
 				                </div>
 				            </div>
 				        </div>
@@ -227,8 +310,16 @@ $(function() {
 				            <div id="collapseTwelve" class="panel-collapse collapse">
 				                <div class="panel-body">
 				                    <% ProvincialStrategicOutcome.all.each do |provincial_strategic_outcome| %>
-  														<li><%= provincial_strategic_outcome.name %></li>
+														<li>
+															<%= link_to edit_provincial_strategic_outcome_path(provincial_strategic_outcome),remote: true,'data-target' => "#edit-provincial-strategic-outcome-modal", 'data-toggle' => 'modal', :title=>"Click to Update" do %>
+															<span><%= provincial_strategic_outcome.name %></span>
+
 														<% end %>
+														</li>
+													<% end %>
+													<div id="edit-provincial-strategic-outcome-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+
+													</div>
 				                </div>
 				            </div>
 				        </div>
@@ -241,8 +332,16 @@ $(function() {
 				            <div id="collapseThirteen" class="panel-collapse collapse">
 				                <div class="panel-body">
 				                    <% ReportingCategory.all.each do |reporting_category| %>
-  															<li><%= reporting_category.name %></li>
+														<li>
+															<%= link_to edit_reporting_category_path(reporting_category),remote: true,'data-target' => "#edit-reporting-category-modal", 'data-toggle' => 'modal', :title=>"Click to Update" do %>
+															<span><%= reporting_category.name %></span>
+
 														<% end %>
+														</li>
+													<% end %>
+													<div id="edit-reporting-category-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+
+													</div>
 				                </div>
 				            </div>
 				        </div>
@@ -255,8 +354,16 @@ $(function() {
 				            <div id="collapseFourteen" class="panel-collapse collapse">
 				                <div class="panel-body">
 				                    <% RiskRating.all.each do |risk_rating| %>
-  															<li><%= risk_rating.name %></li>
+														<li>
+															<%= link_to edit_risk_rating_path(risk_rating),remote: true,'data-target' => "#edit-risk-rating-modal", 'data-toggle' => 'modal', :title=>"Click to Update" do %>
+															<span><%= risk_rating.name %></span>
+
 														<% end %>
+														</li>
+													<% end %>
+													<div id="edit-risk-rating-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+
+													</div>
 				                </div>
 				            </div>
 				        </div>
@@ -269,8 +376,16 @@ $(function() {
 				            <div id="collapseObj" class="panel-collapse collapse">
 				                <div class="panel-body">
 				                    <% StrategicObjective.all.each do |strategic_objective| %>
-  															<li><%= strategic_objective.name %></li>
+														<li>
+															<%= link_to edit_strategic_objective_path(strategic_objective),remote: true,'data-target' => "#edit-strategic-objective-modal", 'data-toggle' => 'modal', :title=>"Click to Update" do %>
+															<span><%= strategic_objective.name %></span>
+
 														<% end %>
+														</li>
+													<% end %>
+													<div id="edit-strategic-objective-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+
+													</div>
 				                </div>
 				            </div>
 				        </div>
@@ -295,8 +410,6 @@ $(function() {
 	</div>
 	</div>
 	<div class = "tab-pane fade" id = "add_lists">
-				<ul class="lists">
-					<%= render 'form' %>
-				</ul>
+			<%= render 'manage_lists' %>
 </div>
 </div>

@@ -2,7 +2,7 @@
 	<section id="branding">
 		<%= link_to image_tag("ks-horizontal.jpg", alt: "Keystone Municipal Performance Management System logo") %>
 		<span class="pull-right">
-			<h4><%= @doc["item"]["condition"]["date"] %></h4>
+			<h4><%= DateTime.parse(@doc["item"]["condition"]["date"]).strftime("%a, %d %b %Y") %></h4>
 			<h4><span class="glyphicon glyphicon-map-marker"></span>&nbsp;<%= @doc["location"]["city"] %></h4>
 		<h4>
 			<span><img height="34" width="34" src="<%= @doc["item"]["description"][/\"(.*?)"/,1] %>"></span>
