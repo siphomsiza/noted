@@ -87,10 +87,13 @@ class SdbipTimePeriodsController < ApplicationController
         new_secondary_closure = time_period.period.days_ago(-params[:secondary_closure].to_i)
         @time_period = SdbipTimePeriod.find(time_period.id)
         @time_period.update_columns(:primary_reminder => new_primary_reminder,:primary_closure=>new_primary_closure,:secondary_reminder=>new_secondary_reminder,:secondary_closure=>new_secondary_closure)
-        #@primary_users =
-        #@secondary_users =
+        @primary_users = User.includes(:role).where(roles:{kpi_owner: true})
+        @secondary_users = User.includes(:role).where(roles:{finance_admin: true,top_layer_administrator: true,secondary_time_period: true})
         #TimePeriodReminder.send_primary_time_period_reminder_email(@primary_users).deliver
         #TimePeriodReminder.send_secondary_time_period_reminder_email(@secondary_users).deliver
+
+        #reminder_date = (@sdbip_time_period.primary_reminder - Date.now)* 24 * 60
+          SendTimePeriodReminderEmailJob.set(wait: 30.seconds).perform_later
       end
         flash[:success] = "All automatic time periods updated successfully."
         redirect_to :back
@@ -120,8 +123,11 @@ class SdbipTimePeriodsController < ApplicationController
   def update
       @sdbip_time_period = SdbipTimePeriod.find(params[:id])
     if @sdbip_time_period.update_attributes(sdbip_time_period_params)
-      reminder_date = (@sdbip_time_period.primary_reminder - Date.now)* 24 * 60
-      SendTimePeriodReminderEmailJob.set(wait: reminder_date.minutes).perform_later
+      @primary_users = User.includes(:role).where(roles:{kpi_owner: true})
+      @secondary_users = User.includes(:role).where(roles:{finance_admin: true,top_layer_administrator: true,secondary_time_period: true})
+
+      #reminder_date = (@sdbip_time_period.primary_reminder - Date.now)* 24 * 60
+      SendTimePeriodReminderEmailJob.set(wait: reminder_date.minutes).perform_later(@primary_users)
       flash[:success]="Sdbip Time Period was successfully updated."
       redirect_to sdbip_time_periods_path
     else

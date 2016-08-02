@@ -12,7 +12,26 @@
     <th>Response:</th>
     <td><%= f.text_area :response, class: "form-control" %></td>
   </tr>
+  <tr>
+    <th>Update User:</th>
+    <td></td>
+  </tr>
+  <tr>
+    <th>Update deadline:</th>
+    <td>
+      <div class="form-group">
+            <div class="input-group date" data-provide="datepicker"
+                               data-date-format="dd-mm-yyyy" data-date-start-view="years" data-date-min-view-mode="days">
+                  <%= text_field_tag :update_time_period,nil, {:id=>'update-time-period',class: "form-control"} %>
+                    <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+            </div>
+      </div>
+    </td>
+  </tr>
 </table>
+
 <%= f.hidden_field :kpi_result_id,:id=>"kpi-result-id" %>
 <%= f.hidden_field :user_id,:id=>"assurance-user" %>
 <%= f.hidden_field :_destroy %>

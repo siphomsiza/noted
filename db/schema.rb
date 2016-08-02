@@ -309,13 +309,6 @@ ActiveRecord::Schema.define(version: 20160731141316) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "lists", force: :cascade do |t|
-    t.string   "name"
-    t.text     "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
   create_table "master_setups", force: :cascade do |t|
     t.string   "municipality", null: false
     t.string   "province",     null: false
