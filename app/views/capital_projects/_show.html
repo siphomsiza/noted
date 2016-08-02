@@ -10,23 +10,23 @@
       <div class="table-responsive">
         <table class="table table-striped" id="sdbips_table">
             <tr>
-              <th><h4>Ref</h4></th><td>CP<%= @capital_project.id %></td></tr>
-              <tr><th><h4>Department</h4></th><td><%= @capital_project.subdepartment.department.name %></td></tr>
-              <tr><th><h4>Subdepartment</h4></th><td><%= @capital_project.subdepartment.subdepartment_name %></td></tr>
-              <tr><th><h4>Project Name</h4></th><td><%= @capital_project.project_name %></td></tr>
-              <tr><th><h4>Mun CP Ref Outcome</h4></th><td><%= @capital_project.mun_cp_ref %></td></tr>
-              <tr><th><h4>Vote Number</h4></th><td><%= @capital_project.vote_number %></td></tr>
-              <tr><th><h4>IDP Number</h4></th><td><%= @capital_project.idp_nummber %></td></tr>
-              <tr><th><h4>Project Description</h4></th><td><%= @capital_project.departmental_sdbip.kpi_ref_number %></td></tr>
-              <tr><th><h4>GFS Classification</h4></th><td><%= @capital_project.mscore_classification.name %></td></tr>
+              <th>Ref</th><td>CP<%= @capital_project.id %></td></tr>
+              <tr><th>Department</th><td><%= @capital_project.subdepartment.department.name %></td></tr>
+              <tr><th>Subdepartment</th><td><%= @capital_project.subdepartment.subdepartment_name %></td></tr>
+              <tr><th>Project Name</th><td><%= @capital_project.project_name %></td></tr>
+              <tr><th>Mun CP Ref Outcome</th><td><%= @capital_project.mun_cp_ref %></td></tr>
+              <tr><th>Vote Number</th><td><%= @capital_project.vote_number %></td></tr>
+              <tr><th>IDP Number</th><td><%= @capital_project.idp_nummber %></td></tr>
+              <tr><th>Project Description</th><td><%= @capital_project.departmental_sdbip.kpi_ref_number %></td></tr>
+              <tr><th>GFS Classification</th><td><%= @capital_project.mscore_classification.name %></td></tr>
 
-              <tr><th><h4>Funding Source</h4></th><td><%= @capital_project.funding_source %></td></tr>
-              <tr><th><h4>Planned Start Date</h4></th><td><% if !@capital_project.planned_start_date.blank? %><%= @capital_project.planned_start_date.strftime("%d %b %Y") %><% end %></td></tr>
-              <tr><th><h4>Planned Completion Date</h4></th><td><% if !@capital_project.planned_completion_date.blank? %><%= @capital_project.planned_completion_date.strftime("%d %b %Y") %><% end %></td></tr>
-              <tr><th><h4>Actual Start Date</h4></th><td><% if !@capital_project.actual_start_date.blank? %><%= @capital_project.actual_start_date.strftime("%d %b %Y") %><% end %></td></tr>
-              <tr><th><h4>Actual Completion Date</h4></th><td><% if !@capital_project.actual_completion_date.blank? %><%= @capital_project.actual_completion_date.strftime("%d %b %Y") %><% end %></td></tr>
-              <tr><th><h4>Areas</h4></th><td><% if !@capital_project.area_id.blank? %><%= @capital_project.area.name %><% end %></td></tr>
-              <tr><th><h4>Wards</h4></th><td><% if !@capital_project.ward_id.blank? %><%= @capital_project.ward.name %><% end %></td></tr>
+              <tr><th>Funding Source</th><td><%= @capital_project.funding_source %></td></tr>
+              <tr><th>Planned Start Date</th><td><% if !@capital_project.planned_start_date.blank? %><%= @capital_project.planned_start_date.strftime("%d %b %Y") %><% end %></td></tr>
+              <tr><th>Planned Completion Date</th><td><% if !@capital_project.planned_completion_date.blank? %><%= @capital_project.planned_completion_date.strftime("%d %b %Y") %><% end %></td></tr>
+              <tr><th>Actual Start Date</th><td><% if !@capital_project.actual_start_date.blank? %><%= @capital_project.actual_start_date.strftime("%d %b %Y") %><% end %></td></tr>
+              <tr><th>Actual Completion Date</th><td><% if !@capital_project.actual_completion_date.blank? %><%= @capital_project.actual_completion_date.strftime("%d %b %Y") %><% end %></td></tr>
+              <tr><th>Areas</th><td><% if !@capital_project.area_id.blank? %><%= @capital_project.area.name %><% end %></td></tr>
+              <tr><th>Wards</th><td><% if !@capital_project.ward_id.blank? %><%= @capital_project.ward.name %><% end %></td></tr>
 
         </table>
         </div>
