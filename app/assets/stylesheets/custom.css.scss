@@ -46,6 +46,7 @@ h1 {
   letter-spacing: -2px;
   margin-bottom: 30px;
   text-align: center;
+  font-size: 30px;
 }
 
 h2 {
@@ -53,20 +54,23 @@ h2 {
   margin-bottom: 30px;
   font-weight: normal;
   text-align: center;
+  font-size: 26px;
 }
 
 h3 {
   text-align: center;
+  font-size: 22px;
 }
 
 h4, h5, h6 {
   text-align: left;
   font-weight: bold;
+  font-size: 18px;
 }
 
 p {
 	font-family: $headingFontFamily;
-	font-size: 1.1em;
+	font-size: 16px;
 	line-height: 1.4em;
 	color: $deepblue;
 	padding: 0 2%;
@@ -75,12 +79,13 @@ p {
 label {
   font-family: $headingFontFamily;
 	color: $deepblue;
-
+  font-size: 16px;
 }
 
 .labels{
   font-family: $headingFontFamily;
   color: $deepblue;
+  font-size: 16px;
 }
 
 a {
@@ -91,6 +96,14 @@ a {
 table {
   font-family: $headingFontFamily;
 	color: $deepblue;
+}
+
+th {
+  font-size: 18px;
+}
+
+td {
+  font-size: 16px;
 }
 
 .container {
@@ -420,11 +433,6 @@ input {
   font-size: 0.9em;
 }
 
-#departmentalsdbips td, th {
-  font-size: 0.8em;
-}
-
-
 #fourth-level-navs .nav-tabs{
   li a{
     color: $deepblue;
@@ -530,6 +538,7 @@ input {
 }
 
 .btn, .btn-midi {
+  border-radius: 2px;
   margin: 1px 0;
   border: 1px solid $deepblue;
   background-color: white !important;
@@ -537,6 +546,7 @@ input {
   font-weight: bold;
   text-decoration: none;
   text-decoration-color: $deepblue;
+  font-size: 16px;
 }
 
 /* miscellaneous */
@@ -554,6 +564,7 @@ input {
 .nav-tabs {
 	li a {
 		color: $deepblue;
+    font-size: 18px;
 	}
 
 	li.active a {
@@ -1757,8 +1768,12 @@ input {
 }
 .nav-pills{
   ul li{
-  margin-bottom: 0 auto;
-}
+    margin-bottom: 0 auto;
+  }
+
+  li a{
+    font-size: 18px;
+  }
 }
 .red{
   color: red;
