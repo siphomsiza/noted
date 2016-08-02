@@ -247,7 +247,7 @@ end
           :reporting_category_id, :provincial_strategic_outcome_id,
           :source_of_evidence, :target, :annual_target,:first_quarter_target,:second_quarter_target,:third_quarter_target,:fourth_quarter_target,:first_quarter_actual,:second_quarter_actual,:third_quarter_actual,:fourth_quarter_actual,:first_quarter_poe,:second_quarter_poe,:third_quarter_poe,:fourth_quarter_poe, :budget, :impact, :top_layer_kpi_ref,
            :kpi_calculation_type_id,
-          :kpi_target_type_id, :annual_target, :revised_target, :assurances_attributes=>[:id,:user_id,:signed_off,:response,:kpi_result_id,:poe], :kpi_results_attributes => [:id,:target,:actual,:kpi_performance_standard,:user_id,:performance_comments,:corrective_measures,:_destroy,:period,:attachments_attributes => [ :id,:name,:_destroy]])
+          :kpi_target_type_id, :annual_target, :revised_target, :assurances_attributes=>[:id,:user_id,:signed_off,:response,:kpi_result_id,:poe], :kpi_results_attributes => [:id,:target,:actual,:kpi_performance_standard,:user_id,:performance_comments,:corrective_measures,:_destroy,:period,:attachments_attributes => [ :id,:poe,:_destroy]])
     end
     def logged_in_user
       unless logged_in?

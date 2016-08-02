@@ -1,3 +1,4 @@
+
 <table class="table table-responsive table-striped">
   <tr>
     <th>Ref:</th><td>D<%= @departmental_sdbip.id %></td>
@@ -13,14 +14,11 @@
   </tr>
   <tr>
     <th>Source of Evidence</th><td><%= @departmental_sdbip.source_of_evidence %>
-      <% @departmental_sdbip.kpi_results.each do |result| %>
-        <% result.attachments.each do |attachment| %>
-        <li><%= link_to attachment.poe,attachment.poe_url, target: '_blank' %></li>
-        <% end %>
-      <% end %>
     </td>
   </tr>
   <tr>
-    <th>KPI Calculation Type</th><td><%= @departmental_sdbip.kpi_calculation_type.name %></td>
+    <th>KPI Calculation Type</th><td><%= @departmental_sdbip.kpi_calculation_type.name %>
+    (<%= @departmental_sdbip.kpi_calculation_type.code %>)
+  </td>
   </tr>
 </table>

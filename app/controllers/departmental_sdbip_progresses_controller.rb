@@ -22,6 +22,21 @@ class DepartmentalSdbipProgressesController < ApplicationController
 
     selected_values = []
     selected_headings = []
+    if params[:selected_project_columns] && (params[:department_id] || params[:subdepartment_id])
+        selected_audit_headers = params[:selected_project_columns]
+        $selected_audit_headers = params[:selected_project_columns]
+        @selected_audit_headers = params[:selected_project_columns]
+        @audit_logs = CapitalProject.all
+        @audit_logs = CapitalProject.generate_report(params[:selected_project_columns],
+          params[:department_id],params[:subdepartment_id],
+          params[:idp_number],params[:vote_number],
+          params[:project_name],params[:project_description],
+          params[:mscore_classification_id],params[:planned_start_date],
+          params[:planned_completion_date],params[:funding_source],
+          params[:ward_id],
+          params[:area_id],params[:mun_cp_ref],params[:actual_start_date],
+          params[:actual_completion_date])
+    end
     if params[:selected_columns] && (params[:department_id] || params[:department_id] || params[:subdepartment_id] || params[:kpi_ref_number] || params[:predetermined_objective_id] || params[:kpi_owner_id] || params[:kpi] || params[:unit_of_measurement] || params[:mcore_classification_id] || params[:strategic_objective_id] || params[:source_of_evidence] || params[:baseline] || params[:annual_target] || params[:revised_target] || params[:national_kpa_id] || params[:ndp_objective_id] || params[:kpi_concept_id] || params[:kpi_type_id] || params[:provincial_strategic_outcome_id] || params[:ward_id] || params[:area_id] || params[:performance_standard] || params[:kpi_calculation_type_id] || params[:kpi_target_type_id])
       selected_audit_headers = params[:selected_columns]
       $selected_audit_headers = params[:selected_columns]
@@ -99,8 +114,9 @@ class DepartmentalSdbipProgressesController < ApplicationController
      ####Graphs###
     @departmental_sdbip_progresses = @departmental_sdbip_progresses
 
-    @departmental_sdbips = DepartmentalSdbip.order(performance_standard: :asc)
+    @departmental_sdbips = DepartmentalSdbip.order(performance_standard: :asc).includes(:kpi_results)
     @departments_sdibps = @departmental_sdbips.select(:performance_standard).uniq
+    @departmental_sdbips = @departmental_sdbips.paginate(page: params[:page],per_page: 10)
     $colors = []
     @departments_sdibps.each do |color|
     if color.performance_standard.include?("KPI Almost Met")
@@ -123,98 +139,6 @@ class DepartmentalSdbipProgressesController < ApplicationController
     end
   end
     @colours = $colors
-    @kpi_not_yet_measured = DepartmentalSdbip.where("performance_standard = ?", "KPI Not Yet Measured")
-
-    @kpi_measured = DepartmentalSdbip.where("performance_standard != ?", "KPI Measured")
-    @kpi_not_met = DepartmentalSdbip.where("performance_standard = ?", "KPI Not Met")
-    @kpi_almost_met = DepartmentalSdbip.where("performance_standard = ?", "KPI Almost Met")
-    @kpi_met = DepartmentalSdbip.where("performance_standard = ?", "KPI Met")
-    @kpi_well_met = DepartmentalSdbip.where("performance_standard = ?", "KPI Well Met")
-    @kpi_extremely_well_met = DepartmentalSdbip.where("performance_standard = ?", "KPI Extremely Well Met")
-
-    @get_all_kpis = DepartmentalSdbip.all
-
-    @get_performance_standard = DepartmentalSdbip.where("performance_standard = ?", @performance_standard)
-
-    @get_municipal_manager = DepartmentalSdbip.where("department_id = ?", 1)
-    @get_financial_services = DepartmentalSdbip.where("department_id = ?", 2)
-    @get_community_services = DepartmentalSdbip.where("department_id = ?", 3)
-    @get_corporate_services = DepartmentalSdbip.where("department_id = ?", 4)
-    @get_technical_services = DepartmentalSdbip.where("department_id = ?", 5)
-    @get_planning_and_development = DepartmentalSdbip.where("department_id = ?", 6)
-
-    @get_basic_service_delivery = DepartmentalSdbip.where("kpa_id = ?", 1)
-    @get_good_governance = DepartmentalSdbip.where("kpa_id = ?", 2)
-    @get_economic_development = DepartmentalSdbip.where("kpa_id = ?", 3)
-    @get_financial_viability = DepartmentalSdbip.where("kpa_id = ?", 4)
-    @get_municipal_transformation = DepartmentalSdbip.where("kpa_id = ?", 5)
-
-    @kpi_not_met_municipal_manager = DepartmentalSdbip.where("department_id = 1 AND performance_standard = 'KPI Not Met'")
-    @kpi_almost_met_municipal_manager = DepartmentalSdbip.where("department_id = 1 AND performance_standard = 'KPI Almost Met'")
-    @kpi_met_municipal_manager = DepartmentalSdbip.where("department_id = 1 AND performance_standard = 'KPI Met'")
-    @kpi_well_met_municipal_manager = DepartmentalSdbip.where("department_id = 1 AND performance_standard = 'KPI Well Met'")
-    @kpi_extremely_well_met_municipal_manager = DepartmentalSdbip.where("department_id = 1 AND performance_standard = 'KPI Extremely Well Met'")
-
-    @kpi_not_met_financial_services = DepartmentalSdbip.where("department_id = 2 AND performance_standard = 'KPI Not Met'")
-    @kpi_almost_met_financial_services = DepartmentalSdbip.where("department_id = 2 AND performance_standard = 'KPI Almost Met'")
-    @kpi_met_financial_services = DepartmentalSdbip.where("department_id = 2 AND performance_standard = 'KPI Met'")
-    @kpi_well_met_financial_services = DepartmentalSdbip.where("department_id = 2 AND performance_standard = 'KPI Well Met'")
-    @kpi_extremely_well_met_financial_services = DepartmentalSdbip.where("department_id = 2 AND performance_standard = 'KPI Extremely Well Met'")
-
-    @kpi_not_met_community_services = DepartmentalSdbip.where("department_id = 3 AND performance_standard = 'KPI Not Met'")
-    @kpi_almost_met_community_services = DepartmentalSdbip.where("department_id = 3 AND performance_standard = 'KPI Almost Met'")
-    @kpi_met_community_services = DepartmentalSdbip.where("department_id = 3 AND performance_standard = 'KPI Met'")
-    @kpi_well_met_community_services = DepartmentalSdbip.where("department_id = 3 AND performance_standard = 'KPI Well Met'")
-    @kpi_extremely_well_met_community_services = DepartmentalSdbip.where("department_id = 3 AND performance_standard = 'KPI Extremely Well Met'")
-
-    @kpi_not_met_corporate_services = DepartmentalSdbip.where("department_id = 4 AND performance_standard = 'KPI Not Met'")
-    @kpi_almost_met_corporate_services = DepartmentalSdbip.where("department_id = 4 AND performance_standard = 'KPI Almost Met'")
-    @kpi_met_corporate_services = DepartmentalSdbip.where("department_id = 4 AND performance_standard = 'KPI Met'")
-    @kpi_well_met_corporate_services = DepartmentalSdbip.where("department_id = 4 AND performance_standard = 'KPI Well Met'")
-    @kpi_extremely_well_met_corporate_services = DepartmentalSdbip.where("department_id = 4 AND performance_standard = 'KPI Extremely Well Met'")
-
-    @kpi_not_met_technical_services = DepartmentalSdbip.where("department_id = 5 AND performance_standard = 'KPI Not Met'")
-    @kpi_almost_met_technical_services = DepartmentalSdbip.where("department_id = 5 AND performance_standard = 'KPI Almost Met'")
-    @kpi_met_technical_services = DepartmentalSdbip.where("department_id = 5 AND performance_standard = 'KPI Met'")
-    @kpi_well_met_technical_services = DepartmentalSdbip.where("department_id = 5 AND performance_standard = 'KPI Well Met'")
-    @kpi_extremely_well_met_technical_services = DepartmentalSdbip.where("department_id = 5 AND performance_standard = 'KPI Extremely Well Met'")
-
-    @kpi_not_met_planning_and_development = DepartmentalSdbip.where("department_id = 6 AND performance_standard = 'KPI Not Met'")
-    @kpi_almost_met_planning_and_development = DepartmentalSdbip.where("department_id = 6 AND performance_standard = 'KPI Almost Met'")
-    @kpi_met_planning_and_development = DepartmentalSdbip.where("department_id = 6 AND performance_standard = 'KPI Met'")
-    @kpi_well_met_planning_and_development = DepartmentalSdbip.where("department_id = 6 AND performance_standard = 'KPI Well Met'")
-    @kpi_extremely_well_met_planning_and_development = DepartmentalSdbip.where("department_id = 6 AND performance_standard = 'KPI Extremely Well Met'")
-
-    @kpi_not_met_basic_service_delivery = DepartmentalSdbip.where("kpa_id = 1 AND performance_standard = 'KPI Not Met'")
-    @kpi_almost_met_basic_service_delivery = DepartmentalSdbip.where("kpa_id = 1 AND performance_standard = 'KPI Almost Met'")
-    @kpi_met_basic_service_delivery = DepartmentalSdbip.where("kpa_id = 1 AND performance_standard = 'KPI Met'")
-    @kpi_well_met_basic_service_delivery  = DepartmentalSdbip.where("kpa_id = 1 AND performance_standard = 'KPI Well Met'")
-    @kpi_extremely_well_met_basic_service_delivery= DepartmentalSdbip.where("kpa_id = 1 AND performance_standard = 'KPI Extremely Well Met'")
-
-    @kpi_not_met_good_governance = DepartmentalSdbip.where("kpa_id = 2 AND performance_standard = 'KPI Not Met'")
-    @kpi_almost_met_good_governance = DepartmentalSdbip.where("kpa_id = 2 AND performance_standard = 'KPI Almost Met'")
-    @kpi_met_good_governance = DepartmentalSdbip.where("kpa_id = 2 AND performance_standard = 'KPI Met'")
-    @kpi_well_met_good_governance  = DepartmentalSdbip.where("kpa_id = 2 AND performance_standard = 'KPI Well Met'")
-    @kpi_extremely_well_met_good_governance = DepartmentalSdbip.where("kpa_id = 2 AND performance_standard = 'KPI Extremely Well Met'")
-
-    @kpi_not_met_economic_development = DepartmentalSdbip.where("kpa_id = 3 AND performance_standard = 'KPI Not Met'")
-    @kpi_almost_met_economic_development = DepartmentalSdbip.where("kpa_id = 3 AND performance_standard = 'KPI Almost Met'")
-    @kpi_met_economic_development = DepartmentalSdbip.where("kpa_id = 3 AND performance_standard = 'KPI Met'")
-    @kpi_well_met_economic_development  = DepartmentalSdbip.where("kpa_id = 3 AND performance_standard = 'KPI Well Met'")
-    @kpi_extremely_well_met_economic_development = DepartmentalSdbip.where("kpa_id = 2 AND performance_standard = 'KPI Extremely Well Met'")
-
-    @kpi_not_met_financial_viability = DepartmentalSdbip.where("kpa_id = 4 AND performance_standard = 'KPI Not Met'")
-    @kpi_almost_met_financial_viability = DepartmentalSdbip.where("kpa_id = 4 AND performance_standard = 'KPI Almost Met'")
-    @kpi_met_financial_viability = DepartmentalSdbip.where("kpa_id = 4 AND performance_standard = 'KPI Met'")
-    @kpi_well_met_financial_viability  = DepartmentalSdbip.where("kpa_id = 4 AND performance_standard = 'KPI Well Met'")
-    @kpi_extremely_well_met_financial_viability = DepartmentalSdbip.where("kpa_id = 4 AND performance_standard = 'KPI Extremely Well Met'")
-
-    @kpi_not_met_municipal_transformation = DepartmentalSdbip.where("kpa_id = 5 AND performance_standard = 'KPI Not Met'")
-    @kpi_almost_met_municipal_transformation = DepartmentalSdbip.where("kpa_id = 5 AND performance_standard = 'KPI Almost Met'")
-    @kpi_met_municipal_transformation = DepartmentalSdbip.where("kpa_id = 5 AND performance_standard = 'KPI Met'")
-    @kpi_well_met_municipal_transformation = DepartmentalSdbip.where("kpa_id = 5 AND performance_standard = 'KPI Well Met'")
-    @kpi_extremely_well_met_municipal_transformation = DepartmentalSdbip.where("kpa_id = 5 AND performance_standard = 'KPI Extremely Well Met'")
-
     selected_array_of_values = selected_values
     @selected_headers = selected_headings
     @departmental_sdbip_progresses = @sdbip_progresses
@@ -240,7 +164,7 @@ class DepartmentalSdbipProgressesController < ApplicationController
       end
 
       if !params[:data_value].blank? && params[:data_value].to_i > 0
-          @department = Department.includes(:subdepartments,:departmental_sdbips).find(params[:data_value].to_i).order('departmental_sdbips.performance_standard asc')
+          @department = Department.includes(:subdepartments,:departmental_sdbips).find(params[:data_value].to_i)#.order('departmental_sdbips.performance_standard asc')
           @departmental_sdbips = @department.departmental_sdbips.order('departmental_sdbips.performance_standard asc')
       end
 

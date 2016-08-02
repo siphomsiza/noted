@@ -1,4 +1,4 @@
-<% provide(:title, 'Departmental SDBIP Progresses') %>
+<% provide(:title, 'Reports') %>
 <script>
 $(function() {
 	//highlight the current nav
@@ -47,13 +47,21 @@ $("input[name='audit_checkbox']").click(function() {
 	$("#current-selected-columns").val(JSON.stringify(audit_selected_columns));
 });
 
-var report_selected_columns = [];
+var report_selected_columns,project_selected_columns = [];
 $("input[name='select_info']").click(function() {
 	if($("input[name='select_info']").prop("checked") == true) {
 		report_selected_columns.push($(this).val());
 	}
 	unique(report_selected_columns);
 	$("#current-report-selected-columns").val(JSON.stringify(report_selected_columns));
+});
+
+$("input[name='project_info']").click(function() {
+	if($("input[name='project_info']").prop("checked") == true) {
+		project_selected_columns.push($(this).val());
+	}
+	unique(project_selected_columns);
+	$("#current-project-selected-columns").val(JSON.stringify(project_selected_columns));
 });
 
 //Evaluate and Eliminate multiple occurences of an array element

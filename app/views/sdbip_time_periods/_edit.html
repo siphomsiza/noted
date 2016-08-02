@@ -58,9 +58,11 @@
       <fieldset>
         <legend><%= f.label :Secondary %>
           <% if @sdbip_time_period.secondary_status? %>
+          <div class="col pull-right">
           <%= link_to controller: :sdbip_time_periods, action: :close_secondary, id: @sdbip_time_period.id, method: :post,class: 'btn btn-sm pull-right' do %>
               Close
           <% end %>
+        </div>
           <% end %>
         </legend>
         <section class="row">
