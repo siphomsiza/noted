@@ -2,7 +2,7 @@
   <% @departmental_sdbip.kpi_results.each do |kpi_result| %>
     <% @departmental_sdbip.assurances.where(kpi_result_id: kpi_result.id).each do |assurance_result| %>
       <% if assurance_result.signed_off? %>
-          <span class="glyphicon glyphicon-ok-circe limegreen"></span>
+          <span class="glyphicon glyphicon-ok-circle limegreen"></span>
       <% elsif !assurance_result.signed_off? %>
           <span class="glyphicon glyphicon-remove-sign red"></span>
       <% else %>
