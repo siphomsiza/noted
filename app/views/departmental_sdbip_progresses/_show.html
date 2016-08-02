@@ -24,8 +24,8 @@
        <table class="table table-striped table-responsive table-hover table-bordered">
          <tr>
          <th colspan="1" rowspan="2"></th>
-         <th colspan="1" rowspan="2"><h4><%= @department.name %></h4></th>
-         <th colspan="<%= @department.subdepartments.count %>" scope="colgroup"><h4>Sub-Department</h4></th>
+         <th colspan="1" rowspan="2"><%= @department.name %></th>
+         <th colspan="<%= @department.subdepartments.count %>" scope="colgroup">Sub-Department</th>
          </tr>
          <tr>
            <% @department.subdepartments.each do |subdepartment| %>
