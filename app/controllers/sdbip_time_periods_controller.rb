@@ -120,6 +120,15 @@ class SdbipTimePeriodsController < ApplicationController
   end
   end
 
+  def update_deadline
+    selected_month_value = params[:selected_month].strftime("%m")
+    @sdbip_time_period = SdbipTimePeriod.where("extract (month from period) = ?" selected_month_value)
+    if @sdbip_time_period.update_columns(primary_closure: params[:data_value])
+      redirect_to :back
+    else
+      redirect_to :back
+    end
+  end
   def update
       @sdbip_time_period = SdbipTimePeriod.find(params[:id])
     if @sdbip_time_period.update_attributes(sdbip_time_period_params)
@@ -127,7 +136,7 @@ class SdbipTimePeriodsController < ApplicationController
       @secondary_users = User.includes(:role).where(roles:{finance_admin: true,top_layer_administrator: true,secondary_time_period: true})
 
       #reminder_date = (@sdbip_time_period.primary_reminder - Date.now)* 24 * 60
-      SendTimePeriodReminderEmailJob.set(wait: reminder_date.minutes).perform_later(@primary_users)
+      SendTimePeriodReminderEmailJob.set(wait: 30.seconds).perform_later
       flash[:success]="Sdbip Time Period was successfully updated."
       redirect_to sdbip_time_periods_path
     else

@@ -50,7 +50,7 @@
           <td>
 
             <%= departmental_sdbip.kpi_ref_number %>
-            
+
           </td>
 
           <td>
@@ -109,12 +109,12 @@
                           <span class="glyphicon glyphicon-ok-circle limegreen"></span>
                         <% end %>
                   <% else %>
-                        <%= link_to audit_performance_path(departmental_sdbip),remote: true,'data-target' => "#audit-sdbip-modal", 'data-toggle' => 'modal' do %>
+                        <%= link_to audit_performance_path(departmental_sdbip),remote: true,'data-target' => "#audit-sdbip-modal", :title=>"This KPI has been Signed Off.", 'data-toggle' => 'modal' do %>
                           <span class="glyphicon glyphicon-remove-sign red"></span>
                         <% end %>
                   <% end %>
                 <% else %>
-                  <%= link_to audit_performance_path(departmental_sdbip),remote: true,'data-target' => "#audit-sdbip-modal", 'data-toggle' => 'modal' do %>
+                  <%= link_to audit_performance_path(departmental_sdbip),remote: true,'data-target' => "#audit-sdbip-modal", :title=>"This KPI has been Rejected", 'data-toggle' => 'modal' do %>
                       <span class="glyphicon glyphicon-minus-sign orange"></span>
                   <% end %>
                 <% end %>
@@ -127,7 +127,7 @@
       <% end %>
       </tbody>
     </table>
-  
+
   </div>
   <%= will_paginate @departmental_sdbips %>
 </div>
