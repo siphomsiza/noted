@@ -311,6 +311,7 @@ ActiveRecord::Schema.define(version: 20160731141316) do
 
   create_table "master_setups", force: :cascade do |t|
     t.string   "municipality", null: false
+    t.binary   "logo",         null: false
     t.string   "company_code", null: false
     t.string   "province",     null: false
     t.datetime "created_at",   null: false

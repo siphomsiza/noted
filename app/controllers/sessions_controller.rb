@@ -4,7 +4,13 @@ class SessionsController < ApplicationController
   end
 
   def create
-    #company_code = MasterSetup.find_by(company_code: params[:session][:company_code])
+    company_code = MasterSetup.find_by(company_code: params[:session][:company_code])
+    #if !company_code.blank?
+    #  establish_connection "development"
+    #else
+    #  flash[:danger] = "Wrong information provided..."
+    #  redirect_to(:back) and return
+    #end
     user = User.find_by(email: params[:session][:email].downcase)
     if user && user.authenticate(params[:session][:password])
       if user.activated? && !user.terminated? && user.login_attempts < user.max_login_attempts
