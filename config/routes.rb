@@ -93,6 +93,7 @@ Rails.application.routes.draw do
   get 'departmental_sdbip_progresses/generate_graphs' => 'departmental_sdbip_progresses#generate_graphs', :as => :generate_graphs
 
   post 'sdbip_time_periods/update_time_periods' => 'sdbip_time_periods#update_time_periods', :as => :update_time_periods
+  post 'sdbip_time_periods/update_deadline' => 'sdbip_time_periods#update_deadline', :as => :update_deadline
   get 'sdbip_time_periods/close_primary' => 'sdbip_time_periods#close_primary', :as => :close_primary
   get 'sdbip_time_periods/close_secondary' => 'sdbip_time_periods#close_secondary', :as => :close_secondary
   get 'sdbip_time_periods/close_finance' => 'sdbip_time_periods#close_finance', :as => :close_finance

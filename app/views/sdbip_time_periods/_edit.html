@@ -31,21 +31,23 @@
           <% if @sdbip_time_period.primary_status? %>
         <section class="row">
         <label class="col col-lg-4 control-label" for="reminder">Reminder</label>
-          <div class="form-group controls col col-lg-8">
+        <div class="controls col col-lg-8">
+          <div class="form-group">
             <div class="input-group date" data-provide="datepicker"
-                 data-date-format="dd-mm-yyyy" data-date-start-view="days" data-date-min-view-mode="days">
+                 data-date-format="yyyy-mm-dd" data-date-start-view="years" data-date-min-view-mode="days">
               <%= f.text_field :primary_reminder,  class: "form-control" %>
               <span class="input-group-addon">
                 <span class="glyphicon glyphicon-calendar"></span>
               </span>
             </div>
           </div>
+        </div>
         </section><!-- row -->
         <section class="row">
           <label class="col col-lg-4 control-label" for="closure">Closure</label>
           <div class="form-group controls col col-lg-8">
             <div class="input-group date" data-provide="datepicker"
-                 data-date-format="dd-mm-yyyy" data-date-start-view="days" data-date-min-view-mode="days">
+                 data-date-format="yyyy-mm-dd" data-date-start-view="years" data-date-min-view-mode="days">
               <%= f.text_field :primary_closure,  class: "form-control" %>
               <span class="input-group-addon">
                 <span class="glyphicon glyphicon-calendar"></span>
@@ -80,7 +82,7 @@
         <label class="col col-lg-4 control-label" for="reminder">Reminder</label>
           <div class="form-group controls col col-lg-8">
             <div class="input-group date" data-provide="datepicker"
-                 data-date-format="dd-mm-yyyy" data-date-start-view="days" data-date-min-view-mode="days">
+                 data-date-format="yyyy-mm-dd" data-date-start-view="years" data-date-min-view-mode="days">
               <%= f.text_field :secondary_reminder,  class: "form-control" %>
               <span class="input-group-addon">
                 <span class="glyphicon glyphicon-calendar"></span>
@@ -92,7 +94,7 @@
           <label class="col col-lg-4 control-label" for="closure">Closure</label>
           <div class="form-group controls col col-lg-8">
             <div class="input-group date" data-provide="datepicker"
-                 data-date-format="dd-mm-yyyy" data-date-start-view="days" data-date-min-view-mode="days">
+                 data-date-format="yyyy-mm-dd" data-date-start-view="years" data-date-min-view-mode="days">
               <%= f.text_field :secondary_closure,  class: "form-control" %>
               <span class="input-group-addon">
                 <span class="glyphicon glyphicon-calendar"></span>
@@ -123,7 +125,7 @@
         <label class="col col-lg-4 control-label" for="reminder">Reminder</label>
           <div class="form-group controls col col-lg-8">
             <div class="input-group date" data-provide="datepicker"
-                 data-date-format="dd-mm-yyyy" data-date-start-view="days" data-date-min-view-mode="days">
+                 data-date-format="yyyy-mm-dd" data-date-start-view="years" data-date-min-view-mode="days">
               <%= f.text_field :finance_reminder,  class: "form-control" %>
               <span class="input-group-addon">
                 <span class="glyphicon glyphicon-calendar"></span>
@@ -135,7 +137,7 @@
           <label class="col col-lg-4 control-label" for="closure">Closure</label>
           <div class="form-group controls col col-lg-8">
             <div class="input-group date" data-provide="datepicker"
-                 data-date-format="dd-mm-yyyy" data-date-start-view="days" data-date-min-view-mode="days">
+                 data-date-format="yyyy-mm-dd" data-date-start-view="years" data-date-min-view-mode="days">
               <%= f.text_field :finance_closure,  class: "form-control" %>
               <span class="input-group-addon">
                 <span class="glyphicon glyphicon-calendar"></span>

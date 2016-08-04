@@ -37,3 +37,21 @@
 <%= f.hidden_field :_destroy %>
 
 <% end %>
+<script>
+var closure_date,current_month;
+current_month = new Date();
+$("#update-time-period" ).focusout(function() {
+    closure_date = $("#update-time-period" ).val();
+  })
+  .blur(function() {
+    closure_date = $("#update-time-period" ).val();
+  });
+  $('#submit_button').click(function() {
+    alert("button clicked");
+  $.ajax({
+       url : "/sdbip_time_periods/update_deadline",
+       type : "get",
+       data : { data_value: closure_date,selected_month: current_month }
+   });
+   });
+</script>
