@@ -1,5 +1,5 @@
 <div class="table-responsive">
-  <table class="table table-striped table-bordered table-hover" id="sdbips-table">
+  <table class="table table-striped table-bordered table-hover departmental-sdbip-edit" id="sdbips-table">
       <tr>
         <th class="ref">Ref</th>
         <th class="department">Department</th>
@@ -108,7 +108,7 @@
 
         <td class="mscore-classification"><%= departmental_sdbip.mscore_classification.name %></td>
         <td class="national-outcome"><% if !departmental_sdbip.national_outcome_id.blank? %><%= departmental_sdbip.national_outcome.name %><% end %></td>
-        <td class="strategic-objectives"><%= departmental_sdbip.strategic_objective.name %></td>
+        <td class="strategic-objectives"><% if !departmental_sdbip.strategic_objective_id.blank? %><%= departmental_sdbip.strategic_objective.name %><% end %></td>
         <td class="baseline"><%= departmental_sdbip.baseline %></td>
         <td class="budget"><%= departmental_sdbip.budget %></td>
         <td class="performance-standard"><%= departmental_sdbip.performance_standard %></td>

@@ -107,7 +107,7 @@
 
         <td><%= departmental_sdbip.mscore_classification.name %></td>
         <td><% if !departmental_sdbip.national_outcome_id.blank? %><%= departmental_sdbip.national_outcome.name %><% end %></td>
-        <td><%= departmental_sdbip.strategic_objective.name %></td>
+        <td><% if !departmental_sdbip.strategic_objective_id.blank? %><%= departmental_sdbip.strategic_objective.name %><% end %></td>
         <td><%= departmental_sdbip.baseline %></td>
         <td><%= departmental_sdbip.budget %></td>
         <td><%= departmental_sdbip.performance_standard %></td>

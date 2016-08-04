@@ -343,15 +343,15 @@ input {
 }
 
 /****** Misc ******/
-#accordion, #accordion a {
+#accordion, #accordion a,#view_sdbips a {
   color: $deepblue;
 }
 
-#about-section a,#about-section-1 a{
+#about-section a,#about-section-1 a, #view_sdbips a{
   color: $deepblue;
   background-color: white;
 }
-#about-section a:hover,#about-section-1 a:hover{
+#about-section a:hover,#about-section-1 a:hover, #view_sdbips a:hover{
   color: $deepblue;
 }
 #active_users a,

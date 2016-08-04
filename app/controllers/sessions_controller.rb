@@ -1,12 +1,10 @@
 class SessionsController < ApplicationController
-#load_and_authorize_resource
-#skip_before_filter  :verify_authenticity_token
-
   def new
     redirect_to introduction_url unless !session[:user_id]
   end
 
   def create
+    #company_code = MasterSetup.find_by(company_code: params[:session][:company_code])
     user = User.find_by(email: params[:session][:email].downcase)
     if user && user.authenticate(params[:session][:password])
       if user.activated? && !user.terminated? && user.login_attempts < user.max_login_attempts

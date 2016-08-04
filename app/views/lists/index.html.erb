@@ -182,8 +182,16 @@ $(function() {
 				            <div id="collapseKOT" class="panel-collapse collapse">
 				                <div class="panel-body">
 				                    <% KpiOwner.all.each do |kpi_owner| %>
-  														<li><%= kpi_owner.name %></li>
+  														<li>
+															<%= link_to edit_kpi_owner_title_path(kpi_owner),remote: true,'data-target' => "#edit-kpi-owner-title-modal", 'data-toggle' => 'modal', :title=>"Click to Update" do %>
+															<span><%= kpi_owner.name %></li></span>
+
 														<% end %>
+														</li>
+													<% end %>
+													<div id="edit-kpi-owner-title-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+
+													</div>
 				                </div>
 				            </div>
 				        </div>
