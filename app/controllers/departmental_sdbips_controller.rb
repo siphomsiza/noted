@@ -142,6 +142,7 @@ end
     redirect_to departmental_sdbips_path
   end
   def show
+    @time_periods = SdbipTimePeriod.all
     @departmental_sdbip = DepartmentalSdbip.find(params[:id])
   end
 
@@ -169,6 +170,7 @@ end
   end
 
   def audit_performance
+    @time_periods = SdbipTimePeriod.all
      @departmental_sdbip = DepartmentalSdbip.find(params[:id])
      if @departmental_sdbip.assurances.where("extract(month from created_at) = ? AND extract(year from created_at) = ? AND departmental_sdbip_id = ? ",Date.today.month,Date.today.year,@departmental_sdbip.id).any?
      else
@@ -176,6 +178,7 @@ end
      end
   end
   def edit
+    @time_periods = SdbipTimePeriod.all
     @departmental_sdbip = DepartmentalSdbip.find(params[:id])
     if @departmental_sdbip.kpi_results.where("extract(month from period) = ? AND extract(year from period) = ? AND departmental_sdbip_id = ? ",Date.today.month,Date.today.year,@departmental_sdbip.id).any?
     else
@@ -184,6 +187,7 @@ end
   end
 
   def edit_kpis
+    @time_periods = SdbipTimePeriod.all
     @departmental_sdbip = DepartmentalSdbip.find(params[:id])
   end
 

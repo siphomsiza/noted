@@ -79,6 +79,20 @@
       </div>
     </td>
   </tr>
+
+  <tr>
+    <th>KPI Owner Title(s)</th><td></td>
+    <td>
+      <%= link_to new_kpi_owner_path,remote: true,'data-target' => "#kpi-owner-modal", 'data-toggle' => 'modal', class: "btn btn-sm" do %>
+        <span class="glyphicon glyphicon-wrench"></span>&nbsp;Configure
+      <% end %>
+
+      <div id="kpi-owner-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+
+      </div>
+    </td>
+  </tr>
+
   <tr>
     <th>KPI Target Type(s)</th><td></td>
     <td>
