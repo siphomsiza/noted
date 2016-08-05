@@ -87,13 +87,6 @@ class User < ActiveRecord::Base
   def password_reset_expired?
     reset_sent_at < 2.hours.ago
   end
-  def self.search(search)
-  if search
-    find(['firstname LIKE ? OR surname LIKE', "%#{search}%","%#{search}%"])
-  else
-
-  end
-  end
   def self.sweep(time = "20 minutes")
       if time.is_a?(String)
         time = time.split.inject { |count, unit| count.to_i.send(unit) }

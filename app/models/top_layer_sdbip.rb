@@ -1,18 +1,19 @@
 class TopLayerSdbip < ActiveRecord::Base
   include PublicActivity::Common
   belongs_to :department
-  has_one :mscore_classification
-  has_one :national_outcome
-  has_one :kpi_target_type
-  has_one :kpa
-  has_one :predetermined_objective
-  has_one :strategic_objective
+  belongs_to :mscore_classification
+  belongs_to :national_outcome
+  belongs_to :kpi_target_type
+  belongs_to :kpa
+  belongs_to :predetermined_objective
+  belongs_to :strategic_objective
   belongs_to :ndp_objective
-  has_one :ward
-  has_one :area
-  has_one :kpi_owner
-  has_one :mtas_indicator
-  has_one :kpi_calculation_type
+  belongs_to :ward
+  belongs_to :area
+  belongs_to :kpi_owner
+  belongs_to :mtas_indicator
+  belongs_to :kpi_calculation_type
+  belongs_to :kpi_target_type
 
   validates :department_id, :mtas_indicator_id, :mscore_classification_id, :national_outcome_id,:ndp_objective_id,
   :predetermined_objective_id, :strategic_objective_id,:kpa_id, :ward_id,:area_id, :kpi_owner_id, :kpi_calculation_type_id, :kpi_target_type_id, :presence => true

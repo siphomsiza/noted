@@ -4,7 +4,6 @@ class DepartmentalSdbip < ActiveRecord::Base
 	#tracked owner: ->(controller, model) { controller && controller.current_user }
 	belongs_to :department
 	has_many :activities
-	belongs_to :list
 	belongs_to :subdepartment
 	belongs_to :kpi_owner
 	belongs_to :predetermined_objective
@@ -468,6 +467,7 @@ end
 
 		end
 		if !end_date.blank? && end_date.length > 1
+	
 
 		end
 		@departmental_sdbips = @sdbips
