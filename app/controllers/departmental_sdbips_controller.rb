@@ -1,7 +1,8 @@
 class DepartmentalSdbipsController < ApplicationController
   #before_filter :authenticate
-  before_action :logged_in_user, only: [:index, :restore_kpi, :edit, :update,:show,:audit_performance,:generate_graphs]
-  before_action :admin_user,     only: [:new, :restore_kpi, :index,:edit,:update, :destroy,:show]
+  before_action :logged_in_user, only: [:edit_kpis,:index, :restore_kpi, :edit, :update,:show,:audit_performance]
+  before_action :admin_user,     only: [:edit_kpis,:new, :restore_kpi, :index,:edit,:update, :destroy,:show]
+  before_action :correct_user, only: [:edit_kpis,:index, :restore_kpi, :edit, :update,:show,:audit_performance]
   def index
     begin
 
@@ -17,7 +18,7 @@ class DepartmentalSdbipsController < ApplicationController
     flash[:notice] = "received Exception #{e.message}"
     puts "received Exception #{e}"
   end
-    @departmental_sdbip = DepartmentalSdbip.new
+        @departmental_sdbip = DepartmentalSdbip.new
     @departments = Department.includes(:subdepartments)
     @deleted_kpis =  DepartmentalKpi.paginate(page: params[:page],per_page: 10)
     @departmental_sdbips_to_file = DepartmentalSdbip.order(:department_id,:subdepartment_id)
@@ -47,7 +48,11 @@ class DepartmentalSdbipsController < ApplicationController
                 @departmental_sdbipsrtmental_sdbips = @departmental_sdbips.paginate(page: params[:page],per_page: 10)
               end
         elsif current_user.role.kpi_owner? && current_user.subdepartmental_administrator.blank?
-                kpi_id = current_user.role.kpi_owner_id
+                if current_user.kpi_owners.any?
+                  current_user.kpi_owners.each do |kpi_owner|
+                      kpi_id = kpi_owner.id
+                  end
+                end
                 @departmental_sdbips = DepartmentalSdbip.search_subdepartment_kpis(params[:kpi_id],params[:department_id],params[:subdepartment_id],params[:kpi_type_id],params[:start_date],params[:end_date])#.includes(:capital_project,:department,:subdepartment,:kpi_type,:kpi_owner,:kpi_concept,:kpi_calculation_type,:mscore_classification,:kpa,:strategic_objective,:national_outcome,:ward,:area,:reporting_category,:ndp_objective,:risk_rating)
                 if !@departmental_sdbips.blank?
                   @departmental_sdbips = @departmental_sdbips.paginate(page: params[:page],per_page: 10)
@@ -74,7 +79,11 @@ class DepartmentalSdbipsController < ApplicationController
                 @departmental_sdbips = DepartmentalSdbip.paginate(:per_page => 10, :page => params[:page]).includes(:capital_project,:department,:subdepartment,:kpi_type,:kpi_owner,:kpi_concept,:kpi_calculation_type,:mscore_classification,:kpa,:strategic_objective,:national_outcome,:ward,:area,:reporting_category,:ndp_objective,:risk_rating,:kpi_results,:assurances)
 
               elsif current_user.role.kpi_owner? && current_user.departmental_administrator.blank?
-                kpi_id = current_user.role.kpi_owner_id
+                if current_user.kpi_owners.any?
+                  current_user.kpi_owners.each do |kpi_owner|
+                      kpi_id = kpi_owner.id
+                  end
+                end
                 @departmental_sdbips = DepartmentalSdbip.where(kpi_owner_id: kpi_id).paginate(:per_page => 10, :page => params[:page]).includes(:capital_project,:department,:subdepartment,:kpi_type,:kpi_owner,:kpi_concept,:kpi_calculation_type,:mscore_classification,:kpa,:strategic_objective,:national_outcome,:ward,:area,:reporting_category,:ndp_objective,:risk_rating)
 
               elsif !current_user.role.kpi_owner? && !current_user.departmental_administrator.blank?
@@ -85,7 +94,11 @@ class DepartmentalSdbipsController < ApplicationController
 
               elsif current_user.role.kpi_owner? && current_user.subdepartmental_administrator.blank?
                 kpi_id = nil
-                  kpi_id = current_user.role.kpi_owner_id
+                if current_user.kpi_owners.any?
+                  current_user.kpi_owners.each do |kpi_owner|
+                    kpi_id = kpi_owner.id
+                  end
+                end
 
                 @departmental_sdbips = DepartmentalSdbip.where(kpi_owner_id: kpi_id).paginate(:per_page => 10, :page => params[:page]).includes(:capital_project,:department,:subdepartment,:kpi_type,:kpi_owner,:kpi_concept,:kpi_calculation_type,:mscore_classification,:kpa,:strategic_objective,:national_outcome,:ward,:area,:reporting_category,:ndp_objective,:risk_rating)
 
@@ -249,7 +262,7 @@ end
           :kpi_owner_id, :baseline, :past_year_performance,
           :performance_standard, :proof_of_evidence, :mtas_indicator,
           :reporting_category_id, :provincial_strategic_outcome_id,
-          :source_of_evidence, :target, :annual_target,:first_quarter_target,:second_quarter_target,:third_quarter_target,:fourth_quarter_target,:first_quarter_actual,:second_quarter_actual,:third_quarter_actual,:fourth_quarter_actual,:first_quarter_poe,:second_quarter_poe,:third_quarter_poe,:fourth_quarter_poe, :budget, :impact, :top_layer_kpi_ref,
+          :source_of_evidence, :target, :annual_target,:first_quarter_target,:second_quarter_target,:third_quarter_target,:fourth_quarter_target,:first_quarter_actual,:second_quarter_actual,:third_quarter_actual,:fourth_quarter_actual,:first_quarter_poe,:second_quarter_poe,:third_quarter_poe,:fourth_quarter_poe, :budget, :impact, :top_layer_kpi_ref,:mtas_indicator_id,
            :kpi_calculation_type_id,
           :kpi_target_type_id, :annual_target, :revised_target, :assurances_attributes=>[:id,:user_id,:signed_off,:response,:kpi_result_id,:poe], :kpi_results_attributes => [:id,:target,:actual,:kpi_performance_standard,:user_id,:performance_comments,:corrective_measures,:_destroy,:period,:attachments_attributes => [ :id,:poe,:_destroy]])
     end
@@ -266,11 +279,12 @@ end
       end
     # Confirms an admin user.
     def admin_user
-      redirect_to(root_url) unless current_user.admin?# || correct_user?
+      #redirect_to(root_url) unless
+      current_user.admin?# || correct_user?
     end
-    def
     def correct_user
-       !current_user.role.blank? && (current_user.role.audit_log_reporting? || current_user.role.assurance_provider? || !current_user.kpi_owner.blank? && current_user.role.kpi_owner? || !current_user.departmental_administrator.blank? || !current_user.subdepartmental_administrator.blank? )
+       redirect_to(root_url) unless !current_user.role.blank? || current_user.admin?#!current_user.role.blank? && (current_user.role.audit_log_reporting? || current_user.role.assurance_provider? || !current_user.kpi_owner.blank? && current_user.role.kpi_owner? || !current_user.departmental_administrator.blank? || !current_user.subdepartmental_administrator.blank? )
     end
+
 
 end

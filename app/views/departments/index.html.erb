@@ -6,7 +6,7 @@ $(function() {
 }); //jQuery is loaded
 </script>
 <div class="row">
-<div class="col col-lg-">
+<div class="col col-lg-12">
 	<%= render 'layouts/municipality' %>
 <ul class="nav nav-pills nav-justified">
 <li><%= link_to "Master Setup", master_setups_path %></li>
@@ -24,7 +24,7 @@ $(function() {
 		</div>
 	</div>
  <div class="row">
-
+	 <div class="col col-lg-12">
             <div class="tabbable tabs third-level-navs" id="departments-tabs">
               <ul id = "myTab" class = "nav nav-tabs">
 
@@ -36,9 +36,14 @@ $(function() {
                 </li>
               </ul><!-- nav nav-tabs -->
             </div><!-- tabbable tabs -->
+					</div>
+				</div>
+						<div class="row">
+							<div class="col col-lg-12">
     <div id = "myTabContent" class = "tab-content">
 
      <div class = "tab-pane active fade in" id = "departments">
+
       <table class="table table-hover table-striped">
           <tr>
           <th>&nbsp;</th>
@@ -90,5 +95,6 @@ $(function() {
 		<hr/>
 		<%= render 'form' %>
 	</div>
+</div>
 </div>
 </div>

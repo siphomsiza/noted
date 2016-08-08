@@ -41,7 +41,7 @@
                 <div id="user-role-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
 
                 </div>
-          <% elsif current_user.admin? && !current_user?(user) && !user.admin? && user.role.blank? %>
+          <% elsif current_user.admin? && !current_user?(user) && !user.admin? && user.role.blank? %> |
             <%= link_to new_user_role_path(:id=>user.id),remote: true,'data-target' => "#new-user-role-modal", 'data-toggle' => 'modal', class: "btn btn-sm", :title=>"Click to edit user access" do %>
                                 <span class="glyphicon glyphicon-edit"></span>&nbsp;Edit Access
                               <% end %>

@@ -31,6 +31,8 @@ class CapitalProjectsController < ApplicationController
   # GET /capital_projects/1
   # GET /capital_projects/1.json
   def show
+    @capital_project = CapitalProject.includes(:departmental_sdbip=>[:kpi_results]).find(params[:id])
+    @time_periods = SdbipTimePeriod.all
   end
 
   # GET /capital_projects/new
@@ -56,9 +58,11 @@ class CapitalProjectsController < ApplicationController
   end
   # GET /capital_projects/1/edit
   def edit
+    @time_periods = SdbipTimePeriod.all
   end
 
   def edit_capital_projects
+    @time_periods = SdbipTimePeriod.all
   end
 
   # POST /capital_projects

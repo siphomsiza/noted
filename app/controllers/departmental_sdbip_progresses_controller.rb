@@ -19,8 +19,7 @@ class DepartmentalSdbipProgressesController < ApplicationController
     flash[:notice] = "received Exception #{e.message}"
     puts "received Exception #{e}"
   end
-
-    selected_values = []
+      selected_values = []
     selected_headings = []
     if params[:selected_project_columns] && (params[:department_id] || params[:subdepartment_id])
         selected_audit_headers = params[:selected_project_columns]
@@ -158,21 +157,22 @@ class DepartmentalSdbipProgressesController < ApplicationController
       @graph_value = params[:data_value].to_i
       @include_sub_graphs = params[:include_sub_graph]
       if !params[:data_value].blank? && params[:data_value].to_i == 0
-        @departmental_sdbips = DepartmentalSdbip.includes(:department)
+        @departmental_sdbips = DepartmentalSdbip.all
         @departmental_sdbips_kpa = @departmental_sdbips
         @departments = Department.includes(:departmental_sdbips)
       end
 
       if !params[:data_value].blank? && params[:data_value].to_i > 0
-          @department = Department.includes(:subdepartments,:departmental_sdbips).find(params[:data_value].to_i)#.order('departmental_sdbips.performance_standard asc')
-          @departmental_sdbips = @department.departmental_sdbips.order('departmental_sdbips.performance_standard asc')
+          @department = Department.includes(:subdepartments,:departmental_sdbips).find(params[:data_value].to_i)
+          @departmental_sdbips = DepartmentalSdbip.where(department_id: params[:data_value])
       end
 
     if !@departmental_sdbips.blank?
       @departmental_sdbips = @departmental_sdbips.order(performance_standard: :asc)
       $colors = []
-      @departments_sdibps = DepartmentalSdbip.select(:performance_standard).uniq
-      @departments_sdibps.each do |color|
+      @sdbips_chart_theme = @departmental_sdbips.select(:performance_standard).uniq
+      @sdbips_chart_theme#.order(performance_standard: :asc)
+      @sdbips_chart_theme.each do |color|
       if color.performance_standard.include?("KPI Almost Met")
         $colors.push("orange")
       end
