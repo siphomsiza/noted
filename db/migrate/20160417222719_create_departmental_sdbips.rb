@@ -14,6 +14,7 @@ class CreateDepartmentalSdbips < ActiveRecord::Migration
       t.string :idp_ref
       t.integer :national_outcome_id
       t.integer :strategic_objective_id
+      t.integer :mtas_indicator_id
       t.integer  :kpi_target_type_id
       t.string :source_of_evidence
       t.string :baseline

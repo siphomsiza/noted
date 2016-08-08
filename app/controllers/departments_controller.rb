@@ -20,7 +20,7 @@ class DepartmentsController < ApplicationController
     flash[:notice] = "received Exception #{e.message}"
     puts "received Exception #{e}"
   end
-    @department = Department.new
+      @department = Department.new
   	@departments = Department.includes(:subdepartments).paginate(page: params[:page],per_page: 10)
   end
 

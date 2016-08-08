@@ -16,7 +16,7 @@ class HeadingsController < ApplicationController
     flash[:notice] = "received Exception #{e.message}"
     puts "received Exception #{e}"
   end
-    @heading = Heading.new
+      @heading = Heading.new
     @general_headings = Heading.where(category: 'General').paginate( page: params[:page],per_page: 17)
     @headings = Heading.all
     @departmental_headings = Heading.where(category: 'Departmental SDBIP').paginate( page: params[:page],per_page: 17)

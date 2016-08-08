@@ -52,6 +52,9 @@
 		<%= f.label :strategic_objective_id, "Strategic Objectives" %><br>
 		<%= f.select :strategic_objective_id, StrategicObjective.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select Strategic Objective"}, class: "form-control" %>
 
+    <%= f.label :mtas_indicator_id, "Mtas Indicator" %><br>
+		<%= f.select :mtas_indicator_id, MtasIndicator.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select Mtas Indicator"}, class: "form-control" %>
+
 		<%= f.label :source_of_evidence, "Source of Evidence" %><br>
 
 		<%= f.text_field :source_of_evidence, :class => "form-control has-error col-md-5" %>

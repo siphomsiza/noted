@@ -19,11 +19,13 @@
 
   <body id="applicationmanifest">
 <div id="modal-holder"></div>
-		<section class="container">
+		<section class="container-fluid">
 			<div class="content row">
+        <div class="col col-lg-12">
         <% if logged_in? %>
           <%= render 'layouts/header' %>
         <% end %>
+      </div>
 				<div class="main col col-lg-12">
           <% flash.each do |message_type, message| %>
             <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>

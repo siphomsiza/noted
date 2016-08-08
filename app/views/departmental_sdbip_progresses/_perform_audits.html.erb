@@ -121,6 +121,16 @@
           </td>
           <% end %>
         <% else %>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>
+          <%= link_to audit_performance_path(departmental_sdbip),remote: true,'data-target' => "#audit-sdbip-modal", :title=>"This KPI has been Rejected", 'data-toggle' => 'modal' do %>
+              <span class="glyphicon glyphicon-minus-sign orange"></span>
+          <% end %>
+        </td>
         <% end %>
 
         </tr>

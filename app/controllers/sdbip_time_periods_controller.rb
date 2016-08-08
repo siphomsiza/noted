@@ -122,7 +122,7 @@ class SdbipTimePeriodsController < ApplicationController
 
   def update_deadline
     selected_month_value = params[:selected_month].strftime("%m")
-    @sdbip_time_period = SdbipTimePeriod.where("extract (month from period) = ?" selected_month_value)
+    @sdbip_time_period = SdbipTimePeriod.where("extract (month from period) = ?", selected_month_value)
     if @sdbip_time_period.update_columns(primary_closure: params[:data_value])
       redirect_to :back
     else

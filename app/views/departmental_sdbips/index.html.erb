@@ -40,7 +40,7 @@ $(function() {
 								<li class="active">
 									<a href = "#view_sdbips" data-toggle = "tab"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;View KPIs</a>
 								</li>
-								<% if current_user.admin? || (current_user.subdepartmental_administrator.blank? && current_user.subdepartmental_administrator.can_edit?) || (current_user.departmental_administrator.blank? && current_user.departmental_administrator.can_edit?) %>
+								<% if current_user.admin? || (!current_user.subdepartmental_administrator.blank? && current_user.subdepartmental_administrator.can_edit?) || (!current_user.departmental_administrator.blank? && current_user.departmental_administrator.can_edit?) %>
 								<li>
 									<a href = "#edit_kpis" data-toggle = "tab"><span class="glyphicon glyphicon-pencil"></span>&nbsp;Edit KPIs</a>
 								</li>
