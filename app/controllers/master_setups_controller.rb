@@ -83,7 +83,7 @@ class MasterSetupsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def master_setup_params
-      params.require(:master_setup).permit(:municipality,:logo,:company_code,:province, :regions_attributes => [ :id,:name,:_destroy])
+      params.require(:master_setup).permit(:municipality,:logo,:province, :regions_attributes => [ :id,:name,:_destroy])
     end
 
     def set_user
@@ -103,6 +103,6 @@ class MasterSetupsController < ApplicationController
 
     # Confirms an admin user.
     def admin_user
-      redirect_to(root_url) unless current_user.admin?
+      redirect_to(root_url) unless current_user.admin? || current_user.super_admin?
     end
 end

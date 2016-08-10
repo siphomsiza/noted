@@ -248,13 +248,13 @@ end
 
     # Confirms the correct user.
     def correct_user
-      @user = User.find(params[:id])
       # TO DO: Do this properly
-      #redirect_to(root_url) unless current_user?(@user)
+      #redirect_to(root_url) unless
+      current_user?(@user)
     end
 
     # Confirms an admin user.
     def admin_user
-      redirect_to(root_url) unless current_user.admin? || correct_user
+      redirect_to(root_url) unless current_user.admin? || correct_user || current_user.super_admin?
     end
 end

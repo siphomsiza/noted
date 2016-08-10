@@ -5,7 +5,6 @@ class CreateWards < ActiveRecord::Migration
       t.string :ward_no
       t.integer :area_id
       t.string :mun_ref
-
       t.timestamps null: false
     end
   end

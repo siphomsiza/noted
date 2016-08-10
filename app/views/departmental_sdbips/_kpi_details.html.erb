@@ -17,8 +17,11 @@
     </td>
   </tr>
   <tr>
-    <th>KPI Calculation Type</th><td><%= @departmental_sdbip.kpi_calculation_type.name %>
+    <th>KPI Calculation Type</th><td>
+    <% if !@departmental_sdbip.kpi_calculation_type_id.blank? %>
+      <%= @departmental_sdbip.kpi_calculation_type.name %>
     (<%= @departmental_sdbip.kpi_calculation_type.code %>)
+    <% end %>
   </td>
   </tr>
 </table>

@@ -15,7 +15,6 @@ class CreateRevenueBySources < ActiveRecord::Migration
       t.string :april
       t.string :may
       t.string :june
-
       t.timestamps null: false
     end
   end

@@ -26,8 +26,8 @@ class DepartmentalSdbipsController < ApplicationController
     @kpitypes = KpiType.all
     if params[:subdepartment_id]
 
-      if !current_user.role.blank? || current_user.admin?
-        if current_user.admin? || current_user.role.audit_log_reporting? || current_user.role.top_layer_administrator? || current_user.role.assurance_provider? || current_user.role.secondary_time_period? || current_user.role.finance_admin?
+      if !current_user.role.blank? || current_user.admin? || current_user.super_admin?
+        if current_user.admin? || current_user.super_admin? || current_user.role.audit_log_reporting? || current_user.role.top_layer_administrator? || current_user.role.assurance_provider? || current_user.role.secondary_time_period? || current_user.role.finance_admin?
             @departmental_sdbips = DepartmentalSdbip.search(params[:subdepartment_id],params[:kpi_type_id],params[:start_date],params[:end_date]).includes(:department,:subdepartment,:kpi_type,:kpi_owner,:mscore_classification,:national_outcome,:strategic_objective,:risk_rating,:kpa,:ndp_objective,:capital_project,:kpi_concept,:area,:ward,:reporting_category,:kpi_calculation_type)
               if !@departmental_sdbips.blank?
                @departmental_sdbips =  @departmental_sdbips.paginate(page: params[:page],per_page: 10)
@@ -75,7 +75,7 @@ class DepartmentalSdbipsController < ApplicationController
 
            if !current_user.role.blank? || current_user.admin?
 
-             if current_user.admin? || current_user.role.audit_log_reporting? || current_user.role.top_layer_administrator? || current_user.role.assurance_provider? || current_user.role.secondary_time_period? || current_user.role.finance_admin?
+             if current_user.admin? || current_user.super_admin? || current_user.role.audit_log_reporting? || current_user.role.top_layer_administrator? || current_user.role.assurance_provider? || current_user.role.secondary_time_period? || current_user.role.finance_admin?
                 @departmental_sdbips = DepartmentalSdbip.paginate(:per_page => 10, :page => params[:page]).includes(:capital_project,:department,:subdepartment,:kpi_type,:kpi_owner,:kpi_concept,:kpi_calculation_type,:mscore_classification,:kpa,:strategic_objective,:national_outcome,:ward,:area,:reporting_category,:ndp_objective,:risk_rating,:kpi_results,:assurances)
 
               elsif current_user.role.kpi_owner? && current_user.departmental_administrator.blank?

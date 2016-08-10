@@ -14,5 +14,5 @@ class CreateSdbipTimePeriods < ActiveRecord::Migration
       t.boolean :finance_status, :default => true
       t.timestamps null: false
     end
-  end  
+  end
 end

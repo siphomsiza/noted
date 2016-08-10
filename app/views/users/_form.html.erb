@@ -23,7 +23,6 @@
 
           </div><!-- controls -->
         </section><!-- row -->
-
         <section class="row">
           <label class="col col-lg-4 control-label" for="lastname">Surname</label>
           <div class="controls col col-lg-8">
@@ -242,6 +241,7 @@
 </div>
 <script>
 $(document).ready(function(){
+ 
   $("#user_last_name").blur(function() {
     if($("#user_first_name").val() != " "){
       $mystring= $("#user_first_name").val();

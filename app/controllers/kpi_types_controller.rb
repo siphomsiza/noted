@@ -30,7 +30,7 @@ class KpiTypesController < ApplicationController
         flash[:success] = 'KPI Type was successfully created.'
         redirect_to :back
       else
-        flash[:danger] = 'KPI Type was not created.' 
+        flash[:danger] = 'KPI Type was not created.'
         redirect_to :back
       end
   end

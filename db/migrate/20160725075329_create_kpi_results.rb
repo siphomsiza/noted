@@ -9,7 +9,6 @@ class CreateKpiResults < ActiveRecord::Migration
       t.text :corrective_measures
       t.text :performance_comments
       t.string :kpi_performance_standard
-
       t.timestamps null: false
     end
   end

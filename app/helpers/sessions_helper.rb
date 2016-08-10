@@ -10,7 +10,25 @@ module SessionsHelper
     cookies.permanent.signed[:user_id] = user.id
     cookies.permanent[:remember_token] = user.remember_token
   end
-
+  def set_up_database(company_code)
+    if company_code == "MKH001"
+      ActiveRecord::Base.establish_connection(DB1_CONF)
+      session[:session_database] = DB1_CONF
+    end
+    if company_code == "DEV001"
+      ActiveRecord::Base.establish_connection(:development)
+      session[:session_database] = :development
+    end
+    if company_code == "SAK001"
+      ActiveRecord::Base.establish_connection(DB2_CONF)
+      session[:session_database] = DB2_CONF
+    end
+    if company_code != "MKH001" && company_code != "SAK001" && company_code != "DEV001"
+      flash[:danger] = "wrong log on information provided..."
+      redirect_to(root_url) and return
+    end
+    $current_session_db = session[:session_database]
+  end
   # Returns true if the given user is the current user.
   def current_user?(user)
     user == current_user
@@ -45,6 +63,7 @@ module SessionsHelper
   def log_out
     forget(current_user)
     session.delete(:user_id)
+    session.delete(:session_database)
     @current_user = nil
   end
 

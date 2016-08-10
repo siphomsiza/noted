@@ -111,10 +111,15 @@ class PagesController < ApplicationController
 
     # Confirms the correct user.
     def top_layer_administrator
-      redirect_to(root_url) unless (!current_user.role.blank? && (current_user.role.top_layer_administrator? || current_user.role.assurance_provider? || current_user.role.audit_log_reporting? || current_user.role.secondary_time_period? )) || current_user.admin?
+      redirect_to(root_url) unless (!current_user.role.blank? && (current_user.role.top_layer_administrator? || current_user.role.assurance_provider? || current_user.role.audit_log_reporting? || current_user.role.secondary_time_period? )) || current_user.admin? || current_user.super_admin?
     end
     # Confirms an admin user.
     def admin_user
-      redirect_to(root_url) unless current_user.admin? || top_layer_administrator
+      #redirect_to(root_url) unless
+      current_user.admin# || current_user.super_admin? || top_layer_administrator
+    end
+    def super_admin_user
+      #redirect_to(root_url) unless
+      current_user.super_admin?
     end
 end

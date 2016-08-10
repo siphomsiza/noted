@@ -15,7 +15,7 @@ $(function() {
 
 <li><%= link_to "Departmental SDBIP", departmental_sdbips_path %></li>
 
-<% if current_user.admin? %>
+<% if current_user.admin? || current_user.super_admin? %>
 <li><%= link_to "Top Layer SDBIP", top_layer_sdbips_path %></li>
 <li class="active"><%= link_to "Capital Projects", capital_projects_path %></li>
 

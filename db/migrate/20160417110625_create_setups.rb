@@ -11,7 +11,6 @@ class CreateSetups < ActiveRecord::Migration
       t.boolean :include_toplayer_next_target, default: false
       t.boolean :include_toplayer_previous_comments, default: false
       t.boolean :attach_poe, default: false
-
       t.timestamps null: false
     end
   end

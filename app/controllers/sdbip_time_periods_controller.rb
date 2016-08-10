@@ -157,7 +157,7 @@ class SdbipTimePeriodsController < ApplicationController
 
   private
     def sdbip_time_period_params
-        params.require(:sdbip_time_period).permit(:period, :primary_reminder, :primary_closure,:secondary_reminder,:secondary_closure,:finance_reminder,:finance_closure,:finance_status,:primary_status,:secondary_status)
+        params.require(:sdbip_time_period).permit(:period,:primary_reminder, :primary_closure,:secondary_reminder,:secondary_closure,:finance_reminder,:finance_closure,:finance_status,:primary_status,:secondary_status)
     end
       # Confirms a logged-in user.
   def logged_in_user
@@ -170,6 +170,6 @@ class SdbipTimePeriodsController < ApplicationController
 
   # Confirms an admin user.
   def admin_user
-    redirect_to(root_url) unless current_user.admin?
+    redirect_to(root_url) unless current_user.admin? || current_user.super_admin?
   end
 end

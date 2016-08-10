@@ -7,7 +7,6 @@ class CreateSubdepartmentalAdministrators < ActiveRecord::Migration
       t.boolean :can_edit, default: false
       t.boolean :can_update, default: false
       t.boolean :can_approve, default: false
-
       t.timestamps null: false
     end
   end
