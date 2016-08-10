@@ -10,7 +10,6 @@ class CreateMonthlyCashflows < ActiveRecord::Migration
       t.decimal :operational_expenditure
       t.decimal :revenue
       t.decimal :capital_expenditure
-
       t.timestamps null: false
     end
   end

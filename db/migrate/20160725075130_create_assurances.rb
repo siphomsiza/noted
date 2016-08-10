@@ -7,7 +7,6 @@ class CreateAssurances < ActiveRecord::Migration
       t.text :response
       t.integer :kpi_result_id
       t.binary :poe
-
       t.timestamps null: false
     end
   end

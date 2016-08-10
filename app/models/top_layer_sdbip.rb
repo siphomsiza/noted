@@ -1,4 +1,5 @@
 class TopLayerSdbip < ActiveRecord::Base
+  establish_connection($current_session_db)
   include PublicActivity::Common
   belongs_to :department
   belongs_to :mscore_classification

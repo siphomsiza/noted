@@ -227,7 +227,6 @@ ActiveRecord::Schema.define(version: 20160731141316) do
     t.string   "name",       null: false
     t.string   "tel_no",     null: false
     t.string   "fax_no",     null: false
-    t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -314,7 +313,6 @@ ActiveRecord::Schema.define(version: 20160731141316) do
   create_table "master_setups", force: :cascade do |t|
     t.string   "municipality", null: false
     t.binary   "logo",         null: false
-    t.string   "company_code", null: false
     t.string   "province",     null: false
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
@@ -590,9 +588,6 @@ ActiveRecord::Schema.define(version: 20160731141316) do
     t.datetime "reset_sent_at"
     t.boolean  "super_admin",                       default: false
     t.boolean  "admin",                             default: false
-    t.boolean  "support",                           default: false
-    t.boolean  "standard_user",                     default: false
-    t.boolean  "assurance",                         default: false
     t.string   "activation_digest"
     t.boolean  "activated",                         default: false
     t.datetime "activated_at"

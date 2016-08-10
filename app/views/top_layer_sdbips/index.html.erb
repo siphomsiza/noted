@@ -11,7 +11,7 @@ $(function() {
 	<%= render 'layouts/municipality' %></article>
 		<ul class="nav nav-pills nav-justified">
 		<li><%= link_to "Departmental SDBIP", departmental_sdbips_path %></li>
-		<% if current_user.admin? %>
+		<% if current_user.admin? || current_user.super_admin? %>
 		<li class="active"><%= link_to "Top Layer SDBIP", top_layer_sdbips_path %></li>
 		<li><%= link_to "Capital Projects", capital_projects_path %></li>
 		<li><%= link_to "Monthly Cashflow", monthly_cashflows_path %></li>

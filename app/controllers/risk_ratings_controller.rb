@@ -26,7 +26,7 @@ class RiskRatingsController < ApplicationController
   def create
     @risk_rating = RiskRating.new(risk_rating_params)
 
-  
+
       if @risk_rating.save
         flash[:success] = 'Risk Rating was successfully created.'
         redirect_to :back

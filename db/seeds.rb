@@ -18,9 +18,7 @@ User.create!( firstname: "Sandiswa",
               location: "Riversands Incubation Hub",
               password_confirmation: "sableassets",
               admin: true,
-              support: false,
-              standard_user: false,
-              assurance: false,
+              
               activated: true,status: "Active",
               activated_at: Time.zone.now)
 
@@ -36,9 +34,7 @@ User.create!( firstname: "Arms",
               location: "1st Floor, St David's Place, Parktown,Johannesburg, South Africa, 2193",
               password_confirmation: "sableassets",
               admin: true,status: "Active",
-              support: false,
-              standard_user: false,
-              assurance: false,
+              
               activated: true,
               activated_at: Time.zone.now)
 
@@ -58,6 +54,7 @@ mobile=Faker::PhoneNumber.cell_phone
               birth_date: Time.now.strftime("/%dd%mm/%YYYY"),
               status: "Active",
               activated: true,
+              
               activated_at: Time.zone.now)
 end
 
@@ -88,7 +85,7 @@ Department.create!(name: "Planning and Development",
   fax_no: mobile)
 
 Subdepartment.create!(subdepartment_name: "Municipal Manager's Office", department_id: "1")
-Subdepartment.create!(subdepartment_name: "Internal Audit", department_id: "1")
+Subdepartment.create!(subdepartment_name: "Internal Audit", department_id: "1",)
 Subdepartment.create!(subdepartment_name: "Performance Management Unit", department_id: "1")
 Subdepartment.create!(subdepartment_name: "Legal Services", department_id: "1")
 Subdepartment.create!(subdepartment_name: "Forestry", department_id: "1")

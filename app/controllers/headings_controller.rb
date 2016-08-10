@@ -121,6 +121,6 @@ class HeadingsController < ApplicationController
 
     # Confirms an admin user.
     def admin_user
-      redirect_to(root_url) unless current_user.admin?
+      redirect_to(root_url) unless current_user.admin? || current_user.super_admin?
     end
 end

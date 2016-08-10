@@ -1,6 +1,7 @@
 <% provide(:title, "Dashboard") %>
 <div>
   <%= render 'layouts/municipality' %>
+  <% if !@departmental_sdbips.blank? %>
   <div class="row col col-lg-12">
     <div class="panel panel-default">
       <div class="panel-heading">
@@ -127,15 +128,38 @@
         <% @departments.each do |department| %>
         <% @chart_data = @departmental_sdbips.where(:department_id=>department.id) %>
         <% if !@chart_data.blank? %>
-
+        <% $colors = []
+        @chart_theme = @chart_data.select(:performance_standard).uniq
+        @chart_theme.order(performance_standard: :asc)
+        @chart_theme.each do |color|
+        if color.performance_standard.include?("KPI Almost Met")
+          $colors.push("orange")
+        end
+        if color.performance_standard.include?("KPI Extremely Well Met")
+          $colors.push("darkblue")
+        end
+        if color.performance_standard.include?("KPI Met")
+          $colors.push("limegreen")
+        end
+        if color.performance_standard.include?("KPI Not Met")
+          $colors.push("red")
+        end
+        if color.performance_standard.include?("KPI Not Yet Measured")
+          $colors.push("#F4C2C2")
+        end
+        if color.performance_standard.include?("KPI Well Met")
+          $colors.push("darkgreen")
+        end
+        end %>
+        <% @theme_colours = $colors %>
         <div class="well well-lg">
           <h4 align="center"><%= department.name %>
         <div class="row">
           <div class="col col-lg-6">
-            <%= pie_chart @chart_data.group(:performance_standard).count,height: "300px",library: {pieSliceText:'value-and-percentage'}, colors: @colours %>
+            <%= pie_chart @chart_data.group(:performance_standard).count,height: "300px",library: {pieSliceText:'value-and-percentage'}, colors: @theme_colours %>
           </div>
           <div class="col col-lg-6">
-            <%= column_chart @chart_data.group(:performance_standard).count,height: "300px", stacked: 'percent', colors: @colours %>
+            <%= column_chart @chart_data.group(:performance_standard).count,height: "300px", stacked: 'percent', colors: @theme_colours %>
 
           </div>
         </div>
@@ -146,6 +170,9 @@
 
     </div>
   </div>
+  <% else %>
+  <p class="weather-display">SDBIP has not been loaded yet!</p>
+  <% end %>
   <div class="row col col-lg-12">
     <div class="panel panel-default">
       <div class="panel-heading">
