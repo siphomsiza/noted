@@ -69,6 +69,7 @@ Rails.application.routes.draw do
   get 'roles/:id/new_user_role' => 'roles#new_user_role', :as => :new_user_role
   get 'kpi_owners/:id/add_admin' => 'kpi_owners#add_admin', :as => :add_admin
   get 'kpi_owners/:id/edit_kpi_owner_title' => 'kpi_owners#edit_kpi_owner_title', :as => :edit_kpi_owner_title
+  get 'master_setups/:id/show_image' => 'master_setups#show_image', :as => :show_image
 
   get 'users/:id/edit_active_user' => 'users#edit_active_user', :as => :edit_active_user
   get 'users/:id/edit_user_profile' => 'users#edit_user_profile', :as => :edit_user_profile

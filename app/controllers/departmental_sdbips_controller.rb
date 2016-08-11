@@ -73,7 +73,7 @@ class DepartmentalSdbipsController < ApplicationController
       end
     elsif !params[:subdepartment_id]
 
-           if !current_user.role.blank? || current_user.admin?
+           if !current_user.role.blank? || current_user.admin? || current_user.super_admin?
 
              if current_user.admin? || current_user.super_admin? || current_user.role.audit_log_reporting? || current_user.role.top_layer_administrator? || current_user.role.assurance_provider? || current_user.role.secondary_time_period? || current_user.role.finance_admin?
                 @departmental_sdbips = DepartmentalSdbip.paginate(:per_page => 10, :page => params[:page]).includes(:capital_project,:department,:subdepartment,:kpi_type,:kpi_owner,:kpi_concept,:kpi_calculation_type,:mscore_classification,:kpa,:strategic_objective,:national_outcome,:ward,:area,:reporting_category,:ndp_objective,:risk_rating,:kpi_results,:assurances)
@@ -262,7 +262,7 @@ end
           :kpi_owner_id, :baseline, :past_year_performance,
           :performance_standard, :proof_of_evidence, :mtas_indicator,
           :reporting_category_id, :provincial_strategic_outcome_id,
-          :source_of_evidence, :target, :annual_target,:first_quarter_target,:second_quarter_target,:third_quarter_target,:fourth_quarter_target,:first_quarter_actual,:second_quarter_actual,:third_quarter_actual,:fourth_quarter_actual,:first_quarter_poe,:second_quarter_poe,:third_quarter_poe,:fourth_quarter_poe, :budget, :impact, :top_layer_kpi_ref,:mtas_indicator_id,
+          :source_of_evidence, :target, :annual_target, :budget, :impact, :top_layer_kpi_ref,:mtas_indicator_id,
            :kpi_calculation_type_id,
           :kpi_target_type_id, :annual_target, :revised_target, :assurances_attributes=>[:id,:user_id,:signed_off,:response,:kpi_result_id,:poe], :kpi_results_attributes => [:id,:target,:actual,:kpi_performance_standard,:user_id,:performance_comments,:corrective_measures,:_destroy,:period,:attachments_attributes => [ :id,:poe,:_destroy]])
     end
@@ -283,7 +283,7 @@ end
       current_user.admin?# || correct_user?
     end
     def correct_user
-       redirect_to(root_url) unless !current_user.role.blank? || current_user.admin?#!current_user.role.blank? && (current_user.role.audit_log_reporting? || current_user.role.assurance_provider? || !current_user.kpi_owner.blank? && current_user.role.kpi_owner? || !current_user.departmental_administrator.blank? || !current_user.subdepartmental_administrator.blank? )
+       redirect_to(root_url) unless !current_user.role.blank? || current_user.admin? || current_user.super_admin?#!current_user.role.blank? && (current_user.role.audit_log_reporting? || current_user.role.assurance_provider? || !current_user.kpi_owner.blank? && current_user.role.kpi_owner? || !current_user.departmental_administrator.blank? || !current_user.subdepartmental_administrator.blank? )
     end
 
 

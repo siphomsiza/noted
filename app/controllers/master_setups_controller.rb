@@ -5,6 +5,7 @@ class MasterSetupsController < ApplicationController
   # GET /master_setups
   # GET /master_setups.json
   def index
+
     begin
 
         @client = YahooWeather::Client.new
@@ -20,11 +21,15 @@ class MasterSetupsController < ApplicationController
     puts "received Exception #{e}"
   end
     @jobtitle = Jobtitle.new
-    @job_titles = Jobtitle.all
+    @job_titles = Jobtitle.paginate(page: params[:page],per_page: 15)
     @master_setup = MasterSetup.new
-    @master_setups = MasterSetup.all
+    @master_setups = MasterSetup.limit(1).order(id: :asc)
+    @setup = MasterSetup.find_by(:id=>1)
   end
-
+  def show_image
+  @logo = MasterSetup.find(params[:id])
+  send_data(@logo.logo, :type => 'image/png', :disposition => 'inline')
+  end
   # GET /master_setups/1
   # GET /master_setups/1.json
   def show
@@ -83,7 +88,7 @@ class MasterSetupsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def master_setup_params
-      params.require(:master_setup).permit(:municipality,:logo,:province, :regions_attributes => [ :id,:name,:_destroy])
+      params.require(:master_setup).permit(:municipality,:logo,:province, :latitude,:longitude, :regions_attributes => [ :id,:name,:_destroy])
     end
 
     def set_user

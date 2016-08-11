@@ -15,22 +15,6 @@
         <th class="reporting-category">Reporting Category</th>
         <th class="kpi-calculation-type">KPI Calculation Type</th>
 
-        <th class="first-quarter-target">Target</th>
-        <th class="first-quarter-target">Actual</th>
-        <th class="first-quarter-target">Results</th>
-
-        <th class="second-quarter-target">Target</th>
-        <th class="second-quarter-target">Actual</th>
-        <th class="second-quarter-target">Results</th>
-
-        <th class="third-quarter-target">Target</th>
-        <th class="third-quarter-target">Actual</th>
-        <th class="third-quarter-target">Results</th>
-
-        <th class="fourth-quarter-target">Target</th>
-        <th class="fourth-quarter-target">Actual</th>
-        <th class="fourth-quarter-target">Results</th>
-
         <th class="annual-target">Annual Target</th>
         <th class="revised-target">Revised Target</th>
         <th class="annual-target">Actual</th>
@@ -80,27 +64,6 @@
         <td class="capital-project"><% if departmental_sdbip.capital_project %><%= departmental_sdbip.capital_project.mun_cp_ref %><% end %></td>
         <td class="reporting-category"><% if !departmental_sdbip.reporting_category_id.blank? %><%= departmental_sdbip.reporting_category.name %><% end %></td>
         <td class="kpi-calculation-type"><% if !departmental_sdbip.kpi_calculation_type_id.blank? %><%= departmental_sdbip.kpi_calculation_type.name %><% end %></td>
-
-        <th class="first-quarter-target"><%= departmental_sdbip.first_quarter_target %></th>
-        <th class="first-quarter-target"><%= departmental_sdbip.first_quarter_actual %></th>
-        <th class="first-quarter-target"></th>
-
-        <th class="second-quarter-target"><%= departmental_sdbip.second_quarter_target %></th>
-        <th class="second-quarter-target"><%= departmental_sdbip.second_quarter_actual %></th>
-        <th class="second-quarter-target"></th>
-
-        <th class="third-quarter-target"><%= departmental_sdbip.third_quarter_target %></th>
-        <th class="third-quarter-target"><%= departmental_sdbip.third_quarter_actual %></th>
-        <th class="third-quarter-target"></th>
-
-        <th class="fourth-quarter-target"><%= departmental_sdbip.fourth_quarter_target %></th>
-        <th class="fourth-quarter-target"><%= departmental_sdbip.fourth_quarter_actual %></th>
-        <th class="fourth-quarter-target"></th>
-
-        <th class="annual-target"><%= departmental_sdbip.annual_target %></th>
-        <th class="revised-target"><%= departmental_sdbip.revised_target %></th>
-        <th class="annual-target"></th>
-        <th class="revised-target"></th>
 
         <td class="kpi-type"><% if !departmental_sdbip.kpi_type_id.blank? %><%= departmental_sdbip.kpi_type.name %><% end %></td>
         <td class="kpi-target-type"><% if !departmental_sdbip.kpi_target_type_id.blank? %><%= departmental_sdbip.kpi_target_type.name %><% end %></td>

@@ -21,12 +21,31 @@
 
     <div class="field col-lg-12">
       <%= f.label :municipality %><br>
-      <%= f.text_field :municipality,{:class => "form-control"} %>
+      <%= f.text_field :municipality,{:class => "form-control",:required=>true} %>
     </div>
 
     <div class="field col-lg-12">
     <%= f.label :province, "Province:" %>
-    <%= f.text_field :province, :class => "form-control",:autocomplete=>"off" %>
+    <%= f.text_field :province, :class => "form-control",:autocomplete=>"off",:required=>true %>
+    </div>
+    <div class="row">
+    <div class="field col-lg-12">
+      <div class="col col-lg-6">
+        <%= f.label :latitude, "Latitude:" %>
+        <%= f.text_field :latitude, :class => "form-control",:autocomplete=>"off",:pattern=>'^(\-?\d+(\.\d+)?)$' %>
+      </div>
+      <div class="col col-lg-6">
+        <%= f.label :longitude, "Longitude:" %>
+        <%= f.text_field :longitude, :class => "form-control",:autocomplete=>"off",:pattern=>'^(\-?\d+(\.\d+)?)$' %>
+
+      </div>
+    </div>
+  </div>
+    <div class="field col-lg-">
+      <label class="col-lg-2" for="logo"><%= f.label :logo %></label>
+      <div class="col col-lg-10">
+        <%= f.file_field :logo, :class => "form-control" %>
+      </div>
     </div>
     <div class="field col-lg-12">
 
@@ -38,9 +57,8 @@
   <%= link_to_add_fields "Add Region/Area", f, :regions %>
 
   </div>
-
-    <div class="actions col-lg-5">
-      <%= f.submit "Save", :class=> "btn  pull-right" %>
+    <div class="col-lg-12">
+      <%= f.submit "Save", :class=> "btn col-lg-3 pull-right" %>
     </div>
   <% end %>
 
