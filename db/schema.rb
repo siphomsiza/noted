@@ -131,20 +131,8 @@ ActiveRecord::Schema.define(version: 20160731141316) do
     t.string   "target"
     t.decimal  "annual_target",                   default: 0.0
     t.decimal  "revised_target"
-    t.decimal  "first_quarter_target"
-    t.decimal  "second_quarter_target"
-    t.decimal  "third_quarter_target"
-    t.decimal  "fourth_quarter_target"
     t.text     "performance_comments"
     t.text     "corrective_measures"
-    t.decimal  "first_quarter_actual"
-    t.decimal  "second_quarter_actual"
-    t.decimal  "third_quarter_actual"
-    t.decimal  "fourth_quarter_actual"
-    t.binary   "first_quarter_poe"
-    t.binary   "second_quarter_poe"
-    t.binary   "third_quarter_poe"
-    t.binary   "fourth_quarter_poe"
     t.string   "performance_standard",            default: "KPI Not Yet Measured", null: false
     t.integer  "risk_rating_id"
     t.integer  "kpa_id"
@@ -188,20 +176,8 @@ ActiveRecord::Schema.define(version: 20160731141316) do
     t.string   "target"
     t.decimal  "annual_target",                   default: 0.0
     t.decimal  "revised_target"
-    t.decimal  "first_quarter_target"
-    t.decimal  "second_quarter_target"
-    t.decimal  "third_quarter_target"
-    t.decimal  "fourth_quarter_target"
     t.text     "performance_comments"
     t.text     "corrective_measures"
-    t.decimal  "first_quarter_actual"
-    t.decimal  "second_quarter_actual"
-    t.decimal  "third_quarter_actual"
-    t.decimal  "fourth_quarter_actual"
-    t.binary   "first_quarter_poe"
-    t.binary   "second_quarter_poe"
-    t.binary   "third_quarter_poe"
-    t.binary   "fourth_quarter_poe"
     t.string   "performance_standard",            default: "KPI Not Yet Measured", null: false
     t.integer  "risk_rating_id"
     t.integer  "kpa_id"
@@ -314,6 +290,8 @@ ActiveRecord::Schema.define(version: 20160731141316) do
     t.string   "municipality", null: false
     t.binary   "logo",         null: false
     t.string   "province",     null: false
+    t.float    "latitude"
+    t.float    "longitude"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end

@@ -22,20 +22,8 @@ class CreateDepartmentalSdbips < ActiveRecord::Migration
       t.string :target
       t.decimal :annual_target, default: 0.0
       t.decimal :revised_target
-      t.decimal :first_quarter_target
-      t.decimal :second_quarter_target
-      t.decimal :third_quarter_target
-      t.decimal :fourth_quarter_target
       t.text    :performance_comments
       t.text    :corrective_measures
-      t.decimal :first_quarter_actual
-      t.decimal :second_quarter_actual
-      t.decimal :third_quarter_actual
-      t.decimal :fourth_quarter_actual
-      t.binary  :first_quarter_poe
-      t.binary  :second_quarter_poe
-      t.binary  :third_quarter_poe
-      t.binary  :fourth_quarter_poe
       t.string :performance_standard
       t.integer :risk_rating_id
       t.integer :kpa_id

@@ -38,7 +38,7 @@ $(function() {
 
 </div>
 </div>
-<script src="http://maps.googleapis.com/maps/api/js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD1n4JTMGUMSgr0PeFr01A0rFTm5Fx-Du0&sensor=false"></script>
 <script>
 	'use strict';
 
@@ -48,7 +48,7 @@ $(function() {
 	var map;
 
 	function drawMap() {
-		var municipalityLocation = new google.maps.LatLng(-27.0077637, 30.8018875);
+		var municipalityLocation = new google.maps.LatLng(-<%= @setup.latitude %>, <%= @setup.longitude %>);
 
 		var mapOptions = {
 	  	'center' : municipalityLocation,
