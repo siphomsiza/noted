@@ -12,16 +12,12 @@ class DepartmentsController < ApplicationController
         @response = @client.fetch(1582504)
         @doc = @response.doc
         @forecast = @doc["item"]["forecast"]
-      #@response = @client.fetch_by_location('New York')
-      #@response.units.temperature
-      #@response.condition.temp
-
   rescue SignalException => e
     flash[:notice] = "received Exception #{e.message}"
     puts "received Exception #{e}"
   end
-    @department = Department.new
-  	@departments = Department.includes(:subdepartments).paginate(page: params[:page],per_page: 10)
+      @department = Department.new
+  	   @departments = Department.includes(:subdepartments).paginate(page: params[:page],per_page: 10)
   end
 
   def show
@@ -30,10 +26,8 @@ class DepartmentsController < ApplicationController
 
   def edit
     @department = Department.find(params[:id])
-    @users = User.all
   end
   def create
-    @users = User.all
   	@department = Department.new(department_params)
   	if @department.save
       flash[:success] = 'Department was successfully created.'
@@ -47,7 +41,6 @@ class DepartmentsController < ApplicationController
   end
 
   def update
-    @users = User.all
     @department = Department.find(params[:id])
       if @department.update(department_params)
         flash[:success] = 'Department was successfully updated.'
@@ -98,7 +91,7 @@ class DepartmentsController < ApplicationController
 
     # Confirms an admin user.
     def admin_user
-      redirect_to(root_url) unless current_user.admin?
+      redirect_to(root_url) unless current_user.admin?  || current_user.super_admin?
     end
 
 end

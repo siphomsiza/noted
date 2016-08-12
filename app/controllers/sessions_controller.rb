@@ -1,16 +1,19 @@
 class SessionsController < ApplicationController
-#load_and_authorize_resource
-#skip_before_filter  :verify_authenticity_token
-
+  skip_before_filter  :verify_authenticity_token
   def new
     redirect_to introduction_url unless !session[:user_id]
   end
 
   def create
+    if !params[:session][:company_code].blank?
+      company_code = params[:session][:company_code]
+      set_up_database company_code
+    end
     user = User.find_by(email: params[:session][:email].downcase)
     if user && user.authenticate(params[:session][:password])
       if user.activated? && !user.terminated? && user.login_attempts < user.max_login_attempts
         log_in user
+        puts session[:session_database]
             @user = current_user
             if @user.update_columns(:current_login_at => Time.zone.now, :current_login_ip => request.env['REMOTE_ADDR'])
                 @user.increment!(:login_count)
@@ -62,7 +65,9 @@ class SessionsController < ApplicationController
               message += "please contact your system administrator.."
               flash[:danger] = message
         else
-
+          message = "wrong log on information provided..."
+          #message += "please contact your system administrator.."
+          flash[:danger] = message
       end
       render 'new'
     end

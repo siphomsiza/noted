@@ -4,7 +4,6 @@ class CreateHeadings < ActiveRecord::Migration
       t.string :term
       t.string :description
       t.string :category
-
       t.timestamps null: false
     end
   end

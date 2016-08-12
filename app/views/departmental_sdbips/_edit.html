@@ -88,7 +88,7 @@
 </div>
     <div class="row">
     <div class="actions col-lg-">
-      <%= f.submit "Save", id: "submit_form", class: 'btn col-lg-3 pull-right'%>
+      <%= f.submit "Save", id: "submit_form", :id=>'submit_button',class: 'btn col-lg-3 pull-right'%>
     </div>
     </div>
     <% end %>
@@ -102,20 +102,35 @@
 $(document).ready(function(){
 
   var selected_value = <%= current_user.id %>;
+
   $("#update-user").val(selected_value);
+
   var current_date = Date();
+
   $("#update-period").val(current_date);
+
   $("#assurance-user").val(selected_value);
+
   var target = <%= @departmental_sdbip.annual_target %>;
+
   var over_actual = <%= @departmental_sdbip.kpi_results.to_a.sum(&:actual) %>;
+
   $("#kpi-target").val(target);
+
   $( "#kpi-actual" ).blur(function() {
+
   var target_value= parseFloat(target) || 0;
+
   var actual_value = parseFloat($('#kpi-actual').val()) || 0;
+
   var over_all_actual = parseFloat(over_actual) || 0;
-  over_all_actual += actual_value
+
+    over_all_actual += actual_value
+
   var percentages=0;
+
   var over_all_percentages=0;
+
   if(target_value > 0){
     percentages = (actual_value/target_value) * 100;
     over_all_percentages = (over_all_actual/target_value) * 100;

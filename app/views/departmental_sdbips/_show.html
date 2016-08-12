@@ -19,12 +19,12 @@
               <tr><th>Subdepartment</th><td><%= @departmental_sdbip.subdepartment.subdepartment_name %></td></tr>
               <tr><th>KPI Ref Number</th><td><%= @departmental_sdbip.kpi_ref_number %></td></tr>
               <tr><th>Predetermined Objective</th><td><% if !@departmental_sdbip.predetermined_objective_id.blank? %><%= @departmental_sdbip.predetermined_objective.name %><% end %></td></tr>
-              <tr><th>KPI Owner</th><td><%= @departmental_sdbip.kpi_owner.name %></td></tr>
+              <tr><th>KPI Owner</th><td><% if !@departmental_sdbip.kpi_owner_id.blank? %><%= @departmental_sdbip.kpi_owner.name %><% end %></td></tr>
               <tr><th>Unit of Measurement</th><td><%= @departmental_sdbip.unit_of_measurement %></td></tr>
-              <tr><th>M Score Classification</th><td><%= @departmental_sdbip.mscore_classification.name %></td></tr>
+              <tr><th>M Score Classification</th><td><% if !@departmental_sdbip.mscore_classification_id.blank? %><%= @departmental_sdbip.mscore_classification.name %><% end %></td></tr>
               <tr><th>IDP Ref</th><td><%= @departmental_sdbip.idp_ref %></td></tr>
-              <tr><th>National Outcome</th><td><%= @departmental_sdbip.national_outcome.name %></td></tr>
-              <tr><th>Strategic Objective</th><td><%= @departmental_sdbip.strategic_objective.name %></td></tr>
+              <tr><th>National Outcome</th><td><% if !@departmental_sdbip.national_outcome_id.blank? %><%= @departmental_sdbip.national_outcome.name %><% end %></td></tr>
+              <tr><th>Strategic Objective</th><td><% if !@departmental_sdbip.strategic_objective_id.blank? %><%= @departmental_sdbip.strategic_objective.name %><% end %></td></tr>
               <tr><th>Source of Evidence</th><td><%= @departmental_sdbip.source_of_evidence %></td></tr>
               <tr><th>Baseline</th><td><%= @departmental_sdbip.baseline %></td></tr>
               <tr><th>Target</th><td><%= @departmental_sdbip.annual_target %></td></tr>
@@ -32,18 +32,18 @@
               <tr><th>Budget</th><td><%= @departmental_sdbip.budget %></td></tr>
               <tr><th>Performance Standard</th><td><%= @departmental_sdbip.performance_standard %></td></tr>
               <tr><th>KPA</th><td><%= @departmental_sdbip.kpa.name %></td></tr>
-              <tr><th>NDP Objective</th><td><%= @departmental_sdbip.ndp_objective.name %></td></tr>
-              <tr><th>Capital Project</th><td></td></tr>
-              <tr><th>KPI Concept</th><td><%= @departmental_sdbip.kpi_concept.name %></td></tr>
-              <tr><th>KPI Type</th><td><%= @departmental_sdbip.kpi_type.name %></td></tr>
+              <tr><th>NDP Objective</th><td><% if !@departmental_sdbip.ndp_objective_id.blank? %><%= @departmental_sdbip.ndp_objective.name %><% end %></td></tr>
+              <tr><th>Capital Project</th><td><% if !@departmental_sdbip.capital_project.blank? %><%= @departmental_sdbip.capital_project.mun_cp_ref %><% end %></td></tr>
+              <tr><th>KPI Concept</th><td><% if !@departmental_sdbip.kpi_concept_id.blank? %><%= @departmental_sdbip.kpi_concept.name %><% end %></td></tr>
+              <tr><th>KPI Type</th><td><% if !@departmental_sdbip.kpi_type_id.blank? %><%= @departmental_sdbip.kpi_type.name %><% end %></td></tr>
               <tr><th>Impact</th><td><%= @departmental_sdbip.impact %></td></tr>
               <tr><th>Provincial Strategic Outcome</th><td><% if !@departmental_sdbip.provincial_strategic_outcome_id.blank?%><%= @departmental_sdbip.provincial_strategic_outcome.name %><% end %></td></tr>
-              <tr><th>Area</th><td><%= @departmental_sdbip.area.name %></td></tr>
-              <tr><th>Ward</th><td><%= @departmental_sdbip.ward.name %></td></tr>
+              <tr><th>Area</th><td><% if !@departmental_sdbip.area_id.blank? %><%= @departmental_sdbip.area.name %><% end %></td></tr>
+              <tr><th>Ward</th><td><% if !@departmental_sdbip.ward_id.blank? %><%= @departmental_sdbip.ward.name %><% end %></td></tr>
               <tr><th>Past Year Performance</th><td><%= @departmental_sdbip.past_year_performance %></td></tr>
-              <tr><th>Reporting Category</th><td><%= @departmental_sdbip.reporting_category.name %></td></tr>
+              <tr><th>Reporting Category</th><td><% if !@departmental_sdbip.reporting_category_id.blank? %><%= @departmental_sdbip.reporting_category.name %><% end %></td></tr>
               <tr><th>Top Layer KPI Ref</th><td><%= @departmental_sdbip.top_layer_kpi_ref %></td></tr>
-              <tr><th>KPI Calculation Type</th><td><%= @departmental_sdbip.kpi_calculation_type.name %></td></tr>
+              <tr><th>KPI Calculation Type</th><td><% if !@departmental_sdbip.kpi_calculation_type_id.blank? %><%= @departmental_sdbip.kpi_calculation_type.name %><% end %></td></tr>
               <tr><th>Create Date</th><td><%= @departmental_sdbip.created_at.strftime(' %Y-%B-%d') %></td></tr>
               <tr><th>Update Date</th><td><%= @departmental_sdbip.updated_at.strftime(' %Y-%B-%d') %></td></tr>
 

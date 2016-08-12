@@ -47,10 +47,8 @@ class PagesController < ApplicationController
 
   end
   def dashboard
-
     @sdbip_time_periods = SdbipTimePeriod.where(["period >= ? AND period <= ?",Date.today,Date.today.days_ago(-7)])
     @users = User.all
-
     @departmental_sdbips = DepartmentalSdbip.order(performance_standard: :asc)
     @departmental_sdbips_kpa = DepartmentalSdbip.all
     @departments_sdibps = @departmental_sdbips_kpa.select(:performance_standard).order(performance_standard: :asc).uniq
@@ -113,10 +111,15 @@ class PagesController < ApplicationController
 
     # Confirms the correct user.
     def top_layer_administrator
-      redirect_to(root_url) unless (!current_user.role.blank? && (current_user.role.top_layer_administrator? || current_user.role.assurance_provider? || current_user.role.audit_log_reporting? || current_user.role.secondary_time_period? )) || current_user.admin?
+      redirect_to(root_url) unless (!current_user.role.blank? && (current_user.role.top_layer_administrator? || current_user.role.assurance_provider? || current_user.role.audit_log_reporting? || current_user.role.secondary_time_period? )) || current_user.admin? || current_user.super_admin?
     end
     # Confirms an admin user.
     def admin_user
-      redirect_to(root_url) unless current_user.admin? || top_layer_administrator
+      #redirect_to(root_url) unless
+      current_user.admin# || current_user.super_admin? || top_layer_administrator
+    end
+    def super_admin_user
+      #redirect_to(root_url) unless
+      current_user.super_admin?
     end
 end

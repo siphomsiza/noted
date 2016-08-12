@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  establish_connection($current_session_db)
   has_many :activities
   belongs_to :department
   has_one :jobtitle
@@ -86,13 +87,6 @@ class User < ActiveRecord::Base
   # Returns true if a password reset has expired.
   def password_reset_expired?
     reset_sent_at < 2.hours.ago
-  end
-  def self.search(search)
-  if search
-    find(['firstname LIKE ? OR surname LIKE', "%#{search}%","%#{search}%"])
-  else
-
-  end
   end
   def self.sweep(time = "20 minutes")
       if time.is_a?(String)

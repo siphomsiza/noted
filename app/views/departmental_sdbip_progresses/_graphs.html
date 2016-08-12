@@ -115,16 +115,40 @@
     <div class="col col-lg-12">
         <h3>Mkhondo Local Municipality Departments' KPIs</h3>
         <% @departments.each do |department| %>
-        <% @chart_data = @departmental_sdbips.where(:department_id=>department.id) %>
+        <% @chart_data = @departmental_sdbips.where(:department_id=>department.id).order('departmental_sdbips.performance_standard asc') %>
         <% if !@chart_data.blank? %>
+        <% $colors = []
+        @chart_theme = @chart_data.select(:performance_standard).uniq
+        @chart_theme.order(performance_standard: :asc)
+        @chart_theme.each do |color|
+        if color.performance_standard.include?("KPI Almost Met")
+          $colors.push("orange")
+        end
+        if color.performance_standard.include?("KPI Extremely Well Met")
+          $colors.push("darkblue")
+        end
+        if color.performance_standard.include?("KPI Met")
+          $colors.push("limegreen")
+        end
+        if color.performance_standard.include?("KPI Not Met")
+          $colors.push("red")
+        end
+        if color.performance_standard.include?("KPI Not Yet Measured")
+          $colors.push("#F4C2C2")
+        end
+        if color.performance_standard.include?("KPI Well Met")
+          $colors.push("darkgreen")
+        end
+        end %>
+        <% @theme_colours = $colors %>
         <div class="well well-lg">
           <h4 align="center"><%= department.name %></h4>
         <div class="row">
           <div class="col col-lg-6">
-            <%= pie_chart @chart_data.group(:performance_standard).count,height: "300px",library: {pieSliceText:'value-and-percentage'}, colors: @colours %>
+            <%= pie_chart @chart_data.group(:performance_standard).count,height: "300px",library: {pieSliceText:'value-and-percentage'}, colors: @theme_colours %>
           </div>
           <div class="col col-lg-6">
-            <%= column_chart @chart_data.group(:performance_standard).count,height: "300px", stacked: 'percent', colors: @colours %>
+            <%= column_chart @chart_data.group(:performance_standard).count,height: "300px", stacked: 'percent', colors: @theme_colours %>
 
           </div>
         </div>
@@ -137,7 +161,7 @@
 <div class="row">
   <div class=" col col-lg-12">
       <h3><%= "#{@department.name }"%></h3>
-      <% @chart_data = @department.departmental_sdbips#.where(:subdepartment_id=>subdepartment.id) %>
+      <% @chart_data = @department.departmental_sdbips.order('departmental_sdbips.performance_standard asc')#.where(:subdepartment_id=>subdepartment.id) %>
       <% if !@chart_data.blank? %>
       <div class="row">
         <div class="col col-lg-6">
@@ -243,15 +267,39 @@
       <% @department.subdepartments.each do |subdepartment| %>
       <% @chart_data = @department.departmental_sdbips.where(:subdepartment_id=>subdepartment.id) %>
       <% if !@chart_data.blank? %>
+      <% $colors = []
+      @chart_theme = @chart_data.select(:performance_standard).uniq
+      @chart_theme.order(performance_standard: :asc)
+      @chart_theme.each do |color|
+      if color.performance_standard.include?("KPI Almost Met")
+        $colors.push("orange")
+      end
+      if color.performance_standard.include?("KPI Extremely Well Met")
+        $colors.push("darkblue")
+      end
+      if color.performance_standard.include?("KPI Met")
+        $colors.push("limegreen")
+      end
+      if color.performance_standard.include?("KPI Not Met")
+        $colors.push("red")
+      end
+      if color.performance_standard.include?("KPI Not Yet Measured")
+        $colors.push("#F4C2C2")
+      end
+      if color.performance_standard.include?("KPI Well Met")
+        $colors.push("darkgreen")
+      end
+      end %>
+      <% @theme_colours = $colors %>
       <div class="well well-lg">
         <h4 align="center"><%= subdepartment.subdepartment_name %></h4>
       <div class="row">
         <div class=" col col-lg-12">
         <div class="col col-lg-6">
-          <%= pie_chart @chart_data.group(:performance_standard).count,height: "300px",library: {pieSliceText:'value-and-percentage'}, colors: @colours %>
+          <%= pie_chart @chart_data.group(:performance_standard).count,height: "300px",library: {pieSliceText:'value-and-percentage'}, colors: @theme_colours %>
         </div>
         <div class="col col-lg-6">
-          <%= column_chart @chart_data.group(:performance_standard).count,height: "300px", stacked: 'percent', colors: @colours %>
+          <%= column_chart @chart_data.group(:performance_standard).count,height: "300px", stacked: 'percent', colors: @theme_colours %>
 
         </div>
       </div>

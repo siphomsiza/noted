@@ -14,46 +14,6 @@
         <th>Capital Project</th>
         <th>Reporting Category</th>
         <th>KPI Calculation Type</th>
-
-        <th>Target</th>
-        <th>Actual</th>
-        <th>Results</th>
-
-        <th>Target</th>
-        <th>Actual</th>
-        <th>Results</th>
-
-        <th>Target</th>
-        <th>Actual</th>
-        <th>Results</th>
-
-        <th>Target</th>
-        <th>Actual</th>
-        <th>Results</th>
-
-        <th>Annual Target</th>
-        <th>Revised Target</th>
-        <th>Actual</th>
-        <th>Results</th>
-
-        <th>KPI Type</th>
-        <th>KPI Target Type</th>
-        <th>IDP Ref</th>
-        <th>M Score Classification</th>
-        <th>National Outcome</th>
-        <th>Strategic Objective</th>
-        <th>Baseline</th>
-        <th>Budget</th>
-        <th>Performance Standard</th>
-        <th>Risk Rating</th>
-        <th>KPA</th>
-        <th>KPI Concept</th>
-        <th>Impact</th>
-        <th>Provincial Strategic Outcome</th>
-        <th>Area</th>
-        <th>Ward</th>
-        <th>Past Year Performance</th>
-        <th>Top Layer KPI Ref</th>
         <th>Create Date</th>
         <th>Update Date</th>
       </tr>
@@ -63,7 +23,7 @@
         <td><%= departmental_sdbip.department.name %></td>
         <td><%= departmental_sdbip.subdepartment.subdepartment_name %></td>
         <td>
-          <% if (!current_user.departmental_administrator.blank? && current_user.departmental_administrator.can_update?) || (!current_user.subdepartmental_administrator.blank? && current_user.subdepartmental_administrator.can_update?) || current_user.admin? %>
+          <% if (!current_user.departmental_administrator.blank? && current_user.departmental_administrator.can_update?) || (!current_user.subdepartmental_administrator.blank? && current_user.subdepartmental_administrator.can_update?) || current_user.admin? || ( !current_user.role.blank? && current_user.role.kpi_owner? && (!current_user.kpi_owners.blank? && current_user.kpi_owners.can_update? ) ) %>
         <%= link_to edit_departmental_sdbip_path(departmental_sdbip),remote: true,'data-target' => "#departmental-sdbip-modal", 'data-toggle' => 'modal', :title=>"Click to Update KPI" do %>
             <%= departmental_sdbip.kpi %>
           <% end %>
@@ -83,51 +43,6 @@
         <td><% if departmental_sdbip.capital_project %><%= departmental_sdbip.capital_project.mun_cp_ref %><% end %></td>
         <td><% if !departmental_sdbip.reporting_category_id.blank? %><%= departmental_sdbip.reporting_category.name %><% end %></td>
         <td><% if !departmental_sdbip.kpi_calculation_type_id.blank? %><%= departmental_sdbip.kpi_calculation_type.name %><% end %></td>
-
-        <th><%= departmental_sdbip.first_quarter_target %></th>
-        <th><%= departmental_sdbip.first_quarter_actual %></th>
-        <th></th>
-
-        <th><%= departmental_sdbip.second_quarter_target %></th>
-        <th><%= departmental_sdbip.second_quarter_actual %></th>
-        <th></th>
-
-        <th><%= departmental_sdbip.third_quarter_target %></th>
-        <th><%= departmental_sdbip.third_quarter_actual %></th>
-        <th></th>
-
-        <th><%= departmental_sdbip.fourth_quarter_target %></th>
-        <th><%= departmental_sdbip.fourth_quarter_actual %></th>
-        <th></th>
-
-        <th><%= departmental_sdbip.annual_target %></th>
-        <th><%= departmental_sdbip.revised_target %></th>
-        <th></th>
-        <th></th>
-
-        <td><% if !departmental_sdbip.kpi_type_id.blank? %><%= departmental_sdbip.kpi_type.name %><% end %></td>
-        <td><% if !departmental_sdbip.kpi_target_type_id.blank? %><%= departmental_sdbip.kpi_target_type.name %><% end %></td>
-        <td><%= departmental_sdbip.idp_ref %></td>
-
-        <td><%= departmental_sdbip.mscore_classification.name %></td>
-        <td><% if !departmental_sdbip.national_outcome_id.blank? %><%= departmental_sdbip.national_outcome.name %><% end %></td>
-        <td><%= departmental_sdbip.strategic_objective.name %></td>
-        <td><%= departmental_sdbip.baseline %></td>
-        <td><%= departmental_sdbip.budget %></td>
-        <td><%= departmental_sdbip.performance_standard %></td>
-        <td><% if !departmental_sdbip.risk_rating_id.blank?%><%= departmental_sdbip.risk_rating.name %><% end %></td>
-        <td><% if !departmental_sdbip.kpa_id.blank? %><%= departmental_sdbip.kpa.name %><% end %></td>
-
-        <td><% if !departmental_sdbip.kpi_concept_id.blank? %><%= departmental_sdbip.kpi_concept.name %><% end %></td>
-
-        <td><%= departmental_sdbip.impact %></td>
-        <td><% if !departmental_sdbip.provincial_strategic_outcome_id.blank? %><%= departmental_sdbip.provincial_strategic_outcome.name %><% end %></td>
-        <td><% if !departmental_sdbip.area_id.blank? %><%= departmental_sdbip.area.name %><% end %></td>
-        <td><% if !departmental_sdbip.ward_id.blank? %><%= departmental_sdbip.ward.name %><% end %></td>
-        <td><%= departmental_sdbip.past_year_performance %></td>
-
-        <td><%= departmental_sdbip.top_layer_kpi_ref %></td>
-
         <td><%= departmental_sdbip.created_at.strftime(' %Y-%B-%d') %></td>
         <td><%= departmental_sdbip.updated_at.strftime('%d-%B-%Y') %></td>
 

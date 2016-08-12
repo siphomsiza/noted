@@ -1,4 +1,5 @@
 class MasterSetup < ActiveRecord::Base
+  establish_connection($current_session_db)
   include PublicActivity::Common
   validates :municipality,:province, :presence=> true, :uniqueness=>true
   has_many :regions, :dependent => :destroy

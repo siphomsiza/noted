@@ -16,7 +16,7 @@ class HeadingsController < ApplicationController
     flash[:notice] = "received Exception #{e.message}"
     puts "received Exception #{e}"
   end
-    @heading = Heading.new
+      @heading = Heading.new
     @general_headings = Heading.where(category: 'General').paginate( page: params[:page],per_page: 17)
     @headings = Heading.all
     @departmental_headings = Heading.where(category: 'Departmental SDBIP').paginate( page: params[:page],per_page: 17)
@@ -121,6 +121,6 @@ class HeadingsController < ApplicationController
 
     # Confirms an admin user.
     def admin_user
-      redirect_to(root_url) unless current_user.admin?
+      redirect_to(root_url) unless current_user.admin? || current_user.super_admin?
     end
 end

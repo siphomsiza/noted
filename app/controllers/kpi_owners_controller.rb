@@ -1,5 +1,5 @@
 class KpiOwnersController < ApplicationController
-  before_action :set_kpi_owner, only: [:show, :edit, :update, :destroy,:add_admin]
+  before_action :set_kpi_owner, only: [:edit_kpi_owner_title,:show, :edit, :update, :destroy,:add_admin]
 
   # GET /kpi_owners
   # GET /kpi_owners.json
@@ -20,6 +20,8 @@ class KpiOwnersController < ApplicationController
 
   end
   # GET /kpi_owners/1/edit
+  def edit_kpi_owner_title
+  end
   def edit
   end
 
@@ -35,13 +37,13 @@ class KpiOwnersController < ApplicationController
         flash[:danger] = "KPI Owner not created."
         redirect_to :back
       end
-    
+
   end
 
   # PATCH/PUT /kpi_owners/1
   # PATCH/PUT /kpi_owners/1.json
   def update
-    
+
       if @kpi_owner.update(kpi_owner_params)
         flash[:success] = 'Kpi Owner was successfully saved.'
         redirect_to :back
@@ -49,7 +51,7 @@ class KpiOwnersController < ApplicationController
         flash[:danger] = "KPI Owner was not saved."
         redirect_to :back
       end
-    
+
   end
 
   # DELETE /kpi_owners/1
@@ -58,7 +60,7 @@ class KpiOwnersController < ApplicationController
     @kpi_owner.destroy
       flash[:success] = 'Kpi owner was successfully deleted.'
       redirect_to :back
-    
+
   end
 
   private
@@ -69,6 +71,6 @@ class KpiOwnersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def kpi_owner_params
-      params.require(:kpi_owner).permit(:user_id, :title,:can_update)
+      params.require(:kpi_owner).permit(:name,:user_id, :title,:can_update)
     end
 end

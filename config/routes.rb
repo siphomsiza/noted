@@ -68,6 +68,8 @@ Rails.application.routes.draw do
   get 'roles/:id/grant_new_user_access' => 'roles#grant_new_user_access', :as => :grant_new_user_access
   get 'roles/:id/new_user_role' => 'roles#new_user_role', :as => :new_user_role
   get 'kpi_owners/:id/add_admin' => 'kpi_owners#add_admin', :as => :add_admin
+  get 'kpi_owners/:id/edit_kpi_owner_title' => 'kpi_owners#edit_kpi_owner_title', :as => :edit_kpi_owner_title
+  get 'master_setups/:id/show_image' => 'master_setups#show_image', :as => :show_image
 
   get 'users/:id/edit_active_user' => 'users#edit_active_user', :as => :edit_active_user
   get 'users/:id/edit_user_profile' => 'users#edit_user_profile', :as => :edit_user_profile
@@ -92,6 +94,7 @@ Rails.application.routes.draw do
   get 'departmental_sdbip_progresses/generate_graphs' => 'departmental_sdbip_progresses#generate_graphs', :as => :generate_graphs
 
   post 'sdbip_time_periods/update_time_periods' => 'sdbip_time_periods#update_time_periods', :as => :update_time_periods
+  post 'sdbip_time_periods/update_deadline' => 'sdbip_time_periods#update_deadline', :as => :update_deadline
   get 'sdbip_time_periods/close_primary' => 'sdbip_time_periods#close_primary', :as => :close_primary
   get 'sdbip_time_periods/close_secondary' => 'sdbip_time_periods#close_secondary', :as => :close_secondary
   get 'sdbip_time_periods/close_finance' => 'sdbip_time_periods#close_finance', :as => :close_finance

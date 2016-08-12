@@ -1,4 +1,5 @@
 class Subdepartment < ActiveRecord::Base
+	establish_connection($current_session_db)
 	include PublicActivity::Common
 	has_many :users
 	has_many :roles
@@ -8,6 +9,7 @@ class Subdepartment < ActiveRecord::Base
 	has_many :departmental_sdbips
 	has_many :capital_projects
 	has_many :monthly_cashflows
+
 	validates_presence_of :subdepartment_name
 	validates_uniqueness_of :subdepartment_name
 

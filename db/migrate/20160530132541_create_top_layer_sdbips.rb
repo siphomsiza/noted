@@ -33,7 +33,6 @@ class CreateTopLayerSdbips < ActiveRecord::Migration
       t.decimal :second_quarter_actual
       t.decimal :third_quarter_actual
       t.decimal :fourth_quarter_actual
-
       t.timestamps null: false
     end
   end

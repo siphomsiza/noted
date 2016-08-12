@@ -37,9 +37,6 @@ class CreateUsers < ActiveRecord::Migration
     	  t.datetime  :reset_sent_at
         t.boolean  :super_admin, default: false
     	  t.boolean  :admin, default: false
-        t.boolean  :support, default: false
-        t.boolean  :standard_user, default: false
-        t.boolean  :assurance, default: false
     	  t.string  :activation_digest
     	  t.boolean  :activated, default: false
     	  t.datetime  :activated_at

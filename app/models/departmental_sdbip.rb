@@ -2,9 +2,9 @@ class DepartmentalSdbip < ActiveRecord::Base
 
 	include PublicActivity::Model
 	#tracked owner: ->(controller, model) { controller && controller.current_user }
+	establish_connection($current_session_db)
 	belongs_to :department
 	has_many :activities
-	belongs_to :list
 	belongs_to :subdepartment
 	belongs_to :kpi_owner
 	belongs_to :predetermined_objective
@@ -26,9 +26,7 @@ class DepartmentalSdbip < ActiveRecord::Base
 	belongs_to :risk_rating
 	belongs_to :strategic_objective
 	belongs_to :ward
-	belongs_to :departmental_idp_objective
 	has_one :capital_project
-	belongs_to :sdbip_time_period
 	has_many :kpi_results, :dependent => :destroy
 	accepts_nested_attributes_for :kpi_results, allow_destroy: true
 	has_many :assurances, :dependent => :destroy
@@ -468,6 +466,7 @@ end
 
 		end
 		if !end_date.blank? && end_date.length > 1
+
 
 		end
 		@departmental_sdbips = @sdbips

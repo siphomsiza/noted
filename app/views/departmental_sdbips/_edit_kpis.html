@@ -52,6 +52,9 @@
 		<%= f.label :strategic_objective_id, "Strategic Objectives" %><br>
 		<%= f.select :strategic_objective_id, StrategicObjective.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select Strategic Objective"}, class: "form-control" %>
 
+    <%= f.label :mtas_indicator_id, "Mtas Indicator" %><br>
+		<%= f.select :mtas_indicator_id, MtasIndicator.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select Mtas Indicator"}, class: "form-control" %>
+
 		<%= f.label :source_of_evidence, "Source of Evidence" %><br>
 
 		<%= f.text_field :source_of_evidence, :class => "form-control has-error col-md-5" %>
@@ -79,50 +82,6 @@
 		<%= f.label :revised_target, "Revised Target" %><br>
 
 		<%= f.text_field :revised_target, :class => "form-control has-error col-md-5" %>
-
-
-    <%= f.label :first_quarter_target, "First Quarter Target" %><br>
-
-		<%= f.text_field :first_quarter_target, :class => "form-control has-error col-md-5" %>
-
-    <%= f.label :first_quarter_actual, "First Quarter Actual" %><br>
-    <%= f.text_field :first_quarter_actual, :class => "form-control has-error col-md-5" %>
-
-    <%= f.label :first_quarter_poe, "First Quarter POE" %><br>
-    <%= f.file_field :first_quarter_poe, :class => "form-control has-error col-md-5" %>
-
-    <%= f.label :second_quarter_target, "Second Quarter Target" %><br>
-
-    <%= f.text_field :second_quarter_target, :class => "form-control has-error col-md-5" %>
-
-    <%= f.label :second_quarter_actual, "Second Quarter Actual" %><br>
-    <%= f.text_field :second_quarter_actual, :class => "form-control has-error col-md-5" %>
-
-    <%= f.label :second_quarter_poe, "Second Quarter POE" %><br>
-    <%= f.file_field :second_quarter_poe, :class => "form-control has-error col-md-5" %>
-
-
-    <%= f.label :third_quarter_target, "Third Quarter Target" %><br>
-
-    <%= f.text_field :third_quarter_target, :class => "form-control has-error col-md-5" %>
-
-
-    <%= f.label :third_quarter_actual, "Third Quarter Actual" %><br>
-    <%= f.text_field :third_quarter_actual, :class => "form-control has-error col-md-5" %>
-
-    <%= f.label :third_quarter_poe, "Third Quarter POE" %><br>
-    <%= f.file_field :third_quarter_poe, :class => "form-control has-error col-md-5" %>
-
-
-    <%= f.label :fourth_quarter_target, "Fourth Quarter Target" %><br>
-
-    <%= f.text_field :fourth_quarter_target, :class => "form-control has-error col-md-5" %>
-
-    <%= f.label :fourth_quarter_actual, "Fourth Quarter Actual" %><br>
-    <%= f.text_field :fourth_quarter_actual, :class => "form-control has-error col-md-5" %>
-
-    <%= f.label :fourth_quarter_poe, "Fourth Quarter POE" %><br>
-    <%= f.file_field :fourth_quarter_poe, :class => "form-control has-error col-md-5" %>
 
 		<%= f.label :kpa_id, " KPA" %><br>
 		<%= f.select :kpa_id, Kpa.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select National KPA"}, class: "form-control" %>

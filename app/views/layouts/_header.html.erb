@@ -1,14 +1,13 @@
 <header class="clearfix">
 	<section id="branding">
 		<%= link_to image_tag("ks-horizontal.jpg", alt: "Keystone Municipal Performance Management System logo") %>
-		<span class="pull-right">
-			<h4><%= DateTime.parse(@doc["item"]["condition"]["date"]).strftime("%a, %d %b %Y") %></h4>
-			<h4><span class="glyphicon glyphicon-map-marker"></span>&nbsp;<%= @doc["location"]["city"] %></h4>
-		<h4>
+		<span class="pull-right weather-display">
+			<%= DateTime.parse(@doc["item"]["condition"]["date"]).strftime("%A, %d %b %Y") %>
+			<span class="glyphicon glyphicon-map-marker"></span>&nbsp;<%= @doc["location"]["city"] %>&nbsp;
 			<span><img height="34" width="34" src="<%= @doc["item"]["description"][/\"(.*?)"/,1] %>"></span>
-			&nbsp;<%= @doc["item"]["condition"]["text"] %>,
+			<%= @doc["item"]["condition"]["text"] %>,
 			&nbsp;<%= ((@doc["item"]["condition"]["temp"].to_i - 32) / 1.8).round() %>&deg;C
-		</h4>
+
 	</span>
 	</section><!-- branding -->
 	<section class="navbar">
@@ -18,21 +17,21 @@
             <span class="glyphicon glyphicon-home"></span>INTRODUCTION
           <% end %>
         </li>
-				<% if current_user.admin? || (!current_user.role.blank? && (current_user.role.top_layer_administrator? ||current_user.role.finance_admin? || current_user.role.audit_log_reporting? || current_user.role.assurance_provider?))  %>
+				<% if current_user.admin? || current_user.super_admin? || (!current_user.role.blank? && (current_user.role.top_layer_administrator? ||current_user.role.finance_admin? || current_user.role.audit_log_reporting? || current_user.role.assurance_provider?))  %>
         <li class="<%= active_class(dashboard_path) %>">
           <%= link_to dashboard_path do %>
             <span class="glyphicon glyphicon-dashboard"></span>DASHBOARD
           <% end %>
         </li>
 					<% end %>
-					<% if current_user.admin? %>
+					<% if current_user.admin? || current_user.super_admin? %>
         <li class="<%= active_class(setups_path) %>">
           <%= link_to master_setups_path do %>
             <span class="glyphicon glyphicon-cog"></span>SETUP
           <% end %>
         </li>
 				<% end %>
-				<% if current_user.admin? || (!current_user.role.blank? && (current_user.role.kpi_owner? || current_user.role.audit_log_reporting? || current_user.role.assurance_provider? || current_user.role.top_layer_administrator? || current_user.role.finance_admin? || current_user.role.secondary_time_period?))  %>
+				<% if current_user.admin? || current_user.super_admin? || (!current_user.role.blank? && (current_user.role.kpi_owner? || current_user.role.audit_log_reporting? || current_user.role.assurance_provider? || current_user.role.top_layer_administrator? || current_user.role.finance_admin? || current_user.role.secondary_time_period?))  %>
         <li class="<%= active_class(departmental_sdbips_path) %>">
           <%= link_to departmental_sdbips_path do %>
             <span class="glyphicon glyphicon-tasks"></span>SDBIP
@@ -44,7 +43,7 @@
           <% end %>
         </li>
 				<% end%>
-				<% if current_user.admin? %>
+				<% if current_user.admin? || current_user.super_admin? %>
         <li class="<%= active_class(users_path) %>">
           <%= link_to users_path do %>
             <span class="glyphicon glyphicon-user"></span>USERS

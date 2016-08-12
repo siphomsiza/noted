@@ -123,6 +123,7 @@ ActiveRecord::Schema.define(version: 20160731141316) do
     t.string   "idp_ref"
     t.integer  "national_outcome_id"
     t.integer  "strategic_objective_id"
+    t.integer  "mtas_indicator_id"
     t.integer  "kpi_target_type_id"
     t.string   "source_of_evidence"
     t.string   "baseline"
@@ -130,20 +131,8 @@ ActiveRecord::Schema.define(version: 20160731141316) do
     t.string   "target"
     t.decimal  "annual_target",                   default: 0.0
     t.decimal  "revised_target"
-    t.decimal  "first_quarter_target"
-    t.decimal  "second_quarter_target"
-    t.decimal  "third_quarter_target"
-    t.decimal  "fourth_quarter_target"
     t.text     "performance_comments"
     t.text     "corrective_measures"
-    t.decimal  "first_quarter_actual"
-    t.decimal  "second_quarter_actual"
-    t.decimal  "third_quarter_actual"
-    t.decimal  "fourth_quarter_actual"
-    t.binary   "first_quarter_poe"
-    t.binary   "second_quarter_poe"
-    t.binary   "third_quarter_poe"
-    t.binary   "fourth_quarter_poe"
     t.string   "performance_standard",            default: "KPI Not Yet Measured", null: false
     t.integer  "risk_rating_id"
     t.integer  "kpa_id"
@@ -179,6 +168,7 @@ ActiveRecord::Schema.define(version: 20160731141316) do
     t.string   "idp_ref"
     t.integer  "national_outcome_id"
     t.integer  "strategic_objective_id"
+    t.integer  "mtas_indicator_id"
     t.integer  "kpi_target_type_id"
     t.string   "source_of_evidence"
     t.string   "baseline"
@@ -186,20 +176,8 @@ ActiveRecord::Schema.define(version: 20160731141316) do
     t.string   "target"
     t.decimal  "annual_target",                   default: 0.0
     t.decimal  "revised_target"
-    t.decimal  "first_quarter_target"
-    t.decimal  "second_quarter_target"
-    t.decimal  "third_quarter_target"
-    t.decimal  "fourth_quarter_target"
     t.text     "performance_comments"
     t.text     "corrective_measures"
-    t.decimal  "first_quarter_actual"
-    t.decimal  "second_quarter_actual"
-    t.decimal  "third_quarter_actual"
-    t.decimal  "fourth_quarter_actual"
-    t.binary   "first_quarter_poe"
-    t.binary   "second_quarter_poe"
-    t.binary   "third_quarter_poe"
-    t.binary   "fourth_quarter_poe"
     t.string   "performance_standard",            default: "KPI Not Yet Measured", null: false
     t.integer  "risk_rating_id"
     t.integer  "kpa_id"
@@ -225,7 +203,6 @@ ActiveRecord::Schema.define(version: 20160731141316) do
     t.string   "name",       null: false
     t.string   "tel_no",     null: false
     t.string   "fax_no",     null: false
-    t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -311,7 +288,10 @@ ActiveRecord::Schema.define(version: 20160731141316) do
 
   create_table "master_setups", force: :cascade do |t|
     t.string   "municipality", null: false
+    t.binary   "logo",         null: false
     t.string   "province",     null: false
+    t.float    "latitude"
+    t.float    "longitude"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end
@@ -586,9 +566,6 @@ ActiveRecord::Schema.define(version: 20160731141316) do
     t.datetime "reset_sent_at"
     t.boolean  "super_admin",                       default: false
     t.boolean  "admin",                             default: false
-    t.boolean  "support",                           default: false
-    t.boolean  "standard_user",                     default: false
-    t.boolean  "assurance",                         default: false
     t.string   "activation_digest"
     t.boolean  "activated",                         default: false
     t.datetime "activated_at"

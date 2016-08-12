@@ -18,20 +18,22 @@
           <th rowspan="2"><h4>Reporting Category</h4></th>
           <th rowspan="2"><h4>KPI Calculation Type</h4></th>
           <% @departmental_sdbips.each do |departmental_sdbip| %>
-          <% departmental_sdbip.kpi_results. each do |kpi_result| %>
-          <th colspan="6"><h4><%= kpi_result.period.strftime("%B %Y") %></h4></th>
-          <tr>
-            <th>Target</th>
-            <th>Actual</th>
-            <th>Performance Comments</th>
-            <th>Corrective Measures</th>
-            <th>Proof of Evidence</th>
-            <th>Assurance Status</th>
-          </tr>
+            <% if departmental_sdbip.kpi_results.any? %>
+              <% departmental_sdbip.kpi_results.each do |kpi_result| %>
+                <th colspan="6"><h4><%= kpi_result.period.strftime("%B %Y") %></h4></th>
+                  <tr>
+                      <th>Target</th>
+                      <th>Actual</th>
+                      <th>Performance Comments</th>
+                      <th>Corrective Measures</th>
+                      <th>Proof of Evidence</th>
+                      <th>Assurance Status</th>
+                  </tr>
+              <% end %>
           <% end %>
-          <% end %>
-
-        </tr>
+        <% end %>
+      </tr>
+      <tbody>
       <% @departmental_sdbips.each do |departmental_sdbip| %>
         <tr>
           <td><%= departmental_sdbip.id %></td>
@@ -45,54 +47,88 @@
 
             </div>
           </td>
-          <td><%= departmental_sdbip.kpi_ref_number %></td>
-          <td><% if !departmental_sdbip.predetermined_objective_id.blank? %><%= departmental_sdbip.predetermined_objective.name %><% end %></td>
-          <td ><% if !departmental_sdbip.kpi_owner_id.blank? %><%= departmental_sdbip.kpi_owner.name %><% end %></td>
-          <td><%= departmental_sdbip.unit_of_measurement %></td>
-          <td><%= departmental_sdbip.source_of_evidence %></td>
-          <td><% if !departmental_sdbip.ndp_objective_id.blank? %><%= departmental_sdbip.ndp_objective.name %><% end %></td>
-          <td><% if departmental_sdbip.capital_project %><%= departmental_sdbip.capital_project.mun_cp_ref %><% end %></td>
-          <td><% if !departmental_sdbip.reporting_category_id.blank? %><%= departmental_sdbip.reporting_category.name %><% end %></td>
-          <td><% if !departmental_sdbip.kpi_calculation_type_id.blank? %><%= departmental_sdbip.kpi_calculation_type.name %><% end %></td>
-          <% if departmental_sdbip.kpi_results.any? %>
-          <% departmental_sdbip.kpi_results.where(departmental_sdbip: departmental_sdbip.id).each do |kpi_result| %>
-          <td><%= kpi_result.target %></td>
-          <td><%= kpi_result.actual %></td>
-          <td><%= kpi_result.performance_comments %></td>
-          <td><%= kpi_result.corrective_measures %></td>
-          <td><%= kpi_result.departmental_sdbip.source_of_evidence %></td>
           <td>
-            <% if !kpi_result.assurance.blank? %>
-                  <% if kpi_result.assurance.signed_off? %>
-                  <%= link_to audit_performance_path(departmental_sdbip),remote: true,'data-target' => "#audit-sdbip-modal", 'data-toggle' => 'modal', :title=>"Click to Update" do %>
-                    <span class="glyphicon glyphicon-ok-circle limegreen"></span>
-                    <% end %>
-                  <% else %>
-                  <%= link_to audit_performance_path(departmental_sdbip),remote: true,'data-target' => "#audit-sdbip-modal", 'data-toggle' => 'modal', :title=>"Click to Update" do %>
-                    <span class="glyphicon glyphicon-remove-sign red"></span>
-                    <% end %>
 
-                  <% end %>
-            <% else %>
-            <%= link_to audit_performance_path(departmental_sdbip),remote: true,'data-target' => "#audit-sdbip-modal", 'data-toggle' => 'modal', :title=>"Click to Update" do %>
-              <span class="glyphicon glyphicon-minus-sign orange"></span>
-              <% end %>
+            <%= departmental_sdbip.kpi_ref_number %>
 
+          </td>
+
+          <td>
+            <% if !departmental_sdbip.predetermined_objective_id.blank? %>
+              <%= departmental_sdbip.predetermined_objective.name %>
             <% end %>
           </td>
+
+          <td>
+            <% if !departmental_sdbip.kpi_owner_id.blank? %>
+              <%= departmental_sdbip.kpi_owner.name %>
+            <% end %>
+          </td>
+
+          <td>
+            <%= departmental_sdbip.unit_of_measurement %>
+          </td>
+
+          <td>
+            <%= departmental_sdbip.source_of_evidence %>
+          </td>
+
+          <td>
+            <% if !departmental_sdbip.ndp_objective_id.blank? %>
+                <%= departmental_sdbip.ndp_objective.name %>
+            <% end %>
+          </td>
+          <td>
+            <% if departmental_sdbip.capital_project %>
+              <%= departmental_sdbip.capital_project.mun_cp_ref %>
+            <% end %>
+          </td>
+
+          <td>
+            <% if !departmental_sdbip.reporting_category_id.blank? %>
+              <%= departmental_sdbip.reporting_category.name %>
+            <% end %>
+          </td>
+          <td>
+            <% if !departmental_sdbip.kpi_calculation_type_id.blank? %>
+              <%= departmental_sdbip.kpi_calculation_type.name %>
+            <% end %>
+          </td>
+
+          <% if departmental_sdbip.kpi_results.any? %>
+            <% departmental_sdbip.kpi_results.where(departmental_sdbip: departmental_sdbip.id).each do |kpi_result| %>
+              <td><%= kpi_result.target %></td>
+              <td><%= kpi_result.actual %></td>
+              <td><%= kpi_result.performance_comments %></td>
+              <td><%= kpi_result.corrective_measures %></td>
+              <td><%= kpi_result.departmental_sdbip.source_of_evidence %></td>
+              <td>
+                <% if !kpi_result.assurance.blank? %>
+                  <% if kpi_result.assurance.signed_off? %>
+                        <%= link_to audit_performance_path(departmental_sdbip),remote: true,'data-target' => "#audit-sdbip-modal", 'data-toggle' => 'modal' do %>
+                          <span class="glyphicon glyphicon-ok-circle limegreen"></span>
+                        <% end %>
+                  <% else %>
+                        <%= link_to audit_performance_path(departmental_sdbip),remote: true,'data-target' => "#audit-sdbip-modal", :title=>"This KPI has been Signed Off.", 'data-toggle' => 'modal' do %>
+                          <span class="glyphicon glyphicon-remove-sign red"></span>
+                        <% end %>
+                  <% end %>
+                <% else %>
+                  <%= link_to "#",remote: true,'data-target' => "#audit-sdbip-modal", :title=>"This KPI has been Rejected", 'data-toggle' => 'modal' do %>
+                      <span class="glyphicon glyphicon-minus-sign orange"></span>
+                  <% end %>
+                <% end %>
+          </td>
           <% end %>
-          <% else %>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <% end %>
-        </tr>
+        <% else %>
+        
         <% end %>
 
+        </tr>
+      <% end %>
+      </tbody>
     </table>
-  </div>
 
+  </div>
+  <%= will_paginate @departmental_sdbips %>
 </div>
