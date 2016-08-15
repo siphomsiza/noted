@@ -5,7 +5,9 @@ class SessionsController < ApplicationController
   end
 
   def create
+
     if !params[:session][:company_code].blank?
+      ActiveRecord::Base.clear_all_connections!
       company_code = params[:session][:company_code]
       set_up_database company_code
     end
@@ -27,20 +29,20 @@ class SessionsController < ApplicationController
         message  = "Account not activated. "
         message += "Check your email for the activation link."
         flash[:warning] = message
-        redirect_to root_url
+        redirect_to root_url and return
 
       elsif (!user.activated? || user.activated?) && user.terminated?
         message  = "Account terminated. "
         message += "please contact your system administrator."
         flash[:warning] = message
-        redirect_to root_url
+        redirect_to root_url and return
       elsif (user.login_attempts >= user.max_login_attempts)
         message  = "Account Locked. "
         message += "please contact your system administrator."
         flash[:danger] = message
-        redirect_to root_url
+        redirect_to root_url and return
       else
-
+        redirect_to(root_url) and return
       end
     else
 
@@ -55,7 +57,7 @@ class SessionsController < ApplicationController
               flash[:danger] = message
 
           else
-
+              redirect_to(root_url) and return
           end
 
         elsif !@user.blank? && @user.login_attempts >= @user.max_login_attempts
@@ -69,7 +71,7 @@ class SessionsController < ApplicationController
           #message += "please contact your system administrator.."
           flash[:danger] = message
       end
-      render 'new'
+      redirect_to(root_url) and return
     end
   end
 

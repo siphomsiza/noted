@@ -39,7 +39,7 @@ User.create!( firstname: "Arms",
 20.times do |n|
 name  = Faker::Name.first_name
 lastname = Faker::Name.last_name
-title =Faker::Name.title
+title =Faker::Name.prefix
 location = Faker::Address.city
 landline=Faker::PhoneNumber.phone_number
 mobile=Faker::PhoneNumber.cell_phone
@@ -63,11 +63,14 @@ mobile=Faker::PhoneNumber.cell_phone
 end
 
 MasterSetup.create!(
-  municipality: "Mkhondo Local Municipality",
+  municipality: "Mkhondo Local Municipality(Dev Database)",
   logo: File.open(File.join(Rails.root,'/app/assets/images','mkhondo-logo.png')),# File.open("../app/assets/images/mkhondo-logo.png"),
   province: "Mpumalanga",
-  #latitude: ,
-  #longitude: ,
+  latitude: -27.007764 ,
+  longitude: 30.801888,
+  logo_name: 'mkhondo-logo',
+  logo_content_type: 'image/png',
+  address: 'Mkhondo Municipality<br />Piet Retief, 2380<br />Mpumalanga, South Africa'
 )
 end
 landline=Faker::Number.number(10)

@@ -6,7 +6,7 @@
 <div class="modal-body">
 <div class="row">
 <div class="col-lg-10 col-md-offset-1">
-  <%= form_for @master_setup do |f| %>
+  <%= form_for @master_setup,:multipart => true do |f| %>
     <% if @master_setup.errors.any? %>
       <div id="error_explanation">
         <h2><%= pluralize(@master_setup.errors.count, "error") %> prohibited this master_setup from being saved:</h2>
@@ -27,6 +27,10 @@
     <div class="field col-lg-12">
     <%= f.label :province, "Province:" %>
     <%= f.text_field :province, :class => "form-control",:autocomplete=>"off",:required=>true %>
+    </div>
+    <div class="field col-lg-12">
+    <%= f.label :address, "Address:" %>
+    <%= f.text_area :address, :class => "form-control",:autocomplete=>"off",:required=>true %>
     </div>
     <div class="row">
     <div class="field col-lg-12">

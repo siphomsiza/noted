@@ -1,5 +1,5 @@
 class Subdepartment < ActiveRecord::Base
-	establish_connection($current_session_db)
+	ActiveRecord::Base.establish_connection($current_session_db)
 	include PublicActivity::Common
 	has_many :users
 	has_many :roles
