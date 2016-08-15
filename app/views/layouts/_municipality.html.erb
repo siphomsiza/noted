@@ -2,7 +2,7 @@
   <% if !$municipality_info.blank? %>
   <h1>
     <span>
-      <%= image_tag url_for(action: :show_image, controller: :master_setups, :id=>$municipality_info.id) %>
+      <%= image_tag url_for(:controller => "master_setups",:action => "show_image",  :id=>$municipality_info.id) %>
     </span><%= $municipality_info.municipality %>
   </h1>
   <% end %>

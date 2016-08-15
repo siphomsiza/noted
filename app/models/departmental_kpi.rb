@@ -1,5 +1,5 @@
 class DepartmentalKpi < ActiveRecord::Base
-  establish_connection($current_session_db)
+  ActiveRecord::Base.establish_connection($current_session_db)
   belongs_to :department
 	belongs_to :list
 	belongs_to :subdepartment

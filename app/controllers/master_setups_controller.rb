@@ -1,6 +1,6 @@
 class MasterSetupsController < ApplicationController
   before_action :set_master_setup, only: [:show, :edit, :update, :destroy]
-  before_action :logged_in_user, only: [:new, :index, :edit, :update, :destroy,:show]
+  before_action :logged_in_user, only: [:show_image,:new, :index, :edit, :update, :destroy,:show]
   before_action :admin_user,     only: [:new, :index, :edit, :update, :destroy,:show]
   # GET /master_setups
   # GET /master_setups.json
@@ -27,8 +27,8 @@ class MasterSetupsController < ApplicationController
     @setup = MasterSetup.find_by(:id=>1)
   end
   def show_image
-  @logo = MasterSetup.find(params[:id])
-  send_data(@logo.logo, :type => 'image/png', :disposition => 'inline')
+    @logo = MasterSetup.find(params[:id])
+    send_data(@logo.logo,type: @logo.logo_content_type,:disposition => "inline",filename: @logo.logo_name)
   end
   # GET /master_setups/1
   # GET /master_setups/1.json
@@ -88,7 +88,7 @@ class MasterSetupsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def master_setup_params
-      params.require(:master_setup).permit(:municipality,:logo,:province, :latitude,:longitude, :regions_attributes => [ :id,:name,:_destroy])
+      params.require(:master_setup).permit(:municipality,:logo,:logo_name,:address,:logo_content_type,:province, :latitude,:longitude, :regions_attributes => [ :id,:name,:_destroy])
     end
 
     def set_user

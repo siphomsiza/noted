@@ -2,7 +2,7 @@ class DepartmentalSdbip < ActiveRecord::Base
 
 	include PublicActivity::Model
 	#tracked owner: ->(controller, model) { controller && controller.current_user }
-	establish_connection($current_session_db)
+	ActiveRecord::Base.establish_connection($current_session_db)
 	belongs_to :department
 	has_many :activities
 	belongs_to :subdepartment

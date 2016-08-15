@@ -1,5 +1,5 @@
 class MscoreClassification < ActiveRecord::Base
-	establish_connection($current_session_db)
+	ActiveRecord::Base.establish_connection($current_session_db)
 	include PublicActivity::Common
 	has_many :departmental_sdbips
 	has_many :capital_projects

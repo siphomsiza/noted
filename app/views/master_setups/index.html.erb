@@ -48,11 +48,11 @@ $(function() {
 	var map;
 
 	function drawMap() {
-		var municipalityLocation = new google.maps.LatLng(-<%= @setup.latitude %>, <%= @setup.longitude %>);
+		var municipalityLocation = new google.maps.LatLng(<%= @setup.latitude %>, <%= @setup.longitude %>);
 
 		var mapOptions = {
 	  	'center' : municipalityLocation,
-	  	'zoom' : 14,
+	  	'zoom' : 8,
 	  	'mapTypeId' : google.maps.MapTypeId.ROADMAP,
 	  	'draggable' : false
 		};
@@ -62,12 +62,10 @@ $(function() {
 		var marker = new google.maps.Marker({
 			position: municipalityLocation,
 			map: map,
-			title: 'Find us here (Mkhondo Municipality)'
+			title: 'Find us here (<%= @setup.municipality %>)'
 		});
 
-		var popupContent = 'Mkhondo Municipality<br />';
-		popupContent += 'Piet Retief, 2380<br />';
-		popupContent += 'Mpumalanga, South Africa';
+		var popupContent = '<%= simple_format(@setup.address,wrapper_tag: '<br />') %>';
 
 		var infowindow = new google.maps.InfoWindow({
 			content: popupContent,
