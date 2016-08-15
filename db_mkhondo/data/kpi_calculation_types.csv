@@ -1,0 +1,8 @@
+name,code,description
+Carry Over,CO,Targets & Actuals carry over from one period to the next (% of project complete). The highest available Target and Actual is used to calculate the Overall Performance for the period.
+Accumulative,ACC,The system sums the Targets and Actuals in order to calculate the Overall Performance for the period.
+Stand-Alone,STD,The system averages the Targets and Actuals over the number of targets greater than 0 in order to calculate the Overall Performance for the period.
+Zero,ZERO,Actuals must be less than or equal to the Target and the Targets are 0. The system sums the Targets and Actuals in order to calculate the Overall Performance for the period.
+Not applicable,NA,No calculation is done.
+Reverse Stand-Alone,REV,Actuals must be less than or equal to the Target and the Target is greater than 0. The system averages the Targets and Actuals over the number of targets greater than 0 in order to calculate the Overall Performance for the period.
+Last Value,LAST,The most recent Target and Actual greater than zero is used to calculate the Overall Performance for the Period.

@@ -22,7 +22,7 @@ class DepartmentalSdbipsController < ApplicationController
     @departments = Department.includes(:subdepartments)
     @deleted_kpis =  DepartmentalKpi.paginate(page: params[:page],per_page: 10)
     @departmental_sdbips_to_file = DepartmentalSdbip.order(:department_id,:subdepartment_id)
-    @subdepartments = Subdepartment.where("department_id = ?", Department.first.id)
+      #@subdepartments = Subdepartment.where("department_id = ?", Department.first.id)
     @kpitypes = KpiType.all
     if params[:subdepartment_id]
 

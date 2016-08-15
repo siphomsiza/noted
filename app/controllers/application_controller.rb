@@ -7,7 +7,6 @@ class ApplicationController < ActionController::Base
   hide_action :current_user
   protect_from_forgery with: :exception
   include SessionsHelper
-  $municipality_info = MasterSetup.first
   def record_activity(note)
     if !current_user.blank?
       @activity = ActivityLog.new

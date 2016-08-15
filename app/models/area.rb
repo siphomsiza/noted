@@ -1,5 +1,5 @@
 class Area < ActiveRecord::Base
-  establish_connection($current_session_db)
+  ActiveRecord::Base.establish_connection($current_session_db)
   has_many :wards, :dependent => :destroy
 	accepts_nested_attributes_for :wards, allow_destroy: true
 	validates_presence_of :name

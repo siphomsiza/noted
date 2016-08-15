@@ -2,6 +2,8 @@ module SessionsHelper
   # Logs in the given user.
   def log_in(user)
     session[:user_id] = user.id
+    session[:session_database] = $logged_in_database
+    $current_session_db = session[:session_database]
   end
 
   # Remembers a user in a persistent session.
@@ -12,22 +14,29 @@ module SessionsHelper
   end
   def set_up_database(company_code)
     if company_code == "MKH001"
+      ActiveRecord::Base.clear_all_connections!
       ActiveRecord::Base.establish_connection(DB1_CONF)
-      session[:session_database] = DB1_CONF
+      $logged_in_database = DB1_CONF
+      $municipality_info = MasterSetup.first
     end
     if company_code == "DEV001"
+      ActiveRecord::Base.clear_all_connections!
       ActiveRecord::Base.establish_connection(:development)
-      session[:session_database] = :development
+      $logged_in_database = :development
+      $municipality_info = MasterSetup.first
     end
     if company_code == "SAK001"
+      ActiveRecord::Base.clear_all_connections!
       ActiveRecord::Base.establish_connection(DB2_CONF)
-      session[:session_database] = DB2_CONF
+      $logged_in_database = DB2_CONF
+      $municipality_info = MasterSetup.first
     end
     if company_code != "MKH001" && company_code != "SAK001" && company_code != "DEV001"
+      ActiveRecord::Base.clear_all_connections!
       flash[:danger] = "wrong log on information provided..."
       redirect_to(root_url) and return
     end
-    $current_session_db = session[:session_database]
+
   end
   # Returns true if the given user is the current user.
   def current_user?(user)
@@ -62,9 +71,10 @@ module SessionsHelper
   # Logs out the current user.
   def log_out
     forget(current_user)
-    session.delete(:user_id)
     session.delete(:session_database)
+    session.delete(:user_id)
     @current_user = nil
+    ActiveRecord::Base.clear_all_connections!
   end
 
   # Redirects to stored location (or to the default).

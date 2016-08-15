@@ -1,5 +1,5 @@
 class CapitalProject < ActiveRecord::Base
-  establish_connection($current_session_db)
+  ActiveRecord::Base.establish_connection($current_session_db)
   include PublicActivity::Common
   belongs_to :departmental_sdbip
   belongs_to :subdepartment
