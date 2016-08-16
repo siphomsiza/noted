@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  departmental_sdbip_id: 1
+  user_id: 1
+  signed_off: false
+  response: MyText
+  kpi_result_id: 1
+  poe: 
+
+two:
+  departmental_sdbip_id: 1
+  user_id: 1
+  signed_off: false
+  response: MyText
+  kpi_result_id: 1
+  poe: 

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  can_edit: false
+  can_create: false
+  can_approve: false
+  can_update: false
+
+two:
+  user_id: 1
+  can_edit: false
+  can_create: false
+  can_approve: false
+  can_update: false
