@@ -1,4 +1,3 @@
-*.yml
 *.rbc
 capybara-*.html
 .rspec
@@ -30,6 +29,8 @@ bower.json
 /Vagrantfile
 /backups/*
 /config/database.yml
+/config/sakhisizwe_db.yml
+/config/mkhondo_db.yml
 /config/initializers/rack_attack.rb
 /config/initializers/smtp_settings.rb
 /config/initializers/relative_url.rb

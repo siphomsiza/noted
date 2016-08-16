@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  departmental_sdbip_id: 1
+  poe: 
+  user_id: 1
+
+two:
+  departmental_sdbip_id: 1
+  poe: 
+  user_id: 1
