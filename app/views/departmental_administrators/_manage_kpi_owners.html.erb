@@ -1,90 +1,89 @@
 <div class="tab-pane fade" id="kpi-owners">
 
-  <section class="media">
+    <section class="media">
 
-	  <div class="media-body">
+        <div class="media-body">
 
-			<article>
+            <article>
 
-				<div class="tabbable tabs fourth-level-navs">
+                <div class="tabbable tabs fourth-level-navs">
 
-          <ul class="nav nav-tabs">
+                    <ul class="nav nav-tabs">
 
-          <li class="active">
+                        <li class="active">
 
-            <a href = "#kpi_owners" data-toggle = "tab">Manage</a>
+                            <a href="#kpi_owners" data-toggle="tab">Manage</a>
 
-          </li>
-        </ul>
-				</div><!-- tabbable tabs -->
+                        </li>
+                    </ul>
+                </div>
+                <!-- tabbable tabs -->
 
-				<section class="tab-content">
+                <section class="tab-content">
 
-         <div class = "tab-pane active fade in" id = "kpi_owners">
+                    <div class="tab-pane active fade in" id="kpi_owners">
 
-               <div class="col col-lg-8 col-lg-offset-2">
+                        <div class="col col-lg-8 col-lg-offset-2">
 
-                 <table class="table table-striped table-responsive table-hover">
-                     <tr>
+                            <table class="table table-striped table-responsive table-hover">
+                                <tr>
 
-                       <th>KPI Owner</th>
+                                    <th>KPI Owner</th>
 
-                       <th>Administrators</th>
+                                    <th>Administrators</th>
 
-                       <th>Action</th>
+                                    <th>Action</th>
 
-                     </tr>
-                     <% @kpi_owners.each do |kpi_owner| %>
+                                </tr>
+                                <% @kpi_owners.each do |kpi_owner| %>
 
-                       <tr>
+                                <tr>
 
-                         <td><%= kpi_owner.name %></td>
+                                    <td><%= kpi_owner.name %></td>
 
-                         <td>
+                                    <td>
 
-                          <% if !kpi_owner.user_id.blank? %>
+                                        <% if !kpi_owner.user_id.blank? %>
 
-                          <%= kpi_owner.user.firstname %>&nbsp;<%= kpi_owner.user.surname %>
+                                        <%= kpi_owner.user.firstname %>&nbsp;<%= kpi_owner.user.surname %>
 
-                          <% end %>
+                                        <% end %>
 
-                      </td>
+                                    </td>
 
-                      <td>
-                        <% if !kpi_owner.user_id.blank? %>
-                        <%= link_to edit_kpi_owner_path(kpi_owner),remote: true,'data-target' => "#kpi-owner-modal", 'data-toggle' => 'modal', class: "btn btn-mini", :title=>"Click to edit" do %>
-                                <span class="glyphicon glyphicon-remove-sign"></span>&nbsp;Deactivate
-                              <% end %>
-                                <div id="kpi-owner-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+                                    <td>
+                                        <% if !kpi_owner.user_id.blank? %>
+                                        <%= link_to edit_kpi_owner_path(kpi_owner),remote: true,'data-target' => "#kpi-owner-modal", 'data-toggle' => 'modal', class: "btn btn-mini", :title=>"Click to edit" do %>
+                                        <span class="glyphicon glyphicon-remove-sign"></span>&nbsp;Deactivate
+                                        <% end %>
+                                        <div id="kpi-owner-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true"></div>
+                                    <% else %>
+                                        <%= link_to add_admin_path(:id=>kpi_owner.id),remote: true,'data-target' => "#new-kpi-owner-modal", 'data-toggle' => 'modal', class: "btn btn-mini", :title=>"Click to edit" do %>
+                                        <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;Add
+                                        <% end %>
+                                        <div id="new-kpi-owner-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true"></div>
+                                        <% end %>
+                                    </td>
 
-                                </div>
-                            <% else %>
-                            <%= link_to add_admin_path(:id=>kpi_owner.id),remote: true,'data-target' => "#new-kpi-owner-modal", 'data-toggle' => 'modal', class: "btn btn-mini", :title=>"Click to edit" do %>
-                                <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;Add
-                              <% end %>
-                                <div id="new-kpi-owner-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+                                </tr>
 
-                                </div>
-                            <% end %>
-                      </td>
+                                <% end %>
 
-                         </tr>
+                            </table>
+                            <%= will_paginate @kpi_owners %>
+                        </div>
+                        <div class="tab-pane fade" id="add_kpi_owner"></div>
 
-                     <% end %>
+                    </section>
+                    <!-- tab-content -->
 
-                 </table>
-                 <%= will_paginate @kpi_owners %>
-        </div>
-        <div class = "tab-pane fade" id = "add_kpi_owner">
+                </article>
+                <!-- users -->
 
-         </div>
+            </div>
+            <!-- media-body -->
 
-				</section><!-- tab-content -->
+        </section>
+        <!-- media -->
 
-			</article><!-- users -->
-
-	  </div><!-- media-body -->
-
-	</section><!-- media -->
-
-</div>
+    </div>

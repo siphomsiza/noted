@@ -12,12 +12,14 @@ class SdbipTimePeriodsController < ApplicationController
       #@response.units.temperature
       #@response.condition.temp
 
-  rescue SignalException => e
+    rescue SignalException => e
     flash[:notice] = "received Exception #{e.message}"
     puts "received Exception #{e}"
-  end
+    end
     @sdbip_time_period = SdbipTimePeriod.new
-    @sdbip_time_periods = SdbipTimePeriod.paginate( page: params[:page],per_page: 50)
+    @sdbip_time_periods = SdbipTimePeriod.all
+    @closed_primary = @sdbip_time_periods.select(:id).where("primary_closure = ? AND primary_status = ?",Date.today,true)
+    @closed_secondary = @sdbip_time_periods.select(:id).where("secondary_closure = ? AND secondary_status = ?",Date.today,true)
   end
 
   def show
@@ -42,7 +44,9 @@ class SdbipTimePeriodsController < ApplicationController
 
   def edit
     @sdbip_time_period = SdbipTimePeriod.find(params[:id])
-
+  end
+  def update_status
+    
   end
   def close_primary
     @sdbip_time_period = SdbipTimePeriod.find(params[:id])

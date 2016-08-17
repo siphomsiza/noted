@@ -1,51 +1,53 @@
 <% provide(:title, 'Administrators') %>
 <script>
-$(function() {
-	//highlight the current nav
-	$("#applicationmanifest a:contains('SETUP')").parent().addClass('active');
-}); //jQuery is loaded
+	$(function () {
+		//highlight the current nav
+		$("#applicationmanifest a:contains('SETUP')").parent().addClass('active');
+	}); //jQuery is loaded
 </script>
 
 <div class="row">
-<div class="col col-lg-12">
-	<%= render 'layouts/municipality' %>
+	<div class="col col-lg-12">
+		<%= render 'layouts/municipality' %>
 
-<ul class="nav nav-pills nav-justified">
-<li><%= link_to "Master Setup", master_setups_path %></li>
-<li><%= link_to "System Setup", setups_path  %></li>
-<li><%= link_to "Departments", departments_path %></li>
-<li class="active"><%= link_to "Administrators", departmental_administrators_path %></li>
-<li><%= link_to "Headings", headings_path %></li>
-<li><%= link_to "Lists", lists_path %></li>
-<li><%= link_to "Time Periods", sdbip_time_periods_path %></li>
-</ul>
+		<ul class="nav nav-pills nav-justified">
+			<li><%= link_to "Master Setup", master_setups_path %></li>
+			<li><%= link_to "System Setup", setups_path  %></li>
+			<li><%= link_to "Departments", departments_path %></li>
+			<li class="active"><%= link_to "Administrators", departmental_administrators_path %></li>
+			<li><%= link_to "Headings", headings_path %></li>
+			<li><%= link_to "Lists", lists_path %></li>
+			<li><%= link_to "Time Periods", sdbip_time_periods_path %></li>
+		</ul>
+	</div>
 </div>
-</div>
-    <div class="row">
-			<div class="col col-lg-12">
-			<div class="tabbable tabs third-level-navs" id="roles-tabs">
-				<ul id = "myTab" class = "nav nav-tabs">
-					<li class="active">
-						<a href = "#top_layer_administrators" data-toggle = "tab">Top Layer Administrators</a>
-					</li>
-					<li>
-						<a href = "#departmental_administrators" data-toggle = "tab">Departmental Administrators</a>
-					</li>
-					<li>
-						<a href = "#subdepartmental_administrators" data-toggle = "tab">Subdepartmental Administrators</a>
-					</li>
-					<li>
-						<a href = "#kpi-owners" data-toggle = "tab">KPI Owners</a>
-					</li>
-				</ul><!-- nav nav-tabs -->
-			</div><!-- tabbable tabs -->
+<div class="row">
+	<div class="col col-lg-12">
+		<div class="tabbable tabs third-level-navs" id="roles-tabs">
+			<ul id="myTab" class="nav nav-tabs">
+				<li class="active">
+					<a href="#top_layer_administrators" data-toggle="tab">Top Layer Administrators</a>
+				</li>
+				<li>
+					<a href="#departmental_administrators" data-toggle="tab">Departmental Administrators</a>
+				</li>
+				<li>
+					<a href="#subdepartmental_administrators" data-toggle="tab">Subdepartmental Administrators</a>
+				</li>
+				<li>
+					<a href="#kpi-owners" data-toggle="tab">KPI Owners</a>
+				</li>
+			</ul>
+			<!-- nav nav-tabs -->
+		</div>
+		<!-- tabbable tabs -->
 
-			<section class="tab-content">
-				<%= render 'manage_top_layer_administrators'%>
-				<%= render 'manage_departmental_administrators' %>
-				<%= render 'manage_subdepartmental_administrators' %>
-				<%= render 'manage_kpi_owners' %>
-			</section>
+		<section class="tab-content">
+			<%= render 'manage_top_layer_administrators'%>
+			<%= render 'manage_departmental_administrators' %>
+			<%= render 'manage_subdepartmental_administrators' %>
+			<%= render 'manage_kpi_owners' %>
+		</section>
 
 	</div>
 </div>

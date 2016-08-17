@@ -1,100 +1,99 @@
 <% provide(:title, "Departments") %>
 <script>
-$(function() {
-	//highlight the current nav
-	$("#applicationmanifest a:contains('SETUP')").parent().addClass('active');
-}); //jQuery is loaded
+	$(function () {
+		//highlight the current nav
+		$("#applicationmanifest a:contains('SETUP')").parent().addClass('active');
+	}); //jQuery is loaded
 </script>
 <div class="row">
-<div class="col col-lg-12">
-	<%= render 'layouts/municipality' %>
-<ul class="nav nav-pills nav-justified">
-<li><%= link_to "Master Setup", master_setups_path %></li>
-				<li>
+	<div class="col col-lg-12">
+		<%= render 'layouts/municipality' %>
+		<ul class="nav nav-pills nav-justified">
+			<li><%= link_to "Master Setup", master_setups_path %></li>
+			<li>
 				<%= link_to "System Setup", setups_path %>
-				</li>
-				<li class="active">
-						<%= link_to "Departments", departments_path %>
-				</li>
-				<li><%= link_to "Administrators", departmental_administrators_path %></li>
-				<li><%= link_to "Headings", headings_path %></li>
-				<li><%= link_to "Lists", lists_path %></li>
-				<li><%= link_to "Time Periods", sdbip_time_periods_path %></li>
-			</ul>
-		</div>
+			</li>
+			<li class="active">
+				<%= link_to "Departments", departments_path %>
+			</li>
+			<li><%= link_to "Administrators", departmental_administrators_path %></li>
+			<li><%= link_to "Headings", headings_path %></li>
+			<li><%= link_to "Lists", lists_path %></li>
+			<li><%= link_to "Time Periods", sdbip_time_periods_path %></li>
+		</ul>
 	</div>
- <div class="row">
-	 <div class="col col-lg-12">
-            <div class="tabbable tabs third-level-navs" id="departments-tabs">
-              <ul id = "myTab" class = "nav nav-tabs">
+</div>
+<div class="row">
+	<div class="col col-lg-12">
+		<div class="tabbable tabs third-level-navs" id="departments-tabs">
+			<ul id="myTab" class="nav nav-tabs">
 
-                <li class="active">
-                  <a href = "#departments" data-toggle = "tab">Manage</a>
-                </li>
-								<li>
-                  <a href = "#add_departments" data-toggle = "tab">Create</a>
-                </li>
-              </ul><!-- nav nav-tabs -->
-            </div><!-- tabbable tabs -->
-					</div>
-				</div>
-						<div class="row">
-							<div class="col col-lg-12">
-    <div id = "myTabContent" class = "tab-content">
+				<li class="active">
+					<a href="#departments" data-toggle="tab">Manage</a>
+				</li>
+				<li>
+					<a href="#add_departments" data-toggle="tab">Create</a>
+				</li>
+			</ul>
+			<!-- nav nav-tabs -->
+		</div>
+		<!-- tabbable tabs -->
+	</div>
+</div>
+<div class="row">
+	<div class="col col-lg-12">
+		<div id="myTabContent" class="tab-content">
 
-     <div class = "tab-pane active fade in" id = "departments">
+			<div class="tab-pane active fade in" id="departments">
 
-      <table class="table table-hover table-striped">
-          <tr>
-          <th>&nbsp;</th>
-            <th>Department</th>
+				<table class="table table-hover table-striped">
+					<tr>
+						<th>&nbsp;</th>
+						<th>Department</th>
 						<th>Sub-departments</th>
-            <th>Telephone Number</th>
-            <th>Fax Number</th>
-            <th>Actions</th>
-          </tr>
-        <% @departments.each do |department| %>
-          <tr class="<%= cycle('odd', 'even') %>">
-           <td><%= department.id %></td>
-            <td><%= department.name %></td>
+						<th>Telephone Number</th>
+						<th>Fax Number</th>
+						<th>Actions</th>
+					</tr>
+					<% @departments.each do |department| %>
+					<tr class="<%= cycle('odd', 'even') %>">
+						<td><%= department.id %></td>
+						<td><%= department.name %></td>
 						<td>
-						<% department.subdepartments.each do |subdepartment| %>
-						  <li><%=  subdepartment.subdepartment_name %></li>
+							<% department.subdepartments.each do |subdepartment| %>
+							<li><%=  subdepartment.subdepartment_name %></li>
 							<% end %>
 
 						</td>
-             <td><%=  number_to_phone(department.tel_no, :area_code => true, :delimiter => ' ') %></td>
-              <td><%=  number_to_phone(department.fax_no, :area_code => true, :delimiter => ' ') %></td>
+						<td><%=  number_to_phone(department.tel_no, :area_code => true, :delimiter => ' ') %></td>
+						<td><%=  number_to_phone(department.fax_no, :area_code => true, :delimiter => ' ') %></td>
 
+						<td>
+							<% if current_user.admin? || current_user.super_admin? %>
+							<%= link_to edit_department_path(department),remote: true,'data-target' => "#departments-modal", 'data-toggle' => 'modal', class: "btn btn-mini" do %>
+							<span class="glyphicon glyphicon-edit"></span>Edit
+							<% end %>
+							<% end %>
 
-            <td>
-            <% if current_user.admin? %>
-            <%= link_to edit_department_path(department),remote: true,'data-target' => "#departments-modal", 'data-toggle' => 'modal', class: "btn btn-mini" do %>
-              <span class="glyphicon glyphicon-edit"></span>Edit
-            <% end %>
-            <% end %>
+							<div id="departments-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true"></div>
 
-            <div id="departments-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
-
-          </div>
-
-            <% if current_user.admin? %>
-            &nbsp;<%= link_to department, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-mini" do %>
-              <span class="glyphicon glyphicon-trash"></span>Delete
-            <% end %>
-            <% end %>
-            </td>
-          </tr>
-        <% end %>
-      </table>
-      <%= will_paginate %>
-  </div>
-	<div class="tab-pane fade" id="add_departments">
-		<br/>
-		<h3>New Department</h3>
-		<hr/>
-		<%= render 'form' %>
+							<% if current_user.admin? || current_user.super_admin? %>
+							&nbsp;<%= link_to department, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-mini" do %>
+							<span class="glyphicon glyphicon-trash"></span>Delete
+							<% end %>
+							<% end %>
+						</td>
+					</tr>
+					<% end %>
+				</table>
+				<%= will_paginate %>
+			</div>
+			<div class="tab-pane fade" id="add_departments">
+				<br/>
+				<h3>New Department</h3>
+				<hr/>
+				<%= render 'form' %>
+			</div>
+		</div>
 	</div>
-</div>
-</div>
 </div>

@@ -1,169 +1,173 @@
 <% provide(:title, 'Headings') %>
 <script>
-$(function() {
-	//highlight the current nav
-	$("#applicationmanifest a:contains('SETUP')").parent().addClass('active');
-}); //jQuery is loaded
+	$(function () {
+		//highlight the current nav
+		$("#applicationmanifest a:contains('SETUP')").parent().addClass('active');
+	}); //jQuery is loaded
 </script>
 
 <div class="row">
-<div class="col col-lg-12">
-	<%= render 'layouts/municipality' %>
+	<div class="col col-lg-12">
+		<%= render 'layouts/municipality' %>
 
-<ul class="nav nav-pills nav-justified">
-<li><%= link_to "Master Setup", master_setups_path %></li>
-<li><%= link_to "System Setup", setups_path %></li>
-<li><%= link_to "Departments", departments_path %></li>
-<li><%= link_to "Administrators", departmental_administrators_path %></li>
-<li class="active"><%= link_to "Headings", headings_path %></li>
-<li><%= link_to "Lists", lists_path%></li>
-<li><%= link_to "Time Periods", sdbip_time_periods_path %></li>
-</ul>
+		<ul class="nav nav-pills nav-justified">
+			<li><%= link_to "Master Setup", master_setups_path %></li>
+			<li><%= link_to "System Setup", setups_path %></li>
+			<li><%= link_to "Departments", departments_path %></li>
+			<li><%= link_to "Administrators", departmental_administrators_path %></li>
+			<li class="active"><%= link_to "Headings", headings_path %></li>
+			<li><%= link_to "Lists", lists_path%></li>
+			<li><%= link_to "Time Periods", sdbip_time_periods_path %></li>
+		</ul>
+	</div>
 </div>
-</div>
 
-    <div class="row">
-				<div class="col col-lg-12">
-            <div class="tabbable tabs third-level-navs" id="headings-tabs">
-              <ul id = "myTab" class = "nav nav-tabs">
+<div class="row">
+	<div class="col col-lg-12">
+		<div class="tabbable tabs third-level-navs" id="headings-tabs">
+			<ul id="myTab" class="nav nav-tabs">
 
-                <li class="active">
-                  <a href = "#headings" data-toggle = "tab">Manage</a>
-                </li>
-								<li>
-									<a href = "#add_heading" data-toggle = "tab">Create</a>
-								</li>
+				<li class="active">
+					<a href="#headings" data-toggle="tab">Manage</a>
+				</li>
+				<li>
+					<a href="#add_heading" data-toggle="tab">Create</a>
+				</li>
 
-              </ul><!-- nav nav-tabs -->
-            </div><!-- tabbable tabs -->
+			</ul>
+			<!-- nav nav-tabs -->
+		</div>
+		<!-- tabbable tabs -->
 
-    <div id = "myTabContent" class = "tab-content">
+		<div id="myTabContent" class="tab-content">
 
-     <div class = "tab-pane active fade in" id = "headings">
+			<div class="tab-pane active fade in" id="headings">
 
-     <div class="tabbable tabs fourth-level-navs" id="headings-tabs">
-      <ul id = "myTab" class = "nav nav-tabs">
-      <li class="active">
-        <a href = "#general_headings" data-toggle = "tab">General</a>
-      </li>
-      <li>
-        <a href = "#departmental_sdbip" data-toggle = "tab">Departmental SDBIP</a>
-      </li>
-      <li>
-        <a href = "#top_layer_sdbip" data-toggle = "tab">Top Layer SDBIP</a>
-      </li>
-      <li>
-        <a href= "#capital_project" data-toggle = "tab">Capital Projects</a>
-      </li>
-      <li>
-        <a href= "#monthly_cashflow" data-toggle = "tab">Monthly Cashflows</a>
-      </li>
-      <li>
-        <a href= "#revenue_by_source" data-toggle = "tab">Revenue by Source</a>
-      </li>
-    </ul>
-    </div>
+				<div class="tabbable tabs fourth-level-navs" id="headings-tabs">
+					<ul id="myTab" class="nav nav-tabs">
+						<li class="active">
+							<a href="#general_headings" data-toggle="tab">General</a>
+						</li>
+						<li>
+							<a href="#departmental_sdbip" data-toggle="tab">Departmental SDBIP</a>
+						</li>
+						<li>
+							<a href="#top_layer_sdbip" data-toggle="tab">Top Layer SDBIP</a>
+						</li>
+						<li>
+							<a href="#capital_project" data-toggle="tab">Capital Projects</a>
+						</li>
+						<li>
+							<a href="#monthly_cashflow" data-toggle="tab">Monthly Cashflows</a>
+						</li>
+						<li>
+							<a href="#revenue_by_source" data-toggle="tab">Revenue by Source</a>
+						</li>
+					</ul>
+				</div>
 
-    <div id = "myTabContent" class = "tab-content">
-     <div class = "tab-pane active fade in" id = "general_headings">
-        <ul class="headings">
-          <table class="table table-stiped table-hover">
-            <tr>
-							<th>&nbsp;</th>
-							<th>Default Terminology</th>
-							<th>Client Terminology</th>
-							<th></th>
-						</tr>
-          <%= render @general_headings %>
-      </table><%= will_paginate @general_headings %>
-        </ul>
-      </div>
-      <div class = "tab-pane fade" id = "departmental_sdbip">
-        <ul class="headings">
+				<div id="myTabContent" class="tab-content">
+					<div class="tab-pane active fade in" id="general_headings">
+						<ul class="headings">
+							<table class="table table-stiped table-hover">
+								<tr>
+									<th>&nbsp;</th>
+									<th>Default Terminology</th>
+									<th>Client Terminology</th>
+									<th></th>
+								</tr>
+								<%= render @general_headings %>
+							</table><%= will_paginate @general_headings %>
+						</ul>
+					</div>
+					<div class="tab-pane fade" id="departmental_sdbip">
+						<ul class="headings">
 
-          <table class="table table-stiped table-hover">
-            <tr>
-							<th>&nbsp;</th>
-							<th>Default Terminology</th>
-							<th>Client Terminology</th>
-							<th></th>
-						</tr>
+							<table class="table table-stiped table-hover">
+								<tr>
+									<th>&nbsp;</th>
+									<th>Default Terminology</th>
+									<th>Client Terminology</th>
+									<th></th>
+								</tr>
 
-          <%= render 'departmental_headings' %>
+								<%= render 'departmental_headings' %>
 
-        </table>
-          <%= will_paginate @departmental_headings %>
-        </ul>
-      </div>
-      <div class = "tab-pane fade" id = "top_layer_sdbip">
-        <ul class="headings">
-          <table class="table table-stiped table-hover">
-            <tr>
-							<th>&nbsp;</th>
-							<th>Default Terminology</th>
-							<th>Client Terminology</th>
-							<th></th>
-						</tr>
+							</table>
+							<%= will_paginate @departmental_headings %>
+						</ul>
+					</div>
+					<div class="tab-pane fade" id="top_layer_sdbip">
+						<ul class="headings">
+							<table class="table table-stiped table-hover">
+								<tr>
+									<th>&nbsp;</th>
+									<th>Default Terminology</th>
+									<th>Client Terminology</th>
+									<th></th>
+								</tr>
 
-          <%= render 'top_layer_headings' %>
+								<%= render 'top_layer_headings' %>
 
-        </table><%= will_paginate @toplayer_headings %>
-        </ul>
-      </div>
-        <div class = "tab-pane fade" id = "capital_project">
-        <ul class="headings">
-          <table class="table table-stiped table-hover">
-            <tr>
-							<th>&nbsp;</th>
-							<th>Default Terminology</th>
-							<th>Client Terminology</th>
-							<th></th>
-						</tr>
+							</table><%= will_paginate @toplayer_headings %>
+						</ul>
+					</div>
+					<div class="tab-pane fade" id="capital_project">
+						<ul class="headings">
+							<table class="table table-stiped table-hover">
+								<tr>
+									<th>&nbsp;</th>
+									<th>Default Terminology</th>
+									<th>Client Terminology</th>
+									<th></th>
+								</tr>
 
-            <%= render 'capital_projects_headings' %>
+								<%= render 'capital_projects_headings' %>
 
-        </table><%= will_paginate @capitalProjects_headings %>
-        </ul>
-      </div>
-        <div class = "tab-pane fade" id = "monthly_cashflow">
-        <ul class="headings">
-          <table class="table table-stiped table-hover">
-            <tr>
-							<th>&nbsp;</th>
-							<th>Default Terminology</th>
-							<th>Client Terminology</th>
-							<th></th>
-						</tr>
+							</table><%= will_paginate @capitalProjects_headings %>
+						</ul>
+					</div>
+					<div class="tab-pane fade" id="monthly_cashflow">
+						<ul class="headings">
+							<table class="table table-stiped table-hover">
+								<tr>
+									<th>&nbsp;</th>
+									<th>Default Terminology</th>
+									<th>Client Terminology</th>
+									<th></th>
+								</tr>
 
-            <%= render 'monthly_cashflow_headings' %>
+								<%= render 'monthly_cashflow_headings' %>
 
-          </table>  <%= will_paginate @monthlycashflow_headings %>
-        </ul>
-      </div>
-        <div class = "tab-pane fade" id = "revenue_by_source">
-        <ul class="headings">
-          <table class="table table-stiped table-hover">
-            <tr>
-							<th>&nbsp;</th>
-							<th>Default Terminology</th>
-							<th>Client Terminology</th>
-							<th></th>
-						</tr>
+							</table>
+							<%= will_paginate @monthlycashflow_headings %>
+						</ul>
+					</div>
+					<div class="tab-pane fade" id="revenue_by_source">
+						<ul class="headings">
+							<table class="table table-stiped table-hover">
+								<tr>
+									<th>&nbsp;</th>
+									<th>Default Terminology</th>
+									<th>Client Terminology</th>
+									<th></th>
+								</tr>
 
-          <%= render 'revenue_by_source_headings' %>
+								<%= render 'revenue_by_source_headings' %>
 
-        </table><%= will_paginate @revenuebysource_headings %>
-        </ul>
-      </div>
-    </div>
+							</table><%= will_paginate @revenuebysource_headings %>
+						</ul>
+					</div>
+				</div>
 
-  </div>
-	<div class = "tab-pane fade" id = "add_heading">
+			</div>
+			<div class="tab-pane fade" id="add_heading">
 				<ul class="headings">
 					<br/>
 					<h3>New Heading</h3><hr/>
 					<%= render 'form' %>
 				</ul>
+			</div>
+		</div>
+	</div>
 </div>
-</div></div>
-    </div>

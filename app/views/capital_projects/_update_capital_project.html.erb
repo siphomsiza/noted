@@ -1,54 +1,51 @@
 <div class="table-responsive">
     <table class="table table-striped table-bordered">
-    <thead>
-      <tr>
-        <th>Project Name</th>
-        <th>Project Description</th>
-        <th>Department</th>
-        <th>Subdepartment</th>
-        <th>Mscore Classification</th>
-        <th>Municipality CP Ref</th>
-        <th>IDP Number</th>
-        <th>Vote Number</th>
-        <th>Funding Source</th>
-        <th>Planned Start Date</th>
-        <th>Planned Completion Date</th>
-        <th>Actual Start Date</th>
-        <th>Actual Completion Date</th>
-        <th>Ward</th>
-        <th>Area</th>
+        <thead>
+            <tr>
+                <th>Project Name</th>
+                <th>Project Description</th>
+                <th>Department</th>
+                <th>Subdepartment</th>
+                <th>Mscore Classification</th>
+                <th>Municipality CP Ref</th>
+                <th>IDP Number</th>
+                <th>Vote Number</th>
+                <th>Funding Source</th>
+                <th>Planned Start Date</th>
+                <th>Planned Completion Date</th>
+                <th>Actual Start Date</th>
+                <th>Actual Completion Date</th>
+                <th>Ward</th>
+                <th>Area</th>
 
+            </tr>
+        </thead>
 
-      </tr>
-    </thead>
+        <tbody>
+            <% @capital_projects.each do |capital_project| %>
+            <tr>
+                <td><%= link_to edit_capital_projects_path(capital_project),remote: true,'data-target' => "#edit-capital-project-modal", 'data-toggle' => 'modal', :title=>"Click to Update KPI" do %>
+                    <%= capital_project.project_name %>
+                    <% end %>
+                    <div id="edit-capital-project-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true"></div>
+                </td>
+                <td><%= capital_project.departmental_sdbip.kpi_ref_number %></td>
+                <td><%= capital_project.subdepartment.department.name %></td>
+                <td><%= capital_project.subdepartment.subdepartment_name %></td>
+                <td><% if !capital_project.mscore_classification_id.blank? %><%= capital_project.mscore_classification.name %><% end %></td>
+                <td><%= capital_project.mun_cp_ref %></td>
+                <td><%= capital_project.idp_nummber %></td>
+                <td><%= capital_project.vote_number %></td>
+                <td><%= capital_project.funding_source %></td>
+                <td><%= capital_project.planned_start_date %></td>
+                <td><%= capital_project.planned_completion_date %></td>
+                <td><%= capital_project.actual_start_date %></td>
+                <td><%= capital_project.actual_completion_date %></td>
+                <td><% if !capital_project.ward_id.blank? %><%= capital_project.ward.name %><% end %></td>
+                <td><% if !capital_project.area_id.blank? %><%= capital_project.area.name %><% end %></td>
 
-    <tbody>
-      <% @capital_projects.each do |capital_project| %>
-        <tr><td><%= link_to edit_capital_projects_path(capital_project),remote: true,'data-target' => "#edit-capital-project-modal", 'data-toggle' => 'modal', :title=>"Click to Update KPI" do %>
-            <%= capital_project.project_name %>
-          <% end %>
-          <div id="edit-capital-project-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
-
-          </div>
-          </td>
-          <td><%= capital_project.departmental_sdbip.kpi_ref_number %></td>
-          <td><%= capital_project.subdepartment.department.name %></td>
-          <td><%= capital_project.subdepartment.subdepartment_name %></td>
-          <td><% if !capital_project.mscore_classification_id.blank? %><%= capital_project.mscore_classification.name %><% end %></td>
-          <td><%= capital_project.mun_cp_ref %></td>
-          <td><%= capital_project.idp_nummber %></td>
-          <td><%= capital_project.vote_number %></td>
-          <td><%= capital_project.funding_source %></td>
-          <td><%= capital_project.planned_start_date %></td>
-          <td><%= capital_project.planned_completion_date %></td>
-          <td><%= capital_project.actual_start_date %></td>
-          <td><%= capital_project.actual_completion_date %></td>
-          <td><% if !capital_project.ward_id.blank? %><%= capital_project.ward.name %><% end %></td>
-          <td><% if !capital_project.area_id.blank? %><%= capital_project.area.name %><% end %></td>
-
-
-        </tr>
-      <% end %>
-    </tbody>
-</table>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
 </div>
