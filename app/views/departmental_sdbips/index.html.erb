@@ -1,299 +1,305 @@
 <% provide(:title, 'Departmental SDBIPs') %>
 <script>
-$(function() {
-	//highlight the current nav
-	//$("#applicationmanifest ul.navbar-nav li:eq(3)").addClass('active');
-}); //jQuery is loaded
+	$(function () {
+		//highlight the current nav $("#applicationmanifest ul.navbar-nav li:eq(3)").addClass('active');
+	}); //jQuery is loaded
 </script>
 <br/>
 <div class="row">
-<div class="col col-lg-12">
-<%= render 'layouts/municipality' %>
+	<div class="col col-lg-12">
+		<%= render 'layouts/municipality' %>
 
-<ul class="nav nav-pills nav-justified">
-<li class="active"><%= link_to "Departmental SDBIP", departmental_sdbips_path %></li>
+		<ul class="nav nav-pills nav-justified">
+			<li class="active"><%= link_to "Departmental SDBIP", departmental_sdbips_path %></li>
 
-<% if current_user.admin?  || current_user.super_admin? %>
+			<% if current_user.admin?  || current_user.super_admin? %>
 
-<li><%= link_to "Top Layer SDBIP", top_layer_sdbips_path %></li>
-<li><%= link_to "Capital Projects", capital_projects_path %></li>
-<li><%= link_to "Monthly Cashflow", monthly_cashflows_path %></li>
-<li><%= link_to "Revenue By Source", revenue_by_sources_path %></li>
+			<li><%= link_to "Top Layer SDBIP", top_layer_sdbips_path %></li>
+			<li><%= link_to "Capital Projects", capital_projects_path %></li>
+			<li><%= link_to "Monthly Cashflow", monthly_cashflows_path %></li>
+			<li><%= link_to "Revenue By Source", revenue_by_sources_path %></li>
 
-<% end %>
+			<% end %>
 
-</ul>
+		</ul>
 
-</div>
+	</div>
 
 </div>
 
 <div class="row">
 
+	<div class="col col-lg-12">
 
-					<div class="col col-lg-12">
+		<div class="tabbable tabs third-level-navs" id="departmental_sdbips-tabs">
 
-						<div class="tabbable tabs third-level-navs" id="departmental_sdbips-tabs">
+			<ul id="myTab" class="nav nav-tabs">
 
-							<ul id = "myTab" class = "nav nav-tabs">
-
-								<li class="active">
-									<a href = "#view_sdbips" data-toggle = "tab"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;View KPIs</a>
-								</li>
-								<% if current_user.admin? || current_user.super_admin? || (!current_user.subdepartmental_administrator.blank? && current_user.subdepartmental_administrator.can_edit?) || (!current_user.departmental_administrator.blank? && current_user.departmental_administrator.can_edit?) %>
-								<li>
-									<a href = "#edit_kpis" data-toggle = "tab"><span class="glyphicon glyphicon-pencil"></span>&nbsp;Edit KPIs</a>
-								</li>
-								<% end %>
-								<li>
-									<a href = "#manage_sdbips" data-toggle = "tab"><span class="glyphicon glyphicon-edit"></span>&nbsp;Update KPIs</a>
-								</li>
-								<li>
-									<a href = "#new_sdbip" data-toggle = "tab">
-										<span class="glyphicon glyphicon-plus-sign"></span>&nbsp;Add KPI
-									</a>
-								</li>
-								<% if current_user.admin? || current_user.super_admin? %>
-								<li>
-									<a href = "#deleted_sdbip" data-toggle = "tab">
-										<span class="glyphicon glyphicon-trash"></span>&nbsp;Deleted KPIs
-									</a>
-								</li>
-								<% end %>
-								<li class="btn-group pull-right">
-									<% if current_user.admin? || current_user.super_admin? %>
-													<button class="btn btn-sm" data-toggle="modal" data-target="#importModal" title="Click to upload SDBIP.">
-														<span class="glyphicon glyphicon-upload"></span>&nbsp;Import SDBIP</button>&nbsp;&nbsp;
-									<% end %>
-												<button type="button" class="btn btn-sm dropdown-toggle" data-toggle="dropdown">
-													<span class="glyphicon glyphicon-download"></span>&nbsp;Export SDBIP
-													<span class="caret"></span>
-												</button>
-												<ul class="dropdown-menu" role="menu">
-													<li><%= link_to "CSV format", departmental_sdbips_path(format: "csv") %></li>
-													<li><%= link_to "Excel format", departmental_sdbips_path(format: "xls") %></li>
-												</ul>
-								</li>
-							</ul><!-- nav nav-tabs -->
-						</div><!-- tabbable tabs -->
-
-						<div id = "myTabContent" class = "tab-content">
-
-							<div class = "tab-pane active fade in" id = "view_sdbips">
-							<br/>
-									<% if @departmental_sdbips.blank? && DepartmentalSdbip.blank? %>
-									<p> There are no Departmental SDBIPs currently in the system </p>
-									<% elsif @departmental_sdbips.blank? && !DepartmentalSdbip.blank? %>
-									<p> You currently have no Departmental SDBIP </p>
-									<% else %>
-									<%= form_tag departmental_sdbips_path, method: :get do |f| %>
-										<div class="row">
-											<div class="col col-lg-12">
-												<div class="col-lg-3">
-													<label class="col control-label">Who:</label>&nbsp;<%= select_tag :subdepartment_id, grouped_options_for_select(@departments.map{ |group| [group.name, group.subdepartments.map{ |c| [c.subdepartment_name, c.id] } ] }),{class:'form-control'} %>
-												</div>
-												<div class="col-lg-3">
-													<label class="col control-label">What:</label>&nbsp;<%= select_tag :kpi_type_id,options_for_select([["All KPIs","0"]]+@kpitypes.all.collect {|x| [ x.name, x.id ] },id:'kpi_select'),prompt:'Select KPI Type',class: "form-control" %>
-												</div>
-												<div class="col-lg-2">
-													<label class="col control-label">When:</label>&nbsp;
-													<div class="form-group">
-														<div class="input-group date" data-provide="datepicker"
-								                 data-date-format="M-yyyy" data-date-start-view="months" data-date-min-view-mode="months">
-															<%= text_field_tag :start_date, nil, class: "form-control" %>
-															<span class="input-group-addon">
-																<span class="glyphicon glyphicon-calendar"></span>
-															</span>
-														</div>
-													</div>
-												</div>
-												<div class="col-lg-2">
-													<label class="col control-label">To:</label>&nbsp;
-													<div class="form-group">
-														<div class="input-group date" data-provide="datepicker"
-								                 data-date-format="M-yyyy" data-date-start-view="months" data-date-min-view-mode="months">
-															<%= text_field_tag :end_date, nil, class: "form-control" %>
-															<span class="input-group-addon">
-																<span class="glyphicon glyphicon-calendar"></span>
-															</span>
-														</div>
-													</div>
-												</div>
-												<div class="col-lg-1">
-													<label class="col control-label">&nbsp;</label>&nbsp;
-													<%= submit_tag "Apply", class: "btn btn-mini", :department_id => nil %>
-												</div>
-											</div>
-										</div>
-									<% end %>
-
-								<h3 id="filter_toggle">
-									<button type="button" class="btn" data-toggle="collapse" data-target="#grpChkBox" title="Click link to display custom view functionality.">
-										<span class="glyphicon glyphicon-filter"></span>&nbsp;Custom View
-									</button>
-								</h3>
-								<%= render 'custom_view' %>
-
-								<div class="row">
-										<div class="col col-lg-12"><br/>
-
-										<% if !@departmental_sdbips.blank? %>
-
-											<%= render "sdbips" %>
-											<%= will_paginate %>
-
-											<% end %>
-									</div>
-								</div>
-								<% end %>
-
-				</div>
-							<% if current_user.admin? || current_user.super_admin? %>
-							<div class = "tab-pane fade" id = "edit_kpis">
-
-									<% if @departmental_sdbips.blank? && DepartmentalSdbip.blank? %>
-									<p> There are no Departmental SDBIPs currently in the system </p>
-									<% elsif @departmental_sdbips.blank? && !DepartmentalSdbip.blank? %>
-									<p> You currently have no Departmental SDBIP </p>
-									<% else %>
-									<div class="row">
-									<div class="col col-lg-12">
-
-										<% if !@departmental_sdbips.blank? %>
-										<br/>
-											<%= render 'filter' %>
-											<br/>
-											<%= render "update_sdbips" %>
-											<%= will_paginate %>
-										<% else %>
-											<p>There are no kpis for edit.</p>
-										<% end %>
-									</div>
-
-								</div>
-									<% end %>
-							</div>
-							<% end %>
-							<div class = "tab-pane fade" id = "manage_sdbips">
-
-									<% if @departmental_sdbips.blank? && DepartmentalSdbip.blank? %>
-									<p> There are no Departmental SDBIPs currently in the system </p>
-									<% elsif @departmental_sdbips.blank? && !DepartmentalSdbip.blank? %>
-									<p> You currently have no Departmental SDBIP </p>
-									<% else %>
-									<div class="row">
-									<div class="col col-lg-12">
-
-										<% if !@departmental_sdbips.blank? %>
-										<br/>
-										<%= render 'filter' %>
-										<br/>
-											<%= render "edit_sdbips" %>
-											<%= will_paginate %>
-										<% else %>
-											<p>There are no kpis for update.</p>
-										<% end %>
-									</div>
-
-								</div>
-									<% end %>
-							</div>
-							<div class = "tab-pane fade" id = "new_sdbip">
-											<h2>New Departmental KPI</h2>
-									<% if current_user.admin? || current_user.super_admin? %>
-											<%= render 'form' %>
-									<% else %>
-										<p align="center">You're not eligible to create SDBIPs.</p>
-									<% end %>
-							</div>
-							<div class = "tab-pane fade" id = "deleted_sdbip">
-											<h2>Deleted Departmental KPIs</h2>
-									<% if current_user.admin? || current_user.super_admin? %>
-									<% if !@deleted_kpis.blank? %>
-											<%= render 'deleted_kpis' %>
-									<% else %>
-									<p>There are currently no deleted KPIs.</p>
-									<% end %>
-									<% end %>
-							</div>
-
-			</div>
+				<li class="active">
+					<a href="#view_sdbips" data-toggle="tab">
+						<span class="glyphicon glyphicon-list-alt"></span>&nbsp;View KPIs</a>
+				</li>
+				<% if current_user.admin? || current_user.super_admin? || (!current_user.subdepartmental_administrator.blank? && current_user.subdepartmental_administrator.can_edit?) || (!current_user.departmental_administrator.blank? &&
+				current_user.departmental_administrator.can_edit?) %>
+				<li>
+					<a href="#edit_kpis" data-toggle="tab">
+						<span class="glyphicon glyphicon-pencil"></span>&nbsp;Edit KPIs</a>
+				</li>
+				<% end %>
+				<li>
+					<a href="#manage_sdbips" data-toggle="tab">
+						<span class="glyphicon glyphicon-edit"></span>&nbsp;Update KPIs</a>
+				</li>
+				<li>
+					<a href="#new_sdbip" data-toggle="tab">
+						<span class="glyphicon glyphicon-plus-sign"></span>&nbsp;Add KPI
+					</a>
+				</li>
+				<% if current_user.admin? || current_user.super_admin? %>
+				<li>
+					<a href="#deleted_sdbip" data-toggle="tab">
+						<span class="glyphicon glyphicon-trash"></span>&nbsp;Deleted KPIs
+					</a>
+				</li>
+				<% end %>
+				<li class="btn-group pull-right">
+					<% if current_user.admin? || current_user.super_admin? %>
+					<button class="btn btn-sm" data-toggle="modal" data-target="#importModal" title="Click to upload SDBIP.">
+						<span class="glyphicon glyphicon-upload"></span>&nbsp;Import SDBIP</button>&nbsp;&nbsp;
+					<% end %>
+				</li>
+			</ul>
+			<!-- nav nav-tabs -->
 		</div>
+		<!-- tabbable tabs -->
 
-</div>
+		<div id="myTabContent" class="tab-content">
+
+			<div class="tab-pane active fade in" id="view_sdbips">
+				<br/>
+				<% if @departmental_sdbips.blank? && DepartmentalSdbip.blank? %>
+				<p>
+					There are no Departmental SDBIPs currently in the system
+				</p>
+				<% elsif @departmental_sdbips.blank? && !DepartmentalSdbip.blank? %>
+				<p>
+					You currently have no Departmental SDBIP
+				</p>
+			<% else %>
+				<%= form_tag departmental_sdbips_path, method: :get do |f| %>
+				<div class="row">
 					<div class="col col-lg-12">
-						<!-- Import SDBIP modal -->
-						<div class="modal fade" id="importModal" tabindex="-1" role="dialog" aria-labelledby="importModalLabel" aria-hidden="true">
-							<div class="modal-dialog">
-								<div class="modal-content">
-									<%= form_tag import_departmental_sdbips_path, accept: 'text/csv,text/xls,text/xlsx,text/ods', multipart: true do %>
-										<div class="modal-header">
-											<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-												&times;
-											</button>
-											<h4 class="modal-title" id="importModalLabel">
-												<ol class="breadcrumb">
-													<li><a href="#" data-dismiss="modal">SDBIP</a></li>
-													<li>Departmental SDBIP</li>
-													<li class="active">Importing SDBIP</li>
-												</ol>
-											</h4>
-											<%= label_tag :NB,"Note: Supported files types are xls,xlsx, ods and csv types.", id: 'import_info' %>
-										</div>
-										<div class="modal-body">
-											<%= label_tag :file,"Select File to upload:" %>
-											<%= file_field_tag :file ,{:class=>"form-control"} %>
-										</div>
-										<div class="modal-footer">
-											<div class="col-md-4 pull-right">
-												<%= submit_tag "Import", :class=>"btn btn-midi" %>
-											</div>
-										</div>
-									<% end %>
-								</div><!-- /.modal-content -->
-							</div><!-- /.modal -->
+						<div class="col-lg-3">
+							<label class="col control-label">Who:</label>&nbsp;<%= select_tag :subdepartment_id, grouped_options_for_select(@departments.map{ |group| [group.name, group.subdepartments.map{ |c| [c.subdepartment_name, c.id] } ] }),{class:'form-control'} %>
+						</div>
+						<div class="col-lg-3">
+							<label class="col control-label">What:</label>&nbsp;<%= select_tag :kpi_type_id,options_for_select([["All KPIs","0"]]+@kpitypes.all.collect {|x| [ x.name, x.id ] },id:'kpi_select'),prompt:'Select KPI Type',:required=> true,class: "form-control" %>
+						</div>
+						<div class="col-lg-2">
+							<label class="col control-label">When:</label>&nbsp;
+							<div class="form-group">
+								<div class="input-group date" data-provide="datepicker" data-date-format="M-yyyy" data-date-start-view="months" data-date-min-view-mode="months">
+									<%= text_field_tag :start_date, nil, class: "form-control" %>
+									<span class="input-group-addon">
+										<span class="glyphicon glyphicon-calendar"></span>
+									</span>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-2">
+							<label class="col control-label">To:</label>&nbsp;
+							<div class="form-group">
+								<div class="input-group date" data-provide="datepicker" data-date-format="M-yyyy" data-date-start-view="months" data-date-min-view-mode="months">
+									<%= text_field_tag :end_date, nil, class: "form-control" %>
+									<span class="input-group-addon">
+										<span class="glyphicon glyphicon-calendar"></span>
+									</span>
+								</div>
+							</div>
+						</div>
+						<div class="col-lg-1">
+							<label class="col control-label">&nbsp;</label>&nbsp;
+							<%= submit_tag "Apply", class: "btn btn-mini", :department_id => nil %>
 						</div>
 					</div>
+				</div>
+				<% end %>
+
+				<h3 id="filter_toggle">
+					<button type="button" class="btn" data-toggle="collapse" data-target="#grpChkBox" title="Click link to display custom view functionality.">
+						<span class="glyphicon glyphicon-filter"></span>&nbsp;Custom View
+					</button>
+				</h3>
+				<%= render 'custom_view' %>
+
+				<div class="row">
+					<div class="col col-lg-12"><br/>
+						<%= render "sdbips" %>
+					</div>
+				</div>
+				<% end %>
+
+			</div>
+			<% if current_user.admin? || current_user.super_admin? || (!current_user.subdepartmental_administrator.blank? && current_user.subdepartmental_administrator.can_edit?) || (!current_user.departmental_administrator.blank? &&
+			current_user.departmental_administrator.can_edit?) %>
+
+			<div class="tab-pane fade" id="edit_kpis">
+
+				<% if @departmental_sdbips.blank? && DepartmentalSdbip.blank? %>
+				<p>
+					There are no Departmental SDBIPs currently in the system
+				</p>
+				<% elsif @departmental_sdbips.blank? && !DepartmentalSdbip.blank? %>
+				<p>
+					You currently have no Departmental SDBIP
+				</p>
+			<% else %>
+				<div class="row">
+					<div class="col col-lg-12">
+
+						<% if !@departmental_sdbips.blank? %>
+						<br/>
+						<%= render 'filter' %>
+						<br/>
+						<%= render "update_sdbips" %>
+						<%= will_paginate %>
+					<% else %>
+						<p>There are no kpis for edit.</p>
+						<% end %>
+					</div>
+
+				</div>
+				<% end %>
+			</div>
+			<% end %>
+			<div class="tab-pane fade" id="manage_sdbips">
+
+				<% if @departmental_sdbips.blank? && DepartmentalSdbip.blank? %>
+				<p>
+					There are no Departmental SDBIPs currently in the system
+				</p>
+				<% elsif @departmental_sdbips.blank? && !DepartmentalSdbip.blank? %>
+				<p>
+					You currently have no Departmental SDBIP
+				</p>
+			<% else %>
+				<div class="row">
+					<div class="col col-lg-12">
+
+						<% if !@departmental_sdbips.blank? %>
+						<br/>
+						<%= render 'filter' %>
+						<br/>
+						<%= render "edit_sdbips" %>
+						<%= will_paginate %>
+					<% else %>
+						<p>There are no kpis for update.</p>
+						<% end %>
+					</div>
+
+				</div>
+				<% end %>
+			</div>
+			<div class="tab-pane fade" id="new_sdbip">
+				<h2>New Departmental KPI</h2>
+				<% if current_user.admin? || current_user.super_admin? %>
+				<%= render 'form' %>
+			<% else %>
+				<p align="center">You're not eligible to create SDBIPs.</p>
+				<% end %>
+			</div>
+			<div class="tab-pane fade" id="deleted_sdbip">
+				<h2>Deleted Departmental KPIs</h2>
+				<% if current_user.admin? || current_user.super_admin? %>
+				<% if !@deleted_kpis.blank? %>
+				<%= render 'deleted_kpis' %>
+			<% else %>
+				<p>There are currently no deleted KPIs.</p>
+				<% end %>
+				<% end %>
+			</div>
+
+		</div>
+	</div>
+
+</div>
+<div class="col col-lg-12">
+	<!-- Import SDBIP modal -->
+	<div class="modal fade" id="importModal" tabindex="-1" role="dialog" aria-labelledby="importModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<%= form_tag import_departmental_sdbips_path, accept: 'text/csv,text/xls,text/xlsx,text/ods', multipart: true do %>
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+						&times;
+					</button>
+					<h4 class="modal-title" id="importModalLabel">
+						<ol class="breadcrumb">
+							<li>
+								<a href="#" data-dismiss="modal">SDBIP</a>
+							</li>
+							<li>Departmental SDBIP</li>
+							<li class="active">Importing SDBIP</li>
+						</ol>
+					</h4>
+					<%= label_tag :NB,"Note: Supported files types are xls,xlsx, ods and csv types.", id: 'import_info' %>
+				</div>
+				<div class="modal-body">
+					<%= label_tag :file,"Select File to upload:" %>
+					<%= file_field_tag :file ,{:class=>"form-control"} %>
+				</div>
+				<div class="modal-footer">
+					<div class="col-md-4 pull-right">
+						<%= submit_tag "Import", :class=>"btn btn-midi" %>
+					</div>
+				</div>
+				<% end %>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal -->
+	</div>
+</div>
 
 <script>
-$(document).ready(function() {
-  $(".first-quarter-target").hide();
-	$(".second-quarter-target").hide();
-	$(".third-quarter-target").hide();
-	$(".fourth-quarter-target").hide();
-	$(".kpi-type").hide();
-	$(".kpi-target-type").hide();
-	$(".idf-ref").hide();
-	$(".mscore-classification").hide();
-	$(".national-outcome").hide();
-	$(".strategic-objectives").hide();
-	$(".baseline").hide();
-	$(".performance-standard").hide();
-	$(".risk-rating").hide();
-	$(".kpa").hide();
-	$(".kpi-concept").hide();
-	$(".impact").hide();
-	$(".provincial-strategic-outcome").hide();
-	$(".area").hide();
-	$(".ward").hide();
-	$(".past-year-performance").hide();
-	$(".top-layer-ref").hide();
-	$(".created-date").hide();
-	$(".budget").hide();
+	$(document).ready(function () {
+		$(".first-quarter-target").hide();
+		$(".second-quarter-target").hide();
+		$(".third-quarter-target").hide();
+		$(".fourth-quarter-target").hide();
+		$(".kpi-type").hide();
+		$(".kpi-target-type").hide();
+		$(".idf-ref").hide();
+		$(".mscore-classification").hide();
+		$(".national-outcome").hide();
+		$(".strategic-objectives").hide();
+		$(".baseline").hide();
+		$(".performance-standard").hide();
+		$(".risk-rating").hide();
+		$(".kpa").hide();
+		$(".kpi-concept").hide();
+		$(".impact").hide();
+		$(".provincial-strategic-outcome").hide();
+		$(".area").hide();
+		$(".ward").hide();
+		$(".past-year-performance").hide();
+		$(".top-layer-ref").hide();
+		$(".created-date").hide();
+		$(".budget").hide();
 		$(".idp-ref").hide();
-	$(".updated-date").hide();
-	$(".annual-target").hide();
-	$(".revised-target").hide();
+		$(".updated-date").hide();
+		$(".annual-target").hide();
+		$(".revised-target").hide();
 
-	$(function () {
-		var chk = $("#grpChkBox input:checkbox");
-		var tbl = $("#sdbips-table");
-		chk.prop('checked', false);
-		chk.click(function () {
-			var colToHide = tbl.find("." + $(this).attr("name"));
-			$(colToHide).toggle();
+		$(function () {
+			var chk = $("#grpChkBox input:checkbox");
+			var tbl = $("#sdbips-table");
+			chk.prop('checked', false);
+			chk.click(function () {
+				var colToHide = tbl.find("." + $(this).attr("name"));
+				$(colToHide).toggle();
+			});
 		});
-	});
 
-});
+	});
 </script>

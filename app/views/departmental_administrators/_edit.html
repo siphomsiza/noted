@@ -1,63 +1,67 @@
 <div class="modal-dialog">
-<div class="modal-content">
-<div class="modal-header">
-  <h3><%= "Editing #{@departmental_administrator.user.firstname}" %></h3>
-</div>
-<div class="modal-body">
-<div class="row">
-<div class="col-lg-10 col-md-offset-1">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3><%= "Editing #{@departmental_administrator.user.firstname}" %></h3>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-lg-10 col-md-offset-1">
 
-  <%= form_for(@departmental_administrator) do |f| %>
-    <% if @departmental_administrator.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(@departmental_administrator.errors.count, "error") %> prohibited this departmental_administrator from being saved:</h2>
+                    <%= form_for(@departmental_administrator) do |f| %>
+                        <% if @departmental_administrator.errors.any? %>
+                            <div id="error_explanation">
+                                <h2><%= pluralize(@departmental_administrator.errors.count, "error") %> prohibited this departmental_administrator from being saved:</h2>
 
-        <ul>
-        <% @departmental_administrator.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-        </ul>
-      </div>
-    <% end %>
+                                <ul>
+                                    <% @departmental_administrator.errors.full_messages.each do |message| %>
+                                        <li>
+                                            <%= message %>
+                                        </li>
+                                        <% end %>
+                                </ul>
+                            </div>
+                            <% end %>
 
-    <div class="field">
-      <%= f.label :department_id,"Department:" %><br>
-      <%= f.select(:department_id,options_for_select(Department.all.collect{ |u| [u.name, u.id] }),{},{class: 'form-control'}) %>
+                                <div class="field">
+                                    <%= f.label :department_id,"Department:" %>
+                                        <br>
+                                        <%= f.select(:department_id,options_for_select(Department.all.collect{ |u| [u.name, u.id] }),{},{class: 'form-control'}) %>
+
+                                </div>
+                                <div class="field">
+                                    <%= f.label :user_id,"User:" %>
+                                        <br>
+                                        <%= f.select :user_id, User.all.collect {|x| [x.firstname, x.id]}, {:include_blank => "Select User"}, class: "form-control" %>
+                                </div>
+                                <%= f.label :can_create, class: "checkbox inline" do %>
+                                    <%= f.check_box :can_create %>
+                                        <span>Create</span>
+                                        <% end %>
+                                            <%= f.label :can_edit, class: "checkbox inline" do %>
+                                                <%= f.check_box :can_edit %>
+                                                    <span>Edit</span>
+                                                    <% end %>
+                                                        <%= f.label :can_update, class: "checkbox inline" do %>
+                                                            <%= f.check_box :can_update %>
+                                                                <span>Update</span>
+                                                                <% end %>
+                                                                    <%= f.label :can_approve, class: "checkbox inline" do %>
+                                                                        <%= f.check_box :can_approve %>
+                                                                            <span>Approve</span>
+                                                                            <% end %>
+
+                                                                                <div class="actions">
+                                                                                    <%= f.submit "Save",class: "btn col-lg-3 pull-right" %>
+                                                                                </div>
+                                                                                <% end %>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+
+        </div>
 
     </div>
-    <div class="field">
-      <%= f.label :user_id,"User:" %><br>
-      <%= f.select :user_id, User.all.collect {|x| [x.firstname, x.id]}, {:include_blank => "Select User"}, class: "form-control" %>
-    </div>
-    <%= f.label :can_create, class: "checkbox inline" do %>
-      <%= f.check_box :can_create %>
-      <span>Create</span>
-    <% end %>
-    <%= f.label :can_edit, class: "checkbox inline" do %>
-      <%= f.check_box :can_edit %>
-      <span>Edit</span>
-    <% end %>
-    <%= f.label :can_update, class: "checkbox inline" do %>
-      <%= f.check_box :can_update %>
-      <span>Update</span>
-    <% end %>
-    <%= f.label :can_approve, class: "checkbox inline" do %>
-      <%= f.check_box :can_approve %>
-      <span>Approve</span>
-    <% end %>
-
-    <div class="actions">
-      <%= f.submit "Save",class: "btn col-lg-3 pull-right" %>
-    </div>
-  <% end %>
-
-
-</div>
-</div>
-</div>
-<div class="modal-footer">
-
-</div>
-
-</div>
 </div>

@@ -7,7 +7,11 @@ namespace :mkhondo do
     Rails.application.config.paths['db'] = ['db_mkhondo']
     Rails.application.config.paths['db/migrate'] = ['db/migrate']
     Rails.application.config.paths['db/seeds.rb'] = ['db_mkhondo/seeds.rb']
-    Rails.application.config.paths['config/database'] = ['config/mkhondo_db.yml']
+    if !Rails.env.production?
+      Rails.application.config.paths['config/database'] = ['config/mkhondo_db.yml']
+    elsif Rails.env.production?
+      Rails.application.config.paths['../shared/config/database'] = ['../shared/config/mkhondo_db.yml']
+    end
     end
 
 namespace :db do
@@ -51,7 +55,11 @@ namespace :sakhisizwe do
     Rails.application.config.paths['db'] = ['db_sakhisizwe']
     Rails.application.config.paths['db/migrate'] = ['db/migrate']
     Rails.application.config.paths['db/seeds.rb'] = ['db_sakhisizwe/seeds.rb']
-    Rails.application.config.paths['config/database'] = ['config/sakhisizwe_db.yml']
+    if !Rails.env.production?
+      Rails.application.config.paths['config/database'] = ['config/sakhisizwe_db.yml']
+    elsif Rails.env.production?
+      Rails.application.config.paths['../shared/config/database'] = ['../shared/config/sakhisizwe_db.yml']
+    end
     end
 
   namespace :db do

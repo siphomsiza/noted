@@ -19,10 +19,10 @@ class PagesController < ApplicationController
       #@response.units.temperature
       #@response.condition.temp
 
-  rescue SignalException => e
+   rescue SignalException => e
     flash[:notice] = "received Exception #{e.message}"
     puts "received Exception #{e}"
-  end
+    end
   end
   def introduction
     begin
@@ -35,10 +35,10 @@ class PagesController < ApplicationController
       #@response.units.temperature
       #@response.condition.temp
 
-  rescue SignalException => e
+    rescue SignalException => e
     flash[:notice] = "received Exception #{e.message}"
     puts "received Exception #{e}"
-  end
+    end
   end
   def contact
   end
@@ -52,7 +52,7 @@ class PagesController < ApplicationController
     @departmental_sdbips = DepartmentalSdbip.order(performance_standard: :asc)
     @departmental_sdbips_kpa = DepartmentalSdbip.all
     @departments_sdibps = @departmental_sdbips_kpa.select(:performance_standard).order(performance_standard: :asc).uniq
-    @departments = Department.includes(:departmental_sdbips)
+    @departments = Department.all
     $colors = []
     @departments_sdibps.each do |color|
     if color.performance_standard.include?("KPI Almost Met")

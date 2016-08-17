@@ -1,181 +1,193 @@
 <div class="modal-dialog">
-<div class="modal-content">
-<div class="modal-header">
-  <h3><%= "Update #{@departmental_sdbip.kpi}" %></h3>
-</div>
-<div class="modal-body">
-<div class="row">
-    <div class="col-lg-10 col-md-offset-1">
-<%= form_for @departmental_sdbip, html: {multipart: true} do |f| %>
-<%= f.hidden_field :performance_standard,:id=>"over-all-performance"%>
-<div class="row">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3><%= "Update #{@departmental_sdbip.kpi}" %></h3>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-lg-10 col-md-offset-1">
+                    <%= form_for @departmental_sdbip, html: {multipart: true} do |f| %>
+                        <%= f.hidden_field :performance_standard,:id=>"over-all-performance"%>
+                            <div class="row">
 
-  <%= f.fields_for :kpi_results do |f| %>
+                                <%= f.fields_for :kpi_results do |f| %>
 
-  <table class="table table-striped">
-    <tr>
-      <th>Target</th><td><%= f.text_field :target,{:class=>"form-control", :readonly => true,:id=>"kpi-target"} %>
+                                    <table class="table table-striped">
+                                        <tr>
+                                            <th>Target</th>
+                                            <td>
+                                                <%= f.text_field :target,{:class=>"form-control", :readonly => true,:id=>"kpi-target"} %>
 
-      </td>
-    </tr>
-    <tr>
-      <th>Actual</th><td><%= f.text_field :actual, :class => "form-control has-error col-md-5",:autocomplete=>'off', :id=>'kpi-actual',:required => true %>
-  </td>
-    </tr>
-      <%= f.hidden_field(:kpi_performance_standard,:class => "form-control has-error col-md-5",:id=>"kpi-result",:readonly=>true) %>
-    <tr>
-      <th>Performance Comments</th><td>
-      <%= f.text_area :performance_comments, :class => "form-control has-error col-md-5" %>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Actual</th>
+                                            <td>
+                                                <%= f.text_field :actual, :class => "form-control has-error col-md-5",:autocomplete=>'off', :id=>'kpi-actual',:required => true %>
+                                            </td>
+                                        </tr>
+                                        <%= f.hidden_field(:kpi_performance_standard,:class => "form-control has-error col-md-5",:id=>"kpi-result",:readonly=>true) %>
+                                            <tr>
+                                                <th>Performance Comments</th>
+                                                <td>
+                                                    <%= f.text_area :performance_comments, :class => "form-control has-error col-md-5" %>
 
-    </td>
-    </tr>
+                                                </td>
+                                            </tr>
 
-    <tr>
-      <th>Corrective Measures</th><td>  <%= f.text_area :corrective_measures, :class => "form-control has-error col-md-5" %></td>
-    </tr>
-    <tr>
-      <th>Proof of Evidence</th><td><%= @departmental_sdbip.source_of_evidence %></td>
-    </tr>
-    <tr>
-      <th>Attachment(s)</th><td>
+                                            <tr>
+                                                <th>Corrective Measures</th>
+                                                <td>
+                                                    <%= f.text_area :corrective_measures, :class => "form-control has-error col-md-5" %>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>Proof of Evidence</th>
+                                                <td>
+                                                    <%= @departmental_sdbip.source_of_evidence %>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th>Attachment(s)</th>
+                                                <td>
 
-        <%= f.hidden_field :_destroy %>
-        <%= f.fields_for :attachments do |attachment_for_form| %>
+                                                    <%= f.hidden_field :_destroy %>
+                                                        <%= f.fields_for :attachments do |attachment_for_form| %>
 
-            <%= render 'attachment_fields', f: attachment_for_form %>
+                                                            <%= render 'attachment_fields', f: attachment_for_form %>
 
-        <% end %>
-      <%= link_to_add_fields "Upload Attachment", f, :attachments %></td>
-    </tr>
-  </table>
-  <%= f.hidden_field :user_id,:id=>"update-user" %>
-  <%= f.hidden_field :period,:id=>"update-period" %>
-  <%= f.hidden_field :_destroy %>
+                                                                <% end %>
+                                                                    <%= link_to_add_fields "Upload Attachment", f, :attachments %>
+                                                </td>
+                                            </tr>
+                                    </table>
+                                    <%= f.hidden_field :user_id,:id=>"update-user" %>
+                                        <%= f.hidden_field :period,:id=>"update-period" %>
+                                            <%= f.hidden_field :_destroy %>
 
-  <% end %>
+                                                <% end %>
 
-</div>
-<div class="row">
-  <div class="panel-group" id="accordion">
-              <h5>
+                            </div>
+                            <div class="row">
+                                <div class="panel-group" id="accordion">
+                                    <h5>
                   <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" title="click to view KPI details">Details</a>
               </h5>
-          <div id="collapseOne" class="collapse">
-                <%= render 'kpi_details' %>
-          </div>
-          <h5>
+                                    <div id="collapseOne" class="collapse">
+                                        <%= render 'kpi_details' %>
+                                    </div>
+                                    <h5>
               <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" title="click to view KPI results">Results</a>
           </h5>
-      <div id="collapseTwo" class="collapse">
-        <% if @departmental_sdbip.kpi_results.any? %>
-            <%= render 'results' %>
-        <% else %>
-        <p>No results associated with KPI.</p>
-        <% end %>
-      </div>
-      <h5>
+                                    <div id="collapseTwo" class="collapse">
+                                        <% if @departmental_sdbip.kpi_results.any? %>
+                                            <%= render 'results' %>
+                                                <% else %>
+                                                    <p>No results associated with KPI.</p>
+                                                    <% end %>
+                                    </div>
+                                    <h5>
           <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" title="click to view KPI Assurance Review History">Assurance Review History</a>
       </h5>
-  <div id="collapseThree" class="collapse">
-    <% if @departmental_sdbip.assurances.any? %>
-        <%= render 'assurance_review' %>
-    <% else %>
-    <p>No Assurance Review associated with KPI.</p>
-    <% end %>
-  </div>
-</div>
+                                    <div id="collapseThree" class="collapse">
+                                        <% if @departmental_sdbip.assurances.any? %>
+                                            <%= render 'assurance_review' %>
+                                                <% else %>
+                                                    <p>No Assurance Review associated with KPI.</p>
+                                                    <% end %>
+                                    </div>
+                                </div>
 
-</div>
-    <div class="row">
-    <div class="actions col-lg-">
-      <%= f.submit "Save", id: "submit_form", :id=>'submit_button',class: 'btn col-lg-3 pull-right'%>
-    </div>
-    </div>
-    <% end %>
-</div>
-</div>
-</div>
+                            </div>
+                            <div class="row">
+                                <div class="actions col-lg-">
+                                    <%= f.submit "Save", id: "submit_form", :id=>'submit_button',class: 'btn col-lg-3 pull-right'%>
+                                </div>
+                            </div>
+                            <% end %>
+                </div>
+            </div>
+        </div>
 
-</div>
+    </div>
 </div>
 <script>
-$(document).ready(function(){
+    $(document).ready(function() {
 
-  var selected_value = <%= current_user.id %>;
+        var selected_value = <%= current_user.id %>;
 
-  $("#update-user").val(selected_value);
+        $("#update-user").val(selected_value);
 
-  var current_date = Date();
+        var current_date = Date();
 
-  $("#update-period").val(current_date);
+        $("#update-period").val(current_date);
 
-  $("#assurance-user").val(selected_value);
+        $("#assurance-user").val(selected_value);
 
-  var target = <%= @departmental_sdbip.annual_target %>;
+        var target = <%= @departmental_sdbip.annual_target %>;
 
-  var over_actual = <%= @departmental_sdbip.kpi_results.to_a.sum(&:actual) %>;
+        var over_actual = <%= @departmental_sdbip.kpi_results.to_a.sum(&:actual) %>;
 
-  $("#kpi-target").val(target);
+        $("#kpi-target").val(target);
 
-  $( "#kpi-actual" ).blur(function() {
+        $("#kpi-actual").blur(function() {
 
-  var target_value= parseFloat(target) || 0;
+            var target_value = parseFloat(target) || 0;
 
-  var actual_value = parseFloat($('#kpi-actual').val()) || 0;
+            var actual_value = parseFloat($('#kpi-actual').val()) || 0;
 
-  var over_all_actual = parseFloat(over_actual) || 0;
+            var over_all_actual = parseFloat(over_actual) || 0;
 
-    over_all_actual += actual_value
+            over_all_actual += actual_value
 
-  var percentages=0;
+            var percentages = 0;
 
-  var over_all_percentages=0;
+            var over_all_percentages = 0;
 
-  if(target_value > 0){
-    percentages = (actual_value/target_value) * 100;
-    over_all_percentages = (over_all_actual/target_value) * 100;
-    //KPI performance standard
-    if(percentages >= 0 && percentages < 49 ){
-      $("#kpi-result").val("KPI Not Met");
-    }
-    if(percentages >= 50 && percentages < 99 ){
-      $("#kpi-result").val("KPI Almost Met");
-    }
-    if(percentages >= 100 && percentages < 130 ){
-      $("#kpi-result").val("KPI Met");
-    }
-    if(percentages >= 130 && percentages <= 149 ){
-      $("#kpi-result").val("KPI Well Met");
-    }
-    if(percentages >= 150 ){
-      $("#kpi-result").val("KPI Extremely Well Met");
-    }
-    //Over all KPI performance Standard
-    if(over_all_percentages >= 0 && over_all_percentages < 49 ){
-      $("#over-all-performance").val("KPI Not Met");
-    }
-    if(over_all_percentages >= 50 && over_all_percentages < 99 ){
-      $("#over-all-performance").val("KPI Almost Met");
-    }
-    if(over_all_percentages >= 100 && over_all_percentages < 130 ){
-      $("#over-all-performance").val("KPI Met");
-    }
-    if(over_all_percentages >= 130 && over_all_percentages <= 149 ){
-      $("#over-all-performance").val("KPI Well Met");
-    }
-    if(over_all_percentages >= 150 ){
-      $("#over-all-performance").val("KPI Extremely Well Met");
-    }
+            if (target_value > 0) {
+                percentages = (actual_value / target_value) * 100;
+                over_all_percentages = (over_all_actual / target_value) * 100;
+                //KPI performance standard
+                if (percentages >= 0 && percentages < 49) {
+                    $("#kpi-result").val("KPI Not Met");
+                }
+                if (percentages >= 50 && percentages < 99) {
+                    $("#kpi-result").val("KPI Almost Met");
+                }
+                if (percentages >= 100 && percentages < 130) {
+                    $("#kpi-result").val("KPI Met");
+                }
+                if (percentages >= 130 && percentages <= 149) {
+                    $("#kpi-result").val("KPI Well Met");
+                }
+                if (percentages >= 150) {
+                    $("#kpi-result").val("KPI Extremely Well Met");
+                }
+                //Over all KPI performance Standard
+                if (over_all_percentages >= 0 && over_all_percentages < 49) {
+                    $("#over-all-performance").val("KPI Not Met");
+                }
+                if (over_all_percentages >= 50 && over_all_percentages < 99) {
+                    $("#over-all-performance").val("KPI Almost Met");
+                }
+                if (over_all_percentages >= 100 && over_all_percentages < 130) {
+                    $("#over-all-performance").val("KPI Met");
+                }
+                if (over_all_percentages >= 130 && over_all_percentages <= 149) {
+                    $("#over-all-performance").val("KPI Well Met");
+                }
+                if (over_all_percentages >= 150) {
+                    $("#over-all-performance").val("KPI Extremely Well Met");
+                }
 
-  }else {
-    $("#kpi-result").val("KPI Not Met");
-    $("#over-all-performance").val("KPI Not Met");
+            } else {
+                $("#kpi-result").val("KPI Not Met");
+                $("#over-all-performance").val("KPI Not Met");
 
-  }
+            }
 
 
-  });
+        });
 
-});
-
+    });
 </script>

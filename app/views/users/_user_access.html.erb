@@ -28,7 +28,7 @@
         <td><% if !user.role.blank? && user.role.secondary_time_period? %>Yes<% else %>No<% end %></td>
         <td><% if !user.role.blank? && user.role.setup? %>Yes<% else %>No<% end %></td>
         <td><% if !user.role.blank? %>
-          <%= link_to edit_user_role_path(user),remote: true,'data-target' => "#user-access-modal", 'data-toggle' => 'modal', class: "btn btn-mini", :title=>"Click to Edit user access" do %>
+          <%= link_to edit_user_role_path(user.role.id),remote: true,'data-target' => "#user-access-modal", 'data-toggle' => 'modal', class: "btn btn-mini", :title=>"Click to Edit user access" do %>
             <span class="glyphicon glyphicon-edit"></span>&nbsp;Edit Access
           <% end %>
           <% else %>

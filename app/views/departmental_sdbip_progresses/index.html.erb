@@ -1,149 +1,163 @@
 <% provide(:title, 'Reports') %>
 <script>
-$(function() {
-	//highlight the current nav
-	$("#applicationmanifest a:contains('REPORTS')").parent().addClass('active');
-}); //jQuery is loaded
+	$(function () {
+		//highlight the current nav
+		$("#applicationmanifest a:contains('REPORTS')").parent().addClass('active');
+	}); //jQuery is loaded
 </script>
 <div class="departmentalsdbipprogress">
 
-  <div class="row">
-    <div class="col col-lg-12">
+	<div class="row">
+		<div class="col col-lg-12">
 			<%= render 'layouts/municipality' %>
 
-	<div class="tabbable tabs second-level-navs">
-		<ul class="nav nav-tabs">
-			<li class="active"><a href="#departmental_sdbip_report" data-toggle="tab">Departmental SDBIP</a></li>
-			<li><a href="#top_layer_sdbip_report" data-toggle="tab">Top Layer SDBIP</a></li>
-			<li><a href="#capital_projects_report" data-toggle="tab">Capital Projects</a></li>
-			<li><a href="#monthly_cashflow_report" data-toggle="tab">Monthly Cashflow</a></li>
-      <li><a href="#revenue_by_source_report" data-toggle="tab">Revenue By Source</a></li>
-		 <li><a href="#charts_per_department" data-toggle="tab">YTD Dashboard</a></li>
-		 <% if current_user.admin? %>
-		  <li><a href="#audit_logs" data-toggle="tab">Assurance</a></li>
-			<% end %>
-</ul><!-- nav nav-tabs -->
-	</div><!-- tabbable tabs -->
+			<div class="tabbable tabs second-level-navs">
+				<ul class="nav nav-tabs">
+					<li class="active">
+						<a href="#departmental_sdbip_report" data-toggle="tab">Departmental SDBIP</a>
+					</li>
+					<li>
+						<a href="#top_layer_sdbip_report" data-toggle="tab">Top Layer SDBIP</a>
+					</li>
+					<li>
+						<a href="#capital_projects_report" data-toggle="tab">Capital Projects</a>
+					</li>
+					<li>
+						<a href="#monthly_cashflow_report" data-toggle="tab">Monthly Cashflow</a>
+					</li>
+					<li>
+						<a href="#revenue_by_source_report" data-toggle="tab">Revenue By Source</a>
+					</li>
+					<li>
+						<a href="#charts_per_department" data-toggle="tab">YTD Dashboard</a>
+					</li>
+					<% if current_user.admin? || current_user.super_admin? %>
+					<li>
+						<a href="#audit_logs" data-toggle="tab">Assurance</a>
+					</li>
+					<% end %>
+				</ul>
+				<!-- nav nav-tabs -->
+			</div>
+			<!-- tabbable tabs -->
 
-	<section class="tab-content">
+			<section class="tab-content">
 
-    <%= render 'departmental_sdbip_report' %>
-    <%= render 'top_layer_sdbip_report' %>
-    <%= render 'capital_projects_report' %>
-    <%= render 'monthly_cashflow_report' %>
-    <%= render 'revenue_by_source_report' %>
-		<%= render "charts_per_department" %>
-		<%= render "audit_logs" %>
+				<%= render 'departmental_sdbip_report' %>
+				<%= render 'top_layer_sdbip_report' %>
+				<%= render 'capital_projects_report' %>
+				<%= render 'monthly_cashflow_report' %>
+				<%= render 'revenue_by_source_report' %>
+				<%= render "charts_per_department" %>
+				<%= render "audit_logs" %>
 
-	</section><!-- tab-content -->
+			</section>
+			<!-- tab-content -->
 
-<script>
+			<script>
+				var report_selected_columns = [];
+				var audit_selected_columns = [];
+				var project_selected_columns = [];
 
-$("input[name='audit_checkbox']").click(function() {
-	if($("input[name='audit_checkbox']").prop("checked") == true) {
-		audit_selected_columns.push($(this).val());
-	}
-	unique(audit_selected_columns);
-	$("#current-selected-columns").val(JSON.stringify(audit_selected_columns));
-});
+				$("input[name='audit_checkbox']").click(function () {
+					if ($("input[name='audit_checkbox']").prop("checked") == true) {
+						audit_selected_columns.push($(this).val());
+					}
+					unique(audit_selected_columns);
+					$("#current-selected-columns").val(JSON.stringify(audit_selected_columns));
+				});
 
-var report_selected_columns,project_selected_columns = [];
-$("input[name='select_info']").click(function() {
-	if($("input[name='select_info']").prop("checked") == true) {
-		report_selected_columns.push($(this).val());
-	}
-	unique(report_selected_columns);
-	$("#current-report-selected-columns").val(JSON.stringify(report_selected_columns));
-});
+				$("input[name='select_info']").click(function () {
+					if ($("input[name='select_info']").prop("checked") == true) {
+						report_selected_columns.push($(this).val());
+						
+					}
+					unique(report_selected_columns);
+					$("#current-report-selected-columns").val(JSON.stringify(report_selected_columns));
+				});
 
-$("input[name='project_info']").click(function() {
-	if($("input[name='project_info']").prop("checked") == true) {
-		project_selected_columns.push($(this).val());
-	}
-	unique(project_selected_columns);
-	$("#current-project-selected-columns").val(JSON.stringify(project_selected_columns));
-});
+				$("input[name='project_info']").click(function () {
+					if ($("input[name='project_info']").prop("checked") == true) {
+						project_selected_columns.push($(this).val());
+					}
+					unique(project_selected_columns);
+					$("#current-project-selected-columns").val(JSON.stringify(project_selected_columns));
+				});
 
-//Evaluate and Eliminate multiple occurences of an array element
-function unique(list) {
-	var result = [];
-    $.each(list, function(i, e) {
-        if ($.inArray(e, result) == -1){
-       	 		var target = e;
-         		var numOccurences = $.grep(list, function (elem) {
-    						return elem === target;
-				 		}).length;
+				//Evaluate and Eliminate multiple occurences of an array element
+				function unique(list) {
+					var result = [];
+					$.each(list, function (i, e) {
+						if ($.inArray(e, result) == -1) {
+							var target = e;
+							var numOccurences = $.grep(list, function (elem) {
+								return elem === target;
+							}).length;
 
-        	if((numOccurences%2) === 0){
+							if ((numOccurences % 2) === 0) {} else {
 
-          	}
-					else{
+								result.push(e);
+							}
+						}
+					});
+					return result;
+				}
+				/*$("input[type=radio]").click(var cp_value = "";
+				var tp_value = "";
+				function () {
+					if ($("#cp-selection-all").prop("checked") == true) {
+						cp_value = $(this).val();
+						$("#sdbip_capital_project_filter").val(cp_value);
+					}
+					if ($("#cp-selection-operational").prop("checked") == true) {
+						cp_value = $(this).val();
+						$("#sdbip_capital_project_filter").val(cp_value);
+					}
+					if ($("#cp-selection-only").prop("checked") == true) {
+						cp_value = $(this).val();
+						$("#sdbip_capital_project_filter").val(cp_value);
+					}
 
-          	result.push(e);
-          	}
-        }
-    });
-    return result;
-}
-/*$("input[type=radio]").click(
-	var cp_value = "";
-	var tp_value = "";
-	function() {
-		if($("#cp-selection-all").prop("checked") == true) {
-			cp_value = $(this).val();
-			$("#sdbip_capital_project_filter").val(cp_value);
-		}
-		if($("#cp-selection-operational").prop("checked") == true) {
-			cp_value = $(this).val();
-			$("#sdbip_capital_project_filter").val(cp_value);
-		}
-		if($("#cp-selection-only").prop("checked") == true) {
-			cp_value = $(this).val();
-			$("#sdbip_capital_project_filter").val(cp_value);
-		}
+					if ($("#tp-selection-all").prop("checked") == true) {
+						tp_value = $(this).val();
+						$("#sdbip_top_layer_kpi_ref_filter").val(tp_value);
+					}
+					if ($("#tp-selection-not-linked").prop("checked") == true) {
+						tp_value = $(this).val();
+						$("#sdbip_top_layer_kpi_ref_filter").val(tp_value);
+					}
+					if ($("#tp-selection-linked").prop("checked") == true) {
+						tp_value = $(this).val();
+						$("#sdbip_top_layer_kpi_ref_filter").val(tp_value);
+					}
+					if ($("#audit-cp-selection-all").prop("checked") == true) {
+						cp_value = $(this).val();
+						$("#capital_project_filter").val(cp_value);
+					}
+					if ($("#audit-cp-selection-operational").prop("checked") == true) {
+						cp_value = $(this).val();
+						$("#capital_project_filter").val(cp_value);
+					}
+					if ($("#audit-cp-selection-only").prop("checked") == true) {
+						cp_value = $(this).val();
+						$("#capital_project_filter").val(cp_value);
+					}
 
-		if($("#tp-selection-all").prop("checked") == true) {
-			tp_value = $(this).val();
-			$("#sdbip_top_layer_kpi_ref_filter").val(tp_value);
-		}
-		if($("#tp-selection-not-linked").prop("checked") == true) {
-			tp_value = $(this).val();
-			$("#sdbip_top_layer_kpi_ref_filter").val(tp_value);
-		}
-		if($("#tp-selection-linked").prop("checked") == true) {
-			tp_value = $(this).val();
-			$("#sdbip_top_layer_kpi_ref_filter").val(tp_value);
-		}
-		if($("#audit-cp-selection-all").prop("checked") == true) {
-			cp_value = $(this).val();
-			$("#capital_project_filter").val(cp_value);
-		}
-		if($("#audit-cp-selection-operational").prop("checked") == true) {
-			cp_value = $(this).val();
-			$("#capital_project_filter").val(cp_value);
-		}
-		if($("#audit-cp-selection-only").prop("checked") == true) {
-			cp_value = $(this).val();
-			$("#capital_project_filter").val(cp_value);
-		}
-
-		if($("#audit-tp-selection-all").prop("checked") == true) {
-			tp_value = $(this).val();
-			$("#top_layer_kpi_ref_filter").val(tp_value);
-		}
-		if($("#audit-tp-selection-not-linked").prop("checked") == true) {
-			tp_value = $(this).val();
-			$("#top_layer_kpi_ref_filter").val(tp_value);
-		}
-		if($("#audit-tp-selection-linked").prop("checked") == true) {
-			tp_value = $(this).val();
-			$("#top_layer_kpi_ref_filter").val(tp_value);
-		}
-	}
-
-);*/
-
-</script>
-  </div>
-  </div>
-</div><!-- departmentalsdbipprogress -->
+					if ($("#audit-tp-selection-all").prop("checked") == true) {
+						tp_value = $(this).val();
+						$("#top_layer_kpi_ref_filter").val(tp_value);
+					}
+					if ($("#audit-tp-selection-not-linked").prop("checked") == true) {
+						tp_value = $(this).val();
+						$("#top_layer_kpi_ref_filter").val(tp_value);
+					}
+					if ($("#audit-tp-selection-linked").prop("checked") == true) {
+						tp_value = $(this).val();
+						$("#top_layer_kpi_ref_filter").val(tp_value);
+					}
+				}); */
+			</script>
+		</div>
+	</div>
+</div>
+<!-- departmentalsdbipprogress -->

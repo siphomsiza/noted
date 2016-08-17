@@ -1,352 +1,371 @@
 <% provide(:title, "Dashboard") %>
 <div>
-  <%= render 'layouts/municipality' %>
-  <% if !@departmental_sdbips.blank? %>
-  <div class="row col col-lg-12">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3>Mkhondo Local Municipality's KPIs</h3>
-      </div>
-      <div class="panel-body">
-        <div class="row">
-          <div class="col col-lg-6">
-            <%= pie_chart @departmental_sdbips.group(:performance_standard).count,height: "300px",library: {pieSliceText:'value-and-percentage', colors: @colours} %>
-          </div>
-          <div class="col col-lg-6">
-            <%= column_chart @departmental_sdbips.group(:performance_standard).count,height: "300px", colors: @colours %>
-          </div>
+    <%= render 'layouts/municipality' %>
+    <% if !@departmental_sdbips.blank? %>
+    <div class="row col col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3>Mkhondo Local Municipality's KPIs</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col col-lg-6">
+                        <%= pie_chart @departmental_sdbips.group(:performance_standard).count,height: "300px",library: {pieSliceText:'value-and-percentage', colors: @colours} %>
+                    </div>
+                    <div class="col col-lg-6">
+                        <%= column_chart @departmental_sdbips.group(:performance_standard).count,height: "300px", colors: @colours %>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col-lg-12">
+                        <table class="table table-striped table-responsive table-hover table-bordered">
+                            <tr>
+                                <th colspan="1" rowspan="2"></th>
+                                <th colspan="1" rowspan="2">Mkhondo Local Municipality</th>
+                                <th colspan="<%= @departments.count %>" scope="colgroup">Department</th>
+                            </tr>
+                            <tr>
+                                <% @departments.each do |department| %>
+                                <th>
+                                    <h5><%= department.name %></h5>
+                                </th>
+                                <% end %>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <span class="glyphicon glyphicon-stop babypink"></span>KPI Not Yet Measured</td>
+                                <td><%= @departmental_sdbips.where(:performance_standard=> "KPI Not Yet Measured").count %>&nbsp; (<%= number_to_percentage(@departmental_sdbips.where(:performance_standard=> "KPI Not Yet Measured").count.to_f * 100 / (@departmental_sdbips.count.nonzero? || 1 ),precision: 2) %>)</td>
+                                <!--populating the columns and rows with data  -->
+                                <% @departments.each do |department_value| %>
+                                <td><%= @departmental_sdbips.where(:performance_standard=> "KPI Not Yet Measured", :department_id => department_value.id ).count %>&nbsp; (<%= number_to_percentage(@departmental_sdbips.where(:performance_standard=> "KPI Not Yet Measured",
+                                    :department_id => department_value.id).count.to_f * 100 / (@departmental_sdbips.where(:department_id => department_value.id ).count.nonzero? || 1 ),precision: 2) %>)
+                                </td>
+                                <% end %>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="glyphicon glyphicon-stop red"></span>KPI Not Met</td>
+                                <td><%= @departmental_sdbips.where(:performance_standard=> "KPI Not Met").count %>&nbsp; (<%= number_to_percentage(@departmental_sdbips.where(:performance_standard=> "KPI Not Met").count.to_f * 100 / (@departmental_sdbips.count.nonzero? || 1 ),precision: 2) %>)</td>
+
+                                <% @departments.each do |department_value| %>
+                                <td><%= @departmental_sdbips.where(:performance_standard=> "KPI Not Met", :department_id => department_value.id ).count %>&nbsp; (<%= number_to_percentage(@departmental_sdbips.where(:performance_standard=> "KPI Not Met", :department_id =>
+                                    department_value.id).count.to_f * 100 / (@departmental_sdbips.where(:department_id => department_value.id ).count.nonzero? || 1 ),precision: 2) %>)</td>
+                                <% end %>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="glyphicon glyphicon-stop orange"></span>KPI Almost Met</td>
+                                <td><%= @departmental_sdbips.where(:performance_standard=> "KPI Almost Met").count %>&nbsp; (<%= number_to_percentage(@departmental_sdbips.where(:performance_standard=> "KPI Almost Met").count.to_f * 100 / (@departmental_sdbips.count.nonzero? || 1 ),precision: 2) %>)</td>
+
+                                <% @departments.each do |department_value| %>
+                                <td><%= @departmental_sdbips.where(:performance_standard=> "KPI Almost Met", :department_id => department_value.id ).count %>&nbsp; (<%= number_to_percentage(@departmental_sdbips.where(:performance_standard=> "KPI Almost Met", :department_id =>
+                                    department_value.id).count.to_f * 100 / (@departmental_sdbips.where(:department_id => department_value.id ).count.nonzero? || 1 ),precision: 2) %>)</td>
+                                <% end %>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="glyphicon glyphicon-stop limegreen"></span>KPI Met</td>
+                                <td><%= @departmental_sdbips.where(:performance_standard=> "KPI Met").count %>&nbsp; (<%= number_to_percentage(@departmental_sdbips.where(:performance_standard=> "KPI Met").count.to_f * 100 / (@departmental_sdbips.count.nonzero? || 1 ),precision: 2) %>)</td>
+                                <% @departments.each do |department_value| %>
+                                <td><%= @departmental_sdbips.where(:performance_standard=> "KPI Met", :department_id => department_value.id ).count %>&nbsp; (<%= number_to_percentage(@departmental_sdbips.where(:performance_standard=> "KPI Met", :department_id =>
+                                    department_value.id).count.to_f * 100 / (@departmental_sdbips.where(:department_id => department_value.id ).count.nonzero? || 1 ),precision: 2) %>)</td>
+                                <% end %>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="glyphicon glyphicon-stop darkgreen"></span>KPI Well Met</td>
+                                <td><%= @departmental_sdbips.where(:performance_standard=> "KPI Well Met").count %>&nbsp; (<%= number_to_percentage(@departmental_sdbips.where(:performance_standard=> "KPI Well Met").count.to_f * 100 / (@departmental_sdbips.count.nonzero? || 1 ),precision: 2) %>)</td>
+                                <% @departments.each do |department_value| %>
+                                <td><%= @departmental_sdbips.where(:performance_standard=> "KPI Well Met", :department_id => department_value.id ).count %>&nbsp; (<%= number_to_percentage(@departmental_sdbips.where(:performance_standard=> "KPI Well Met", :department_id =>
+                                    department_value.id).count.to_f * 100 / (@departmental_sdbips.where(:department_id => department_value.id ).count.nonzero? || 1 ),precision: 2) %>)</td>
+                                <% end %>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <span class="glyphicon glyphicon-stop darkblue"></span>KPI Extremely Well Met</td>
+                                <td><%= @departmental_sdbips.where(:performance_standard=> "KPI Extremely Well Met").count %>&nbsp; (<%= number_to_percentage(@departmental_sdbips.where(:performance_standard=> "KPI Extremely Well Met").count.to_f * 100 / (@departmental_sdbips.count.nonzero? || 1 ),precision: 2) %>)</td>
+                                <% @departments.each do |department_value| %>
+                                <td><%= @departmental_sdbips.where(:performance_standard=> "KPI Extremely Well Met", :department_id => department_value.id ).count %>&nbsp; (<%= number_to_percentage(@departmental_sdbips.where(:performance_standard=> "KPI Extremely Well Met",
+                                    :department_id => department_value.id).count.to_f * 100 / (@departmental_sdbips.where(:department_id => department_value.id ).count.nonzero? || 1 ),precision: 2) %>)</td>
+                                <% end %>
+                            </tr>
+                            <tr>
+                                <td>Total:</td>
+                                <td><%= @departmental_sdbips.count %></td>
+                                <% @departments.each do |department_sdbip_count| %>
+                                <td><%= department_sdbip_count.departmental_sdbips.where(department_id: department_sdbip_count.id ).count %></td>
+                                <% end %>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="row">
-            <div class="col col-lg-12">
-            <table class="table table-striped table-responsive table-hover table-bordered">
-              <tr>
-              <th colspan="1" rowspan="2"></th>
-              <th colspan="1" rowspan="2">Mkhondo Local Municipality</th>
-              <th colspan="<%= @departments.count %>" scope="colgroup">Department</th>
-              </tr>
-              <tr>
+    </div>
+    <div class="row col col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3>Mkhondo Local Municipality's KPAs</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col col-lg-6">
+                        <%= pie_chart @departmental_sdbips_kpa.group(:kpa_name).count,height: "300px",library: {pieSliceText:'value-and-percentage'} %>
+                    </div>
+                    <div class="col col-lg-6">
+                        <%= column_chart @departmental_sdbips_kpa.group(:kpa_name).count,height: "300px",library: {pieSliceText:'value-and-percentage'} %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row col col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3>Mkhondo Local Municipality Departments' KPIs</h3>
+            </div>
+
+            <div class="panel-body">
                 <% @departments.each do |department| %>
-                <th><h5><%= department.name %></h5></th>
-                <% end %>
-              </tr>
+                <% @chart_data = @departmental_sdbips.where(:department_id=>department.id) %>
+                <% if !@chart_data.blank? %>
+                <% $colors = [] %>
+                <% @chart_theme = @chart_data.select(:performance_standard).uniq
+                @chart_theme.order(performance_standard: :asc)
+                @chart_theme.each do |color|
+                  if color.performance_standard.include?("KPI Almost Met")
+                    $colors.push("orange")
+                  end
+                  if color.performance_standard.include?("KPI Extremely Well Met")
+                     $colors.push("darkblue")
+                   end
+                   if color.performance_standard.include?("KPI Met")
+                     $colors.push("limegreen")
+                   end
+                   if color.performance_standard.include?("KPI Not Met")
+                     $colors.push("red")
+                   end
+                   if color.performance_standard.include?("KPI Not Yet Measured")
+                     $colors.push("#F4C2C2")
+                   end
+                   if color.performance_standard.include?("KPI Well Met")
+                     $colors.push("darkgreen")
+                   end
+                 end %>
+                <% @theme_colours = $colors %>
+                <div class="well well-lg">
+                    <h4 align="center"><%= department.name %>
+                        <div class="row">
+                            <div class="col col-lg-6">
+                                <%= pie_chart @chart_data.group(:performance_standard).count,height: "300px",library: {pieSliceText:'value-and-percentage'}, colors: @theme_colours %>
+                            </div>
+                            <div class="col col-lg-6">
+                                <%= column_chart @chart_data.group(:performance_standard).count,height: "300px", stacked: 'percent', colors: @theme_colours %>
 
-              <tr>
-                <td><span class="glyphicon glyphicon-stop babypink"></span>KPI Not Yet Measured</td>
-                <td><%= @departmental_sdbips.where(:performance_standard=> "KPI Not Yet Measured").count %>&nbsp;
-                  (<%= number_to_percentage(@departmental_sdbips.where(:performance_standard=> "KPI Not Yet Measured").count.to_f * 100 / (@departmental_sdbips.count.nonzero? || 1 ),precision: 2) %>)</td>
-                  <!--populating the columns and rows with data  -->
-                  <% @departments.each do |department_value| %>
-                    <td><%= @departmental_sdbips.where(:performance_standard=> "KPI Not Yet Measured", :department_id => department_value.id ).count %>&nbsp;
-                      (<%= number_to_percentage(@departmental_sdbips.where(:performance_standard=> "KPI Not Yet Measured", :department_id => department_value.id).count.to_f * 100 / (@departmental_sdbips.where(:department_id => department_value.id ).count.nonzero? || 1 ),precision: 2) %>)
-                    </td>
-                  <% end %>
-              </tr>
-              <tr>
-                <td><span class="glyphicon glyphicon-stop red"></span>KPI Not Met</td>
-                <td><%= @departmental_sdbips.where(:performance_standard=> "KPI Not Met").count %>&nbsp;
-                  (<%= number_to_percentage(@departmental_sdbips.where(:performance_standard=> "KPI Not Met").count.to_f * 100 / (@departmental_sdbips.count.nonzero? || 1 ),precision: 2) %>)</td>
+                            </div>
+                        </div>
+                    </div>
+                    <% end %>
+                    <% end %>
+                </div>
 
-                  <% @departments.each do |department_value| %>
-                    <td><%= @departmental_sdbips.where(:performance_standard=> "KPI Not Met", :department_id => department_value.id ).count %>&nbsp;
-                      (<%= number_to_percentage(@departmental_sdbips.where(:performance_standard=> "KPI Not Met", :department_id => department_value.id).count.to_f * 100 / (@departmental_sdbips.where(:department_id => department_value.id ).count.nonzero? || 1 ),precision: 2) %>)</td>
-                  <% end %>
-              </tr>
-              <tr>
-                <td><span class="glyphicon glyphicon-stop orange"></span>KPI Almost Met</td>
-                <td><%= @departmental_sdbips.where(:performance_standard=> "KPI Almost Met").count %>&nbsp;
-                  (<%= number_to_percentage(@departmental_sdbips.where(:performance_standard=> "KPI Almost Met").count.to_f * 100 / (@departmental_sdbips.count.nonzero? || 1 ),precision: 2) %>)</td>
-
-                  <% @departments.each do |department_value| %>
-                    <td><%= @departmental_sdbips.where(:performance_standard=> "KPI Almost Met", :department_id => department_value.id ).count %>&nbsp;
-                      (<%= number_to_percentage(@departmental_sdbips.where(:performance_standard=> "KPI Almost Met", :department_id => department_value.id).count.to_f * 100 / (@departmental_sdbips.where(:department_id => department_value.id ).count.nonzero? || 1 ),precision: 2) %>)</td>
-                  <% end %>
-              </tr>
-              <tr>
-                <td><span class="glyphicon glyphicon-stop limegreen"></span>KPI Met</td>
-                <td><%= @departmental_sdbips.where(:performance_standard=> "KPI Met").count %>&nbsp;
-                  (<%= number_to_percentage(@departmental_sdbips.where(:performance_standard=> "KPI Met").count.to_f * 100 / (@departmental_sdbips.count.nonzero? || 1 ),precision: 2) %>)</td>
-                  <% @departments.each do |department_value| %>
-                    <td><%= @departmental_sdbips.where(:performance_standard=> "KPI Met", :department_id => department_value.id ).count %>&nbsp;
-                      (<%= number_to_percentage(@departmental_sdbips.where(:performance_standard=> "KPI Met", :department_id => department_value.id).count.to_f * 100 / (@departmental_sdbips.where(:department_id => department_value.id ).count.nonzero? || 1 ),precision: 2) %>)</td>
-                  <% end %>
-              </tr>
-              <tr>
-                <td><span class="glyphicon glyphicon-stop darkgreen"></span>KPI Well Met</td>
-                <td><%= @departmental_sdbips.where(:performance_standard=> "KPI Well Met").count %>&nbsp;
-                  (<%= number_to_percentage(@departmental_sdbips.where(:performance_standard=> "KPI Well Met").count.to_f * 100 / (@departmental_sdbips.count.nonzero? || 1 ),precision: 2) %>)</td>
-                  <% @departments.each do |department_value| %>
-                    <td><%= @departmental_sdbips.where(:performance_standard=> "KPI Well Met", :department_id => department_value.id ).count %>&nbsp;
-                      (<%= number_to_percentage(@departmental_sdbips.where(:performance_standard=> "KPI Well Met", :department_id => department_value.id).count.to_f * 100 / (@departmental_sdbips.where(:department_id => department_value.id ).count.nonzero? || 1 ),precision: 2) %>)</td>
-                  <% end %>
-              </tr>
-              <tr>
-                <td><span class="glyphicon glyphicon-stop darkblue"></span>KPI Extremely Well Met</td>
-                <td><%= @departmental_sdbips.where(:performance_standard=> "KPI Extremely Well Met").count %>&nbsp;
-                  (<%= number_to_percentage(@departmental_sdbips.where(:performance_standard=> "KPI Extremely Well Met").count.to_f * 100 / (@departmental_sdbips.count.nonzero? || 1 ),precision: 2) %>)</td>
-                  <% @departments.each do |department_value| %>
-                    <td><%= @departmental_sdbips.where(:performance_standard=> "KPI Extremely Well Met", :department_id => department_value.id ).count %>&nbsp;
-                      (<%= number_to_percentage(@departmental_sdbips.where(:performance_standard=> "KPI Extremely Well Met", :department_id => department_value.id).count.to_f * 100 / (@departmental_sdbips.where(:department_id => department_value.id ).count.nonzero? || 1 ),precision: 2) %>)</td>
-                  <% end %>
-              </tr>
-              <tr>
-                <td>Total:</td>
-                <td><%= @departmental_sdbips.count %></td>
-                <% @departments.each do |department_sdbip_count| %>
-                <td><%= department_sdbip_count.departmental_sdbips.where(department_id: department_sdbip_count.id ).count %></td>
-                <% end %>
-              </tr>
-            </table>
-          </div>
-          </div>
-      </div>
-    </div>
-  </div>
-  <div class="row col col-lg-12">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3>Mkhondo Local Municipality's KPAs</h3>
-      </div>
-      <div class="panel-body">
-        <div class="row">
-          <div class="col col-lg-6">
-            <%= pie_chart @departmental_sdbips_kpa.group(:kpa_name).count,height: "300px",library: {pieSliceText:'value-and-percentage'} %>
-          </div>
-          <div class="col col-lg-6">
-            <%= column_chart @departmental_sdbips_kpa.group(:kpa_name).count,height: "300px",library: {pieSliceText:'value-and-percentage'} %>
-          </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </div>
-  <div class="row col col-lg-12">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3>Mkhondo Local Municipality Departments' KPIs</h3>
-      </div>
-
-      <div class="panel-body">
-        <% @departments.each do |department| %>
-        <% @chart_data = @departmental_sdbips.where(:department_id=>department.id) %>
-        <% if !@chart_data.blank? %>
-        <% $colors = []
-        @chart_theme = @chart_data.select(:performance_standard).uniq
-        @chart_theme.order(performance_standard: :asc)
-        @chart_theme.each do |color|
-        if color.performance_standard.include?("KPI Almost Met")
-          $colors.push("orange")
-        end
-        if color.performance_standard.include?("KPI Extremely Well Met")
-          $colors.push("darkblue")
-        end
-        if color.performance_standard.include?("KPI Met")
-          $colors.push("limegreen")
-        end
-        if color.performance_standard.include?("KPI Not Met")
-          $colors.push("red")
-        end
-        if color.performance_standard.include?("KPI Not Yet Measured")
-          $colors.push("#F4C2C2")
-        end
-        if color.performance_standard.include?("KPI Well Met")
-          $colors.push("darkgreen")
-        end
-        end %>
-        <% @theme_colours = $colors %>
-        <div class="well well-lg">
-          <h4 align="center"><%= department.name %>
-        <div class="row">
-          <div class="col col-lg-6">
-            <%= pie_chart @chart_data.group(:performance_standard).count,height: "300px",library: {pieSliceText:'value-and-percentage'}, colors: @theme_colours %>
-          </div>
-          <div class="col col-lg-6">
-            <%= column_chart @chart_data.group(:performance_standard).count,height: "300px", stacked: 'percent', colors: @theme_colours %>
-
-          </div>
+    <% else %>
+        <div class="row col col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3>
+                        <span class="glyphicon glyphicon-info-sign"></span>&nbsp;SDBIP Notice:</h3>
+                </div>
+                <div class="panel-body">
+                    <h3 class="label label-info">SDBIP has not been loaded yet!</h3>
+                </div>
+            </div>
         </div>
-      </div>
         <% end %>
-        <% end %>
-      </div>
-
-    </div>
-  </div>
-  <% else %>
-  <p class="weather-display">SDBIP has not been loaded yet!</p>
-  <% end %>
-  <div class="row col col-lg-12">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3><span class="glyphicon glyphicon-time"></span>&nbsp;SDBIP Time Periods</h3>
-      </div>
-      <div class="panel-body">
-        <table class="table table-striped table-responsive">
-          <tr>
-            <th>Period</th>
-            <th>Reminder Date</th>
-            <th>Primary Closure Date</th>
-            <th>Secondary Closure Date</th>
-            <th>Status</th>
-
-          </tr>
-          <% if @sdbip_time_periods.blank? %>
-          <tr><td colspan="5"><h3 class=" label label-info">No actions overdue today or the next 7 days.</h3></td></tr>
-          <% else %>
-          <% @sdbip_time_periods.each do |time_period| %>
-          <tr>
-          <td><%= time_period.period.strftime("%d %B %Y") %></td>
-          <td>
-          <% if !time_period.primary_reminder.blank? %>
-            <%= time_period.primary_reminder.strftime("%d %B %Y") %>
-            <% end %>
-          </td>
-          <td>
-          <% if !time_period.primary_closure.blank? %>
-            <%= time_period.primary_closure.strftime("%d %B %Y") %>
-          <% end %>
-        </td>
-          <td><% if !time_period.secondary_closure.blank? %>
-            <%= time_period.secondary_closure.strftime("%d %B %Y") %><% end %></td>
-          <td>
-          <% if  time_period.primary_status? || time_period.secondary_status? %>
-
-            <label class="label label-success">Open</label>
-
-            <% else %>
-
-            <label class="label label-danger">Closed</label>
-
-            <% end %>
-          </td>
-
-          </tr>
-          <% end %>
-        <% end %>
-        </table>
-      </div>
-    </div>
-  </div>
-  <div class="row col col-lg-12">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3><span class="glyphicon glyphicon-user"></span>&nbsp;Users Statistics</h3>
-      </div>
-      <div class="panel-body">
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-          <div>
-            <% if @users.count > 100 %>
-              <div class="c100 p100">
-                <span><%= @users.count %></span>
-                <div class="slice">
-                  <div class="bar"></div>
-                  <div class="fill"></div>
+        <div class="row col col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3>
+                        <span class="glyphicon glyphicon-time"></span>&nbsp;SDBIP Time Periods</h3>
                 </div>
-              </div>
-            <% else %>
-              <div class="c100 p<%= @users.count %>">
-                <span><%= @users.count %></span>
-                <div class="slice">
-                  <div class="bar"></div>
-                  <div class="fill"></div>
+                <div class="panel-body">
+                    <table class="table table-striped table-responsive">
+                        <tr>
+                            <th>Period</th>
+                            <th>Reminder Date</th>
+                            <th>Primary Closure Date</th>
+                            <th>Secondary Closure Date</th>
+                            <th>Status</th>
+
+                        </tr>
+                        <% if @sdbip_time_periods.blank? %>
+                        <tr>
+                            <td colspan="5">
+                                <h3 class=" label label-info">No actions overdue today or the next 7 days.</h3>
+                            </td>
+                        </tr>
+                    <% else %>
+                        <% @sdbip_time_periods.each do |time_period| %>
+                        <tr>
+                            <td><%= time_period.period.strftime("%d %B %Y") %></td>
+                            <td>
+                                <% if !time_period.primary_reminder.blank? %>
+                                <%= time_period.primary_reminder.strftime("%d %B %Y") %>
+                                <% end %>
+                            </td>
+                            <td>
+                                <% if !time_period.primary_closure.blank? %>
+                                <%= time_period.primary_closure.strftime("%d %B %Y") %>
+                                <% end %>
+                            </td>
+                            <td><% if !time_period.secondary_closure.blank? %>
+                                <%= time_period.secondary_closure.strftime("%d %B %Y") %><% end %></td>
+                            <td>
+                                <% if  time_period.primary_status? || time_period.secondary_status? %>
+
+                                <label class="label label-success">Open</label>
+
+                            <% else %>
+
+                                <label class="label label-danger">Closed</label>
+
+                                <% end %>
+                            </td>
+
+                        </tr>
+                        <% end %>
+                        <% end %>
+                    </table>
                 </div>
-              </div>
-            <% end %>
-            <h3>All Users</h3>
-          </div>
+            </div>
         </div>
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-          <div>
-            <% if @users.where(admin: true).count > 100 %>
-              <div class="c100 p100 red">
-                <span><%= @users.where(admin: true).count %></span>
-                <div class="slice">
-                  <div class="bar"></div>
-                  <div class="fill"></div>
+        <div class="row col col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3>
+                        <span class="glyphicon glyphicon-user"></span>&nbsp;Users Statistics</h3>
                 </div>
-              </div>
-            <% else %>
-              <div class="c100 p<%= @users.where(admin: true).count %> red">
-                <span><%= @users.where(admin: true).count %></span>
-                <div class="slice">
-                  <div class="bar"></div>
-                  <div class="fill"></div>
+                <div class="panel-body">
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <div>
+                            <% if @users.count > 100 %>
+                            <div class="c100 p100">
+                                <span><%= @users.count %></span>
+                                <div class="slice">
+                                    <div class="bar"></div>
+                                    <div class="fill"></div>
+                                </div>
+                            </div>
+                        <% else %>
+                            <div class="c100 p<%= @users.count %>">
+                                <span><%= @users.count %></span>
+                                <div class="slice">
+                                    <div class="bar"></div>
+                                    <div class="fill"></div>
+                                </div>
+                            </div>
+                            <% end %>
+                            <h3>All Users</h3>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <div>
+                            <% if @users.where('admin = ? OR super_admin = ?', true, true).count > 100 %>
+                            <div class="c100 p100 red">
+                                <span><%= @users.where('admin = ? OR super_admin = ?', true, true).count %></span>
+                                <div class="slice">
+                                    <div class="bar"></div>
+                                    <div class="fill"></div>
+                                </div>
+                            </div>
+                        <% else %>
+                            <div class="c100 p<%= @users.where('admin = ? OR super_admin = ?', true, true).count %> red">
+                                <span><%= @users.where('admin = ? OR super_admin = ?', true, true).count %></span>
+                                <div class="slice">
+                                    <div class="bar"></div>
+                                    <div class="fill"></div>
+                                </div>
+                            </div>
+                            <% end %>
+                            <h3>Admin Users</h3>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <div>
+                            <% if @users.where(status: 'Active').count > 100 %>
+                            <div class="c100 p100 green">
+                                <span><%= @users.where(status: "Active").count %></span>
+                                <div class="slice">
+                                    <div class="bar"></div>
+                                    <div class="fill"></div>
+                                </div>
+                            </div>
+                        <% else %>
+                            <div class="c100 p<%= @users.where(status: 'Active').count %> green">
+                                <span><%= @users.where(status: "Active").count %></span>
+                                <div class="slice">
+                                    <div class="bar"></div>
+                                    <div class="fill"></div>
+                                </div>
+                            </div>
+                            <% end %>
+                            <h3>Active Users</h3>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                        <div>
+                            <% if @users.where(activated: false).count > 100 %>
+                            <div class="c100 p100 orange">
+                                <span><%= @users.where(activated: false).count %></span>
+                                <div class="slice">
+                                    <div class="bar"></div>
+                                    <div class="fill"></div>
+                                </div>
+                            </div>
+                        <% else %>
+                            <div class="c100 p<%= @users.where(activated: false).count %> orange">
+                                <span><%= @users.where(activated: false).count %></span>
+                                <div class="slice">
+                                    <div class="bar"></div>
+                                    <div class="fill"></div>
+                                </div>
+                            </div>
+                            <% end %>
+                            <h3>Inactive Users</h3>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            <% end %>
-            <h3>Admin Users</h3>
-          </div>
+            </div>
         </div>
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-          <div>
-            <% if @users.where(status: 'Active').count > 100 %>
-              <div class="c100 p100 green">
-                <span><%= @users.where(status: "Active").count %></span>
-                <div class="slice">
-                  <div class="bar"></div>
-                  <div class="fill"></div>
+        <div class="row col col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3>
+                        <span class="glyphicon glyphicon-list-alt"></span>&nbsp;Activity Log</h3>
                 </div>
-              </div>
-            <% else %>
-              <div class="c100 p<%= @users.where(status: 'Active').count %> green">
-                <span><%= @users.where(status: "Active").count %></span>
-                <div class="slice">
-                  <div class="bar"></div>
-                  <div class="fill"></div>
+                <div class="panel-body">
+                    <table class="table table-striped table-responsive">
+                        <tr>
+                            <th>User</th>
+                            <th>Email</th>
+                            <th>Status</th>
+                            <th>Location(IP Address)</th>
+                            <th>Date</th>
+                        </tr>
+                        <% User.where.not(current_login_ip: "").each do |activity|%>
+                        <tr>
+                            <td><%= activity.firstname %>&nbsp;<%= activity.surname %></td>
+                            <td><%= link_to activity.email %></td>
+                            <td><%= activity.status %></td>
+                            <td><%= activity.current_login_ip %></td>
+                            <td><%= activity.current_login_at %></td>
+                        </tr>
+                        <% end %>
+                    </table>
                 </div>
-              </div>
-            <% end %>
-            <h3>Active Users</h3>
-          </div>
+            </div>
         </div>
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-          <div>
-            <% if @users.where(activated: false).count > 100 %>
-              <div class="c100 p100 orange">
-                <span><%= @users.where(activated: false).count %></span>
-                <div class="slice">
-                  <div class="bar"></div>
-                  <div class="fill"></div>
-                </div>
-              </div>
-            <% else %>
-              <div class="c100 p<%= @users.where(activated: false).count %> orange">
-                <span><%= @users.where(activated: false).count %></span>
-                <div class="slice">
-                  <div class="bar"></div>
-                  <div class="fill"></div>
-                </div>
-              </div>
-            <% end %>
-            <h3>Inactive Users</h3>
-          </div>
-        </div>
-      </div>
     </div>
-  </div>
-  <div class="row col col-lg-12">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3><span class="glyphicon glyphicon-list-alt"></span>&nbsp;Activity Log</h3>
-      </div>
-      <div class="panel-body">
-        <table class="table table-striped table-responsive">
-          <tr>
-            <th>User</th>
-            <th>Email</th>
-            <th>Status</th>
-            <th>Location(IP Address)</th>
-            <th>Date</th>
-          </tr>
-          <% User.where.not(current_login_ip: "").each do |activity|%>
-          <tr>
-            <td><%= activity.firstname %>&nbsp;<%= activity.surname %></td>
-            <td><%= link_to activity.email %></td>
-            <td><%= activity.status %></td>
-            <td><%= activity.current_login_ip %></td>
-            <td><%= activity.current_login_at %></td>
-          </tr>
-          <% end %>
-        </table>
-      </div>
-    </div>
-  </div>
-</div>

@@ -1,53 +1,52 @@
 <div class="table-responsive">
-  <table class="table table-striped table-bordered departmental-sdbip-edit">
-      <tr>
-        <th>Ref</th>
-        <th>Department</th>
-        <th>Subdepartment</th>
-        <th>KPI</th>
-        <th>KPI Ref Number</th>
-        <th>Predetermined Objectives</th>
-        <th>KPI Owner</th>
-        <th>Unit of Measurement</th>
-        <th>Source of Evidence</th>
-        <th>NDP Objective</th>
-        <th>Capital Project</th>
-        <th>Reporting Category</th>
-        <th>KPI Calculation Type</th>
-        <th>Create Date</th>
-        <th>Update Date</th>
-      </tr>
-    <% @departmental_sdbips.each do |departmental_sdbip| %>
-      <tr>
-        <td>D<%= departmental_sdbip.id %></td>
-        <td><%= departmental_sdbip.department.name %></td>
-        <td><%= departmental_sdbip.subdepartment.subdepartment_name %></td>
-        <td>
-          <% if (!current_user.departmental_administrator.blank? && current_user.departmental_administrator.can_update?) || (!current_user.subdepartmental_administrator.blank? && current_user.subdepartmental_administrator.can_update?) || current_user.admin? || ( !current_user.role.blank? && current_user.role.kpi_owner? && (!current_user.kpi_owners.blank? && current_user.kpi_owners.can_update? ) ) %>
-        <%= link_to edit_departmental_sdbip_path(departmental_sdbip),remote: true,'data-target' => "#departmental-sdbip-modal", 'data-toggle' => 'modal', :title=>"Click to Update KPI" do %>
-            <%= departmental_sdbip.kpi %>
-          <% end %>
-          <div id="departmental-sdbip-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+    <table class="table table-striped table-bordered departmental-sdbip-edit">
+        <tr>
+            <th>Ref</th>
+            <th>Department</th>
+            <th>Subdepartment</th>
+            <th>KPI</th>
+            <th>KPI Ref Number</th>
+            <th>Predetermined Objectives</th>
+            <th>KPI Owner</th>
+            <th>Unit of Measurement</th>
+            <th>Source of Evidence</th>
+            <th>NDP Objective</th>
+            <th>Capital Project</th>
+            <th>Reporting Category</th>
+            <th>KPI Calculation Type</th>
+            <th>Create Date</th>
+            <th>Update Date</th>
+        </tr>
+        <% @departmental_sdbips.each do |departmental_sdbip| %>
+        <tr>
+            <td>D<%= departmental_sdbip.id %></td>
+            <td><%= departmental_sdbip.department.name %></td>
+            <td><%= departmental_sdbip.subdepartment.subdepartment_name %></td>
+            <td>
+                <% if (!current_user.departmental_administrator.blank? && current_user.departmental_administrator.can_update?) || (!current_user.subdepartmental_administrator.blank? && current_user.subdepartmental_administrator.can_update?) || current_user.admin? ||
+                ( !current_user.role.blank? && current_user.role.kpi_owner? && (!current_user.kpi_owners.blank?))# && current_user.kpi_owners.can_update? ) ) %>
+                <%= link_to edit_departmental_sdbip_path(departmental_sdbip),remote: true,'data-target' => "#departmental-sdbip-modal", 'data-toggle' => 'modal', :title=>"Click to Update KPI" do %>
+                <%= departmental_sdbip.kpi %>
+                <% end %>
+                <div id="departmental-sdbip-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true"></div>
+            <% else %>
+                <%= departmental_sdbip.kpi %>
+                <% end %>
+            </td>
+            <td><%= departmental_sdbip.kpi_ref_number %></td>
+            <td><% if !departmental_sdbip.predetermined_objective_id.blank? %><%= departmental_sdbip.predetermined_objective.name %><% end %></td>
+            <td><% if !departmental_sdbip.kpi_owner_id.blank? %><%= departmental_sdbip.kpi_owner.name %><% end %></td>
+            <td><%= departmental_sdbip.unit_of_measurement %></td>
+            <td><%= departmental_sdbip.source_of_evidence %></td>
+            <td><% if !departmental_sdbip.ndp_objective_id.blank? %><%= departmental_sdbip.ndp_objective.name %><% end %></td>
+            <td><% if departmental_sdbip.capital_project %><%= departmental_sdbip.capital_project.mun_cp_ref %><% end %></td>
+            <td><% if !departmental_sdbip.reporting_category_id.blank? %><%= departmental_sdbip.reporting_category.name %><% end %></td>
+            <td><% if !departmental_sdbip.kpi_calculation_type_id.blank? %><%= departmental_sdbip.kpi_calculation_type.name %><% end %></td>
+            <td><%= departmental_sdbip.created_at.strftime(' %Y-%B-%d') %></td>
+            <td><%= departmental_sdbip.updated_at.strftime('%d-%B-%Y') %></td>
 
-          </div>
-          <% else %>
-            <%= departmental_sdbip.kpi %>
-          <% end %>
-        </td>
-        <td><%= departmental_sdbip.kpi_ref_number %></td>
-        <td><% if !departmental_sdbip.predetermined_objective_id.blank? %><%= departmental_sdbip.predetermined_objective.name %><% end %></td>
-        <td><% if !departmental_sdbip.kpi_owner_id.blank? %><%= departmental_sdbip.kpi_owner.name %><% end %></td>
-        <td><%= departmental_sdbip.unit_of_measurement %></td>
-        <td><%= departmental_sdbip.source_of_evidence %></td>
-        <td><% if !departmental_sdbip.ndp_objective_id.blank? %><%= departmental_sdbip.ndp_objective.name %><% end %></td>
-        <td><% if departmental_sdbip.capital_project %><%= departmental_sdbip.capital_project.mun_cp_ref %><% end %></td>
-        <td><% if !departmental_sdbip.reporting_category_id.blank? %><%= departmental_sdbip.reporting_category.name %><% end %></td>
-        <td><% if !departmental_sdbip.kpi_calculation_type_id.blank? %><%= departmental_sdbip.kpi_calculation_type.name %><% end %></td>
-        <td><%= departmental_sdbip.created_at.strftime(' %Y-%B-%d') %></td>
-        <td><%= departmental_sdbip.updated_at.strftime('%d-%B-%Y') %></td>
+        </tr>
+        <% end %>
 
-      </tr>
-      <% end %>
-
-  </table>
+    </table>
 </div>

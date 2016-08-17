@@ -1,43 +1,44 @@
 <% @departmental_sdbip.assurances.each do |assurance| %>
 <table class="table table-responsive table-hover table-striped">
-  <tr>
-    <th>
-      Reviewed By:
-    </th>
-    <td>
-      <%= assurance.user.firstname %>&nbsp;<%= assurance.user.surname%>
-      <p>Updated on <%= assurance.created_at.strftime("%d %B %Y %H:%M:%S") %></p>
-    </td>
-  </tr>
-  <tr>
-    <th>
-      Signed-Off:
-    </th>
-    <td>
-      <% if assurance.signed_off? %>
-      Yes
-      <% else %>
-      No
-      <% end %>
-    </td>
-  </tr>
-  <tr>
-    <th>
-      Response:
-    </th>
-    <td>
-      <%= assurance.response %>
-    </td>
-  </tr>
-  <tr>
-    <th>
-      Assigned to:
-    </th>
-  </tr>
-  <tr>
-    <th>
-      Update Deadline
-    </th>
-  </tr>
+    <tr>
+        <th>
+            Reviewed By:
+        </th>
+        <td>
+            <%= assurance.user.firstname %>&nbsp;<%= assurance.user.surname%>
+            <p>Updated on
+                <%= assurance.created_at.strftime("%d %B %Y %H:%M:%S") %></p>
+        </td>
+    </tr>
+    <tr>
+        <th>
+            Signed-Off:
+        </th>
+        <td>
+            <% if assurance.signed_off? %>
+            Yes
+        <% else %>
+            No
+            <% end %>
+        </td>
+    </tr>
+    <tr>
+        <th>
+            Response:
+        </th>
+        <td>
+            <%= assurance.response %>
+        </td>
+    </tr>
+    <tr>
+        <th>
+            Assigned to:
+        </th>
+    </tr>
+    <tr>
+        <th>
+            Update Deadline
+        </th>
+    </tr>
 </table>
 <% end %>
