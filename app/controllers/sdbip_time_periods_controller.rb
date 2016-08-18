@@ -1,25 +1,21 @@
 class SdbipTimePeriodsController < ApplicationController
    before_action :logged_in_user, only: [:close_primary,:close_secondary,:close_finance,:index, :show, :edit, :update, :destroy,:update_time_periods]
   before_action :admin_user, only: [:close_primary,:close_secondary,:close_finance,:index, :show, :edit, :update, :destroy,:update_time_periods]
+  skip_before_filter  :verify_authenticity_token
   def index
     begin
-
-        @client = YahooWeather::Client.new
-        @response = @client.fetch(1582504)
-        @doc = @response.doc
-        @forecast = @doc["item"]["forecast"]
-      #@response = @client.fetch_by_location('New York')
-      #@response.units.temperature
-      #@response.condition.temp
-
+      @client = YahooWeather::Client.new
+      @response = @client.fetch(1582504)
+      @doc = @response.doc
+      @forecast = @doc["item"]["forecast"]
     rescue SignalException => e
-    flash[:notice] = "received Exception #{e.message}"
-    puts "received Exception #{e}"
+        flash[:notice] = "received Exception #{e.message}"
+        puts "received Exception #{e}"
     end
     @sdbip_time_period = SdbipTimePeriod.new
-    @sdbip_time_periods = SdbipTimePeriod.all
-    @closed_primary = @sdbip_time_periods.select(:id).where("primary_closure = ? AND primary_status = ?",Date.today,true)
-    @closed_secondary = @sdbip_time_periods.select(:id).where("secondary_closure = ? AND secondary_status = ?",Date.today,true)
+    @sdbip_time_periods = SdbipTimePeriod.all.order(id: :asc)
+    @closed_primary = @sdbip_time_periods.select(:id).where("primary_closure <= ? AND primary_status = ?",Date.today,true)
+    @closed_secondary = @sdbip_time_periods.select(:id).where("secondary_closure <= ? AND secondary_status = ?",Date.today,true)
   end
 
   def show
@@ -46,7 +42,19 @@ class SdbipTimePeriodsController < ApplicationController
     @sdbip_time_period = SdbipTimePeriod.find(params[:id])
   end
   def update_status
-    
+    primary_values = params[:primary_data_value]
+    secondary_values = params[:secondary_data_value]
+    @primary_sdbip_time_periods = SdbipTimePeriod.find(primary_values)
+    @secondary_sdbip_time_periods = SdbipTimePeriod.find(secondary_values)
+    @primary_sdbip_time_periods.each do |primary_sdbip_time_period|
+      @time_period = SdbipTimePeriod.find(primary_sdbip_time_period.id)
+      @time_period.update_columns(:primary_status => false)
+    end
+    @secondary_sdbip_time_periods.each do |secondary_sdbip_time_period|
+      @time_period = SdbipTimePeriod.find(secondary_sdbip_time_period.id)
+      @time_period.update_columns(:secondary_status => false)
+    end
+    redirect_to :back
   end
   def close_primary
     @sdbip_time_period = SdbipTimePeriod.find(params[:id])
@@ -121,7 +129,7 @@ class SdbipTimePeriodsController < ApplicationController
       flash[:danger] = "Time periods failed to import #{e.message}."
        redirect_to sdbip_time_periods_url
     end
-  end
+    end
   end
 
   def update_deadline

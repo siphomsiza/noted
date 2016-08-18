@@ -144,8 +144,13 @@
                         <% end %>
                     </td>
                     <% end %>
-                <% else %>
-
+                <% elsif !@periods.blank? && !departmental_sdbip.kpi_results.any? %>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
                 <% end %>
 
                 </tr>

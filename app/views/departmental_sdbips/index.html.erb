@@ -295,6 +295,11 @@
 			var chk = $("#grpChkBox input:checkbox");
 			var tbl = $("#sdbips-table");
 			chk.prop('checked', false);
+			$( "#grpChkBox input:checkbox" ).each(function(){
+				if($(this).hasClass("default-view")){
+					$(this).prop('checked',true);
+				}
+			});
 			chk.click(function () {
 				var colToHide = tbl.find("." + $(this).attr("name"));
 				$(colToHide).toggle();

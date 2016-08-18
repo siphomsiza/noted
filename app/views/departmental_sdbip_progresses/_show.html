@@ -7,7 +7,7 @@
 <div class="modal-body">
   <div class="panel panel-default col-lg-6">
       <div class="panel-body">
-        <%= pie_chart @departmental_sdbips.group(:performance_standard).count, width: "400px", height: "400px", colors: @colours %>
+        <%= pie_chart @departmental_sdbips.group(:performance_standard).count, width: "400px", height: "400px",is3D: true, colors: @colours %>
 
       </div>
       <!-- /.panel-body -->

@@ -1,224 +1,254 @@
 <% provide(:title, 'SDBIP Time Periods') %>
 <script>
-$(function() {
-	//highlight the current nav
-	$("#applicationmanifest a:contains('SETUP')").parent().addClass('active');
-}); //jQuery is loaded
+	$(function () {
+		//highlight the current nav
+		$("#applicationmanifest a:contains('SETUP')").parent().addClass('active');
+	}); //jQuery is loaded
 </script>
 
 <div class="row">
-<div class="col col-lg-12">
-	<%= render 'layouts/municipality' %>
+	<div class="col col-lg-12">
+		<%= render 'layouts/municipality' %>
 
-<ul class="nav nav-pills  nav-justified">
-<li><%= link_to "Master Setup", master_setups_path %></li>
-<li><%= link_to "System Setup", setups_path %>
-</li>
-<li><%= link_to "Departments", departments_path %></li>
-<li><%= link_to "Administrators", departmental_administrators_path %></li>
-<li><%= link_to "Headings", headings_path %></li>
-<li><%= link_to "Lists", lists_path %></li>
-<li class="active"><%= link_to "Time Periods", sdbip_time_periods_path %></li>
+		<ul class="nav nav-pills  nav-justified">
+			<li><%= link_to "Master Setup", master_setups_path %></li>
+			<li><%= link_to "System Setup", setups_path %>
+			</li>
+			<li><%= link_to "Departments", departments_path %></li>
+			<li><%= link_to "Administrators", departmental_administrators_path %></li>
+			<li><%= link_to "Headings", headings_path %></li>
+			<li><%= link_to "Lists", lists_path %></li>
+			<li class="active"><%= link_to "Time Periods", sdbip_time_periods_path %></li>
+		</ul>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col col-lg-12">
+		<div class="tabbable tabs third-level-navs" id="sdbip_time_periods-tabs">
+			<ul id="myTab" class="nav nav-tabs">
+
+				<li class="active">
+					<a href="#sdbip_time_periods" data-toggle="tab">Manage Time Periods</a>
+				</li>
+				<li>
+					<a href="#add_sdbip_time_periods" data-toggle="tab">Create Time Period(s)</a>
+				</li>
+				<li class="pull-right">
+					<% if current_user.admin? %>
+					<button class="btn pull-right" data-toggle="modal" data-target="#importTimePeriodsModal" title="Click to upload Time Periods.">
+						<span class="glyphicon glyphicon-upload"></span>&nbsp;Import Time Periods</button>&nbsp;
+					<button class="btn pull-right" data-toggle="modal" data-target="#updateTimePeriodsModal" title="Click to update all automatic Time Periods.">
+						<span class="glyphicon glyphicon-edit"></span>&nbsp;Update All Automatic Time Periods</button>&nbsp;
+					<% end %>
+				</li>
 			</ul>
+			<!-- nav nav-tabs -->
+		</div>
+		<!-- tabbable tabs -->
+	</div>
+</div>
+<div class="row">
+	<div class="col col-lg-12">
+
+		<div id="myTabContent" class="tab-content">
+
+			<div class="tab-pane active fade in" id="sdbip_time_periods">
+				<div class="col col-lg-">
+
+					<table class="table table-hover table-striped table-bordered">
+
+						<tr align="center">
+							<td rowspan="1"></td>
+							<th colspan="3" scope="colgroup">Primary</th>
+							<th colspan="3" scope="colgroup">Secondary</th>
+							<th colspan="3" scope="colgroup">Finance</th>
+							<td rowspan="1"></td>
+						</tr>
+						<tr>
+							<th>Period</th>
+							<th>Status</th>
+							<th>Reminder</th>
+							<th>Closure</th>
+							<th>Status</th>
+							<th>Reminder</th>
+							<th>Closure</th>
+							<th>Status</th>
+							<th>Reminder</th>
+							<th>Closure</th>
+							<th colspan="1">Action</th>
+						</tr>
+
+						<% @sdbip_time_periods.each do |sdbip_time_period| %>
+						<tr>
+
+							<td><%= "Month ending #{sdbip_time_period.period.strftime('%d %B %Y')}" %></td>
+							<td>
+								<% if  sdbip_time_period.primary_status? %>
+								<label class="label label-success">Open</label>
+							<% else sdbip_time_period.primary_status? %>
+								<label class="label label-danger">Closed</label>
+								<% end %>
+							</td>
+							<td>
+								<% if sdbip_time_period.primary_status?%>
+								<% if (!sdbip_time_period.primary_reminder.blank? && sdbip_time_period.primary_reminder > Date.today) || sdbip_time_period.primary_status? %>
+								<%= sdbip_time_period.primary_reminder.strftime('%d %B %Y') %>&nbsp; (<%= (sdbip_time_period.primary_reminder).strftime("%a")%>)
+								<% end %>
+								<% end %>
+							</td>
+
+							<td>
+								<% if sdbip_time_period.primary_status?%>
+								<% if (!sdbip_time_period.primary_closure.blank? && sdbip_time_period.primary_closure.strftime("%dd-%B-%YYY") > Date.today.strftime("%dd-%B-%YYY")) %>
+								<%= sdbip_time_period.primary_closure.strftime('%d %B %Y') %>&nbsp; (<%= (sdbip_time_period.primary_closure).strftime("%a")%>)
+								<% end %>
+								<% end %>
+							</td>
+
+							<td>
+								<% if  sdbip_time_period.secondary_status? %>
+								<label class="label label-success">Open</label>
+							<% else %>
+								<label class="label label-danger">Closed</label>
+								<% end %>
+							</td>
+							<td>
+								<% if  sdbip_time_period.secondary_status? %>
+								<% if (!sdbip_time_period.secondary_reminder.blank? && sdbip_time_period.secondary_reminder > Date.today) %>
+								<%= sdbip_time_period.secondary_reminder.strftime('%d %B %Y') %>&nbsp; (<%= (sdbip_time_period.secondary_reminder).strftime("%a")%>)
+								<% end %>
+								<% end %>
+							</td>
+							<td>
+								<% if  sdbip_time_period.secondary_status? %>
+								<% if (!sdbip_time_period.secondary_closure.blank? && sdbip_time_period.secondary_closure > Date.today) %>
+								<%= sdbip_time_period.secondary_closure.strftime('%d %B %Y') %>&nbsp; (<%= (sdbip_time_period.secondary_closure).strftime("%a")%>)
+								<% end %>
+								<% end %>
+							</td>
+
+							<td>
+								<% if  sdbip_time_period.finance_status? %>
+								<label class="label label-success">Open</label>
+							<% else %>
+								<label class="label label-danger">Closed</label>
+								<% end %>
+							</td>
+							<td></td>
+							<td></td>
+
+							<td><%= link_to edit_sdbip_time_period_path(sdbip_time_period),remote: true,'data-target' => "#time-periods-modal", 'data-toggle' => 'modal', class: 'btn btn-sm' do %>
+								<span class="glyphicon glyphicon-edit"></span>&nbsp;Update
+								<% end %>
+								<div id="time-periods-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true"></div>
+
+							</td>
+						</tr>
+						<% end %>
+
+					</table>
+				</div>
+			</div>
+			<div class="tab-pane fade" id="add_sdbip_time_periods">
+
+				<ul class="sdbip_time_periods">
+					<br/>
+					<h3>New Time Period</h3><hr/>
+					<%= render 'form' %>
+				</ul>
+			</div>
 		</div>
 	</div>
+</div>
 
-    <div class="row">
-			<div class="col col-lg-12">
-            <div class="tabbable tabs third-level-navs" id="sdbip_time_periods-tabs">
-              <ul id = "myTab" class = "nav nav-tabs">
-
-                <li class="active">
-                  <a href = "#sdbip_time_periods" data-toggle = "tab">Manage Time Periods</a>
-                </li>
-								<li>
-                  <a href = "#add_sdbip_time_periods" data-toggle = "tab">Create Time Period(s)</a>
-                </li>
-								<li class="pull-right">
-									<% if current_user.admin? %>
-						        <button class="btn pull-right" data-toggle="modal" data-target="#importTimePeriodsModal" title="Click to upload Time Periods.">
-						          <span class="glyphicon glyphicon-upload"></span>&nbsp;Import Time Periods</button>&nbsp;
-											<button class="btn pull-right" data-toggle="modal" data-target="#updateTimePeriodsModal" title="Click to update all automatic Time Periods.">
-												<span class="glyphicon glyphicon-edit"></span>&nbsp;Update All Automatic Time Periods</button>&nbsp;
-						      <% end %>
-								</li>
-              </ul><!-- nav nav-tabs -->
-            </div><!-- tabbable tabs -->
-					</div>
+<!-- Import Time Periods modal -->
+<div class="modal fade" id="importTimePeriodsModal" tabindex="-1" role="dialog" aria-labelledby="importModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<%= form_tag import_sdbip_time_periods_path, accept: 'text/csv,text/xls,text/xlsx,text/ods', multipart: true do %>
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title" id="importModalLabel">
+					<ol class="breadcrumb">
+						<li>
+							<a href="#" data-dismiss="modal">Setup</a>
+						</li>
+						<li>SDBIP Time Period</li>
+						<li class="active">Importing SDBIP Time Periods</li>
+					</ol>
+				</h4>
+				<%= label_tag :NB,"Note: Supported files types are xls,xlsx, ods and csv types.", id: 'import_info' %>
+			</div>
+			<div class="modal-body">
+				<%= label_tag :select_file,"Primary Reminder:" %>
+				<%= file_field_tag :file ,{:class=>"form-control"} %>
+			</div>
+			<div class="modal-footer">
+				<div class="col-md-4 pull-right">
+					<%= submit_tag "Import", :class=>"btn btn-midi" %>
 				</div>
-				<div class="row">
-					<div class="col col-lg-12">
-
-    <div id = "myTabContent" class = "tab-content">
-
-     <div class = "tab-pane active fade in" id = "sdbip_time_periods">
-           <div class="col col-lg-">
-
-      <table class="table table-hover table-striped table-bordered">
-
-					<tr align="center">
-    			<td rowspan="1"></td>
-    			<th colspan="3" scope="colgroup">Primary</th>
-    			<th colspan="3" scope="colgroup">Secondary</th>
-					<th colspan="3" scope="colgroup">Finance</th>
-					<td rowspan="1"></td>
-  				</tr>
-          <tr>
-            <th>Period</th>
-            <th>Status</th>
-            <th>Reminder</th>
-            <th>Closure</th>
-						<th>Status</th>
-            <th>Reminder</th>
-            <th>Closure</th>
-						<th>Status</th>
-            <th>Reminder</th>
-            <th>Closure</th>
-            <th colspan="1"></th>
-          </tr>
-
-        <% @sdbip_time_periods.each do |sdbip_time_period| %>
-          <tr>
-
-            <td><%= "Month ending #{sdbip_time_period.period.strftime('%d %B %Y')}" %></td>
-						<td>
-							<% if  sdbip_time_period.primary_status? %>
-	              <label class="label label-success">Open</label>
-	              <% else sdbip_time_period.primary_status? %>
-	              <label class="label label-danger">Closed</label>
-	              <% end %>
-            </td>
-            <td>
-						<% if !sdbip_time_period.primary_reminder.blank? && sdbip_time_period.primary_reminder > Date.today %>
-							<%= sdbip_time_period.primary_reminder.strftime('%d %B %Y') %>&nbsp;
-							(<%= (sdbip_time_period.primary_reminder).strftime("%a")%>)
-						<% end %>
-					</td>
-
-            <td>
-						<% if !sdbip_time_period.primary_closure.blank? && sdbip_time_period.primary_closure.strftime("%dd-%B-%YYY") > Date.today.strftime("%dd-%B-%YYY") %>
-							<%= sdbip_time_period.primary_closure.strftime('%d %B %Y') %>&nbsp;
-							(<%= (sdbip_time_period.primary_closure).strftime("%a")%>)
-							<% end %>
-						</td>
-
-						<td>
-						<% if  sdbip_time_period.secondary_status? %>
-              <label class="label label-success">Open</label>
-							<% else %>
-							<label class="label label-danger">Closed</label>
-              <% end %>
-            </td>
-						<td>
-						<% if !sdbip_time_period.secondary_reminder.blank? && sdbip_time_period.secondary_reminder > Date.today %>
-							<%= sdbip_time_period.secondary_reminder.strftime('%d %B %Y') %>&nbsp;
-							(<%= (sdbip_time_period.secondary_reminder).strftime("%a")%>)
-							<% end %>
-						</td>
-            <td>
-						<% if !sdbip_time_period.secondary_closure.blank? && sdbip_time_period.secondary_closure > Date.today %>
-							<%= sdbip_time_period.secondary_closure.strftime('%d %B %Y') %>&nbsp;
-							(<%= (sdbip_time_period.secondary_closure).strftime("%a")%>)
-							<% end %>
-						</td>
-
-						<td>
-            </td>
-						<td></td>
-            <td></td>
-
-            <td><%= link_to edit_sdbip_time_period_path(sdbip_time_period),remote: true,'data-target' => "#time-periods-modal", 'data-toggle' => 'modal', class: 'btn btn-sm' do %>
-							<span class="glyphicon glyphicon-edit"></span>&nbsp;Edit
-							<% end %>
-							<div id="time-periods-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
-
-	          	</div>
-
-					</td>
-          </tr>
-        <% end %>
-
-      </table>
-    </div>
-      </div>
-			<div class = "tab-pane fade" id = "add_sdbip_time_periods">
-
-		        <ul class="sdbip_time_periods">
-							<br/>
-							<h3>New Time Period</h3><hr/>
-		          <%= render 'form' %>
-		        </ul>
+			</div>
+			<% end %>
 		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal -->
 </div>
-</div>
-</div>
+<!-- Import Time Periods modal -->
+<div class="modal fade" id="updateTimePeriodsModal" tabindex="-1" role="dialog" aria-labelledby="importModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<%= form_tag controller: :sdbip_time_periods, method: :post, action: :update_time_periods do %>
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title" id="importModalLabel">
+					<ol class="breadcrumb">
+						<li>
+							<a href="#" data-dismiss="modal">Setup</a>
+						</li>
+						<li>SDBIP Time Periods</li>
+						<li class="active">Update Time Periods</li>
+					</ol>
+				</h4>
+			</div>
+			<div class="modal-body">
+				<%= label_tag :primary_reminder,"Primary Reminder:" %>
+				<%= text_field_tag :primary_reminder , nil,{:class=>"form-control",:pattern=>"[0-9]+", required: true,autocomplete: "off"} %>
+				<%= label_tag :primary_closure,"Primary Auto-Closure:" %>
+				<%= text_field_tag :primary_closure , nil,{:class=>"form-control",:pattern=>"[0-9]+", required: true,autocomplete: "off"} %>
+				<%= label_tag :secondary_reminder,"Secondary Reminder:" %>
+				<%= text_field_tag :secondary_reminder , nil,{:class=>"form-control",:pattern=>"[0-9]+", required: true,autocomplete: "off"} %>
+				<%= label_tag :secondary_closure,"Secondary Auto-Closure:" %>
+				<%= text_field_tag :secondary_closure , nil,{:class=>"form-control",:pattern=>"[0-9]+", required: true,autocomplete: "off"} %>
 
-            <!-- Import Time Periods modal -->
-            <div class="modal fade" id="importTimePeriodsModal" tabindex="-1" role="dialog" aria-labelledby="importModalLabel" aria-hidden="true">
-              <div class="modal-dialog">
-                <div class="modal-content">
-                  <%= form_tag import_sdbip_time_periods_path, accept: 'text/csv,text/xls,text/xlsx,text/ods', multipart: true do %>
-                    <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                        &times;
-                      </button>
-                      <h4 class="modal-title" id="importModalLabel">
-                        <ol class="breadcrumb">
-                          <li><a href="#" data-dismiss="modal">Setup</a></li>
-													<li>SDBIP Time Period</li>
-                          <li class="active">Importing SDBIP Time Periods</li>
-                        </ol>
-                      </h4>
-                      <%= label_tag :NB,"Note: Supported files types are xls,xlsx, ods and csv types.", id: 'import_info' %>
-                    </div>
-                    <div class="modal-body">
-											<%= label_tag :select_file,"Primary Reminder:" %>
-											<%= file_field_tag :file ,{:class=>"form-control"} %>
-										  </div>
-                    <div class="modal-footer">
-                      <div class="col-md-4 pull-right">
-                        <%= submit_tag "Import", :class=>"btn btn-midi" %>
-                      </div>
-                    </div>
-                  <% end %>
-                </div><!-- /.modal-content -->
-              </div><!-- /.modal -->
-            </div>
-						<!-- Import Time Periods modal -->
-						<div class="modal fade" id="updateTimePeriodsModal" tabindex="-1" role="dialog" aria-labelledby="importModalLabel" aria-hidden="true">
-							<div class="modal-dialog">
-								<div class="modal-content">
-									<%= form_tag controller: :sdbip_time_periods, method: :post, action: :update_time_periods do %>
-										<div class="modal-header">
-											<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-												&times;
-											</button>
-											<h4 class="modal-title" id="importModalLabel">
-												<ol class="breadcrumb">
-													<li><a href="#" data-dismiss="modal">Setup</a></li>
-													<li>SDBIP Time Periods</li>
-													<li class="active">Update Time Periods</li>
-												</ol>
-											</h4>
-										</div>
-										<div class="modal-body">
-											<%= label_tag :primary_reminder,"Primary Reminder:" %>
-											<%= text_field_tag :primary_reminder , nil,{:class=>"form-control",:pattern=>"[0-9]+", required: true,autocomplete: "off"} %>
-											<%= label_tag :primary_closure,"Primary Auto-Closure:" %>
-											<%= text_field_tag :primary_closure , nil,{:class=>"form-control",:pattern=>"[0-9]+", required: true,autocomplete: "off"} %>
-											<%= label_tag :secondary_reminder,"Secondary Reminder:" %>
-											<%= text_field_tag :secondary_reminder , nil,{:class=>"form-control",:pattern=>"[0-9]+", required: true,autocomplete: "off"} %>
-											<%= label_tag :secondary_closure,"Secondary Auto-Closure:" %>
-											<%= text_field_tag :secondary_closure , nil,{:class=>"form-control",:pattern=>"[0-9]+", required: true,autocomplete: "off"} %>
-
-										</div>
-										<div class="modal-footer">
-											<div class="col-md-4 pull-right">
-												<%= submit_tag "Save", :class=>"btn btn-midi" %>
-											</div>
-										</div>
-									<% end %>
-								</div><!-- /.modal-content -->
-							</div><!-- /.modal -->
-						</div>
-						
+			</div>
+			<div class="modal-footer">
+				<div class="col-md-4 pull-right">
+					<%= submit_tag "Save", :class=>"btn btn-midi" %>
+				</div>
+			</div>
+			<% end %>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal -->
+</div>
+<script>
+	var closed_primary_periods = <%= @closed_primary.ids %>;
+	var closed_secondary_periods = <%= @closed_secondary.ids %>;
+	$.ajax({
+		type: "POST",
+		url: "/sdbip_time_periods/update_status",
+		data: {
+			primary_data_value: closed_primary_periods,
+			secondary_data_value: closed_secondary_periods
+		},
+		success: function (data) {},
+		error: function (data) {}
+	});
+</script>
