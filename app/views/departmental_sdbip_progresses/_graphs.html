@@ -14,7 +14,7 @@
                         <h3>Mkhondo Local Municipality's KPIs</h3>
                         <div class="row">
                             <div class="col col-lg-6">
-                                <%= pie_chart @departmental_sdbips.group(:performance_standard).count,height: "300px",library: {pieSliceText:'value-and-percentage', colors: @colours} %>
+                                <%= pie_chart @departmental_sdbips.group(:performance_standard).count,height: "300px",library: {pieSliceText:'value-and-percentage',is3D: true, colors: @colours} %>
                             </div>
                             <div class="col col-lg-6">
                                 <%= column_chart @departmental_sdbips.group(:performance_standard).count,height: "300px", colors: @colours %>
@@ -161,7 +161,7 @@
                                                     <h4 align="center"><%= department.name %></h4>
                                                     <div class="row">
                                                         <div class="col col-lg-6">
-                                                            <%= pie_chart @chart_data.group(:performance_standard).count,height: "300px",library: {pieSliceText:'value-and-percentage'}, colors: @theme_colours %>
+                                                            <%= pie_chart @chart_data.group(:performance_standard).count,height: "300px",library: {pieSliceText:'value-and-percentage',is3D: true, colors: @theme_colours} %>
                                                         </div>
                                                         <div class="col col-lg-6">
                                                             <%= column_chart @chart_data.group(:performance_standard).count,height: "300px", stacked: 'percent', colors: @theme_colours %>

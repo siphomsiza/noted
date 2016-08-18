@@ -20,7 +20,7 @@ class DepartmentalAdministratorsController < ApplicationController
     puts "received Exception #{e}"
   end
 
-  @subdepartments = Subdepartment.includes(subdepartmental_administrators:[:user])
+    @subdepartments = Subdepartment.includes(subdepartmental_administrators:[:user])
     @departments = Department.includes(top_layer_administrators:[:user],departmental_administrators:[:user])
     @kpi_owners = KpiOwner.includes(:user).paginate(page: params[:page],per_page: 10)
     @top_layer_administrator = TopLayerAdministrator.new
