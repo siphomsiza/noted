@@ -1,68 +1,260 @@
 <div class="modal-dialog">
-<div class="modal-content">
-<div class="modal-header">
-  <button class="close" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
-  <h3><%= " #{@departmental_sdbip.kpi } Details" %></h3>
-</div>
-<div class="modal-body">
-<div class="row">
-<div class="col-lg-10 col-md-offset-1">
-<div class="row">
-    <div class="col col-lg-">
-      <div class="table-responsive">
-        <table class="table table-striped table-responsive" id="sdbips_table">
-          <tbody>
-            <tr>
-              <th>Ref</th> <td>D<%= @departmental_sdbip.id %></td></tr>
-              <tr><th>KPI</th><td><%= @departmental_sdbip.kpi %></td></tr>
-              <tr><th>Department</th><td><%= @departmental_sdbip.department.name %></td></tr>
-              <tr><th>Subdepartment</th><td><%= @departmental_sdbip.subdepartment.subdepartment_name %></td></tr>
-              <tr><th>KPI Ref Number</th><td><%= @departmental_sdbip.kpi_ref_number %></td></tr>
-              <tr><th>Predetermined Objective</th><td><% if !@departmental_sdbip.predetermined_objective_id.blank? %><%= @departmental_sdbip.predetermined_objective.name %><% end %></td></tr>
-              <tr><th>KPI Owner</th><td><% if !@departmental_sdbip.kpi_owner_id.blank? %><%= @departmental_sdbip.kpi_owner.name %><% end %></td></tr>
-              <tr><th>Unit of Measurement</th><td><%= @departmental_sdbip.unit_of_measurement %></td></tr>
-              <tr><th>M Score Classification</th><td><% if !@departmental_sdbip.mscore_classification_id.blank? %><%= @departmental_sdbip.mscore_classification.name %><% end %></td></tr>
-              <tr><th>IDP Ref</th><td><%= @departmental_sdbip.idp_ref %></td></tr>
-              <tr><th>National Outcome</th><td><% if !@departmental_sdbip.national_outcome_id.blank? %><%= @departmental_sdbip.national_outcome.name %><% end %></td></tr>
-              <tr><th>Strategic Objective</th><td><% if !@departmental_sdbip.strategic_objective_id.blank? %><%= @departmental_sdbip.strategic_objective.name %><% end %></td></tr>
-              <tr><th>Source of Evidence</th><td><%= @departmental_sdbip.source_of_evidence %></td></tr>
-              <tr><th>Baseline</th><td><%= @departmental_sdbip.baseline %></td></tr>
-              <tr><th>Target</th><td><%= @departmental_sdbip.annual_target %></td></tr>
-              <tr><th>Actual</th><td><%= @departmental_sdbip.first_quarter_actual %></td></tr>
-              <tr><th>Budget</th><td><%= @departmental_sdbip.budget %></td></tr>
-              <tr><th>Performance Standard</th><td><%= @departmental_sdbip.performance_standard %></td></tr>
-              <tr><th>KPA</th><td><%= @departmental_sdbip.kpa.name %></td></tr>
-              <tr><th>NDP Objective</th><td><% if !@departmental_sdbip.ndp_objective_id.blank? %><%= @departmental_sdbip.ndp_objective.name %><% end %></td></tr>
-              <tr><th>Capital Project</th><td><% if !@departmental_sdbip.capital_project.blank? %><%= @departmental_sdbip.capital_project.mun_cp_ref %><% end %></td></tr>
-              <tr><th>KPI Concept</th><td><% if !@departmental_sdbip.kpi_concept_id.blank? %><%= @departmental_sdbip.kpi_concept.name %><% end %></td></tr>
-              <tr><th>KPI Type</th><td><% if !@departmental_sdbip.kpi_type_id.blank? %><%= @departmental_sdbip.kpi_type.name %><% end %></td></tr>
-              <tr><th>Impact</th><td><%= @departmental_sdbip.impact %></td></tr>
-              <tr><th>Provincial Strategic Outcome</th><td><% if !@departmental_sdbip.provincial_strategic_outcome_id.blank?%><%= @departmental_sdbip.provincial_strategic_outcome.name %><% end %></td></tr>
-              <tr><th>Area</th><td><% if !@departmental_sdbip.area_id.blank? %><%= @departmental_sdbip.area.name %><% end %></td></tr>
-              <tr><th>Ward</th><td><% if !@departmental_sdbip.ward_id.blank? %><%= @departmental_sdbip.ward.name %><% end %></td></tr>
-              <tr><th>Past Year Performance</th><td><%= @departmental_sdbip.past_year_performance %></td></tr>
-              <tr><th>Reporting Category</th><td><% if !@departmental_sdbip.reporting_category_id.blank? %><%= @departmental_sdbip.reporting_category.name %><% end %></td></tr>
-              <tr><th>Top Layer KPI Ref</th><td><%= @departmental_sdbip.top_layer_kpi_ref %></td></tr>
-              <tr><th>KPI Calculation Type</th><td><% if !@departmental_sdbip.kpi_calculation_type_id.blank? %><%= @departmental_sdbip.kpi_calculation_type.name %><% end %></td></tr>
-              <tr><th>Create Date</th><td><%= @departmental_sdbip.created_at.strftime(' %Y-%B-%d') %></td></tr>
-              <tr><th>Update Date</th><td><%= @departmental_sdbip.updated_at.strftime(' %Y-%B-%d') %></td></tr>
-
-          </tbody>
-        </table>
+    <div class="modal-content">
+        <div class="modal-header">
+            <button class="close" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3><%= " #{@departmental_sdbip.kpi } Details" %></h3>
         </div>
-</div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-lg-10 col-md-offset-1">
+                    <div class="row">
+                        <div class="col col-lg-">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-responsive" id="sdbips_table">
+                                    <tbody>
+                                        <tr>
+                                            <th>Ref</th>
+                                            <td>D
+                                                <%= @departmental_sdbip.id %>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>KPI</th>
+                                            <td>
+                                                <%= @departmental_sdbip.kpi %>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Department</th>
+                                            <td>
+                                                <%= @departmental_sdbip.department.name %>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Subdepartment</th>
+                                            <td>
+                                                <%= @departmental_sdbip.subdepartment.subdepartment_name %>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>KPI Ref Number</th>
+                                            <td>
+                                                <%= @departmental_sdbip.kpi_ref_number %>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Predetermined Objective</th>
+                                            <td>
+                                                <% if !@departmental_sdbip.predetermined_objective_id.blank? %>
+                                                    <%= @departmental_sdbip.predetermined_objective.name %>
+                                                        <% end %>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>KPI Owner</th>
+                                            <td>
+                                                <% if !@departmental_sdbip.kpi_owner_id.blank? %>
+                                                    <%= @departmental_sdbip.kpi_owner.name %>
+                                                        <% end %>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Unit of Measurement</th>
+                                            <td>
+                                                <%= @departmental_sdbip.unit_of_measurement %>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>M Score Classification</th>
+                                            <td>
+                                                <% if !@departmental_sdbip.mscore_classification_id.blank? %>
+                                                    <%= @departmental_sdbip.mscore_classification.name %>
+                                                        <% end %>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>IDP Ref</th>
+                                            <td>
+                                                <%= @departmental_sdbip.idp_ref %>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>National Outcome</th>
+                                            <td>
+                                                <% if !@departmental_sdbip.national_outcome_id.blank? %>
+                                                    <%= @departmental_sdbip.national_outcome.name %>
+                                                        <% end %>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Strategic Objective</th>
+                                            <td>
+                                                <% if !@departmental_sdbip.strategic_objective_id.blank? %>
+                                                    <%= @departmental_sdbip.strategic_objective.name %>
+                                                        <% end %>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Source of Evidence</th>
+                                            <td>
+                                                <%= @departmental_sdbip.source_of_evidence %>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Baseline</th>
+                                            <td>
+                                                <%= @departmental_sdbip.baseline %>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Target</th>
+                                            <td>
+                                                <%= @departmental_sdbip.annual_target %>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Actual</th>
+                                            <td>
+                                                <%= @departmental_sdbip.kpi_results.to_a.sum(&:actual) %>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Budget</th>
+                                            <td>
+                                                <%= @departmental_sdbip.budget %>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Performance Standard</th>
+                                            <td>
+                                                <%= @departmental_sdbip.performance_standard %>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>KPA</th>
+                                            <td>
+                                                <%= @departmental_sdbip.kpa.name %>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>NDP Objective</th>
+                                            <td>
+                                                <% if !@departmental_sdbip.ndp_objective_id.blank? %>
+                                                    <%= @departmental_sdbip.ndp_objective.name %>
+                                                        <% end %>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Capital Project</th>
+                                            <td>
+                                                <% if !@departmental_sdbip.capital_project.blank? %>
+                                                    <%= @departmental_sdbip.capital_project.mun_cp_ref %>
+                                                        <% end %>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>KPI Concept</th>
+                                            <td>
+                                                <% if !@departmental_sdbip.kpi_concept_id.blank? %>
+                                                    <%= @departmental_sdbip.kpi_concept.name %>
+                                                        <% end %>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>KPI Type</th>
+                                            <td>
+                                                <% if !@departmental_sdbip.kpi_type_id.blank? %>
+                                                    <%= @departmental_sdbip.kpi_type.name %>
+                                                        <% end %>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Impact</th>
+                                            <td>
+                                                <%= @departmental_sdbip.impact %>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Provincial Strategic Outcome</th>
+                                            <td>
+                                                <% if !@departmental_sdbip.provincial_strategic_outcome_id.blank?%>
+                                                    <%= @departmental_sdbip.provincial_strategic_outcome.name %>
+                                                        <% end %>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Area</th>
+                                            <td>
+                                                <% if !@departmental_sdbip.area_id.blank? %>
+                                                    <%= @departmental_sdbip.area.name %>
+                                                        <% end %>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Ward</th>
+                                            <td>
+                                                <% if !@departmental_sdbip.ward_id.blank? %>
+                                                    <%= @departmental_sdbip.ward.name %>
+                                                        <% end %>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Past Year Performance</th>
+                                            <td>
+                                                <%= @departmental_sdbip.past_year_performance %>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Reporting Category</th>
+                                            <td>
+                                                <% if !@departmental_sdbip.reporting_category_id.blank? %>
+                                                    <%= @departmental_sdbip.reporting_category.name %>
+                                                        <% end %>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Top Layer KPI Ref</th>
+                                            <td>
+                                                <%= @departmental_sdbip.top_layer_kpi_ref %>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>KPI Calculation Type</th>
+                                            <td>
+                                                <% if !@departmental_sdbip.kpi_calculation_type_id.blank? %>
+                                                    <%= @departmental_sdbip.kpi_calculation_type.name %>
+                                                        <% end %>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Create Date</th>
+                                            <td>
+                                                <%= @departmental_sdbip.created_at.strftime(' %Y-%B-%d') %>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>Update Date</th>
+                                            <td>
+                                                <%= @departmental_sdbip.updated_at.strftime(' %Y-%B-%d') %>
+                                            </td>
+                                        </tr>
 
-</div>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
 
-<% if @departmental_sdbip.kpi_results.any? %>
+                    </div>
 
-  <%= render 'results' %>
+                    <% if @departmental_sdbip.kpi_results.any? %>
 
-<% end %>
-  </div>
-</div>
-</div>
-<div class="modal-footer">
-<button class="btn btn-mini pull-right" type="button" data-dismiss="modal">Close</button>
-</div>
-</div>
+                        <%= render 'results' %>
+
+                            <% end %>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-mini pull-right" type="button" data-dismiss="modal">Close</button>
+        </div>
+    </div>

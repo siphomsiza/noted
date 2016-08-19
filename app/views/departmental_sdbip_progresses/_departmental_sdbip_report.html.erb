@@ -1,25 +1,36 @@
 <div class="tab-pane active fade in" id="departmental_sdbip_report">
-  <section class="media">
-	  <div class="media-body">
+    <section class="media">
+        <div class="media-body">
 
-      <article>
+            <article>
 
-      	<div class="tabbable tabs third-level-navs">
-      		<ul class="nav nav-tabs">
-      			<li class="active"><a href="#generate_reports" data-toggle="tab">Generate Reports</a></li>
-      			<li><a href="#generate_graphs" data-toggle="tab">Generate Graphs</a></li>
-      		</ul><!-- nav nav-tabs -->
-      	</div><!-- tabbable tabs -->
+                <div class="tabbable tabs third-level-navs">
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a href="#generate_reports" data-toggle="tab">Generate Reports</a>
+                        </li>
+                        <li>
+                            <a href="#generate_graphs" data-toggle="tab">Generate Graphs</a>
+                        </li>
+                    </ul>
+                    <!-- nav nav-tabs -->
+                </div>
+                <!-- tabbable tabs -->
 
-      	<section class="tab-content">
+                <section class="tab-content">
 
-          <%= render 'generate_reports' %>
-          <%= render 'generate_graphs' %>
+                    <%= render 'generate_reports' %>
+                    <%= render 'generate_graphs' %>
 
-      	</section><!-- tab-content -->
+                </section>
+                <!-- tab-content -->
 
-      </article><!-- users -->
+            </article>
+            <!-- users -->
 
-	  </div><!-- media-body -->
-	</section><!-- media -->
-</div><!-- friday -->
+        </div>
+        <!-- media-body -->
+    </section>
+    <!-- media -->
+</div>
+<!-- friday -->

@@ -1,57 +1,59 @@
 <div class="modal-dialog">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h3><%= "Editing #{@department.name}" %></h3>
-    </div>
-    <div class="modal-body">
-  <%= form_for(@department) do |f| %>
-  <%= render 'shared/departmental_error_messages', object: @department %>
-  <div class="row">
-    <div class="col-lg-10 col-lg-offset-1">
-      <div class="field col-lg-">
-        <%= f.label :name,"Department Name:" %>
-        <%= f.text_field :name,:class=>"form-control", :autocomplete=>"off" %>
-      </div>
-    </div>
-  </div>
-    <div class="row">
-      <div class="col-lg-10 col-lg-offset-1">
-        <div class="field col-lg-">
-          <%= f.label :tel_no,"Department Landline no.:" %>
-          <%= f.phone_field :tel_no ,:area_code => true, :delimiter => ' ',:class=>"form-control",:autocomplete=>"off" %>
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3><%= "Editing #{@department.name}" %></h3>
         </div>
-      </div>
-    </div>
-      <div class="row">
-        <div class="col-lg-10 col-lg-offset-1">
-        <div class="field col-lg-">
-          <%= f.label :fax_no,"Department Fax no.:" %>
-          <%= f.phone_field :fax_no, :area_code => true, :delimiter => ' ',:class=>"form-control",:autocomplete=>"off" %>
+        <div class="modal-body">
+            <%= form_for(@department) do |f| %>
+                <%= render 'shared/departmental_error_messages', object: @department %>
+                    <div class="row">
+                        <div class="col-lg-10 col-lg-offset-1">
+                            <div class="field col-lg-">
+                                <%= f.label :name,"Department Name:" %>
+                                    <%= f.text_field :name,:class=>"form-control", :autocomplete=>"off" %>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-10 col-lg-offset-1">
+                            <div class="field col-lg-">
+                                <%= f.label :tel_no,"Department Landline no.:" %>
+                                    <%= f.phone_field :tel_no ,:area_code => true, :delimiter => ' ',:class=>"form-control",:autocomplete=>"off" %>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-10 col-lg-offset-1">
+                            <div class="field col-lg-">
+                                <%= f.label :fax_no,"Department Fax no.:" %>
+                                    <%= f.phone_field :fax_no, :area_code => true, :delimiter => ' ',:class=>"form-control",:autocomplete=>"off" %>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-10 col-lg-offset-1">
+
+                            <%= f.fields_for :subdepartments do |subdepartments_for_form| %>
+
+                                <%= render 'subdepartment_fields', f: subdepartments_for_form %>
+
+                                    <% end %>
+                                        <%= link_to_add_fields "Add Subdepartment", f, :subdepartments %>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-lg-10  col-lg-offset-1">
+                            <div class="actions">
+                                <%= f.submit "Save", :class =>'btn col-lg-3 pull-right' %>
+                            </div>
+                        </div>
+                    </div>
+                    <% end %>
+
         </div>
-      </div>
+
     </div>
-
-    <div class="row"><div class="col-lg-10 col-lg-offset-1">
-
-    <%= f.fields_for :subdepartments do |subdepartments_for_form| %>
-
-      <%= render 'subdepartment_fields', f: subdepartments_for_form %>
-
-  <% end %>
-  <%= link_to_add_fields "Add Subdepartment", f, :subdepartments %>
-</div></div>
-
-
-<div class="row">
-  <div class="col-lg-10  col-lg-offset-1">
-    <div class="actions">
-      <%= f.submit "Save", :class =>'btn col-lg-3 pull-right' %>
-   </div>
-</div>
-</div>
-  <% end %>
-
-  </div>
-
-</div>
 </div>

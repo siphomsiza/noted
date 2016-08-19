@@ -1,241 +1,240 @@
 <div class="tab-pane fade" id="capital_projects_report">
-<%= form_tag departmental_sdbip_progresses_path(format: "csv"), method: :get do %>
-  <fieldset id="select-info">
+    <%= form_tag departmental_sdbip_progresses_path(format: "csv"), method: :get do %>
+    <fieldset id="select-info">
 
-    <legend><br/>1. Select the information to be displayed in the report:</legend>
-    <div class="form-group row">
-      <div class="checkbox col col-lg-3">
-        <label>
-          <input type="checkbox" id="Department" value="Department" name="project_info">&nbsp;&nbsp;&nbsp;&nbsp;Department
-        </label>
-      </div>
-      <div class="checkbox col col-lg-3">
-        <label>
-          <input type="checkbox" style="margin-left: 0;" id="Sub-Department" value="Sub-Department" name="project_info">&nbsp;&nbsp;&nbsp;&nbsp;Sub-Department
-        </label>
-      </div>
-      <div class="checkbox col col-lg-3">
-        <label>
-          <input type="checkbox" id="KPI-Ref-Number" value="Project Description" name="project_info">&nbsp;&nbsp;&nbsp;&nbsp;Project Description
-        </label>
-      </div>
-      <div class="checkbox col col-lg-3">
-        <label>
-          <input type="checkbox" value="GFS Classification" id="gfs-classification" name="project_info">&nbsp;&nbsp;&nbsp;&nbsp;GFS Classification
-        </label>
-      </div>
-    </div>
-    <div class="form-group row">
-      <div class="checkbox col col-lg-3">
-        <label>
-          <input type="checkbox" value="Mun CP Ref" id="KPI-Owner" name="project_info">&nbsp;&nbsp;&nbsp;&nbsp;Mun CP Ref
-        </label>
-      </div>
-      <div class="checkbox col col-lg-3">
-        <label>
-          <input type="checkbox" value="Project Name" id="KPI" name="project_info">&nbsp;&nbsp;&nbsp;&nbsp;Project Name
-        </label>
-      </div>
-      <div class="checkbox col col-lg-3">
-        <label>
-          <input type="checkbox" value="IDP Number" id="unit-of-measurement" name="project_info">&nbsp;&nbsp;&nbsp;&nbsp;IDP Number
-        </label>
-      </div>
-      <div class="checkbox col col-lg-3">
-        <label>
-          <input type="checkbox" value="Vote Number" id="gfs-classification" name="project_info">&nbsp;&nbsp;&nbsp;&nbsp;Vote Number
-        </label>
-      </div>
-    </div>
-    <div class="form-group row">
-      <div class="checkbox col col-lg-3">
-        <label>
-          <input type="checkbox" value="Planned Start Date" id="IDP-ref" name="project_info">&nbsp;&nbsp;&nbsp;&nbsp;Planned Start Date
-        </label>
-      </div>
-      <div class="checkbox col col-lg-3">
-        <label>
-          <input type="checkbox" value="Planned Completion Date" id="national-outcome" name="project_info">&nbsp;&nbsp;&nbsp;&nbsp;Planned Completion Date
-        </label>
-      </div>
-      <div class="checkbox col col-lg-3">
-        <label>
-          <input type="checkbox" value="Actual Start Date" id="strategic-objective" name="project_info">&nbsp;&nbsp;&nbsp;&nbsp;Actual Start Date
-        </label>
-      </div>
-      <div class="checkbox col col-lg-3">
-        <label>
-          <input type="checkbox" value="Actual Completion Date" id="source-of-evidence" name="project_info">&nbsp;&nbsp;&nbsp;&nbsp;Actual Completion Date
-        </label>
-      </div>
-    </div>
-    <div class="form-group row">
-      <div class="checkbox col col-lg-3">
-        <label>
-          <input type="checkbox" id="wards" value="Ward" name="project_info">&nbsp;&nbsp;&nbsp;&nbsp;Wards
-        </label>
-      </div>
-      <div class="checkbox col col-lg-3">
-        <label>
-          <input type="checkbox" id="area" value="Area" name="project_info">&nbsp;&nbsp;&nbsp;&nbsp;Area
-        </label>
-      </div>
-      <div class="checkbox col col-lg-3">
-
-      </div>
-      <div class="checkbox col col-lg-3">
-
-      </div>
-    </div>
-    <div class="form-group row col col-lg-12">
-      <div class='col-lg-3'>
-        <div>
-          <label>Results From:</label>
-          <div class="input-group date" data-provide="datepicker"
-               data-date-format="M-yyyy" data-date-start-view="months" data-date-min-view-mode="months">
-            <input type="text" class="form-control">
-            <div class="input-group-addon">
-              <span class="glyphicon glyphicon-calendar"></span>
+        <legend><br/>1. Select the information to be displayed in the report:</legend>
+        <div class="form-group row">
+            <div class="checkbox col col-lg-3">
+                <label>
+                    <input type="checkbox" id="Department" value="Department" name="project_info">&nbsp;&nbsp;&nbsp;&nbsp;Department
+                </label>
             </div>
-          </div>
-        </div>
-      </div>
-      <div class='col-lg-3'>
-        <div>
-          <label>To:</label>
-          <div class="input-group date" data-provide="datepicker"
-               data-date-format="M-yyyy" data-date-start-view="months" data-date-min-view-mode="months">
-            <input type="text" class="form-control">
-            <div class="input-group-addon">
-              <span class="glyphicon glyphicon-calendar"></span>
+            <div class="checkbox col col-lg-3">
+                <label>
+                    <input type="checkbox" style="margin-left: 0;" id="Sub-Department" value="Sub-Department" name="project_info">&nbsp;&nbsp;&nbsp;&nbsp;Sub-Department
+                </label>
             </div>
-          </div>
+            <div class="checkbox col col-lg-3">
+                <label>
+                    <input type="checkbox" id="KPI-Ref-Number" value="Project Description" name="project_info">&nbsp;&nbsp;&nbsp;&nbsp;Project Description
+                </label>
+            </div>
+            <div class="checkbox col col-lg-3">
+                <label>
+                    <input type="checkbox" value="GFS Classification" id="gfs-classification" name="project_info">&nbsp;&nbsp;&nbsp;&nbsp;GFS Classification
+                </label>
+            </div>
         </div>
-      </div>
-      <div class="col col-lg-6">
-
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" value="values as captured" name="display_method" id="display-method-captured">Monthly Financials
-          </label>
+        <div class="form-group row">
+            <div class="checkbox col col-lg-3">
+                <label>
+                    <input type="checkbox" value="Mun CP Ref" id="KPI-Owner" name="project_info">&nbsp;&nbsp;&nbsp;&nbsp;Mun CP Ref
+                </label>
+            </div>
+            <div class="checkbox col col-lg-3">
+                <label>
+                    <input type="checkbox" value="Project Name" id="KPI" name="project_info">&nbsp;&nbsp;&nbsp;&nbsp;Project Name
+                </label>
+            </div>
+            <div class="checkbox col col-lg-3">
+                <label>
+                    <input type="checkbox" value="IDP Number" id="unit-of-measurement" name="project_info">&nbsp;&nbsp;&nbsp;&nbsp;IDP Number
+                </label>
+            </div>
+            <div class="checkbox col col-lg-3">
+                <label>
+                    <input type="checkbox" value="Vote Number" id="gfs-classification" name="project_info">&nbsp;&nbsp;&nbsp;&nbsp;Vote Number
+                </label>
+            </div>
         </div>
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" value="year-to-date values" name="display_method" id="display-method-year">YTD Financials
-          </label>
+        <div class="form-group row">
+            <div class="checkbox col col-lg-3">
+                <label>
+                    <input type="checkbox" value="Planned Start Date" id="IDP-ref" name="project_info">&nbsp;&nbsp;&nbsp;&nbsp;Planned Start Date
+                </label>
+            </div>
+            <div class="checkbox col col-lg-3">
+                <label>
+                    <input type="checkbox" value="Planned Completion Date" id="national-outcome" name="project_info">&nbsp;&nbsp;&nbsp;&nbsp;Planned Completion Date
+                </label>
+            </div>
+            <div class="checkbox col col-lg-3">
+                <label>
+                    <input type="checkbox" value="Actual Start Date" id="strategic-objective" name="project_info">&nbsp;&nbsp;&nbsp;&nbsp;Actual Start Date
+                </label>
+            </div>
+            <div class="checkbox col col-lg-3">
+                <label>
+                    <input type="checkbox" value="Actual Completion Date" id="source-of-evidence" name="project_info">&nbsp;&nbsp;&nbsp;&nbsp;Actual Completion Date
+                </label>
+            </div>
         </div>
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" value="period-to-date values" name="display_method" id="display-method-period">Total Financials
-          </label>
+        <div class="form-group row">
+            <div class="checkbox col col-lg-3">
+                <label>
+                    <input type="checkbox" id="wards" value="Ward" name="project_info">&nbsp;&nbsp;&nbsp;&nbsp;Wards
+                </label>
+            </div>
+            <div class="checkbox col col-lg-3">
+                <label>
+                    <input type="checkbox" id="area" value="Area" name="project_info">&nbsp;&nbsp;&nbsp;&nbsp;Area
+                </label>
+            </div>
+            <div class="checkbox col col-lg-3"></div>
+            <div class="checkbox col col-lg-3"></div>
         </div>
-      </div>
-    </div>
-  </fieldset><!-- personal info -->
-
-  <fieldset id="select-filter">
-    <legend>2. Select the filter you wish to apply:</legend>
-    <div class="form-group col col-lg-12">
-      <label>Department:</label>
-      <%= select_tag :department_id,options_for_select(Department.all.collect {|p| [ p.name, p.id ] }),{:required => true, :id=>"department-filter",:multiple => "true",:class=>'form-control'}%>
-    </div>
-    <%= hidden_field_tag "selected_project_columns",nil,:multiple => true,:id=> "current-project-selected-columns" %>
-    <div class="form-group col col-lg-12">
-      <label>Sub-Department:</label>
-      <%= select_tag :subdepartment_id, options_for_select(Subdepartment.all.collect {|p| [ p.subdepartment_name, p.id ] }),{:id=>"sub-department-filter",:multiple => "true",:class=>'form-control'} %>
-    </div>
-    <div class="form-group col col-lg-12">
-      <label>GFS Classification:</label>
-      <%= select_tag :mscore_classification_id, options_for_select(MscoreClassification.all.collect {|p| [ p.name, p.id ] }),{:id=>"gfs-classification-filter",:multiple => "true",:class=>'form-control'} %>
-    </div>
-
-    <div class="form-group col col-lg-12">
-          <label class="control-label">Mun CP Ref:</label>
-          <%= select_tag :mun_cp_ref,options_for_select(CapitalProject.select(:mun_cp_ref).uniq.collect {|p| [ p.mun_cp_ref, p.mun_cp_ref ] }),{:id=>"kpi-ref-number-filter",:multiple => "true",:class=>'form-control'} %>
-    </div>
-
-    <div class="form-group col col-lg-12">
-          <label class="control-label">IDP Number:</label>
-          <%= select_tag :idp_number,options_for_select(CapitalProject.all.collect {|p| [ p.idp_nummber, p.idp_nummber ] }),{:id=>"kpi-ref-number-filter",:multiple => "true",:class=>'form-control'} %>
-    </div>
-    <div class="form-group col col-lg-12">
-          <label class="control-label">Project Name:</label>
-          <%= select_tag :project_name,options_for_select(CapitalProject.all.collect {|p| [ p.project_name, p.id ] }),{:id=>"kpi-ref-number-filter",:multiple => "true",:class=>'form-control'} %>
-    </div>
-    <div class="form-group col col-lg-12">
-          <label class="control-label">Project Description:</label>
-          <%= select_tag :project_description,options_for_select(DepartmentalSdbip.all.collect {|p| [ p.kpi_ref_number, p.id ] }),{:id=>"kpi-ref-number-filter",:multiple => "true",:class=>'form-control'} %>
-    </div>
-
-    <div class="form-group col col-lg-12">
-          <label class="control-label">Funding Source:</label>
-          <%= select_tag :funding_source,options_for_select(CapitalProject.select(:funding_source).uniq.collect {|p| [ p.funding_source, p.funding_source ] }),{:id=>"kpi-ref-number-filter",:multiple => "true",:class=>'form-control'} %>
-    </div>
-    <div class="form-group col col-lg-12">
-      <label class="col col-lg-4 control-label" for="lastname">Planned Start Date:</label>
-      <div class="controls col col-lg-8">
-      <div class="form-group">
-                          <div class="input-group date" data-provide="datepicker"
-                               data-date-format="dd-mm-yyyy" data-date-start-view="years" data-date-min-view-mode="days">
-                            <%= text_field_tag :planned_start_date,nil, class: "form-control" %>
-                            <span class="input-group-addon">
-                              <span class="glyphicon glyphicon-calendar"></span>
-                            </span>
-                          </div>
+        <div class="form-group row col col-lg-12">
+            <div class='col-lg-3'>
+                <div>
+                    <label>Results From:</label>
+                    <div class="input-group date" data-provide="datepicker" data-date-format="M-yyyy" data-date-start-view="months" data-date-min-view-mode="months">
+                        <input type="text" class="form-control">
+                        <div class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
                         </div>
-      </div><!-- controls -->
+                    </div>
+                </div>
+            </div>
+            <div class='col-lg-3'>
+                <div>
+                    <label>To:</label>
+                    <div class="input-group date" data-provide="datepicker" data-date-format="M-yyyy" data-date-start-view="months" data-date-min-view-mode="months">
+                        <input type="text" class="form-control">
+                        <div class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-lg-6">
 
-    </div>
-    <div class="form-group col col-lg-12">
-          <label class="col col-lg-4 control-label" for="lastname">Planned Completion Date:</label>
-          <div class="controls col col-lg-8">
-          <div class="form-group">
-                              <div class="input-group date" data-provide="datepicker"
-                                   data-date-format="dd-mm-yyyy" data-date-start-view="years" data-date-min-view-mode="days">
-                                <%= text_field_tag :planned_completion_date, nil,class: "form-control" %>
-                                <span class="input-group-addon">
-                                  <span class="glyphicon glyphicon-calendar"></span>
-                                </span>
-                              </div>
-                            </div>
-          </div><!-- controls -->
-    </div>
-    <div class="form-group col col-lg-12">
-      <label>Area:</label>
-      <%= select_tag :area_id, options_for_select(Area.all.collect {|p| [ p.name, p.id ] }),{:id=>'area-filter',:multiple => "true",:class=>'form-control'} %>
-    </div>
-    <div class="form-group col col-lg-12">
-      <label>Wards:</label>
-      <%= select_tag :ward_id, options_for_select(Ward.all.collect {|p| [ p.name, p.id ] }),{:id=>'wards-filter',:multiple => "true",:class=>'form-control'} %>
-    </div>
-  </fieldset><!-- personal info -->
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" value="values as captured" name="display_method" id="display-method-captured">Monthly Financials
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" value="year-to-date values" name="display_method" id="display-method-year">YTD Financials
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" value="period-to-date values" name="display_method" id="display-method-period">Total Financials
+                    </label>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <!-- personal info -->
 
-  <fieldset id="choose-group">
-    <legend>3. Choose your group and sort options:</legend>
-    <div class="form-group col col-lg-12">
-      <label>Group by:</label>
-      <select class="form-control">
-        <option>No grouping</option>
+    <fieldset id="select-filter">
+        <legend>2. Select the filter you wish to apply:</legend>
+        <div class="form-group col col-lg-12">
+            <label>Department:</label>
+            <%= select_tag :department_id,options_for_select(Department.all.collect {|p| [ p.name, p.id ] }),{:required => true, :id=>"department-filter",:multiple => "true",:class=>'form-control'}%>
+        </div>
+        <%= hidden_field_tag "selected_project_columns",nil,:multiple => true,:id=> "current-project-selected-columns" %>
+        <div class="form-group col col-lg-12">
+            <label>Sub-Department:</label>
+            <%= select_tag :subdepartment_id, options_for_select(Subdepartment.all.collect {|p| [ p.subdepartment_name, p.id ] }),{:id=>"sub-department-filter",:multiple => "true",:class=>'form-control'} %>
+        </div>
+        <div class="form-group col col-lg-12">
+            <label>GFS Classification:</label>
+            <%= select_tag :mscore_classification_id, options_for_select(MscoreClassification.all.collect {|p| [ p.name, p.id ] }),{:id=>"gfs-classification-filter",:multiple => "true",:class=>'form-control'} %>
+        </div>
 
-      </select>
-    </div>
-  </fieldset><!-- personal info -->
+        <div class="form-group col col-lg-12">
+            <label class="control-label">Mun CP Ref:</label>
+            <%= select_tag :mun_cp_ref,options_for_select(CapitalProject.select(:mun_cp_ref).uniq.collect {|p| [ p.mun_cp_ref, p.mun_cp_ref ] }),{:id=>"kpi-ref-number-filter",:multiple => "true",:class=>'form-control'} %>
+        </div>
 
-  <fieldset id="generate-report">
-    <legend>4. Generate the report:</legend>
-    <div class="form-group col col-lg-12">
-      <label class="control-label">Report Title:</label>
-      <div>
-        <%= text_field_tag :file_name,nil,{:class => "form-control", :required => true}%>
+        <div class="form-group col col-lg-12">
+            <label class="control-label">IDP Number:</label>
+            <%= select_tag :idp_number,options_for_select(CapitalProject.all.collect {|p| [ p.idp_nummber, p.idp_nummber ] }),{:id=>"kpi-ref-number-filter",:multiple => "true",:class=>'form-control'} %>
+        </div>
+        <div class="form-group col col-lg-12">
+            <label class="control-label">Project Name:</label>
+            <%= select_tag :project_name,options_for_select(CapitalProject.all.collect {|p| [ p.project_name, p.id ] }),{:id=>"kpi-ref-number-filter",:multiple => "true",:class=>'form-control'} %>
+        </div>
+        <div class="form-group col col-lg-12">
+            <label class="control-label">Project Description:</label>
+            <%= select_tag :project_description,options_for_select(DepartmentalSdbip.all.collect {|p| [ p.kpi_ref_number, p.id ] }),{:id=>"kpi-ref-number-filter",:multiple => "true",:class=>'form-control'} %>
+        </div>
 
-      </div>
-    </div>
-    <div class="form-group col col-lg-12">
-      <%= submit_tag "PDF",{:selected_columns => nil, :id => "audit-target-report", 'data-target'=>"audit_log_modal", 'data-toggle'=>"modal",:class=>"btn btn-midi col-lg-2 pull-right disabled"} %>&nbsp;&nbsp;
-      <%= submit_tag "Excel",{:selected_columns => nil, :id => "audit-target-report", 'data-target'=>"audit_log_modal", 'data-toggle'=>"modal",:class=>"btn btn-midi col-lg-2 pull-right disabled"} %>&nbsp;&nbsp;
-      <%= submit_tag "CSV", :id=>"sdbip-target-report",:class=> "btn btn-midi col-lg-2 pull-right"%>
-      <!--<button class="btn btn-primary pull-right" id="submit-button" type="submit" style="margin-right: 0px;"> Generate Report</button>
-    --></div>
-  </fieldset><!-- personal info -->
-<% end %>
+        <div class="form-group col col-lg-12">
+            <label class="control-label">Funding Source:</label>
+            <%= select_tag :funding_source,options_for_select(CapitalProject.select(:funding_source).uniq.collect {|p| [ p.funding_source, p.funding_source ] }),{:id=>"kpi-ref-number-filter",:multiple => "true",:class=>'form-control'} %>
+        </div>
+        <div class="form-group col col-lg-12">
+            <label class="col col-lg-4 control-label" for="lastname">Planned Start Date:</label>
+            <div class="controls col col-lg-8">
+                <div class="form-group">
+                    <div class="input-group date" data-provide="datepicker" data-date-format="dd-mm-yyyy" data-date-start-view="years" data-date-min-view-mode="days">
+                        <%= text_field_tag :planned_start_date,nil, class: "form-control" %>
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <!-- controls -->
+
+        </div>
+        <div class="form-group col col-lg-12">
+            <label class="col col-lg-4 control-label" for="lastname">Planned Completion Date:</label>
+            <div class="controls col col-lg-8">
+                <div class="form-group">
+                    <div class="input-group date" data-provide="datepicker" data-date-format="dd-mm-yyyy" data-date-start-view="years" data-date-min-view-mode="days">
+                        <%= text_field_tag :planned_completion_date, nil,class: "form-control" %>
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <!-- controls -->
+        </div>
+        <div class="form-group col col-lg-12">
+            <label>Area:</label>
+            <%= select_tag :area_id, options_for_select(Area.all.collect {|p| [ p.name, p.id ] }),{:id=>'area-filter',:multiple => "true",:class=>'form-control'} %>
+        </div>
+        <div class="form-group col col-lg-12">
+            <label>Wards:</label>
+            <%= select_tag :ward_id, options_for_select(Ward.all.collect {|p| [ p.name, p.id ] }),{:id=>'wards-filter',:multiple => "true",:class=>'form-control'} %>
+        </div>
+    </fieldset>
+    <!-- personal info -->
+
+    <fieldset id="choose-group">
+        <legend>3. Choose your group and sort options:</legend>
+        <div class="form-group col col-lg-12">
+            <label>Group by:</label>
+            <select class="form-control">
+                <option>No grouping</option>
+
+            </select>
+        </div>
+    </fieldset>
+    <!-- personal info -->
+
+    <fieldset id="generate-report">
+        <legend>4. Generate the report:</legend>
+        <div class="form-group col col-lg-12">
+            <label class="control-label">Report Title:</label>
+            <div>
+                <%= text_field_tag :file_name,nil,{:class => "form-control", :required => true}%>
+
+            </div>
+        </div>
+        <div class="form-group col col-lg-12">
+            <%= submit_tag "PDF",{:selected_columns => nil, :id => "audit-target-report", 'data-target'=>"audit_log_modal", 'data-toggle'=>"modal",:class=>"btn btn-midi col-lg-2 pull-right disabled"} %>&nbsp;&nbsp;
+            <%= submit_tag "Excel",{:selected_columns => nil, :id => "audit-target-report", 'data-target'=>"audit_log_modal", 'data-toggle'=>"modal",:class=>"btn btn-midi col-lg-2 pull-right disabled"} %>&nbsp;&nbsp;
+            <%= submit_tag "CSV", :id=>"sdbip-target-report",:class=> "btn btn-midi col-lg-2 pull-right"%>
+            <!--<button class="btn btn-primary pull-right" id="submit-button" type="submit" style="margin-right: 0px;"> Generate Report</button>
+    -->
+        </div>
+    </fieldset>
+    <!-- personal info -->
+    <% end %>
 </div>

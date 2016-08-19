@@ -22,7 +22,7 @@
 
     <div class="field">
       <%= f.label :name,"KPI Owner:" %><br>
-      <%= f.select(:name,options_for_select(KpiOwner.all.collect{ |u| [u.title, u.title] }),{},{class: 'form-control'}) %>
+      <%= f.select(:name,options_for_select(KpiOwner.where(id: @kpi_owner.id).all.collect{ |u| [u.name, u.name] }),{},{class: 'form-control'}) %>
 
     </div>
     <div class="field">

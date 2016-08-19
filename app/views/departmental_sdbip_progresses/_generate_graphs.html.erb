@@ -1,104 +1,106 @@
 <div class="tab-pane fade" id="generate_graphs">
-  <div class="row">
-    <br/>
-    <h3>Generate Graph Report</h3>
-    <div class="col-lg-12">
-    <fieldset id="select-info">
-	    <legend><br/>1. Select the filters you wish to apply:</legend>
-      <div class="form-group col col-lg-12">
-        <label>Department:</label>
-        <%= select_tag :department_id_selection, options_for_select([["--select option--"],["Entire Municipality",0]] + Department.all.collect {|p| [ p.name, p.id ] }),{:class=>'form-control',:id=>"department-choice"} %>
-      </div>
-      <div class="form-group row col col-lg-12">
-        <div class='col-lg-4'>
-          <div>
-            <label>Time Period From:</label>
-            <div class="input-group date" data-provide="datepicker"
-                 data-date-format="M-yyyy" data-date-start-view="months" data-date-min-view-mode="months">
-              <input type="text" class="form-control">
-              <div class="input-group-addon">
-                <span class="glyphicon glyphicon-calendar"></span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class='col-lg-4'>
-          <div>
-            <label>To:</label>
-            <div class="input-group date" data-provide="datepicker"
-                 data-date-format="M-yyyy" data-date-start-view="months" data-date-min-view-mode="months">
-              <input type="text" class="form-control">
-              <div class="input-group-addon">
-                <span class="glyphicon glyphicon-calendar"></span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-	  </fieldset><!-- personal info -->
+    <div class="row">
+        <br/>
+        <h3>Generate Graph Report</h3>
+        <div class="col-lg-12">
+            <fieldset id="select-info">
+                <legend><br/>1. Select the filters you wish to apply:</legend>
+                <div class="form-group col col-lg-12">
+                    <label>Department:</label>
+                    <%= select_tag :department_id_selection, options_for_select([["--select option--"],["Entire Municipality",0]] + Department.all.collect {|p| [ p.name, p.id ] }),{:class=>'form-control',:id=>"department-choice"} %>
+                </div>
+                <div class="form-group row col col-lg-12">
+                    <div class='col-lg-4'>
+                        <div>
+                            <label>Time Period From:</label>
+                            <div class="input-group date" data-provide="datepicker" data-date-format="M-yyyy" data-date-start-view="months" data-date-min-view-mode="months">
+                                <input type="text" class="form-control">
+                                <div class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='col-lg-4'>
+                        <div>
+                            <label>To:</label>
+                            <div class="input-group date" data-provide="datepicker" data-date-format="M-yyyy" data-date-start-view="months" data-date-min-view-mode="months">
+                                <input type="text" class="form-control">
+                                <div class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <!-- personal info -->
 
-    <fieldset id="choose-group">
-	    <legend>2. Select the layout:</legend>
-      <div class="form-group col col-lg-12">
-        <div class="checkbox col col-lg-3">
-          <label>
-            <input type="checkbox" style="margin-left: 0;" id="include-sub-graphs">&nbsp;&nbsp;&nbsp;&nbsp;Include Sub-graphs
-          </label>
-        </div>
+            <fieldset id="choose-group">
+                <legend>2. Select the layout:</legend>
+                <div class="form-group col col-lg-12">
+                    <div class="checkbox col col-lg-3">
+                        <label>
+                            <input type="checkbox" style="margin-left: 0;" id="include-sub-graphs">&nbsp;&nbsp;&nbsp;&nbsp;Include Sub-graphs
+                        </label>
+                    </div>
 
+                </div>
+                <div class="form-group col col-lg-12">
+                    <label class="control-label">Group By:</label>
+                    <%= select_tag :group_by_selection, options_for_select([["Department","0"],["Performance Standard","1"],["KPA","2"]]),{:class=>'form-control'} %>
+                </div>
+
+                <div class="form-group col col-lg-12">
+                    <label class="control-label">Graph Type:</label>
+                    <%= select_tag :graph_type_selection, options_for_select([["Bar Graph","0"],["Pie Chart","1"]]),{:required=>true,:class=>'form-control'} %>
+                </div>
+
+            </fieldset>
+
+            <fieldset id="generate-report">
+                <legend>3. Generate the report:</legend>
+                <div class="form-group col col-lg-12">
+                    <%= link_to "#", :remote => true, 'data-target'=> '#audit-log-modal', 'data-toggle' => 'modal', :class=> 'btn btn-mini col-lg-2 pull-right',:id=>"page_button" do %>
+                    <span>Generate</span>
+                    <% end %>
+                    <div class="modal fade" id="audit-log-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"></div>
+                </div>
+            </fieldset>
+        </div>
     </div>
-    <div class="form-group col col-lg-12">
-      <label class="control-label">Group By:</label>
-      <%= select_tag :group_by_selection, options_for_select([["Department","0"],["Performance Standard","1"],["KPA","2"]]),{:class=>'form-control'} %>
-    </div>
-
-    <div class="form-group col col-lg-12">
-      <label class="control-label">Graph Type:</label>
-      <%= select_tag :graph_type_selection, options_for_select([["Bar Graph","0"],["Pie Chart","1"]]),{:required=>true,:class=>'form-control'} %>
-    </div>
-
-	  </fieldset>
-
-    <fieldset id="generate-report">
-	    <legend>3. Generate the report:</legend>
-      <div class="form-group col col-lg-12">
-        <%= link_to "#", :remote => true, 'data-target'=> '#audit-log-modal', 'data-toggle' => 'modal', :class=> 'btn btn-mini col-lg-2 pull-right',:id=>"page_button" do %>
-        <span>Generate</span>
-        <% end %>
-        <div class="modal fade" id="audit-log-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        </div>
-      </div>
-	  </fieldset>
-</div>
-</div>
 </div>
 <script>
-$(document).ready(function() {
-  var select_value,sub_graphs=false;
-  $(function(){
+    $(document).ready(function () {
+        var select_value,
+            sub_graphs = false;
+        $(function () {
 
-        $(document).on('change','#department-choice', function(){
-           select_value = $(this).val();
-           $('#department-value').val(select_value);
+            $(document).on('change', '#department-choice', function () {
+                select_value = $(this).val();
+                $('#department-value').val(select_value);
+            });
+            $('input[type="checkbox"]').click(function () {
+                if ($('#include-sub-graphs').prop("checked") == true) {
+                    sub_graphs = true;
+                }
+                if ($('#include-sub-graphs').prop("checked") == false) {
+                    sub_graphs = false;
+
+                }
+            });
+            $('#page_button').click(function () {
+                $.ajax({
+                    url: "/departmental_sdbip_progresses/generate_graphs",
+                    type: "get",
+                    data: {
+                        data_value: select_value,
+                        include_sub_graph: sub_graphs
+                    }
+                });
+            });
+
         });
-        $('input[type="checkbox"]').click(function(){
-              if($('#include-sub-graphs').prop("checked") == true){
-                  sub_graphs = true;
-              }
-              if($('#include-sub-graphs').prop("checked") == false){
-                sub_graphs = false;
 
-              }
-          });
-        $('#page_button').click(function() {
-          $.ajax({
-               url : "/departmental_sdbip_progresses/generate_graphs",
-               type : "get",
-               data : { data_value: select_value,include_sub_graph: sub_graphs }
-           });
-        });
-
-  });
-
-});
+    });
 </script>

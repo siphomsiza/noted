@@ -1,184 +1,203 @@
 <% provide(:title, 'Capital Projects') %>
 <script>
-$(function() {
-	//highlight the current nav
-	$("#applicationmanifest ul.navbar-nav li:eq(3)").addClass('active');
-}); //jQuery is loaded
+	$(function () {
+		//highlight the current nav
+		$("#applicationmanifest ul.navbar-nav li:eq(3)").addClass('active');
+	}); //jQuery is loaded
 </script>
 <br/>
 <div class="row">
-<div class="col col-lg-12">
+	<div class="col col-lg-12">
 
-	<%= render 'layouts/municipality' %>
+		<%= render 'layouts/municipality' %>
 
-<ul class="nav nav-pills  nav-justified">
+		<ul class="nav nav-pills  nav-justified">
 
-<li><%= link_to "Departmental SDBIP", departmental_sdbips_path %></li>
+			<li><%= link_to "Departmental SDBIP", departmental_sdbips_path %></li>
 
-<% if current_user.admin? || current_user.super_admin? %>
-<li><%= link_to "Top Layer SDBIP", top_layer_sdbips_path %></li>
-<li class="active"><%= link_to "Capital Projects", capital_projects_path %></li>
+			<% if current_user.admin? || current_user.super_admin? %>
+			<li><%= link_to "Top Layer SDBIP", top_layer_sdbips_path %></li>
+			<li class="active"><%= link_to "Capital Projects", capital_projects_path %></li>
 
-<li><%= link_to "Monthly Cashflow", monthly_cashflows_path %></li>
-<li><%= link_to "Revenue By Source", revenue_by_sources_path %></li>
+			<li><%= link_to "Monthly Cashflow", monthly_cashflows_path %></li>
+			<li><%= link_to "Revenue By Source", revenue_by_sources_path %></li>
 
-<% end %>
+			<% end %>
 
-</ul>
-</div></div>
+		</ul>
+	</div>
+</div>
 
 <div class="row">
 
-  <div id="departmentalsdbips">
+	<div id="departmentalsdbips">
 
-					<div class="col col-lg-12">
+		<div class="col col-lg-12">
 
-						<div class="tabbable tabs third-level-navs" id="capital_projects-tabs">
+			<div class="tabbable tabs third-level-navs" id="capital_projects-tabs">
 
-							<ul id = "myTab" class = "nav nav-tabs">
+				<ul id="myTab" class="nav nav-tabs">
 
-								<li class="active">
-									<a href = "#view_capital_projects" data-toggle = "tab"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;View Capital Projects</a>
-								</li>
-								<li>
-									<a href = "#edit_capital_projects" data-toggle = "tab"><span class="glyphicon glyphicon-pencil"></span>&nbsp;Edit Capital Projects</a>
-								</li>
-								<li>
-									<a href = "#manage_capital_projects" data-toggle = "tab"><span class="glyphicon glyphicon-edit"></span>&nbsp;Update Capital Projects</a>
-								</li>
-								<li>
-									<a href = "#new_capital_project" data-toggle = "tab">
+					<li class="active">
+						<a href="#view_capital_projects" data-toggle="tab">
+							<span class="glyphicon glyphicon-list-alt"></span>&nbsp;View Capital Projects</a>
+					</li>
+					<li>
+						<a href="#edit_capital_projects" data-toggle="tab">
+							<span class="glyphicon glyphicon-pencil"></span>&nbsp;Edit Capital Projects</a>
+					</li>
+					<li>
+						<a href="#manage_capital_projects" data-toggle="tab">
+							<span class="glyphicon glyphicon-edit"></span>&nbsp;Update Capital Projects</a>
+					</li>
+					<li>
+						<a href="#new_capital_project" data-toggle="tab">
 
-										<span class="glyphicon glyphicon-plus-sign"></span>&nbsp;Add Capital Project
-									</a>
-								</li>
-								<% if current_user.admin? %>
-								<li class="pull-right">
-													<button class="btn btn-sm  pull-right" data-toggle="modal" data-target="#capital_projectModal" title="Click to upload Capital projects.">
-														<span class="glyphicon glyphicon-upload"></span>&nbsp;Import Capital Projects
-													</button>&nbsp;
-								</li>
-								<% end %>
-							</ul><!-- nav nav-tabs -->
-						</div><!-- tabbable tabs -->
-
-						<div id = "myTabContent" class = "tab-content">
-
-							<div class = "tab-pane active fade in" id = "view_capital_projects">
-
-								<% if @capital_projects.blank? && CapitalProject.blank? %>
-
-								<p> There are no capital projects currently in the system. </p>
-
-								<% elsif @capital_projects.blank? && !CapitalProject.blank? %>
-
-								<p> You currently have no capital projects. </p>
-
-								<% elsif !@capital_projects.blank? %>
-
-								<%= render "capital_projects" %>
-
-								<% end %>
-
-							<% if !@capital_projects.blank? %>
-
-								<%= will_paginate @capital_projects %>
-
-								<% end %>
-
-							</div>
-
-							<div class = "tab-pane fade" id = "edit_capital_projects">
-
-								<% if @capital_projects.blank? && CapitalProject.blank? %>
-
-								<p> There are no capital projects currently in the system. </p>
-
-								<% elsif @capital_projects.blank? && !CapitalProject.blank? %>
-
-								<p> You currently have no capital projects. </p>
-
-								<% elsif !@capital_projects.blank? %>
-
-								<%= render "update_capital_project" %>
-
-								<% end %>
-
-							<% if !@capital_projects.blank? %>
-
-								<%= will_paginate @capital_projects %>
-
-								<% end %>
-
-							</div>
-
-							<div class = "tab-pane fade" id = "manage_capital_projects">
-
-								<% if @capital_projects.blank? && CapitalProject.blank? %>
-
-								<p> There are no capital projects currently in the system. </p>
-
-								<% elsif @capital_projects.blank? && !CapitalProject.blank? %>
-
-								<p> You currently have no capital projects. </p>
-
-								<% elsif !@capital_projects.blank? %>
-
-								<%= render "edit_capital_project" %>
-
-								<% end %>
-
-							<% if !@capital_projects.blank? %>
-
-								<%= will_paginate @capital_projects %>
-
-								<% end %>
-
-							</div>
-							<div class = "tab-pane fade" id = "new_capital_project">
-								<%= render 'form' %>
-							</div>
+							<span class="glyphicon glyphicon-plus-sign"></span>&nbsp;Add Capital Project
+						</a>
+					</li>
+					<% if current_user.admin? %>
+					<li class="pull-right">
+						<button class="btn btn-sm  pull-right" data-toggle="modal" data-target="#capital_projectModal" title="Click to upload Capital projects.">
+							<span class="glyphicon glyphicon-upload"></span>&nbsp;Import Capital Projects
+						</button>&nbsp;
+					</li>
+					<% end %>
+				</ul>
+				<!-- nav nav-tabs -->
 			</div>
+			<!-- tabbable tabs -->
 
+			<div id="myTabContent" class="tab-content">
+
+				<div class="tab-pane active fade in" id="view_capital_projects">
+
+					<% if @capital_projects.blank? && CapitalProject.blank? %>
+
+					<p>
+						There are no capital projects currently in the system.
+					</p>
+
+					<% elsif @capital_projects.blank? && !CapitalProject.blank? %>
+
+					<p>
+						You currently have no capital projects.
+					</p>
+
+					<% elsif !@capital_projects.blank? %>
+
+					<%= render "capital_projects" %>
+
+					<% end %>
+
+					<% if !@capital_projects.blank? %>
+
+					<%= will_paginate @capital_projects %>
+
+					<% end %>
+
+				</div>
+
+				<div class="tab-pane fade" id="edit_capital_projects">
+
+					<% if @capital_projects.blank? && CapitalProject.blank? %>
+
+					<p>
+						There are no capital projects currently in the system.
+					</p>
+
+					<% elsif @capital_projects.blank? && !CapitalProject.blank? %>
+
+					<p>
+						You currently have no capital projects.
+					</p>
+
+					<% elsif !@capital_projects.blank? %>
+
+					<%= render "update_capital_project" %>
+
+					<% end %>
+
+					<% if !@capital_projects.blank? %>
+
+					<%= will_paginate @capital_projects %>
+
+					<% end %>
+
+				</div>
+
+				<div class="tab-pane fade" id="manage_capital_projects">
+
+					<% if @capital_projects.blank? && CapitalProject.blank? %>
+
+					<p>
+						There are no capital projects currently in the system.
+					</p>
+
+					<% elsif @capital_projects.blank? && !CapitalProject.blank? %>
+
+					<p>
+						You currently have no capital projects.
+					</p>
+
+					<% elsif !@capital_projects.blank? %>
+
+					<%= render "edit_capital_project" %>
+
+					<% end %>
+
+					<% if !@capital_projects.blank? %>
+
+					<%= will_paginate @capital_projects %>
+
+					<% end %>
+
+				</div>
+				<div class="tab-pane fade" id="new_capital_project">
+					<%= render 'form' %>
+				</div>
+			</div>
 
 		</div>
 
 	</div>
 </div>
 
-
-
 <div class="col col-lg-12">
-  <!-- Import SDBIP modal -->
-  <div class="modal fade" id="capital_projectModal" tabindex="-1" role="dialog" aria-labelledby="capital_projectModalLabel" aria-hidden="true">
+	<!-- Import SDBIP modal -->
+	<div class="modal fade" id="capital_projectModal" tabindex="-1" role="dialog" aria-labelledby="capital_projectModalLabel" aria-hidden="true">
 
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <%= form_tag import_capital_projects_path, accept: 'text/csv,text/xls,text/xlsx,text/ods', multipart: true do %>
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-              &times;
-            </button>
-            <h4 class="modal-title" id="capital_projectModalLabel">
-              <ol class="breadcrumb">
-                <li><a href="#" data-dismiss="modal">SDBIP</a></li>
-                <li>Capital Projects</li>
-								<li class="active">Import</li>
-              </ol>
-            </h4>
-            <%= label_tag :NB,"Note: Supported files types are xls,xlsx, ods and csv types.", id: 'import_info' %>
-          </div>
-          <div class="modal-body">
-            <%= label_tag :file,"Select File to upload:" %>
-            <%= file_field_tag :file ,{:class=>"form-control"} %>
-          </div>
-          <div class="modal-footer">
-            <div class="col-md-4 pull-right">
-              <%= submit_tag "Import", :class=>"btn" %>
-            </div>
-          </div>
-        <% end %>
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal -->
-  </div>
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<%= form_tag import_capital_projects_path, accept: 'text/csv,text/xls,text/xlsx,text/ods', multipart: true do %>
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+						&times;
+					</button>
+					<h4 class="modal-title" id="capital_projectModalLabel">
+						<ol class="breadcrumb">
+							<li>
+								<a href="#" data-dismiss="modal">SDBIP</a>
+							</li>
+							<li>Capital Projects</li>
+							<li class="active">Import</li>
+						</ol>
+					</h4>
+					<%= label_tag :NB,"Note: Supported files types are xls,xlsx, ods and csv types.", id: 'import_info' %>
+				</div>
+				<div class="modal-body">
+					<%= label_tag :file,"Select File to upload:" %>
+					<%= file_field_tag :file ,{:class=>"form-control"} %>
+				</div>
+				<div class="modal-footer">
+					<div class="col-md-4 pull-right">
+						<%= submit_tag "Import", :class=>"btn" %>
+					</div>
+				</div>
+				<% end %>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal -->
+	</div>
 </div>

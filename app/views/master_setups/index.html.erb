@@ -1,80 +1,78 @@
 <% provide(:title, 'Master Setup') %>
 <script>
-$(function() {
-	//highlight the current nav
-	$("#applicationmanifest a:contains('SETUP')").parent().addClass('active');
-}); //jQuery is loaded
+	$(function () {
+		//highlight the current nav
+		$("#applicationmanifest a:contains('SETUP')").parent().addClass('active');
+	}); //jQuery is loaded
 </script>
 
 <div class="row">
-<div class="col col-lg-12">
-	<%= render 'layouts/municipality' %>
+	<div class="col col-lg-12">
+		<%= render 'layouts/municipality' %>
 	</article>
 
-<ul class="nav nav-pills nav-justified">
-<li class="active"><%= link_to "Master Setup", master_setups_path %></li>
-<li><%= link_to "System Setup", setups_path %></li>
-<li><%= link_to "Departments", departments_path %></li>
-<li><%= link_to "Administrators", departmental_administrators_path %></li>
-<li><%= link_to "Headings", headings_path %></li>
-<li><%= link_to "Lists", lists_path %></li>
-<li><%= link_to "Time Periods", sdbip_time_periods_path %></li>
-</ul>
+	<ul class="nav nav-pills nav-justified">
+		<li class="active"><%= link_to "Master Setup", master_setups_path %></li>
+		<li><%= link_to "System Setup", setups_path %></li>
+		<li><%= link_to "Departments", departments_path %></li>
+		<li><%= link_to "Administrators", departmental_administrators_path %></li>
+		<li><%= link_to "Headings", headings_path %></li>
+		<li><%= link_to "Lists", lists_path %></li>
+		<li><%= link_to "Time Periods", sdbip_time_periods_path %></li>
+	</ul>
 </div>
 </div>
 
-    <div class="row">
-			<div class="col col-lg-12">
-            <div class="tabbable tabs third-level-navs">
-              <ul id = "myTab" class = "nav nav-tabs">
-								<li class="active"><a href = "#master-setup" data-toggle = "tab">Locations</a></li>
-								<li><a href = "#job-titles" data-toggle = "tab">Job Titles</a></li>
-              </ul><!-- nav nav-tabs -->
-            </div><!-- tabbable tabs -->
-						<section class="tab-content">
-							<%= render 'master_setup' %>
-							<%= render 'setup_job_titles' %>
-						</section>
+<div class="row">
+<div class="col col-lg-12">
+	<div class="tabbable tabs third-level-navs">
+		<ul id="myTab" class="nav nav-tabs">
+			<li class="active">
+				<a href="#master-setup" data-toggle="tab">Locations</a>
+			</li>
+			<li>
+				<a href="#job-titles" data-toggle="tab">Job Titles</a>
+			</li>
+		</ul>
+		<!-- nav nav-tabs -->
+	</div>
+	<!-- tabbable tabs -->
+	<section class="tab-content">
+		<%= render 'master_setup' %>
+		<%= render 'setup_job_titles' %>
+	</section>
 
 </div>
 </div>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD1n4JTMGUMSgr0PeFr01A0rFTm5Fx-Du0&sensor=false"></script>
 <script>
-	'use strict';
+'use strict';
 
-	document.addEventListener('DOMContentLoaded', drawMap);
+document.addEventListener('DOMContentLoaded', drawMap);
 
-	// make map available in global scope
-	var map;
+// make map available in global scope
+var map;
 
-	function drawMap() {
-		var municipalityLocation = new google.maps.LatLng(<%= @setup.latitude %>, <%= @setup.longitude %>);
+function drawMap() {
+	var municipalityLocation = new google.maps.LatLng(<%= @setup.latitude %>, <%= @setup.longitude %>);
 
-		var mapOptions = {
-	  	'center' : municipalityLocation,
-	  	'zoom' : 8,
-	  	'mapTypeId' : google.maps.MapTypeId.ROADMAP,
-	  	'draggable' : false
-		};
+	var mapOptions = {
+		'center': municipalityLocation,
+		'zoom': 8,
+		'mapTypeId': google.maps.MapTypeId.ROADMAP,
+		'draggable': false
+	};
 
-		map = new google.maps.Map(document.getElementById("googleMap"), mapOptions);
+	map = new google.maps.Map(document.getElementById("googleMap"), mapOptions);
 
-		var marker = new google.maps.Marker({
-			position: municipalityLocation,
-			map: map,
-			title: 'Find us here (<%= @setup.municipality %>)'
-		});
+	var marker = new google.maps.Marker({position: municipalityLocation, map: map, title: 'Find us here (<%= @setup.municipality %>)'});
 
-		var popupContent = '<%= simple_format(@setup.address,wrapper_tag: '<br />') %>';
+	var popupContent = '<%= simple_format(@setup.address,wrapper_tag: ' < br /> ') %>';
 
-		var infowindow = new google.maps.InfoWindow({
-			content: popupContent,
-			maxWidth: 270
-		});
+	var infowindow = new google.maps.InfoWindow({content: popupContent, maxWidth: 270});
 
-		google.maps.event.addListener(marker, 'click', function() {
-			infowindow.open(map, marker);
-		});
-	}
-
+	google.maps.event.addListener(marker, 'click', function () {
+		infowindow.open(map, marker);
+	});
+}
 </script>
