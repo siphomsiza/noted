@@ -10,7 +10,7 @@ namespace :mkhondo do
     if !Rails.env.production?
       Rails.application.config.paths['config/database'] = ['config/mkhondo_db.yml']
     elsif Rails.env.production?
-      Rails.application.config.paths['../shared/config/database'] = ['../shared/config/mkhondo_db.yml']
+      Rails.application.config.paths['../../shared/config/database'] = ['../../shared/config/mkhondo_db.yml']
     end
     end
 
