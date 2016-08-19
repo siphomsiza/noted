@@ -135,7 +135,7 @@
       <label class="col col-lg-4 control-label" for="location">Location</label>
         <div class="controls col col-lg-8">
 
-            <%= f.select :location, Region.all.collect {|x| [x.name, x.name]}, {:include_blank => "Select Location"}, class: "form-control" %>
+            <%= f.select :location, Area.all.collect {|x| [x.name, x.name]}, {:include_blank => "Select Location"}, class: "form-control" %>
 
         </div><!-- controls -->
       </section><!-- row -->

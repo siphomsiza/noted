@@ -11,7 +11,7 @@
                             <% if @departmental_sdbip.kpi_results.any? %>
                                 <% @departmental_sdbip.kpi_results.each do |result| %>
                                     <% @result = result %>
-                                        <% if result.assurance.blank? %>
+
                                             <%= render 'audited_results' %>
                                                 <%= f.fields_for :assurances do |assurance_for_form| %>
 
@@ -25,7 +25,7 @@
                                                                     <br/>
                                                                     <%= f.submit "Save", class: 'btn col-lg-3 pull-right'%>
                                                                         <% end %>
-                                                                            <% end %>
+                                                                            
                 </div>
             </div>
         </div>

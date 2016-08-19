@@ -370,13 +370,6 @@ ActiveRecord::Schema.define(version: 20160813201349) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "regions", force: :cascade do |t|
-    t.string   "name",            null: false
-    t.integer  "master_setup_id", null: false
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-  end
-
   create_table "reporting_categories", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
