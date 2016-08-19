@@ -139,6 +139,10 @@ class DepartmentalSdbipProgressesController < ApplicationController
         end
     end
 
+    def assurance_results
+      @assurance = Assurance.find(params[:id])
+    end
+
     def generate_graphs
         @graph_value = params[:data_value].to_i
         @include_sub_graphs = params[:include_sub_graph]

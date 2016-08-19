@@ -84,7 +84,7 @@ class MasterSetupsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def master_setup_params
-      params.require(:master_setup).permit(:municipality,:logo,:logo_name,:address,:logo_content_type,:province, :latitude,:longitude, :regions_attributes => [ :id,:name,:_destroy])
+      params.require(:master_setup).permit(:municipality,:logo,:logo_name,:address,:logo_content_type,:province, :latitude,:longitude)
     end
 
     def set_user
