@@ -23,7 +23,7 @@
             <td><%= departmental_sdbip.department.name %></td>
             <td><%= departmental_sdbip.subdepartment.subdepartment_name %></td>
             <td>
-                <% if (!current_user.departmental_administrator.blank? && current_user.departmental_administrator.can_update?) || (!current_user.subdepartmental_administrator.blank? && current_user.subdepartmental_administrator.can_update?) || current_user.admin? ||
+                <% if (!current_user.departmental_administrator.blank? && current_user.departmental_administrator.can_update?) || (!current_user.subdepartmental_administrator.blank? && current_user.subdepartmental_administrator.can_update?) || current_user.super_admin? || current_user.admin? ||
                 ( !current_user.role.blank? && current_user.role.kpi_owner? && (!current_user.kpi_owners.blank?))# && current_user.kpi_owners.can_update? ) ) %>
                 <%= link_to edit_departmental_sdbip_path(departmental_sdbip),remote: true,'data-target' => "#departmental-sdbip-modal", 'data-toggle' => 'modal', :title=>"Click to Update KPI" do %>
                 <%= departmental_sdbip.kpi %>
