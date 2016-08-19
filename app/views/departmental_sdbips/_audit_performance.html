@@ -1,42 +1,41 @@
 <div class="modal-dialog">
-<div class="modal-content">
-<div class="modal-header">
-  <h3>Assurance Review:&nbsp;KPI&nbsp;D<%= @departmental_sdbip.id %>&nbsp;for&nbsp;<%= Date.today.strftime("%B %Y") %></h3>
-</div>
-<div class="modal-body">
-<div class="row">
-  <div class="col col-lg-10 col-lg-offset-1">
-        <%= form_for(@departmental_sdbip) do |f| %>
-            <%= render 'kpi_details' %>
-            <% if @departmental_sdbip.kpi_results.any? %>
-            <% @departmental_sdbip.kpi_results.each do |result| %>
-            <% @result = result %>
-            <% if result.assurance.blank? %>
-                <%= render 'audited_results' %>
-                <%= f.fields_for :assurances do |assurance_for_form| %>
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Assurance Review:&nbsp;KPI&nbsp;D<%= @departmental_sdbip.id %>&nbsp;for&nbsp;<%= Date.today.strftime("%B %Y") %></h3>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col col-lg-10 col-lg-offset-1">
+                    <%= form_for(@departmental_sdbip) do |f| %>
+                        <%= render 'kpi_details' %>
+                            <% if @departmental_sdbip.kpi_results.any? %>
+                                <% @departmental_sdbip.kpi_results.each do |result| %>
+                                    <% @result = result %>
+                                        <% if result.assurance.blank? %>
+                                            <%= render 'audited_results' %>
+                                                <%= f.fields_for :assurances do |assurance_for_form| %>
 
-                    <%= render 'assurance_fields', f: assurance_for_form %>
+                                                    <%= render 'assurance_fields', f: assurance_for_form %>
 
-              <% end %>
-            <% end %>
-            <% end %>
+                                                        <% end %>
+                                                            <% end %>
+                                                                <% end %>
 
 
-            <br/>
-            <%= f.submit "Save", class: 'btn col-lg-3 pull-right'%>
-          <% end %>
-        <% end %>
-      </div>
-      </div>
-</div>
-</div>
+                                                                    <br/>
+                                                                    <%= f.submit "Save", class: 'btn col-lg-3 pull-right'%>
+                                                                        <% end %>
+                                                                            <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <script>
-$(document).ready(function(){
-  var selected_value = <%= current_user.id %>;
-  var kpi_result_value = <%= @result.id %>;
-  $("#assurance-user").val(selected_value);
-  $("#kpi-result-id").val(kpi_result_value);
-});
-
+    $(document).ready(function() {
+        var selected_value = <%= current_user.id %>;
+        var kpi_result_value = <%= @result.id %>;
+        $("#assurance-user").val(selected_value);
+        $("#kpi-result-id").val(kpi_result_value);
+    });
 </script>

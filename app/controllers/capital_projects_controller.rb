@@ -22,7 +22,7 @@ class CapitalProjectsController < ApplicationController
     puts "received Exception #{e}"
   end
     @capital_project = CapitalProject.new
-    @capital_projects = CapitalProject.all
+    @capital_projects = CapitalProject.all.order(id: :asc)
       if !@capital_projects.blank?
        @capital_projects =  @capital_projects.paginate(page: params[:page],per_page: 15).includes(:departmental_sdbip,:mscore_classification,subdepartment: [:department])
       end

@@ -1,25 +1,24 @@
-
 <table class="table table-responsive table-striped">
-  <% @departmental_sdbip.kpi_results.each do |kpi_result| %>
-  <tr>
-    <th>Target</th>
-    <td><%= kpi_result.target %></td>
-  </tr>
-  <tr>
-    <th>Actual</th>
-    <td><%= kpi_result.actual %></td>
-  </tr>
-  <tr>
-    <th>Result</th>
-    <td><%= kpi_result.kpi_performance_standard %></td>
-  </tr>
-  <tr>
-    <th>Performance Comment(s)</th>
-    <td><%= kpi_result.performance_comments %></td>
-  </tr>
-  <tr>
-    <th>Corrective Measure(s)</th>
-    <td><%= kpi_result.corrective_measures %></td>
-  </tr>
-  <% end %>
+    <% @departmental_sdbip.kpi_results.each do |kpi_result| %>
+    <tr>
+        <th>Target</th>
+        <td><%= kpi_result.target %></td>
+    </tr>
+    <tr>
+        <th>Actual</th>
+        <td><%= kpi_result.actual %></td>
+    </tr>
+    <tr>
+        <th>Result</th>
+        <td><%= kpi_result.kpi_performance_standard %></td>
+    </tr>
+    <tr>
+        <th>Performance Comment(s)</th>
+        <td><%= kpi_result.performance_comments %></td>
+    </tr>
+    <tr>
+        <th>Corrective Measure(s)</th>
+        <td><%= kpi_result.corrective_measures %></td>
+    </tr>
+    <% end %>
 </table>

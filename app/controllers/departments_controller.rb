@@ -17,7 +17,7 @@ class DepartmentsController < ApplicationController
     puts "received Exception #{e}"
   end
       @department = Department.new
-  	   @departments = Department.includes(:subdepartments).paginate(page: params[:page],per_page: 10)
+  	   @departments = Department.includes(:subdepartments).paginate(page: params[:page],per_page: 10).order(id: :asc)
   end
 
   def show

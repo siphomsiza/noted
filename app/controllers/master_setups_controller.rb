@@ -7,20 +7,16 @@ class MasterSetupsController < ApplicationController
   def index
 
     begin
-
         @client = YahooWeather::Client.new
         @response = @client.fetch(1582504)
         @doc = @response.doc
         @forecast = @doc["item"]["forecast"]
-      #@response = @client.fetch_by_location('New York')
-      #@response.units.temperature
-      #@response.condition.temp
-
-  rescue SignalException => e
+   rescue SignalException => e
     flash[:notice] = "received Exception #{e.message}"
     puts "received Exception #{e}"
-  end
+    end
     @jobtitle = Jobtitle.new
+    @areas = Area.all
     @job_titles = Jobtitle.paginate(page: params[:page],per_page: 15)
     @master_setup = MasterSetup.new
     @master_setups = MasterSetup.limit(1).order(id: :asc)
@@ -88,7 +84,7 @@ class MasterSetupsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def master_setup_params
-      params.require(:master_setup).permit(:municipality,:logo,:logo_name,:address,:logo_content_type,:province, :latitude,:longitude, :regions_attributes => [ :id,:name,:_destroy])
+      params.require(:master_setup).permit(:municipality,:logo,:logo_name,:address,:logo_content_type,:province, :latitude,:longitude)
     end
 
     def set_user

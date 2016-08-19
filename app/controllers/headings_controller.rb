@@ -16,14 +16,14 @@ class HeadingsController < ApplicationController
     flash[:notice] = "received Exception #{e.message}"
     puts "received Exception #{e}"
   end
-      @heading = Heading.new
+    @heading = Heading.new
     @general_headings = Heading.where(category: 'General').paginate( page: params[:page],per_page: 17)
     @headings = Heading.all
-    @departmental_headings = Heading.where(category: 'Departmental SDBIP').paginate( page: params[:page],per_page: 17)
-    @toplayer_headings = Heading.where(category: 'Top Layer SDBIP').paginate( page: params[:page],per_page: 17)
-    @monthlycashflow_headings = Heading.where(category: 'Monthly Cashflows').paginate( page: params[:page],per_page: 17)
-    @capitalProjects_headings = Heading.where(category: 'Capital Projects').paginate( page: params[:page],per_page: 17)
-    @revenuebysource_headings = Heading.where(category: 'Revenue by source').paginate( page: params[:page],per_page: 17)
+    @departmental_headings = @headings.where(category: 'Departmental SDBIP').paginate( page: params[:page],per_page: 17)
+    @toplayer_headings = @headings.where(category: 'Top Layer SDBIP').paginate( page: params[:page],per_page: 17)
+    @monthlycashflow_headings = @headings.where(category: 'Monthly Cashflows').paginate( page: params[:page],per_page: 17)
+    @capitalProjects_headings = @headings.where(category: 'Capital Projects').paginate( page: params[:page],per_page: 17)
+    @revenuebysource_headings = @headings.where(category: 'Revenue by source').paginate( page: params[:page],per_page: 17)
   end
 
   def show
