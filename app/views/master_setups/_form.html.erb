@@ -24,16 +24,7 @@
   <%= f.label :address, "Address:" %>
   <%= f.text_area :address, :class => "form-control",:autocomplete=>"off",:required=>true %>
   </div>
-  <div class="col-lg-12">
-  <div class="row"><div class="col-lg-12">
-  <%= f.fields_for :regions do |regions_for_form| %>
-
-    <%= render 'regions_fields', f: regions_for_form %>
-
-<% end %>
-<%= link_to_add_fields "Add Region/Area", f, :regions %>
-</div></div>
-</div>
+  
   <div class="actions col-lg-3 col-lg-offset-5">
     <%= f.submit "Save", :class=> "btn  pull-right" %>
   </div>
