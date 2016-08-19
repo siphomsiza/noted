@@ -17,7 +17,7 @@
                                 <%= pie_chart @departmental_sdbips.group(:performance_standard).count,height: "300px",library: {pieSliceText:'value-and-percentage',is3D: true, colors: @colours} %>
                             </div>
                             <div class="col col-lg-6">
-                                <%= column_chart @departmental_sdbips.group(:performance_standard).count,height: "300px", colors: @colours %>
+                                <%= column_chart @departmental_sdbips.group(:performance_standard,:department_name).count,height: "300px", library:{ legend: {position: "bottom"}, isStacked:'percent',colors: @colours} %>
                             </div>
                         </div>
                     </div>
@@ -164,7 +164,7 @@
                                                             <%= pie_chart @chart_data.group(:performance_standard).count,height: "300px",library: {pieSliceText:'value-and-percentage',is3D: true, colors: @theme_colours} %>
                                                         </div>
                                                         <div class="col col-lg-6">
-                                                            <%= column_chart @chart_data.group(:performance_standard).count,height: "300px", stacked: 'percent', colors: @theme_colours %>
+                                                            <%= column_chart @chart_data.group(:performance_standard,:subdepartment_name).count,height: "300px", stacked: 'percent', library:{ legend: {position: "bottom"}, isStacked:'percent',colors: @theme_colours} %>
 
                                                         </div>
                                                     </div>
@@ -181,7 +181,7 @@
                                             <% if !@chart_data.blank? %>
                                                 <div class="row">
                                                     <div class="col col-lg-6">
-                                                        <%= pie_chart @chart_data.group(:performance_standard).count,width: "500px",height: "300px", stacked: 'percent', colors: @colours %>
+                                                        <%= pie_chart @chart_data.group(:performance_standard).count,width: "500px",height: "300px", stacked: 'percent',is3D: true, colors: @colours %>
                                                     </div>
                                                     <div class="col col-lg-6">
                                                         <%= column_chart @chart_data.group(:performance_standard).count,width: "500px",height: "300px", stacked: 'percent', colors: @colours %>
@@ -331,7 +331,7 @@
                                                                     <div class="row">
                                                                         <div class=" col col-lg-12">
                                                                             <div class="col col-lg-6">
-                                                                                <%= pie_chart @chart_data.group(:performance_standard).count,height: "300px",library: {pieSliceText:'value-and-percentage'}, colors: @theme_colours %>
+                                                                                <%= pie_chart @chart_data.group(:performance_standard).count,height: "300px",library: {pieSliceText:'value-and-percentage'},is3D: true, colors: @theme_colours %>
                                                                             </div>
                                                                             <div class="col col-lg-6">
                                                                                 <%= column_chart @chart_data.group(:performance_standard).count,height: "300px", stacked: 'percent', colors: @theme_colours %>

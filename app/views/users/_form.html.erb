@@ -128,7 +128,7 @@
       <label class="col col-lg-4 control-label" for="location">Location</label>
         <div class="controls col col-lg-8">
 
-            <%= f.select :location, Region.all.collect {|x| [x.name, x.name]}, {:include_blank => "Select Location"}, class: "form-control" %>
+            <%= f.select :location, Area.all.collect {|x| [x.name, x.name]}, {:include_blank => "Select Location"}, class: "form-control" %>
 
         </div><!-- controls -->
       </section><!-- row -->
@@ -241,7 +241,7 @@
 </div>
 <script>
 $(document).ready(function(){
- 
+
   $("#user_last_name").blur(function() {
     if($("#user_first_name").val() != " "){
       $mystring= $("#user_first_name").val();

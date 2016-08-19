@@ -163,7 +163,7 @@
                                 <%= pie_chart @chart_data.group(:performance_standard).count,height: "300px",library: {pieSliceText:'value-and-percentage',is3D: true, colors: @theme_colours} %>
                             </div>
                             <div class="col col-lg-6">
-                                <%= column_chart @chart_data.group(:performance_standard).count,height: "300px", stacked: 'percent', colors: @theme_colours %>
+                                <%= column_chart @chart_data.group(:performance_standard,:subdepartment_name).count, library:{ height: "300px", isStacked: 'percent', colors: @theme_colours, legend:{position: "bottom"}} %>
 
                             </div>
                         </div>
