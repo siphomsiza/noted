@@ -4,8 +4,8 @@ namespace :deploy do
     on primary fetch(:migration_role) do
       within release_path do
         with rails_env: fetch(:rails_env) do
-          execute :rake "mkhondo:db:reset"
-          execute :rake "sakhisizwe:db:reset"
+          execute :rake, "mkhondo:db:reset"
+          execute :rake, "sakhisizwe:db:reset"
         end
       end
     end
