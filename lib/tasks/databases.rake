@@ -8,7 +8,7 @@ namespace :mkhondo do
     Rails.application.config.paths['db/migrate'] = ['db/migrate']
     Rails.application.config.paths['db/seeds.rb'] = ['db_mkhondo/seeds.rb']
     if Rails.env.production?
-      Rails.application.config.paths[File.join(Rails.root,'../../shared/config','database')] = [File.join(Rails.root,'../../shared/config','mkhondo_db.yml')]
+      Rails.application.config.paths['../../shared/config/database'] = ['../../shared/config/mkhondo_db.yml']
     elsif !Rails.env.production?
       Rails.application.config.paths['config/database'] = ['config/mkhondo_db.yml']
     end
