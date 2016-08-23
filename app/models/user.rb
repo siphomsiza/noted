@@ -15,6 +15,8 @@ class User < ActiveRecord::Base
   before_save   :downcase_email
   before_create :create_activation_digest
   validates :firstname,presence: true, length: { maximum: 50 }
+  has_attached_file :avatar, :styles => { :medium => "300x300>",:small=> "140x140", :thumb => "60x60" }, :default_url => "/avatars/:style/missing.png"
+  validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
   #validates_presence_of  :title, :surname, :id_number, :gender, :race, :manager, :location, :mobile, :landline, :fax, :country_prefix, :occupational_category, :birthday
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, length: { maximum: 255 },
@@ -93,7 +95,7 @@ class User < ActiveRecord::Base
         time = time.split.inject { |count, unit| count.to_i.send(unit) }
       end
       delete_all "updated_at < '#{time.ago.to_s(:db)}'"
-    end
+  end
   private
 
     # Converts email to all lower-case.

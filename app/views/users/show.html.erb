@@ -12,7 +12,7 @@ $(function() {
         <tbody>
           <tr>
             <td align="right">
-              <%= gravatar_for @user, size: 50 %>
+              <%= image_tag(@user.avatar.url(:thumb), size: 50) %>
             </td>
             <td align="left">
               <strong><%= @user.firstname %></strong>

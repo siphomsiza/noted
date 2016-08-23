@@ -2,11 +2,9 @@ $(function(){
   $(document).on('change','#selected_department_edit', function(){
      var select_value = $(this).val();
      $('#current_department_edit').val(select_value);
-     alert( "Handler for .change() called." + select_value );
   });
   $(document).on('change','#selected_subdepartment_edit', function(){
      var select_value = $(this).val();
-     alert( "Handler for .change() called." + select_value );
      $('#current_subdepartment_edit').val(select_value);
 
   });

@@ -1,5 +1,18 @@
+$(document).ready(function(){
+  var closed_primary_periods = <%= $closed_primary.ids %>;
+  var closed_secondary_periods = <%= $closed_secondary.ids %>;
+  $.ajax({
+    type: "POST",
+    url: "/sdbip_time_periods/update_status",
+    data: {
+      primary_data_value: closed_primary_periods,
+      secondary_data_value: closed_secondary_periods
+    },
+    success: function (data) {},
+    error: function (data) {}
+  });
+});
 $(document).ready(function () {
-
 window.setTimeout(function() {
     $(".alert").fadeTo(1500, 0).slideUp(500, function(){
         $(this).remove();

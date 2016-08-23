@@ -18,9 +18,7 @@ namespace :mkhondo do
 namespace :db do
   task :reset => :set_custom_db_config_paths do
     Rake::Task['db:drop'].invoke
-    Rake::Task['db:create'].invoke
-    Rake::Task['db:migrate'].invoke
-    Rake::Task['db:seed'].invoke
+    Rake::Task['db:setup'].invoke
   end
   task :drop => :set_custom_db_config_paths do
       Rake::Task['db:drop'].invoke
@@ -72,9 +70,7 @@ namespace :sakhisizwe do
   namespace :db do
   task :reset => :set_custom_db_config_paths do
       Rake::Task['db:drop'].invoke
-      Rake::Task['db:create'].invoke
-      Rake::Task['db:migrate'].invoke
-      Rake::Task['db:seed'].invoke
+      Rake::Task['db:setup'].invoke
   end
   task :drop => :set_custom_db_config_paths do
       Rake::Task['db:drop'].invoke

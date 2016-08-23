@@ -395,7 +395,11 @@ class DepartmentalSdbip < ActiveRecord::Base
             audit_columns_headers.push('Corrective Measures')
         end
         if selected_columns.include?('Target, Actual and Results')
-            audit_columns.push('departmental_sdbip.annual_target')
+            audit_columns.push('')
+            audit_columns_headers.push('Target, Actual and Results')
+        end
+        if selected_columns.include?('Target')
+            audit_columns.push('departmental_sdbip.target')
             audit_columns_headers.push('Target')
         end
         if selected_columns.include?('Proof of evidence')
@@ -404,6 +408,10 @@ class DepartmentalSdbip < ActiveRecord::Base
         end
         if selected_columns.include?('KPI Target Type')
             audit_columns.push('departmental_sdbip.kpi_calculation_type.name')
+            audit_columns_headers.push('KPI Target Type')
+        end
+        if selected_columns.include?('KPI Target Type')
+            audit_columns.push('kpi_result.kpi_calculation_type.name')
             audit_columns_headers.push('KPI Target Type')
         end
         $selected_array_of_values = audit_columns
@@ -416,6 +424,17 @@ class DepartmentalSdbip < ActiveRecord::Base
         column_names = selected_columns
         array_of_values = $selected_array_of_values
         CSV.generate(options) do |csv|
+          if $selected_array_of_headers.include?("Target, Actual and Results")
+            first_headers = []
+            $selected_array_of_headers.each do |header|
+              if header == "Target Actual and Results"
+                first_headers.push('Target, Actual and Results')
+              elsif header != "Target, Actual & Results"
+                first_headers.push('')
+              end
+            end
+            csv << first_headers
+          end
             csv << column_names
             all.each do |departmental_sdbip|
               if departmental_sdbip.kpi_owner_id.blank?
@@ -448,6 +467,17 @@ class DepartmentalSdbip < ActiveRecord::Base
                     s.gsub!('departmental_sdbip.kpi_owner.name', '')
                   end
               end
+              if $selected_array_of_headers.include?("Target, Actual and Results")
+                if departmental_sdbip.kpi_results.any?
+                  departmental_sdbip.kpi_results.each do |kpi_result|
+                    #array_of_values.push('departmental_sdbip.kpi_result');
+                  end
+                elsif !departmental_sdbip.kpi_results.any?
+                  departmental_sdbip.kpi_results.each do |kpi_result|
+                    array_of_values.push('');
+                  end
+                end
+              end
               if !CapitalProject.exists?(departmental_sdbip_id: departmental_sdbip.id)
                     array_of_values.each do |s|
                         s.gsub!('departmental_sdbip.capital_project.mun_cp_ref', '')
@@ -458,6 +488,7 @@ class DepartmentalSdbip < ActiveRecord::Base
               end
 
            end
+
         end
     end
 
@@ -752,7 +783,11 @@ class DepartmentalSdbip < ActiveRecord::Base
             audit_columns_headers.push('Corrective Measures')
         end
         if selected_columns.include?('Target, Actual & Results')
-            audit_columns.push('departmental_sdbip.annual_target')
+            audit_columns.push('')
+            audit_columns_headers.push('Target, Actual and Results')
+        end
+        if selected_columns.include?('Target')
+            audit_columns.push('departmental_sdbip.target')
             audit_columns_headers.push('Target')
         end
         if selected_columns.include?('Proof of evidence')

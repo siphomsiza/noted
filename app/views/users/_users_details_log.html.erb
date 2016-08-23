@@ -19,7 +19,7 @@
     <tbody>
       <% @users.each do |user| %>
       <tr>
-        <td><%= gravatar_for user, size: 50 %></td>
+        <td><%= image_tag(user.avatar.url(:thumb), size: 50) %></td>
         <td><%= user.id %></td>
         <td><%= user.firstname %></td>
         <td><%= user.surname %></td>
