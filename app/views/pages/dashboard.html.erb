@@ -5,7 +5,7 @@
     <div class="row col col-lg-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3>Mkhondo Local Municipality's KPIs</h3>
+                <h3><%= $municipality_info.municipality %>'s KPIs</h3>
             </div>
             <div class="panel-body">
                 <div class="row">
@@ -14,7 +14,7 @@
                         <%= pie_chart @departmental_sdbips.group(:performance_standard).count,height: "300px",library: {legend: {position: "right"},is3D: true,pieSliceText:'value-and-percentage', colors: @colours} %>
                     </div>
                     <div class="col col-lg-6">
-                        <%= column_chart @departmental_sdbips.group(:performance_standard).count,height: "300px",width: '100%',library: { colors: @colours} %>
+                        <%= column_chart @departmental_sdbips.group(:performance_standard).count,height: "300px",width: '100%',library: { colors: @colours, isStacked: 'percent'} %>
                     </div>
                   </div>
                 </div>
@@ -23,7 +23,7 @@
                         <table class="table table-striped table-responsive table-hover table-bordered">
                             <tr>
                                 <th colspan="1" rowspan="2"></th>
-                                <th colspan="1" rowspan="2">Mkhondo Local Municipality</th>
+                                <th colspan="1" rowspan="2"><%= $municipality_info.municipality %></th>
                                 <th colspan="<%= @departments.count %>" scope="colgroup">Department</th>
                             </tr>
                             <tr>

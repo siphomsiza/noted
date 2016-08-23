@@ -16,7 +16,7 @@
       <% @user_activities.each do |user_activity| %>
 
       <tr>
-        <td></td>
+        <td><%= image_tag(user_activity.user.avatar.url(:thumb), size: 50) %></td>
         <td><% if !user_activity.user_id.blank? %><%= user_activity.id %><% end %></td>
         <td><% if !user_activity.user_id.blank? %><%= user_activity.user.firstname %><% end %></td>
         <td><% if !user_activity.user_id.blank? %><%= user_activity.user.surname %><% end %></td>

@@ -16,7 +16,7 @@
     <tbody>
      <% @terminated_users.each do |terminated_user| %>
       <tr>
-        <td><%= gravatar_for terminated_user, size: 50 %></td>
+        <td><%= image_tag(terminated_user.avatar.url(:thumb), size: 50) %></td>
         <td><%= terminated_user.id %></td>
         <td><%= terminated_user.firstname %></td>
         <td><%= terminated_user.surname %></td>

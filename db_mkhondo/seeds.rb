@@ -47,10 +47,7 @@ MasterSetup.create!(
   province: "Mpumalanga",
   latitude: -27.007764 ,
   longitude: 30.801888,
-  logo_name: 'mkhondo-logo',
-  logo_content_type: 'image/png',
   address: 'Mkhondo Municipality<br />Piet Retief, 2380<br />Mpumalanga, South Africa'
-
 )
 end
 $i=0

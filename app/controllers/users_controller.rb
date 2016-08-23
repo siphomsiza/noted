@@ -75,10 +75,10 @@ class UsersController < ApplicationController
     end
 
     def edit_active_user
-      end
+    end
 
     def edit_user_profile
-      end
+    end
 
     def create
         @user = User.new(user_params)
@@ -98,11 +98,7 @@ class UsersController < ApplicationController
     def update
         if @user.update_attributes(user_params)
             flash[:success] = 'User details updated successfully'
-            if admin_user && !correct_user
-                redirect_to :back
-            elsif !admin_user && correct_user
-                redirect_to introduction_url
-            end
+            redirect_to :back
         else
             flash[:danger] = 'Profile not updated.'
             redirect_to :back
@@ -212,7 +208,7 @@ class UsersController < ApplicationController
                                      :user_name, :admin, :employee_number, :employee_date, :birth_date, :username, :id_number, :job_title, :department, :location, :manager,
                                      :country_prefix, :landline, :mobile, :fax, :gender, :race, :occupational_category,
                                      :disabled, :birthday, :email, :password,
-                                     :password_confirmation, roles_attributes: [:name, :description, :edit_right, :delete_right, :create_right, :approve_right, :view_right, :deactivate_right, :update_right, :user_id])
+                                     :password_confirmation, :avatar, roles_attributes: [:name, :description, :edit_right, :delete_right, :create_right, :approve_right, :view_right, :deactivate_right, :update_right, :user_id])
     end
 
     #

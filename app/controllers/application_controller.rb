@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
     if !current_user.blank?
       @activity = ActivityLog.new
       @activity.user_id = current_user.id
-      @activity.admin = current_user.admin
+      @activity.admin = current_user.admin || current_user.super_admin
       @activity.browser = request.env['HTTP_USER_AGENT']
       @activity.ip_address = request.env['REMOTE_ADDR']
       @activity.controller = controller_name
