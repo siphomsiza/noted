@@ -3,7 +3,6 @@ class DepartmentalSdbip < ActiveRecord::Base
     # tracked owner: ->(controller, model) { controller && controller.current_user }
     ActiveRecord::Base.establish_connection($current_session_db)
     belongs_to :department
-    has_many :activities
     belongs_to :subdepartment
     belongs_to :kpi_owner
     belongs_to :predetermined_objective
@@ -824,30 +823,24 @@ class DepartmentalSdbip < ActiveRecord::Base
                 @sdbips = @sdbips.where(['kpi_type_id = ?', kpi_type_id])
             end
         end
-        if !start_date.blank? && start_date.length > 1
-
-        end
-        if !end_date.blank? && end_date.length > 1
-
-        end
         @departmental_sdbips = @sdbips
     end
 
     def self.search_kpi(kpi_id, department_id, subdepartment_id, kpi_type_id, start_date, end_date)
-        if department_id && subdepartment_id && kpi_type_id && start_date && end_date
-            where(['kpi_owner_id = ? AND department_id = ? AND subdepartment_id = ? AND kpi_type_id = ? AND start_date >= ? AND end_date <= ?', kpi_id, department_id, subdepartment_id, kpi_type_id, start_date, end_date])
+        if department_id && subdepartment_id && kpi_type_id
+            where(['kpi_owner_id = ? AND department_id = ? AND subdepartment_id = ? AND kpi_type_id = ?', kpi_id, department_id, subdepartment_id, kpi_type_id])
         end
     end
 
     def self.search_departmental_kpis(department_id, subdepartment_id, kpi_type_id, start_date, end_date)
-        if department_id && subdepartment_id && kpi_type_id && start_date && end_date
-            where(['department_id = ? AND subdepartment_id = ? AND kpi_type_id = ? AND start_date >= ? AND end_date <= ?', department_id, subdepartment_id, kpi_type_id, start_date, end_date])
+        if department_id && subdepartment_id && kpi_type_id
+            where(['department_id = ? AND subdepartment_id = ? AND kpi_type_id = ?', department_id, subdepartment_id, kpi_type_id])
         end
     end
 
     def self.search_subdepartment_kpis(department_id, subdepartment_id, kpi_type_id, start_date, end_date)
-        if department_id && subdepartment_id && kpi_type_id && start_date && end_date
-            where(['department_id = ? AND subdepartment_id = ? AND kpi_type_id = ? AND start_date >= ? AND end_date <= ?', department_id, subdepartment_id, kpi_type_id, start_date, end_date])
+        if department_id && subdepartment_id && kpi_type_id
+            where(['department_id = ? AND subdepartment_id = ? AND kpi_type_id = ?', department_id, subdepartment_id, kpi_type_id])
         end
     end
 

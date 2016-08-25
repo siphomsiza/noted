@@ -10,7 +10,25 @@
     </tr>
     <tr>
         <th>Result</th>
-        <td><%= kpi_result.kpi_performance_standard %></td>
+        <td>
+        <% if kpi_result.kpi_performance_standard == "KPI Not Met" %>
+                        <span class="glyphicon glyphicon-stop red">
+                <% end %>
+                <% if kpi_result.kpi_performance_standard == "KPI Almost Met" %>
+                            <span class="glyphicon glyphicon-stop orange">
+                    <% end %>
+                <% if kpi_result.kpi_performance_standard == "KPI Met" %>
+                                <span class="glyphicon glyphicon-stop limegreen">
+                    <% end %>
+             <% if kpi_result.kpi_performance_standard == "KPI Well Met" %>
+                            <span class="glyphicon glyphicon-stop darkgreen">
+                <% end %>
+                <% if kpi_result.kpi_performance_standard == "KPI Extremely Well Met" %>
+                        <span class="glyphicon glyphicon-stop darkblue">
+                    <% end %>
+                </span>
+        <%= kpi_result.kpi_performance_standard %>
+        </td>
     </tr>
     <tr>
         <th>Performance Comment(s)</th>
@@ -19,6 +37,15 @@
     <tr>
         <th>Corrective Measure(s)</th>
         <td><%= kpi_result.corrective_measures %></td>
+    </tr>
+    <tr>
+        <th>Update User:</th>
+        <td>
+
+            <%=  kpi_result.user.firstname %>&nbsp;<%= kpi_result.user.surname %>&nbsp;on&nbsp;
+            <%= kpi_result.updated_at.strftime("%d %B %Y") %>
+            
+        </td>
     </tr>
     <% end %>
 </table>

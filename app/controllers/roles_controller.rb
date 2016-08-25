@@ -13,7 +13,7 @@ class RolesController < ApplicationController
       #@response.units.temperature
       #@response.condition.temp
 
-  rescue SignalException => e
+  rescue SocketError => e
     flash[:notice] = "received Exception #{e.message}"
     puts "received Exception #{e}"
   end

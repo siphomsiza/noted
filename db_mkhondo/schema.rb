@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160823101209) do
+ActiveRecord::Schema.define(version: 20160824071947) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,10 +57,13 @@ ActiveRecord::Schema.define(version: 20160823101209) do
   end
 
   create_table "attachments", force: :cascade do |t|
-    t.integer  "kpi_result_id", null: false
-    t.string   "poe"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.integer  "kpi_result_id",    null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.string   "poe_file_name"
+    t.string   "poe_content_type"
+    t.integer  "poe_file_size"
+    t.datetime "poe_updated_at"
   end
 
   create_table "capital_projects", force: :cascade do |t|

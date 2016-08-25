@@ -11,10 +11,10 @@
                 <div class="row">
                   <div class="col col-lg-12">
                     <div class="col col-lg-6">
-                        <%= pie_chart @departmental_sdbips.group(:performance_standard).count,height: "300px",library: {legend: {position: "right"},is3D: true,pieSliceText:'value-and-percentage', colors: @colours} %>
+                        <%= pie_chart @departmental_sdbips.group(:performance_standard).count,height: "350px",width: '100%',library: {legend: {position: "right"},is3D: true,pieSliceText:'value-and-percentage', colors: @colours} %>
                     </div>
                     <div class="col col-lg-6">
-                        <%= column_chart @departmental_sdbips.group(:performance_standard).count,height: "300px",width: '100%',library: { colors: @colours, isStacked: 'percent'} %>
+                        <%= column_chart @departmental_sdbips.group(:performance_standard,:department_name).count,height: "350px",width: '100%',library: {legend:{position: "bottom"}, colors: @colours, isStacked: 'percent'} %>
                     </div>
                   </div>
                 </div>
@@ -160,10 +160,10 @@
                     <h4 align="center"><%= department.name %>
                         <div class="row">
                             <div class="col col-lg-6">
-                                <%= pie_chart @chart_data.group(:performance_standard).count,height: "300px",library: {pieSliceText:'value-and-percentage',is3D: true, colors: @theme_colours} %>
+                                <%= pie_chart @chart_data.group(:performance_standard).count,height: "350px",width: '100%',library: {pieSliceText:'value-and-percentage',is3D: true, colors: @theme_colours} %>
                             </div>
                             <div class="col col-lg-6">
-                                <%= column_chart @chart_data.group(:performance_standard,:subdepartment_name).count, library:{ height: "300px", isStacked: 'percent', colors: @theme_colours, legend:{position: "bottom"}} %>
+                                <%= column_chart @chart_data.group(:performance_standard,:subdepartment_name).count,height: "350px",width: '100%',library:{ isStacked: 'percent', colors: @theme_colours, legend:{position: "bottom"}} %>
 
                             </div>
                         </div>

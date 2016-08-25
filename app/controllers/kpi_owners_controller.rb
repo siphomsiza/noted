@@ -71,6 +71,6 @@ class KpiOwnersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def kpi_owner_params
-      params.require(:kpi_owner).permit(:name,:user_id, :title,:can_update)
+      params.require(:kpi_owner).permit(:name,:user_id,:can_update)
     end
 end
