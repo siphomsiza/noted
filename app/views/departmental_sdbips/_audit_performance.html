@@ -30,6 +30,18 @@
                 </div>
             </div>
         </div>
+        <div class="modal-footer">
+        <div class="row">
+        <div class="col col-lg-10 col-lg-offset-1">
+            <h5>Assurance Review History</h5>
+                <% if @departmental_sdbip.assurances.any? %>
+                    <%= render 'assurance_review' %>
+                <% else %>
+                    <p>No Assurance Review associated with KPI.</p>
+                <% end %>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <script>

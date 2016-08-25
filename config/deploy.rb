@@ -38,11 +38,6 @@ set :keep_releases, 5
 set :rvm_ruby_version, '2.3.0'
 
 namespace :deploy do
-  desc "Symlink shared config files"
-  task :symlink_config_files do
-      run "#{ try_sudo } ln -s #{ deploy_to }/shared/config/mkhondo_db.yml #{ current_path }/config/mkhondo_db.yml"
-      run "#{ try_sudo } ln -s #{ deploy_to }/shared/config/sakhisizwe_db.yml #{ current_path }/config/sakhisizwe_db.yml"
-  end
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
       # Here we can do anything such as:
