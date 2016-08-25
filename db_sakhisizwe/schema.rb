@@ -132,7 +132,11 @@ ActiveRecord::Schema.define(version: 20160824071947) do
     t.string   "baseline"
     t.string   "budget"
     t.string   "target"
-    t.decimal  "annual_target",                   default: 0.0
+    t.string "first_quarter_target"
+    t.string "second_quarter_target"
+    t.string "third_quarter_target"
+    t.string "fourth_quarter_target"
+    t.decimal  "annual_target",                   default: 0.00
     t.decimal  "revised_target"
     t.text     "performance_comments"
     t.text     "corrective_measures"
@@ -177,7 +181,11 @@ ActiveRecord::Schema.define(version: 20160824071947) do
     t.string   "baseline"
     t.string   "budget"
     t.string   "target"
-    t.decimal  "annual_target",                   default: 0.0
+    t.string "first_quarter_target"
+    t.string "second_quarter_target"
+    t.string "third_quarter_target"
+    t.string "fourth_quarter_target"
+    t.decimal  "annual_target",                   default: 0.00
     t.decimal  "revised_target"
     t.text     "performance_comments"
     t.text     "corrective_measures"

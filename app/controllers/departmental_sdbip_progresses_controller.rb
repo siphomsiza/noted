@@ -107,7 +107,7 @@ class DepartmentalSdbipProgressesController < ApplicationController
         @periods = KpiResult.select(:period).distinct
         @departmental_sdbips = DepartmentalSdbip.order(performance_standard: :asc).includes(:kpi_results)
         @departments_sdibps = @departmental_sdbips.select(:performance_standard).uniq
-        @departmental_sdbips = @departmental_sdbips.paginate(page: params[:page], per_page: 10)
+        @departmental_sdbips = @departmental_sdbips.paginate(page: params[:page], per_page: 15).order(id: :asc)
         $colors = []
         @departments_sdibps.each do |color|
             if color.performance_standard.include?('KPI Almost Met')
