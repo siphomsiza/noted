@@ -10,20 +10,19 @@ class DepartmentalSdbipsController < ApplicationController
           @response = @client.fetch(1_582_504)
           @doc = @response.doc
           @forecast = @doc['item']['forecast']
-      rescue SignalException => e
+      rescue SocketError => e
           flash[:notice] = "received Exception #{e.message}"
           puts "received Exception #{e}"
       end
-        @periods = KpiResult.select(:period).distinct
         @departmental_sdbip = DepartmentalSdbip.new
         @departments = Department.includes(:subdepartments)
-        @deleted_kpis = DepartmentalKpi.paginate(page: params[:page], per_page: 10)
+        @deleted_kpis = DepartmentalKpi.paginate(page: params[:page], per_page: 15)
         @departmental_sdbips_to_file = DepartmentalSdbip.order(:department_id, :subdepartment_id)
         # @subdepartments = Subdepartment.where("department_id = ?", Department.first.id)
         @kpitypes = KpiType.all
         if params[:subdepartment_id]
             if !current_user.role.blank? || current_user.admin? || current_user.super_admin?
-
+                    @periods = KpiResult.select(:period).where("extract(month from period) >= ? AND extract(year from period) >= ? AND extract(month from period) <= ? AND extract(year from period) <= ?" ,params[:start_date].to_date.month,params[:start_date].to_date.year, params[:end_date].to_date.month,params[:end_date].to_date.year).distinct
                 if current_user.admin? || current_user.super_admin? || current_user.role.audit_log_reporting? || current_user.role.top_layer_administrator? || current_user.role.assurance_provider? || current_user.role.secondary_time_period? || current_user.role.finance_admin?
                     @departmental_sdbips = DepartmentalSdbip.search(params[:subdepartment_id], params[:kpi_type_id], params[:start_date], params[:end_date])
                 end
@@ -43,7 +42,7 @@ class DepartmentalSdbipsController < ApplicationController
                     @departmental_sdbips = @departmental_sdbips.where(department_id: department_id) unless @departmental_sdbips.blank?
                 end
                 if !@departmental_sdbips.blank?
-                    @departmental_sdbips = @departmental_sdbips.paginate(per_page: 10, page: params[:page]).includes(:department, :subdepartment, :kpi_type, :kpi_owner, :mscore_classification, :national_outcome, :strategic_objective, :risk_rating, :kpa, :ndp_objective, :capital_project, :kpi_concept, :area, :ward, :reporting_category, :kpi_calculation_type).order(id: :asc)
+                    @departmental_sdbips = @departmental_sdbips.includes(:department, :subdepartment, :kpi_type, :kpi_owner, :mscore_classification, :national_outcome, :strategic_objective, :risk_rating, :kpa, :ndp_objective, :capital_project, :kpi_concept, :area, :ward, :reporting_category, :kpi_calculation_type).paginate(per_page: 15, page: params[:page]).order(id: :asc)
                 else
                     @departmental_sdbips = nil
                 end
@@ -51,6 +50,7 @@ class DepartmentalSdbipsController < ApplicationController
         elsif !params[:subdepartment_id]
 
             if !current_user.role.blank? || current_user.admin? || current_user.super_admin?
+                @periods = KpiResult.select(:period).distinct
                 @departmental_sdbips = DepartmentalSdbip.all
                 if current_user.admin? || current_user.super_admin? || current_user.role.audit_log_reporting? || current_user.role.top_layer_administrator? || current_user.role.assurance_provider? || current_user.role.secondary_time_period? || current_user.role.finance_admin?
                     @departmental_sdbips = @departmental_sdbips
@@ -59,7 +59,7 @@ class DepartmentalSdbipsController < ApplicationController
                     kpi_id = nil
                     kpi_id = current_user.kpi_owners.ids
                     @departmental_sdbips = @departmental_sdbips.where(kpi_owner_id: kpi_id)
-                 end
+                end
                 if !current_user.subdepartmental_administrator.blank? && current_user.kpi_owners.blank?
                     subdepartment_id = nil
                     subdepartment_id = current_user.subdepartmental_administrator.subdepartment_id
@@ -74,18 +74,18 @@ class DepartmentalSdbipsController < ApplicationController
                     @departmental_sdbips = nil
                 end
                 if !@departmental_sdbips.blank?
-                    @departmental_sdbips = @departmental_sdbips.paginate(per_page: 10, page: params[:page]).includes(:capital_project, :department, :subdepartment, :kpi_type, :kpi_owner, :kpi_concept, :kpi_calculation_type, :mscore_classification, :kpa, :strategic_objective, :national_outcome, :ward, :area, :reporting_category, :ndp_objective, :risk_rating).order(id: :asc)
+                    @departmental_sdbips = @departmental_sdbips.paginate(per_page: 15, page: params[:page]).includes(:capital_project, :department, :subdepartment, :kpi_type, :kpi_owner, :kpi_concept, :kpi_calculation_type, :mscore_classification, :kpa, :strategic_objective, :national_outcome, :ward, :area, :reporting_category, :ndp_objective, :risk_rating,:kpi_results).order(id: :asc)
                 else
                     @departmental_sdbips = nil
                 end
-             end
+            end
         end
         respond_to do |format|
             format.html
             format.csv { send_data @departmental_sdbips_to_file.to_csv }
             format.xls { send_data @departmental_sdbips_to_file.to_csv(col_sep: "\t") }
         end
-  end
+    end
 
     def restore_kpi
         @deleted_kpi = DepartmentalKpi.find(params[:id])
@@ -220,7 +220,7 @@ class DepartmentalSdbipsController < ApplicationController
 
     def set_departmental_sdbip
         @departmental_sdbip = DepartmentalSdbip.find(params[:id])
-      end
+    end
 
     # Confirms an admin user.
     def admin_user

@@ -16,7 +16,7 @@
     <tbody>
      <% @user_login_attempts.each do |user_login_attempt| %>
       <tr>
-        <td><%= gravatar_for user_login_attempt, size: 50 %></td>
+        <td><%= image_tag(user_login_attempt.avatar.url(:thumb), size: 50) %></td>
         <td><%= user_login_attempt.id %></td>
         <td><%= user_login_attempt.firstname %></td>
         <td><%= user_login_attempt.surname %></td>

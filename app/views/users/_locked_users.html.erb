@@ -16,7 +16,7 @@
     <tbody>
       <% @locked_users.each do |locked_user| %>
       <tr>
-        <td><%= gravatar_for locked_user, size: 50 %></td>
+        <td><%= image_tag(locked_user.avatar.url(:thumb), size: 50) %></td>
         <td><%= locked_user.id %></td>
         <td><%= locked_user.firstname %></td>
         <td><%= locked_user.surname %></td>

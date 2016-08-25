@@ -6,11 +6,16 @@
 <div class="modal-body">
   <div class="col-lg-10 col-md-offset-1">
 
-    <%= form_for(@user, :id=>"createUserForm") do |f| %>
+    <%= form_for @user, :id=>"createUserForm", html: { multipart: true } do |f| %>
   <%= render 'shared/error_messages', object: @user %><br/>
     <fieldset id="userinfo">
       <legend>User Info</legend>
-
+      <section class="row">
+      <label class="col col-lg-4 control-label" for="avatar">Avatar</label>
+        <div class="controls col col-lg-8">
+          <%= f.file_field :avatar, :class=>'form-control' %>
+        </div><!-- controls -->
+      </section><!-- row -->
       <section class="row">
       <label class="col col-lg-4 control-label" for="title">Title</label>
         <div class="controls col col-lg-8">

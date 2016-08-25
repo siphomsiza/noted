@@ -3,7 +3,6 @@ class DepartmentalSdbip < ActiveRecord::Base
     # tracked owner: ->(controller, model) { controller && controller.current_user }
     ActiveRecord::Base.establish_connection($current_session_db)
     belongs_to :department
-    has_many :activities
     belongs_to :subdepartment
     belongs_to :kpi_owner
     belongs_to :predetermined_objective
@@ -395,7 +394,11 @@ class DepartmentalSdbip < ActiveRecord::Base
             audit_columns_headers.push('Corrective Measures')
         end
         if selected_columns.include?('Target, Actual and Results')
-            audit_columns.push('departmental_sdbip.annual_target')
+            audit_columns.push('')
+            audit_columns_headers.push('Target, Actual and Results')
+        end
+        if selected_columns.include?('Target')
+            audit_columns.push('departmental_sdbip.target')
             audit_columns_headers.push('Target')
         end
         if selected_columns.include?('Proof of evidence')
@@ -404,6 +407,10 @@ class DepartmentalSdbip < ActiveRecord::Base
         end
         if selected_columns.include?('KPI Target Type')
             audit_columns.push('departmental_sdbip.kpi_calculation_type.name')
+            audit_columns_headers.push('KPI Target Type')
+        end
+        if selected_columns.include?('KPI Target Type')
+            audit_columns.push('kpi_result.kpi_calculation_type.name')
             audit_columns_headers.push('KPI Target Type')
         end
         $selected_array_of_values = audit_columns
@@ -416,6 +423,17 @@ class DepartmentalSdbip < ActiveRecord::Base
         column_names = selected_columns
         array_of_values = $selected_array_of_values
         CSV.generate(options) do |csv|
+          if $selected_array_of_headers.include?("Target, Actual and Results")
+            first_headers = []
+            $selected_array_of_headers.each do |header|
+              if header == "Target Actual and Results"
+                first_headers.push('Target, Actual and Results')
+              elsif header != "Target, Actual & Results"
+                first_headers.push('')
+              end
+            end
+            csv << first_headers
+          end
             csv << column_names
             all.each do |departmental_sdbip|
               if departmental_sdbip.kpi_owner_id.blank?
@@ -448,6 +466,17 @@ class DepartmentalSdbip < ActiveRecord::Base
                     s.gsub!('departmental_sdbip.kpi_owner.name', '')
                   end
               end
+              if $selected_array_of_headers.include?("Target, Actual and Results")
+                if departmental_sdbip.kpi_results.any?
+                  departmental_sdbip.kpi_results.each do |kpi_result|
+                    #array_of_values.push('departmental_sdbip.kpi_result');
+                  end
+                elsif !departmental_sdbip.kpi_results.any?
+                  departmental_sdbip.kpi_results.each do |kpi_result|
+                    array_of_values.push('');
+                  end
+                end
+              end
               if !CapitalProject.exists?(departmental_sdbip_id: departmental_sdbip.id)
                     array_of_values.each do |s|
                         s.gsub!('departmental_sdbip.capital_project.mun_cp_ref', '')
@@ -458,6 +487,7 @@ class DepartmentalSdbip < ActiveRecord::Base
               end
 
            end
+
         end
     end
 
@@ -752,7 +782,11 @@ class DepartmentalSdbip < ActiveRecord::Base
             audit_columns_headers.push('Corrective Measures')
         end
         if selected_columns.include?('Target, Actual & Results')
-            audit_columns.push('departmental_sdbip.annual_target')
+            audit_columns.push('')
+            audit_columns_headers.push('Target, Actual and Results')
+        end
+        if selected_columns.include?('Target')
+            audit_columns.push('departmental_sdbip.target')
             audit_columns_headers.push('Target')
         end
         if selected_columns.include?('Proof of evidence')
@@ -789,30 +823,24 @@ class DepartmentalSdbip < ActiveRecord::Base
                 @sdbips = @sdbips.where(['kpi_type_id = ?', kpi_type_id])
             end
         end
-        if !start_date.blank? && start_date.length > 1
-
-        end
-        if !end_date.blank? && end_date.length > 1
-
-        end
         @departmental_sdbips = @sdbips
     end
 
     def self.search_kpi(kpi_id, department_id, subdepartment_id, kpi_type_id, start_date, end_date)
-        if department_id && subdepartment_id && kpi_type_id && start_date && end_date
-            where(['kpi_owner_id = ? AND department_id = ? AND subdepartment_id = ? AND kpi_type_id = ? AND start_date >= ? AND end_date <= ?', kpi_id, department_id, subdepartment_id, kpi_type_id, start_date, end_date])
+        if department_id && subdepartment_id && kpi_type_id
+            where(['kpi_owner_id = ? AND department_id = ? AND subdepartment_id = ? AND kpi_type_id = ?', kpi_id, department_id, subdepartment_id, kpi_type_id])
         end
     end
 
     def self.search_departmental_kpis(department_id, subdepartment_id, kpi_type_id, start_date, end_date)
-        if department_id && subdepartment_id && kpi_type_id && start_date && end_date
-            where(['department_id = ? AND subdepartment_id = ? AND kpi_type_id = ? AND start_date >= ? AND end_date <= ?', department_id, subdepartment_id, kpi_type_id, start_date, end_date])
+        if department_id && subdepartment_id && kpi_type_id
+            where(['department_id = ? AND subdepartment_id = ? AND kpi_type_id = ?', department_id, subdepartment_id, kpi_type_id])
         end
     end
 
     def self.search_subdepartment_kpis(department_id, subdepartment_id, kpi_type_id, start_date, end_date)
-        if department_id && subdepartment_id && kpi_type_id && start_date && end_date
-            where(['department_id = ? AND subdepartment_id = ? AND kpi_type_id = ? AND start_date >= ? AND end_date <= ?', department_id, subdepartment_id, kpi_type_id, start_date, end_date])
+        if department_id && subdepartment_id && kpi_type_id
+            where(['department_id = ? AND subdepartment_id = ? AND kpi_type_id = ?', department_id, subdepartment_id, kpi_type_id])
         end
     end
 

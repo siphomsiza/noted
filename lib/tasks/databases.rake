@@ -7,19 +7,14 @@ namespace :mkhondo do
     Rails.application.config.paths['db'] = ['db_mkhondo']
     Rails.application.config.paths['db/migrate'] = ['db/migrate']
     Rails.application.config.paths['db/seeds.rb'] = ['db_mkhondo/seeds.rb']
-    if Rails.env.production?
-      Rails.application.config.paths['../shared/config/database'] = ['../shared/config/mkhondo_db.yml']
-    elsif !Rails.env.production?
-      Rails.application.config.paths['config/database'] = ['config/mkhondo_db.yml']
-    end
+    Rails.application.config.paths['config/database'] = ['config/mkhondo_db.yml']
+
     end
 
 namespace :db do
   task :reset => :set_custom_db_config_paths do
     Rake::Task['db:drop'].invoke
-    Rake::Task['db:create'].invoke
-    Rake::Task['db:migrate'].invoke
-    Rake::Task['db:seed'].invoke
+    Rake::Task['db:setup'].invoke
   end
   task :drop => :set_custom_db_config_paths do
       Rake::Task['db:drop'].invoke
@@ -61,19 +56,13 @@ namespace :sakhisizwe do
     Rails.application.config.paths['db'] = ['db_sakhisizwe']
     Rails.application.config.paths['db/migrate'] = ['db/migrate']
     Rails.application.config.paths['db/seeds.rb'] = ['db_sakhisizwe/seeds.rb']
-    if Rails.env.production?
-      Rails.application.config.paths['../shared/config/database'] = ['../shared/config/sakhisizwe_db.yml']
-    elsif !Rails.env.production?
-      Rails.application.config.paths['config/database'] = ['config/sakhisizwe_db.yml']
-    end
+    Rails.application.config.paths['config/database'] = ['config/sakhisizwe_db.yml']
     end
 
   namespace :db do
   task :reset => :set_custom_db_config_paths do
       Rake::Task['db:drop'].invoke
-      Rake::Task['db:create'].invoke
-      Rake::Task['db:migrate'].invoke
-      Rake::Task['db:seed'].invoke
+      Rake::Task['db:setup'].invoke
   end
   task :drop => :set_custom_db_config_paths do
       Rake::Task['db:drop'].invoke

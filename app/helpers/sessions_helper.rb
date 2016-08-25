@@ -21,8 +21,14 @@ module SessionsHelper
     end
     if company_code == "DEV001"
       ActiveRecord::Base.clear_all_connections!
-      ActiveRecord::Base.establish_connection(:development)
-      $logged_in_database = :development
+      if Rails.env.production?
+        ActiveRecord::Base.establish_connection(:production)
+        $logged_in_database = :production
+      end
+      if Rails.env.development?
+        ActiveRecord::Base.establish_connection(:development)
+        $logged_in_database = :development
+      end
       $municipality_info = MasterSetup.first
     end
     if company_code == "SAK001"

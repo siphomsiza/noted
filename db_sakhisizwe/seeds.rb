@@ -44,7 +44,6 @@ end
 MasterSetup.create!(
   municipality: "Sakhisizwe Local Municipality",
   logo: File.open(File.join(Rails.root,'/app/assets/images','sakhisizwe-logo.jpeg')),# File.open("../app/assets/images/mkhondo-logo.png"),
-  logo_content_type: 'image/jpeg',
   province: "Eastern Cape",
   address: 'Sakhisizwe Municipality<br/>15 Maclear Rd,<br/>Elliot,<br/> 5460<br/>Eastern Cape, South Africa',
   latitude: -31.333819,

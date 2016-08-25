@@ -95,6 +95,7 @@
 			<td class="past-year-performance"><%= departmental_sdbip.past_year_performance %></td>
 
 			<td class="top-layer-ref"><%= departmental_sdbip.top_layer_kpi_ref %></td>
+			<% @periods.each do |period| %>
 			<% if departmental_sdbip.kpi_results.any? %>
 			<% departmental_sdbip.kpi_results.where(departmental_sdbip: departmental_sdbip.id).each do |kpi_result| %>
 			<td class="target-actual-and-results"><%= kpi_result.target %></td>
@@ -122,6 +123,7 @@
 				<td class="target-actual-and-results"></td>
 				<td class="target-actual-and-results"></td>
 				<td class="target-actual-and-results"></td>
+			<% end %>
 			<% end %>
 		</tr>
 		<tbody>

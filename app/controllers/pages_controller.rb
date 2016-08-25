@@ -10,16 +10,12 @@ class PagesController < ApplicationController
 
   def about
     begin
-
         @client = YahooWeather::Client.new
         @response = @client.fetch(1582504)
         @doc = @response.doc
         @forecast = @doc["item"]["forecast"]
-      #@response = @client.fetch_by_location('New York')
-      #@response.units.temperature
-      #@response.condition.temp
 
-   rescue SignalException => e
+   rescue SocketError => e
     flash[:notice] = "received Exception #{e.message}"
     puts "received Exception #{e}"
     end
@@ -35,7 +31,7 @@ class PagesController < ApplicationController
       #@response.units.temperature
       #@response.condition.temp
 
-    rescue SignalException => e
+    rescue SocketError => e
     flash[:notice] = "received Exception #{e.message}"
     puts "received Exception #{e}"
     end
@@ -86,10 +82,10 @@ class PagesController < ApplicationController
       #@response.units.temperature
       #@response.condition.temp
 
-  rescue SignalException => e
-    flash[:notice] = "received Exception #{e.message}"
-    puts "received Exception #{e}"
-  end
+    rescue SocketError => e
+      flash[:notice] = "received Exception #{e.message}"
+      puts "received Exception #{e}"
+    end
 
   end
   private
