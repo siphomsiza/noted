@@ -181,10 +181,11 @@
                                             <% if !@chart_data.blank? %>
                                                 <div class="row">
                                                     <div class="col col-lg-6">
-                                                        <%= pie_chart @chart_data.group(:performance_standard).count,width: "500px",height: "300px", stacked: 'percent',is3D: true, colors: @colours %>
+                                                        <%= pie_chart @chart_data.group(:performance_standard).count,width: "500px",height: "300px",is3D: true, colors: @colours %>
                                                     </div>
                                                     <div class="col col-lg-6">
-                                                        <%= column_chart @chart_data.group(:performance_standard).count,width: "500px",height: "300px", stacked: 'percent', colors: @colours %>
+                                                    <% puts @colours %>
+                                                        <%= column_chart @chart_data.group(:performance_standard).count,width: "500px",height: "300px",library:{ isStacked: 'percent',colors: @colours} %>
                                                     </div>
                                                 </div>
                                                 <% end %>

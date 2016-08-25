@@ -8,14 +8,14 @@ class SdbipTimePeriodsController < ApplicationController
       @response = @client.fetch(1582504)
       @doc = @response.doc
       @forecast = @doc["item"]["forecast"]
-    rescue SignalException => e
+    rescue SocketError => e
         flash[:notice] = "received Exception #{e.message}"
         puts "received Exception #{e}"
     end
     @sdbip_time_period = SdbipTimePeriod.new
     @sdbip_time_periods = SdbipTimePeriod.all.order(id: :asc)
-    @closed_primary = @sdbip_time_periods.select(:id).where("primary_closure <= ? AND primary_status = ?",Date.today,true)
-    @closed_secondary = @sdbip_time_periods.select(:id).where("secondary_closure <= ? AND secondary_status = ?",Date.today,true)
+    $closed_primary = @sdbip_time_periods.select(:id).where("primary_closure <= ? AND primary_status = ?",Date.today,true)
+    $closed_secondary = @sdbip_time_periods.select(:id).where("secondary_closure <= ? AND secondary_status = ?",Date.today,true)
   end
 
   def show

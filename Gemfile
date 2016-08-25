@@ -41,7 +41,7 @@ gem 'newrelic_rpm'
 gem 'scout_apm'
 gem 'airbrake'
 gem 'god'
-
+gem "paperclip", "~> 5.0.0"
 group :development, :test do
   gem 'byebug',                         '8.2.2'
   gem 'web-console',                    '3.1.1'

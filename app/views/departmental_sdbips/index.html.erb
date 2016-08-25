@@ -99,7 +99,7 @@
 							<label class="col control-label">When:</label>&nbsp;
 							<div class="form-group">
 								<div class="input-group date" data-provide="datepicker" data-date-format="M-yyyy" data-date-start-view="months" data-date-min-view-mode="months">
-									<%= text_field_tag :start_date, nil, class: "form-control" %>
+									<%= text_field_tag :start_date, nil, class: "form-control",:required=>true %>
 									<span class="input-group-addon">
 										<span class="glyphicon glyphicon-calendar"></span>
 									</span>
@@ -110,7 +110,7 @@
 							<label class="col control-label">To:</label>&nbsp;
 							<div class="form-group">
 								<div class="input-group date" data-provide="datepicker" data-date-format="M-yyyy" data-date-start-view="months" data-date-min-view-mode="months">
-									<%= text_field_tag :end_date, nil, class: "form-control" %>
+									<%= text_field_tag :end_date, nil, class: "form-control",:required=>true %>
 									<span class="input-group-addon">
 										<span class="glyphicon glyphicon-calendar"></span>
 									</span>

@@ -11,7 +11,6 @@
                             <% if @departmental_sdbip.kpi_results.any? %>
                                 <% @departmental_sdbip.kpi_results.each do |result| %>
                                     <% @result = result %>
-
                                             <%= render 'audited_results' %>
                                                 <%= f.fields_for :assurances do |assurance_for_form| %>
 
@@ -19,11 +18,13 @@
 
                                                         <% end %>
                                                             <% end %>
-                                                                <% end %>
+                                                           
 
 
                                                                     <br/>
+                                                                   
                                                                     <%= f.submit "Save", class: 'btn col-lg-3 pull-right'%>
+                                                                    <% end %>
                                                                         <% end %>
                                                                             
                 </div>
@@ -34,7 +35,7 @@
 <script>
     $(document).ready(function() {
         var selected_value = <%= current_user.id %>;
-        var kpi_result_value = <%= @result.id %>;
+        var kpi_result_value = <%= @result.id if !@result.blank? %>;
         $("#assurance-user").val(selected_value);
         $("#kpi-result-id").val(kpi_result_value);
     });

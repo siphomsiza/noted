@@ -15,7 +15,7 @@
     <tbody>
     <% @inactive_users.each do |inactive_user| %>
       <tr>
-        <td><%= gravatar_for inactive_user, size: 50 %></td>
+        <td><%= image_tag(inactive_user.avatar.url(:thumb), size: 50) %></td>
         <td><%= inactive_user.id %></td>
         <td><%= inactive_user.firstname %></td>
         <td><%= inactive_user.surname %></td>

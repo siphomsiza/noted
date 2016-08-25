@@ -239,8 +239,8 @@
 	<!-- /.modal -->
 </div>
 <script>
-	var closed_primary_periods = <%= @closed_primary.ids %>;
-	var closed_secondary_periods = <%= @closed_secondary.ids %>;
+	var closed_primary_periods = <%= $closed_primary.ids %>;
+	var closed_secondary_periods = <%= $closed_secondary.ids %>;
 	$.ajax({
 		type: "POST",
 		url: "/sdbip_time_periods/update_status",

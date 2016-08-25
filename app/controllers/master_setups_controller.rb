@@ -11,7 +11,7 @@ class MasterSetupsController < ApplicationController
         @response = @client.fetch(1582504)
         @doc = @response.doc
         @forecast = @doc["item"]["forecast"]
-   rescue SignalException => e
+   rescue SocketError => e
     flash[:notice] = "received Exception #{e.message}"
     puts "received Exception #{e}"
     end
@@ -22,10 +22,7 @@ class MasterSetupsController < ApplicationController
     @master_setups = MasterSetup.limit(1).order(id: :asc)
     @setup = MasterSetup.find_by(:id=>1)
   end
-  def show_image
-    @logo = MasterSetup.find(params[:id])
-    send_data(@logo.logo,type: @logo.logo_content_type,:disposition => "inline",filename: @logo.logo_name)
-  end
+
   # GET /master_setups/1
   # GET /master_setups/1.json
   def show
@@ -84,7 +81,7 @@ class MasterSetupsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def master_setup_params
-      params.require(:master_setup).permit(:municipality,:logo,:logo_name,:address,:logo_content_type,:province, :latitude,:longitude)
+      params.require(:master_setup).permit(:municipality,:logo,:address,:province, :latitude,:longitude)
     end
 
     def set_user

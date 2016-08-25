@@ -8,12 +8,18 @@
 <div class="modal-body">
   <div class="col-lg-10 col-md-offset-1">
 
-    <%= form_for(@user) do |f| %>
+    <%= form_for @user, html: { multipart: true } do |f| %>
   <%= render 'shared/error_messages', object: @user %>
 
     <fieldset id="userinfo">
       <legend>User Info</legend>
 
+    <section class="row">
+    <label class="col col-lg-4 control-label" for="avatar">Avatar</label>
+      <div class="controls col col-lg-8">
+        <%= f.file_field :avatar, :class=>'form-control' %>
+      </div><!-- controls -->
+    </section><!-- row -->
       <section class="row">
       <label class="col col-lg-4 control-label" for="title">Title</label>
         <div class="controls col col-lg-8">
@@ -238,7 +244,7 @@
     </fieldset>
     <section class="row">
       <div class="col-lg-12">
-        <% if current_user.admin? && !current_user?(@user) && !@user.admin? %>
+        <% if (current_user.admin? || current_user.super_admin?) && !current_user?(@user) && (!@user.admin? || !@user.super_admin?) %>
         <%= link_to controller: "users", action: "terminate", id: @user.id, method: "get", class: "btn btn-mini pull-left" do%>
         <span class = "glyphicon glyphicon-remove-sign"></span>Terminate <% end %>&nbsp;|&nbsp;
         <%= link_to controller: "users", action: "lock_user", id: @user.id, method: "get", class: "btn btn-mini pull-left" do%>
