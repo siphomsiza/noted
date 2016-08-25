@@ -15,6 +15,7 @@
                 <th>Actual</th>
                 <th>Results</th>
             </tr>
+            
             <tr>
                 <th>July&nbsp;
                     <% @time_periods.select(:period).where("extract(month  from period) = ?", 7 ).each do |time_period| %>
@@ -32,7 +33,7 @@
                     <%= kpi_result.departmental_sdbip.source_of_evidence %>
                     <br/>
                     <% kpi_result.attachments.each do |attachment| %>
-                    <%= link_to attachment.poe,attachment.poe_url, target: '_blank' %>
+                    <%= link_to attachment.poe_file_name,attachment.poe.url, target: '_blank' %>
                     <% end %>
                 </td>
                 <td>
@@ -75,7 +76,7 @@
                     <%= kpi_result.departmental_sdbip.source_of_evidence %>
                     <br/>
                     <% kpi_result.attachments.each do |attachment| %>
-                    <%= link_to attachment.poe,attachment.poe_url, target: '_blank' %>
+                    <%= link_to attachment.poe_file_name,attachment.poe.url, target: '_blank' %>
                     <% end %>
                 </td>
                 <td>
@@ -117,7 +118,7 @@
                     <%= kpi_result.departmental_sdbip.source_of_evidence %>
                     <br/>
                     <% kpi_result.attachments.each do |attachment| %>
-                    <%= link_to attachment.poe,attachment.poe_url, target: '_blank' %>
+                    <%= link_to attachment.poe_file_name,attachment.poe.url, target: '_blank' %>
                     <% end %>
                 </td>
                 <td>
@@ -159,7 +160,7 @@
                     <%= kpi_result.departmental_sdbip.source_of_evidence %>
                     <br/>
                     <% kpi_result.attachments.each do |attachment| %>
-                    <%= link_to attachment.poe,attachment.poe_url, target: '_blank' %>
+                    <%= link_to attachment.poe_file_name,attachment.poe.url, target: '_blank' %>
                     <% end %>
                 </td>
                 <td>
@@ -201,7 +202,7 @@
                     <%= kpi_result.departmental_sdbip.source_of_evidence %>
                     <br/>
                     <% kpi_result.attachments.each do |attachment| %>
-                    <%= link_to attachment.poe,attachment.poe_url, target: '_blank' %>
+                    <%= link_to attachment.poe_file_name,attachment.poe.url, target: '_blank' %>
                     <% end %>
                 </td>
                 <td>
@@ -243,7 +244,7 @@
                     <%= kpi_result.departmental_sdbip.source_of_evidence %>
                     <br/>
                     <% kpi_result.attachments.each do |attachment| %>
-                    <%= link_to attachment.poe,attachment.poe_url, target: '_blank' %>
+                    <%= link_to attachment.poe_file_name,attachment.poe.url, target: '_blank' %>
                     <% end %>
                 </td>
                 <td>
@@ -285,7 +286,7 @@
                     <%= kpi_result.departmental_sdbip.source_of_evidence %>
                     <br/>
                     <% kpi_result.attachments.each do |attachment| %>
-                    <%= link_to attachment.poe,attachment.poe_url, target: '_blank' %>
+                    <%= link_to attachment.poe_file_name,attachment.poe.url, target: '_blank' %>
                     <% end %>
                 </td>
                 <td>
@@ -325,7 +326,7 @@
                     <%= kpi_result.departmental_sdbip.source_of_evidence %>
                     <br/>
                     <% kpi_result.attachments.each do |attachment| %>
-                    <%= link_to attachment.poe,attachment.poe_url, target: '_blank' %>
+                    <%= link_to attachment.poe_file_name,attachment.poe.url, target: '_blank' %>
                     <% end %>
                 </td>
                 <td>
@@ -365,7 +366,7 @@
                     <%= kpi_result.departmental_sdbip.source_of_evidence %>
                     <br/>
                     <% kpi_result.attachments.each do |attachment| %>
-                    <%= link_to attachment.poe,attachment.poe_url, target: '_blank' %>
+                    <%= link_to attachment.poe_file_name,attachment.poe.url, target: '_blank' %>
                     <% end %>
                 </td>
                 <td>
@@ -405,7 +406,7 @@
                     <%= kpi_result.departmental_sdbip.source_of_evidence %>
                     <br/>
                     <% kpi_result.attachments.each do |attachment| %>
-                    <%= link_to attachment.poe,attachment.poe_url, target: '_blank' %>
+                    <%= link_to attachment.poe_file_name,attachment.poe.url, target: '_blank' %>
                     <% end %>
                 </td>
                 <td>
@@ -445,7 +446,7 @@
                     <%= kpi_result.departmental_sdbip.source_of_evidence %>
                     <br/>
                     <% kpi_result.attachments.each do |attachment| %>
-                    <%= link_to attachment.poe,attachment.poe_url, target: '_blank' %>
+                    <%= link_to attachment.poe_file_name,attachment.poe.url, target: '_blank' %>
                     <% end %>
                 </td>
                 <td>
@@ -485,7 +486,7 @@
                     <%= kpi_result.departmental_sdbip.source_of_evidence %>
                     <br/>
                     <% kpi_result.attachments.each do |attachment| %>
-                    <%= link_to attachment.poe,attachment.poe_url, target: '_blank' %>
+                    <%= link_to attachment.poe_file_name,attachment.poe.url, target: '_blank' %>
                     <% end %>
                 </td>
                 <td>

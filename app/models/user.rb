@@ -1,6 +1,5 @@
 class User < ActiveRecord::Base
   ActiveRecord::Base.establish_connection($current_session_db)
-  has_many :activities
   belongs_to :department
   has_one :jobtitle
   has_many :kpi_results

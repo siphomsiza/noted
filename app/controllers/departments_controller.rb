@@ -12,7 +12,7 @@ class DepartmentsController < ApplicationController
         @response = @client.fetch(1582504)
         @doc = @response.doc
         @forecast = @doc["item"]["forecast"]
-  rescue SignalException => e
+  rescue SocketError => e
     flash[:notice] = "received Exception #{e.message}"
     puts "received Exception #{e}"
   end

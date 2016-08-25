@@ -240,7 +240,7 @@
     </fieldset>
   <section class="row">
       <div class="col-lg-12">
-        <% if current_user.admin? && !current_user?(@user) && !@user.admin? %>
+        <% if (current_user.admin? || current_user.super_admin?) && !current_user?(@user) && (!@user.admin? || !@user.super_admin?) %>
         <%= link_to controller: "users", action: "terminate", id: @user.id, method: "get", class: "btn btn-mini" do%>
         <span class = "glyphicon glyphicon-remove-sign"></span>Terminate <% end %>&nbsp;|&nbsp;
         <%= link_to controller: "users", action: "lock_user", id: @user.id, method: "get", class: "btn btn-mini" do%>

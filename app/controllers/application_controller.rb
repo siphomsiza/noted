@@ -21,21 +21,10 @@ class ApplicationController < ActionController::Base
       @activity.save
     end
   end
-  def audit_log(departmental_sdbip_id)
 
-    if !current_user.blank?
-      @audit_log = Activity.new
-      @audit_log.user_id = current_user.id
-      @audit_log.browser = request.env['HTTP_USER_AGENT']
-      @audit_log.ip_address = request.env['REMOTE_ADDR']
-      @audit_log.params = params.inspect
-      @audit_log.departmental_sdbip_id = departmental_sdbip_id
-      @audit_log.save
-    end
-  end
   def authenticate
    redirect_to root_url if session[:session_key].nil?
- end
+  end
   private
   def current_user
     @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
