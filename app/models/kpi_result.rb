@@ -5,6 +5,7 @@ class KpiResult < ActiveRecord::Base
   has_one :assurance
   has_many :attachments, :dependent => :destroy
 	accepts_nested_attributes_for :attachments, allow_destroy: true
+  delegate :period,:target,:corrective_measures,:performance_comments,:kpi_performance_standard,:actual, :to => :departmental_sdbip, :prefix => true
   def attachment_for_form
       collection = attachments.where(kpi_result_id: id)
       collection.any? ? collection : attachments.build

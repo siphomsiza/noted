@@ -8,7 +8,7 @@ class CapitalProject < ActiveRecord::Base
     belongs_to :ward
     has_one :monthly_cashflow
     validates :subdepartment, :mscore_classification, :project_name, :departmental_sdbip_id, presence: true
-
+    delegate :mun_cp_ref, :to => :departmental_sdbip, :prefix => true
     def self.import(file)
         case File.extname(file.original_filename)
         when '.csv' then

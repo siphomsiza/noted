@@ -29,7 +29,6 @@ class DepartmentalSdbip < ActiveRecord::Base
     accepts_nested_attributes_for :kpi_results, allow_destroy: true
     has_many :assurances, dependent: :destroy
     accepts_nested_attributes_for :assurances, allow_destroy: true
-
     validates :department_name, :subdepartment_name, :kpi, :kpi_ref_number, presence: true
 
     def kpi_result_for_form
@@ -116,7 +115,7 @@ class DepartmentalSdbip < ActiveRecord::Base
                                  provincial_strategic_outcome_id, ward_id,
                                  area_id, performance_standard, past_year_performance,
                                  impact,
-                                 kpi_calculation_type_id, _kpi_target_type_id)
+                                 kpi_calculation_type_id, _kpi_target_type_id,start_date,end_date)
 
         @audits = DepartmentalSdbip.all
         audit_columns = []
@@ -393,10 +392,6 @@ class DepartmentalSdbip < ActiveRecord::Base
             audit_columns.push('departmental_sdbip.corrective_measures')
             audit_columns_headers.push('Corrective Measures')
         end
-        if selected_columns.include?('Target, Actual and Results')
-            audit_columns.push('')
-            audit_columns_headers.push('Target, Actual and Results')
-        end
         if selected_columns.include?('Target')
             audit_columns.push('departmental_sdbip.target')
             audit_columns_headers.push('Target')
@@ -413,6 +408,10 @@ class DepartmentalSdbip < ActiveRecord::Base
             audit_columns.push('kpi_result.kpi_calculation_type.name')
             audit_columns_headers.push('KPI Target Type')
         end
+        if selected_columns.include?('Target, Actual and Results')
+            @kpi_results = KpiResult.where("extract(month from period) >= ? AND extract(year from period) >= ? AND extract(month from period) <= ? AND extract(year from period) <= ?" ,start_date.to_date.month,start_date.to_date.year, end_date.to_date.month,end_date.to_date.year)
+        end
+        $results = @kpi_results
         $selected_array_of_values = audit_columns
         $selected_array_of_headers = audit_columns_headers
         @audit_logs = @audits
@@ -422,15 +421,18 @@ class DepartmentalSdbip < ActiveRecord::Base
         selected_columns = $selected_array_of_headers
         column_names = selected_columns
         array_of_values = $selected_array_of_values
+        if !$results.blank?
+            $results.each do |kpi_result|
+              column_names.push("Target")
+              column_names.push("Actual")
+              column_names.push("Results")
+            end
+        end
         CSV.generate(options) do |csv|
-          if $selected_array_of_headers.include?("Target, Actual and Results")
+          if !$results.blank?
             first_headers = []
-            $selected_array_of_headers.each do |header|
-              if header == "Target Actual and Results"
-                first_headers.push('Target, Actual and Results')
-              elsif header != "Target, Actual & Results"
-                first_headers.push('')
-              end
+            !$results.select(:period).uniq.each do |header|
+              first_headers.push(header.period.strftime("%b-%Y"))
             end
             csv << first_headers
           end
@@ -477,6 +479,13 @@ class DepartmentalSdbip < ActiveRecord::Base
                   end
                 end
               end
+              if departmental_sdbip.kpi_results.any? && !$results.blank?
+                  $results.each do |kpi_result|
+                    #array_of_values.push("departmental_sdbip.kpi_result.target")
+                    #column_names.push("departmental_sdbip.kpi_result.actual")
+                    #column_names.push("departmental_sdbip.kpi_result.kpi_performance_standard")
+                  end
+              end
               if !CapitalProject.exists?(departmental_sdbip_id: departmental_sdbip.id)
                     array_of_values.each do |s|
                         s.gsub!('departmental_sdbip.capital_project.mun_cp_ref', '')
@@ -485,8 +494,7 @@ class DepartmentalSdbip < ActiveRecord::Base
               elsif CapitalProject.exists?(departmental_sdbip_id: departmental_sdbip.id)
                     csv << array_of_values.map { |n| eval n }
               end
-
-           end
+              end
 
         end
     end
@@ -503,7 +511,7 @@ class DepartmentalSdbip < ActiveRecord::Base
                                provincial_strategic_outcome_id, ward_id,
                                area_id, performance_standard, past_year_performance,
                                impact,
-                               kpi_calculation_type_id, _kpi_target_type_id)
+                               kpi_calculation_type_id, _kpi_target_type_id,start_date,end_date)
 
         @audits = DepartmentalSdbip.includes(:kpi_results, :assurances)
         audit_columns = []
@@ -781,10 +789,6 @@ class DepartmentalSdbip < ActiveRecord::Base
             audit_columns.push('departmental_sdbip.corrective_measures')
             audit_columns_headers.push('Corrective Measures')
         end
-        if selected_columns.include?('Target, Actual & Results')
-            audit_columns.push('')
-            audit_columns_headers.push('Target, Actual and Results')
-        end
         if selected_columns.include?('Target')
             audit_columns.push('departmental_sdbip.target')
             audit_columns_headers.push('Target')
@@ -797,6 +801,10 @@ class DepartmentalSdbip < ActiveRecord::Base
             audit_columns.push('departmental_sdbip.kpi_calculation_type.name')
             audit_columns_headers.push('KPI Target Type')
         end
+        if selected_columns.include?('Target, Actual and Results')
+            @kpi_results = KpiResult.where("extract(month from period) >= ? AND extract(year from period) >= ? AND extract(month from period) <= ? AND extract(year from period) <= ?" ,start_date.to_date.month,start_date.to_date.year, end_date.to_date.month,end_date.to_date.year)
+        end
+        $results = @kpi_results
         $selected_array_of_values = audit_columns
         $selected_array_of_headers = audit_columns_headers
         @audit_logs = @audits
