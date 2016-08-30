@@ -10,7 +10,7 @@ class SdbipReportsController < ApplicationController
   def index
   	@sdbip_report = SdbipReport.new
   	@sdbip_reports = SdbipReport.all
-  	respond_to do | format | 
+  	respond_to do | format |
   format.html # index.html.erb
   format.json { render :json => @posts }
    format.csv { send_data @sdbip_reports.to_csv }
@@ -24,7 +24,7 @@ class SdbipReportsController < ApplicationController
       temp.close
       temp.unlink
     end
- }  
+ }
   end
   end
 
