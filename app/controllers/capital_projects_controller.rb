@@ -49,12 +49,11 @@ class CapitalProjectsController < ApplicationController
        flash[:success] = "Capital Projects imported successfully."
        redirect_to capital_projects_url
     rescue=> e
-
        Rails.logger.error { "#{e.message} #{e.backtrace.join("\n")}" }
       flash[:danger] = "Capital Projects failed to import #{e.message}."
        redirect_to capital_projects_url
     end
-  end
+    end
   end
   # GET /capital_projects/1/edit
   def edit
@@ -102,8 +101,6 @@ class CapitalProjectsController < ApplicationController
     flash[:success]='Capital project was successfully deleted.'
 
       redirect_to capital_projects_url
-
-
   end
 
   private

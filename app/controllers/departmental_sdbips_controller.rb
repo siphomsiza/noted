@@ -5,7 +5,6 @@ class DepartmentalSdbipsController < ApplicationController
     before_action :correct_user, only: [:edit_kpis, :index, :restore_kpi, :edit, :update, :show, :audit_performance]
     def index
       begin
-
           @client = YahooWeather::Client.new
           @response = @client.fetch(1_582_504)
           @doc = @response.doc

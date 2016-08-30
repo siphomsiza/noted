@@ -15,7 +15,6 @@
                 <th>Actual</th>
                 <th>Results</th>
             </tr>
-            
             <tr>
                 <th>July&nbsp;
                     <% @time_periods.select(:period).where("extract(month  from period) = ?", 7 ).each do |time_period| %>

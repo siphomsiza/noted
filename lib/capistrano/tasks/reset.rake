@@ -1,7 +1,8 @@
 namespace :deploy do
   desc "Symlink shared configs on each release."
   task :symlink_config_files do
-      #ln -s #{release_path}
+      put File.read("config/mkhondo_db.yml"), "#{shared_path}/config/mkhondo_db.yml"
+      put File.read("config/sakhisizwe_db.yml"), "#{shared_path}/config/sakhisizwe_db.yml"
       run "ln -nfs #{shared_path}/config/mkhondo_db.yml #{release_path}/config/mkhondo_db.yml"
       run "ln -nfs #{shared_path}/config/sakhisizwe_db.yml #{release_path}/config/sakhisizwe_db.yml"
     end

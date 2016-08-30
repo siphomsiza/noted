@@ -11,20 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160824071947) do
+ActiveRecord::Schema.define(version: 20160826103737) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "activities", force: :cascade do |t|
-    t.string   "user_id",               null: false
-    t.string   "browser"
-    t.string   "ip_address"
-    t.string   "params"
-    t.integer  "departmental_sdbip_id", null: false
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
-  end
 
   create_table "activity_logs", force: :cascade do |t|
     t.string   "user_id"
@@ -38,6 +28,8 @@ ActiveRecord::Schema.define(version: 20160824071947) do
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
   end
+
+  add_index "activity_logs", ["user_id"], name: "index_activity_logs_on_user_id", using: :btree
 
   create_table "areas", force: :cascade do |t|
     t.string   "name"
@@ -56,6 +48,10 @@ ActiveRecord::Schema.define(version: 20160824071947) do
     t.datetime "updated_at",            null: false
   end
 
+  add_index "assurances", ["departmental_sdbip_id"], name: "index_assurances_on_departmental_sdbip_id", using: :btree
+  add_index "assurances", ["kpi_result_id"], name: "index_assurances_on_kpi_result_id", using: :btree
+  add_index "assurances", ["user_id"], name: "index_assurances_on_user_id", using: :btree
+
   create_table "attachments", force: :cascade do |t|
     t.integer  "kpi_result_id",    null: false
     t.datetime "created_at",       null: false
@@ -65,6 +61,8 @@ ActiveRecord::Schema.define(version: 20160824071947) do
     t.integer  "poe_file_size"
     t.datetime "poe_updated_at"
   end
+
+  add_index "attachments", ["kpi_result_id"], name: "index_attachments_on_kpi_result_id", using: :btree
 
   create_table "capital_projects", force: :cascade do |t|
     t.integer  "subdepartment_id",         null: false
@@ -84,6 +82,12 @@ ActiveRecord::Schema.define(version: 20160824071947) do
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
   end
+
+  add_index "capital_projects", ["area_id"], name: "index_capital_projects_on_area_id", using: :btree
+  add_index "capital_projects", ["departmental_sdbip_id"], name: "index_capital_projects_on_departmental_sdbip_id", using: :btree
+  add_index "capital_projects", ["mscore_classification_id"], name: "index_capital_projects_on_mscore_classification_id", using: :btree
+  add_index "capital_projects", ["subdepartment_id"], name: "index_capital_projects_on_subdepartment_id", using: :btree
+  add_index "capital_projects", ["ward_id"], name: "index_capital_projects_on_ward_id", using: :btree
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",   default: 0, null: false
@@ -112,6 +116,9 @@ ActiveRecord::Schema.define(version: 20160824071947) do
     t.datetime "updated_at",                    null: false
   end
 
+  add_index "departmental_administrators", ["department_id"], name: "index_departmental_administrators_on_department_id", using: :btree
+  add_index "departmental_administrators", ["user_id"], name: "index_departmental_administrators_on_user_id", using: :btree
+
   create_table "departmental_kpis", force: :cascade do |t|
     t.integer  "department_id",                                                    null: false
     t.string   "department_name",                                                  null: false
@@ -132,11 +139,11 @@ ActiveRecord::Schema.define(version: 20160824071947) do
     t.string   "baseline"
     t.string   "budget"
     t.string   "target"
-    t.string "first_quarter_target"
-    t.string "second_quarter_target"
-    t.string "third_quarter_target"
-    t.string "fourth_quarter_target"
-    t.decimal  "annual_target",                   default: 0.00
+    t.string   "first_quarter_target"
+    t.string   "second_quarter_target"
+    t.string   "third_quarter_target"
+    t.string   "fourth_quarter_target"
+    t.decimal  "annual_target",                   default: 0.0
     t.decimal  "revised_target"
     t.text     "performance_comments"
     t.text     "corrective_measures"
@@ -159,7 +166,26 @@ ActiveRecord::Schema.define(version: 20160824071947) do
     t.datetime "updated_at",                                                       null: false
   end
 
+  add_index "departmental_kpis", ["area_id"], name: "index_departmental_kpis_on_area_id", using: :btree
+  add_index "departmental_kpis", ["department_id"], name: "index_departmental_kpis_on_department_id", using: :btree
+  add_index "departmental_kpis", ["kpa_id"], name: "index_departmental_kpis_on_kpa_id", using: :btree
+  add_index "departmental_kpis", ["kpi_calculation_type_id"], name: "index_departmental_kpis_on_kpi_calculation_type_id", using: :btree
+  add_index "departmental_kpis", ["kpi_concept_id"], name: "index_departmental_kpis_on_kpi_concept_id", using: :btree
+  add_index "departmental_kpis", ["kpi_owner_id"], name: "index_departmental_kpis_on_kpi_owner_id", using: :btree
   add_index "departmental_kpis", ["kpi_ref_number"], name: "index_departmental_kpis_on_kpi_ref_number", using: :btree
+  add_index "departmental_kpis", ["kpi_target_type_id"], name: "index_departmental_kpis_on_kpi_target_type_id", using: :btree
+  add_index "departmental_kpis", ["kpi_type_id"], name: "index_departmental_kpis_on_kpi_type_id", using: :btree
+  add_index "departmental_kpis", ["mscore_classification_id"], name: "index_departmental_kpis_on_mscore_classification_id", using: :btree
+  add_index "departmental_kpis", ["mtas_indicator_id"], name: "index_departmental_kpis_on_mtas_indicator_id", using: :btree
+  add_index "departmental_kpis", ["national_outcome_id"], name: "index_departmental_kpis_on_national_outcome_id", using: :btree
+  add_index "departmental_kpis", ["ndp_objective_id"], name: "index_departmental_kpis_on_ndp_objective_id", using: :btree
+  add_index "departmental_kpis", ["predetermined_objective_id"], name: "index_departmental_kpis_on_predetermined_objective_id", using: :btree
+  add_index "departmental_kpis", ["provincial_strategic_outcome_id"], name: "index_departmental_kpis_on_provincial_strategic_outcome_id", using: :btree
+  add_index "departmental_kpis", ["reporting_category_id"], name: "index_departmental_kpis_on_reporting_category_id", using: :btree
+  add_index "departmental_kpis", ["risk_rating_id"], name: "index_departmental_kpis_on_risk_rating_id", using: :btree
+  add_index "departmental_kpis", ["strategic_objective_id"], name: "index_departmental_kpis_on_strategic_objective_id", using: :btree
+  add_index "departmental_kpis", ["subdepartment_id"], name: "index_departmental_kpis_on_subdepartment_id", using: :btree
+  add_index "departmental_kpis", ["ward_id"], name: "index_departmental_kpis_on_ward_id", using: :btree
 
   create_table "departmental_sdbips", force: :cascade do |t|
     t.integer  "department_id",                                                    null: false
@@ -181,11 +207,11 @@ ActiveRecord::Schema.define(version: 20160824071947) do
     t.string   "baseline"
     t.string   "budget"
     t.string   "target"
-    t.string "first_quarter_target"
-    t.string "second_quarter_target"
-    t.string "third_quarter_target"
-    t.string "fourth_quarter_target"
-    t.decimal  "annual_target",                   default: 0.00
+    t.string   "first_quarter_target"
+    t.string   "second_quarter_target"
+    t.string   "third_quarter_target"
+    t.string   "fourth_quarter_target"
+    t.decimal  "annual_target",                   default: 0.0
     t.decimal  "revised_target"
     t.text     "performance_comments"
     t.text     "corrective_measures"
@@ -208,7 +234,26 @@ ActiveRecord::Schema.define(version: 20160824071947) do
     t.datetime "updated_at",                                                       null: false
   end
 
+  add_index "departmental_sdbips", ["area_id"], name: "index_departmental_sdbips_on_area_id", using: :btree
+  add_index "departmental_sdbips", ["department_id"], name: "index_departmental_sdbips_on_department_id", using: :btree
+  add_index "departmental_sdbips", ["kpa_id"], name: "index_departmental_sdbips_on_kpa_id", using: :btree
+  add_index "departmental_sdbips", ["kpi_calculation_type_id"], name: "index_departmental_sdbips_on_kpi_calculation_type_id", using: :btree
+  add_index "departmental_sdbips", ["kpi_concept_id"], name: "index_departmental_sdbips_on_kpi_concept_id", using: :btree
+  add_index "departmental_sdbips", ["kpi_owner_id"], name: "index_departmental_sdbips_on_kpi_owner_id", using: :btree
   add_index "departmental_sdbips", ["kpi_ref_number"], name: "index_departmental_sdbips_on_kpi_ref_number", using: :btree
+  add_index "departmental_sdbips", ["kpi_target_type_id"], name: "index_departmental_sdbips_on_kpi_target_type_id", using: :btree
+  add_index "departmental_sdbips", ["kpi_type_id"], name: "index_departmental_sdbips_on_kpi_type_id", using: :btree
+  add_index "departmental_sdbips", ["mscore_classification_id"], name: "index_departmental_sdbips_on_mscore_classification_id", using: :btree
+  add_index "departmental_sdbips", ["mtas_indicator_id"], name: "index_departmental_sdbips_on_mtas_indicator_id", using: :btree
+  add_index "departmental_sdbips", ["national_outcome_id"], name: "index_departmental_sdbips_on_national_outcome_id", using: :btree
+  add_index "departmental_sdbips", ["ndp_objective_id"], name: "index_departmental_sdbips_on_ndp_objective_id", using: :btree
+  add_index "departmental_sdbips", ["predetermined_objective_id"], name: "index_departmental_sdbips_on_predetermined_objective_id", using: :btree
+  add_index "departmental_sdbips", ["provincial_strategic_outcome_id"], name: "index_departmental_sdbips_on_provincial_strategic_outcome_id", using: :btree
+  add_index "departmental_sdbips", ["reporting_category_id"], name: "index_departmental_sdbips_on_reporting_category_id", using: :btree
+  add_index "departmental_sdbips", ["risk_rating_id"], name: "index_departmental_sdbips_on_risk_rating_id", using: :btree
+  add_index "departmental_sdbips", ["strategic_objective_id"], name: "index_departmental_sdbips_on_strategic_objective_id", using: :btree
+  add_index "departmental_sdbips", ["subdepartment_id"], name: "index_departmental_sdbips_on_subdepartment_id", using: :btree
+  add_index "departmental_sdbips", ["ward_id"], name: "index_departmental_sdbips_on_ward_id", using: :btree
 
   create_table "departments", force: :cascade do |t|
     t.string   "name",       null: false
@@ -270,6 +315,8 @@ ActiveRecord::Schema.define(version: 20160824071947) do
     t.datetime "updated_at",                 null: false
   end
 
+  add_index "kpi_owners", ["user_id"], name: "index_kpi_owners_on_user_id", using: :btree
+
   create_table "kpi_results", force: :cascade do |t|
     t.date     "period"
     t.integer  "departmental_sdbip_id"
@@ -282,6 +329,9 @@ ActiveRecord::Schema.define(version: 20160824071947) do
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
   end
+
+  add_index "kpi_results", ["departmental_sdbip_id"], name: "index_kpi_results_on_departmental_sdbip_id", using: :btree
+  add_index "kpi_results", ["user_id"], name: "index_kpi_results_on_user_id", using: :btree
 
   create_table "kpi_target_types", force: :cascade do |t|
     t.string   "name"
@@ -329,6 +379,10 @@ ActiveRecord::Schema.define(version: 20160824071947) do
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
   end
+
+  add_index "monthly_cashflows", ["department_id"], name: "index_monthly_cashflows_on_department_id", using: :btree
+  add_index "monthly_cashflows", ["mscore_classification_id"], name: "index_monthly_cashflows_on_mscore_classification_id", using: :btree
+  add_index "monthly_cashflows", ["subdepartment_id"], name: "index_monthly_cashflows_on_subdepartment_id", using: :btree
 
   create_table "mscore_classifications", force: :cascade do |t|
     t.string   "name"
@@ -382,13 +436,6 @@ ActiveRecord::Schema.define(version: 20160824071947) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "regions", force: :cascade do |t|
-    t.string   "name",            null: false
-    t.integer  "master_setup_id", null: false
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-  end
-
   create_table "reporting_categories", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -434,6 +481,8 @@ ActiveRecord::Schema.define(version: 20160824071947) do
     t.datetime "updated_at",                              null: false
   end
 
+  add_index "roles", ["user_id"], name: "index_roles_on_user_id", using: :btree
+
   create_table "roles_details", force: :cascade do |t|
     t.integer  "role_id",                          null: false
     t.integer  "subdepartment_id",                 null: false
@@ -446,6 +495,10 @@ ActiveRecord::Schema.define(version: 20160824071947) do
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
   end
+
+  add_index "roles_details", ["department_id"], name: "index_roles_details_on_department_id", using: :btree
+  add_index "roles_details", ["role_id"], name: "index_roles_details_on_role_id", using: :btree
+  add_index "roles_details", ["subdepartment_id"], name: "index_roles_details_on_subdepartment_id", using: :btree
 
   create_table "sdbip_time_periods", force: :cascade do |t|
     t.date     "period",                            null: false
@@ -494,12 +547,17 @@ ActiveRecord::Schema.define(version: 20160824071947) do
     t.datetime "updated_at",                       null: false
   end
 
+  add_index "subdepartmental_administrators", ["subdepartment_id"], name: "index_subdepartmental_administrators_on_subdepartment_id", using: :btree
+  add_index "subdepartmental_administrators", ["user_id"], name: "index_subdepartmental_administrators_on_user_id", using: :btree
+
   create_table "subdepartments", force: :cascade do |t|
     t.string   "subdepartment_name", null: false
     t.integer  "department_id"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
   end
+
+  add_index "subdepartments", ["department_id"], name: "index_subdepartments_on_department_id", using: :btree
 
   create_table "top_layer_administrators", force: :cascade do |t|
     t.integer  "user_id",                       null: false
@@ -511,6 +569,9 @@ ActiveRecord::Schema.define(version: 20160824071947) do
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
   end
+
+  add_index "top_layer_administrators", ["department_id"], name: "index_top_layer_administrators_on_department_id", using: :btree
+  add_index "top_layer_administrators", ["user_id"], name: "index_top_layer_administrators_on_user_id", using: :btree
 
   create_table "top_layer_sdbips", force: :cascade do |t|
     t.integer  "department_id",                              null: false
@@ -548,6 +609,20 @@ ActiveRecord::Schema.define(version: 20160824071947) do
     t.datetime "created_at",                                 null: false
     t.datetime "updated_at",                                 null: false
   end
+
+  add_index "top_layer_sdbips", ["area_id"], name: "index_top_layer_sdbips_on_area_id", using: :btree
+  add_index "top_layer_sdbips", ["department_id"], name: "index_top_layer_sdbips_on_department_id", using: :btree
+  add_index "top_layer_sdbips", ["kpa_id"], name: "index_top_layer_sdbips_on_kpa_id", using: :btree
+  add_index "top_layer_sdbips", ["kpi_calculation_type_id"], name: "index_top_layer_sdbips_on_kpi_calculation_type_id", using: :btree
+  add_index "top_layer_sdbips", ["kpi_owner_id"], name: "index_top_layer_sdbips_on_kpi_owner_id", using: :btree
+  add_index "top_layer_sdbips", ["kpi_target_type_id"], name: "index_top_layer_sdbips_on_kpi_target_type_id", using: :btree
+  add_index "top_layer_sdbips", ["mscore_classification_id"], name: "index_top_layer_sdbips_on_mscore_classification_id", using: :btree
+  add_index "top_layer_sdbips", ["mtas_indicator_id"], name: "index_top_layer_sdbips_on_mtas_indicator_id", using: :btree
+  add_index "top_layer_sdbips", ["national_outcome_id"], name: "index_top_layer_sdbips_on_national_outcome_id", using: :btree
+  add_index "top_layer_sdbips", ["ndp_objective_id"], name: "index_top_layer_sdbips_on_ndp_objective_id", using: :btree
+  add_index "top_layer_sdbips", ["predetermined_objective_id"], name: "index_top_layer_sdbips_on_predetermined_objective_id", using: :btree
+  add_index "top_layer_sdbips", ["strategic_objective_id"], name: "index_top_layer_sdbips_on_strategic_objective_id", using: :btree
+  add_index "top_layer_sdbips", ["ward_id"], name: "index_top_layer_sdbips_on_ward_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "firstname",                                         null: false
@@ -600,6 +675,7 @@ ActiveRecord::Schema.define(version: 20160824071947) do
     t.datetime "avatar_updated_at"
   end
 
+  add_index "users", ["department_id"], name: "index_users_on_department_id", using: :btree
   add_index "users", ["email"], name: "index_users_on_email", using: :btree
 
   create_table "wards", force: :cascade do |t|
@@ -610,5 +686,7 @@ ActiveRecord::Schema.define(version: 20160824071947) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_index "wards", ["area_id"], name: "index_wards_on_area_id", using: :btree
 
 end
