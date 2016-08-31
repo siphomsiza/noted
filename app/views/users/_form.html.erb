@@ -17,7 +17,7 @@
       <section class="row">
       <label class="col col-lg-4 control-label" for="title">Title</label>
         <div class="controls col col-lg-8">
-          <%= f.select :title, options_for_select(["Dr.", "Miss.", "Mr.", "Mrs.", "Ms.", "Prof.", "Rev."], prompt: true),
+          <%= f.select :title,options_for_title ,
            {:include_blank => "Select Title"}, class: "form-control" %>
         </div><!-- controls -->
       </section><!-- row -->
@@ -203,7 +203,7 @@
       <section class="row">
       <label class="col col-lg-4 control-label" for="race">Race</label>
         <div class="controls col col-lg-8">
-          <%= f.select :race, options_for_select(["African", "Coloured", "Indian", "White"]),
+          <%= f.select :race,options_for_race,
           {:include_blank => "Select Race"}, class: "form-control" %>
         </div><!-- controls -->
       </section><!-- row -->
@@ -211,8 +211,7 @@
       <section class="row">
       <label class="col col-lg-4 control-label" for="occupationalcategory">Occupational Category</label>
         <div class="controls col col-lg-8">
-          <%= f.select :occupational_category, options_for_select(["Top Management", "Senior Manager, Professionally Qualified, Experienced and Specialist", "Middle Management", "Skilled Technician and Academically Qualified Worker",
-            "Junior Management, Supervisor, Foreman and Superintendent","Semi-skilled and Discretionary Decision Making","Unskilled and Defined Decision Making"]),
+          <%= f.select :occupational_category, options_for_occupational_category,
           {:include_blank => "Select Occupational Category"}, class: "form-control" %>
         </div><!-- controls -->
       </section><!-- row -->

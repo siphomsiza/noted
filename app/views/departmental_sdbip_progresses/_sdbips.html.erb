@@ -14,8 +14,8 @@
         <tr>
             <td><%= departmental_sdbip.id %></td>
             <td><%= departmental_sdbip.project_name %></td>
-            <td><%= departmental_sdbip.department.name %></td>
-            <td><%= departmental_sdbip.kpi_type.name %></td>
+            <td><%= departmental_sdbip.department_name %></td>
+            <td><%= departmental_sdbip.kpi_type_name %></td>
             <td><%= link_to 'Show', departmental_sdbip, class: 'btn btn-mini' %></td>
             <td><%= link_to 'Edit', edit_departmental_sdbip_path(departmental_sdbip), class: 'btn btn-mini' %></td>
             <td><%= link_to 'Destroy', departmental_sdbip, class: 'btn btn-mini', method: :delete, data: { confirm: 'Are you sure?' } %></td>

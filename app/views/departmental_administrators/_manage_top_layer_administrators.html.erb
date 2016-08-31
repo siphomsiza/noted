@@ -36,7 +36,7 @@
                                 <tr>
                                     <td rowspan="<%= department.top_layer_administrators.count%>"><%= department.name %></td>
                                     <% department.top_layer_administrators.each do |departmental_administrator| %>
-                                    <td><%= departmental_administrator.user.firstname %>&nbsp;<%= departmental_administrator.user.surname %></td>
+                                    <td><%= departmental_administrator.user_firstname %>&nbsp;<%= departmental_administrator.user_surname %></td>
                                     <td><% if top_layer_administrator.can_create? %>Yes<% else %>No<% end %></td>
                                     <td><% if top_layer_administrator.can_edit? %>Yes<% else %>No<% end %></td>
                                     <td><% if top_layer_administrator.can_update? %>Yes<% else %>No<% end %></td>

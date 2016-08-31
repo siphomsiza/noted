@@ -30,7 +30,8 @@ class DepartmentalSdbip < ActiveRecord::Base
     has_many :assurances, dependent: :destroy
     accepts_nested_attributes_for :assurances, allow_destroy: true
     validates :department_name, :subdepartment_name, :kpi, :kpi_ref_number, presence: true
-
+    delegate :id,:unit_of_measurement,:kpi,:kpi_ref_number,:annual_target,:source_of_evidence, :to => :capital_project, :prefix => true
+    delegate :source_of_evidence, :to => :kpi_results, :prefix => true
     def kpi_result_for_form
         collection = kpi_results.where(departmental_sdbip_id: id)
         collection.any? ? collection : kpi_results.build
@@ -153,7 +154,7 @@ class DepartmentalSdbip < ActiveRecord::Base
         end
 
         if selected_columns.include?('Sub-Department')
-            audit_columns.push('departmental_sdbip.subdepartment_name')
+            audit_columns.push('departmental_sdbip.name')
             audit_columns_headers.push('Sub-Department')
             unless subdepartment_id.blank?
                 subdepartments_value = subdepartment_id
@@ -550,7 +551,7 @@ class DepartmentalSdbip < ActiveRecord::Base
         end
 
         if selected_columns.include?('Sub-Department')
-            audit_columns.push('departmental_sdbip.subdepartment_name')
+            audit_columns.push('departmental_sdbip.name')
             audit_columns_headers.push('Sub-Department')
             unless subdepartment_id.blank?
                 subdepartments_value = subdepartment_id
@@ -815,7 +816,7 @@ class DepartmentalSdbip < ActiveRecord::Base
             column_names = ['KPI Ref no.', 'KPI', 'Department', 'Subdepartment', 'KPA', 'KPI Type', 'KPI Owner', 'Strategic Objectives', 'Baseline', 'Annual Target', 'Revised Target','Area', 'Ward', 'Source of Evidence', 'Unit of Measurement']
             csv << column_names
             all.each do |departmental_sdbip|
-                csv << [departmental_sdbip.kpi_ref_number, departmental_sdbip.kpi, departmental_sdbip.department.name, departmental_sdbip.subdepartment.subdepartment_name, departmental_sdbip.kpa.name, departmental_sdbip.kpi_type.name, departmental_sdbip.kpi_owner.name, departmental_sdbip.strategic_objective.name, departmental_sdbip.baseline, departmental_sdbip.annual_target, departmental_sdbip.revised_target, departmental_sdbip.area.name, departmental_sdbip.ward.name, departmental_sdbip.source_of_evidence, departmental_sdbip.unit_of_measurement]
+                csv << [departmental_sdbip.kpi_ref_number, departmental_sdbip.kpi, departmental_sdbip.department_name, departmental_sdbip.subdepartment_name, departmental_sdbip.kpa_name, departmental_sdbip.kpi_type_name, departmental_sdbip.kpi_owner_name, departmental_sdbip.strategic_objective_name, departmental_sdbip.baseline, departmental_sdbip.annual_target, departmental_sdbip.revised_target, departmental_sdbip.area_name, departmental_sdbip.ward_name, departmental_sdbip.source_of_evidence, departmental_sdbip.unit_of_measurement]
             end
         end
     end

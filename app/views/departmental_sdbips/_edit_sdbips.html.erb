@@ -20,8 +20,8 @@
         <% @departmental_sdbips.each do |departmental_sdbip| %>
         <tr>
             <td>D<%= departmental_sdbip.id %></td>
-            <td><%= departmental_sdbip.department.name %></td>
-            <td><%= departmental_sdbip.subdepartment.subdepartment_name %></td>
+            <td><%= departmental_sdbip.department_name %></td>
+            <td><%= departmental_sdbip.subdepartment_name %></td>
             <td>
                 <% if (!current_user.departmental_administrator.blank? && current_user.departmental_administrator.can_update?) || (!current_user.subdepartmental_administrator.blank? && current_user.subdepartmental_administrator.can_update?) || current_user.super_admin? || current_user.admin? ||
                 ( !current_user.role.blank? && current_user.role.kpi_owner? && (!current_user.kpi_owners.blank?))# && current_user.kpi_owners.can_update? ) ) %>

@@ -14,7 +14,7 @@
     <tr>
         <th>Result(s)</th>
         <td>
-            <%= f.select(:kpi_performance_standard,options_for_select(["KPI Not Yet Measured","KPI Not Met", "KPI Almost Met", "KPI Met", "KPI Well Met", "KPI Extremely Well Met"]),{}, :class => "form-control has-error
+            <%= f.select(:kpi_performance_standard,options_for_performance_standard,{}, :class => "form-control has-error
             col-md-5",:id=>"kpi-result",:disabled=>"disabled") %>
         </td>
     </tr>

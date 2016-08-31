@@ -1,5 +1,5 @@
 <div class="table-responsive">
-	
+
 <table class="table table-striped table-bordered">
 
     <tr>
@@ -37,14 +37,11 @@
       <th>Fourth quarter actual</th>
 
     </tr>
-
-
-
     <% @top_layer_sdbips.each do |top_layer_sdbip| %>
       <tr>
         <td>
 					<%= link_to edit_top_layer_sdbip_path(top_layer_sdbip),remote: true,'data-target' => "#top-layer-sdbip-modal", 'data-toggle' => 'modal', :title=>"Click to Update KPI" do %>
-							<%= top_layer_sdbip.department.name %>
+							<%= top_layer_sdbip.department_name %>
 						<% end %>
 						<div id="top-layer-sdbip-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
 
@@ -57,25 +54,25 @@
 						<span class="glyphicon glyphicon-trash"></span>
 					<% end %></td>
         <td><%= top_layer_sdbip.idp_ref %></td>
-        <td><%= top_layer_sdbip.mscore_classification.name %></td>
-        <td><%= top_layer_sdbip.national_outcome.name %></td>
-        <td><%= top_layer_sdbip.kpa.name %></td>
-        <td><%= top_layer_sdbip.predetermined_objective.name %></td>
-        <td><%= top_layer_sdbip.ndp_objective.name %></td>
-        <td><%= top_layer_sdbip.strategic_objective.name %></td>
+        <td><%= top_layer_sdbip.mscore_classification_name %></td>
+        <td><%= top_layer_sdbip.national_outcome_name %></td>
+        <td><%= top_layer_sdbip.kpa_name %></td>
+        <td><%= top_layer_sdbip.predetermined_objective_name %></td>
+        <td><%= top_layer_sdbip.ndp_objective_name %></td>
+        <td><%= top_layer_sdbip.strategic_objective_name %></td>
         <td><%= top_layer_sdbip.kpi %></td>
         <td><%= top_layer_sdbip.unit_of_measurement %></td>
         <td><%= top_layer_sdbip.risk %></td>
-        <td><%= top_layer_sdbip.ward.name %></td>
-        <td><%= top_layer_sdbip.area.name %></td>
-        <td><%= top_layer_sdbip.kpi_owner.name %></td>
+        <td><%= top_layer_sdbip.ward_name %></td>
+        <td><%= top_layer_sdbip.area_name %></td>
+        <td><%= top_layer_sdbip.kpi_owner_name %></td>
         <td><%= top_layer_sdbip.baseline %></td>
         <td><%= top_layer_sdbip.poe %></td>
         <td><%= top_layer_sdbip.past_year_performance %></td>
-        <td><%= top_layer_sdbip.mtas_indicator.name %></td>
+        <td><%= top_layer_sdbip.mtas_indicator_name %></td>
         <td><%= top_layer_sdbip.reporting_category %></td>
-        <td><%= top_layer_sdbip.kpi_calculation_type.name %></td>
-        <td><%= top_layer_sdbip.kpi_target_type_id %></td>
+        <td><%= top_layer_sdbip.kpi_calculation_type_name %></td>
+        <td><%= top_layer_sdbip.kpi_target_type_name %></td>
         <td><%= top_layer_sdbip.annual_target %></td>
         <td><%= top_layer_sdbip.revised_target %></td>
         <td><%= top_layer_sdbip.first_quarter_target %></td>

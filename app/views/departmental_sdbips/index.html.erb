@@ -90,7 +90,7 @@
 				<div class="row">
 					<div class="col col-lg-12">
 						<div class="col-lg-3">
-							<label class="col control-label">Who:</label>&nbsp;<%= select_tag :subdepartment_id, grouped_options_for_select(@departments.map{ |group| [group.name, group.subdepartments.map{ |c| [c.subdepartment_name, c.id] } ] }),{class:'form-control'} %>
+							<label class="col control-label">Who:</label>&nbsp;<%= select_tag :subdepartment_id, grouped_options_for_select(@departments.map{ |group| [group.name, group.subdepartments.map{ |c| [c.name, c.id] } ] }),{class:'form-control'} %>
 						</div>
 						<div class="col-lg-3">
 							<label class="col control-label">What:</label>&nbsp;<%= select_tag :kpi_type_id,options_for_select([["All KPIs","0"]]+@kpitypes.all.collect {|x| [ x.name, x.id ] },id:'kpi_select'),prompt:'Select KPI Type',:required=> true,class: "form-control" %>

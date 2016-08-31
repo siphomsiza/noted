@@ -281,7 +281,7 @@
             <%= hidden_field_tag "selected_columns",nil,:multiple => true,:id=> "current-selected-columns" %>
             <div class="form-group col col-lg-12">
                 <label>Sub-Department:</label>
-                <%= select_tag :subdepartment_id, options_for_select(Subdepartment.all.collect {|p| [ p.subdepartment_name, p.id ] }),{:id=>"sub-department-filter",:multiple => "true",:class=>'form-control'} %>
+                <%= select_tag :subdepartment_id, options_for_select(Subdepartment.all.collect {|p| [ p.name, p.id ] }),{:id=>"sub-department-filter",:multiple => "true",:class=>'form-control'} %>
             </div>
             <div class="form-group col col-lg-12">
                 <label class="control-label">KPI Ref Number:</label>
@@ -398,7 +398,7 @@
             </div>
             <div class="form-group col col-lg-12">
                 <label class="control-label">Performance Standard:</label>
-                <%= select_tag :performance_standard, options_for_select(["KPI Not Met", "KPI Almost Met", "KPI Met", "KPI Well Met", "KPI Extremely Well Met"]),{:multiple => "true",:class=>'form-control'} %>
+                <%= select_tag :performance_standard, options_for_performance_standard,{:multiple => "true",:class=>'form-control'} %>
             </div>
             <div class="form-group col col-lg-12">
                 <%= hidden_field_tag "top_layer_kpi_ref_filters",nil,:multiple => false,:id=> "top_layer_kpi_ref_filter" %>

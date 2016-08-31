@@ -16,7 +16,7 @@
   </div>
   <div class="field">
     <%= f.label :subdepartment_id %><br>
-    <%= f.select :subdepartment_id,Subdepartment.all.collect{ |u| [u.subdepartment_name, u.id] },{},{class: "form-control"} %>
+    <%= f.select :subdepartment_id,Subdepartment.all.collect{ |u| [u.name, u.id] },{},{class: "form-control"} %>
   </div>
 
   <div class="field">
