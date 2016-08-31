@@ -15,12 +15,12 @@
 <div id="subdepartment_select">
   <br/>
   <%= f.label :subdepartment_id, "Subdepartment Name:" %>
-  <%= f.select(:subdepartment_id,options_for_select(Subdepartment.all.collect{ |u| [u.subdepartment_name, u.id] }),{}, {class: "form-control"}) %>
+  <%= f.select(:subdepartment_id,options_for_select(Subdepartment.all.collect{ |u| [u.name, u.id] }),{}, {class: "form-control"}) %>
 </div>
 <% else %>
 <br/>
 <%= f.label :subdepartment_id, "Subdepartment Name:" %>
-<%= f.select(:subdepartment_id,Subdepartment.all.collect{ |u| [u.subdepartment_name, u.id] },{}, {class: "form-control"}) %>
+<%= f.select(:subdepartment_id,Subdepartment.all.collect{ |u| [u.name, u.id] },{}, {class: "form-control"}) %>
 
 <% end %>
 

@@ -1,6 +1,7 @@
 class DepartmentsController < ApplicationController
   before_action :logged_in_user, only: [:new, :index, :edit, :update, :destroy,:show]
   before_action :admin_user,     only: [:new, :index, :edit, :update, :destroy,:show]
+  before_action :set_department,     only: [:edit, :update, :destroy,:show]
   def new
   	 @department = Department.new
   end
@@ -21,11 +22,11 @@ class DepartmentsController < ApplicationController
   end
 
   def show
-    @department = Department.find(params[:id])
+    
   end
 
   def edit
-    @department = Department.find(params[:id])
+    
   end
   def create
   	@department = Department.new(department_params)
@@ -70,13 +71,10 @@ class DepartmentsController < ApplicationController
     end
 
   def department_params
-  	params.require(:department).permit(:name, :tel_no, :fax_no, :subdepartments_attributes => [ :id,:subdepartment_name,:_destroy])
+  	params.require(:department).permit(:name, :tel_no, :fax_no, :subdepartments_attributes => [ :id,:name,:_destroy])
 
   end
 #
-    def set_user
-      @user = User.find(params[:id])
-    end
 
     # Before filters
 

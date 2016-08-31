@@ -2,8 +2,6 @@ class PagesController < ApplicationController
   before_action :logged_in_user, only: [:about,:new,:setup,:dashboard,:introduction]
   before_action :admin_user,     only: [:about,:new,:setup,:dashboard]
   before_action :top_layer_administrator,     only: [:dashboard]
-  def home
-  end
 
   def help
   end
@@ -90,9 +88,6 @@ class PagesController < ApplicationController
   end
   private
   #
-    def set_user
-      @user = User.find(params[:id])
-    end
 
     # Before filters
 
@@ -112,10 +107,7 @@ class PagesController < ApplicationController
     # Confirms an admin user.
     def admin_user
       #redirect_to(root_url) unless
-      current_user.admin# || current_user.super_admin? || top_layer_administrator
+      current_user.admin || current_user.super_admin?# || top_layer_administrator
     end
-    def super_admin_user
-      #redirect_to(root_url) unless
-      current_user.super_admin?
-    end
+    
 end

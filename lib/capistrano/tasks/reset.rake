@@ -1,10 +1,12 @@
 namespace :deploy do
   desc "Symlink shared configs on each release."
   task :symlink_config_files do
+      #put mhondo_db_config, "#{shared_path}/config/mkhondo_db.yml"
+      #put sakhisizwe_db_config, "#{shared_path}/config/sakhisizwe_db.yml"
       put File.read("config/mkhondo_db.yml"), "#{shared_path}/config/mkhondo_db.yml"
       put File.read("config/sakhisizwe_db.yml"), "#{shared_path}/config/sakhisizwe_db.yml"
-      run "ln -nfs #{shared_path}/config/mkhondo_db.yml #{release_path}/config/mkhondo_db.yml"
-      run "ln -nfs #{shared_path}/config/sakhisizwe_db.yml #{release_path}/config/sakhisizwe_db.yml"
+      #run "ln -nfs #{shared_path}/config/mkhondo_db.yml #{release_path}/config/mkhondo_db.yml"
+      #run "ln -nfs #{shared_path}/config/sakhisizwe_db.yml #{release_path}/config/sakhisizwe_db.yml"
     end
   desc 'Resets the database to an empty state'
   task :reset => [:set_rails_env] do

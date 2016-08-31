@@ -194,7 +194,7 @@ class DepartmentalSdbipsController < ApplicationController
     private
 
     def departmental_sdbip_params
-        params.require(:departmental_sdbip).permit(:subdepartment_name, :department_name, :kpa_name, :department_id,
+        params.require(:departmental_sdbip).permit(:name, :department_name, :kpa_name, :department_id,
                                                    :subdepartment_id, :kpi_ref_number, :mscore_classification_id, :idp_ref, :national_outcome_id, :strategic_objective_id,
                                                    :kpa_id, :kpi_target_type_id,
                                                    :predetermined_objective_id, :ndp_objective_id,

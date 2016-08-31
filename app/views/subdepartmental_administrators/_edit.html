@@ -22,7 +22,7 @@
 
     <div class="field">
       <%= f.label :subdepartment_id,"Subdepartment" %><br>
-      <%= f.select(:subdepartment_id,options_for_select(Subdepartment.all.collect{ |u| [u.subdepartment_name, u.id] }),{},{class: 'form-control'}) %>
+      <%= f.select(:subdepartment_id,options_for_select(Subdepartment.all.collect{ |u| [u.name, u.id] }),{},{class: 'form-control'}) %>
 
     </div>
     <div class="field">

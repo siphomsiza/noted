@@ -5,7 +5,7 @@
     </tr>
     <tr>
         <th>Department</th>
-        <td><%= @departmental_sdbip.department.name %></td>
+        <td><%= @departmental_sdbip.department_name %></td>
     </tr>
     <tr>
         <th>KPI</th>
@@ -24,8 +24,8 @@
         <th>KPI Calculation Type</th>
         <td>
             <% if !@departmental_sdbip.kpi_calculation_type_id.blank? %>
-            <%= @departmental_sdbip.kpi_calculation_type.name %>
-            (<%= @departmental_sdbip.kpi_calculation_type.code %>)
+            <%= @departmental_sdbip.kpi_calculation_type_name %>
+            (<%= @departmental_sdbip.kpi_calculation_type_code %>)
             <% end %>
         </td>
     </tr>

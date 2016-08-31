@@ -3,7 +3,7 @@
     <table class="table table-responsive table-striped">
         <tr>
             <th>Ref:</th>
-            <td>D<%= @capital_project.departmental_sdbip.id %></td>
+            <td>D<%= @capital_project.departmental_sdbip_id %></td>
         </tr>
         <tr>
             <th>Department:</th>
@@ -11,15 +11,15 @@
         </tr>
         <tr>
             <th>KPI:</th>
-            <td><%= @capital_project.departmental_sdbip.kpi %></td>
+            <td><%= @capital_project.departmental_sdbip_kpi %></td>
         </tr>
         <tr>
             <th>Unit of Measurement:</th>
-            <td><%= @capital_project.departmental_sdbip.unit_of_measurement %></td>
+            <td><%= @capital_project.departmental_sdbip_unit_of_measurement %></td>
         </tr>
         <tr>
             <th>Source of Evidence:</th>
-            <td><%= @capital_project.departmental_sdbip.source_of_evidence %></td>
+            <td><%= @capital_project.departmental_sdbip_source_of_evidence %></td>
         </tr>
         <tr>
             <th>KPI calculation Type:</th>
@@ -58,15 +58,15 @@
                     <td><%= kpi_result.performance_comments %></td>
                     <td><%= kpi_result.corrective_measures %></td>
                     <td>
-                        <%= kpi_result.departmental_sdbip.source_of_evidence %>
+                        <%= kpi_result.departmental_sdbip_source_of_evidence %>
                         <br/>
                         <% kpi_result.attachments.each do |attachment| %>
                         <%= link_to attachment.poe_file_name,attachment.poe.url, target: '_blank' %>
                         <% end %>
                     </td>
                     <td>
-                        <%= kpi_result.user.firstname %>&nbsp;
-                        <%= kpi_result.user.surname %>&nbsp;on
+                        <%= kpi_result.user_firstname %>&nbsp;
+                        <%= kpi_result.user_surname %>&nbsp;on
                         <%= kpi_result.updated_at.strftime("%d-%b-%Y") %>
                     </td>
                     <td>
@@ -75,12 +75,12 @@
 
                     <% end %>
                 <% else %>
-                    <td><%= @capital_project.departmental_sdbip.annual_target %></td>
+                    <td><%= @capital_project.departmental_sdbip_annual_target %></td>
                     <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td><%= @capital_project.departmental_sdbip.source_of_evidence %></td>
+                    <td><%= @capital_project.departmental_sdbip_source_of_evidence %></td>
                     <td></td>
                     <td>
                         <span class="glyphicon glyphicon-minus-sign orange"></span>
@@ -101,15 +101,15 @@
                     <td><%= kpi_result.performance_comments %></td>
                     <td><%= kpi_result.corrective_measures %></td>
                     <td>
-                        <%= kpi_result.departmental_sdbip.source_of_evidence %>
+                        <%= kpi_result.departmental_sdbip_source_of_evidence %>
                         <br/>
                         <% kpi_result.attachments.each do |attachment| %>
                         <%= link_to attachment.poe_file_name,attachment.poe.url, target: '_blank' %>
                         <% end %>
                     </td>
                     <td>
-                        <%= kpi_result.user.firstname %>&nbsp;
-                        <%= kpi_result.user.surname %>&nbsp;on
+                        <%= kpi_result.user_firstname %>&nbsp;
+                        <%= kpi_result.user_surname %>&nbsp;on
                         <%= kpi_result.updated_at.strftime("%d-%b-%Y") %>
                     </td>
                     <td>
@@ -117,12 +117,12 @@
                     </td>
                     <% end %>
                 <% else %>
-                    <td><%= @capital_project.departmental_sdbip.annual_target %></td>
+                    <td><%= @capital_project.departmental_sdbip_annual_target %></td>
                     <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td><%= @capital_project.departmental_sdbip.source_of_evidence %></td>
+                    <td><%= @capital_project.departmental_sdbip_source_of_evidence %></td>
                     <td></td>
                     <td>
                         <span class="glyphicon glyphicon-minus-sign orange"></span>
@@ -143,15 +143,15 @@
                     <td><%= kpi_result.performance_comments %></td>
                     <td><%= kpi_result.corrective_measures %></td>
                     <td>
-                        <%= kpi_result.departmental_sdbip.source_of_evidence %>
+                        <%= kpi_result.departmental_sdbip_source_of_evidence %>
                         <br/>
                         <% kpi_result.attachments.each do |attachment| %>
                         <%= link_to attachment.poe_file_name,attachment.poe.url, target: '_blank' %>
                         <% end %>
                     </td>
                     <td>
-                        <%= kpi_result.user.firstname %>&nbsp;
-                        <%= kpi_result.user.surname %>&nbsp;on
+                        <%= kpi_result.user_firstname %>&nbsp;
+                        <%= kpi_result.user_surname %>&nbsp;on
                         <%= kpi_result.updated_at.strftime("%d-%b-%Y") %>
                     </td>
                     <td>
@@ -159,12 +159,12 @@
                     </td>
                     <% end %>
                 <% else %>
-                    <td><%= @capital_project.departmental_sdbip.annual_target %></td>
+                    <td><%= @capital_project.departmental_sdbip_annual_target %></td>
                     <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td><%= @capital_project.departmental_sdbip.source_of_evidence %></td>
+                    <td><%= @capital_project.departmental_sdbip_source_of_evidence %></td>
                     <td></td>
                     <td>
                         <span class="glyphicon glyphicon-minus-sign orange"></span>
@@ -185,15 +185,15 @@
                     <td><%= kpi_result.performance_comments %></td>
                     <td><%= kpi_result.corrective_measures %></td>
                     <td>
-                        <%= kpi_result.departmental_sdbip.source_of_evidence %>
+                        <%= kpi_result.departmental_sdbip_source_of_evidence %>
                         <br/>
                         <% kpi_result.attachments.each do |attachment| %>
                         <%= link_to attachment.poe_file_name,attachment.poe.url, target: '_blank' %>
                         <% end %>
                     </td>
                     <td>
-                        <%= kpi_result.user.firstname %>&nbsp;
-                        <%= kpi_result.user.surname %>&nbsp;on
+                        <%= kpi_result.user_firstname %>&nbsp;
+                        <%= kpi_result.user_surname %>&nbsp;on
                         <%= kpi_result.updated_at.strftime("%d-%b-%Y") %>
                     </td>
                     <td>
@@ -201,12 +201,12 @@
                     </td>
                     <% end %>
                 <% else %>
-                    <td><%= @capital_project.departmental_sdbip.annual_target %></td>
+                    <td><%= @capital_project.departmental_sdbip_annual_target %></td>
                     <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td><%= @capital_project.departmental_sdbip.source_of_evidence %></td>
+                    <td><%= @capital_project.departmental_sdbip_source_of_evidence %></td>
                     <td></td>
                     <td>
                         <span class="glyphicon glyphicon-minus-sign orange"></span>
@@ -227,15 +227,15 @@
                     <td><%= kpi_result.performance_comments %></td>
                     <td><%= kpi_result.corrective_measures %></td>
                     <td>
-                        <%= kpi_result.departmental_sdbip.source_of_evidence %>
+                        <%= kpi_result.departmental_sdbip_source_of_evidence %>
                         <br/>
                         <% kpi_result.attachments.each do |attachment| %>
                         <%= link_to attachment.poe_file_name,attachment.poe.url, target: '_blank' %>
                         <% end %>
                     </td>
                     <td>
-                        <%= kpi_result.user.firstname %>&nbsp;
-                        <%= kpi_result.user.surname %>&nbsp;on
+                        <%= kpi_result.user_firstname %>&nbsp;
+                        <%= kpi_result.user_surname %>&nbsp;on
                         <%= kpi_result.updated_at.strftime("%d-%b-%Y") %>
                     </td>
                     <td>
@@ -243,12 +243,12 @@
                     </td>
                     <% end %>
                 <% else %>
-                    <td><%= @capital_project.departmental_sdbip.annual_target %></td>
+                    <td><%= @capital_project.departmental_sdbip_annual_target %></td>
                     <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td><%= @capital_project.departmental_sdbip.source_of_evidence %></td>
+                    <td><%= @capital_project.departmental_sdbip_source_of_evidence %></td>
                     <td></td>
                     <td>
                         <span class="glyphicon glyphicon-minus-sign orange"></span>
@@ -269,15 +269,15 @@
                     <td><%= kpi_result.performance_comments %></td>
                     <td><%= kpi_result.corrective_measures %></td>
                     <td>
-                        <%= kpi_result.departmental_sdbip.source_of_evidence %>
+                        <%= kpi_result.departmental_sdbip_source_of_evidence %>
                         <br/>
                         <% kpi_result.attachments.each do |attachment| %>
                         <%= link_to attachment.poe_file_name,attachment.poe.url, target: '_blank' %>
                         <% end %>
                     </td>
                     <td>
-                        <%= kpi_result.user.firstname %>&nbsp;
-                        <%= kpi_result.user.surname %>&nbsp;on
+                        <%= kpi_result.user_firstname %>&nbsp;
+                        <%= kpi_result.user_surname %>&nbsp;on
                         <%= kpi_result.updated_at.strftime("%d-%b-%Y") %>
                     </td>
                     <td>
@@ -285,12 +285,12 @@
                     </td>
                     <% end %>
                 <% else %>
-                    <td><%= @capital_project.departmental_sdbip.annual_target %></td>
+                    <td><%= @capital_project.departmental_sdbip_annual_target %></td>
                     <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td><%= @capital_project.departmental_sdbip.source_of_evidence %></td>
+                    <td><%= @capital_project.departmental_sdbip_source_of_evidence %></td>
                     <td></td>
                     <td>
                         <span class="glyphicon glyphicon-minus-sign orange"></span>
@@ -311,26 +311,26 @@
                     <td><%= kpi_result.performance_comments %></td>
                     <td><%= kpi_result.corrective_measures %></td>
                     <td>
-                        <%= kpi_result.departmental_sdbip.source_of_evidence %>
+                        <%= kpi_result.departmental_sdbip_source_of_evidence %>
                         <br/>
                         <% kpi_result.attachments.each do |attachment| %>
                         <%= link_to attachment.poe_file_name,attachment.poe.url, target: '_blank' %>
                         <% end %>
                     </td>
                     <td>
-                        <%= kpi_result.user.firstname %>&nbsp;
-                        <%= kpi_result.user.surname %>&nbsp;on
+                        <%= kpi_result.user_firstname %>&nbsp;
+                        <%= kpi_result.user_surname %>&nbsp;on
                         <%= kpi_result.updated_at.strftime("%d-%b-%Y") %>
                     </td>
                     <td><%= render "assurance_results" %></td>
                     <% end %>
                 <% else %>
-                    <td><%= @capital_project.departmental_sdbip.annual_target %></td>
+                    <td><%= @capital_project.departmental_sdbip_annual_target %></td>
                     <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td><%= @capital_project.departmental_sdbip.source_of_evidence %></td>
+                    <td><%= @capital_project.departmental_sdbip_source_of_evidence %></td>
                     <td></td>
                     <td>
                         <span class="glyphicon glyphicon-minus-sign orange"></span>
@@ -351,26 +351,26 @@
                     <td><%= kpi_result.performance_comments %></td>
                     <td><%= kpi_result.corrective_measures %></td>
                     <td>
-                        <%= kpi_result.departmental_sdbip.source_of_evidence %>
+                        <%= kpi_result.departmental_sdbip_source_of_evidence %>
                         <br/>
                         <% kpi_result.attachments.each do |attachment| %>
                         <%= link_to attachment.poe_file_name,attachment.poe.url, target: '_blank' %>
                         <% end %>
                     </td>
                     <td>
-                        <%= kpi_result.user.firstname %>&nbsp;
-                        <%= kpi_result.user.surname %>&nbsp;on
+                        <%= kpi_result.user_firstname %>&nbsp;
+                        <%= kpi_result.user_surname %>&nbsp;on
                         <%= kpi_result.updated_at.strftime("%d-%b-%Y") %>
                     </td>
                     <td><%= render "assurance_results" %></td>
                     <% end %>
                 <% else %>
-                    <td><%= @capital_project.departmental_sdbip.annual_target %></td>
+                    <td><%= @capital_project.departmental_sdbip_annual_target %></td>
                     <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td><%= @capital_project.departmental_sdbip.source_of_evidence %></td>
+                    <td><%= @capital_project.departmental_sdbip_source_of_evidence %></td>
                     <td></td>
                     <td>
                         <span class="glyphicon glyphicon-minus-sign orange"></span>
@@ -391,26 +391,26 @@
                     <td><%= kpi_result.performance_comments %></td>
                     <td><%= kpi_result.corrective_measures %></td>
                     <td>
-                        <%= kpi_result.departmental_sdbip.source_of_evidence %>
+                        <%= kpi_result.departmental_sdbip_source_of_evidence %>
                         <br/>
                         <% kpi_result.attachments.each do |attachment| %>
                         <%= link_to attachment.poe_file_name,attachment.poe.url, target: '_blank' %>
                         <% end %>
                     </td>
                     <td>
-                        <%= kpi_result.user.firstname %>&nbsp;
-                        <%= kpi_result.user.surname %>&nbsp;on
+                        <%= kpi_result.user_firstname %>&nbsp;
+                        <%= kpi_result.user_surname %>&nbsp;on
                         <%= kpi_result.updated_at.strftime("%d-%b-%Y") %>
                     </td>
                     <td><%= render "assurance_results" %></td>
                     <% end %>
                 <% else %>
-                    <td><%= @capital_project.departmental_sdbip.annual_target %></td>
+                    <td><%= @capital_project.departmental_sdbip_annual_target %></td>
                     <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td><%= @capital_project.departmental_sdbip.source_of_evidence %></td>
+                    <td><%= @capital_project.departmental_sdbip_source_of_evidence %></td>
                     <td></td>
                     <td>
                         <span class="glyphicon glyphicon-minus-sign orange"></span>
@@ -431,26 +431,26 @@
                     <td><%= kpi_result.performance_comments %></td>
                     <td><%= kpi_result.corrective_measures %></td>
                     <td>
-                        <%= kpi_result.departmental_sdbip.source_of_evidence %>
+                        <%= kpi_result.departmental_sdbip_source_of_evidence %>
                         <br/>
                         <% kpi_result.attachments.each do |attachment| %>
                         <%= link_to attachment.poe_file_name,attachment.poe.url, target: '_blank' %>
                         <% end %>
                     </td>
                     <td>
-                        <%= kpi_result.user.firstname %>&nbsp;
-                        <%= kpi_result.user.surname %>&nbsp;on
+                        <%= kpi_result.user_firstname %>&nbsp;
+                        <%= kpi_result.user_surname %>&nbsp;on
                         <%= kpi_result.updated_at.strftime("%d-%b-%Y") %>
                     </td>
                     <td><%= render "assurance_results" %></td>
                     <% end %>
                 <% else %>
-                    <td><%= @capital_project.departmental_sdbip.annual_target %></td>
+                    <td><%= @capital_project.departmental_sdbip_annual_target %></td>
                     <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td><%= @capital_project.departmental_sdbip.source_of_evidence %></td>
+                    <td><%= @capital_project.departmental_sdbip_source_of_evidence %></td>
                     <td></td>
                     <td>
                         <span class="glyphicon glyphicon-minus-sign orange"></span>
@@ -471,26 +471,26 @@
                     <td><%= kpi_result.performance_comments %></td>
                     <td><%= kpi_result.corrective_measures %></td>
                     <td>
-                        <%= kpi_result.departmental_sdbip.source_of_evidence %>
+                        <%= kpi_result.departmental_sdbip_source_of_evidence %>
                         <br/>
                         <% kpi_result.attachments.each do |attachment| %>
                         <%= link_to attachment.poe_file_name,attachment.poe.url, target: '_blank' %>
                         <% end %>
                     </td>
                     <td>
-                        <%= kpi_result.user.firstname %>&nbsp;
-                        <%= kpi_result.user.surname %>&nbsp;on
+                        <%= kpi_result.user_firstname %>&nbsp;
+                        <%= kpi_result.user_surname %>&nbsp;on
                         <%= kpi_result.updated_at.strftime("%d-%b-%Y") %>
                     </td>
                     <td><%= render "assurance_results" %></td>
                     <% end %>
                 <% else %>
-                    <td><%= @capital_project.departmental_sdbip.annual_target %></td>
+                    <td><%= @capital_project.departmental_sdbip_annual_target %></td>
                     <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td><%= @capital_project.departmental_sdbip.source_of_evidence %></td>
+                    <td><%= @capital_project.departmental_sdbip_source_of_evidence %></td>
                     <td></td>
                     <td>
                         <span class="glyphicon glyphicon-minus-sign orange"></span>
@@ -511,26 +511,26 @@
                     <td><%= kpi_result.performance_comments %></td>
                     <td><%= kpi_result.corrective_measures %></td>
                     <td>
-                        <%= kpi_result.departmental_sdbip.source_of_evidence %>
+                        <%= kpi_result.departmental_sdbip_source_of_evidence %>
                         <br/>
                         <% kpi_result.attachments.each do |attachment| %>
                         <%= link_to attachment.poe_file_name,attachment.poe.url, target: '_blank' %>
                         <% end %>
                     </td>
                     <td>
-                        <%= kpi_result.user.firstname %>&nbsp;
-                        <%= kpi_result.user.surname %>&nbsp;on
+                        <%= kpi_result.user_firstname %>&nbsp;
+                        <%= kpi_result.user_surname %>&nbsp;on
                         <%= kpi_result.updated_at.strftime("%d-%b-%Y") %>
                     </td>
                     <td><%= render "assurance_results" %></td>
                     <% end %>
                 <% else %>
-                    <td><%= @capital_project.departmental_sdbip.annual_target %></td>
+                    <td><%= @capital_project.departmental_sdbip_annual_target %></td>
                     <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td><%= @capital_project.departmental_sdbip.source_of_evidence %></td>
+                    <td><%= @capital_project.departmental_sdbip_source_of_evidence %></td>
                     <td></td>
                     <td>
                         <span class="glyphicon glyphicon-minus-sign orange"></span>

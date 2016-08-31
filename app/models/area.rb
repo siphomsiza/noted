@@ -1,11 +1,15 @@
 class Area < ActiveRecord::Base
   ActiveRecord::Base.establish_connection($current_session_db)
+  has_many :capital_projects
+  has_many :top_layer_sdbips
   has_many :wards, :dependent => :destroy
 	accepts_nested_attributes_for :wards, allow_destroy: true
 	validates_presence_of :name
 	validates_uniqueness_of :name
 	validates :name,format: { with: /\A[a-zA-Z',. ]+\z/ }
-
+  delegate :name, :to => :departmental_sdbips, :prefix => true
+  delegate :name, :to => :capital_projects, :prefix => true
+  delegate :name, :to => :top_layer_sdbips, :prefix => true
 	def ward_for_form
     collection = wards.where(area_id: id)
     collection.any? ? collection : wards.build

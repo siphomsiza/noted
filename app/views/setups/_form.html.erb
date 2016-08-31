@@ -7,7 +7,7 @@
   <% end %>
 	<%= f.label :performance_length, "If the performance comment/corrective measures fields are required,
 																	 what is the of minimum characters required?" %>
-  <%= f.select :performance_length, options_for_select([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]),
+  <%= f.select :performance_length, options_for_performance_length,
                                           {}, {:class => "form-control"} %>
 	<%= f.label :project_life_cycle, class: "checkbox inline" do %>
     <%= f.check_box :project_life_cycle %>

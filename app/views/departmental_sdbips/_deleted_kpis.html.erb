@@ -19,7 +19,7 @@
         <% @deleted_kpis.each do |deleted_kpi| %>
         <tr>
             <td><%= deleted_kpi.department.name %></td>
-            <td><%= deleted_kpi.subdepartment.subdepartment_name %></td>
+            <td><%= deleted_kpi.subdepartment.name %></td>
             <td><%= deleted_kpi.kpi %></td>
             <td><%= deleted_kpi.kpi_ref_number %></td>
             <td><% if !deleted_kpi.predetermined_objective_id.blank? %><%= deleted_kpi.predetermined_objective.name %><% end %></td>

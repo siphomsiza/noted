@@ -551,10 +551,10 @@ ActiveRecord::Schema.define(version: 20160826103737) do
   add_index "subdepartmental_administrators", ["user_id"], name: "index_subdepartmental_administrators_on_user_id", using: :btree
 
   create_table "subdepartments", force: :cascade do |t|
-    t.string   "subdepartment_name", null: false
+    t.string   "name",          null: false
     t.integer  "department_id"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   add_index "subdepartments", ["department_id"], name: "index_subdepartments_on_department_id", using: :btree

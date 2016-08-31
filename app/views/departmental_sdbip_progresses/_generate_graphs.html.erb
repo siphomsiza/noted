@@ -48,12 +48,12 @@
                 </div>
                 <div class="form-group col col-lg-12">
                     <label class="control-label">Group By:</label>
-                    <%= select_tag :group_by_selection, options_for_select([["Department","0"],["Performance Standard","1"],["KPA","2"]]),{:class=>'form-control'} %>
+                    <%= select_tag :group_by_selection, options_for_group_selection ,{:class=>'form-control'} %>
                 </div>
 
                 <div class="form-group col col-lg-12">
                     <label class="control-label">Graph Type:</label>
-                    <%= select_tag :graph_type_selection, options_for_select([["Bar Graph","0"],["Pie Chart","1"]]),{:required=>true,:class=>'form-control'} %>
+                    <%= select_tag :graph_type_selection, options_for_graph_selection,{:required=>true,:class=>'form-control'} %>
                 </div>
 
             </fieldset>

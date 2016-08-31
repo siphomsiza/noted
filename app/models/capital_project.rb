@@ -99,7 +99,7 @@ class CapitalProject < ActiveRecord::Base
         end
 
         if selected_project_columns.include?('Sub-Department')
-            audit_columns.push('capital_project.subdepartment.subdepartment_name')
+            audit_columns.push('capital_project.subdepartment.name')
             audit_columns_headers.push('Sub-Department')
             unless subdepartment_id.blank?
                 subdepartments_value = subdepartment_id
