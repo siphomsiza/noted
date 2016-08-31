@@ -63,8 +63,8 @@
                 <% @departmental_sdbips.each do |departmental_sdbip| %>
                 <tr>
                     <td>D<%= departmental_sdbip.id %></td>
-                    <td><%= departmental_sdbip.department.name %></td>
-                    <td><%= departmental_sdbip.subdepartment.subdepartment_name %></td>
+                    <td><%= departmental_sdbip.department_name %></td>
+                    <td><%= departmental_sdbip.subdepartment_name %></td>
                     <td>
                         <%= link_to audit_performance_path(departmental_sdbip),remote: true,'data-target' => "#audit-sdbip-modal", 'data-toggle' => 'modal', :title=>"Click to Update" do %>
                         <%= departmental_sdbip.kpi %>
@@ -125,7 +125,7 @@
                     <td><%= kpi_result.actual %></td>
                     <td><%= kpi_result.performance_comments %></td>
                     <td><%= kpi_result.corrective_measures %></td>
-                    <td><%= kpi_result.departmental_sdbip.source_of_evidence %></td>
+                    <td><%= kpi_result.departmental_sdbip_source_of_evidence %></td>
                     <td>
                         <% if !kpi_result.assurance.blank? %>
                         <% if kpi_result.assurance.signed_off? %>

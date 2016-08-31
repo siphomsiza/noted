@@ -5,7 +5,7 @@
             Reviewed By:
         </th>
         <td>
-            <%= assurance.user.firstname %>&nbsp;<%= assurance.user.surname%>
+            <%= assurance.user_firstname %>&nbsp;<%= assurance.user_surname%>
             <p>Updated on
                 <%= assurance.created_at.strftime("%d %B %Y %H:%M:%S") %></p>
         </td>
@@ -34,7 +34,7 @@
         <th>
             Assigned to:
         </th>
-        <td><%= assurance.kpi_result.user.firstname %>&nbsp;<%= assurance.kpi_result.user.surname %></td>
+        <td><%= assurance.kpi_result.user_firstname %>&nbsp;<%= assurance.kpi_result.user_surname %></td>
     </tr>
     <tr>
         <th>

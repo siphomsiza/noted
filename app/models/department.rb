@@ -15,7 +15,10 @@ class Department < ActiveRecord::Base
 	validates_uniqueness_of :name
 	validates :name,format: { with: /\A[a-zA-Z',. ]+\z/ }
 	validates_numericality_of :tel_no, :fax_no
-
+	delegate :name, :to => :departmental_sdbip, :prefix => true
+	delegate :name, :to => :roles, :prefix => true
+	delegate :name, :to => :monthly_cashflows, :prefix => true
+	delegate :name, :to => :top_layer_sdbips, :prefix => true
 	def subdepartment_for_form
     collection = subdepartments.where(department_id: id)
     collection.any? ? collection : subdepartments.build

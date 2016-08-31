@@ -31,7 +31,7 @@
                 </td>
                 <td><%= capital_project.departmental_sdbip.kpi_ref_number %></td>
                 <td><%= capital_project.subdepartment.department.name %></td>
-                <td><%= capital_project.subdepartment.subdepartment_name %></td>
+                <td><%= capital_project.subdepartment.name %></td>
                 <td><% if !capital_project.mscore_classification_id.blank? %><%= capital_project.mscore_classification.name %><% end %></td>
                 <td><%= capital_project.mun_cp_ref %></td>
                 <td><%= capital_project.idp_nummber %></td>
@@ -41,8 +41,8 @@
                 <td><%= capital_project.planned_completion_date %></td>
                 <td><%= capital_project.actual_start_date %></td>
                 <td><%= capital_project.actual_completion_date %></td>
-                <td><% if !capital_project.ward_id.blank? %><%= capital_project.ward.name %><% end %></td>
-                <td><% if !capital_project.area_id.blank? %><%= capital_project.area.name %><% end %></td>
+                <td><% if !capital_project.ward_id.blank? %><%= capital_project.ward_name %><% end %></td>
+                <td><% if !capital_project.area_id.blank? %><%= capital_project.area_name %><% end %></td>
 
             </tr>
             <% end %>

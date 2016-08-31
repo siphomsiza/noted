@@ -6,4 +6,14 @@ module UsersHelper
     gravatar_url = "https://secure.gravatar.com/avatar/#{gravatar_id}?s=#{size}"
     image_tag(gravatar_url, alt: user.firstname, class: "gravatar")
   end
+  def options_for_title
+  	options_for_select(["Dr.", "Miss.", "Mr.", "Mrs.", "Ms.", "Prof.", "Rev."])
+  end
+  def options_for_race
+  	 options_for_select(["African", "Coloured", "Indian", "White"])
+  end
+  def options_for_occupational_category
+  	options_for_select(["Top Management", "Senior Manager, Professionally Qualified, Experienced and Specialist", "Middle Management", "Skilled Technician and Academically Qualified Worker",
+            "Junior Management, Supervisor, Foreman and Superintendent","Semi-skilled and Discretionary Decision Making","Unskilled and Defined Decision Making"])
+  end
 end

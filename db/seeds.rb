@@ -112,30 +112,30 @@ Department.create!(name: "Planning and Development",
   tel_no:landline,
   fax_no: mobile)
 
-Subdepartment.create!(subdepartment_name: "Municipal Manager's Office", department_id: "1")
-Subdepartment.create!(subdepartment_name: "Internal Audit", department_id: "1",)
-Subdepartment.create!(subdepartment_name: "Performance Management Unit", department_id: "1")
-Subdepartment.create!(subdepartment_name: "Legal Services", department_id: "1")
-Subdepartment.create!(subdepartment_name: "Forestry", department_id: "1")
+Subdepartment.create!(name: "Municipal Manager's Office", department_id: "1")
+Subdepartment.create!(name: "Internal Audit", department_id: "1",)
+Subdepartment.create!(name: "Performance Management Unit", department_id: "1")
+Subdepartment.create!(name: "Legal Services", department_id: "1")
+Subdepartment.create!(name: "Forestry", department_id: "1")
 
-Subdepartment.create!(subdepartment_name: "Budget And Financial Reporting", department_id: "2")
-Subdepartment.create!(subdepartment_name: "Expenditure", department_id: "2")
-Subdepartment.create!(subdepartment_name: "ICT", department_id: "2")
-Subdepartment.create!(subdepartment_name: "Revenue", department_id: "2")
-Subdepartment.create!(subdepartment_name: "Supply Chain Management", department_id: "2")
+Subdepartment.create!(name: "Budget And Financial Reporting", department_id: "2")
+Subdepartment.create!(name: "Expenditure", department_id: "2")
+Subdepartment.create!(name: "ICT", department_id: "2")
+Subdepartment.create!(name: "Revenue", department_id: "2")
+Subdepartment.create!(name: "Supply Chain Management", department_id: "2")
 
-Subdepartment.create!(subdepartment_name: "Department Of Community Service", department_id: "3")
+Subdepartment.create!(name: "Department Of Community Service", department_id: "3")
 
-Subdepartment.create!(subdepartment_name: "Corporate Services", department_id: "4")
+Subdepartment.create!(name: "Corporate Services", department_id: "4")
 
-Subdepartment.create!(subdepartment_name: "Water and Sanitation", department_id: "5")
-Subdepartment.create!(subdepartment_name: "Electrical Services", department_id: "5")
-Subdepartment.create!(subdepartment_name: "Roads and Storm Water", department_id: "5")
-Subdepartment.create!(subdepartment_name: "Project Management Unit", department_id: "5")
+Subdepartment.create!(name: "Water and Sanitation", department_id: "5")
+Subdepartment.create!(name: "Electrical Services", department_id: "5")
+Subdepartment.create!(name: "Roads and Storm Water", department_id: "5")
+Subdepartment.create!(name: "Project Management Unit", department_id: "5")
 
-Subdepartment.create!(subdepartment_name: "Planning and Development", department_id: "6")
-Subdepartment.create!(subdepartment_name: "Human Settlements", department_id: "6")
-Subdepartment.create!(subdepartment_name: "Building Control", department_id: "6")
+Subdepartment.create!(name: "Planning and Development", department_id: "6")
+Subdepartment.create!(name: "Human Settlements", department_id: "6")
+Subdepartment.create!(name: "Building Control", department_id: "6")
 
 #directory = File.join(File.dirname(__FILE__), '/migrate/data')
 # From lookup_classes

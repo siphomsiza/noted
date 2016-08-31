@@ -13,9 +13,9 @@
   </tr>
   <% @monthly_cashflows.each do |monthly_cashflow| %>
     <tr>
-      <td><%= monthly_cashflow.department.name %></td>
-      <td><%= monthly_cashflow.subdepartment.subdepartment_name %></td>
-      <td><%= monthly_cashflow.mscore_classification.name %></td>
+      <td><%= monthly_cashflow.department_name %></td>
+      <td><%= monthly_cashflow.subdepartment_name %></td>
+      <td><%= monthly_cashflow.mscore_classification_name %></td>
       <td><%= monthly_cashflow.line_item %></td>
       <td><%= monthly_cashflow.month %></td>
       <td><%= monthly_cashflow.vote_number %></td>

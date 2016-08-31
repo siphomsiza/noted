@@ -55,8 +55,8 @@
 		<tbody>
 		<tr>
 			<td class="ref">D<%= departmental_sdbip.id %></td>
-			<td class="department"><%= departmental_sdbip.department.name %></td>
-			<td class="subdepartment"><%= departmental_sdbip.subdepartment.subdepartment_name %></td>
+			<td class="department"><%= departmental_sdbip.department_name %></td>
+			<td class="subdepartment"><%= departmental_sdbip.subdepartment_name %></td>
 			<td class="kpi">
 
 				<%= link_to departmental_sdbip_path(departmental_sdbip),remote: true,'data-target' => "#show-departmental-sdbip-modal", 'data-toggle' => 'modal', :title=>"Click to View KPI details" do %>

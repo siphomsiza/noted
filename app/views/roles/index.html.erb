@@ -59,8 +59,8 @@ $(function() {
       <tbody>
       <% @roles.each do |role| %>
         <tr>
-					  <td><%=  role.user.firstname %><%=  role.user.surname %></td>
-          <td><%= link_to role.user.email %></td>
+					  <td><%=  role.user_firstname %><%=  role.user_surname %></td>
+          <td><%= link_to role.user_email %></td>
           <td><% if role.kpi_owner? %>
 					<span class="glyphicon glyphicon-ok-sign"></span>
 					<% else %>

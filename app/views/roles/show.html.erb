@@ -1,11 +1,11 @@
-<% provide(:title, @role.user.firstname) %>
+<% provide(:title, @role.user_firstname) %>
 <script>
 $(function() {
 	//highlight the current nav
 	$("#applicationmanifest a:contains('SETUP')").parent().addClass('active');
 }); //jQuery is loaded
 </script>
-<h3><%= @role.user.firstname %></h3>
+<h3><%= @role.user_firstname %></h3>
 <hr/>
 <div class="row">
 	<div class="col-md-4 col-sm-8">
@@ -31,7 +31,7 @@ $(function() {
 <output>
 <% if !@role.roles_details.blank? %>
 <% @role.roles_details.each do |role_detail| %>
-<%= role_detail.department.name %>
+<%= role_detail.department_name %>
 <% end %>
 <% end %>
 </output>
@@ -40,7 +40,7 @@ $(function() {
 <output>
 <% if !@role.roles_details.blank? %>
 <% @role.roles_details.each do |role_detail| %>
-<%= role_detail.subdepartment.subdepartment_name %>
+<%= role_detail.subdepartment_name %>
 <% end %>
 <% end %>
 </output>

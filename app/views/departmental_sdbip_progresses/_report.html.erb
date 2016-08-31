@@ -78,27 +78,27 @@
                 <% if @selected_headers.include?("KPI")%>
                 <td><%= departmental_sdbip.kpi %></td><% end %>
                 <% if @selected_headers.include?("Department")%>
-                <td><%= departmental_sdbip.department.name %></td><% end %>
+                <td><%= departmental_sdbip.department_name %></td><% end %>
                 <% if @selected_headers.include?("Subdepartment")%>
-                <td><%= departmental_sdbip.subdepartment.subdepartment_name %></td><% end %>
+                <td><%= departmental_sdbip.subdepartment_name %></td><% end %>
                 <% if @selected_headers.include?("KPI Ref Number")%>
                 <td><%= departmental_sdbip.kpi_ref_number %></td><% end %>
                 <% if @selected_headers.include?("KPI Type")%>
-                <td><% if !departmental_sdbip.kpi_type_id.blank? %><%= departmental_sdbip.kpi_type.name %><% end %></td><% end %>
+                <td><% if !departmental_sdbip.kpi_type_id.blank? %><%= departmental_sdbip.kpi_type_name %><% end %></td><% end %>
                 <% if @selected_headers.include?("Predetermined Objectives")%>
-                <td><% if !departmental_sdbip.predetermined_objective_id.blank? %><%= departmental_sdbip.predetermined_objective.name %><% end %></td><% end %>
+                <td><% if !departmental_sdbip.predetermined_objective_id.blank? %><%= departmental_sdbip.predetermined_objective_name %><% end %></td><% end %>
                 <% if @selected_headers.include?("KPI Owner")%>
-                <td><% if !departmental_sdbip.kpi_owner_id.blank? %><%= departmental_sdbip.kpi_owner.name %><% end %></td><% end %>
+                <td><% if !departmental_sdbip.kpi_owner_id.blank? %><%= departmental_sdbip.kpi_owner_name %><% end %></td><% end %>
                 <% if @selected_headers.include?("Unit of Measurement")%>
                 <td><%= departmental_sdbip.unit_of_measurement %></td><% end %>
                 <% if @selected_headers.include?("Mscore Classification")%>
-                <td><%= departmental_sdbip.mscore_classification.name %></td><% end %>
+                <td><%= departmental_sdbip.mscore_classification_name %></td><% end %>
                 <% if @selected_headers.include?("IDP Ref")%>
                 <td><%= departmental_sdbip.idp_ref %></td><% end %>
                 <% if @selected_headers.include?("National Outcome")%>
-                <td><% if !departmental_sdbip.national_outcome_id.blank? %><%= departmental_sdbip.national_outcome.name %><% end %></td><% end %>
+                <td><% if !departmental_sdbip.national_outcome_id.blank? %><%= departmental_sdbip.national_outcome_name %><% end %></td><% end %>
                 <% if @selected_headers.include?("Strategic Objectives")%>
-                <td><%= departmental_sdbip.strategic_objective.name %></td><% end %>
+                <td><%= departmental_sdbip.strategic_objective_name %></td><% end %>
                 <% if @selected_headers.include?("Source of Evidence")%>
                 <td><%= departmental_sdbip.source_of_evidence %></td><% end %>
                 <% if @selected_headers.include?("Baseline")%>
@@ -118,21 +118,21 @@
                 <% if @selected_headers.include?("Performance Standard")%>
                 <td><%= departmental_sdbip.performance_standard %></td><% end %>
                 <% if @selected_headers.include?("Risk Rating")%>
-                <td><% if !departmental_sdbip.risk_rating_id.blank?%><%= departmental_sdbip.risk_rating.name %><% end %></td><% end %>
+                <td><% if !departmental_sdbip.risk_rating_id.blank?%><%= departmental_sdbip.risk_rating_name %><% end %></td><% end %>
                 <% if @selected_headers.include?("KPA")%>
-                <td><% if !departmental_sdbip.kpa_id.blank? %><%= departmental_sdbip.kpa.name %><% end %></td><% end %>
+                <td><% if !departmental_sdbip.kpa_id.blank? %><%= departmental_sdbip.kpa_name %><% end %></td><% end %>
                 <% if @selected_headers.include?("NDP Objectives")%>
-                <td><% if !departmental_sdbip.ndp_objective_id.blank? %><%= departmental_sdbip.ndp_objective.name %><% end %></td><% end %>
+                <td><% if !departmental_sdbip.ndp_objective_id.blank? %><%= departmental_sdbip.ndp_objective_name %><% end %></td><% end %>
                 <% if @selected_headers.include?("Capital Project")%>
                 <td><% if !departmental_sdbip.capital_project_id.blank? %>
-                    <%= departmental_sdbip.capital_project.mun_cp_ref %>
+                    <%= departmental_sdbip.capital_project_mun_cp_ref %>
                     <% end %>
                 </td>
                 <% end %>
                 <% if @selected_headers.include?("KPI Concept")%>
                 <td>
                     <% if !departmental_sdbip.kpi_concept_id.blank? %>
-                    <%= departmental_sdbip.kpi_concept.name %>
+                    <%= departmental_sdbip.kpi_concept_name %>
                     <% end %>
                 </td>
                 <% end %>
@@ -144,21 +144,21 @@
                 <% if @selected_headers.include?("Provincial Strategic Objectives")%>
                 <td>
                     <% if !departmental_sdbip.provincial_strategic_outcome_id.blank? %>
-                    <%= departmental_sdbip.provincial_strategic_outcome.name %>
+                    <%= departmental_sdbip.provincial_strategic_outcome_name %>
                     <% end %>
                 </td>
                 <% end %>
                 <% if @selected_headers.include?("Area")%>
                 <td>
                     <% if !departmental_sdbip.area_id.blank? %>
-                    <%= departmental_sdbip.area.name %>
+                    <%= departmental_sdbip.area_name %>
                     <% end %>
                 </td>
                 <% end %>
                 <% if @selected_headers.include?("Ward")%>
                 <td>
                     <% if !departmental_sdbip.ward_id.blank? %>
-                    <%= departmental_sdbip.ward.name %>
+                    <%= departmental_sdbip.ward_name %>
                     <% end %>
                 </td>
                 <% end %>
@@ -170,7 +170,7 @@
                 <% if @selected_headers.include?("Reporting Category")%>
                 <td>
                     <% if !departmental_sdbip.reporting_category_id.blank? %>
-                    <%= departmental_sdbip.reporting_category.name %>
+                    <%= departmental_sdbip.reporting_category_name %>
                     <% end %>
                 </td>
                 <% end %>
@@ -182,7 +182,7 @@
                 <% if @selected_headers.include?("KPI Calculation Type")%>
                 <td>
                     <% if !departmental_sdbip.kpi_calculation_type_id.blank? %>
-                    <%= departmental_sdbip.kpi_calculation_type.name %>
+                    <%= departmental_sdbip.kpi_calculation_type_name %>
                     <% end %>
                 </td>
                 <% end %>

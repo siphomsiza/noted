@@ -49,7 +49,7 @@ $(function() {
             <td><% @department.subdepartments %>
         <ol class="subdepartments">
           <% @department.subdepartments.each do |subdepartment| %>
-            <li><%=  subdepartment.subdepartment_name %></li>
+            <li><%=  subdepartment.name %></li>
            <% end %>
         </ol>
       </td>

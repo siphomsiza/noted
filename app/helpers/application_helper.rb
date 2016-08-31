@@ -18,20 +18,6 @@ module ApplicationHelper
     link_to(name, '', class: "btn add_fields btn-mini", data: { id: id, fields: fields.gsub("\n", "")})
   end
 
-  def sortable(column, title = nil)
-  title ||= column.titleize
-  css_class = column == sort_column ? "current #{sort_direction}" : nil
-  direction = column == sort_column && sort_direction == "asc" ? "desc" : "asc"
-  link_to title, params.merge(:sort => column, :direction => direction, :page => nil), {:class => css_class}
-  end
-def javascript(*files)
-  content_for(:head) { javascript_include_tag(*files) }
-end
-
-def stylesheet(*files)
-  content_for(:head) { stylesheet_link_tag(*files) }
-end
-
 def active_class(link_path)
   current_page?(link_path) ? "active" : ""
 end

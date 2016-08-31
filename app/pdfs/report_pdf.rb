@@ -397,7 +397,7 @@ class ReportPdf < Prawn::Document
       @departmental_sdbips.map do |sdbip|
       [sdbip.id, 
         sdbip.department.name, 
-        sdbip.subdepartment.subdepartment_name, 
+        sdbip.subdepartment.name, 
         sdbip.predetermined_objective.name, 
         sdbip.kpi_owner.name]
     end

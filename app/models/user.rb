@@ -2,12 +2,18 @@ class User < ActiveRecord::Base
   ActiveRecord::Base.establish_connection($current_session_db)
   belongs_to :department
   has_one :jobtitle
+  has_many :roles
   has_many :kpi_results
+  has_many :top_layer_administrators
   has_many :assurances
   has_many :attachments
   has_many :kpi_owners
   has_one :subdepartmental_administrator
   has_one :departmental_administrator
+  delegate :firstname,:surname, :to => :subdepartmental_administrator, :prefix => true
+  delegate :firstname,:surname, :to => :top_layer_administrators, :prefix => true
+  delegate :firstname,:surname,:email, :to => :roles, :prefix => true
+  delegate :firstname,:surname,:email, :to => :kpi_results, :prefix => true
   has_many :activity_logs
   has_one :role, :dependent => :destroy
   attr_accessor :remember_token, :activation_token, :reset_token
