@@ -147,7 +147,7 @@
             if (target_value > 0) {
                 percentages = (actual_value / target_value) * 100;
                 over_all_percentages = (over_all_actual / target_value) * 100;
-                //KPI performance standard
+             
                 if (percentages >= 0 && percentages < 49) {
                     $("#kpi-result").val("KPI Not Met");
                 }
@@ -163,7 +163,7 @@
                 if (percentages >= 150) {
                     $("#kpi-result").val("KPI Extremely Well Met");
                 }
-                //Over all KPI performance Standard
+                
                 if (over_all_percentages >= 0 && over_all_percentages < 49) {
                     $("#over-all-performance").val("KPI Not Met");
                 }

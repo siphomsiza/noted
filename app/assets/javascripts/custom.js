@@ -1,17 +1,4 @@
-$(document).ready(function(){
-  var closed_primary_periods = <%= $closed_primary.ids %>;
-  var closed_secondary_periods = <%= $closed_secondary.ids %>;
-  $.ajax({
-    type: "POST",
-    url: "/sdbip_time_periods/update_status",
-    data: {
-      primary_data_value: closed_primary_periods,
-      secondary_data_value: closed_secondary_periods
-    },
-    success: function (data) {},
-    error: function (data) {}
-  });
-});
+
 $(document).ready(function () {
 window.setTimeout(function() {
     $(".alert").fadeTo(1500, 0).slideUp(500, function(){
@@ -49,7 +36,6 @@ $(document).ready(function(){
                 }
             });
             toggleFields();
-        });
 
         function toggleFields(){
           $("#kpi_owner_select").hide();
@@ -60,7 +46,8 @@ $(document).ready(function(){
           $("#update_subdepartment_select").hide();
           $('#disability_description_fields').hide();
         }
-
+});
+$(document).ready(function(){
   $(function() {
       $( "#accordion" ).accordion({
         collapsible: true
@@ -79,55 +66,34 @@ $(document).ready(function(){
 
         });
   });
+    $(function() {
 
+    //activate schedule tabs
+    var hash = window.location.hash;
+    hash && $('ul.nav a[href="' + hash + '"]').tab('show');
 
-  $(function() {
-
-  	//activate schedule tabs
-  	var hash = window.location.hash;
-  	hash && $('ul.nav a[href="' + hash + '"]').tab('show');
-
-  	//highlight the current nav
-  	$("#introduction a:contains('INTRODUCTION')").parent().addClass('active');
-  	$("#dashboard a:contains('DASHBOARD')").parent().addClass('active');
-  	$("#setup a:contains('SETUP')").parent().addClass('active');
-  	$("#sdbip a:contains('SDBIP')").parent().addClass('active');
-  	$("#reports a:contains('REPORTS')").parent().addClass('active');
+    //highlight the current nav
+    $("#introduction a:contains('INTRODUCTION')").parent().addClass('active');
+    $("#dashboard a:contains('DASHBOARD')").parent().addClass('active');
+    $("#setup a:contains('SETUP')").parent().addClass('active');
+    $("#sdbip a:contains('SDBIP')").parent().addClass('active');
+    $("#reports a:contains('REPORTS')").parent().addClass('active');
     $("#users a:contains('USERS')").parent().addClass('active');
-  	$("#contact a:contains('CONTACT')").parent().addClass('active');
+    $("#contact a:contains('CONTACT')").parent().addClass('active');
 
 
-  	//make menus drop automatically
-  	$('ul.nav li.dropdown').hover(function() {
-  		$('.dropdown-menu', this).fadeIn();
-  	}, function() {
-  		$('.dropdown-menu', this).fadeOut('fast');
-  	});//hover
+    //make menus drop automatically
+    $('ul.nav li.dropdown').hover(function() {
+      $('.dropdown-menu', this).fadeIn();
+    }, function() {
+      $('.dropdown-menu', this).fadeOut('fast');
+    });
 
-  	//show tooltips
-  	$("[data-toggle='tooltip']").tooltip({ animation: true});
-
-  	//show modals
-
-  	//$('.modalphotos img').on('click', function() {
-  	//	$('#modal').modal({
-  	//		show: true,
-  	//	})
-
-  	//	var mysrc = this.src.substr(0, this.src.length-7) + '.jpg';
-  	//	$('#modalimage').attr('src', mysrc);
-  	//	$('#modalimage').on('click', function(){
-  	//			$('#modal').modal('hide');
-  	//	})//hide modal
-  	//});//show modal
-
+    //show tooltips
+    $("[data-toggle='tooltip']").tooltip({ animation: true});
 
   }); //jQuery is loaded
-  $('#submit-button').on('click', function() {
-  	$('#reports-modal').modal({
-  		show: true,
-    })
-  }); //
+});
 
 $(document).ready(function(){
 	$("#datepicker1").on("dp.change", function (e) {
