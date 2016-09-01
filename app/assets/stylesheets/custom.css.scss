@@ -186,16 +186,7 @@ footer {
 
 /****** Form Elements ********/
 /* forms */
-input:required:invalid, input:focus:invalid {
-    //background-image: url(/images/invalid.png);
-    background-position: right top;
-    background-repeat: no-repeat;
-  }
-  input:required:valid {
-    //background-image: url(/images/valid.png);
-    background-position: right top;
-    background-repeat: no-repeat;
-  }
+
 input, textarea, select, .uneditable-input {
   border: 1px solid #bbb;
   width: 100%;
