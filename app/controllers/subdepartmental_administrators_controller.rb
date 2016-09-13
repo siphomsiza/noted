@@ -84,7 +84,4 @@ class SubdepartmentalAdministratorsController < ApplicationController
         #redirect_to(root_url) unless
         current_user.admin?
       end
-      def kpi_owner_user
-        redirect_to(root_url) unless !current_user.role.blank? || current_user.admin?
-      end
 end

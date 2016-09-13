@@ -1,6 +1,6 @@
 <div class = "tab-pane fade" id = "add_administrator"><br/>
       <ul class="roles">
         <h3>New Top Layer Administrator</h3><hr/>
-        <%= render 'form' %>
+        <%= render partial: 'form', {:top_layer_administrator => @top_layer_administrator,:users_for_departmental_administrators => @users_for_departmental_administrators} %>
       </ul>
   </div>

@@ -53,7 +53,7 @@ $(function() {
 							<p> You currently have no Revenue By Source(s). </p>
 							<% elsif !@revenue_by_sources.blank? %>
 							<div class="table-responsive">
-								<%= render 'revenue_by_sources'%>
+								<%= render partial: 'revenue_by_sources', :locals=>{:revenue_by_sources => @revenue_by_sources} %>
 								<%= will_paginate @revenue_by_sources %>
 							</div>
 							<% end %>
@@ -73,7 +73,7 @@ $(function() {
 
 							<div class="table-responsive">
 
-								<%= render 'update_revenue_by_source'%>
+								<%= render partial: 'update_revenue_by_source',:locals=>{:revenue_by_sources => @revenue_by_sources} %>
 
 								<%= will_paginate @revenue_by_sources %>
 
@@ -98,7 +98,7 @@ $(function() {
 
 							<div class="table-responsive">
 
-								<%= render 'edit_revenue_by_source'%>
+								<%= render partial: 'edit_revenue_by_source', :locals=>{:revenue_by_sources => @revenue_by_sources} %>
 
 								<%= will_paginate @revenue_by_sources %>
 
@@ -110,7 +110,7 @@ $(function() {
 						<div class = "tab-pane fade" id = "new_revenue_by_source">
 
 										<h2>New Monthly Cashflow</h2>
-							<%= render 'form' %>
+							<%= render partial: 'form', :locals=>{:revenue_by_source => @revenue_by_source} %>
 						</div>
 					</div>
 

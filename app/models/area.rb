@@ -10,8 +10,5 @@ class Area < ActiveRecord::Base
   delegate :name, :to => :departmental_sdbips, :prefix => true
   delegate :name, :to => :capital_projects, :prefix => true
   delegate :name, :to => :top_layer_sdbips, :prefix => true
-	def ward_for_form
-    collection = wards.where(area_id: id)
-    collection.any? ? collection : wards.build
-  	end
+	
 end

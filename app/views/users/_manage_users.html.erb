@@ -17,12 +17,12 @@
 
 				<section class="tab-content">
 
-			    <%= render 'active_users' %>
-			    <%= render 'inactive_users' %>
-					<%= render 'new_users' %>
-			    <%= render 'locked_users' %>
-			    <%= render 'terminated_users' %>
-					<%= render 'all_users' %>
+			    <%= render partial: 'active_users', :locals => { :active_users => @active_users } %>
+			    <%= render partial: 'inactive_users', :locals => { :inactive_users => @inactive_users } %>
+				<%= render partial: 'new_users', :locals => { :new_users => @new_users } %>
+			    <%= render partial: 'locked_users', :locals => { :locked_users => @locked_users } %>
+			    <%= render partial: 'terminated_users', :locals => { :terminated_users => @terminated_users } %>
+				<%= render partial: 'all_users', :locals => { :users => @users } %>
 
 				</section><!-- tab-content -->
 

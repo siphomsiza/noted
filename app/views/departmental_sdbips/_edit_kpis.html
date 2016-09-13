@@ -25,7 +25,7 @@
 
                                                 <%= f.select :subdepartment_id, Subdepartment.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select Subdepartment"}, :id=>"selected_subdepartment_edit", class: "form-control" %>
 
-                                                    <%= f.hidden_field :name, id: "current_subdepartment_update" %>
+                                                    <%= f.hidden_field :subdepartment_name, id: "current_subdepartment_update" %>
 
                                                         <%= f.label :kpi_ref_number, "KPI Ref Number" %>
                                                             <br>
@@ -189,7 +189,7 @@
             <div class="row">
                 <div class="col-lg-10 col-md-offset-1">
                     <% if @departmental_sdbip.kpi_results.any? %>
-                        <%= render 'results' %>
+                        <%= render partial: 'results', :locals => {:departmental_sdbip => @departmental_sdbip,:time_periods => @time_periods } %>
                             <% end %>
                 </div>
             </div>

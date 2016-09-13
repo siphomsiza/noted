@@ -4,21 +4,15 @@ class RolesController < ApplicationController
   before_action :set_role, only: [:show, :edit, :update,:grant_user_access, :destroy,:edit_user_role,:edit_user_access]
   def index
     begin
-
         @client = YahooWeather::Client.new
         @response = @client.fetch(1582504)
         @doc = @response.doc
         @forecast = @doc["item"]["forecast"]
-      #@response = @client.fetch_by_location('New York')
-      #@response.units.temperature
-      #@response.condition.temp
-
   rescue SocketError => e
-    flash[:notice] = "received Exception #{e.message}"
-    puts "received Exception #{e}"
+    flash[:danger] = "received Exception #{e.message}"
   end
+    @users_for_role = User.where('id NOT IN(SELECT (user_id) FROM roles)')
     @role = Role.new
-    @role.roles_details.build
     @roles = Role.paginate(page: params[:page],per_page: 15).includes(:user)
     @departments = Department.all
   end
@@ -45,7 +39,6 @@ class RolesController < ApplicationController
 
   def new
     @role = Role.new
-    @role.roles_details.build
   end
 
   def create
@@ -87,7 +80,7 @@ class RolesController < ApplicationController
     def role_params
         params.require(:role).permit(:user_id,
           :kpi_owner, :top_layer_administrator, :audit_log_reporting,:setup,
-          :assurance_provider,:finance_admin, :secondary_time_period, :roles_details_attributes=>[:id,:department_id,:subdepartment_id,:_destroy],)
+          :assurance_provider,:finance_admin, :secondary_time_period)
     end
 
     def set_role
@@ -106,8 +99,5 @@ class RolesController < ApplicationController
       def admin_user
         #redirect_to(root_url) unless
         current_user.admin?
-      end
-      def kpi_owner_user
-        redirect_to(root_url) unless !current_user.role.blank? || current_user.admin?
       end
 end

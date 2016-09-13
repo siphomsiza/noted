@@ -7,11 +7,11 @@
             <div class="row">
                 <div class="col col-lg-10 col-lg-offset-1">
                     <%= form_for(@departmental_sdbip) do |f| %>
-                        <%= render 'kpi_details' %>
+                        <%= render partial: 'kpi_details', :locals => {:departmental_sdbip => @departmental_sdbip } %>
                             <% if @departmental_sdbip.kpi_results.any? %>
                                 <% @departmental_sdbip.kpi_results.each do |result| %>
                                     <% @result = result %>
-                                            <%= render 'audited_results' %>
+                                            <%= render partial: 'audited_results', :departmental_sdbip => @departmental_sdbip %>
                                                 <%= f.fields_for :assurances do |assurance_for_form| %>
 
                                                     <%= render 'assurance_fields', f: assurance_for_form %>
@@ -32,7 +32,7 @@
         <div class="col col-lg-10 col-lg-offset-1">
             <h5>Assurance Review History</h5>
                 <% if @departmental_sdbip.assurances.any? %>
-                    <%= render 'assurance_review' %>
+                    <%= render partial: 'assurance_review', :locals => {:departmental_sdbip => @departmental_sdbip} %>
                 <% else %>
                     <p>No Assurance Review associated with KPI.</p>
                 <% end %>

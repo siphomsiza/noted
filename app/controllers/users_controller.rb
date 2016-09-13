@@ -6,31 +6,24 @@ class UsersController < ApplicationController
 
     def index
         begin
-
             @client = YahooWeather::Client.new
             @response = @client.fetch(1_582_504)
             @doc = @response.doc
             @forecast = @doc['item']['forecast']
-        # @response = @client.fetch_by_location('New York')
-        # @response.units.temperature
-        # @response.condition.temp
-
         rescue SocketError => e
-            flash[:notice] = "received Exception #{e.message}"
-            puts "received Exception #{e}"
+            flash[:danger] = "received Exception #{e.message}"
         end
-        @system_users = User.all
         @user_activities = ActivityLog.where(admin: false).paginate(page: params[:page], per_page: 15).includes(:user)
         @super_user_activities = ActivityLog.where(admin: true).paginate(page: params[:page], per_page: 15).includes(:user)
         @user = User.new
-        @users = @system_users.paginate(page: params[:page], per_page: 15).includes(:department).includes(:role)
-        @admin_users = @system_users.where('admin = ? OR super_admin = ?', true, true).paginate(page: params[:page], per_page: 15)
-        @active_users = @system_users.where(activated: true).paginate(page: params[:page], per_page: 15).includes(:role)
-        @inactive_users = @system_users.where(activated: false).paginate(page: params[:page], per_page: 15)
-        @terminated_users = @system_users.where(terminated: true).paginate(page: params[:page], per_page: 15)
-        @new_users = @system_users.where(activated: false).paginate(page: params[:page], per_page: 15)
-        @locked_users = @system_users.where('login_attempts >= max_login_attempts').paginate(page: params[:page], per_page: 15)
-        @user_login_attempts = @system_users.where('login_count > ? OR login_attempts > ?', 0, 0).paginate(page: params[:page], per_page: 15)
+        @users = User.paginate(page: params[:page], per_page: 15).includes(:department).includes(:role)
+        @admin_users = User.where('admin = ? OR super_admin = ?', true, true).paginate(page: params[:page], per_page: 15)
+        @active_users = User.where(activated: true).paginate(page: params[:page], per_page: 15).includes(:role)
+        @inactive_users = User.where(activated: false).paginate(page: params[:page], per_page: 15)
+        @terminated_users = User.where(terminated: true).paginate(page: params[:page], per_page: 15)
+        @new_users = User.where(activated: false).paginate(page: params[:page], per_page: 15)
+        @locked_users = User.where('login_attempts >= max_login_attempts').paginate(page: params[:page], per_page: 15)
+        @user_login_attempts = User.where('login_count > ? OR login_attempts > ?', 0, 0).paginate(page: params[:page], per_page: 15)
     end
 
     def set_new_password
@@ -42,13 +35,8 @@ class UsersController < ApplicationController
         @response = @client.fetch(1_582_504)
         @doc = @response.doc
         @forecast = @doc['item']['forecast']
-    # @response = @client.fetch_by_location('New York')
-    # @response.units.temperature
-    # @response.condition.temp
-
     rescue SocketError => e
-        flash[:notice] = "received Exception #{e.message}"
-        puts "received Exception #{e}"
+        flash[:danger] = "received Exception #{e.message}" 
     end
 
     def set_super_user
@@ -59,7 +47,7 @@ class UsersController < ApplicationController
                 redirect_to users_path
             end
         else
-            flash[:warning] = "failed to set #{@user.firstname} #{@user.surname} as super user/admin."
+            flash[:danger] = "failed to set #{@user.firstname} #{@user.surname} as super user/admin."
             redirect_to users_path
         end
     end
@@ -138,7 +126,7 @@ class UsersController < ApplicationController
                 redirect_to users_path
             end
         else
-            flash[:warning] = 'Maximum login attempts not updated.'
+            flash[:danger] = 'Maximum login attempts not updated.'
             redirect_to users_path
         end
     end

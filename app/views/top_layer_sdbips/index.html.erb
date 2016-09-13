@@ -60,7 +60,7 @@ $(function() {
 						<p> You currently have no Top Layer SDBIPs. </p>
 						<% elsif !@top_layer_sdbips.blank? %>
 						<div class="table-responsive">
-							<%= render 'top_layer_sdbips'%>
+							<%= render partial: 'top_layer_sdbips', :locals=>{:top_layer_sdbips => @top_layer_sdbips } %>
 							<%= will_paginate @top_layer_sdbips %>
 						</div>
 						<% end %>
@@ -74,7 +74,7 @@ $(function() {
 									<p> You currently have no Top Layer SDBIPs to edit. </p>
 									<% elsif !@top_layer_sdbips.blank? %>
 									<div class="table-responsive">
-										<%= render 'update_top_layer_sdbip'%>
+										<%= render partial: 'update_top_layer_sdbip', :locals=>{:top_layer_sdbips => @top_layer_sdbips} %>
 										<%= will_paginate @top_layer_sdbips %>
 									</div>
 									<% end %>
@@ -88,7 +88,7 @@ $(function() {
 									<p> You currently have no Top Layer SDBIPs to update. </p>
 									<% elsif !@top_layer_sdbips.blank? %>
 									<div class="table-responsive">
-										<%= render 'edit_top_layer_sdbip'%>
+										<%= render partial: 'edit_top_layer_sdbip', :locals=>{:top_layer_sdbips => @top_layer_sdbips} %>
 										<%= will_paginate @top_layer_sdbips %>
 									</div>
 									<% end %>
@@ -96,7 +96,7 @@ $(function() {
 
 					<div class = "tab-pane fade" id = "new-top-layer-sdbip">
 										<h2>New Top Layer SDBIP</h2>
-										<%= render 'form' %>
+										<%= render partial: 'form', :locals=>{:top_layer_sdbip => @top_layer_sdbip} %>
 					</div>
 				</div>
 		</div>

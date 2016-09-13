@@ -15,7 +15,7 @@
 
    <div class="panel panel-default col-lg-6">
       <div class="panel-body">
-        <%= column_chart @departmental_sdbips.group(:performance_standard,:name).count, width: "400px", height: "400px", stacked: true, colors: @colours %>
+        <%= column_chart @departmental_sdbips.group(:performance_standard,:subdepartment_name).count, width: "400px", height: "400px", stacked: true, colors: @colours %>
       </div>
       <!-- /.panel-body -->
     </div>

@@ -3,27 +3,27 @@
     <table class="table table-responsive table-striped">
         <tr>
             <th>Ref:</th>
-            <td>D<%= @capital_project.departmental_sdbip_id %></td>
+            <td>D<%= capital_project.departmental_sdbip_id %></td>
         </tr>
         <tr>
             <th>Department:</th>
-            <td><%= @capital_project.subdepartment.department.name %></td>
+            <td><%= capital_project.subdepartment.department.name %></td>
         </tr>
         <tr>
             <th>KPI:</th>
-            <td><%= @capital_project.departmental_sdbip_kpi %></td>
+            <td><%= capital_project.departmental_sdbip.kpi %></td>
         </tr>
         <tr>
             <th>Unit of Measurement:</th>
-            <td><%= @capital_project.departmental_sdbip_unit_of_measurement %></td>
+            <td><%= capital_project.departmental_sdbip.unit_of_measurement %></td>
         </tr>
         <tr>
             <th>Source of Evidence:</th>
-            <td><%= @capital_project.departmental_sdbip_source_of_evidence %></td>
+            <td><%= capital_project.departmental_sdbip.source_of_evidence %></td>
         </tr>
         <tr>
             <th>KPI calculation Type:</th>
-            <td><%= @capital_project.departmental_sdbip.kpi_calculation_type.name %></td>
+            <td><%= capital_project.departmental_sdbip.kpi_calculation_type.name %></td>
         </tr>
     </table>
     <div class="row">
@@ -46,12 +46,12 @@
                 </tr>
                 <tr>
                     <th>July&nbsp;
-                        <% @time_periods.select(:period).where("extract(month  from period) = ?", 7 ).each do |time_period| %>
+                        <% time_periods.select(:period).where("extract(month  from period) = ?", 7 ).each do |time_period| %>
                         <%= time_period.period.strftime("%Y") %>
                         <% end %>
                     </th>
-                    <% if @capital_project.departmental_sdbip.kpi_results.where("extract(month  from created_at) = ?", 7 ).any? %>
-                    <% @capital_project.departmental_sdbip.kpi_results.where("extract(month  from created_at) = ?", 7 ).each do |kpi_result| %>
+                    <% if capital_project.departmental_sdbip.kpi_results.where("extract(month  from created_at) = ?", 7 ).any? %>
+                    <% capital_project.departmental_sdbip.kpi_results.where("extract(month  from created_at) = ?", 7 ).each do |kpi_result| %>
                     <td><%= kpi_result.target %></td>
                     <td><%= kpi_result.actual %></td>
                     <td><%= kpi_result.kpi_performance_standard %></td>
@@ -70,17 +70,17 @@
                         <%= kpi_result.updated_at.strftime("%d-%b-%Y") %>
                     </td>
                     <td>
-                        <%= render "assurance_results" %>
+                        <%= render partial: "assurance_results", {:capital_project => @capital_project} %>
                     </td>
 
                     <% end %>
                 <% else %>
-                    <td><%= @capital_project.departmental_sdbip_annual_target %></td>
+                    <td><%= capital_project.departmental_sdbip.annual_target %></td>
                     <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td><%= @capital_project.departmental_sdbip_source_of_evidence %></td>
+                    <td><%= capital_project.departmental_sdbip.source_of_evidence %></td>
                     <td></td>
                     <td>
                         <span class="glyphicon glyphicon-minus-sign orange"></span>
@@ -89,12 +89,12 @@
                 </tr>
                 <tr>
                     <th>August &nbsp;
-                        <% @time_periods.select(:period).where("extract(month  from period) = ?", 8 ).each do |time_period| %>
+                        <% time_periods.select(:period).where("extract(month  from period) = ?", 8 ).each do |time_period| %>
                         <%= time_period.period.strftime("%Y") %>
                         <% end %>
                     </th>
-                    <% if @capital_project.departmental_sdbip.kpi_results.where("extract(month  from created_at) = ?", 8 ).any? %>
-                    <% @capital_project.departmental_sdbip.kpi_results.where("extract(month  from created_at) = ?", 8 ).each do |kpi_result| %>
+                    <% if capital_project.departmental_sdbip.kpi_results.where("extract(month  from created_at) = ?", 8 ).any? %>
+                    <% capital_project.departmental_sdbip.kpi_results.where("extract(month  from created_at) = ?", 8 ).each do |kpi_result| %>
                     <td><%= kpi_result.target %></td>
                     <td><%= kpi_result.actual %></td>
                     <td><%= kpi_result.kpi_performance_standard %></td>
@@ -113,16 +113,16 @@
                         <%= kpi_result.updated_at.strftime("%d-%b-%Y") %>
                     </td>
                     <td>
-                        <%= render "assurance_results" %>
+                        <%= render partial: "assurance_results", {:capital_project => @capital_project} %>
                     </td>
                     <% end %>
                 <% else %>
-                    <td><%= @capital_project.departmental_sdbip_annual_target %></td>
+                    <td><%= capital_project.departmental_sdbip.annual_target %></td>
                     <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td><%= @capital_project.departmental_sdbip_source_of_evidence %></td>
+                    <td><%= capital_project.departmental_sdbip.source_of_evidence %></td>
                     <td></td>
                     <td>
                         <span class="glyphicon glyphicon-minus-sign orange"></span>
@@ -131,12 +131,12 @@
                 </tr>
                 <tr>
                     <th>Sepetember &nbsp;
-                        <% @time_periods.select(:period).where("extract(month  from period) = ?", 9 ).each do |time_period| %>
+                        <% time_periods.select(:period).where("extract(month  from period) = ?", 9 ).each do |time_period| %>
                         <%= time_period.period.strftime("%Y") %>
                         <% end %>
                     </th>
-                    <% if @capital_project.departmental_sdbip.kpi_results.where("extract(month  from created_at) = ?", 9 ).any? %>
-                    <% @capital_project.departmental_sdbip.kpi_results.where("extract(month  from created_at) = ?", 9 ).each do |kpi_result| %>
+                    <% if capital_project.departmental_sdbip.kpi_results.where("extract(month  from created_at) = ?", 9 ).any? %>
+                    <% capital_project.departmental_sdbip.kpi_results.where("extract(month  from created_at) = ?", 9 ).each do |kpi_result| %>
                     <td><%= kpi_result.target %></td>
                     <td><%= kpi_result.actual %></td>
                     <td><%= kpi_result.kpi_performance_standard %></td>
@@ -155,16 +155,16 @@
                         <%= kpi_result.updated_at.strftime("%d-%b-%Y") %>
                     </td>
                     <td>
-                        <%= render "assurance_results" %>
+                        <%= render partial: "assurance_results", {:capital_project => @capital_project} %>
                     </td>
                     <% end %>
                 <% else %>
-                    <td><%= @capital_project.departmental_sdbip_annual_target %></td>
+                    <td><%= capital_project.departmental_sdbip.annual_target %></td>
                     <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td><%= @capital_project.departmental_sdbip_source_of_evidence %></td>
+                    <td><%= capital_project.departmental_sdbip.source_of_evidence %></td>
                     <td></td>
                     <td>
                         <span class="glyphicon glyphicon-minus-sign orange"></span>
@@ -173,12 +173,12 @@
                 </tr>
                 <tr>
                     <th>October&nbsp;
-                        <% @time_periods.select(:period).where("extract(month  from period) = ?", 10 ).each do |time_period| %>
+                        <% time_periods.select(:period).where("extract(month  from period) = ?", 10 ).each do |time_period| %>
                         <%= time_period.period.strftime("%Y") %>
                         <% end %>
                     </th>
-                    <% if @capital_project.departmental_sdbip.kpi_results.where("extract(month  from created_at) = ?", 10 ).any? %>
-                    <% @capital_project.departmental_sdbip.kpi_results.where("extract(month  from created_at) = ?", 10 ).each do |kpi_result| %>
+                    <% if capital_project.departmental_sdbip.kpi_results.where("extract(month  from created_at) = ?", 10 ).any? %>
+                    <% capital_project.departmental_sdbip.kpi_results.where("extract(month  from created_at) = ?", 10 ).each do |kpi_result| %>
                     <td><%= kpi_result.target %></td>
                     <td><%= kpi_result.actual %></td>
                     <td><%= kpi_result.kpi_performance_standard %></td>
@@ -197,16 +197,16 @@
                         <%= kpi_result.updated_at.strftime("%d-%b-%Y") %>
                     </td>
                     <td>
-                        <%= render "assurance_results" %>
+                        <%= render partial: "assurance_results", {:capital_project => @capital_project} %>
                     </td>
                     <% end %>
                 <% else %>
-                    <td><%= @capital_project.departmental_sdbip_annual_target %></td>
+                    <td><%= capital_project.departmental_sdbip.annual_target %></td>
                     <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td><%= @capital_project.departmental_sdbip_source_of_evidence %></td>
+                    <td><%= capital_project.departmental_sdbip.source_of_evidence %></td>
                     <td></td>
                     <td>
                         <span class="glyphicon glyphicon-minus-sign orange"></span>
@@ -215,12 +215,12 @@
                 </tr>
                 <tr>
                     <th>November&nbsp;
-                        <% @time_periods.select(:period).where("extract(month  from period) = ?", 11 ).each do |time_period| %>
+                        <% time_periods.select(:period).where("extract(month  from period) = ?", 11 ).each do |time_period| %>
                         <%= time_period.period.strftime("%Y") %>
                         <% end %>
                     </th>
-                    <% if @capital_project.departmental_sdbip.kpi_results.where("extract(month  from created_at) = ?", 11 ).any? %>
-                    <% @capital_project.departmental_sdbip.kpi_results.where("extract(month  from created_at) = ?", 11 ).each do |kpi_result| %>
+                    <% if capital_project.departmental_sdbip.kpi_results.where("extract(month  from created_at) = ?", 11 ).any? %>
+                    <% capital_project.departmental_sdbip.kpi_results.where("extract(month  from created_at) = ?", 11 ).each do |kpi_result| %>
                     <td><%= kpi_result.target %></td>
                     <td><%= kpi_result.actual %></td>
                     <td><%= kpi_result.kpi_performance_standard %></td>
@@ -239,16 +239,16 @@
                         <%= kpi_result.updated_at.strftime("%d-%b-%Y") %>
                     </td>
                     <td>
-                        <%= render "assurance_results" %>
+                        <%= render partial: "assurance_results", {:capital_project => @capital_project} %>
                     </td>
                     <% end %>
                 <% else %>
-                    <td><%= @capital_project.departmental_sdbip_annual_target %></td>
+                    <td><%= capital_project.departmental_sdbip.annual_target %></td>
                     <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td><%= @capital_project.departmental_sdbip_source_of_evidence %></td>
+                    <td><%= capital_project.departmental_sdbip.source_of_evidence %></td>
                     <td></td>
                     <td>
                         <span class="glyphicon glyphicon-minus-sign orange"></span>
@@ -257,12 +257,12 @@
                 </tr>
                 <tr>
                     <th>December&nbsp;
-                        <% @time_periods.select(:period).where("extract(month  from period) = ?", 12 ).each do |time_period| %>
+                        <% time_periods.select(:period).where("extract(month  from period) = ?", 12 ).each do |time_period| %>
                         <%= time_period.period.strftime("%Y") %>
                         <% end %>
                     </th>
-                    <% if @capital_project.departmental_sdbip.kpi_results.where("extract(month  from created_at) = ?", 12 ).any? %>
-                    <% @capital_project.departmental_sdbip.kpi_results.where("extract(month  from created_at) = ?", 12 ).each do |kpi_result| %>
+                    <% if capital_project.departmental_sdbip.kpi_results.where("extract(month  from created_at) = ?", 12 ).any? %>
+                    <% capital_project.departmental_sdbip.kpi_results.where("extract(month  from created_at) = ?", 12 ).each do |kpi_result| %>
                     <td><%= kpi_result.target %></td>
                     <td><%= kpi_result.actual %></td>
                     <td><%= kpi_result.kpi_performance_standard %></td>
@@ -281,16 +281,16 @@
                         <%= kpi_result.updated_at.strftime("%d-%b-%Y") %>
                     </td>
                     <td>
-                        <%= render "assurance_results" %>
+                        <%= render partial: "assurance_results", {:capital_project => @capital_project} %>
                     </td>
                     <% end %>
                 <% else %>
-                    <td><%= @capital_project.departmental_sdbip_annual_target %></td>
+                    <td><%= capital_project.departmental_sdbip.annual_target %></td>
                     <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td><%= @capital_project.departmental_sdbip_source_of_evidence %></td>
+                    <td><%= capital_project.departmental_sdbip.source_of_evidence %></td>
                     <td></td>
                     <td>
                         <span class="glyphicon glyphicon-minus-sign orange"></span>
@@ -299,12 +299,12 @@
                 </tr>
                 <tr>
                     <th>January&nbsp;
-                        <% @time_periods.select(:period).where("extract(month  from period) = ?", 1 ).each do |time_period| %>
+                        <% time_periods.select(:period).where("extract(month  from period) = ?", 1 ).each do |time_period| %>
                         <%= time_period.period.strftime("%Y") %>
                         <% end %>
                     </th>
-                    <% if @capital_project.departmental_sdbip.kpi_results.where("extract(month  from created_at) = ?", 1 ).any? %>
-                    <% @capital_project.departmental_sdbip.kpi_results.where("extract(month  from created_at) = ?", 1 ).each do |kpi_result| %>
+                    <% if capital_project.departmental_sdbip.kpi_results.where("extract(month  from created_at) = ?", 1 ).any? %>
+                    <% capital_project.departmental_sdbip.kpi_results.where("extract(month  from created_at) = ?", 1 ).each do |kpi_result| %>
                     <td><%= kpi_result.target %></td>
                     <td><%= kpi_result.actual %></td>
                     <td><%= kpi_result.kpi_performance_standard %></td>
@@ -322,15 +322,15 @@
                         <%= kpi_result.user_surname %>&nbsp;on
                         <%= kpi_result.updated_at.strftime("%d-%b-%Y") %>
                     </td>
-                    <td><%= render "assurance_results" %></td>
+                    <td><%= render partial: "assurance_results", {:capital_project => @capital_project} %></td>
                     <% end %>
                 <% else %>
-                    <td><%= @capital_project.departmental_sdbip_annual_target %></td>
+                    <td><%= capital_project.departmental_sdbip.annual_target %></td>
                     <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td><%= @capital_project.departmental_sdbip_source_of_evidence %></td>
+                    <td><%= capital_project.departmental_sdbip.source_of_evidence %></td>
                     <td></td>
                     <td>
                         <span class="glyphicon glyphicon-minus-sign orange"></span>
@@ -339,12 +339,12 @@
                 </tr>
                 <tr>
                     <th>February&nbsp;
-                        <% @time_periods.select(:period).where("extract(month  from period) = ?", 2 ).each do |time_period| %>
+                        <% time_periods.select(:period).where("extract(month  from period) = ?", 2 ).each do |time_period| %>
                         <%= time_period.period.strftime("%Y") %>
                         <% end %>
                     </th>
-                    <% if @capital_project.departmental_sdbip.kpi_results.where("extract(month  from created_at) = ?", 2 ).any? %>
-                    <% @capital_project.departmental_sdbip.kpi_results.where("extract(month  from created_at) = ?", 2 ).each do |kpi_result| %>
+                    <% if capital_project.departmental_sdbip.kpi_results.where("extract(month  from created_at) = ?", 2 ).any? %>
+                    <% capital_project.departmental_sdbip.kpi_results.where("extract(month  from created_at) = ?", 2 ).each do |kpi_result| %>
                     <td><%= kpi_result.target %></td>
                     <td><%= kpi_result.actual %></td>
                     <td><%= kpi_result.kpi_performance_standard %></td>
@@ -362,15 +362,15 @@
                         <%= kpi_result.user_surname %>&nbsp;on
                         <%= kpi_result.updated_at.strftime("%d-%b-%Y") %>
                     </td>
-                    <td><%= render "assurance_results" %></td>
+                    <td><%= render partial: "assurance_results", {:capital_project => @capital_project} %></td>
                     <% end %>
                 <% else %>
-                    <td><%= @capital_project.departmental_sdbip_annual_target %></td>
+                    <td><%= capital_project.departmental_sdbip.annual_target %></td>
                     <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td><%= @capital_project.departmental_sdbip_source_of_evidence %></td>
+                    <td><%= capital_project.departmental_sdbip.source_of_evidence %></td>
                     <td></td>
                     <td>
                         <span class="glyphicon glyphicon-minus-sign orange"></span>
@@ -379,12 +379,12 @@
                 </tr>
                 <tr>
                     <th>March&nbsp;
-                        <% @time_periods.select(:period).where("extract(month  from period) = ?", 3 ).each do |time_period| %>
+                        <% time_periods.select(:period).where("extract(month  from period) = ?", 3 ).each do |time_period| %>
                         <%= time_period.period.strftime("%Y") %>
                         <% end %>
                     </th>
-                    <% if @capital_project.departmental_sdbip.kpi_results.where("extract(month  from created_at) = ?", 3 ).any? %>
-                    <% @capital_project.departmental_sdbip.kpi_results.where("extract(month  from created_at) = ?", 3 ).each do |kpi_result| %>
+                    <% if capital_project.departmental_sdbip.kpi_results.where("extract(month  from created_at) = ?", 3 ).any? %>
+                    <% capital_project.departmental_sdbip.kpi_results.where("extract(month  from created_at) = ?", 3 ).each do |kpi_result| %>
                     <td><%= kpi_result.target %></td>
                     <td><%= kpi_result.actual %></td>
                     <td><%= kpi_result.kpi_performance_standard %></td>
@@ -402,15 +402,15 @@
                         <%= kpi_result.user_surname %>&nbsp;on
                         <%= kpi_result.updated_at.strftime("%d-%b-%Y") %>
                     </td>
-                    <td><%= render "assurance_results" %></td>
+                    <td><%= render partial: "assurance_results", {:capital_project => @capital_project} %></td>
                     <% end %>
                 <% else %>
-                    <td><%= @capital_project.departmental_sdbip_annual_target %></td>
+                    <td><%= capital_project.departmental_sdbip.annual_target %></td>
                     <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td><%= @capital_project.departmental_sdbip_source_of_evidence %></td>
+                    <td><%= capital_project.departmental_sdbip.source_of_evidence %></td>
                     <td></td>
                     <td>
                         <span class="glyphicon glyphicon-minus-sign orange"></span>
@@ -419,12 +419,12 @@
                 </tr>
                 <tr>
                     <th>April&nbsp;
-                        <% @time_periods.select(:period).where("extract(month  from period) = ?", 4 ).each do |time_period| %>
+                        <% time_periods.select(:period).where("extract(month  from period) = ?", 4 ).each do |time_period| %>
                         <%= time_period.period.strftime("%Y") %>
                         <% end %>
                     </th>
-                    <% if @capital_project.departmental_sdbip.kpi_results.where("extract(month  from created_at) = ?", 4 ).any? %>
-                    <% @capital_project.departmental_sdbip.kpi_results.where("extract(month  from created_at) = ?", 4 ).each do |kpi_result| %>
+                    <% if capital_project.departmental_sdbip.kpi_results.where("extract(month  from created_at) = ?", 4 ).any? %>
+                    <% capital_project.departmental_sdbip.kpi_results.where("extract(month  from created_at) = ?", 4 ).each do |kpi_result| %>
                     <td><%= kpi_result.target %></td>
                     <td><%= kpi_result.actual %></td>
                     <td><%= kpi_result.kpi_performance_standard %></td>
@@ -442,15 +442,15 @@
                         <%= kpi_result.user_surname %>&nbsp;on
                         <%= kpi_result.updated_at.strftime("%d-%b-%Y") %>
                     </td>
-                    <td><%= render "assurance_results" %></td>
+                    <td><%= render partial: "assurance_results", {:capital_project => @capital_project} %></td>
                     <% end %>
                 <% else %>
-                    <td><%= @capital_project.departmental_sdbip_annual_target %></td>
+                    <td><%= capital_project.departmental_sdbip.annual_target %></td>
                     <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td><%= @capital_project.departmental_sdbip_source_of_evidence %></td>
+                    <td><%= capital_project.departmental_sdbip.source_of_evidence %></td>
                     <td></td>
                     <td>
                         <span class="glyphicon glyphicon-minus-sign orange"></span>
@@ -459,12 +459,12 @@
                 </tr>
                 <tr>
                     <th>May&nbsp;
-                        <% @time_periods.select(:period).where("extract(month  from period) = ?", 5 ).each do |time_period| %>
+                        <% time_periods.select(:period).where("extract(month  from period) = ?", 5 ).each do |time_period| %>
                         <%= time_period.period.strftime("%Y") %>
                         <% end %>
                     </th>
-                    <% if @capital_project.departmental_sdbip.kpi_results.where("extract(month  from created_at) = ?", 5 ).any? %>
-                    <% @capital_project.departmental_sdbip.kpi_results.where("extract(month  from created_at) = ?", 5 ).each do |kpi_result| %>
+                    <% if capital_project.departmental_sdbip.kpi_results.where("extract(month  from created_at) = ?", 5 ).any? %>
+                    <% capital_project.departmental_sdbip.kpi_results.where("extract(month  from created_at) = ?", 5 ).each do |kpi_result| %>
                     <td><%= kpi_result.target %></td>
                     <td><%= kpi_result.actual %></td>
                     <td><%= kpi_result.kpi_performance_standard %></td>
@@ -482,15 +482,15 @@
                         <%= kpi_result.user_surname %>&nbsp;on
                         <%= kpi_result.updated_at.strftime("%d-%b-%Y") %>
                     </td>
-                    <td><%= render "assurance_results" %></td>
+                    <td><%= render partial: "assurance_results", {:capital_project => @capital_project} %></td>
                     <% end %>
                 <% else %>
-                    <td><%= @capital_project.departmental_sdbip_annual_target %></td>
+                    <td><%= capital_project.departmental_sdbip.annual_target %></td>
                     <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td><%= @capital_project.departmental_sdbip_source_of_evidence %></td>
+                    <td><%= capital_project.departmental_sdbip.source_of_evidence %></td>
                     <td></td>
                     <td>
                         <span class="glyphicon glyphicon-minus-sign orange"></span>
@@ -499,12 +499,12 @@
                 </tr>
                 <tr>
                     <th>June&nbsp;
-                        <% @time_periods.select(:period).where("extract(month  from period) = ?", 6 ).each do |time_period| %>
+                        <% time_periods.select(:period).where("extract(month  from period) = ?", 6 ).each do |time_period| %>
                         <%= time_period.period.strftime("%Y") %>
                         <% end %>
                     </th>
-                    <% if @capital_project.departmental_sdbip.kpi_results.where("extract(month  from created_at) = ?", 6 ).any? %>
-                    <% @capital_project.departmental_sdbip.kpi_results.where("extract(month  from created_at) = ?", 6 ).each do |kpi_result| %>
+                    <% if capital_project.departmental_sdbip.kpi_results.where("extract(month  from created_at) = ?", 6 ).any? %>
+                    <% capital_project.departmental_sdbip.kpi_results.where("extract(month  from created_at) = ?", 6 ).each do |kpi_result| %>
                     <td><%= kpi_result.target %></td>
                     <td><%= kpi_result.actual %></td>
                     <td><%= kpi_result.kpi_performance_standard %></td>
@@ -522,15 +522,15 @@
                         <%= kpi_result.user_surname %>&nbsp;on
                         <%= kpi_result.updated_at.strftime("%d-%b-%Y") %>
                     </td>
-                    <td><%= render "assurance_results" %></td>
+                    <td><%= render partial: "assurance_results", {:capital_project => @capital_project} %></td>
                     <% end %>
                 <% else %>
-                    <td><%= @capital_project.departmental_sdbip_annual_target %></td>
+                    <td><%= capital_project.departmental_sdbip.annual_target %></td>
                     <td></td>
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td><%= @capital_project.departmental_sdbip_source_of_evidence %></td>
+                    <td><%= capital_project.departmental_sdbip.source_of_evidence %></td>
                     <td></td>
                     <td>
                         <span class="glyphicon glyphicon-minus-sign orange"></span>

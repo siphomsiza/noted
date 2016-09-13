@@ -14,7 +14,7 @@
                 </tr>
             </thead>
             <tbody>
-                <% @active_users.each do |active_user| %>
+                <% active_users.each do |active_user| %>
                 <tr>
                     <td><%= image_tag(active_user.avatar.url(:thumb), size: 50) %>
                     </td>
@@ -64,7 +64,7 @@
                 <% end %>
             </tbody>
         </table>
-        <%= will_paginate @active_users %>
+        <%= will_paginate active_users %>
     </div>
     <!-- table-responsive -->
 </div>

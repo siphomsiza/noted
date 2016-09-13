@@ -1,23 +1,23 @@
-<% @departmental_headings.each do |heading| %>
 <tr>
-    <td>
-        <%= heading.id %>
-    </td>
-    <td>
-        <%= heading.term %>
-    </td>
-    <td>
-        <%= heading.description %>
-    </td>
-    <td><%= link_to edit_departmental_headings_path(heading),class: "btn btn-mini",remote: true,'data-target' => "#departmental-heading-modal", 'data-toggle' => 'modal', :title=>"Click to Update heading" do %>
-        <span class="glyphicon glyphicon-edit"></span>&nbsp;Edit
-        <% end %>
-        <div id="departmental-heading-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true"></div>
+  <td>
+    <%= heading.id %>
+  </td>
+  <td>
+    <%= heading.term %>
+  </td>
+  <td>
+    <%= heading.description %>
+  </td>
+  <td><%= link_to edit_departmental_headings_path(heading),class: "btn btn-mini",remote: true,'data-target' => "#departmental-heading-modal", 'data-toggle' => 'modal', :title=>"Click to Update heading" do %>
+      <span class="glyphicon glyphicon-edit"></span>&nbsp;Edit
+    <% end %>
+    <div id="departmental-heading-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
 
-        &nbsp;
-        <%= link_to heading, class: "btn btn-mini", method: :delete, data: { confirm: 'Are you sure?' } do %>
-        <span class="glyphicon glyphicon-trash"></span>&nbsp;Delete
-        <% end %>
-    </td>
+    </div>
+
+  &nbsp;
+    <%= link_to heading, class: "btn btn-mini", method: :delete, data: { confirm: 'Are you sure?' } do %>
+      <span class="glyphicon glyphicon-trash"></span>&nbsp;Delete
+    <% end %>
+  </td>
 </tr>
-<% end %>

@@ -9,13 +9,10 @@ class SdbipTimePeriodsController < ApplicationController
       @doc = @response.doc
       @forecast = @doc["item"]["forecast"]
     rescue SocketError => e
-        flash[:notice] = "received Exception #{e.message}"
-        puts "received Exception #{e}"
+        flash[:danger] = "received Exception #{e.message}"
     end
     @sdbip_time_period = SdbipTimePeriod.new
     @sdbip_time_periods = SdbipTimePeriod.all.order(id: :asc)
-    $closed_primary = @sdbip_time_periods.select(:id).where("primary_closure <= ? AND primary_status = ?",Date.today,true)
-    $closed_secondary = @sdbip_time_periods.select(:id).where("secondary_closure <= ? AND secondary_status = ?",Date.today,true)
   end
 
   def show
@@ -41,20 +38,52 @@ class SdbipTimePeriodsController < ApplicationController
   def edit
     @sdbip_time_period = SdbipTimePeriod.find(params[:id])
   end
+  def send_notification
+    #sends a reminder notification to Administrators
+    if !params[:primary_notification_value].blank?
+      @primary_sdbip_time_periods = SdbipTimePeriod.find(params[:primary_notification_value])
+      @primary_users = User.includes(:role).where(roles:{kpi_owner: true})
+    if !@primary_sdbip_time_periods.blank?
+      @primary_users.each do |user|
+        @user = User.find(user.id)
+        @user.send_primary_reminder_email
+      end
+      @primary_sdbip_time_periods.each do |sdbip_time_period|
+        sdbip_time_period.update_columns(:primary_notification_sent => true)
+      end
+    end
+  end
+  if !params[:secondary_notification_value].blank?
+    @secondary_users = User.joins(:roles).where("roles.finance_admin = ? OR roles.top_layer_administrator = ? OR roles.secondary_time_period = ?",true,true,true)#includes(:role).where(:roles => {"role.finance_admin = ? OR role.top_layer_administrator = ? OR role.secondary_time_period = ?",true,true,true})#(roles:{finance_admin: true,top_layer_administrator: true, secondary_time_period: true})
+    @secondary_sdbip_time_periods = SdbipTimePeriod.find(params[:secondary_notification_value])
+    if !@secondary_sdbip_time_periods.blank?
+      @secondary_users.each do |user|
+        @user = User.find(user.id)
+        @user.send_secondary_reminder_email
+      end
+      @secondary_sdbip_time_periods.each do |sdbip_time_period|
+        sdbip_time_period.update_columns(:secondary_notification_sent => true)
+      end
+    end
+  end
+  redirect_to introduction_url
+  end
   def update_status
-    primary_values = params[:primary_data_value]
-    secondary_values = params[:secondary_data_value]
-    @primary_sdbip_time_periods = SdbipTimePeriod.find(primary_values)
-    @secondary_sdbip_time_periods = SdbipTimePeriod.find(secondary_values)
+    if !params[:primary_data_value].blank?
+    @primary_sdbip_time_periods = SdbipTimePeriod.find(params[:primary_data_value])
     @primary_sdbip_time_periods.each do |primary_sdbip_time_period|
       @time_period = SdbipTimePeriod.find(primary_sdbip_time_period.id)
       @time_period.update_columns(:primary_status => false)
     end
+  end
+  if !params[:secondary_data_value].blank?
+    @secondary_sdbip_time_periods = SdbipTimePeriod.find(params[:secondary_data_value])
     @secondary_sdbip_time_periods.each do |secondary_sdbip_time_period|
       @time_period = SdbipTimePeriod.find(secondary_sdbip_time_period.id)
       @time_period.update_columns(:secondary_status => false)
     end
-    redirect_to :back
+  end
+  redirect_to introduction_url
   end
   def close_primary
     @sdbip_time_period = SdbipTimePeriod.find(params[:id])
@@ -110,7 +139,7 @@ class SdbipTimePeriodsController < ApplicationController
         flash[:success] = "All automatic time periods updated successfully."
         redirect_to :back
     else
-      flash[:warning] = "All automatic time periods were not updated."
+      flash[:danger] = "All automatic time periods were not updated."
       redirect_to :back
     end
   end

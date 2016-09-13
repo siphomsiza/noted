@@ -8,4 +8,8 @@ module DepartmentalSdbipsHelper
 	def options_for_performance_standard
 		options_for_select(["KPI Not Yet Measured","KPI Not Met", "KPI Almost Met", "KPI Met", "KPI Well Met", "KPI Extremely Well Met"])
 	end
+	
+	def editors
+		current_user && (current_user.admin? || current_user.super_admin?)
+	end
 end

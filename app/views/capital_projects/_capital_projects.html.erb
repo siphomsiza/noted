@@ -22,7 +22,7 @@
         </thead>
 
         <tbody>
-            <% @capital_projects.each do |capital_project| %>
+            <% capital_projects.each do |capital_project| %>
             <tr>
                 <td><%= capital_project.subdepartment.department.name %></td>
                 <td><%= capital_project.subdepartment.name %></td>

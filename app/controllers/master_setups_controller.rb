@@ -12,8 +12,7 @@ class MasterSetupsController < ApplicationController
         @doc = @response.doc
         @forecast = @doc["item"]["forecast"]
    rescue SocketError => e
-    flash[:notice] = "received Exception #{e.message}"
-    puts "received Exception #{e}"
+    flash[:danger] = "received Exception #{e.message}"
     end
     @jobtitle = Jobtitle.new
     @areas = Area.all
@@ -84,9 +83,6 @@ class MasterSetupsController < ApplicationController
       params.require(:master_setup).permit(:municipality,:logo,:address,:province, :latitude,:longitude)
     end
 
-    def set_user
-      @user = User.find(params[:id])
-    end
 
     # Before filters
 

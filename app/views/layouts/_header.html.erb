@@ -2,11 +2,11 @@
 	<section id="branding">
 		<%= link_to image_tag("ks-horizontal.jpg", alt: "Keystone Municipal Performance Management System logo") %>
 		<span class="pull-right weather-display">
-			<%= DateTime.parse(@doc["item"]["condition"]["date"]).strftime("%A, %d %b %Y") if !@doc.blank? %>
-			<span class="glyphicon glyphicon-map-marker"></span>&nbsp;<%= @doc["location"]["city"]  if !@doc.blank? %>&nbsp;
-			<%  if !@doc.blank? %><span><img height="34" width="34" src="<%= @doc["item"]["description"][/\"(.*?)"/,1] %>"></span><% end %>
-			<%= @doc["item"]["condition"]["text"]  if !@doc.blank? %>,
-			&nbsp;<%= ((@doc["item"]["condition"]["temp"].to_i - 32) / 1.8).round()  if !@doc.blank? %>&deg;C
+			<%= DateTime.parse(doc["item"]["condition"]["date"]).strftime("%A, %d %b %Y") if !doc.blank? %>
+			<span class="glyphicon glyphicon-map-marker"></span>&nbsp;<%= doc["location"]["city"]  if !doc.blank? %>&nbsp;
+			<%  if !doc.blank? %><span><img height="34" width="34" src="<%= doc["item"]["description"][/\"(.*?)"/,1] %>"></span><% end %>
+			<%= doc["item"]["condition"]["text"]  if !doc.blank? %>,
+			&nbsp;<%= ((doc["item"]["condition"]["temp"].to_i - 32) / 1.8).round()  if !doc.blank? %>&deg;C
 
 	</span>
 	</section><!-- branding -->

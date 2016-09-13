@@ -14,8 +14,8 @@
 
       	<section class="tab-content">
 
-          <%= render 'user_access' %>
-          <%= render 'admin_users' %>
+          <%= render partial: 'user_access', :locals => {:users => @users} %>
+          <%= render partial: 'admin_users', :locals => {:users => @users} %>
           <%= render 'security_settings' %>
 
       	</section><!-- tab-content -->

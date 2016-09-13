@@ -1,10 +1,10 @@
-<%= form_for @master_setup,:multipart => true do |f| %>
-  <% if @master_setup.errors.any? %>
+<%= form_for master_setup,:multipart => true do |f| %>
+  <% if master_setup.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@master_setup.errors.count, "error") %> prohibited this master_setup from being saved:</h2>
+      <h2><%= pluralize(master_setup.errors.count, "error") %> prohibited this master_setup from being saved:</h2>
 
       <ul>
-      <% @master_setup.errors.full_messages.each do |message| %>
+      <% master_setup.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>

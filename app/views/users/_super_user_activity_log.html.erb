@@ -14,7 +14,7 @@
       </tr>
     </thead>
     <tbody>
-      <% @super_user_activities.each do |super_user_activity| %>
+      <% super_user_activities.each do |super_user_activity| %>
 
       <tr>
         <td><%= image_tag(super_user_activity.user.avatar.url(:thumb), size: 50) %></td>
@@ -29,6 +29,6 @@
       <% end %>
     </tbody>
     </table>
-      <%= will_paginate @super_user_activities %>
+      <%= will_paginate super_user_activities %>
 </div>
 </div>

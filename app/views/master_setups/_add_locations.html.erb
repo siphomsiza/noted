@@ -1,13 +1,13 @@
 <div class="tab-pane fade" id="add_locations">
   <div class="col-lg-6 col-lg-offset-3"><br/>
     <h3>New Location</h3><br/>
-<%= form_for(@master_setup) do |f| %>
-  <% if @master_setup.errors.any? %>
+<%= form_for(master_setup) do |f| %>
+  <% if master_setup.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@master_setup.errors.count, "error") %> prohibited this master_setup from being saved:</h2>
+      <h2><%= pluralize(master_setup.errors.count, "error") %> prohibited this master_setup from being saved:</h2>
 
       <ul>
-      <% @master_setup.errors.full_messages.each do |message| %>
+      <% master_setup.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
