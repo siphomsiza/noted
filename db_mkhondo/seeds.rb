@@ -1,11 +1,17 @@
+# This file should contain all the record creation needed to seed the database with its default values.
+# The data can then be loaded with the rake db_mkhondo:seed (or created alongside the db_mkhondo with db_mkhondo:setup).
+#
+# Examples:
+#
+#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
+#   Mayor.create(name: 'Emanuel', city: cities.first)
 require 'active_record/fixtures'
-User.create!( firstname: "Casey Abram",
-              surname: "Seabela",
-              username: "caseabela",
-              email: "casey@sableassets.co.za",
+User.create!( firstname: "Sandiswa",
+              surname: "Nqampoyi",
+              email: "Sandiswa@sableassets.co.za",
               password: "sableassets",
               title: "Mr",
-              mobile: "0764338939",
+              mobile: "0832687954",
               landline: "0112563984",
               id_number: Faker::Number.number(13),
               birth_date: Time.now.strftime("/%dd%mm/%YYYY"),
@@ -14,7 +20,37 @@ User.create!( firstname: "Casey Abram",
               super_admin: true,
               activated: true,status: "Active",
               activated_at: Time.zone.now)
+              User.create!( firstname: "Casey Abram",
+                            surname: "Seabela",
+                            username: "caseabela",
+                            email: "casey@sableassets.com",
+                            password: "sableassets",
+                            title: "Mr",
+                            mobile: "0764338939",
+                            landline: "0112563984",
+                            id_number: Faker::Number.number(13),
+                            birth_date: Time.now.strftime("/%dd%mm/%YYYY"),
+                            location: "Riversands Incubation Hub",
+                            password_confirmation: "sableassets",
+                            super_admin: true,
+                            activated: true,status: "Active",
+                            activated_at: Time.zone.now)
 if !Rails.env.production?
+User.create!( firstname: "Arms",
+              surname: "Audit",
+              email: "armsuser@sableassets.co.za",
+              password: "sableassets",
+              id_number: Faker::Number.number(13),
+              birth_date: Time.now.strftime("/%dd%mm/%YYYY"),
+              title: "Mrs",
+              mobile: "+27 86 619-9887",
+              landline: "+27 11 484-1253/8223",
+              location: "1st Floor, St David's Place, Parktown,Johannesburg, South Africa, 2193",
+              password_confirmation: "sableassets",
+              admin: true,status: "Active",
+              activated: true,
+              activated_at: Time.zone.now)
+
 20.times do |n|
 name  = Faker::Name.first_name
 lastname = Faker::Name.last_name
@@ -22,7 +58,7 @@ title =Faker::Name.prefix
 location = Faker::Address.city
 landline=Faker::PhoneNumber.phone_number
 mobile=Faker::PhoneNumber.cell_phone
-  email = "example-#{n+21}@railstutorial.org"
+  email = "example-#{n+1}@railstutorial.org"
   password = "password"
   User.create!(firstname:  name,
               surname: lastname,
@@ -42,39 +78,13 @@ mobile=Faker::PhoneNumber.cell_phone
 end
 
 MasterSetup.create!(
-  municipality: "Mkhondo Local Municipality",
+  municipality: "Mkhondo Local Municipality(Dev Database)",
   logo: File.open(File.join(Rails.root,'/app/assets/images','mkhondo-logo.png')),# File.open("../app/assets/images/mkhondo-logo.png"),
   province: "Mpumalanga",
   latitude: -27.007764 ,
   longitude: 30.801888,
   address: 'Mkhondo Municipality<br />Piet Retief, 2380<br />Mpumalanga, South Africa'
 )
-end
-$i=0
-$num = 12
-while $i < $num  do
-  month_number = 7 + $i
-  if month_number <= 12
-  month_beginning = Date.new(Date.today.year, month_number)
-  month_ending = month_beginning.end_of_month
-  period = month_ending.strftime("%d-%b-%Y")
-  primary_reminder = period.to_date + 7.days
-  primary_closure = period.to_date + 14.days
-  secondary_reminder = period.to_date + 7.days
-  secondary_closure = period.to_date + 16.days
-  else
-    month_number -= 12
-    month_beginning = Date.new(Date.today.year, month_number)
-    month_beginning += 1.year
-    month_ending = month_beginning.end_of_month
-    period = month_ending.strftime("%d-%b-%Y")
-    primary_reminder = period.to_date + 7.days
-    primary_closure = period.to_date + 14.days
-    secondary_reminder = period.to_date + 7.days
-    secondary_closure = period.to_date + 16.days
-  end
-  SdbipTimePeriod.create!(period: period,primary_reminder: primary_reminder,primary_closure: primary_closure, secondary_reminder: secondary_reminder,secondary_closure: secondary_closure)
-   $i +=1
 end
 landline=Faker::Number.number(10)
 mobile=Faker::Number.number(10)
@@ -101,12 +111,16 @@ Department.create!(name: "Technical Services",
 Department.create!(name: "Planning and Development",
   tel_no:landline,
   fax_no: mobile)
+Department.create!(name: "Department in the MM's Office",
+  tel_no:landline,
+  fax_no: mobile)
 
 Subdepartment.create!(name: "Municipal Manager's Office", department_id: "1")
-Subdepartment.create!(name: "Internal Audit", department_id: "1",)
-Subdepartment.create!(name: "Performance Management Unit", department_id: "1")
-Subdepartment.create!(name: "Legal Services", department_id: "1")
-Subdepartment.create!(name: "Forestry", department_id: "1")
+
+Subdepartment.create!(name: "Internal Audit", department_id: "7",)
+Subdepartment.create!(name: "Performance Management Unit", department_id: "7")
+Subdepartment.create!(name: "Legal Services", department_id: "7")
+Subdepartment.create!(name: "Forestry", department_id: "7")
 
 Subdepartment.create!(name: "Budget And Financial Reporting", department_id: "2")
 Subdepartment.create!(name: "Expenditure", department_id: "2")
@@ -127,50 +141,56 @@ Subdepartment.create!(name: "Planning and Development", department_id: "6")
 Subdepartment.create!(name: "Human Settlements", department_id: "6")
 Subdepartment.create!(name: "Building Control", department_id: "6")
 
+Subdepartment.create!(name: "Executive Mayor's Office", department_id: "1")
+
+Subdepartment.create!(name: "Finance", department_id: "2")
+
+Subdepartment.create!(name: "Risk", department_id: "7")
+
 #directory = File.join(File.dirname(__FILE__), '/migrate/data')
 # From lookup_classes
-#ActiveRecord::FixtureSet.create_fixtures(File.join(Rails.root, 'db/migrate/data'), 'kpa')
+#ActiveRecord::FixtureSet.create_fixtures(File.join(Rails.root, 'db_mkhondo/migrate/data'), 'kpa')
 # From lookups
-#ActiveRecord::FixtureSet.create_fixtures(File.join(Rails.root, 'db/migrate/data'), 'strategic_objectives')
+#ActiveRecord::FixtureSet.create_fixtures(File.join(Rails.root, 'db_mkhondo/migrate/data'), 'strategic_objectives')
 
-CSV.foreach('db/data/kpa.csv', headers: true, :col_sep => ',') do |row|
+CSV.foreach('db_mkhondo/data/kpa.csv', headers: true, :col_sep => ',') do |row|
   Kpa.create! row.to_hash
 end
-CSV.foreach('db/data/strategic_objectives.csv', headers: true, :col_sep => ',') do |row|
+CSV.foreach('db_mkhondo/data/strategic_objectives.csv', headers: true, :col_sep => ',') do |row|
   StrategicObjective.create! row.to_hash
 end
-CSV.foreach('db/data/risk_ratings.csv', headers: true, :col_sep => ',') do |row|
+CSV.foreach('db_mkhondo/data/risk_ratings.csv', headers: true, :col_sep => ',') do |row|
   RiskRating.create! row.to_hash
 end
 
-CSV.foreach('db/data/kpi_concept.csv', headers: true, :col_sep => ',') do |row|
+CSV.foreach('db_mkhondo/data/kpi_concept.csv', headers: true, :col_sep => ',') do |row|
   KpiConcept.create! row.to_hash
 end
-CSV.foreach('db/data/jobs.csv', headers: true, :col_sep => ',') do |row|
+CSV.foreach('db_mkhondo/data/jobs.csv', headers: true, :col_sep => ',') do |row|
   Jobtitle.create! row.to_hash
 end
-CSV.foreach('db/data/kpi_owners.csv', headers: true, :col_sep => ',') do |row|
+CSV.foreach('db_mkhondo/data/kpi_owners.csv', headers: true, :col_sep => ',') do |row|
   KpiOwner.create! row.to_hash
 end
-CSV.foreach('db/data/kpi_type.csv', headers: true, :col_sep => ',') do |row|
+CSV.foreach('db_mkhondo/data/kpi_type.csv', headers: true, :col_sep => ',') do |row|
   KpiType.create! row.to_hash
 end
-CSV.foreach('db/data/kpi_calculation_types.csv', headers: true, :col_sep => ',') do |row|
+CSV.foreach('db_mkhondo/data/kpi_calculation_types.csv', headers: true, :col_sep => ',') do |row|
   KpiCalculationType.create! row.to_hash
 end
-CSV.foreach('db/data/ndp_objectives.csv', headers: true, :col_sep => ',') do |row|
+CSV.foreach('db_mkhondo/data/ndp_objectives.csv', headers: true, :col_sep => ',') do |row|
   NdpObjective.create! row.to_hash
 end
-CSV.foreach('db/data/predetermined_objectives.csv', headers: true, :col_sep => ',') do |row|
+CSV.foreach('db_mkhondo/data/predetermined_objectives.csv', headers: true, :col_sep => ',') do |row|
   PredeterminedObjective.create! row.to_hash
 end
-CSV.foreach('db/data/national_outcomes.csv', headers: true, :col_sep => ',') do |row|
+CSV.foreach('db_mkhondo/data/national_outcomes.csv', headers: true, :col_sep => ',') do |row|
   NationalOutcome.create! row.to_hash
 end
-CSV.foreach('db/data/mscore_classification.csv', headers: true, :col_sep => ',') do |row|
+CSV.foreach('db_mkhondo/data/mscore_classification.csv', headers: true, :col_sep => ',') do |row|
   MscoreClassification.create! row.to_hash
 end
-CSV.foreach('db/data/reporting.csv', headers: true, :col_sep => ',') do |row|
+CSV.foreach('db_mkhondo/data/reporting.csv', headers: true, :col_sep => ',') do |row|
   ReportingCategory.create! row.to_hash
 end
 Ward.create!(name: "All",ward_no: 1,area_id: 1, mun_ref: "Unspecified")
@@ -270,147 +290,147 @@ Heading.create!(term: "Reporting Category",
 
 Heading.create!(term: "Risk Rating",
   description: "Risk Rating description",
-  category: "Departmental SDBIP")
+  category: "Departmental Sdb_mkhondoIP")
 
 Heading.create!(term: "Top Layer KPI Ref",
   description: "Top Layer KPI Ref description",
-  category: "Departmental SDBIP")
+  category: "Departmental Sdb_mkhondoIP")
 
 Heading.create!(term: "IDP Ref",
   description: "IDP Ref description",
-  category: "Departmental SDBIP")
+  category: "Departmental Sdb_mkhondoIP")
 
 Heading.create!(term: "IDP Objective",
   description: "IDP Objective description",
-  category: "Departmental SDBIP")
+  category: "Departmental Sdb_mkhondoIP")
 
 Heading.create!(term: "Capital Project",
   description: "Capital Project description",
-  category: "Departmental SDBIP")
+  category: "Departmental Sdb_mkhondoIP")
 
 Heading.create!(term: "KPI Name",
   description: "KPI Name description",
-  category: "Departmental SDBIP")
+  category: "Departmental Sdb_mkhondoIP")
 
 Heading.create!(term: "Unit of Measurement",
   description: "Unit of Measurement description",
-  category: "Departmental SDBIP")
+  category: "Departmental Sdb_mkhondoIP")
 
 Heading.create!(term: "KPI Concept",
   description: "KPI Concept description",
-  category: "Departmental SDBIP")
+  category: "Departmental Sdb_mkhondoIP")
 
 Heading.create!(term: "KPI Type",
   description: "KPI Type description",
-  category: "Departmental SDBIP")
+  category: "Departmental Sdb_mkhondoIP")
 
 Heading.create!(term: "Risk Reg Ref",
   description: "Risk Reg Ref description",
-  category: "Departmental SDBIP")
+  category: "Departmental Sdb_mkhondoIP")
 
 Heading.create!(term: "Risk",
   description: "Risk description",
-  category: "Departmental SDBIP")
+  category: "Departmental Sdb_mkhondoIP")
 
 Heading.create!(term: "Baseline",
   description: "Baseline description",
-  category: "Departmental SDBIP")
+  category: "Departmental Sdb_mkhondoIP")
 
 Heading.create!(term: "Previous Year Actual Performance",
   description: "Previous Year Actual Performance description",
-  category: "Departmental SDBIP")
+  category: "Departmental Sdb_mkhondoIP")
 
 Heading.create!(term: "Performance standard",
   description: "Performance standard description",
-  category: "Departmental SDBIP")
+  category: "Departmental Sdb_mkhondoIP")
 
 Heading.create!(term: "POE",
   description: "POE description",
-  category: "Departmental SDBIP")
+  category: "Departmental Sdb_mkhondoIP")
 
 Heading.create!(term: "MTAS Indicator",
   description: "MTAS Indicator description",
-  category: "Departmental SDBIP")
+  category: "Departmental Sdb_mkhondoIP")
 
 Heading.create!(term: "Annual Target",
   description: "Annual Target description",
-  category: "Departmental SDBIP")
+  category: "Departmental Sdb_mkhondoIP")
 
 Heading.create!(term: "Revised Target",
   description: "Revised Target description",
-  category: "Departmental SDBIP")
+  category: "Departmental Sdb_mkhondoIP")
 
 Heading.create!(term: "Performance Comment",
   description: "Performance Comment description",
-  category: "Departmental SDBIP")
+  category: "Departmental Sdb_mkhondoIP")
 
 Heading.create!(term: "Corrective measures",
   description: "Corrective measures description",
-  category: "Departmental SDBIP")
+  category: "Departmental Sdb_mkhondoIP")
 
 Heading.create!(term: "Update proof of evidence",
   description: "Update proof of evidence description",
-  category: "Departmental SDBIP")
+  category: "Departmental Sdb_mkhondoIP")
 
 Heading.create!(term: "PMS Ref",
   description: "PMS Ref Description",
-  category: "Top Layer SDBIP")
+  category: "Top Layer Sdb_mkhondoIP")
 
 Heading.create!(term: "IDP Objective",
   description: "IDP Objective description",
-  category: "Top Layer SDBIP")
+  category: "Top Layer Sdb_mkhondoIP")
 
 Heading.create!(term: "KPI Name",
   description: "KPI Name description",
-  category: "Top Layer SDBIP")
+  category: "Top Layer Sdb_mkhondoIP")
 
 Heading.create!(term: "Unit of Measurement",
   description: "Unit of Measurement description",
-  category: "Top Layer SDBIP")
+  category: "Top Layer Sdb_mkhondoIP")
 
 Heading.create!(term: "Risk",
   description: "Risk description",
-  category: "Top Layer SDBIP")
+  category: "Top Layer Sdb_mkhondoIP")
 
 Heading.create!(term: "Baseline",
   description: "Baseline description",
-  category: "Top Layer SDBIP")
+  category: "Top Layer Sdb_mkhondoIP")
 
 Heading.create!(term: "POE",
   description: "POE description",
-  category: "Top Layer SDBIP")
+  category: "Top Layer Sdb_mkhondoIP")
 
 Heading.create!(term: "Previous Year Actual Performance",
   description: "Previous Year Actual Performance description",
-  category: "Top Layer SDBIP")
+  category: "Top Layer Sdb_mkhondoIP")
 
 Heading.create!(term: "MTAS Indicator",
   description: "MTAS Indicator description",
-  category: "Top Layer SDBIP")
+  category: "Top Layer Sdb_mkhondoIP")
 
 Heading.create!(term: "Annual Target",
   description: "Annual Target description",
-  category: "Top Layer SDBIP")
+  category: "Top Layer Sdb_mkhondoIP")
 
 Heading.create!(term: "Revised Target",
   description: "Revised Target description",
-  category: "Top Layer SDBIP")
+  category: "Top Layer Sdb_mkhondoIP")
 
 Heading.create!(term: "Performance Comment",
   description: "Annual Target description",
-  category: "Top Layer SDBIP")
+  category: "Top Layer Sdb_mkhondoIP")
 
 Heading.create!(term: "Corrective measures",
   description: "Corrective measures description",
-  category: "Top Layer SDBIP")
+  category: "Top Layer Sdb_mkhondoIP")
 
 Heading.create!(term: "Update proof of evidence",
   description: "Update proof of evidence description",
-  category: "Top Layer SDBIP")
+  category: "Top Layer Sdb_mkhondoIP")
 
 Heading.create!(term: "Departmental proof of evidence",
   description: "Departmental proof of evidence description",
-  category: "Top Layer SDBIP")
+  category: "Top Layer Sdb_mkhondoIP")
 
 Heading.create!(term: "Mun CP Ref",
   description: "Mun CP Ref description",
@@ -464,9 +484,35 @@ Heading.create!(term: "Vote number",
   description: "Vote number description",
   category: "Revenue by source")
 
-  CSV.foreach('db/data/capital.csv', headers: true, :col_sep => ',') do |row|
+$i=0
+$num = 12
+while $i < $num  do
+  month_number = 7 + $i
+  if month_number <= 12
+  month_beginning = Date.new(Date.today.year, month_number)
+  month_ending = month_beginning.end_of_month
+  period = month_ending.strftime("%d-%b-%Y")
+  primary_reminder = period.to_date + 7.days
+  primary_closure = period.to_date + 14.days
+  secondary_reminder = period.to_date + 7.days
+  secondary_closure = period.to_date + 16.days
+  else
+    month_number -= 12
+    month_beginning = Date.new(Date.today.year, month_number)
+    month_beginning += 1.year
+    month_ending = month_beginning.end_of_month
+    period = month_ending.strftime("%d-%b-%Y")
+    primary_reminder = period.to_date + 7.days
+    primary_closure = period.to_date + 14.days
+    secondary_reminder = period.to_date + 7.days
+    secondary_closure = period.to_date + 16.days
+  end
+  SdbipTimePeriod.create!(period: period,primary_reminder: primary_reminder,primary_closure: primary_closure, secondary_reminder: secondary_reminder,secondary_closure: secondary_closure)
+   $i +=1
+end
+  CSV.foreach('db_mkhondo/data/capital.csv', headers: true, :col_sep => ',') do |row|
     CapitalProject.create! row.to_hash
   end
-  CSV.foreach('db/data/sdbips.csv', headers: true, :col_sep => ',') do |row|
+  CSV.foreach('db_mkhondo/data/sdbips.csv', headers: true, :col_sep => ',') do |row|
     DepartmentalSdbip.create! row.to_hash
   end

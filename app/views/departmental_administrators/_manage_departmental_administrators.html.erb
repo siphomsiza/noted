@@ -32,7 +32,7 @@
                                     <th>Can approve?</th>
                                     <th>Actions</th>
                                 </tr>
-                                <% @departments.each do |department| %>
+                                <% departments.each do |department| %>
                                 <tr>
                                     <td rowspan="<%= department.departmental_administrators.count%>"><%= department.name %></td>
                                     <% department.departmental_administrators.each do |departmental_administrator| %>
@@ -60,7 +60,7 @@
                     <div class="tab-pane fade" id="add_departmental_admin"><br/>
                         <ul class="roles">
                             <h3>New Departmental Administrator</h3><hr/>
-                            <%= render 'form' %>
+                            <%= render'form',:departmental_administrator => @departmental_administrator %>
                         </ul>
                     </div>
 

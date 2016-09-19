@@ -30,19 +30,21 @@ class DepartmentalSdbip < ActiveRecord::Base
     has_many :assurances, dependent: :destroy
     accepts_nested_attributes_for :assurances, allow_destroy: true
     validates :department_name, :subdepartment_name, :kpi, :kpi_ref_number, presence: true
-    delegate :id,:unit_of_measurement,:kpi,:kpi_ref_number,:annual_target,:source_of_evidence, :to => :capital_project, :prefix => true
+    delegate :kpi,:id,:unit_of_measurement,:kpi,:kpi_ref_number,:annual_target,:source_of_evidence, :to => :capital_project, :prefix => true
     delegate :source_of_evidence, :to => :kpi_results, :prefix => true
-    def kpi_result_for_form
-        collection = kpi_results.where(departmental_sdbip_id: id)
-        collection.any? ? collection : kpi_results.build
-    end
-
-    def assurance_for_form
-        collection = assurances.where(departmental_sdbip_id: id)
-        collection.any? ? collection : assurances.build
-    end
 
     # validate :extension_white_list
+    def self.chart_theme(departments_sdibps)
+        departments_sdibps.each do |color|
+            $colors.push('orange') if color.performance_standard.include?('KPI Almost Met')
+            $colors.push('darkblue') if color.performance_standard.include?('KPI Extremely Well Met')
+            $colors.push('limegreen') if color.performance_standard.include?('KPI Met')
+            $colors.push('red') if color.performance_standard.include?('KPI Not Met')
+            $colors.push('#F4C2C2') if color.performance_standard.include?('KPI Not Yet Measured')
+            $colors.push('darkgreen') if color.performance_standard.include?('KPI Well Met')
+        end
+        $colors = $colors
+    end
     def self.import_from_file(file)
         DepartmentalSdbip.import(file)
     end
@@ -116,7 +118,7 @@ class DepartmentalSdbip < ActiveRecord::Base
                                  provincial_strategic_outcome_id, ward_id,
                                  area_id, performance_standard, past_year_performance,
                                  impact,
-                                 kpi_calculation_type_id, _kpi_target_type_id,start_date,end_date)
+                                 kpi_calculation_type_id, kpi_target_type_id,start_date,end_date)
 
         @audits = DepartmentalSdbip.all
         audit_columns = []
@@ -833,27 +835,5 @@ class DepartmentalSdbip < ActiveRecord::Base
             end
         end
         @departmental_sdbips = @sdbips
-    end
-
-    def self.search_kpi(kpi_id, department_id, subdepartment_id, kpi_type_id, start_date, end_date)
-        if department_id && subdepartment_id && kpi_type_id
-            where(['kpi_owner_id = ? AND department_id = ? AND subdepartment_id = ? AND kpi_type_id = ?', kpi_id, department_id, subdepartment_id, kpi_type_id])
-        end
-    end
-
-    def self.search_departmental_kpis(department_id, subdepartment_id, kpi_type_id, start_date, end_date)
-        if department_id && subdepartment_id && kpi_type_id
-            where(['department_id = ? AND subdepartment_id = ? AND kpi_type_id = ?', department_id, subdepartment_id, kpi_type_id])
-        end
-    end
-
-    def self.search_subdepartment_kpis(department_id, subdepartment_id, kpi_type_id, start_date, end_date)
-        if department_id && subdepartment_id && kpi_type_id
-            where(['department_id = ? AND subdepartment_id = ? AND kpi_type_id = ?', department_id, subdepartment_id, kpi_type_id])
-        end
-    end
-
-    def extension_white_list
-        %w(xls xlsx ods csv)
     end
 end

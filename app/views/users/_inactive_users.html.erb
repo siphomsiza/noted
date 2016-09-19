@@ -13,7 +13,7 @@
       </tr>
     </thead>
     <tbody>
-    <% @inactive_users.each do |inactive_user| %>
+    <% inactive_users.each do |inactive_user| %>
       <tr>
         <td><%= image_tag(inactive_user.avatar.url(:thumb), size: 50) %></td>
         <td><%= inactive_user.id %></td>

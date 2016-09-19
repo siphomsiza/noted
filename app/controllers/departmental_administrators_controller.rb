@@ -6,20 +6,14 @@ class DepartmentalAdministratorsController < ApplicationController
   # GET /departmental_administrators.json
   def index
     begin
-
         @client = YahooWeather::Client.new
         @response = @client.fetch(1582504)
         @doc = @response.doc
         @forecast = @doc["item"]["forecast"]
-      #@response = @client.fetch_by_location('New York')
-      #@response.units.temperature
-      #@response.condition.temp
-
   rescue SocketError => e
-    flash[:notice] = "received Exception #{e.message}"
-    puts "received Exception #{e}"
+    flash[:danger] = "received Exception #{e.message}"
   end
-
+    @users_for_departmental_administrators = User.where('id NOT IN(SELECT (user_id) FROM top_layer_administrators)')
     @subdepartments = Subdepartment.includes(subdepartmental_administrators:[:user])
     @departments = Department.includes(top_layer_administrators:[:user],departmental_administrators:[:user])
     @kpi_owners = KpiOwner.includes(:user).paginate(page: params[:page],per_page: 10)

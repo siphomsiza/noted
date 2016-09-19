@@ -12,37 +12,39 @@ module SessionsHelper
     cookies.permanent.signed[:user_id] = user.id
     cookies.permanent[:remember_token] = user.remember_token
   end
+  def increment_login_count(user)
+    user.update_columns(:current_login_at => Time.zone.now, :current_login_ip => request.env['REMOTE_ADDR'])
+    user.increment!(:login_count)
+    note = "user logged in to the system."
+    record_activity(note)
+  end
+  def increment_login_attempts(user)
+    user.increment!(:login_attempts)
+    user.update_columns(:status=> "Locked")
+  end
+  #Connects user to database for a session
   def set_up_database(company_code)
+    ActiveRecord::Base.clear_all_connections!
     if company_code == "MKH001"
-      ActiveRecord::Base.clear_all_connections!
       ActiveRecord::Base.establish_connection(DB1_CONF)
       $logged_in_database = DB1_CONF
       $municipality_info = MasterSetup.first
     end
     if company_code == "DEV001"
-      ActiveRecord::Base.clear_all_connections!
-      if Rails.env.production?
-        ActiveRecord::Base.establish_connection(:production)
-        $logged_in_database = :production
-      end
-      if Rails.env.development?
-        ActiveRecord::Base.establish_connection(:development)
-        $logged_in_database = :development
-      end
-      $municipality_info = MasterSetup.first
+        ActiveRecord::Base.establish_connection(:production) if Rails.env.production?
+        ActiveRecord::Base.establish_connection(:development) if Rails.env.development?
+        $logged_in_database = :production if Rails.env.production?
+        $logged_in_database = :development if Rails.env.development
+        $municipality_info = MasterSetup.first
     end
     if company_code == "SAK001"
-      ActiveRecord::Base.clear_all_connections!
       ActiveRecord::Base.establish_connection(DB2_CONF)
       $logged_in_database = DB2_CONF
       $municipality_info = MasterSetup.first
     end
     if company_code != "MKH001" && company_code != "SAK001" && company_code != "DEV001"
       ActiveRecord::Base.clear_all_connections!
-      flash[:danger] = "wrong log on information provided..."
-      redirect_to(root_url) and return
     end
-
   end
   # Returns true if the given user is the current user.
   def current_user?(user)
@@ -80,13 +82,12 @@ module SessionsHelper
     session.delete(:session_database)
     session.delete(:user_id)
     @current_user = nil
-    ActiveRecord::Base.clear_all_connections!
   end
 
   # Redirects to stored location (or to the default).
   def redirect_back_or(default)
-    redirect_to(session[:forwarding_url] || default)
-    session.delete(:forwarding_url)
+    #redirect_to(session[:forwarding_url] || default)
+    #session.delete(:forwarding_url)
   end
 
   # Stores the URL trying to be accessed.
@@ -94,13 +95,4 @@ module SessionsHelper
     session[:forwarding_url] = request.url if request.get?
   end
 
-  def authenticate
-  if session[:logged_in]
-    reset_session if session[:last_seen] < 30.seconds.ago
-    session[:last_seen] = Time.now
-  else
-    #... authenticate
-    session[:last_seen] = Time.now
-  end
-end
 end

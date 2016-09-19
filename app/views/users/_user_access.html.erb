@@ -16,7 +16,7 @@
       </tr>
     </thead>
     <tbody>
-      <% @users.each do |user| %>
+      <% users.each do |user| %>
       <tr>
         <td><%= user.firstname %>&nbsp;<%= user.surname %></td>
         <td><% if user.admin? %>Yes<% else %>No<% end %></td>
@@ -49,5 +49,5 @@
     </tbody>
   </table>
 </div> <!-- table-responsive -->
-<%= will_paginate @roles %>
+<%= will_paginate users %>
 </div>

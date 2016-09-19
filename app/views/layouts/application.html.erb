@@ -21,7 +21,7 @@
 			<div class="content row">
         <div class="col col-lg-12">
         <% if logged_in? %>
-          <%= render 'layouts/header' %>
+          <%= render partial: 'layouts/header', :locals => {:doc => @doc} %>
         <% end %>
       </div>
 				<div class="main col col-lg-12">

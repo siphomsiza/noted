@@ -12,7 +12,7 @@
 
   </tr>
 
-  <% @monthly_cashflows.each do |monthly_cashflow| %>
+  <% monthly_cashflows.each do |monthly_cashflow| %>
     <tr>
       <td>
         <%= link_to edit_monthly_cashflow_path(monthly_cashflow),remote: true,'data-target' => "#monthly-cashflow-modal", 'data-toggle' => 'modal', :title=>"Click to Update KPI" do %>

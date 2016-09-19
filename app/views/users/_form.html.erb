@@ -2,7 +2,7 @@
   <div class="tab-pane fade" class="newuserform" id="add_user">
   <section class="media">
     <div class="media-body">
-<%= form_for @user, :id=>"createUserForm", html: { multipart: true } do |f| %>
+<%= form_for user, :id=>"createUserForm", html: { multipart: true } do |f| %>
   <%= render 'shared/error_messages', object: @user %><br/>
   <h3>New User</h3>
   <hr>
@@ -141,7 +141,7 @@
       <section class="row">
       <label class="col col-lg-4 control-label" for="manager">Manager</label>
         <div class="controls col col-lg-8">
-          <%= f.select :manager, @system_users.all.collect {|x| [x.firstname, x.email]}, {:include_blank => "Select Manager"}, class: "form-control" %>
+          <%= f.select :manager, system_users.all.collect {|x| [x.firstname, x.email]}, {:include_blank => "Select Manager"}, class: "form-control" %>
         </div><!-- controls -->
       </section><!-- row -->
 

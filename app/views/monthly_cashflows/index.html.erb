@@ -70,7 +70,7 @@ $(function() {
 
 				<div class="table-responsive">
 
-					<%= render 'monthly_cashflows'%>
+					<%= render partial: 'monthly_cashflows', :locals=>{:monthly_cashflows => @monthly_cashflows} %>
 
 					<%= will_paginate @monthly_cashflows %>
 
@@ -93,7 +93,7 @@ $(function() {
 
 							<div class="table-responsive">
 
-								<%= render 'update_monthly_cashflow'%>
+								<%= render partial: 'update_monthly_cashflow', :locals=>{:monthly_cashflows => @monthly_cashflows} %>
 
 								<%= will_paginate @monthly_cashflows %>
 
@@ -117,7 +117,7 @@ $(function() {
 
 							<div class="table-responsive">
 
-								<%= render 'edit_monthly_cashflow'%>
+								<%= render partial: 'edit_monthly_cashflow', :locals=>{:monthly_cashflows => @monthly_cashflows} %>
 
 								<%= will_paginate @monthly_cashflows %>
 
@@ -128,7 +128,7 @@ $(function() {
 		</div>
 		<div class = "tab-pane fade" id = "new_monthly_cashflow">
 						<h2>New Monthly Cashflow</h2>
-			<%= render 'form' %>
+			<%= render partial: 'form', :locals=>{:monthly_cashflow => @monthly_cashflow} %>
 		</div>
 </div>
 </div>

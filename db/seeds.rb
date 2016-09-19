@@ -111,12 +111,16 @@ Department.create!(name: "Technical Services",
 Department.create!(name: "Planning and Development",
   tel_no:landline,
   fax_no: mobile)
+Department.create!(name: "Department in the MM's Office",
+  tel_no:landline,
+  fax_no: mobile)
 
 Subdepartment.create!(name: "Municipal Manager's Office", department_id: "1")
-Subdepartment.create!(name: "Internal Audit", department_id: "1",)
-Subdepartment.create!(name: "Performance Management Unit", department_id: "1")
-Subdepartment.create!(name: "Legal Services", department_id: "1")
-Subdepartment.create!(name: "Forestry", department_id: "1")
+
+Subdepartment.create!(name: "Internal Audit", department_id: "7",)
+Subdepartment.create!(name: "Performance Management Unit", department_id: "7")
+Subdepartment.create!(name: "Legal Services", department_id: "7")
+Subdepartment.create!(name: "Forestry", department_id: "7")
 
 Subdepartment.create!(name: "Budget And Financial Reporting", department_id: "2")
 Subdepartment.create!(name: "Expenditure", department_id: "2")
@@ -136,6 +140,12 @@ Subdepartment.create!(name: "Project Management Unit", department_id: "5")
 Subdepartment.create!(name: "Planning and Development", department_id: "6")
 Subdepartment.create!(name: "Human Settlements", department_id: "6")
 Subdepartment.create!(name: "Building Control", department_id: "6")
+
+Subdepartment.create!(name: "Executive Mayor's Office", department_id: "1")
+
+Subdepartment.create!(name: "Finance", department_id: "2")
+
+Subdepartment.create!(name: "Risk", department_id: "7")
 
 #directory = File.join(File.dirname(__FILE__), '/migrate/data')
 # From lookup_classes

@@ -17,7 +17,7 @@
       </tr>
     </thead>
     <tbody>
-      <% @users.each do |user| %>
+      <% users.each do |user| %>
       <tr>
         <td><%= image_tag(user.avatar.url(:thumb), size: 50) %></td>
         <td><%= user.id %></td>
@@ -34,6 +34,6 @@
       <% end %>
     </tbody>
     </table>
-    <%= will_paginate @users %>
+    <%= will_paginate users %>
 </div>
 </div>

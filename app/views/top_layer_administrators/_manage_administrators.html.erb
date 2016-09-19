@@ -15,7 +15,7 @@
                        <th>Can approve?</th>
                        <th>Actions</th>
                      </tr>
-                     <% @departments.each do |department| %>
+                     <% departments.each do |department| %>
                       <tr>
                          <td rowspan="<%= department.top_layer_administrators.count%>"><%= department.name %></td>
                          <% department.top_layer_administrators.each do |departmental_administrator| %>

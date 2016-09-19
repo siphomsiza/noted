@@ -8,13 +8,8 @@ def index
       @response = @client.fetch(1582504)
       @doc = @response.doc
       @forecast = @doc["item"]["forecast"]
-    #@response = @client.fetch_by_location('New York')
-    #@response.units.temperature
-    #@response.condition.temp
-
 rescue SocketError => e
-  flash[:notice] = "received Exception #{e.message}"
-  puts "received Exception #{e}"
+  flash[:danger] = "received Exception #{e.message}"
 end
 end
 

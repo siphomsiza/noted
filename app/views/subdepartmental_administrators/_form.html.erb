@@ -1,11 +1,11 @@
 <div class="col-lg-6 col-lg-offset-3"><br/>
-<%= form_for(@subdepartmental_administrator) do |f| %>
-  <% if @subdepartmental_administrator.errors.any? %>
+<%= form_for(subdepartmental_administrator) do |f| %>
+  <% if subdepartmental_administrator.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@subdepartmental_administrator.errors.count, "error") %> prohibited this departmental_administrator from being saved:</h2>
+      <h2><%= pluralize(subdepartmental_administrator.errors.count, "error") %> prohibited this departmental_administrator from being saved:</h2>
 
       <ul>
-      <% @subdepartmental_administrator.errors.full_messages.each do |message| %>
+      <% subdepartmental_administrator.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
@@ -19,8 +19,8 @@
   </div>
   <div class="field">
     <%= f.label :user_id %><br>
-    <% @users_for_departmental_administrators = User.where('id NOT IN(SELECT (user_id) FROM departmental_administrators)') %>
-    <%= f.select :user_id, @users_for_departmental_administrators.all.collect {|x| [x.firstname, x.id]}, {:include_blank => "Select User"}, class: "form-control" %>
+    <% users_for_subdepartmental_administrators = User.where('id NOT IN(SELECT (user_id) FROM subdepartmental_administrators)') %>
+    <%= f.select :user_id, users_for_subdepartmental_administrators.all.collect {|x| [x.firstname, x.id]}, {:include_blank => "Select User"}, class: "form-control" %>
   </div>
   <%= f.label :can_create, class: "checkbox inline" do %>
     <%= f.check_box :can_create %>

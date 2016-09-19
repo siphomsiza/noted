@@ -17,7 +17,7 @@
             <th>Create Date</th>
             <th>Update Date</th>
         </tr>
-        <% @departmental_sdbips.each do |departmental_sdbip| %>
+        <% departmental_sdbips.each do |departmental_sdbip| %>
         <tr>
             <td>D<%= departmental_sdbip.id %></td>
             <td><%= departmental_sdbip.department_name %></td>
@@ -35,13 +35,13 @@
             </td>
             <td><%= departmental_sdbip.kpi_ref_number %></td>
             <td><% if !departmental_sdbip.predetermined_objective_id.blank? %><%= departmental_sdbip.predetermined_objective.name %><% end %></td>
-            <td><% if !departmental_sdbip.kpi_owner_id.blank? %><%= departmental_sdbip.kpi_owner_name %><% end %></td>
+            <td><% if !departmental_sdbip.kpi_owner_id.blank? %><%= departmental_sdbip.kpi_owner.name %><% end %></td>
             <td><%= departmental_sdbip.unit_of_measurement %></td>
             <td><%= departmental_sdbip.source_of_evidence %></td>
-            <td><% if !departmental_sdbip.ndp_objective_id.blank? %><%= departmental_sdbip.ndp_objective_name %><% end %></td>
-            <td><% if departmental_sdbip.capital_project %><%= departmental_sdbip.capital_project_mun_cp_ref %><% end %></td>
-            <td><% if !departmental_sdbip.reporting_category_id.blank? %><%= departmental_sdbip.reporting_category_name %><% end %></td>
-            <td><% if !departmental_sdbip.kpi_calculation_type_id.blank? %><%= departmental_sdbip.kpi_calculation_type_name %><% end %></td>
+            <td><% if !departmental_sdbip.ndp_objective_id.blank? %><%= departmental_sdbip.ndp_objective.name %><% end %></td>
+            <td><% if departmental_sdbip.capital_project %><%= departmental_sdbip.capital_project.mun_cp_ref %><% end %></td>
+            <td><% if !departmental_sdbip.reporting_category_id.blank? %><%= departmental_sdbip.reporting_category.name %><% end %></td>
+            <td><% if !departmental_sdbip.kpi_calculation_type_id.blank? %><%= departmental_sdbip.kpi_calculation_type.name %><% end %></td>
             <td><%= departmental_sdbip.created_at.strftime(' %Y-%B-%d') %></td>
             <td><%= departmental_sdbip.updated_at.strftime('%d-%B-%Y') %></td>
 

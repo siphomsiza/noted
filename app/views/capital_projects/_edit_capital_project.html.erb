@@ -21,7 +21,7 @@
         </thead>
 
         <tbody>
-            <% @capital_projects.each do |capital_project| %>
+            <% capital_projects.each do |capital_project| %>
             <tr>
                 <td><%= link_to edit_capital_project_path(capital_project),remote: true,'data-target' => "#capital-project-modal", 'data-toggle' => 'modal', :title=>"Click to Update KPI" do %>
                     <%= capital_project.project_name %>

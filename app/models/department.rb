@@ -19,8 +19,5 @@ class Department < ActiveRecord::Base
 	delegate :name, :to => :roles, :prefix => true
 	delegate :name, :to => :monthly_cashflows, :prefix => true
 	delegate :name, :to => :top_layer_sdbips, :prefix => true
-	def subdepartment_for_form
-    collection = subdepartments.where(department_id: id)
-    collection.any? ? collection : subdepartments.build
-  	end
+	
 end

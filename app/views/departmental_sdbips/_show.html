@@ -248,7 +248,7 @@
 
                     <% if @departmental_sdbip.kpi_results.any? %>
 
-                        <%= render 'results' %>
+                        <%= render partial: 'results', :locals => {:departmental_sdbip => @departmental_sdbip,:time_periods => @time_periods} %>
 
                             <% end %>
                 </div>

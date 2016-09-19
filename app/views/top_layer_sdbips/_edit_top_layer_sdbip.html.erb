@@ -37,7 +37,7 @@
       <th>Fourth quarter actual</th>
 
     </tr>
-    <% @top_layer_sdbips.each do |top_layer_sdbip| %>
+    <% top_layer_sdbips.each do |top_layer_sdbip| %>
       <tr>
         <td>
 					<%= link_to edit_top_layer_sdbip_path(top_layer_sdbip),remote: true,'data-target' => "#top-layer-sdbip-modal", 'data-toggle' => 'modal', :title=>"Click to Update KPI" do %>

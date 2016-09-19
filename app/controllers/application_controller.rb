@@ -9,8 +9,8 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
   def record_activity(note)
     if !current_user.blank?
-      @activity = ActivityLog.new
-      @activity.user_id = current_user.id
+      @activity = self.new
+      @activity = current_user.activity_logs.build
       @activity.admin = current_user.admin || current_user.super_admin
       @activity.browser = request.env['HTTP_USER_AGENT']
       @activity.ip_address = request.env['REMOTE_ADDR']

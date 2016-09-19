@@ -74,14 +74,14 @@
                   <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" title="click to view KPI details">Details</a>
               </h5>
                                     <div id="collapseOne" class="collapse">
-                                        <%= render 'kpi_details' %>
+                                        <%= render partial: 'kpi_details', :locals => {:departmental_sdbip => @departmental_sdbip} %>
                                     </div>
                                     <h5>
               <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" title="click to view KPI results">Results</a>
           </h5>
                                     <div id="collapseTwo" class="collapse">
                                         <% if @departmental_sdbip.kpi_results.any? %>
-                                            <%= render 'results' %>
+                                            <%= render partial: 'results', :locals => {:departmental_sdbip => @departmental_sdbip,:time_periods => @time_periods} %>
                                                 <% else %>
                                                     <p>No results associated with KPI.</p>
                                                     <% end %>
@@ -91,7 +91,7 @@
       </h5>
                                     <div id="collapseThree" class="collapse">
                                         <% if @departmental_sdbip.assurances.any? %>
-                                            <%= render 'assurance_review' %>
+                                            <%= render partial: 'assurance_review', :locals => {:departmental_sdbip => @departmental_sdbip } %>
                                                 <% else %>
                                                     <p>No Assurance Review associated with KPI.</p>
                                                     <% end %>

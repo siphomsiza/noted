@@ -86,7 +86,7 @@
 
 					<% elsif !@capital_projects.blank? %>
 
-					<%= render "capital_projects" %>
+					<%= render partial: "capital_projects", :locals=>{:capital_projects => @capital_projects} %>
 
 					<% end %>
 
@@ -114,7 +114,7 @@
 
 					<% elsif !@capital_projects.blank? %>
 
-					<%= render "update_capital_project" %>
+					<%= render partial: "update_capital_project", :locals=>{:capital_projects => @capital_projects} %>
 
 					<% end %>
 
@@ -142,7 +142,7 @@
 
 					<% elsif !@capital_projects.blank? %>
 
-					<%= render "edit_capital_project" %>
+					<%= render partial: "edit_capital_project",:locals=>{:capital_projects => @capital_projects} %>
 
 					<% end %>
 
@@ -154,7 +154,7 @@
 
 				</div>
 				<div class="tab-pane fade" id="new_capital_project">
-					<%= render 'form' %>
+					<%= render partial: 'form',:locals=>{:capital_project => @capital_project} %>
 				</div>
 			</div>
 

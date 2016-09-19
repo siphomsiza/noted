@@ -17,12 +17,12 @@
       	</div><!-- tabbable tabs -->
 
       	<section class="tab-content">
-            <%= render 'user_details' %>
+            <%= render partial: 'user_details', :locals => {:users => @users } %>
             <%= render 'users_licenses' %>
-            <%= render 'users_details_log' %>
-            <%= render 'login_attempts_log' %>
-            <%= render 'super_user_activity_log' %>
-            <%= render 'users_activity_log' %>
+            <%= render partial: 'users_details_log', :locals => { :users => @users } %>
+            <%= render partial: 'login_attempts_log',:locals => { :users => @users,:user_login_attempts =>@user_login_attempts } %>
+            <%= render partial: 'super_user_activity_log', :locals => { :super_user_activities => @super_user_activities } %>
+            <%= render partial: 'users_activity_log', :locals => { :user_activities => @users_activities } %>
             <%= render 'password_status' %>
       	</section><!-- tab-content -->
 

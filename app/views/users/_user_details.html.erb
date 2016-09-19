@@ -33,7 +33,7 @@
       </tr>
     </thead>
     <tbody>
-    <% @users.each do |user| %>
+    <% users.each do |user| %>
       <tr>
         <td><%= image_tag(user.avatar.url(:thumb), size: 50) %></td>
         <td><%= user.id %></td>

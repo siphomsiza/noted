@@ -88,7 +88,7 @@
 							<label class="col control-label">Who:</label>&nbsp;<%= select_tag :subdepartment_id, grouped_options_for_select(@departments.map{ |group| [group.name, group.subdepartments.map{ |c| [c.name, c.id] } ] }),{class:'form-control'} %>
 						</div>
 						<div class="col-lg-3">
-							<label class="col control-label">What:</label>&nbsp;<%= select_tag :kpi_type_id,options_for_select([["All KPIs","0"]]+@kpitypes.all.collect {|x| [ x.name, x.id ] },id:'kpi_select'),prompt:'Select KPI Type',:required=> true,class: "form-control" %>
+							<label class="col control-label">What:</label>&nbsp;<%= select_tag :kpi_type_id,options_for_select([["All KPIs","0"]]+ @kpi_types.all.collect {|x| [ x.name, x.id ] },id:'kpi_select'),prompt:'Select KPI Type',:required=> true,class: "form-control" %>
 						</div>
 						<div class="col-lg-2">
 							<label class="col control-label">When:</label>&nbsp;
@@ -129,7 +129,7 @@
 
 				<div class="row">
 					<div class="col col-lg-12"><br/>
-						<%= render "sdbips" %>
+						<%= render partial: "sdbips", :locals=> {:departmental_sdbips => @departmental_sdbips,:periods => @periods} %>
 					</div>
 				</div>
 				<% end %>
@@ -154,9 +154,9 @@
 
 						<% if !@departmental_sdbips.blank? %>
 						<br/>
-						<%= render 'filter' %>
+						<%= render partial: 'filter',:locals=>{:departments => @departments, :kpi_types => @kpi_types} %>
 						<br/>
-						<%= render "update_sdbips" %>
+						<%= render partial: "update_sdbips", :locals=>{:departmental_sdbips => @departmental_sdbips} %>
 						<%= will_paginate %>
 					<% else %>
 						<p>There are no kpis for edit.</p>
@@ -183,9 +183,9 @@
 
 						<% if !@departmental_sdbips.blank? %>
 						<br/>
-						<%= render 'filter' %>
+						<%= render partial: 'filter', :locals=>{:departments => @departments, :kpi_types => @kpi_types} %>
 						<br/>
-						<%= render "edit_sdbips" %>
+						<%= render partial: "edit_sdbips", :locals=>{:departmental_sdbips => @departmental_sdbips} %>
 						<%= will_paginate %>
 					<% else %>
 						<p>There are no kpis for update.</p>
@@ -198,7 +198,7 @@
 			<div class="tab-pane fade" id="new_sdbip">
 				<h2>New Departmental KPI</h2>
 				<% if current_user.admin? || current_user.super_admin? %>
-				<%= render 'form' %>
+				<%= render partial: 'form', :locals=>{:departmental_sdbip => @departmental_sdbip} %>
 			<% else %>
 				<p align="center">You're not eligible to create SDBIPs.</p>
 				<% end %>
@@ -207,7 +207,7 @@
 				<h2>Deleted Departmental KPIs</h2>
 				<% if current_user.admin? || current_user.super_admin? %>
 				<% if !@deleted_kpis.blank? %>
-				<%= render 'deleted_kpis' %>
+				<%= render partial: 'deleted_kpis', :departmental_sdbips => @departmental_sdbips %>
 			<% else %>
 				<p>There are currently no deleted KPIs.</p>
 				<% end %>

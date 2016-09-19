@@ -43,10 +43,10 @@
 		<!-- tabbable tabs -->
 
 		<section class="tab-content">
-			<%= render 'manage_top_layer_administrators'%>
-			<%= render 'manage_departmental_administrators' %>
-			<%= render 'manage_subdepartmental_administrators' %>
-			<%= render 'manage_kpi_owners' %>
+			<%= render partial: 'manage_top_layer_administrators', :locals=>{:departments => @departments} %>
+			<%= render partial: 'manage_departmental_administrators',:locals=>{:departments => @departments} %>
+			<%= render partial: 'manage_subdepartmental_administrators',:locals=>{:subdepartments => @subdepartments} %>
+			<%= render partial: 'manage_kpi_owners',:locals=>{:kpi_owners => @kpi_owners} %>
 		</section>
 
 	</div>

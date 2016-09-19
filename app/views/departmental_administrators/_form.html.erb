@@ -1,12 +1,12 @@
 <div class="col-lg-6 col-lg-offset-3"><br/>
-    <%= form_for(@departmental_administrator) do |f| %>
-    <% if @departmental_administrator.errors.any? %>
+    <%= form_for(departmental_administrator) do |f| %>
+    <% if departmental_administrator.errors.any? %>
     <div id="error_explanation">
-        <h2><%= pluralize(@departmental_administrator.errors.count, "error") %>
+        <h2><%= pluralize(departmental_administrator.errors.count, "error") %>
             prohibited this departmental_administrator from being saved:</h2>
 
         <ul>
-            <% @departmental_administrator.errors.full_messages.each do |message| %>
+            <% departmental_administrator.errors.full_messages.each do |message| %>
             <li><%= message %></li>
             <% end %>
         </ul>
