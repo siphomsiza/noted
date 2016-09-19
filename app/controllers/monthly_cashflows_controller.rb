@@ -12,13 +12,8 @@ class MonthlyCashflowsController < ApplicationController
         @response = @client.fetch(1582504)
         @doc = @response.doc
         @forecast = @doc["item"]["forecast"]
-      #@response = @client.fetch_by_location('New York')
-      #@response.units.temperature
-      #@response.condition.temp
-
   rescue SocketError => e
-    flash[:notice] = "received Exception #{e.message}"
-    puts "received Exception #{e}"
+    flash[:danger] = "received Exception #{e.message}"
   end
     @monthly_cashflow = MonthlyCashflow.new
     @monthly_cashflows = MonthlyCashflow.all
@@ -103,8 +98,5 @@ class MonthlyCashflowsController < ApplicationController
       def admin_user
         #redirect_to(root_url) unless
         current_user.admin?
-      end
-      def kpi_owner_user
-        redirect_to(root_url) unless !current_user.role.blank? || current_user.admin? || current_user.super_admin?
       end
 end

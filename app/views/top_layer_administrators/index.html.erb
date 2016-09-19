@@ -39,7 +39,7 @@ $(function() {
 			</div><!-- tabbable tabs -->
 
 			<section class="tab-content">
-				<%= render 'manage_administrators' %>
+				<%= render partial: 'manage_administrators', {:departments => @departments} %>
 				<%= render 'add_administrators' %>
 			</section>
 

@@ -1,5 +1,4 @@
 <div class="table-responsive">
-	<%= will_paginate @top_layer_sdbips,:class=>"center" %>
 <table class="table table-striped table-bordered">
   <thead>
     <tr>
@@ -40,7 +39,7 @@
   </thead>
 
   <tbody>
-    <% @top_layer_sdbips.each do |top_layer_sdbip| %>
+    <% top_layer_sdbips.each do |top_layer_sdbip| %>
       <tr>
         <td><%= top_layer_sdbip.department_name %></td>
         <td><% if top_layer_sdbip.reporting_kpi? %>

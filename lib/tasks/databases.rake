@@ -59,7 +59,7 @@ namespace :sakhisizwe do
     Rails.application.config.paths['config/database'] = ['config/sakhisizwe_db.yml']
     end
 
-  namespace :db do
+  namespace :db  do
   task :reset => :set_custom_db_config_paths do
       Rake::Task['db:drop'].invoke
       Rake::Task['db:setup'].invoke

@@ -47,7 +47,7 @@ class SdbipTimePeriod < ActiveRecord::Base
        end
    end
  end
-
+ 
  def self.open_spreadsheet(file)
 
    case File.extname(file.original_filename)
@@ -65,5 +65,4 @@ class SdbipTimePeriod < ActiveRecord::Base
    else raise "Unknown file type: #{file.original_filename}"
    end
  end
-
 end

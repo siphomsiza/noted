@@ -52,7 +52,7 @@ class AreasController < ApplicationController
   # DELETE /areas/1.json
   def destroy
     @area.destroy
-    flash[:notice] = 'Area was successfully deleted.'
+    flash[:danger] = 'Area was successfully deleted.'
     redirect_to :back
   end
 

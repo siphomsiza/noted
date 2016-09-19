@@ -14,7 +14,7 @@
       </tr>
     </thead>
     <tbody>
-      <% @locked_users.each do |locked_user| %>
+      <% locked_users.each do |locked_user| %>
       <tr>
         <td><%= image_tag(locked_user.avatar.url(:thumb), size: 50) %></td>
         <td><%= locked_user.id %></td>

@@ -1,31 +1,31 @@
 <table class="table table-responsive table-striped">
     <tr>
         <th>Ref:</th>
-        <td>D<%= @departmental_sdbip.id %></td>
+        <td>D<%= departmental_sdbip.id %></td>
     </tr>
     <tr>
         <th>Department</th>
-        <td><%= @departmental_sdbip.department_name %></td>
+        <td><%= departmental_sdbip.department_name %></td>
     </tr>
     <tr>
         <th>KPI</th>
-        <td><%= @departmental_sdbip.kpi %></td>
+        <td><%= departmental_sdbip.kpi %></td>
     </tr>
     <tr>
         <th>Unit of Measrement</th>
-        <td><%= @departmental_sdbip.unit_of_measurement %></td>
+        <td><%= departmental_sdbip.unit_of_measurement %></td>
     </tr>
     <tr>
         <th>Source of Evidence</th>
-        <td><%= @departmental_sdbip.source_of_evidence %>
+        <td><%= departmental_sdbip.source_of_evidence %>
         </td>
     </tr>
     <tr>
         <th>KPI Calculation Type</th>
         <td>
-            <% if !@departmental_sdbip.kpi_calculation_type_id.blank? %>
-            <%= @departmental_sdbip.kpi_calculation_type_name %>
-            (<%= @departmental_sdbip.kpi_calculation_type_code %>)
+            <% if !departmental_sdbip.kpi_calculation_type_id.blank? %>
+            <%= departmental_sdbip.kpi_calculation_type.name %>
+            (<%= departmental_sdbip.kpi_calculation_type.code %>)
             <% end %>
         </td>
     </tr>

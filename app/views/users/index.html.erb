@@ -16,7 +16,7 @@
     <%= render 'manage_users' %>
     <%= render 'report_users' %>
     <%= render 'setup_users' %>
-    <%= render 'form' %>
+    <%= render partial: 'form', :locals => {:user=>@user,:system_users => @users} %>
 
   </section><!-- tab-content -->
 

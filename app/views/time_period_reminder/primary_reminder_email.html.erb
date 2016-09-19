@@ -1,0 +1,9 @@
+<h1>KEYSTONE Application</h1>
+
+<p>Hi <%= @user.surname %>&nbsp;<%= @user.firstname %>,</p>
+
+<p>
+  Please update your KPI.
+</p>
+
+<%= link_to "update kpi", departmental_sdbips_url(email: @user.email) %>

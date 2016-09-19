@@ -8,25 +8,21 @@ class DepartmentsController < ApplicationController
 
   def index
     begin
-
         @client = YahooWeather::Client.new
         @response = @client.fetch(1582504)
         @doc = @response.doc
         @forecast = @doc["item"]["forecast"]
   rescue SocketError => e
-    flash[:notice] = "received Exception #{e.message}"
-    puts "received Exception #{e}"
+    flash[:danger] = "received Exception #{e.message}"
   end
       @department = Department.new
   	   @departments = Department.includes(:subdepartments).paginate(page: params[:page],per_page: 10).order(id: :asc)
   end
 
   def show
-    
   end
 
   def edit
-    
   end
   def create
   	@department = Department.new(department_params)
@@ -36,9 +32,7 @@ class DepartmentsController < ApplicationController
 
       else
       redirect_to :back
-
   	end
-
   end
 
   def update
@@ -50,7 +44,6 @@ class DepartmentsController < ApplicationController
         flash[:danger] = 'Department was not updated.'
         redirect_to :back
       end
-
   end
 
   # DELETE /municipalities/1
@@ -60,7 +53,6 @@ class DepartmentsController < ApplicationController
     @department.destroy
       flash[:success]='Department was successfully deleted.'
       redirect_to departments_path
-
   end
 
 
@@ -72,10 +64,8 @@ class DepartmentsController < ApplicationController
 
   def department_params
   	params.require(:department).permit(:name, :tel_no, :fax_no, :subdepartments_attributes => [ :id,:name,:_destroy])
-
   end
 #
-
     # Before filters
 
     # Confirms a logged-in user.
@@ -91,5 +81,4 @@ class DepartmentsController < ApplicationController
     def admin_user
       redirect_to(root_url) unless current_user.admin?  || current_user.super_admin?
     end
-
 end

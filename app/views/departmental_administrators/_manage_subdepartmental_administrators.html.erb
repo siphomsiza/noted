@@ -31,7 +31,7 @@
                                     <th>Can approve?</th>
                                     <th>Actions</th>
                                 </tr>
-                                <% @subdepartments.each do |subdepartment| %>
+                                <% subdepartments.each do |subdepartment| %>
                                 <tr>
                                     <td rowspan="<%= subdepartment.subdepartmental_administrators.count%>"><%= subdepartment.name %></td>
                                     <% subdepartment.subdepartmental_administrators.each do |subdepartmental_administrator| %>
@@ -60,7 +60,7 @@
                     <div class="tab-pane fade" id="add_subdepartmental_admin"><br/>
                         <ul class="roles">
                             <h3>New Sub-Departmental Administrator</h3><hr/>
-                            <%= render 'subdepartmental_administrators/form' %>
+                            <%= render partial: 'subdepartmental_administrators/form',:locals=>{ :subdepartmental_administrator => @subdepartmental_administrator} %>
                         </ul>
                     </div>
 

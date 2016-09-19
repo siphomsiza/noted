@@ -5,30 +5,8 @@
         </div>
         <div class="modal-body">
             <div class="row">
-                <div class="col-lg-10 col-md-offset-1">
-
-                    <div class="row">
                         <br/>
-                        <%= form_for @heading do |f| %>
-
-                            <%= f.label :term %>
-                                <br>
-                                <%= f.text_field :term, :class => "form-control has-error col-md-5" %>
-
-                                    <%= f.label :description %>
-                                        <br>
-                                        <%= f.text_area :description, :class => "form-control has-error col-md-5" %>
-
-                                            <%= f.label :category %>
-                                                <br>
-                                                <%= f.select(:category,["Capital Projects", "Departmental SDBIP","General","Monthly Cashflows", "Revenue by source","Top Layer SDBIP"],{},{:class=>"form-control"})%>
-
-                                                    <%= f.submit "Save",class: 'btn col-lg-3  pull-right'%>
-                                                        <br/>
-
-                                                        <% end %>
-
-                    </div>
+                        <%= render 'form' %>
 
                 </div>
             </div>
@@ -38,4 +16,3 @@
         </div>
 
     </div>
-</div>

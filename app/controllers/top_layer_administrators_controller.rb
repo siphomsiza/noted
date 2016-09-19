@@ -5,6 +5,7 @@ class TopLayerAdministratorsController < ApplicationController
   # GET /top_layer_administrators
   # GET /top_layer_administrators.json
   def index
+    @users_for_departmental_administrators = User.where('id NOT IN(SELECT (user_id) FROM top_layer_administrators)')
     @top_layer_administrator = TopLayerAdministrator.new
     @departments = Department.includes(:top_layer_administrators).paginate(page: params[:page],per_page: 10)
   end

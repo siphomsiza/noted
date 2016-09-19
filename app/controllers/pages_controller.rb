@@ -12,27 +12,23 @@ class PagesController < ApplicationController
         @response = @client.fetch(1582504)
         @doc = @response.doc
         @forecast = @doc["item"]["forecast"]
-
    rescue SocketError => e
-    flash[:notice] = "received Exception #{e.message}"
-    puts "received Exception #{e}"
+    flash[:danger] = "received Exception #{e.message}"
     end
   end
   def introduction
     begin
-
         @client = YahooWeather::Client.new
         @response = @client.fetch(1582504)
         @doc = @response.doc
         @forecast = @doc["item"]["forecast"]
-      #@response = @client.fetch_by_location('New York')
-      #@response.units.temperature
-      #@response.condition.temp
-
     rescue SocketError => e
-    flash[:notice] = "received Exception #{e.message}"
-    puts "received Exception #{e}"
+    flash[:danger] = "received Exception #{e.message}"
     end
+    @closed_primary = SdbipTimePeriod.where("extract(day from primary_closure) = ? AND extract(month from primary_closure) = ? AND extract(year from primary_closure) = ? AND primary_status = ?",Date.today.day,Date.today.month,Date.today.year,true)
+    @closed_secondary = SdbipTimePeriod.where("extract(day from secondary_closure) = ? AND extract(month from secondary_closure) = ? AND extract(year from secondary_closure) = ? AND secondary_status = ?",Date.today.day,Date.today.month,Date.today.year,true)
+    @primary_reminders = SdbipTimePeriod.where("extract(day from primary_reminder) = ? AND extract(month from primary_reminder) = ? AND extract(year from primary_reminder) = ? AND primary_status = ? AND primary_notification_sent = ?",Date.today.day,Date.today.month,Date.today.year,true,false)
+    @secondary_reminders = SdbipTimePeriod.where("extract(day from secondary_reminder) = ? AND extract(month from secondary_reminder) = ? AND extract(year from secondary_reminder) = ? AND secondary_status = ? AND secondary_notification_sent = ? ", Date.today.day,Date.today.month,Date.today.year,true,false)
   end
   def contact
   end
@@ -45,44 +41,18 @@ class PagesController < ApplicationController
     @users = User.all
     @departmental_sdbips = DepartmentalSdbip.order(performance_standard: :asc)
     @departmental_sdbips_kpa = DepartmentalSdbip.all
-    @departments_sdibps = @departmental_sdbips_kpa.select(:performance_standard).order(performance_standard: :asc).uniq
+    @departments_sdibps = DepartmentalSdbip.select(:performance_standard).order(performance_standard: :asc).uniq
     @departments = Department.all
     $colors = []
-    @departments_sdibps.each do |color|
-    if color.performance_standard.include?("KPI Almost Met")
-      $colors.push("orange")
-    end
-    if color.performance_standard.include?("KPI Extremely Well Met")
-      $colors.push("darkblue")
-    end
-    if color.performance_standard.include?("KPI Met")
-      $colors.push("limegreen")
-    end
-    if color.performance_standard.include?("KPI Not Met")
-      $colors.push("red")
-    end
-    if color.performance_standard.include?("KPI Not Yet Measured")
-      $colors.push("#F4C2C2")
-    end
-    if color.performance_standard.include?("KPI Well Met")
-      $colors.push("darkgreen")
-    end
-  end
+    $colors = DepartmentalSdbip.chart_theme @departments_sdibps
     @colours = $colors
-
     begin
-
         @client = YahooWeather::Client.new
         @response = @client.fetch(1582504)
         @doc = @response.doc
         @forecast = @doc["item"]["forecast"]
-      #@response = @client.fetch_by_location('New York')
-      #@response.units.temperature
-      #@response.condition.temp
-
     rescue SocketError => e
-      flash[:notice] = "received Exception #{e.message}"
-      puts "received Exception #{e}"
+      flash[:danger] = "received Exception #{e.message}"
     end
 
   end
@@ -109,5 +79,4 @@ class PagesController < ApplicationController
       #redirect_to(root_url) unless
       current_user.admin || current_user.super_admin?# || top_layer_administrator
     end
-    
 end

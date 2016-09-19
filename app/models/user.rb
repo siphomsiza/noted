@@ -41,6 +41,20 @@ class User < ActiveRecord::Base
   def User.new_token
     SecureRandom.urlsafe_base64
   end
+  # Send primary user notification email.
+  def send_primary_reminder_email
+    UserMailer.primary_reminder_email(self).deliver_now
+  end
+  # Send secondary user notification email.
+  def send_secondary_reminder_email
+    UserMailer.secondary_reminder_email(self).deliver_now
+  end
+  def editable_by?(user)
+    self.user_editors(user)#.include?(user)
+  end
+  def user_editors(user)
+    user == user || user.admin? || user.super_admin?
+  end
 
   # Remembers a user in the database for use in persistent sessions.
   def remember
@@ -78,7 +92,6 @@ class User < ActiveRecord::Base
   def send_locked_account_email
     UserMailer.account_locked(self).deliver_now
   end
-
   # Sets the password reset attributes.
   def create_reset_digest
     self.reset_token = User.new_token
@@ -94,12 +107,6 @@ class User < ActiveRecord::Base
   # Returns true if a password reset has expired.
   def password_reset_expired?
     reset_sent_at < 2.hours.ago
-  end
-  def self.sweep(time = "20 minutes")
-      if time.is_a?(String)
-        time = time.split.inject { |count, unit| count.to_i.send(unit) }
-      end
-      delete_all "updated_at < '#{time.ago.to_s(:db)}'"
   end
   private
 

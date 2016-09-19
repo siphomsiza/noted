@@ -14,7 +14,7 @@
       </tr>
     </thead>
     <tbody>
-     <% @new_users.each do |new_user| %>
+     <% new_users.each do |new_user| %>
       <tr>
         <td><%= gravatar_for new_user, size: 50 %></td>
         <td><%= new_user.id %></td>

@@ -14,7 +14,7 @@
       </tr>
     </thead>
     <tbody>
-     <% @terminated_users.each do |terminated_user| %>
+     <% terminated_users.each do |terminated_user| %>
       <tr>
         <td><%= image_tag(terminated_user.avatar.url(:thumb), size: 50) %></td>
         <td><%= terminated_user.id %></td>

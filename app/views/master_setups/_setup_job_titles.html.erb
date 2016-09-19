@@ -10,8 +10,8 @@
 				</div><!-- tabbable tabs -->
 
 				<section class="tab-content">
-          <%= render 'manage_titles' %>
-			    <%= render 'add_titles' %>
+          		<%= render 'manage_titles',:job_titles => @job_titles %>
+			    <%= render 'add_titles', :jobtitle => @jobtitle %>
 
 				</section><!-- tab-content -->
 

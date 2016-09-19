@@ -10,7 +10,7 @@
      <th>Actions</th>
    </tr>
 
- <% @job_titles.each do |title| %>
+ <% job_titles.each do |title| %>
    <tr>
      <td><%=  title.id %></td>
        <td><%=  title.title %></td>
@@ -31,5 +31,5 @@
 
 </table>
 </div>
-<%= will_paginate @job_titles %>
+<%= will_paginate job_titles %>
 </div>

@@ -106,7 +106,7 @@
                                 <th>Areas</th>
                                 <td>
                                     <% if !@capital_project.area_id.blank? %>
-                                        <%= @capital_project.area.name %>
+                                        <%= @capital_project.area_name %>
                                             <% end %>
                                 </td>
                             </tr>
@@ -114,7 +114,7 @@
                                 <th>Wards</th>
                                 <td>
                                     <% if !@capital_project.ward_id.blank? %>
-                                        <%= @capital_project.ward.name %>
+                                        <%= @capital_project.ward_name %>
                                             <% end %>
                                 </td>
                             </tr>
@@ -131,14 +131,14 @@
                             <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" title="click to view Capital Project results.">Results</a>
                         </h5>
                         <div id="collapseOne" class="collapse">
-                            <%= render 'results' %>
+                            <%= render partial: 'results', :locals => {:capital_project => @capital_project} %>
                         </div>
                       
     <h5>
         <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" title="click to view Associated Departmental KPI details">Associated Departmental KPI</a>
     </h5>
                         <div id="collapseTwo" class="collapse">
-                            <%= render 'associated_kpi' %>
+                            <%= render partial: 'associated_kpi', :locals => {:capital_project => @capital_project,:time_periods => @time_periods} %>
                         </div>
 
                     </div>

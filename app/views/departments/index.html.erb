@@ -92,7 +92,7 @@
 				<br/>
 				<h3>New Department</h3>
 				<hr/>
-				<%= render 'form' %>
+				<%= render partial: 'form', :locals=> {:department => @department} %>
 			</div>
 		</div>
 	</div>

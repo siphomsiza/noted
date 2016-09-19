@@ -43,8 +43,8 @@
                 <th rowspan="2">
                     <h4>KPI Calculation Type</h4>
                 </th>
-                <% if !@periods.blank? %>
-                <% @periods.each do |kpi_result_period| %>
+                <% if !periods.blank? %>
+                <% periods.each do |kpi_result_period| %>
                 <th colspan="6">
                     <h4><%= kpi_result_period.period.strftime("%B %Y") %></h4>
                 </th>
@@ -60,7 +60,7 @@
                 <% end %>
             </tr>
             <tbody>
-                <% @departmental_sdbips.each do |departmental_sdbip| %>
+                <% departmental_sdbips.each do |departmental_sdbip| %>
                 <tr>
                     <td>D<%= departmental_sdbip.id %></td>
                     <td><%= departmental_sdbip.department_name %></td>
@@ -144,7 +144,7 @@
                         <% end %>
                     </td>
                     <% end %>
-                <% elsif !@periods.blank? && !departmental_sdbip.kpi_results.any? %>
+                <% elsif !periods.blank? && !departmental_sdbip.kpi_results.any? %>
                   <td></td>
                   <td></td>
                   <td></td>
@@ -159,5 +159,5 @@
         </table>
 
     </div>
-    <%= will_paginate @departmental_sdbips %>
+    <%= will_paginate departmental_sdbips %>
 </div>

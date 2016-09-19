@@ -1,6 +1,7 @@
 class DepartmentalSdbipsController < ApplicationController
     # before_filter :authenticate
     before_action :logged_in_user, only: [:edit_kpis, :index, :restore_kpi, :edit, :update, :show, :audit_performance]
+    before_action :set_departmental_sdbip, only: [:edit,:edit_kpis,:update,:show]
     before_action :admin_user, only: [:edit_kpis, :new, :restore_kpi, :index, :edit, :update, :destroy, :show]
     before_action :correct_user, only: [:edit_kpis, :index, :restore_kpi, :edit, :update, :show, :audit_performance]
     def index
@@ -10,74 +11,59 @@ class DepartmentalSdbipsController < ApplicationController
           @doc = @response.doc
           @forecast = @doc['item']['forecast']
       rescue SocketError => e
-          flash[:notice] = "received Exception #{e.message}"
-          puts "received Exception #{e}"
+          flash[:danger] = "received Exception #{e.message}"
       end
         @departmental_sdbip = DepartmentalSdbip.new
         @departments = Department.includes(:subdepartments)
         @deleted_kpis = DepartmentalKpi.paginate(page: params[:page], per_page: 15)
         @departmental_sdbips_to_file = DepartmentalSdbip.order(:department_id, :subdepartment_id)
-        # @subdepartments = Subdepartment.where("department_id = ?", Department.first.id)
-        @kpitypes = KpiType.all
-        if params[:subdepartment_id]
-            if !current_user.role.blank? || current_user.admin? || current_user.super_admin?
+        @kpi_types = KpiType.all
+        if params[:subdepartment_id] && (!current_user.role.blank? || current_user.admin? || current_user.super_admin?)
                     @periods = KpiResult.select(:period).where("extract(month from period) >= ? AND extract(year from period) >= ? AND extract(month from period) <= ? AND extract(year from period) <= ?" ,params[:start_date].to_date.month,params[:start_date].to_date.year, params[:end_date].to_date.month,params[:end_date].to_date.year).distinct
-                if current_user.admin? || current_user.super_admin? || current_user.role.audit_log_reporting? || current_user.role.top_layer_administrator? || current_user.role.assurance_provider? || current_user.role.secondary_time_period? || current_user.role.finance_admin?
                     @departmental_sdbips = DepartmentalSdbip.search(params[:subdepartment_id], params[:kpi_type_id], params[:start_date], params[:end_date])
+                if current_user.admin? || current_user.super_admin? || current_user.role.audit_log_reporting? || current_user.role.top_layer_administrator? || current_user.role.assurance_provider? || current_user.role.secondary_time_period? || current_user.role.finance_admin?
+                    @departmental_sdbips = @departmental_sdbips
                 end
                 if !current_user.role.blank? && current_user.role.kpi_owner? && !current_user.kpi_owners.blank? # && (current_user.subdepartmental_administrator.blank? || current_user.departmental_administrator.blank?)
                     kpi_id = current_user.kpi_owners.ids
-                    @departmental_sdbips = DepartmentalSdbip.search_kpi(params[:kpi_id], params[:department_id], params[:subdepartment_id], params[:kpi_type_id], params[:start_date], params[:end_date])
-                    @departmental_sdbips = @departmental_sdbips.where(kpi_owner_id: kpi_id) unless @departmental_sdbips.blank?
+                    @departmental_sdbips = @departmental_sdbips.where(:kpi_owner_id => params[:kpi_id]) unless @departmental_sdbips.blank?
                 end
                 if !current_user.subdepartmental_administrator.blank? && current_user.kpi_owners.blank?
                     subdepartment_id = current_user.subdepartmental_administrator.subdepartment_id
-                    @departmental_sdbips = DepartmentalSdbip.search_departmental_kpis(params[:department_id], params[:subdepartment_id], params[:kpi_type_id], params[:start_date], params[:end_date])
                     @departmental_sdbips = @departmental_sdbips.where(subdepartment_id: subdepartment_id) unless @departmental_sdbips.blank?
                 end
                 if !current_user.departmental_administrator.blank? && current_user.kpi_owners.blank?
                     department_id = current_user.departmental_administrator.department_id
-                    @departmental_sdbips = DepartmentalSdbip.search_subdepartment_kpis(params[:department_id], params[:subdepartment_id], params[:kpi_type_id], params[:start_date], params[:end_date])
-                    @departmental_sdbips = @departmental_sdbips.where(department_id: department_id) unless @departmental_sdbips.blank?
+                    @departmental_sdbips = @departmental_sdbips.where(:department_id => params[:department_id]) unless @departmental_sdbips.blank?
                 end
                 if !@departmental_sdbips.blank?
                     @departmental_sdbips = @departmental_sdbips.includes(:department, :subdepartment, :kpi_type, :kpi_owner, :mscore_classification, :national_outcome, :strategic_objective, :risk_rating, :kpa, :ndp_objective, :capital_project, :kpi_concept, :area, :ward, :reporting_category, :kpi_calculation_type).paginate(per_page: 15, page: params[:page]).order(id: :asc)
                 else
                     @departmental_sdbips = nil
                 end
-            end
-        elsif !params[:subdepartment_id]
-
-            if !current_user.role.blank? || current_user.admin? || current_user.super_admin?
+        elsif !params[:subdepartment_id] && (!current_user.role.blank? || current_user.admin? || current_user.super_admin?)
                 @periods = KpiResult.select(:period).distinct
                 @departmental_sdbips = DepartmentalSdbip.all
                 if current_user.admin? || current_user.super_admin? || current_user.role.audit_log_reporting? || current_user.role.top_layer_administrator? || current_user.role.assurance_provider? || current_user.role.secondary_time_period? || current_user.role.finance_admin?
                     @departmental_sdbips = @departmental_sdbips
                 end
                 if !current_user.role.blank? && current_user.role.kpi_owner? && !current_user.kpi_owners.blank? # && (current_user.subdepartmental_administrator.blank? || current_user.departmental_administrator.blank?)
-                    kpi_id = nil
                     kpi_id = current_user.kpi_owners.ids
                     @departmental_sdbips = @departmental_sdbips.where(kpi_owner_id: kpi_id)
                 end
                 if !current_user.subdepartmental_administrator.blank? && current_user.kpi_owners.blank?
-                    subdepartment_id = nil
                     subdepartment_id = current_user.subdepartmental_administrator.subdepartment_id
                     @departmental_sdbips = @departmental_sdbips.where(subdepartment_id: subdepartment_id)
                 end
                 if !current_user.departmental_administrator.blank? && current_user.kpi_owners.blank?
-                    department_id = nil
                     department_id = current_user.departmental_administrator.department_id
                     @departmental_sdbips = @departmental_sdbips.where(department_id: department_id)
-                end
-                if !current_user.admin? && !current_user.super_admin? && !current_user.role.audit_log_reporting? && !current_user.role.top_layer_administrator? && !current_user.role.assurance_provider? && current_user.departmental_administrator.blank? && current_user.kpi_owners.blank? && current_user.subdepartmental_administrator.blank? && !current_user.role.finance_admin?
-                    @departmental_sdbips = nil
                 end
                 if !@departmental_sdbips.blank?
                     @departmental_sdbips = @departmental_sdbips.paginate(per_page: 15, page: params[:page]).includes(:capital_project, :department, :subdepartment, :kpi_type, :kpi_owner, :kpi_concept, :kpi_calculation_type, :mscore_classification, :kpa, :strategic_objective, :national_outcome, :ward, :area, :reporting_category, :ndp_objective, :risk_rating,:kpi_results).order(id: :asc)
                 else
                     @departmental_sdbips = nil
                 end
-            end
         end
         respond_to do |format|
             format.html
@@ -96,7 +82,6 @@ class DepartmentalSdbipsController < ApplicationController
 
     def show
         @time_periods = SdbipTimePeriod.all
-        @departmental_sdbip = DepartmentalSdbip.find(params[:id])
     end
 
     def new
@@ -114,13 +99,6 @@ class DepartmentalSdbipsController < ApplicationController
         end
     end
 
-    def update_subdepartments
-        @subdepartments = Subdepartment.where('department_id = ?', params[:department_id])
-        respond_to do |format|
-            format.js
-        end
-    end
-
     def audit_performance
         @time_periods = SdbipTimePeriod.all
         @departmental_sdbip = DepartmentalSdbip.find(params[:id])
@@ -132,7 +110,6 @@ class DepartmentalSdbipsController < ApplicationController
 
     def edit
         @time_periods = SdbipTimePeriod.all
-        @departmental_sdbip = DepartmentalSdbip.find(params[:id])
         if @departmental_sdbip.kpi_results.where('extract(month from period) = ? AND extract(year from period) = ? AND departmental_sdbip_id = ? ', Date.today.month, Date.today.year, @departmental_sdbip.id).any?
         else
           @departmental_sdbip.kpi_results.build
@@ -141,11 +118,9 @@ class DepartmentalSdbipsController < ApplicationController
 
     def edit_kpis
         @time_periods = SdbipTimePeriod.all
-        @departmental_sdbip = DepartmentalSdbip.find(params[:id])
     end
 
     def update
-        @departmental_sdbip = DepartmentalSdbip.find(params[:id])
         # @departmental_sdbip.kpi_results.user_id = current_user.id
         # @departmental_sdbip.assurances.user_id = current_user.id
 

@@ -21,5 +21,8 @@ module ApplicationHelper
 def active_class(link_path)
   current_page?(link_path) ? "active" : ""
 end
+def viewable_by?(user)
+    user && (user == self.user || self.editors.include?(user))
+end
 
 end

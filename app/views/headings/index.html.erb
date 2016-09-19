@@ -91,7 +91,7 @@
 									<th></th>
 								</tr>
 
-								<%= render 'departmental_headings' %>
+								<%= render partial: 'heading', collection: @departmental_headings, as: :heading %>
 
 							</table>
 							<%= will_paginate @departmental_headings %>
@@ -107,7 +107,7 @@
 									<th></th>
 								</tr>
 
-								<%= render 'top_layer_headings' %>
+								<%= render partial: 'heading', collection: @toplayer_headings, as: :heading %>
 
 							</table><%= will_paginate @toplayer_headings %>
 						</ul>
@@ -122,7 +122,7 @@
 									<th></th>
 								</tr>
 
-								<%= render 'capital_projects_headings' %>
+								<%= render partial: 'capital_projects_headings', collection: @capitalProjects_headings, as: :heading %>
 
 							</table><%= will_paginate @capitalProjects_headings %>
 						</ul>
@@ -137,7 +137,7 @@
 									<th></th>
 								</tr>
 
-								<%= render 'monthly_cashflow_headings' %>
+								<%= render partial: 'monthly_cashflow_headings', collection: @monthlycashflow_headings, as: :heading %>
 
 							</table>
 							<%= will_paginate @monthlycashflow_headings %>
@@ -153,7 +153,7 @@
 									<th></th>
 								</tr>
 
-								<%= render 'revenue_by_source_headings' %>
+								<%= render partial: 'revenue_by_source_headings', collection: @revenuebysource_headings, as: :heading %>
 
 							</table><%= will_paginate @revenuebysource_headings %>
 						</ul>

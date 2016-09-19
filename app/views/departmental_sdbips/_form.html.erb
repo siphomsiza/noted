@@ -1,14 +1,14 @@
 <div class="row">
     <div class="col-lg-6 col-md-offset-3">
 
-        <%= form_for @departmental_sdbip do |f| %>
-        <% if @departmental_sdbip.errors.any? %>
+        <%= form_for departmental_sdbip do |f| %>
+        <% if departmental_sdbip.errors.any? %>
         <div id="error_explanation">
-            <h2><%= pluralize(@departmental_sdbip.errors.count, "error") %>
+            <h2><%= pluralize(departmental_sdbip.errors.count, "error") %>
                 prohibited this Departmental SDBIP from being saved:</h2>
 
             <ul>
-                <% @departmental_sdbip.errors.full_messages.each do |message| %>
+                <% departmental_sdbip.errors.full_messages.each do |message| %>
                 <li><%= message %></li>
                 <% end %>
             </ul>
