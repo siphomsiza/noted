@@ -19,5 +19,5 @@ namespace :deploy do
     end
   end
   after "deploy:migrate", "deploy:reset"
-  before "deploy:reset", "deploy:symlink_config_files"
+  #before "deploy:reset", "deploy:symlink_config_files"
 end
