@@ -14,7 +14,7 @@ User.create!( firstname: "Casey Abram",
               super_admin: true,
               activated: true,status: "Active",
               activated_at: Time.zone.now)
-if !Rails.env.production?
+
 20.times do |n|
 name  = Faker::Name.first_name
 lastname = Faker::Name.last_name
@@ -49,7 +49,7 @@ MasterSetup.create!(
   latitude: -31.333819,
   longitude: 27.849731,
 )
-end
+
 $i=0
 $num = 12
 while $i < $num  do

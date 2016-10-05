@@ -35,7 +35,6 @@ User.create!( firstname: "Sandiswa",
                             super_admin: true,
                             activated: true,status: "Active",
                             activated_at: Time.zone.now)
-if !Rails.env.production?
 User.create!( firstname: "Arms",
               surname: "Audit",
               email: "armsuser@sableassets.co.za",
@@ -85,7 +84,7 @@ MasterSetup.create!(
   longitude: 30.801888,
   address: 'Mkhondo Municipality<br />Piet Retief, 2380<br />Mpumalanga, South Africa'
 )
-end
+
 landline=Faker::Number.number(10)
 mobile=Faker::Number.number(10)
 Department.create!(name: "Municipal Manager's Office",
