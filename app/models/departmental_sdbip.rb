@@ -156,7 +156,7 @@ class DepartmentalSdbip < ActiveRecord::Base
         end
 
         if selected_columns.include?('Sub-Department')
-            audit_columns.push('departmental_sdbip.name')
+            audit_columns.push('departmental_sdbip.subdepartment_name')
             audit_columns_headers.push('Sub-Department')
             unless subdepartment_id.blank?
                 subdepartments_value = subdepartment_id

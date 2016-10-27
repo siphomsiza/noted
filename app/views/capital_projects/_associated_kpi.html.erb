@@ -70,7 +70,7 @@
                         <%= kpi_result.updated_at.strftime("%d-%b-%Y") %>
                     </td>
                     <td>
-                        <%= render partial: "assurance_results", {:capital_project => @capital_project} %>
+                        <%= render partial: "assurance_results", locals {:capital_project => @capital_project} %>
                     </td>
 
                     <% end %>

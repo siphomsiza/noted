@@ -77,7 +77,7 @@ mobile=Faker::PhoneNumber.cell_phone
 end
 
 MasterSetup.create!(
-  municipality: "Mkhondo Local Municipality(Dev Database)",
+  municipality: "Mkhondo Local Municipality",
   logo: File.open(File.join(Rails.root,'/app/assets/images','mkhondo-logo.png')),# File.open("../app/assets/images/mkhondo-logo.png"),
   province: "Mpumalanga",
   latitude: -27.007764 ,
