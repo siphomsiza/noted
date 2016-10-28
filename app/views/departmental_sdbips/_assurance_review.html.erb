@@ -1,4 +1,4 @@
-<% departmental_sdbip.assurances.each do |assurance| %>
+<% @departmental_sdbip.assurances.each do |assurance| %>
 <table class="table table-responsive table-hover table-striped">
     <tr>
         <th>
@@ -34,7 +34,11 @@
         <th>
             Assigned to:
         </th>
-        <td><%= assurance.kpi_result.user.firstname if !assurance.kpi_result.user_id.blank? %>&nbsp;<%= assurance.kpi_result.user.surname if !assurance.kpi_result.user_id.blank? %></td>
+        <td>
+          <% if assurance.kpi_result.present? %>
+          <%= assurance.kpi_result.user.firstname %>&nbsp;<%= assurance.kpi_result.user.surname %>
+        <% end %>
+      </td>
     </tr>
     <tr>
         <th>

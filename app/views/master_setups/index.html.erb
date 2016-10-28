@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', drawMap);
 var map;
 
 function drawMap() {
-	var municipalityLocation = new google.maps.LatLng(<%= @setup.latitude %>, <%= @setup.longitude %>);
+	var municipalityLocation = new google.maps.LatLng(<%= @setup.latitude if !@setup.blank? %>, <%= @setup.longitude if !@setup.blank? %>);
 
 	var mapOptions = {
 		'center': municipalityLocation,
@@ -65,9 +65,9 @@ function drawMap() {
 
 	map = new google.maps.Map(document.getElementById("googleMap"), mapOptions);
 
-	var marker = new google.maps.Marker({position: municipalityLocation, map: map, title: 'Find us here (<%= @setup.municipality %>)'});
+	var marker = new google.maps.Marker({position: municipalityLocation, map: map, title: 'Find us here (<%= @setup.municipality if !@setup.blank? %>)'});
 
-	var popupContent = '<%= simple_format(@setup.address,wrapper_tag: ' < br /> ') %>';
+	var popupContent = '<%= simple_format(@setup.address,wrapper_tag: ' < br /> ') if !@setup.blank? %>';
 
 	var infowindow = new google.maps.InfoWindow({content: popupContent, maxWidth: 270});
 
