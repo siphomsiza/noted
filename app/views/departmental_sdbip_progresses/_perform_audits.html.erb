@@ -78,15 +78,12 @@
                     </td>
 
                     <td>
-                        <% if !departmental_sdbip.predetermined_objective_id.blank? %>
-                        <%= departmental_sdbip.predetermined_objective.name %>
-                        <% end %>
+                        <%= departmental_sdbip.predetermined_objective.name if !departmental_sdbip.predetermined_objective_id.blank? %>
+
                     </td>
 
                     <td>
-                        <% if !departmental_sdbip.kpi_owner_id.blank? %>
-                        <%= departmental_sdbip.kpi_owner.name %>
-                        <% end %>
+                        <%= departmental_sdbip.kpi_owner.name if !departmental_sdbip.kpi_owner_id.blank? %>
                     </td>
 
                     <td>
@@ -125,7 +122,7 @@
                     <td><%= kpi_result.actual %></td>
                     <td><%= kpi_result.performance_comments %></td>
                     <td><%= kpi_result.corrective_measures %></td>
-                    <td><%= kpi_result.departmental_sdbip_source_of_evidence %></td>
+                    <td><%= kpi_result.departmental_sdbip.source_of_evidence %></td>
                     <td>
                         <% if !kpi_result.assurance.blank? %>
                         <% if kpi_result.assurance.signed_off? %>

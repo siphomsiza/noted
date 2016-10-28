@@ -484,21 +484,21 @@ ActiveRecord::Schema.define(version: 20160826103737) do
   add_index "roles", ["user_id"], name: "index_roles_on_user_id", using: :btree
 
   create_table "sdbip_time_periods", force: :cascade do |t|
-    t.date     "period",                            null: false
+    t.date     "period",                                      null: false
     t.date     "primary_reminder"
     t.date     "secondary_reminder"
     t.date     "primary_closure"
     t.date     "secondary_closure"
     t.date     "finance_reminder"
     t.date     "finance_closure"
-    t.boolean  "primary_status",     default: true
-    t.boolean  "primary_notification_sent",     default: false
-    t.boolean  "secondary_notification_sent",     default: false
-    t.boolean  "finance_notification_sent",     default: false
-    t.boolean  "secondary_status",   default: true
-    t.boolean  "finance_status",     default: true
-    t.datetime "created_at",                        null: false
-    t.datetime "updated_at",                        null: false
+    t.boolean  "primary_notification_sent",   default: false
+    t.boolean  "secondary_notification_sent", default: false
+    t.boolean  "finance_notification_sent",   default: false
+    t.boolean  "primary_status",              default: true
+    t.boolean  "secondary_status",            default: true
+    t.boolean  "finance_status",              default: true
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
   end
 
   create_table "setups", force: :cascade do |t|

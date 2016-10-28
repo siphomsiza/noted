@@ -1,5 +1,5 @@
 # This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db_mkhondo:seed (or created alongside the db_mkhondo with db_mkhondo:setup).
+# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 #
 # Examples:
 #
@@ -35,7 +35,7 @@ User.create!( firstname: "Sandiswa",
                             super_admin: true,
                             activated: true,status: "Active",
                             activated_at: Time.zone.now)
-if !Rails.env.production?
+
 User.create!( firstname: "Arms",
               surname: "Audit",
               email: "armsuser@sableassets.co.za",
@@ -78,14 +78,14 @@ mobile=Faker::PhoneNumber.cell_phone
 end
 
 MasterSetup.create!(
-  municipality: "Mkhondo Local Municipality(Dev Database)",
+  municipality: "Mkhondo Local Municipality",
   logo: File.open(File.join(Rails.root,'/app/assets/images','mkhondo-logo.png')),# File.open("../app/assets/images/mkhondo-logo.png"),
   province: "Mpumalanga",
   latitude: -27.007764 ,
   longitude: 30.801888,
   address: 'Mkhondo Municipality<br />Piet Retief, 2380<br />Mpumalanga, South Africa'
 )
-end
+
 landline=Faker::Number.number(10)
 mobile=Faker::Number.number(10)
 Department.create!(name: "Municipal Manager's Office",
@@ -149,48 +149,48 @@ Subdepartment.create!(name: "Risk", department_id: "7")
 
 #directory = File.join(File.dirname(__FILE__), '/migrate/data')
 # From lookup_classes
-#ActiveRecord::FixtureSet.create_fixtures(File.join(Rails.root, 'db_mkhondo/migrate/data'), 'kpa')
+#ActiveRecord::FixtureSet.create_fixtures(File.join(Rails.root, 'db/migrate/data'), 'kpa')
 # From lookups
-#ActiveRecord::FixtureSet.create_fixtures(File.join(Rails.root, 'db_mkhondo/migrate/data'), 'strategic_objectives')
+#ActiveRecord::FixtureSet.create_fixtures(File.join(Rails.root, 'db/migrate/data'), 'strategic_objectives')
 
-CSV.foreach('db_mkhondo/data/kpa.csv', headers: true, :col_sep => ',') do |row|
+CSV.foreach('db/data/kpa.csv', headers: true, :col_sep => ',') do |row|
   Kpa.create! row.to_hash
 end
-CSV.foreach('db_mkhondo/data/strategic_objectives.csv', headers: true, :col_sep => ',') do |row|
+CSV.foreach('db/data/strategic_objectives.csv', headers: true, :col_sep => ',') do |row|
   StrategicObjective.create! row.to_hash
 end
-CSV.foreach('db_mkhondo/data/risk_ratings.csv', headers: true, :col_sep => ',') do |row|
+CSV.foreach('db/data/risk_ratings.csv', headers: true, :col_sep => ',') do |row|
   RiskRating.create! row.to_hash
 end
 
-CSV.foreach('db_mkhondo/data/kpi_concept.csv', headers: true, :col_sep => ',') do |row|
+CSV.foreach('db/data/kpi_concept.csv', headers: true, :col_sep => ',') do |row|
   KpiConcept.create! row.to_hash
 end
-CSV.foreach('db_mkhondo/data/jobs.csv', headers: true, :col_sep => ',') do |row|
+CSV.foreach('db/data/jobs.csv', headers: true, :col_sep => ',') do |row|
   Jobtitle.create! row.to_hash
 end
-CSV.foreach('db_mkhondo/data/kpi_owners.csv', headers: true, :col_sep => ',') do |row|
+CSV.foreach('db/data/kpi_owners.csv', headers: true, :col_sep => ',') do |row|
   KpiOwner.create! row.to_hash
 end
-CSV.foreach('db_mkhondo/data/kpi_type.csv', headers: true, :col_sep => ',') do |row|
+CSV.foreach('db/data/kpi_type.csv', headers: true, :col_sep => ',') do |row|
   KpiType.create! row.to_hash
 end
-CSV.foreach('db_mkhondo/data/kpi_calculation_types.csv', headers: true, :col_sep => ',') do |row|
+CSV.foreach('db/data/kpi_calculation_types.csv', headers: true, :col_sep => ',') do |row|
   KpiCalculationType.create! row.to_hash
 end
-CSV.foreach('db_mkhondo/data/ndp_objectives.csv', headers: true, :col_sep => ',') do |row|
+CSV.foreach('db/data/ndp_objectives.csv', headers: true, :col_sep => ',') do |row|
   NdpObjective.create! row.to_hash
 end
-CSV.foreach('db_mkhondo/data/predetermined_objectives.csv', headers: true, :col_sep => ',') do |row|
+CSV.foreach('db/data/predetermined_objectives.csv', headers: true, :col_sep => ',') do |row|
   PredeterminedObjective.create! row.to_hash
 end
-CSV.foreach('db_mkhondo/data/national_outcomes.csv', headers: true, :col_sep => ',') do |row|
+CSV.foreach('db/data/national_outcomes.csv', headers: true, :col_sep => ',') do |row|
   NationalOutcome.create! row.to_hash
 end
-CSV.foreach('db_mkhondo/data/mscore_classification.csv', headers: true, :col_sep => ',') do |row|
+CSV.foreach('db/data/mscore_classification.csv', headers: true, :col_sep => ',') do |row|
   MscoreClassification.create! row.to_hash
 end
-CSV.foreach('db_mkhondo/data/reporting.csv', headers: true, :col_sep => ',') do |row|
+CSV.foreach('db/data/reporting.csv', headers: true, :col_sep => ',') do |row|
   ReportingCategory.create! row.to_hash
 end
 Ward.create!(name: "All",ward_no: 1,area_id: 1, mun_ref: "Unspecified")
@@ -290,147 +290,147 @@ Heading.create!(term: "Reporting Category",
 
 Heading.create!(term: "Risk Rating",
   description: "Risk Rating description",
-  category: "Departmental Sdb_mkhondoIP")
+  category: "Departmental SDBIP")
 
 Heading.create!(term: "Top Layer KPI Ref",
   description: "Top Layer KPI Ref description",
-  category: "Departmental Sdb_mkhondoIP")
+  category: "Departmental SDBIP")
 
 Heading.create!(term: "IDP Ref",
   description: "IDP Ref description",
-  category: "Departmental Sdb_mkhondoIP")
+  category: "Departmental SDBIP")
 
 Heading.create!(term: "IDP Objective",
   description: "IDP Objective description",
-  category: "Departmental Sdb_mkhondoIP")
+  category: "Departmental SDBIP")
 
 Heading.create!(term: "Capital Project",
   description: "Capital Project description",
-  category: "Departmental Sdb_mkhondoIP")
+  category: "Departmental SDBIP")
 
 Heading.create!(term: "KPI Name",
   description: "KPI Name description",
-  category: "Departmental Sdb_mkhondoIP")
+  category: "Departmental SDBIP")
 
 Heading.create!(term: "Unit of Measurement",
   description: "Unit of Measurement description",
-  category: "Departmental Sdb_mkhondoIP")
+  category: "Departmental SDBIP")
 
 Heading.create!(term: "KPI Concept",
   description: "KPI Concept description",
-  category: "Departmental Sdb_mkhondoIP")
+  category: "Departmental SDBIP")
 
 Heading.create!(term: "KPI Type",
   description: "KPI Type description",
-  category: "Departmental Sdb_mkhondoIP")
+  category: "Departmental SDBIP")
 
 Heading.create!(term: "Risk Reg Ref",
   description: "Risk Reg Ref description",
-  category: "Departmental Sdb_mkhondoIP")
+  category: "Departmental SDBIP")
 
 Heading.create!(term: "Risk",
   description: "Risk description",
-  category: "Departmental Sdb_mkhondoIP")
+  category: "Departmental SDBIP")
 
 Heading.create!(term: "Baseline",
   description: "Baseline description",
-  category: "Departmental Sdb_mkhondoIP")
+  category: "Departmental SDBIP")
 
 Heading.create!(term: "Previous Year Actual Performance",
   description: "Previous Year Actual Performance description",
-  category: "Departmental Sdb_mkhondoIP")
+  category: "Departmental SDBIP")
 
 Heading.create!(term: "Performance standard",
   description: "Performance standard description",
-  category: "Departmental Sdb_mkhondoIP")
+  category: "Departmental SDBIP")
 
 Heading.create!(term: "POE",
   description: "POE description",
-  category: "Departmental Sdb_mkhondoIP")
+  category: "Departmental SDBIP")
 
 Heading.create!(term: "MTAS Indicator",
   description: "MTAS Indicator description",
-  category: "Departmental Sdb_mkhondoIP")
+  category: "Departmental SDBIP")
 
 Heading.create!(term: "Annual Target",
   description: "Annual Target description",
-  category: "Departmental Sdb_mkhondoIP")
+  category: "Departmental SDBIP")
 
 Heading.create!(term: "Revised Target",
   description: "Revised Target description",
-  category: "Departmental Sdb_mkhondoIP")
+  category: "Departmental SDBIP")
 
 Heading.create!(term: "Performance Comment",
   description: "Performance Comment description",
-  category: "Departmental Sdb_mkhondoIP")
+  category: "Departmental SDBIP")
 
 Heading.create!(term: "Corrective measures",
   description: "Corrective measures description",
-  category: "Departmental Sdb_mkhondoIP")
+  category: "Departmental SDBIP")
 
 Heading.create!(term: "Update proof of evidence",
   description: "Update proof of evidence description",
-  category: "Departmental Sdb_mkhondoIP")
+  category: "Departmental SDBIP")
 
 Heading.create!(term: "PMS Ref",
   description: "PMS Ref Description",
-  category: "Top Layer Sdb_mkhondoIP")
+  category: "Top Layer SDBIP")
 
 Heading.create!(term: "IDP Objective",
   description: "IDP Objective description",
-  category: "Top Layer Sdb_mkhondoIP")
+  category: "Top Layer SDBIP")
 
 Heading.create!(term: "KPI Name",
   description: "KPI Name description",
-  category: "Top Layer Sdb_mkhondoIP")
+  category: "Top Layer SDBIP")
 
 Heading.create!(term: "Unit of Measurement",
   description: "Unit of Measurement description",
-  category: "Top Layer Sdb_mkhondoIP")
+  category: "Top Layer SDBIP")
 
 Heading.create!(term: "Risk",
   description: "Risk description",
-  category: "Top Layer Sdb_mkhondoIP")
+  category: "Top Layer SDBIP")
 
 Heading.create!(term: "Baseline",
   description: "Baseline description",
-  category: "Top Layer Sdb_mkhondoIP")
+  category: "Top Layer SDBIP")
 
 Heading.create!(term: "POE",
   description: "POE description",
-  category: "Top Layer Sdb_mkhondoIP")
+  category: "Top Layer SDBIP")
 
 Heading.create!(term: "Previous Year Actual Performance",
   description: "Previous Year Actual Performance description",
-  category: "Top Layer Sdb_mkhondoIP")
+  category: "Top Layer SDBIP")
 
 Heading.create!(term: "MTAS Indicator",
   description: "MTAS Indicator description",
-  category: "Top Layer Sdb_mkhondoIP")
+  category: "Top Layer SDBIP")
 
 Heading.create!(term: "Annual Target",
   description: "Annual Target description",
-  category: "Top Layer Sdb_mkhondoIP")
+  category: "Top Layer SDBIP")
 
 Heading.create!(term: "Revised Target",
   description: "Revised Target description",
-  category: "Top Layer Sdb_mkhondoIP")
+  category: "Top Layer SDBIP")
 
 Heading.create!(term: "Performance Comment",
   description: "Annual Target description",
-  category: "Top Layer Sdb_mkhondoIP")
+  category: "Top Layer SDBIP")
 
 Heading.create!(term: "Corrective measures",
   description: "Corrective measures description",
-  category: "Top Layer Sdb_mkhondoIP")
+  category: "Top Layer SDBIP")
 
 Heading.create!(term: "Update proof of evidence",
   description: "Update proof of evidence description",
-  category: "Top Layer Sdb_mkhondoIP")
+  category: "Top Layer SDBIP")
 
 Heading.create!(term: "Departmental proof of evidence",
   description: "Departmental proof of evidence description",
-  category: "Top Layer Sdb_mkhondoIP")
+  category: "Top Layer SDBIP")
 
 Heading.create!(term: "Mun CP Ref",
   description: "Mun CP Ref description",
@@ -510,9 +510,9 @@ while $i < $num  do
   SdbipTimePeriod.create!(period: period,primary_reminder: primary_reminder,primary_closure: primary_closure, secondary_reminder: secondary_reminder,secondary_closure: secondary_closure)
    $i +=1
 end
-  CSV.foreach('db_mkhondo/data/capital.csv', headers: true, :col_sep => ',') do |row|
+  CSV.foreach('db/data/capital.csv', headers: true, :col_sep => ',') do |row|
     CapitalProject.create! row.to_hash
   end
-  CSV.foreach('db_mkhondo/data/sdbips.csv', headers: true, :col_sep => ',') do |row|
+  CSV.foreach('db/data/sdbips.csv', headers: true, :col_sep => ',') do |row|
     DepartmentalSdbip.create! row.to_hash
   end

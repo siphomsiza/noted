@@ -1,7 +1,9 @@
 class SessionsController < ApplicationController
   skip_before_filter  :verify_authenticity_token
   def new
-    redirect_to introduction_url unless !session[:user_id]
+    if !session[:user_id].blank?
+      redirect_to introduction_url
+    end
   end
 
   def create
@@ -45,7 +47,6 @@ class SessionsController < ApplicationController
               message += "your account has been locked."
               flash[:danger] = message
           end
-          redirect_to(root_url) and return
       end
       if !@user.blank? && @user.login_attempts >= @user.max_login_attempts
               increment_login_attempts @user

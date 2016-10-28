@@ -1,13 +1,13 @@
-<% departmental_sdbip.assurances.each do |assurance| %>
+<% @departmental_sdbip.assurances.each do |assurance| %>
 <table class="table table-responsive table-hover table-striped">
     <tr>
         <th>
             Reviewed By:
         </th>
         <td>
-            <%= assurance.user_firstname %>&nbsp;<%= assurance.user_surname%>
+            <%= assurance.user.firstname  if !assurance.user_id.blank? %>&nbsp;<%= assurance.user.surname if !assurance.user_id.blank? %>
             <p>Updated on
-                <%= assurance.created_at.strftime("%d %B %Y %H:%M:%S") %></p>
+                <%= assurance.created_at.strftime("%d %B %Y %H:%M:%S") if !assurance.created_at.blank? %></p>
         </td>
     </tr>
     <tr>
@@ -34,7 +34,11 @@
         <th>
             Assigned to:
         </th>
-        <td><%= assurance.kpi_result.user_firstname %>&nbsp;<%= assurance.kpi_result.user_surname %></td>
+        <td>
+          <% if assurance.kpi_result.present? %>
+          <%= assurance.kpi_result.user.firstname %>&nbsp;<%= assurance.kpi_result.user.surname %>
+        <% end %>
+      </td>
     </tr>
     <tr>
         <th>
