@@ -1,5 +1,5 @@
 <table class="table table-responsive table-striped">
-    <% departmental_sdbip.kpi_results.each do |kpi_result| %>
+    <% @departmental_sdbip.kpi_results.each do |kpi_result| %>
     <tr>
         <th>Target</th>
         <td><%= kpi_result.target %></td>
@@ -42,7 +42,7 @@
         <th>Update User:</th>
         <td>
 
-            <%=  kpi_result.user_firstname %>&nbsp;<%= kpi_result.user_surname %>&nbsp;on&nbsp;
+            <%=  kpi_result.user.firstname %>&nbsp;<%= kpi_result.user.surname  %>&nbsp;on&nbsp;
             <%= kpi_result.updated_at.strftime("%d %B %Y") %>
         </td>
     </tr>

@@ -14,7 +14,7 @@
             </div>
             <!-- tabbable tabs -->
             <section class="tab-content">
-                <%= render partial: 'perform_audits', :locals=>{:periods => @periods, :departmental_sdbips => @departmental_sdbips} %>
+                <%= render partial: 'perform_audits', locals: {:periods => @periods, :departmental_sdbips => @departmental_sdbips} %>
                 <%= render 'audits' %>
             </section>
         </div>

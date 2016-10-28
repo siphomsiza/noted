@@ -5,7 +5,7 @@
     <div class="row col col-lg-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3><%= $municipality_info.municipality %>'s KPIs</h3>
+                <h3><%= $municipality_info.municipality if !$municipality_info.blank? %>'s KPIs</h3>
             </div>
             <div class="panel-body">
                 <div class="row">
@@ -23,7 +23,7 @@
                         <table class="table table-striped table-responsive table-hover table-bordered">
                             <tr>
                                 <th colspan="1" rowspan="2"></th>
-                                <th colspan="1" rowspan="2"><%= $municipality_info.municipality %></th>
+                                <th colspan="1" rowspan="2"><%= $municipality_info.municipality if !$municipality_info.blank? %></th>
                                 <th colspan="<%= @departments.count %>" scope="colgroup">Department</th>
                             </tr>
                             <tr>

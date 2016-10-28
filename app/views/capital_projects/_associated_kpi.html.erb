@@ -70,7 +70,7 @@
                         <%= kpi_result.updated_at.strftime("%d-%b-%Y") %>
                     </td>
                     <td>
-                        <%= render partial: "assurance_results", {:capital_project => @capital_project} %>
+                        <%= render partial: "assurance_results", locals: {:capital_project => @capital_project} %>
                     </td>
 
                     <% end %>
@@ -89,7 +89,7 @@
                 </tr>
                 <tr>
                     <th>August &nbsp;
-                        <% time_periods.select(:period).where("extract(month  from period) = ?", 8 ).each do |time_period| %>
+                        <% time_periods.select(:period).where("extract(month from period) = ?", 8 ).each do |time_period| %>
                         <%= time_period.period.strftime("%Y") %>
                         <% end %>
                     </th>
@@ -113,7 +113,7 @@
                         <%= kpi_result.updated_at.strftime("%d-%b-%Y") %>
                     </td>
                     <td>
-                        <%= render partial: "assurance_results", {:capital_project => @capital_project} %>
+                        <%= render partial: "assurance_results", locals: {:capital_project => @capital_project} %>
                     </td>
                     <% end %>
                 <% else %>
@@ -155,7 +155,7 @@
                         <%= kpi_result.updated_at.strftime("%d-%b-%Y") %>
                     </td>
                     <td>
-                        <%= render partial: "assurance_results", {:capital_project => @capital_project} %>
+                        <%= render partial: "assurance_results", locals: {:capital_project => @capital_project} %>
                     </td>
                     <% end %>
                 <% else %>
@@ -197,7 +197,7 @@
                         <%= kpi_result.updated_at.strftime("%d-%b-%Y") %>
                     </td>
                     <td>
-                        <%= render partial: "assurance_results", {:capital_project => @capital_project} %>
+                        <%= render partial: "assurance_results", locals: {:capital_project => @capital_project} %>
                     </td>
                     <% end %>
                 <% else %>
@@ -239,7 +239,7 @@
                         <%= kpi_result.updated_at.strftime("%d-%b-%Y") %>
                     </td>
                     <td>
-                        <%= render partial: "assurance_results", {:capital_project => @capital_project} %>
+                        <%= render partial: "assurance_results", locals: {:capital_project => @capital_project} %>
                     </td>
                     <% end %>
                 <% else %>
@@ -281,7 +281,7 @@
                         <%= kpi_result.updated_at.strftime("%d-%b-%Y") %>
                     </td>
                     <td>
-                        <%= render partial: "assurance_results", {:capital_project => @capital_project} %>
+                        <%= render partial: "assurance_results", locals: {:capital_project => @capital_project} %>
                     </td>
                     <% end %>
                 <% else %>
@@ -322,7 +322,7 @@
                         <%= kpi_result.user_surname %>&nbsp;on
                         <%= kpi_result.updated_at.strftime("%d-%b-%Y") %>
                     </td>
-                    <td><%= render partial: "assurance_results", {:capital_project => @capital_project} %></td>
+                    <td><%= render partial: "assurance_results", locals: {:capital_project => @capital_project} %></td>
                     <% end %>
                 <% else %>
                     <td><%= capital_project.departmental_sdbip.annual_target %></td>
@@ -362,7 +362,7 @@
                         <%= kpi_result.user_surname %>&nbsp;on
                         <%= kpi_result.updated_at.strftime("%d-%b-%Y") %>
                     </td>
-                    <td><%= render partial: "assurance_results", {:capital_project => @capital_project} %></td>
+                    <td><%= render partial: "assurance_results", locals: {:capital_project => @capital_project} %></td>
                     <% end %>
                 <% else %>
                     <td><%= capital_project.departmental_sdbip.annual_target %></td>
@@ -402,7 +402,7 @@
                         <%= kpi_result.user_surname %>&nbsp;on
                         <%= kpi_result.updated_at.strftime("%d-%b-%Y") %>
                     </td>
-                    <td><%= render partial: "assurance_results", {:capital_project => @capital_project} %></td>
+                    <td><%= render partial: "assurance_results", locals: {:capital_project => @capital_project} %></td>
                     <% end %>
                 <% else %>
                     <td><%= capital_project.departmental_sdbip.annual_target %></td>
@@ -442,7 +442,7 @@
                         <%= kpi_result.user_surname %>&nbsp;on
                         <%= kpi_result.updated_at.strftime("%d-%b-%Y") %>
                     </td>
-                    <td><%= render partial: "assurance_results", {:capital_project => @capital_project} %></td>
+                    <td><%= render partial: "assurance_results", locals: {:capital_project => @capital_project} %></td>
                     <% end %>
                 <% else %>
                     <td><%= capital_project.departmental_sdbip.annual_target %></td>
@@ -482,7 +482,7 @@
                         <%= kpi_result.user_surname %>&nbsp;on
                         <%= kpi_result.updated_at.strftime("%d-%b-%Y") %>
                     </td>
-                    <td><%= render partial: "assurance_results", {:capital_project => @capital_project} %></td>
+                    <td><%= render partial: "assurance_results", locals: {:capital_project => @capital_project} %></td>
                     <% end %>
                 <% else %>
                     <td><%= capital_project.departmental_sdbip.annual_target %></td>
@@ -522,7 +522,7 @@
                         <%= kpi_result.user_surname %>&nbsp;on
                         <%= kpi_result.updated_at.strftime("%d-%b-%Y") %>
                     </td>
-                    <td><%= render partial: "assurance_results", {:capital_project => @capital_project} %></td>
+                    <td><%= render partial: "assurance_results", locals: {:capital_project => @capital_project} %></td>
                     <% end %>
                 <% else %>
                     <td><%= capital_project.departmental_sdbip.annual_target %></td>
