@@ -35,6 +35,7 @@ class DepartmentalSdbip < ActiveRecord::Base
 
     # validate :extension_white_list
     def self.chart_theme(departments_sdibps)
+      $colors = []
         departments_sdibps.each do |color|
             $colors.push('orange') if color.performance_standard.include?('KPI Almost Met')
             $colors.push('darkblue') if color.performance_standard.include?('KPI Extremely Well Met')
