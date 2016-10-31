@@ -510,9 +510,9 @@ while $i < $num  do
   SdbipTimePeriod.create!(period: period,primary_reminder: primary_reminder,primary_closure: primary_closure, secondary_reminder: secondary_reminder,secondary_closure: secondary_closure)
    $i +=1
 end
-  CSV.foreach('db_mkhondo/data/capital.csv', headers: true, :col_sep => ',') do |row|
+  CSV.foreach('db/data/capital.csv', headers: true, :col_sep => ',') do |row|
     CapitalProject.create! row.to_hash
   end
-  CSV.foreach('db_mkhondo/data/sdbips.csv', headers: true, :col_sep => ',') do |row|
+  CSV.foreach('db/data/sdbips.csv', headers: true, :col_sep => ',') do |row|
     DepartmentalSdbip.create! row.to_hash
   end
