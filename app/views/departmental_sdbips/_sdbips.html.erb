@@ -36,12 +36,11 @@
 			<% if !periods.blank? %>
 			<% periods.each do |kpi_result_period| %>
 			<th class="target-actual-and-results" colspan="3">
-				<h4><%= kpi_result_period.inspect %></h4>
+				<h4><%= kpi_result_period %></h4>
 			</th>
 
 			<% end %>
 			<% end %>
-		</tr>
 		<% if !periods.blank? %>
 		<% periods.each do |kpi_result_period| %>
 		<tr>
@@ -51,6 +50,7 @@
 		</tr>
 		<% end %>
 		<% end %>
+	</tr>
 		<% departmental_sdbips.each do |departmental_sdbip| %>
 		<tbody>
 		<tr>

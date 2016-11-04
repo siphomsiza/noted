@@ -1,0 +1,45 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times; </button>
+      <% if @jobtitle.new_record? %>
+        <h3>Configure Job Title</h3>
+      <% else %>
+        <h3><%= "Editing #{@jobtitle.title}" %></h3>
+      <% end %>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col col-lg-10  col-lg-10 col-lg-offset-1">
+      <%= form_for(@jobtitle) do |f| %>
+  <% if @jobtitle.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@jobtitle.errors.count, "error") %> prohibited this area from being saved:</h2>
+
+      <ul>
+      <% @jobtitle.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title,"Title:" %><br>
+    <%= f.text_field :title, :class=>"form-control" %>
+  </div>
+
+<br/>
+  <div class="actions">
+
+    <%= f.submit "Save", class: 'btn col-lg-3 pull-right' %>
+    <% if !@jobtitle.new_record? %>
+      <%= link_to "Delete",area_path(@jobtitle),method: :delete, data: {confirm: "Are you sure to delete this job title?"}, :class=>'btn col-lg-3 pull-right'%>
+    <% end %>
+  </div>
+<% end %>
+</div>
+</div>
+</div>
+</div>
+</div>

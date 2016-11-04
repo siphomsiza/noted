@@ -29,11 +29,11 @@ class JobtitlesController < ApplicationController
     respond_to do |format|
       if @jobtitle.save
         flash[:success] = 'Jobtitle was successfully created.'
-        format.html { redirect_to master_setups_path }
+        format.html { redirect_to :back }
         format.json { render :show, status: :created, location: master_setups_path }
       else
         flash[:danger] = 'Jobtitle was not created.'
-        format.html { redirect_to master_setups_path }
+        format.html { redirect_to :back }
         format.json { render json: @jobtitle.errors, status: :unprocessable_entity }
       end
     end
@@ -45,11 +45,11 @@ class JobtitlesController < ApplicationController
     respond_to do |format|
       if @jobtitle.update(jobtitle_params)
         flash[:success] = 'Jobtitle was successfully updated.'
-        format.html { redirect_to master_setups_path }
+        format.html { redirect_to :back }
         format.json { render :show, status: :ok, location: master_setups_path }
       else
         flash[:success] = 'Jobtitle was not updated.'
-        format.html { redirect_to jobtitles_path }
+        format.html { redirect_to :back }
         format.json { render :show, status: :ok, location: master_setups_path }
       end
     end
@@ -61,7 +61,7 @@ class JobtitlesController < ApplicationController
     @jobtitle.destroy
     respond_to do |format|
       flash[:success] = 'Jobtitle was successfully deleted.'
-      format.html { redirect_to master_setups_path }
+      format.html { redirect_to :back }
       format.json { render :show, status: :ok, location: master_setups_path }
     end
   end

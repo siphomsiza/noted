@@ -3,14 +3,13 @@
   <head>
     <title><%= full_title(yield(:title)) %></title>
     <%= stylesheet_link_tag    'application', media: 'all' %>
-    <!--<script src="http://code.highcharts.com/highcharts.js"></script>-->
+    <script src="http://code.highcharts.com/highcharts.js"></script>
     <%= javascript_include_tag "http://www.google.com/jsapi", "chartkick" %>
     <%= stylesheet_link_tag "application", media: "all","data-turbolinks-track" => true %>
     <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
     <%= javascript_include_tag 'jquery' %>
     <%= csrf_meta_tags %>
     <%= render 'layouts/shim' %>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD1n4JTMGUMSgr0PeFr01A0rFTm5Fx-Du0&sensor=false"></script>
     <%= google_webfonts_init({
         google: ['Josefin Sans', 'PT Sans']
       }) %>
