@@ -14,7 +14,7 @@ User.create!( firstname: "Sandiswa",
               mobile: "0832687954",
               landline: "0112563984",
               id_number: Faker::Number.number(13),
-              birth_date: Time.now.strftime("/%dd%mm/%YYYY"),
+              birth_date: Time.now.strftime("%dd/%mm/%YYYY"),
               location: "Riversands Incubation Hub",
               password_confirmation: "sableassets",
               super_admin: true,
@@ -153,44 +153,44 @@ Subdepartment.create!(name: "Risk", department_id: "7")
 # From lookups
 #ActiveRecord::FixtureSet.create_fixtures(File.join(Rails.root, 'db/migrate/data'), 'strategic_objectives')
 
-CSV.foreach('db/data/kpa.csv', headers: true, :col_sep => ',') do |row|
+CSV.foreach('db_mkhondo/data/kpa.csv', headers: true, :col_sep => ',') do |row|
   Kpa.create! row.to_hash
 end
-CSV.foreach('db/data/strategic_objectives.csv', headers: true, :col_sep => ',') do |row|
+CSV.foreach('db_mkhondo/data/strategic_objectives.csv', headers: true, :col_sep => ',') do |row|
   StrategicObjective.create! row.to_hash
 end
-CSV.foreach('db/data/risk_ratings.csv', headers: true, :col_sep => ',') do |row|
+CSV.foreach('db_mkhondo/data/risk_ratings.csv', headers: true, :col_sep => ',') do |row|
   RiskRating.create! row.to_hash
 end
 
-CSV.foreach('db/data/kpi_concept.csv', headers: true, :col_sep => ',') do |row|
+CSV.foreach('db_mkhondo/data/kpi_concept.csv', headers: true, :col_sep => ',') do |row|
   KpiConcept.create! row.to_hash
 end
-CSV.foreach('db/data/jobs.csv', headers: true, :col_sep => ',') do |row|
+CSV.foreach('db_mkhondo/data/jobs.csv', headers: true, :col_sep => ',') do |row|
   Jobtitle.create! row.to_hash
 end
-CSV.foreach('db/data/kpi_owners.csv', headers: true, :col_sep => ',') do |row|
+CSV.foreach('db_mkhondo/data/kpi_owners.csv', headers: true, :col_sep => ',') do |row|
   KpiOwner.create! row.to_hash
 end
-CSV.foreach('db/data/kpi_type.csv', headers: true, :col_sep => ',') do |row|
+CSV.foreach('db_mkhondo/data/kpi_type.csv', headers: true, :col_sep => ',') do |row|
   KpiType.create! row.to_hash
 end
-CSV.foreach('db/data/kpi_calculation_types.csv', headers: true, :col_sep => ',') do |row|
+CSV.foreach('db_mkhondo/data/kpi_calculation_types.csv', headers: true, :col_sep => ',') do |row|
   KpiCalculationType.create! row.to_hash
 end
-CSV.foreach('db/data/ndp_objectives.csv', headers: true, :col_sep => ',') do |row|
+CSV.foreach('db_mkhondo/data/ndp_objectives.csv', headers: true, :col_sep => ',') do |row|
   NdpObjective.create! row.to_hash
 end
-CSV.foreach('db/data/predetermined_objectives.csv', headers: true, :col_sep => ',') do |row|
+CSV.foreach('db_mkhondo/data/predetermined_objectives.csv', headers: true, :col_sep => ',') do |row|
   PredeterminedObjective.create! row.to_hash
 end
-CSV.foreach('db/data/national_outcomes.csv', headers: true, :col_sep => ',') do |row|
+CSV.foreach('db_mkhondo/data/national_outcomes.csv', headers: true, :col_sep => ',') do |row|
   NationalOutcome.create! row.to_hash
 end
-CSV.foreach('db/data/mscore_classification.csv', headers: true, :col_sep => ',') do |row|
+CSV.foreach('db_mkhondo/data/mscore_classification.csv', headers: true, :col_sep => ',') do |row|
   MscoreClassification.create! row.to_hash
 end
-CSV.foreach('db/data/reporting.csv', headers: true, :col_sep => ',') do |row|
+CSV.foreach('db_mkhondo/data/reporting.csv', headers: true, :col_sep => ',') do |row|
   ReportingCategory.create! row.to_hash
 end
 Ward.create!(name: "All",ward_no: 1,area_id: 1, mun_ref: "Unspecified")
@@ -510,9 +510,9 @@ while $i < $num  do
   SdbipTimePeriod.create!(period: period,primary_reminder: primary_reminder,primary_closure: primary_closure, secondary_reminder: secondary_reminder,secondary_closure: secondary_closure)
    $i +=1
 end
-  CSV.foreach('db/data/capital.csv', headers: true, :col_sep => ',') do |row|
+  CSV.foreach('db_mkhondo/data/capital.csv', headers: true, :col_sep => ',') do |row|
     CapitalProject.create! row.to_hash
   end
-  CSV.foreach('db/data/sdbips.csv', headers: true, :col_sep => ',') do |row|
+  CSV.foreach('db_mkhondo/data/sdbips.csv', headers: true, :col_sep => ',') do |row|
     DepartmentalSdbip.create! row.to_hash
   end

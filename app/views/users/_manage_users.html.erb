@@ -5,7 +5,7 @@
 			<article>
 
 				<div class="tabbable tabs third-level-navs">
-					<ul class="nav nav-tabs">
+					<ul class="nav nav-tabs" id="ManageUsersTab">
 						<li class="active"><a href="#active_users" data-toggle="tab">Active</a></li>
 						<li><a href="#inactive_users" data-toggle="tab">Inactive</a></li>
 						<li><a href="#new_users" data-toggle="tab">New</a></li>
@@ -31,3 +31,35 @@
 	  </div><!-- media-body -->
 	</section><!-- media -->
 </div><!-- friday -->
+<script>
+  // open tab on click
+  $('#ManageUsersTab a').click(function (e) {
+    e.preventDefault();
+		$(this).addClass("active");
+    $(this).tab('show');
+
+    // getting tab id
+    var id = $(e.target).attr("href").substr(1);
+
+    // change hash value for all pages
+    $('ul.pagination > li > a').each(function(i, pageAnchor) {
+      pageAnchor.hash = id;
+			alert(id);
+    });
+  });
+
+  // assign tab id to location hash
+  $("ul.nav-tabs > li > a").on("shown.bs.tab", function (e) {
+    var id = $(e.target).attr("href").substr(1);
+    window.location.hash = id;
+  });
+
+  // open initial hash
+  var hash = window.location.hash;
+  $('#ManageUsersTab a[href="' + hash + '"]').tab('show');
+
+  // UPDATE
+  $('ul.pagination > li > a').each(function(i, pageAnchor) {
+    pageAnchor.hash = hash;
+  });
+</script>

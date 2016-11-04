@@ -61,6 +61,8 @@ Rails.application.routes.draw do
   get 'unlock_user', to: 'users#unlock_user'
   get 'restore', to: 'users#restore'
   get 'activate', to: 'users#activate'
+  get 'users/report_users' => 'users#report_users', :as => :report_users
+  get 'users/setup_users' => 'users#setup_users', :as => :setup_users
   get 'users/:id/edit_new_user' => 'users#edit_new_user', :as => :edit_new_user
   get 'roles/:id/edit_user_role' => 'roles#edit_user_role', :as => :edit_user_role
   get 'roles/:id/grant_user_access' => 'roles#grant_user_access', :as => :grant_user_access

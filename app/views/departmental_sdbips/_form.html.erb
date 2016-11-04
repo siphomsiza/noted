@@ -89,11 +89,11 @@
         <%= f.label :provincial_strategic_outcome_id, "Provincial Strategic Outcome" %><br>
         <%= f.select :provincial_strategic_outcome_id, ProvincialStrategicOutcome.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select Provincial Strategic Outcome"}, class: "form-control" %>
 
-        <%= f.label :ward_id, "Ward" %><br>
-        <%= f.select :ward_id, Ward.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select Ward"}, class: "form-control" %>
+        <%= f.label :wards, "Ward" %><br>
+        <%= f.select :wards, Ward.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select Ward"}, class: "form-control" %>
 
-        <%= f.label :area_id, "Area" %><br>
-        <%= f.select :area_id, Area.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select Area"}, class: "form-control" %>
+        <%= f.label :areas, "Area" %><br>
+        <%= f.select :areas, Area.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select Area"}, class: "form-control" %>
         <%= f.label :performance_standard, "Performance Standard" %><br>
         <%= f.select :performance_standard, options_for_performance_standard,
                                           {}, {:class => "form-control"} %>

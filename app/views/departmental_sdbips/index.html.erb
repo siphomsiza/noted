@@ -128,7 +128,7 @@
 				<%= render 'custom_view' %>
 
 				<div class="row">
-					<div class="col col-lg-12"><br/>
+					<div class="col col-lg-12" id="sdbips"><br/>
 						<%= render partial: "sdbips", :locals=> {:departmental_sdbips => @departmental_sdbips,:periods => @periods} %>
 					</div>
 				</div>
@@ -218,6 +218,52 @@
 	</div>
 
 </div>
+<script>
+$(document).ready(function(){
+	$(".first-quarter-target").hide();
+	$(".second-quarter-target").hide();
+	$(".third-quarter-target").hide();
+	$(".fourth-quarter-target").hide();
+	$(".kpi-type").hide();
+	$(".kpi-target-type").hide();
+	$(".idf-ref").hide();
+	$(".mscore-classification").hide();
+	$(".national-outcome").hide();
+	$(".strategic-objectives").hide();
+	$(".baseline").hide();
+	$(".performance-standard").hide();
+	$(".risk-rating").hide();
+	$(".kpa").hide();
+	$(".kpi-concept").hide();
+	$(".impact").hide();
+	$(".provincial-strategic-outcome").hide();
+	$(".area").hide();
+	$(".ward").hide();
+	$(".past-year-performance").hide();
+	$(".top-layer-ref").hide();
+	$(".created-date").hide();
+	$(".budget").hide();
+	$(".idp-ref").hide();
+	$(".updated-date").hide();
+	$(".annual-target").hide();
+	$(".revised-target").hide();
+
+	$(function () {
+	  var chk = $("#grpChkBox input:checkbox");
+	  var tbl = $("#sdbips-table");
+	  chk.prop('checked', false);
+	  $( "#grpChkBox input:checkbox" ).each(function(){
+	    if($(this).hasClass("default-view")){
+	      $(this).prop('checked',true);
+	    }
+	  });
+	  chk.click(function () {
+	    var colToHide = tbl.find("." + $(this).attr("name"));
+	    $(colToHide).toggle();
+	  });
+	});
+});
+</script>
 <div class="col col-lg-12">
 	<!-- Import SDBIP modal -->
 	<div class="modal fade" id="importModal" tabindex="-1" role="dialog" aria-labelledby="importModalLabel" aria-hidden="true">
@@ -255,51 +301,3 @@
 		<!-- /.modal -->
 	</div>
 </div>
-
-<script>
-	$(document).ready(function () {
-		$(".first-quarter-target").hide();
-		$(".second-quarter-target").hide();
-		$(".third-quarter-target").hide();
-		$(".fourth-quarter-target").hide();
-		$(".kpi-type").hide();
-		$(".kpi-target-type").hide();
-		$(".idf-ref").hide();
-		$(".mscore-classification").hide();
-		$(".national-outcome").hide();
-		$(".strategic-objectives").hide();
-		$(".baseline").hide();
-		$(".performance-standard").hide();
-		$(".risk-rating").hide();
-		$(".kpa").hide();
-		$(".kpi-concept").hide();
-		$(".impact").hide();
-		$(".provincial-strategic-outcome").hide();
-		$(".area").hide();
-		$(".ward").hide();
-		$(".past-year-performance").hide();
-		$(".top-layer-ref").hide();
-		$(".created-date").hide();
-		$(".budget").hide();
-		$(".idp-ref").hide();
-		$(".updated-date").hide();
-		$(".annual-target").hide();
-		$(".revised-target").hide();
-
-		$(function () {
-			var chk = $("#grpChkBox input:checkbox");
-			var tbl = $("#sdbips-table");
-			chk.prop('checked', false);
-			$( "#grpChkBox input:checkbox" ).each(function(){
-				if($(this).hasClass("default-view")){
-					$(this).prop('checked',true);
-				}
-			});
-			chk.click(function () {
-				var colToHide = tbl.find("." + $(this).attr("name"));
-				$(colToHide).toggle();
-			});
-		});
-
-	});
-</script>

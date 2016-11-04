@@ -36,7 +36,7 @@
 			<% if !periods.blank? %>
 			<% periods.each do |kpi_result_period| %>
 			<th class="target-actual-and-results" colspan="3">
-				<h4><%= kpi_result_period.period.strftime("%B %Y") %></h4>
+				<h4><%#= @kpi_result_period.where("").strftime("%B %Y") %></h4>
 			</th>
 
 			<% end %>
@@ -90,12 +90,12 @@
 
 			<td class="impact"><%= departmental_sdbip.impact %></td>
 			<td class="provincial-strategic-outcome"><% if !departmental_sdbip.provincial_strategic_outcome_id.blank? %><%= departmental_sdbip.provincial_strategic_outcome.name %><% end %></td>
-			<td class="area"><% if !departmental_sdbip.area_id.blank? %><%= departmental_sdbip.area.name %><% end %></td>
-			<td class="ward"><% if !departmental_sdbip.ward_id.blank? %><%= departmental_sdbip.ward.name %><% end %></td>
+			<td class="area"><%= departmental_sdbip.areas %></td>
+			<td class="ward"><%= departmental_sdbip.wards %></td>
 			<td class="past-year-performance"><%= departmental_sdbip.past_year_performance %></td>
 
 			<td class="top-layer-ref"><%= departmental_sdbip.top_layer_kpi_ref %></td>
-			<% periods.each do |period| %>
+			<% @result_periods.each do |period| %>
 			<% if departmental_sdbip.kpi_results.any? %>
 			<% departmental_sdbip.kpi_results.where(departmental_sdbip: departmental_sdbip.id).each do |kpi_result| %>
 			<td class="target-actual-and-results"><%= kpi_result.target %></td>

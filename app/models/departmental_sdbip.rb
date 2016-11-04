@@ -10,7 +10,6 @@ class DepartmentalSdbip < ActiveRecord::Base
     belongs_to :national_outcome
     belongs_to :strategic_objective
     belongs_to :kpa
-    belongs_to :area
     belongs_to :funding_source
     belongs_to :kpi_calculation_type
     belongs_to :kpi_concept
@@ -23,7 +22,6 @@ class DepartmentalSdbip < ActiveRecord::Base
     belongs_to :revenue_by_source
     belongs_to :risk_rating
     belongs_to :strategic_objective
-    belongs_to :ward
     has_one :capital_project
     has_many :kpi_results, dependent: :destroy
     accepts_nested_attributes_for :kpi_results, allow_destroy: true
@@ -36,6 +34,7 @@ class DepartmentalSdbip < ActiveRecord::Base
     # validate :extension_white_list
     def self.chart_theme(departments_sdibps)
       $colors = []
+      departments_sdibps = departments_sdibps.order(performance_standard: :asc)
         departments_sdibps.each do |color|
             $colors.push('orange') if color.performance_standard.include?('KPI Almost Met')
             $colors.push('darkblue') if color.performance_standard.include?('KPI Extremely Well Met')

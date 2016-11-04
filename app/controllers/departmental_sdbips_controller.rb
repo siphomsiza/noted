@@ -42,7 +42,8 @@ class DepartmentalSdbipsController < ApplicationController
                     @departmental_sdbips = nil
                 end
         elsif !params[:subdepartment_id] && (!current_user.role.blank? || current_user.admin? || current_user.super_admin?)
-                @periods = KpiResult.select(:period).distinct
+                @periods = KpiResult.pluck(:period).map{|x| x.month}.uniq
+                @result_periods = KpiResult.select(:period)
                 @departmental_sdbips = DepartmentalSdbip.all
                 if current_user.admin? || current_user.super_admin? || current_user.role.audit_log_reporting? || current_user.role.top_layer_administrator? || current_user.role.assurance_provider? || current_user.role.secondary_time_period? || current_user.role.finance_admin?
                     @departmental_sdbips = @departmental_sdbips
@@ -60,7 +61,7 @@ class DepartmentalSdbipsController < ApplicationController
                     @departmental_sdbips = @departmental_sdbips.where(department_id: department_id)
                 end
                 if !@departmental_sdbips.blank?
-                    @departmental_sdbips = @departmental_sdbips.paginate(per_page: 15, page: params[:page]).includes(:capital_project, :department, :subdepartment, :kpi_type, :kpi_owner, :kpi_concept, :kpi_calculation_type, :mscore_classification, :kpa, :strategic_objective, :national_outcome, :ward, :area, :reporting_category, :ndp_objective, :risk_rating,:kpi_results).order(id: :asc)
+                    @departmental_sdbips = @departmental_sdbips.paginate(per_page: 15, page: params[:page]).includes(:capital_project, :department, :subdepartment, :kpi_type, :kpi_owner, :kpi_concept, :kpi_calculation_type, :mscore_classification, :kpa, :strategic_objective, :national_outcome, :reporting_category, :ndp_objective, :risk_rating,:kpi_results).order(id: :asc)
                 else
                     @departmental_sdbips = nil
                 end
@@ -175,12 +176,13 @@ class DepartmentalSdbipsController < ApplicationController
                                                    :predetermined_objective_id, :ndp_objective_id,
                                                    :capital_project_id, :kpi, :unit_of_measurement,
                                                    :kpi_concept_id, :kpi_type_id, :risk_reg_ref,
-                                                   :comments, :risk_rating_id, :ward_id, :area_id,
+                                                   :comments, :risk_rating_id, :wards, :areas,
                                                    :kpi_owner_id, :baseline, :past_year_performance,
                                                    :performance_standard, :proof_of_evidence, :mtas_indicator,
                                                    :reporting_category_id, :provincial_strategic_outcome_id,
                                                    :source_of_evidence, :target, :annual_target, :budget, :impact, :top_layer_kpi_ref, :mtas_indicator_id,
-                                                   :kpi_calculation_type_id,
+                                                   :kpi_calculation_type_id,:first_quarter_target,:second_quarter_target,:third_quarter_target,:fourth_quarter_target,:first_quarter_actual,:second_quarter_actual,:third_quarter_actual,:fourth_quarter_actual,
+                                                   :first_quarter_results,:second_quarter_results,:third_quarter_results,:fourth_quarter_results,
                                                    :kpi_target_type_id, :annual_target, :revised_target, assurances_attributes: [:id, :user_id, :signed_off, :response, :kpi_result_id, :poe], kpi_results_attributes: [:id, :target, :actual, :kpi_performance_standard, :user_id, :performance_comments, :corrective_measures, :_destroy, :period, attachments_attributes: [:id, :poe, :_destroy]])
     end
 

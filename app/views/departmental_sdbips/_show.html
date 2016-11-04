@@ -133,7 +133,7 @@
                                         <tr>
                                             <th>KPA</th>
                                             <td>
-                                                <%= @departmental_sdbip.kpa.name %>
+                                                <%= @departmental_sdbip.kpa.name if !@departmental_sdbip.kpa_id.blank? %>
                                             </td>
                                         </tr>
                                         <tr>
@@ -185,7 +185,7 @@
                                         <tr>
                                             <th>Area</th>
                                             <td>
-                                                <% if !@departmental_sdbip.area_id.blank? %>
+                                                <% if !@departmental_sdbip.areas.blank? %>
                                                     <%= @departmental_sdbip.area.name %>
                                                         <% end %>
                                             </td>
@@ -193,7 +193,7 @@
                                         <tr>
                                             <th>Ward</th>
                                             <td>
-                                                <% if !@departmental_sdbip.ward_id.blank? %>
+                                                <% if !@departmental_sdbip.wards.blank? %>
                                                     <%= @departmental_sdbip.ward.name %>
                                                         <% end %>
                                             </td>
