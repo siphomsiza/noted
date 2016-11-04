@@ -17,5 +17,4 @@
 //= require bootstrap-datepicker
 //= require chartkick
 //= require custom
-//= require pagination
 //= require_tree .

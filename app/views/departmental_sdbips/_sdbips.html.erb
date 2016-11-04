@@ -36,7 +36,7 @@
 			<% if !periods.blank? %>
 			<% periods.each do |kpi_result_period| %>
 			<th class="target-actual-and-results" colspan="3">
-				<h4><%#= @kpi_result_period.where("").strftime("%B %Y") %></h4>
+				<h4><%= kpi_result_period.inspect %></h4>
 			</th>
 
 			<% end %>
@@ -95,7 +95,7 @@
 			<td class="past-year-performance"><%= departmental_sdbip.past_year_performance %></td>
 
 			<td class="top-layer-ref"><%= departmental_sdbip.top_layer_kpi_ref %></td>
-			<% @result_periods.each do |period| %>
+			<% @periods.each do |period| %>
 			<% if departmental_sdbip.kpi_results.any? %>
 			<% departmental_sdbip.kpi_results.where(departmental_sdbip: departmental_sdbip.id).each do |kpi_result| %>
 			<td class="target-actual-and-results"><%= kpi_result.target %></td>

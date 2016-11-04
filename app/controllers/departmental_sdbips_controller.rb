@@ -42,7 +42,7 @@ class DepartmentalSdbipsController < ApplicationController
                     @departmental_sdbips = nil
                 end
         elsif !params[:subdepartment_id] && (!current_user.role.blank? || current_user.admin? || current_user.super_admin?)
-                @periods = KpiResult.pluck(:period).map{|x| x.month}.uniq
+                @periods = KpiResult.select("distinct(extract(year from period), extract(month from period))")#.map{|x| x.month}.uniq
                 @result_periods = KpiResult.select(:period)
                 @departmental_sdbips = DepartmentalSdbip.all
                 if current_user.admin? || current_user.super_admin? || current_user.role.audit_log_reporting? || current_user.role.top_layer_administrator? || current_user.role.assurance_provider? || current_user.role.secondary_time_period? || current_user.role.finance_admin?
