@@ -34,14 +34,14 @@
             <div id="user-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
 
             </div>
-            <% if !user.role.blank? && user.editable_by?(current_user) %> |
+            <% if (current_user.admin? || current_user.super_admin?) && !current_user?(user) && !user.role.blank? %> |
             <%= link_to edit_user_access_path(user.role.id),remote: true,'data-target' => "#user-role-modal", 'data-toggle' => 'modal', class: "btn btn-sm", :title=>"Click to edit user access" do %>
                                 <span class="glyphicon glyphicon-edit"></span>&nbsp;Edit Access
                               <% end %>
                 <div id="user-role-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
 
                 </div>
-          <% elsif user.role.blank? && user.editable_by?(current_user) %> |
+          <% elsif user.role.blank? && (current_user.admin? || current_user.super_admin?) && !current_user?(user) %> |
             <%= link_to new_user_role_path(:id=>user.id),remote: true,'data-target' => "#new-user-role-modal", 'data-toggle' => 'modal', class: "btn btn-sm", :title=>"Click to edit user access" do %>
                                 <span class="glyphicon glyphicon-edit"></span>&nbsp;Edit Access
                               <% end %>
@@ -54,7 +54,7 @@
               <span class="glyphicon glyphicon-lock"></span>&nbsp;Reset Password
             <% end %>
           <% end %>
-          <% if user && user.editable_by?(current_user) %>
+          <% if (current_user.admin? || current_user.super_admin?) && !current_user?(user) %>
            |
           <%= link_to user, data:{confirm: 'Are you sure?'} , :method => :delete, class: "btn btn-sm" do %><span class="glyphicon glyphicon-trash"></span>&nbsp;
             Delete
