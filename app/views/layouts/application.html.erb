@@ -16,32 +16,176 @@
   </head>
 
   <body id="applicationmanifest">
-<div id="modal-holder"></div>
-		<section class="container-fluid">
-			<div class="content row">
+    <% if current_user %>
+    <%= auto_session_timeout_js frequency: 5 %>
+    <% end %>
+    <div id="modal-holder"></div>
+    <section class="container-fluid">
+      <div class="content row">
         <div class="col col-lg-12">
-        <% if logged_in? %>
+          <% if logged_in? %>
           <%= render partial: 'layouts/header', :locals => {:doc => @doc} %>
-        <% end %>
-      </div>
-				<div class="main col col-lg-12">
+          <% end %>
+        </div>
+        <div class="main col col-lg-12">
           <% flash.each do |message_type, message| %>
-            <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
+          <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
           <% end %>
           <%= yield %>
-				</section><!-- main -->
-			</div><!-- content -->
+        </section>
+        <!-- main -->
+      </div>
+      <!-- content -->
       <% if logged_in? %>
-        <%= render 'layouts/footer' %>
+      <%= render 'layouts/footer' %>
       <% end %>
-		</div><!-- container -->
-
+    </div>
+    <!-- container -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.3.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
   </body>
 </html>
 <script>
-$(document).ready(function(){
-  if ( window.location.pathname == "/edit_user_profile" ) {
-    $('#user_details_modal').modal('show');
-  }
-});
+  $(document).ready(function () {
+    if (window.location.pathname == "/edit_user_profile") {
+      $('#user_details_modal').modal('show');
+    }
+  });
+</script>
+<script type="text/javascript">
+  $(document).ready(function () {
+    // var elements = document.getElementByClassName("datatable");
+    // for(var i =0, i < elements.length, i){
+    //
+    // }
+    $('#active-users').DataTable({
+      dom: 'Bfrtip',
+      buttons: ['copyHtml5', 'excelHtml5', 'csvHtml5', 'pdfHtml5']
+    });
+    $('#inactive-users').DataTable({
+      dom: 'Bfrtip',
+      buttons: ['copyHtml5', 'excelHtml5', 'csvHtml5', 'pdfHtml5']
+    });
+    $('#new-users').DataTable({
+      dom: 'Bfrtip',
+      buttons: ['copyHtml5', 'excelHtml5', 'csvHtml5', 'pdfHtml5']
+    });
+    $('#locked-users').DataTable({
+      dom: 'Bfrtip',
+      buttons: ['copyHtml5', 'excelHtml5', 'csvHtml5', 'pdfHtml5']
+    });
+    $('#terminated-users').DataTable({
+      dom: 'Bfrtip',
+      buttons: ['copyHtml5', 'excelHtml5', 'csvHtml5', 'pdfHtml5']
+    });
+    $('#all-users').DataTable({
+      dom: 'Bfrtip',
+      buttons: ['copyHtml5', 'excelHtml5', 'csvHtml5', 'pdfHtml5']
+    });
+    $('#user-details').DataTable({
+      dom: 'Bfrtip',
+      buttons: ['copyHtml5', 'excelHtml5', 'csvHtml5', 'pdfHtml5']
+    });
+    $('#user-details-log').DataTable({
+      dom: 'Bfrtip',
+      buttons: ['copyHtml5', 'excelHtml5', 'csvHtml5', 'pdfHtml5']
+    });
+    $('#login-attempts-log').DataTable({
+      dom: 'Bfrtip',
+      buttons: ['copyHtml5', 'excelHtml5', 'csvHtml5', 'pdfHtml5']
+    });
+    $('#super-user-activity-logs').DataTable({
+      dom: 'Bfrtip',
+      buttons: ['copyHtml5', 'excelHtml5', 'csvHtml5', 'pdfHtml5']
+    });
+    $('#user-activity-logs').DataTable({
+      dom: 'Bfrtip',
+      buttons: ['copyHtml5', 'excelHtml5', 'csvHtml5', 'pdfHtml5']
+    });
+    $('#user-access').DataTable({
+      dom: 'Bfrtip',
+      buttons: ['copyHtml5', 'excelHtml5', 'csvHtml5', 'pdfHtml5']
+    });
+    $('#admin-users').DataTable({
+      dom: 'Bfrtip',
+      buttons: ['copyHtml5', 'excelHtml5', 'csvHtml5', 'pdfHtml5']
+    });
+    $('#sdbips-table').DataTable({
+      dom: 'Bfrtip',
+      buttons: ['copyHtml5', 'excelHtml5', 'csvHtml5', 'pdfHtml5']
+    });
+    $('#edit-kpi-table').DataTable({
+      dom: 'Bfrtip',
+      buttons: ['copyHtml5', 'excelHtml5', 'csvHtml5', 'pdfHtml5']
+    });
+    $('#update-kpi-table').DataTable({
+      dom: 'Bfrtip',
+      buttons: ['copyHtml5', 'excelHtml5', 'csvHtml5', 'pdfHtml5']
+    });
+    $('#deleted-kpi-table').DataTable({
+      dom: 'Bfrtip',
+      buttons: ['copyHtml5', 'excelHtml5', 'csvHtml5', 'pdfHtml5']
+    });
+    $('#view-toplayer-table').DataTable({
+      dom: 'Bfrtip',
+      buttons: ['copyHtml5', 'excelHtml5', 'csvHtml5', 'pdfHtml5']
+    });
+    $('#edit-toplayer-table').DataTable({
+      dom: 'Bfrtip',
+      buttons: ['copyHtml5', 'excelHtml5', 'csvHtml5', 'pdfHtml5']
+    });
+    $('#update-toplayer-table').DataTable({
+      dom: 'Bfrtip',
+      buttons: ['copyHtml5', 'excelHtml5', 'csvHtml5', 'pdfHtml5']
+    });
+    $('#view-capitalproject-table').DataTable({
+      dom: 'Bfrtip',
+      buttons: ['copyHtml5', 'excelHtml5', 'csvHtml5', 'pdfHtml5']
+    });
+    $('#edit-capitalproject-table').DataTable({
+      dom: 'Bfrtip',
+      buttons: ['copyHtml5', 'excelHtml5', 'csvHtml5', 'pdfHtml5']
+    });
+    $('#update-capitalproject-table').DataTable({
+      dom: 'Bfrtip',
+      buttons: ['copyHtml5', 'excelHtml5', 'csvHtml5', 'pdfHtml5']
+    });
+    $('#view-monthlycashflows-table').DataTable({
+      dom: 'Bfrtip',
+      buttons: ['copyHtml5', 'excelHtml5', 'csvHtml5', 'pdfHtml5']
+    });
+    $('#edit-monthlycashflows-table').DataTable({
+      dom: 'Bfrtip',
+      buttons: ['copyHtml5', 'excelHtml5', 'csvHtml5', 'pdfHtml5']
+    });
+    $('#update-monthlycashflows-table').DataTable({
+      dom: 'Bfrtip',
+      buttons: ['copyHtml5', 'excelHtml5', 'csvHtml5', 'pdfHtml5']
+    });
+    $('#view-revenuebysource-table').DataTable({
+      dom: 'Bfrtip',
+      buttons: ['copyHtml5', 'excelHtml5', 'csvHtml5', 'pdfHtml5']
+    });
+    $('#edit-revenuebysource-table').DataTable({
+      dom: 'Bfrtip',
+      buttons: ['copyHtml5', 'excelHtml5', 'csvHtml5', 'pdfHtml5']
+    });
+    $('#update-revenuebysource-table').DataTable({
+      dom: 'Bfrtip',
+      buttons: ['copyHtml5', 'excelHtml5', 'csvHtml5', 'pdfHtml5']
+    });
+    $('#view-assurance-datatable').DataTable({
+      dom: 'Bfrtip',
+      buttons: ['copyHtml5', 'excelHtml5', 'csvHtml5', 'pdfHtml5']
+    });
+    $('#kpi-owners-table').DataTable({
+      dom: 'Bfrtip',
+      buttons: ['copyHtml5', 'excelHtml5', 'csvHtml5', 'pdfHtml5']
+    });
+  });
 </script>

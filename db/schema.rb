@@ -198,6 +198,7 @@ ActiveRecord::Schema.define(version: 20160826103737) do
     t.integer  "predetermined_objective_id"
     t.integer  "kpi_owner_id"
     t.text     "kpi"
+    t.text     "project_name"
     t.string   "unit_of_measurement"
     t.integer  "mscore_classification_id"
     t.string   "idp_ref"
@@ -217,11 +218,16 @@ ActiveRecord::Schema.define(version: 20160826103737) do
     t.decimal  "second_quarter_actual",           default: 0.0
     t.decimal  "third_quarter_actual",            default: 0.0
     t.decimal  "fourth_quarter_actual",           default: 0.0
+    t.string   "first_quarter_results",           default: "KPI Not Yet Measured"
+    t.string   "second_quarter_results",          default: "KPI Not Yet Measured"
+    t.string   "third_quarter_results",           default: "KPI Not Yet Measured"
+    t.string   "fourth_quarter_results",          default: "KPI Not Yet Measured"
     t.decimal  "annual_target",                   default: 0.0
     t.decimal  "revised_target"
     t.text     "performance_comments"
     t.text     "corrective_measures"
     t.string   "performance_standard",            default: "KPI Not Yet Measured", null: false
+    t.string   "risk"
     t.integer  "risk_rating_id"
     t.integer  "kpa_id"
     t.string   "kpa_name"

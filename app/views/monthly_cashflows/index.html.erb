@@ -58,15 +58,7 @@ $(function() {
 
 			<div class = "tab-pane active fade in" id = "view_monthly_cashflows">
 
-				<% if @monthly_cashflows.blank? && MonthlyCashflow.blank? %>
-
-				<p> There are no Monthly Cashflows currently in the system. </p>
-
-				<% elsif @monthly_cashflows.blank? && !MonthlyCashflow.blank? %>
-
-				<p> You currently have no Monthly Cashflows. </p>
-
-				<% elsif !@monthly_cashflows.blank? %>
+				<br/>
 
 				<div class="table-responsive">
 
@@ -76,21 +68,10 @@ $(function() {
 
 				</div>
 
-				<% end %>
 			</div>
 
 			<div class = "tab-pane active fade" id = "edit_monthly_cashflows">
 					<br/>
-							<% if @monthly_cashflows.blank? && MonthlyCashflow.blank? %>
-
-							<p> There are no Monthly Cashflows currently in the system to edit. </p>
-
-							<% elsif @monthly_cashflows.blank? && !MonthlyCashflow.blank? %>
-
-							<p> You currently have no Monthly Cashflows to edit. </p>
-
-							<% elsif !@monthly_cashflows.blank? %>
-
 							<div class="table-responsive">
 
 								<%= render partial: 'update_monthly_cashflow', :locals=>{:monthly_cashflows => @monthly_cashflows} %>
@@ -99,22 +80,10 @@ $(function() {
 
 							</div>
 
-							<% end %>
-
 		</div>
 
 			<div class = "tab-pane active fade" id = "manage_monthly_cashflows">
 					<br/>
-							<% if @monthly_cashflows.blank? && MonthlyCashflow.blank? %>
-
-							<p> There are no Monthly Cashflows currently in the system to edit. </p>
-
-							<% elsif @monthly_cashflows.blank? && !MonthlyCashflow.blank? %>
-
-							<p> You currently have no Monthly Cashflows to edit. </p>
-
-							<% elsif !@monthly_cashflows.blank? %>
-
 							<div class="table-responsive">
 
 								<%= render partial: 'edit_monthly_cashflow', :locals=>{:monthly_cashflows => @monthly_cashflows} %>
@@ -122,8 +91,6 @@ $(function() {
 								<%= will_paginate @monthly_cashflows %>
 
 							</div>
-
-							<% end %>
 
 		</div>
 		<div class = "tab-pane fade" id = "new_monthly_cashflow">

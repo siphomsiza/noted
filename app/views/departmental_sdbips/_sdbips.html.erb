@@ -1,6 +1,5 @@
-<% if !departmental_sdbips.blank? %>
 <div class="table-responsive">
-	<table class="table table-striped table-bordered table-hover departmental-sdbip-edit" id="sdbips-table">
+	<table class="table table-striped table-bordered table-hover departmental-sdbip-edit display" id="sdbips-table">
 		<tr>
 			<th rowspan="2" class="ref">Ref</th>
 			<th rowspan="2" class="department">Department</th>
@@ -33,16 +32,16 @@
 			<th rowspan="2" class="ward">Ward</th>
 			<th rowspan="2" class="past-year-performance">Past Year Performance</th>
 			<th rowspan="2" class="top-layer-ref">Top Layer KPI Ref</th>
-			<% if !periods.blank? %>
-			<% periods.each do |kpi_result_period| %>
+			<% if !@periods.blank? %>
+			<% @periods.each do |kpi_result_period| %>
 			<th class="target-actual-and-results" colspan="3">
-				<h4><%= kpi_result_period %></h4>
+				<h4></h4>
 			</th>
 
 			<% end %>
 			<% end %>
-		<% if !periods.blank? %>
-		<% periods.each do |kpi_result_period| %>
+		<% if !@periods.blank? %>
+		<% @periods.each do |kpi_result_period| %>
 		<tr>
 			<th class="target-actual-and-results">Target</th>
 			<th class="target-actual-and-results">Actual</th>
@@ -51,7 +50,7 @@
 		<% end %>
 		<% end %>
 	</tr>
-		<% departmental_sdbips.each do |departmental_sdbip| %>
+		<% @departmental_sdbips.each do |departmental_sdbip| %>
 		<tbody>
 		<tr>
 			<td class="ref">D<%= departmental_sdbip.id %></td>
@@ -119,17 +118,14 @@
 				</span><%= kpi_result.kpi_performance_standard %>
 			</td>
 			<% end %>
-			<% elsif !periods.blank? && !departmental_sdbip.kpi_results.any? %>
+			<% elsif !@periods.blank? && !departmental_sdbip.kpi_results.any? %>
 				<td class="target-actual-and-results"></td>
 				<td class="target-actual-and-results"></td>
 				<td class="target-actual-and-results"></td>
 			<% end %>
 			<% end %>
 		</tr>
-		<tbody>
+	</tbody>
 		<% end %>
-
 	</table>
 </div>
-<%= will_paginate departmental_sdbips %>
-<% end %>

@@ -1,4 +1,4 @@
-<div class="modal-dialog">
+<div class="modal-dialog modal-lg">
     <div class="modal-content">
         <div class="modal-header">
             <h3><%= "Update #{@departmental_sdbip.kpi}" %></h3>
@@ -16,7 +16,7 @@
                                         <tr>
                                             <th>Target</th>
                                             <td>
-                                                <%= f.text_field :target,{:class=>"form-control", :readonly => true,:id=>"kpi-target"} %>
+                                                <%= f.text_field :target,{:value => @departmental_sdbip.annual_target ,:class=>"form-control", :readonly => true,:id => "target"} %>
 
                                             </td>
                                         </tr>
@@ -30,7 +30,7 @@
                                             <tr>
                                                 <th>Performance Comments</th>
                                                 <td>
-                                                    <%= f.text_area :performance_comments, :class => "form-control has-error col-md-5" %>
+                                                    <%= f.text_area :performance_comments, :class => "form-control has-error col-md-5", :required => true %>
 
                                                 </td>
                                             </tr>
@@ -124,9 +124,7 @@
 
         var target = <%= @departmental_sdbip.annual_target %>;
 
-        var over_actual = <%= @departmental_sdbip.kpi_results.to_a.sum(&:actual) %>;
-
-        $("#kpi-target").val(target);
+        var over_actual = <%= @departmental_sdbip.kpi_results.to_a.sum(&:actual) if @departmental_sdbip.kpi_results.any? %>;
 
         $("#kpi-actual").blur(function() {
 

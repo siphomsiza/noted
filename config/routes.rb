@@ -27,6 +27,8 @@ Rails.application.routes.draw do
   resources :activities
   resources :regions
   resources :master_setups
+  get 'sessions/active' => 'sessions#active', as: :active
+  get 'sessions/timeout' => 'sessions#timeout', as: :timeout
   resources :top_layer_sdbips do
       collection {post :import}
   end

@@ -16,10 +16,8 @@ class MonthlyCashflowsController < ApplicationController
     flash[:danger] = "received Exception #{e.message}"
   end
     @monthly_cashflow = MonthlyCashflow.new
-    @monthly_cashflows = MonthlyCashflow.all
-    if !@monthly_cashflows.blank?
-      @monthly_cashflows =  @monthly_cashflows.paginate(page: params[:page],per_page: 10)
-    end
+    @monthly_cashflows = MonthlyCashflow.paginate(page: params[:page],per_page: 10)
+    
   end
 
   # GET /monthly_cashflows/1

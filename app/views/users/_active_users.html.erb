@@ -1,6 +1,6 @@
 <div class="tab-pane fade in active" id="active_users">
     <div class="table-responsive table-bordered">
-        <table class="table">
+        <table class="table display" id="active-users">
             <thead>
                 <tr>
                     <th>Avatar</th>
@@ -63,7 +63,7 @@
                 <% end %>
             </tbody>
         </table>
-        <%= will_paginate active_users, :param_name => 'page', params: {active_tab: 'active_users'} %>
+        <!-- <%= will_paginate active_users, :param_name => 'page', params: {active_tab: 'active_users'} %> -->
     </div>
     <!-- table-responsive -->
 </div>

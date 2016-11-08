@@ -1,4 +1,4 @@
-<div class="modal-dialog">
+<div class="modal-dialog modal-lg">
     <div class="modal-content">
         <div class="modal-header">
             <button class="close" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -107,7 +107,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <th>Target</th>
+                                            <th>Annual Target</th>
                                             <td>
                                                 <%= @departmental_sdbip.annual_target %>
                                             </td>
@@ -186,7 +186,7 @@
                                             <th>Area</th>
                                             <td>
                                                 <% if !@departmental_sdbip.areas.blank? %>
-                                                    <%= @departmental_sdbip.area.name %>
+                                                    <%= @departmental_sdbip.areas %>
                                                         <% end %>
                                             </td>
                                         </tr>
@@ -194,7 +194,7 @@
                                             <th>Ward</th>
                                             <td>
                                                 <% if !@departmental_sdbip.wards.blank? %>
-                                                    <%= @departmental_sdbip.ward.name %>
+                                                    <%= @departmental_sdbip.wards %>
                                                         <% end %>
                                             </td>
                                         </tr>

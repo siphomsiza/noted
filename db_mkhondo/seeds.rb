@@ -88,7 +88,7 @@ MasterSetup.create!(
 
 landline=Faker::Number.number(10)
 mobile=Faker::Number.number(10)
-Department.create!(name: "Municipal Manager's Office",
+Department.create!(name: "Office of the Municipal Manager",
   tel_no: landline,
   fax_no:mobile)
 
@@ -115,12 +115,12 @@ Department.create!(name: "Department in the MM's Office",
   tel_no:landline,
   fax_no: mobile)
 
-Subdepartment.create!(name: "Municipal Manager's Office", department_id: "1")
-
-Subdepartment.create!(name: "Internal Audit", department_id: "7",)
-Subdepartment.create!(name: "Performance Management Unit", department_id: "7")
-Subdepartment.create!(name: "Legal Services", department_id: "7")
-Subdepartment.create!(name: "Forestry", department_id: "7")
+Subdepartment.create!(name: "Municipal Manager", department_id: "1")
+Subdepartment.create!(name: "Internal Audit", department_id: "1",)
+Subdepartment.create!(name: "Performance Management Unit", department_id: "1")
+Subdepartment.create!(name: "Risk Management", department_id: "1")
+Subdepartment.create!(name: "Legal Services", department_id: "1")
+Subdepartment.create!(name: "Forestry", department_id: "1")
 
 Subdepartment.create!(name: "Budget And Financial Reporting", department_id: "2")
 Subdepartment.create!(name: "Expenditure", department_id: "2")
@@ -193,37 +193,35 @@ end
 CSV.foreach('db_mkhondo/data/reporting.csv', headers: true, :col_sep => ',') do |row|
   ReportingCategory.create! row.to_hash
 end
-Ward.create!(name: "All",ward_no: 1,area_id: 1, mun_ref: "Unspecified")
-Ward.create!(name: "1",ward_no: 1,area_id: 1, mun_ref:1)
-Ward.create!(name: "2",ward_no: 1,area_id: 1, mun_ref:2)
-Ward.create!(name: "3",ward_no: 1,area_id: 1, mun_ref:3)
-Ward.create!(name: "4",ward_no: 1,area_id: 1, mun_ref:4)
-Ward.create!(name: "5",ward_no: 1,area_id: 1, mun_ref:5)
-Ward.create!(name: "6",ward_no: 1,area_id: 1, mun_ref:6)
-Ward.create!(name: "7",ward_no: 1,area_id: 1, mun_ref:7)
-Ward.create!(name: "8",ward_no: 1,area_id: 1, mun_ref:8)
-Ward.create!(name: "9",ward_no: 1,area_id: 1, mun_ref:9)
-Ward.create!(name: "10",ward_no: 1,area_id: 1, mun_ref:10)
-Ward.create!(name: "11",ward_no: 1,area_id: 1, mun_ref:11)
-Ward.create!(name: "12",ward_no: 1,area_id: 1, mun_ref:12)
-Ward.create!(name: "13",ward_no: 1,area_id: 1, mun_ref:13)
-Ward.create!(name: "14",ward_no: 1,area_id: 1, mun_ref:14)
-Ward.create!(name: "15",ward_no: 1,area_id: 1, mun_ref:15)
-Ward.create!(name: "16",ward_no: 1,area_id: 1, mun_ref:16)
-Ward.create!(name: "17",ward_no: 1,area_id: 1, mun_ref:17)
-Ward.create!(name: "18",ward_no: 1,area_id: 1, mun_ref:18)
-Ward.create!(name: "19",ward_no: 1,area_id: 1, mun_ref:19)
+Ward.create!(name: "All",ward_no: 1,area_id: 1, mun_ref: "All")
+Ward.create!(name: "Ward 4",ward_no: 1,area_id: 1, mun_ref:2)
+Ward.create!(name: "Ward 5",ward_no: 1,area_id: 1, mun_ref:3)
+Ward.create!(name: "Ward 6",ward_no: 1,area_id: 1, mun_ref:5)
+Ward.create!(name: "Ward 8",ward_no: 1,area_id: 1, mun_ref:6)
+Ward.create!(name: "Ward 10",ward_no: 1,area_id: 1, mun_ref:9)
+Ward.create!(name: "Ward 11",ward_no: 1,area_id: 1, mun_ref:10)
+Ward.create!(name: "Ward 12",ward_no: 1,area_id: 1, mun_ref:11)
+Ward.create!(name: "Ward 13",ward_no: 1,area_id: 1, mun_ref:12)
+Ward.create!(name: "Ward 15",ward_no: 1,area_id: 1, mun_ref:14)
+Ward.create!(name: "Ward 16",ward_no: 1,area_id: 1, mun_ref:15)
+Ward.create!(name: "Ward 17",ward_no: 1,area_id: 1, mun_ref:16)
+Ward.create!(name: "Ward 18",ward_no: 1,area_id: 1, mun_ref:17)
+Ward.create!(name: "Ward 19",ward_no: 1,area_id: 1, mun_ref:18)
 
 Area.create!(name: "All")
-Area.create!(name: "Amsterdam")
-Area.create!(name: "Dirkiesdorp")
-Area.create!(name: "Driefontein")
-Area.create!(name: "Ethandkukhanya")
-Area.create!(name: "Iswepe")
-Area.create!(name: "Kempville")
-Area.create!(name: "Kwathandeka")
-Area.create!(name: "Piet Retief")
-Area.create!(name: "Retief ville")
+Area.create!(name: "Area 4")
+Area.create!(name: "Area 5")
+Area.create!(name: "Area 6")
+Area.create!(name: "Area 8")
+Area.create!(name: "Area 10")
+Area.create!(name: "Area 11")
+Area.create!(name: "Area 12")
+Area.create!(name: "Area 13")
+Area.create!(name: "Area 15")
+Area.create!(name: "Area 16")
+Area.create!(name: "Area 17")
+Area.create!(name: "Area 18")
+Area.create!(name: "Area 19")
 
 KpiTargetType.create!(name: "Currency", code: "R")
 KpiTargetType.create!(name: "Percentage", code: "%")
@@ -510,9 +508,9 @@ while $i < $num  do
   SdbipTimePeriod.create!(period: period,primary_reminder: primary_reminder,primary_closure: primary_closure, secondary_reminder: secondary_reminder,secondary_closure: secondary_closure)
    $i +=1
 end
-  CSV.foreach('db_mkhondo/data/capital.csv', headers: true, :col_sep => ',') do |row|
-    CapitalProject.create! row.to_hash
-  end
-  CSV.foreach('db_mkhondo/data/sdbips.csv', headers: true, :col_sep => ',') do |row|
-    DepartmentalSdbip.create! row.to_hash
-  end
+  # CSV.foreach('db_mkhondo/data/capital.csv', headers: true, :col_sep => ',') do |row|
+  #   CapitalProject.create! row.to_hash
+  # end
+  # CSV.foreach('db_mkhondo/data/sdbips.csv', headers: true, :col_sep => ',') do |row|
+  #   DepartmentalSdbip.create! row.to_hash
+  # end

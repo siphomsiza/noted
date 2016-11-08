@@ -5,7 +5,10 @@ class SessionsController < ApplicationController
       redirect_to introduction_url
     end
   end
-
+  def active
+  end
+  def timeout
+  end
   def create
     company_code = params[:session][:company_code]
     set_up_database company_code if !params[:session][:company_code].blank?

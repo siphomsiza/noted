@@ -38,6 +38,7 @@ class CreateDepartmentalSdbips < ActiveRecord::Migration
       t.text    :performance_comments
       t.text    :corrective_measures
       t.string :performance_standard
+      t.string :risk
       t.integer :risk_rating_id
       t.integer :kpa_id
       t.string :kpa_name

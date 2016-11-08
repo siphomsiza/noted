@@ -72,15 +72,6 @@
 
 			<div class="tab-pane active fade in" id="view_sdbips">
 				<br/>
-				<% if @departmental_sdbips.blank? && DepartmentalSdbip.blank? %>
-				<p>
-					There are no Departmental SDBIPs currently in the system
-				</p>
-				<% elsif @departmental_sdbips.blank? && !DepartmentalSdbip.blank? %>
-				<p>
-					You currently have no Departmental SDBIP
-				</p>
-			<% else %>
 				<%= form_tag departmental_sdbips_path, method: :get do |f| %>
 				<div class="row">
 					<div class="col col-lg-12">
@@ -129,10 +120,10 @@
 
 				<div class="row">
 					<div class="col col-lg-12" id="sdbips"><br/>
-						<%= render partial: "sdbips", :locals=> {:departmental_sdbips => @departmental_sdbips,:periods => @periods} %>
+						<%= render "sdbips" %>
+						<%= will_paginate @departmental_sdbips if !@departmental_sdbips.blank?  %>
 					</div>
 				</div>
-				<% end %>
 
 			</div>
 			<% if current_user.admin? || current_user.super_admin? || (!current_user.subdepartmental_administrator.blank? && current_user.subdepartmental_administrator.can_edit?) || (!current_user.departmental_administrator.blank? &&
@@ -140,60 +131,32 @@
 
 			<div class="tab-pane fade" id="edit_kpis">
 
-				<% if @departmental_sdbips.blank? && DepartmentalSdbip.blank? %>
-				<p>
-					There are no Departmental SDBIPs currently in the system
-				</p>
-				<% elsif @departmental_sdbips.blank? && !DepartmentalSdbip.blank? %>
-				<p>
-					You currently have no Departmental SDBIP
-				</p>
-			<% else %>
 				<div class="row">
 					<div class="col col-lg-12">
-
-						<% if !@departmental_sdbips.blank? %>
 						<br/>
 						<%= render partial: 'filter',:locals=>{:departments => @departments, :kpi_types => @kpi_types} %>
 						<br/>
 						<%= render partial: "update_sdbips", :locals=>{:departmental_sdbips => @departmental_sdbips} %>
 						<%= will_paginate %>
-					<% else %>
-						<p>There are no kpis for edit.</p>
-						<% end %>
 					</div>
 
 				</div>
-				<% end %>
 			</div>
 			<% end %>
 			<div class="tab-pane fade" id="manage_sdbips">
 
-				<% if @departmental_sdbips.blank? && DepartmentalSdbip.blank? %>
-				<p>
-					There are no Departmental SDBIPs currently in the system
-				</p>
-				<% elsif @departmental_sdbips.blank? && !DepartmentalSdbip.blank? %>
-				<p>
-					You currently have no Departmental SDBIP
-				</p>
-			<% else %>
 				<div class="row">
 					<div class="col col-lg-12">
 
-						<% if !@departmental_sdbips.blank? %>
+
 						<br/>
 						<%= render partial: 'filter', :locals=>{:departments => @departments, :kpi_types => @kpi_types} %>
 						<br/>
 						<%= render partial: "edit_sdbips", :locals=>{:departmental_sdbips => @departmental_sdbips} %>
 						<%= will_paginate %>
-					<% else %>
-						<p>There are no kpis for update.</p>
-						<% end %>
 					</div>
 
 				</div>
-				<% end %>
 			</div>
 			<div class="tab-pane fade" id="new_sdbip">
 				<h2>New Departmental KPI</h2>
@@ -206,11 +169,7 @@
 			<div class="tab-pane fade" id="deleted_sdbip">
 				<h2>Deleted Departmental KPIs</h2>
 				<% if current_user.admin? || current_user.super_admin? %>
-				<% if !@deleted_kpis.blank? %>
-				<%= render partial: 'deleted_kpis', :departmental_sdbips => @departmental_sdbips %>
-			<% else %>
-				<p>There are currently no deleted KPIs.</p>
-				<% end %>
+				<%= render partial: 'deleted_kpis', locals: {:deleted_kpis => @deleted_kpis} %>
 				<% end %>
 			</div>
 
@@ -218,6 +177,41 @@
 	</div>
 
 </div>
+
+	<!-- Import SDBIP modal -->
+	<div class="modal fade" id="importModal" tabindex="-1" role="dialog" aria-labelledby="importModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<%= form_tag import_departmental_sdbips_path, accept: 'text/csv,text/xls,text/xlsx,text/ods', multipart: true do %>
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+						&times;
+					</button>
+					<h4 class="modal-title" id="importModalLabel">
+						<ol class="breadcrumb">
+							<li>
+								<a href="#" data-dismiss="modal">SDBIP</a>
+							</li>
+							<li>Departmental SDBIP</li>
+							<li class="active">Importing SDBIP</li>
+						</ol>
+					</h4>
+					<%= label_tag :NB,"Note: Supported files types are xls,xlsx, ods and csv types.", id: 'import_info' %>
+				</div>
+				<div class="modal-body">
+					<%= label_tag :file,"Select File to upload:" %>
+					<%= file_field_tag :file ,{:class=>"form-control"} %>
+				</div>
+				<div class="modal-footer">
+					<div class="col-md-4 pull-right">
+						<%= submit_tag "Import", :class=>"btn btn-midi" %>
+					</div>
+				</div>
+				<% end %>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal -->
 <script>
 $(document).ready(function(){
 	$(".first-quarter-target").hide();
@@ -264,40 +258,3 @@ $(document).ready(function(){
 	});
 });
 </script>
-<div class="col col-lg-12">
-	<!-- Import SDBIP modal -->
-	<div class="modal fade" id="importModal" tabindex="-1" role="dialog" aria-labelledby="importModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<%= form_tag import_departmental_sdbips_path, accept: 'text/csv,text/xls,text/xlsx,text/ods', multipart: true do %>
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-						&times;
-					</button>
-					<h4 class="modal-title" id="importModalLabel">
-						<ol class="breadcrumb">
-							<li>
-								<a href="#" data-dismiss="modal">SDBIP</a>
-							</li>
-							<li>Departmental SDBIP</li>
-							<li class="active">Importing SDBIP</li>
-						</ol>
-					</h4>
-					<%= label_tag :NB,"Note: Supported files types are xls,xlsx, ods and csv types.", id: 'import_info' %>
-				</div>
-				<div class="modal-body">
-					<%= label_tag :file,"Select File to upload:" %>
-					<%= file_field_tag :file ,{:class=>"form-control"} %>
-				</div>
-				<div class="modal-footer">
-					<div class="col-md-4 pull-right">
-						<%= submit_tag "Import", :class=>"btn btn-midi" %>
-					</div>
-				</div>
-				<% end %>
-			</div>
-			<!-- /.modal-content -->
-		</div>
-		<!-- /.modal -->
-	</div>
-</div>
