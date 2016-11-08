@@ -56,7 +56,7 @@
 							<span class="glyphicon glyphicon-plus-sign"></span>&nbsp;Add Capital Project
 						</a>
 					</li>
-					<% if current_user.admin? %>
+					<% if current_user.admin? || current_user.super_admin? %>
 					<li class="pull-right">
 						<button class="btn btn-sm  pull-right" data-toggle="modal" data-target="#capital_projectModal" title="Click to upload Capital projects.">
 							<span class="glyphicon glyphicon-upload"></span>&nbsp;Import Capital Projects
@@ -71,86 +71,27 @@
 			<div id="myTabContent" class="tab-content">
 
 				<div class="tab-pane active fade in" id="view_capital_projects">
-
-					<% if @capital_projects.blank? && CapitalProject.blank? %>
-
-					<p>
-						There are no capital projects currently in the system.
-					</p>
-
-					<% elsif @capital_projects.blank? && !CapitalProject.blank? %>
-
-					<p>
-						You currently have no capital projects.
-					</p>
-
-					<% elsif !@capital_projects.blank? %>
-
+				<br/>
 					<%= render partial: "capital_projects", :locals=>{:capital_projects => @capital_projects} %>
-
-					<% end %>
-
-					<% if !@capital_projects.blank? %>
-
-					<%= will_paginate @capital_projects %>
-
-					<% end %>
+					<!-- <%= will_paginate @capital_projects if !@capital_projects.blank? %> -->
 
 				</div>
 
 				<div class="tab-pane fade" id="edit_capital_projects">
 
-					<% if @capital_projects.blank? && CapitalProject.blank? %>
-
-					<p>
-						There are no capital projects currently in the system.
-					</p>
-
-					<% elsif @capital_projects.blank? && !CapitalProject.blank? %>
-
-					<p>
-						You currently have no capital projects.
-					</p>
-
-					<% elsif !@capital_projects.blank? %>
+					<br/>
 
 					<%= render partial: "update_capital_project", :locals=>{:capital_projects => @capital_projects} %>
-
-					<% end %>
-
-					<% if !@capital_projects.blank? %>
-
-					<%= will_paginate @capital_projects %>
-
-					<% end %>
+					<!-- <%= will_paginate @capital_projects if !@capital_projects.blank? %> -->
 
 				</div>
 
 				<div class="tab-pane fade" id="manage_capital_projects">
-
-					<% if @capital_projects.blank? && CapitalProject.blank? %>
-
-					<p>
-						There are no capital projects currently in the system.
-					</p>
-
-					<% elsif @capital_projects.blank? && !CapitalProject.blank? %>
-
-					<p>
-						You currently have no capital projects.
-					</p>
-
-					<% elsif !@capital_projects.blank? %>
+				<br/>
 
 					<%= render partial: "edit_capital_project",:locals=>{:capital_projects => @capital_projects} %>
 
-					<% end %>
-
-					<% if !@capital_projects.blank? %>
-
-					<%= will_paginate @capital_projects %>
-
-					<% end %>
+					<!-- <%= will_paginate @capital_projects if !@capital_projects.blank? %> -->
 
 				</div>
 				<div class="tab-pane fade" id="new_capital_project">

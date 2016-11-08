@@ -1,6 +1,6 @@
 <div class="tab-pane fade" id="users_activity_log">
 <div class="table-responsive table-bordered">
-  <table class="table">
+  <table class="table display" id="user-activity-logs">
     <thead>
       <tr>
         <th>Avatar</th>
@@ -12,10 +12,9 @@
         <th>Actions</th>
       </tr>
     </thead>
-    <% if !user_activities.blank? %>
     <tbody>
 
-      <% user_activities.each do |user_activity| %>
+      <% @user_activities.each do |user_activity| %>
 
       <tr>
         <td><%= image_tag(user_activity.user.avatar.url(:thumb), size: 50) %></td>
@@ -29,8 +28,7 @@
       </tr>
       <% end %>
     </tbody>
-    <% end %>
     </table>
-      <%= will_paginate user_activities %>
+      <!-- <%= will_paginate user_activities if !@user_activities.blank? %> -->
 </div>
 </div>

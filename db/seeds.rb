@@ -50,7 +50,6 @@ User.create!( firstname: "Arms",
               admin: true,status: "Active",
               activated: true,
               activated_at: Time.zone.now)
-
 20.times do |n|
 name  = Faker::Name.first_name
 lastname = Faker::Name.last_name
@@ -88,7 +87,7 @@ MasterSetup.create!(
 
 landline=Faker::Number.number(10)
 mobile=Faker::Number.number(10)
-Department.create!(name: "Municipal Manager's Office",
+Department.create!(name: "Office of the Municipal Manager",
   tel_no: landline,
   fax_no:mobile)
 
@@ -115,12 +114,12 @@ Department.create!(name: "Department in the MM's Office",
   tel_no:landline,
   fax_no: mobile)
 
-Subdepartment.create!(name: "Municipal Manager's Office", department_id: "1")
-
-Subdepartment.create!(name: "Internal Audit", department_id: "7",)
-Subdepartment.create!(name: "Performance Management Unit", department_id: "7")
-Subdepartment.create!(name: "Legal Services", department_id: "7")
-Subdepartment.create!(name: "Forestry", department_id: "7")
+Subdepartment.create!(name: "Municipal Manager", department_id: "1")
+Subdepartment.create!(name: "Internal Audit", department_id: "1",)
+Subdepartment.create!(name: "Performance Management Unit", department_id: "1")
+Subdepartment.create!(name: "Risk Management", department_id: "1")
+Subdepartment.create!(name: "Legal Services", department_id: "1")
+Subdepartment.create!(name: "Forestry", department_id: "1")
 
 Subdepartment.create!(name: "Budget And Financial Reporting", department_id: "2")
 Subdepartment.create!(name: "Expenditure", department_id: "2")
@@ -510,9 +509,9 @@ while $i < $num  do
   SdbipTimePeriod.create!(period: period,primary_reminder: primary_reminder,primary_closure: primary_closure, secondary_reminder: secondary_reminder,secondary_closure: secondary_closure)
    $i +=1
 end
-  CSV.foreach('db/data/capital.csv', headers: true, :col_sep => ',') do |row|
-    CapitalProject.create! row.to_hash
-  end
-  CSV.foreach('db/data/sdbips.csv', headers: true, :col_sep => ',') do |row|
-    DepartmentalSdbip.create! row.to_hash
-  end
+  # CSV.foreach('db/data/capital.csv', headers: true, :col_sep => ',') do |row|
+  #   CapitalProject.create! row.to_hash
+  # end
+  # CSV.foreach('db/data/sdbips.csv', headers: true, :col_sep => ',') do |row|
+  #   DepartmentalSdbip.create! row.to_hash
+  # end

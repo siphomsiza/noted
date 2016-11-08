@@ -6,9 +6,8 @@ class Area < ActiveRecord::Base
 	accepts_nested_attributes_for :wards, allow_destroy: true
 	validates_presence_of :name
 	validates_uniqueness_of :name
-	validates :name,format: { with: /\A[a-zA-Z',. ]+\z/ }
+	validates :name,format: { with: /\A[a-zA-Z0-9',. ]+\z/ }
   delegate :name, :to => :departmental_sdbips, :prefix => true
   delegate :name, :to => :capital_projects, :prefix => true
   delegate :name, :to => :top_layer_sdbips, :prefix => true
-	
 end

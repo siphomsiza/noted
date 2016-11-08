@@ -1,0 +1,42 @@
+<% provide(:title, 'Report Users') %>
+<script>
+$(function() {
+	//highlight the current nav
+	$("#applicationmanifest ul.navbar-nav li:eq(5)").addClass('active');
+}); //jQuery is loaded
+</script>
+<article class="users">
+  <%= render 'layouts/municipality' %>
+  <%= render 'user_navigation' %>
+  <section class="media">
+	  <div class="media-body">
+
+      <article>
+
+      	<div class="tabbable tabs third-level-navs">
+      		<ul class="nav nav-tabs">
+      			<li class="active"><a href="#user_details" data-toggle="tab">User Details</a></li>
+      			<li class="disabled"><a href="#users_licenses" data-toggle="tab">Users Licences</a></li>
+      			<li><a href="#users_details_log" data-toggle="tab">Users Details Log</a></li>
+      			<li><a href="#login_attempts_log" data-toggle="tab">Login Attempts Log</a></li>
+            <li><a href="#super_user_activity_log" data-toggle="tab">Super User Activity Log</a></li>
+      			<li><a href="#users_activity_log" data-toggle="tab">User Activity Log</a></li>
+      			<li><a href="#password_status" data-toggle="tab">Password Status</a></li>
+      		</ul><!-- nav nav-tabs -->
+      	</div><!-- tabbable tabs -->
+
+      	<section class="tab-content">
+            <%= render partial: 'user_details', :locals => {:users => @users } %>
+            <%= render 'users_licenses' %>
+            <%= render partial: 'users_details_log', :locals => { :users => @users } %>
+            <%= render partial: 'login_attempts_log',:locals => { :users => @users,:user_login_attempts =>@user_login_attempts } %>
+            <%= render partial: 'super_user_activity_log', :locals => { :super_user_activities => @super_user_activities } %>
+            <%= render partial: 'users_activity_log', :locals => { :user_activities => @users_activities } %>
+            <%= render 'password_status' %>
+      	</section><!-- tab-content -->
+
+      </article><!-- users -->
+
+	  </div><!-- media-body -->
+	</section><!-- media -->
+</article><!-- users -->

@@ -1,0 +1,18 @@
+<% provide(:title, 'Add User') %>
+<script>
+$(function() {
+	//highlight the current nav
+	$("#applicationmanifest ul.navbar-nav li:eq(5)").addClass('active');
+}); //jQuery is loaded
+</script>
+<article class="users">
+  <%= render 'layouts/municipality' %>
+
+  <%= render 'user_navigation' %>
+
+  <section class="tab-content">
+
+    <%= render 'form' %>
+
+  </section><!-- tab-content -->
+</article><!-- users -->

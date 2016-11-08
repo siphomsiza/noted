@@ -1,6 +1,6 @@
-<div class="tab-pane active" id="active_users">
+<div class="tab-pane fade in active" id="active_users">
     <div class="table-responsive table-bordered">
-        <table class="table">
+        <table class="table display" id="active-users">
             <thead>
                 <tr>
                     <th>Avatar</th>
@@ -28,7 +28,6 @@
                         <%= link_to edit_active_user_path(active_user),remote: true,'data-target' => "#edit-active-user-modal", 'data-toggle' => 'modal', class: "btn btn-sm", :title=>"Click to Edit user details" do %>
                         <span class="glyphicon glyphicon-edit"></span>&nbsp;Edit Details
                         <% end %>
-
                         <% if current_user.admin? && !current_user?(active_user) && !active_user.role.blank? %>
                         |
                         <%= link_to grant_user_access_path(active_user.role.id),remote: true,'data-target' => "#active-user-access-modal", 'data-toggle' => 'modal', class: "btn btn-sm", :title=>"Click to edit user access" do %>
@@ -64,11 +63,10 @@
                 <% end %>
             </tbody>
         </table>
-        <%= will_paginate active_users %>
+        <!-- <%= will_paginate active_users, :param_name => 'page', params: {active_tab: 'active_users'} %> -->
     </div>
     <!-- table-responsive -->
 </div>
-
 <div class="modal fade" id="reset-password" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">

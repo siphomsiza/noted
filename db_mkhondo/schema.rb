@@ -139,10 +139,14 @@ ActiveRecord::Schema.define(version: 20160826103737) do
     t.string   "baseline"
     t.string   "budget"
     t.string   "target"
-    t.string   "first_quarter_target"
-    t.string   "second_quarter_target"
-    t.string   "third_quarter_target"
-    t.string   "fourth_quarter_target"
+    t.decimal  "first_quarter_target",            default: 0.0
+    t.decimal  "second_quarter_target",           default: 0.0
+    t.decimal  "third_quarter_target",            default: 0.0
+    t.decimal  "fourth_quarter_target",           default: 0.0
+    t.decimal  "first_quarter_actual",            default: 0.0
+    t.decimal  "second_quarter_actual",           default: 0.0
+    t.decimal  "third_quarter_actual",            default: 0.0
+    t.decimal  "fourth_quarter_actual",           default: 0.0
     t.decimal  "annual_target",                   default: 0.0
     t.decimal  "revised_target"
     t.text     "performance_comments"
@@ -156,8 +160,8 @@ ActiveRecord::Schema.define(version: 20160826103737) do
     t.integer  "kpi_type_id"
     t.string   "impact"
     t.integer  "provincial_strategic_outcome_id"
-    t.integer  "ward_id"
-    t.integer  "area_id"
+    t.string   "wards"
+    t.string   "areas"
     t.text     "past_year_performance"
     t.integer  "reporting_category_id"
     t.string   "top_layer_kpi_ref"
@@ -166,7 +170,6 @@ ActiveRecord::Schema.define(version: 20160826103737) do
     t.datetime "updated_at",                                                       null: false
   end
 
-  add_index "departmental_kpis", ["area_id"], name: "index_departmental_kpis_on_area_id", using: :btree
   add_index "departmental_kpis", ["department_id"], name: "index_departmental_kpis_on_department_id", using: :btree
   add_index "departmental_kpis", ["kpa_id"], name: "index_departmental_kpis_on_kpa_id", using: :btree
   add_index "departmental_kpis", ["kpi_calculation_type_id"], name: "index_departmental_kpis_on_kpi_calculation_type_id", using: :btree
@@ -185,7 +188,6 @@ ActiveRecord::Schema.define(version: 20160826103737) do
   add_index "departmental_kpis", ["risk_rating_id"], name: "index_departmental_kpis_on_risk_rating_id", using: :btree
   add_index "departmental_kpis", ["strategic_objective_id"], name: "index_departmental_kpis_on_strategic_objective_id", using: :btree
   add_index "departmental_kpis", ["subdepartment_id"], name: "index_departmental_kpis_on_subdepartment_id", using: :btree
-  add_index "departmental_kpis", ["ward_id"], name: "index_departmental_kpis_on_ward_id", using: :btree
 
   create_table "departmental_sdbips", force: :cascade do |t|
     t.integer  "department_id",                                                    null: false
@@ -196,6 +198,7 @@ ActiveRecord::Schema.define(version: 20160826103737) do
     t.integer  "predetermined_objective_id"
     t.integer  "kpi_owner_id"
     t.text     "kpi"
+    t.text     "project_name"
     t.string   "unit_of_measurement"
     t.integer  "mscore_classification_id"
     t.string   "idp_ref"
@@ -207,15 +210,24 @@ ActiveRecord::Schema.define(version: 20160826103737) do
     t.string   "baseline"
     t.string   "budget"
     t.string   "target"
-    t.string   "first_quarter_target"
-    t.string   "second_quarter_target"
-    t.string   "third_quarter_target"
-    t.string   "fourth_quarter_target"
+    t.decimal  "first_quarter_target",            default: 0.0
+    t.decimal  "second_quarter_target",           default: 0.0
+    t.decimal  "third_quarter_target",            default: 0.0
+    t.decimal  "fourth_quarter_target",           default: 0.0
+    t.decimal  "first_quarter_actual",            default: 0.0
+    t.decimal  "second_quarter_actual",           default: 0.0
+    t.decimal  "third_quarter_actual",            default: 0.0
+    t.decimal  "fourth_quarter_actual",           default: 0.0
+    t.string   "first_quarter_results",           default: "KPI Not Yet Measured"
+    t.string   "second_quarter_results",          default: "KPI Not Yet Measured"
+    t.string   "third_quarter_results",           default: "KPI Not Yet Measured"
+    t.string   "fourth_quarter_results",          default: "KPI Not Yet Measured"
     t.decimal  "annual_target",                   default: 0.0
     t.decimal  "revised_target"
     t.text     "performance_comments"
     t.text     "corrective_measures"
     t.string   "performance_standard",            default: "KPI Not Yet Measured", null: false
+    t.string   "risk"
     t.integer  "risk_rating_id"
     t.integer  "kpa_id"
     t.string   "kpa_name"
@@ -224,8 +236,8 @@ ActiveRecord::Schema.define(version: 20160826103737) do
     t.integer  "kpi_type_id"
     t.string   "impact"
     t.integer  "provincial_strategic_outcome_id"
-    t.integer  "ward_id"
-    t.integer  "area_id"
+    t.string   "wards"
+    t.string   "areas"
     t.text     "past_year_performance"
     t.integer  "reporting_category_id"
     t.string   "top_layer_kpi_ref"
@@ -234,7 +246,6 @@ ActiveRecord::Schema.define(version: 20160826103737) do
     t.datetime "updated_at",                                                       null: false
   end
 
-  add_index "departmental_sdbips", ["area_id"], name: "index_departmental_sdbips_on_area_id", using: :btree
   add_index "departmental_sdbips", ["department_id"], name: "index_departmental_sdbips_on_department_id", using: :btree
   add_index "departmental_sdbips", ["kpa_id"], name: "index_departmental_sdbips_on_kpa_id", using: :btree
   add_index "departmental_sdbips", ["kpi_calculation_type_id"], name: "index_departmental_sdbips_on_kpi_calculation_type_id", using: :btree
@@ -253,7 +264,6 @@ ActiveRecord::Schema.define(version: 20160826103737) do
   add_index "departmental_sdbips", ["risk_rating_id"], name: "index_departmental_sdbips_on_risk_rating_id", using: :btree
   add_index "departmental_sdbips", ["strategic_objective_id"], name: "index_departmental_sdbips_on_strategic_objective_id", using: :btree
   add_index "departmental_sdbips", ["subdepartment_id"], name: "index_departmental_sdbips_on_subdepartment_id", using: :btree
-  add_index "departmental_sdbips", ["ward_id"], name: "index_departmental_sdbips_on_ward_id", using: :btree
 
   create_table "departments", force: :cascade do |t|
     t.string   "name",       null: false
