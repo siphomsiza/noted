@@ -3,6 +3,8 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
 
 # ...
+  auto_session_timeout 5.minutes
+  before_timedout_action
   include PublicActivity::StoreController
   hide_action :current_user
   protect_from_forgery with: :exception
@@ -32,6 +34,11 @@ class ApplicationController < ActionController::Base
   def admin_user
     #@admin_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
     #@admin_user = @admin_user.admin
+  end
+  protected
+  #override before_timedout
+  def before_timedout
+    #your custom code here
   end
 
 end

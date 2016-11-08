@@ -1,36 +1,80 @@
-$(document).ready(function () {
+$(document).ready(function(){
 window.setTimeout(function() {
     $(".alert").fadeTo(1500, 0).slideUp(500, function(){
         $(this).remove();
     });
   }, 5000);
 });
+$(document).ready(function(){
+  $(".first-quarter-target").hide();
+  $(".second-quarter-target").hide();
+  $(".third-quarter-target").hide();
+  $(".fourth-quarter-target").hide();
+  $(".kpi-type").hide();
+  $(".kpi-target-type").hide();
+  $(".idf-ref").hide();
+  $(".mscore-classification").hide();
+  $(".national-outcome").hide();
+  $(".strategic-objectives").hide();
+  $(".baseline").hide();
+  $(".performance-standard").hide();
+  $(".risk-rating").hide();
+  $(".kpa").hide();
+  $(".kpi-concept").hide();
+  $(".impact").hide();
+  $(".provincial-strategic-outcome").hide();
+  $(".area").hide();
+  $(".ward").hide();
+  $(".past-year-performance").hide();
+  $(".top-layer-ref").hide();
+  $(".created-date").hide();
+  $(".budget").hide();
+  $(".idp-ref").hide();
+  $(".updated-date").hide();
+  $(".annual-target").hide();
+  $(".revised-target").hide();
+
+  $(function () {
+    var chk = $("#grpChkBox input:checkbox");
+    var tbl = $("#sdbips-table");
+    chk.prop('checked', false);
+    $( "#grpChkBox input:checkbox" ).each(function(){
+      if($(this).hasClass("default-view")){
+        $(this).prop('checked',true);
+      }
+    });
+    chk.click(function () {
+      var colToHide = tbl.find("." + $(this).attr("name"));
+      $(colToHide).toggle();
+    });
+  });
+});
 
 $(document).ready(function(){
   $('input[type="checkbox"]').click(function(){
-        if($('#disablity_checkbox').prop("checked") == true){
+        if($('#disablity_checkbox').prop("checked") === true){
                   $('#disability_description_fields').show();
                 }
-                if($('#disablity_checkbox').prop("checked") == false){
+                if($('#disablity_checkbox').prop("checked") === false){
                   $('#disability_description_fields').hide();
                 }
-                if($('#kpi_owner_checkbox').prop("checked") == true){
+                if($('#kpi_owner_checkbox').prop("checked") === true){
                     $('#kpi_owner_select').show();
                 }
-                if($('#kpi_owner_checkbox').prop("checked") == false){
+                if($('#kpi_owner_checkbox').prop("checked") === false){
                   $("#kpi_owner_select").hide();
                 }
-                if($('#subdepartmental_administrator_checkbox').prop("checked") == true){
+                if($('#subdepartmental_administrator_checkbox').prop("checked") === true){
                     $('#subdepartment_select').show();
                 }
-                if($('#subdepartmental_administrator_checkbox').prop("checked") == false){
+                if($('#subdepartmental_administrator_checkbox').prop("checked") === false){
                   $("#subdepartment_select").hide();
 
                 }
-                if($('#departmental_administrator_checkbox').prop("checked") == true){
+                if($('#departmental_administrator_checkbox').prop("checked") === true){
                     $("#department_select").show();
                 }
-                if($('#departmental_administrator_checkbox').prop("checked") == false && $('#kpi_owner_checkbox').prop("checked") == false){
+                if($('#departmental_administrator_checkbox').prop("checked") === false && $('#kpi_owner_checkbox').prop("checked") === false){
                   $("#department_select").hide();
                 }
             });
@@ -68,8 +112,8 @@ $(document).ready(function(){
     $(function() {
 
     //activate schedule tabs
-    var hash = window.location.hash;
-    hash && $('ul.nav a[href="' + hash + '"]').tab('show');
+    // var hash = window.location.hash;
+    // hash && $('ul.nav a[href="' + hash + '"]').tab('show');
 
     //highlight the current nav
     $("#introduction a:contains('INTRODUCTION')").parent().addClass('active');

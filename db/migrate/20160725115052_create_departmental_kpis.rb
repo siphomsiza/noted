@@ -20,10 +20,14 @@ class CreateDepartmentalKpis < ActiveRecord::Migration
       t.string :baseline
       t.string :budget
       t.string  :target
-      t.string :first_quarter_target
-      t.string :second_quarter_target
-      t.string :third_quarter_target
-      t.string :fourth_quarter_target
+      t.decimal :first_quarter_target, default: 0.00
+      t.decimal :second_quarter_target, default: 0.00
+      t.decimal :third_quarter_target, default: 0.00
+      t.decimal :fourth_quarter_target, default: 0.00
+      t.decimal :first_quarter_actual, default: 0.00
+      t.decimal :second_quarter_actual, default: 0.00
+      t.decimal :third_quarter_actual, default: 0.00
+      t.decimal :fourth_quarter_actual, default: 0.00
       t.decimal :annual_target, default: 0.00
       t.decimal :revised_target
       t.text    :performance_comments
@@ -37,8 +41,8 @@ class CreateDepartmentalKpis < ActiveRecord::Migration
       t.integer :kpi_type_id
       t.string :impact
       t.integer :provincial_strategic_outcome_id
-      t.integer :ward_id
-      t.integer :area_id
+      t.string :wards
+      t.string :areas
       t.text :past_year_performance
       t.string :performance_standard, default: "KPI Not Yet Measured", null: false
       t.text :performance_comments

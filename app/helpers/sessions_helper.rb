@@ -34,7 +34,7 @@ module SessionsHelper
         ActiveRecord::Base.establish_connection(:production) if Rails.env.production?
         ActiveRecord::Base.establish_connection(:development) if Rails.env.development?
         $logged_in_database = :production if Rails.env.production?
-        $logged_in_database = :development if Rails.env.development
+        $logged_in_database = :development if Rails.env.development?
         $municipality_info = MasterSetup.first
     end
     if company_code == "SAK001"

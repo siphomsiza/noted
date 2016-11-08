@@ -1,4 +1,4 @@
-<div class="modal-dialog">
+<div class="modal-dialog modal-lg">
     <div class="modal-content">
         <div class="modal-header">
             <h3><%= "Editing #{@departmental_sdbip.kpi}" %></h3>
@@ -128,13 +128,13 @@
                                                                                                                                                                                                                             <br>
                                                                                                                                                                                                                             <%= f.select :provincial_strategic_outcome_id, ProvincialStrategicOutcome.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select Provincial Strategic Outcome"}, class: "form-control" %>
 
-                                                                                                                                                                                                                                <%= f.label :ward_id, "Ward" %>
+                                                                                                                                                                                                                                <%= f.label :wards, "Ward" %>
                                                                                                                                                                                                                                     <br>
-                                                                                                                                                                                                                                    <%= f.select :ward_id, Ward.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select Ward"}, class: "form-control" %>
+                                                                                                                                                                                                                                    <%= f.select :wards, Ward.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select Ward"}, class: "form-control" %>
 
-                                                                                                                                                                                                                                        <%= f.label :area_id, "Area" %>
+                                                                                                                                                                                                                                        <%= f.label :areas, "Area" %>
                                                                                                                                                                                                                                             <br>
-                                                                                                                                                                                                                                            <%= f.select :area_id, Area.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select Area"}, class: "form-control" %>
+                                                                                                                                                                                                                                            <%= f.select :areas, Area.all.collect {|x| [x.name, x.id]}, {:include_blank => "Select Area"}, class: "form-control" %>
                                                                                                                                                                                                                                                 <%= f.label :performance_standard, "Performance Standard" %>
                                                                                                                                                                                                                                                     <br>
                                                                                                                                                                                                                                                     <%= f.select :performance_standard, options_for_select(["KPI Not Yet Measured","KPI Not Met", "KPI Almost Met", "KPI Met", "KPI Well Met", "KPI Extremely Well Met"]),

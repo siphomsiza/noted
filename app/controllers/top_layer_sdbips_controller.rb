@@ -16,10 +16,8 @@ class TopLayerSdbipsController < ApplicationController
     flash[:danger] = "received Exception #{e.message}"
   end
     @top_layer_sdbip = TopLayerSdbip.new
-    @top_layer_sdbips = TopLayerSdbip.all
-    if !@top_layer_sdbips.blank?
-      @top_layer_sdbips =  @top_layer_sdbips.paginate(page: params[:page],per_page: 10)
-    end
+    @top_layer_sdbips = TopLayerSdbip.paginate(page: params[:page],per_page: 10)
+    
   end
 
   # GET /top_layer_sdbips/1

@@ -1,4 +1,4 @@
-<div class="modal-dialog">
+<div class="modal-dialog modal-lg">
 <div class="modal-content">
 <div class="modal-header">
   <h3><%= "Editing #{@user.firstname}" %></h3>
@@ -240,13 +240,7 @@
     </fieldset>
   <section class="row">
       <div class="col-lg-12">
-        <% if (current_user.admin? || current_user.super_admin?) && !current_user?(@user) && (!@user.admin? || !@user.super_admin?) %>
-        <%= link_to controller: "users", action: "terminate", id: @user.id, method: "get", class: "btn btn-mini" do%>
-        <span class = "glyphicon glyphicon-remove-sign"></span>Terminate <% end %>&nbsp;|&nbsp;
-        <%= link_to controller: "users", action: "lock_user", id: @user.id, method: "get", class: "btn btn-mini" do%>
-        <span class = "glyphicon glyphicon-lock"></span>Lock
-        <% end %>
-        <% end %>
+        <%= render 'account_options' %>
         <%= f.submit "Save",class: 'btn col-lg-2 pull-right'%>
     </div>
     </section><!-- row -->

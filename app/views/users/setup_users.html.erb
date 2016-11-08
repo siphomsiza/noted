@@ -1,0 +1,36 @@
+<% provide(:title, 'Setup Users') %>
+<script>
+$(function() {
+	//highlight the current nav
+	$("#applicationmanifest ul.navbar-nav li:eq(5)").addClass('active');
+}); //jQuery is loaded
+</script>
+<article class="users">
+  <%= render 'layouts/municipality' %>
+  <%= render 'user_navigation' %>
+  <section class="media">
+    <div class="media-body">
+
+      <article>
+
+        <div class="tabbable tabs third-level-navs">
+          <ul class="nav nav-tabs">
+            <li class="active"><a href="#user_access" data-toggle="tab">User Access</a></li>
+            <li><a href="#admin_users" data-toggle="tab">Admin Users</a></li>
+            <li><a href="#security_settings" data-toggle="tab">Security Settings</a></li>
+          </ul><!-- nav nav-tabs -->
+        </div><!-- tabbable tabs -->
+
+        <section class="tab-content">
+
+          <%= render partial: 'user_access', :locals => {:users => @users} %>
+          <%= render partial: 'admin_users', :locals => {:users => @users} %>
+          <%= render 'security_settings' %>
+
+        </section><!-- tab-content -->
+
+      </article><!-- users -->
+
+    </div><!-- media-body -->
+  </section><!-- media -->
+</article><!-- users -->
