@@ -8,7 +8,7 @@ $(function() {
 <br/>
 <div class="row">
 <div class="col-lg-12">
-	<%= render 'layouts/municipality' %></article>
+	<%= render 'layouts/municipality' %>
 		<ul class="nav nav-pills nav-justified">
 		<li><%= link_to "Departmental SDBIP", departmental_sdbips_path %></li>
 		<% if current_user.admin? || current_user.super_admin? %>
@@ -42,7 +42,7 @@ $(function() {
 								<span class="glyphicon glyphicon-plus-sign"></span>&nbsp; Add Top Layer
 							</a>
 						</li>
-						<% if current_user.admin? %>
+						<% if current_user.admin? || current_user.super_admin? %>
 						<li class="pull-right">
 							<button class="btn btn-sm  pull-right" data-toggle="modal" data-target="#top_layerModal" title="Click to upload Top Layer SDBIPs.">
 								<span class="glyphicon glyphicon-upload"></span>&nbsp;Import Top Layer SDBIP
@@ -54,44 +54,29 @@ $(function() {
 
 				<div id = "myTabContent" class = "tab-content">
 					<div class = "tab-pane active fade in" id = "view_top_layer_sdbips">
-						<% if @top_layer_sdbips.blank? && TopLayerSdbip.blank? %>
-						<p> There are no Top Layer SDBIPs currently in the system. <p>
-						<% elsif @top_layer_sdbips.blank? && !TopLayerSdbip.blank? %>
-						<p> You currently have no Top Layer SDBIPs. </p>
-						<% elsif !@top_layer_sdbips.blank? %>
+						<br/>
 						<div class="table-responsive">
 							<%= render partial: 'top_layer_sdbips', :locals=>{:top_layer_sdbips => @top_layer_sdbips } %>
 							<%= will_paginate @top_layer_sdbips %>
 						</div>
-						<% end %>
 					</div>
 
 					<div class = "tab-pane fade" id = "edit_top_layer_sdbips">
 
-									<% if @top_layer_sdbips.blank? && TopLayerSdbip.blank? %>
-									<p> There are no Top Layer SDBIPs currently in the system to edit. <p>
-									<% elsif @top_layer_sdbips.blank? && !TopLayerSdbip.blank? %>
-									<p> You currently have no Top Layer SDBIPs to edit. </p>
-									<% elsif !@top_layer_sdbips.blank? %>
+									<br/>
 									<div class="table-responsive">
 										<%= render partial: 'update_top_layer_sdbip', :locals=>{:top_layer_sdbips => @top_layer_sdbips} %>
 										<%= will_paginate @top_layer_sdbips %>
 									</div>
-									<% end %>
 					</div>
 
 					<div class = "tab-pane fade" id = "manage_top_layer_sdbips">
 
-									<% if @top_layer_sdbips.blank? && TopLayerSdbip.blank? %>
-									<p> There are no Top Layer SDBIPs currently in the system to update. <p>
-									<% elsif @top_layer_sdbips.blank? && !TopLayerSdbip.blank? %>
-									<p> You currently have no Top Layer SDBIPs to update. </p>
-									<% elsif !@top_layer_sdbips.blank? %>
+									<br/>
 									<div class="table-responsive">
 										<%= render partial: 'edit_top_layer_sdbip', :locals=>{:top_layer_sdbips => @top_layer_sdbips} %>
 										<%= will_paginate @top_layer_sdbips %>
 									</div>
-									<% end %>
 					</div>
 
 					<div class = "tab-pane fade" id = "new-top-layer-sdbip">
@@ -102,13 +87,9 @@ $(function() {
 		</div>
 </div>
 </div>
-
-</div>
-</div>
-<div class="col col-lg-12">
 	<!-- Import Top Layer SDBIP modal -->
 	<div class="modal fade" id="top_layerModal" tabindex="-1" role="dialog" aria-labelledby="top_layerModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
+		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<%= form_tag import_top_layer_sdbips_path, accept: 'text/csv,text/xls,text/xlsx,text/ods', multipart: true do %>
 					<div class="modal-header">
@@ -137,4 +118,3 @@ $(function() {
 			</div><!-- /.modal-content -->
 		</div><!-- /.modal -->
 	</div>
-</div>

@@ -222,6 +222,18 @@
       </div>
     </td>
   </tr>
+  <tr>
+    <th>Job Title(s)</th><td></td>
+    <td>
+      <%= link_to new_jobtitle_path,remote: true,'data-target' => "#job-title-modal", 'data-toggle' => 'modal', class: "btn btn-sm" do %>
+        <span class="glyphicon glyphicon-wrench"></span>&nbsp;Configure
+      <% end %>
+
+      <div id="job-title-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+
+      </div>
+    </td>
+  </tr>
 
 </table>
 </div>

@@ -16,10 +16,8 @@ class RevenueBySourcesController < ApplicationController
     flash[:danger] = "received Exception #{e.message}"
   end
     @revenue_by_source = RevenueBySource.new
-    @revenue_by_sources = RevenueBySource.all
-    if !@revenue_by_sources.blank?
-      @revenue_by_sources =  @revenue_by_sources.paginate(page: params[:page],per_page: 10)
-    end
+    @revenue_by_sources = RevenueBySource.paginate(page: params[:page],per_page: 10)
+    
   end
 
   # GET /revenue_by_sources/1

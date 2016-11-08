@@ -29,15 +29,15 @@
                 <td><%= kpi_result.performance_comments %></td>
                 <td><%= kpi_result.corrective_measures %></td>
                 <td>
-                    <%= kpi_result.departmental_sdbip_source_of_evidence %>
+                    <%= kpi_result.departmental_sdbip.source_of_evidence %>
                     <br/>
                     <% kpi_result.attachments.each do |attachment| %>
                     <%= link_to attachment.poe_file_name,attachment.poe.url, target: '_blank' %>
                     <% end %>
                 </td>
                 <td>
-                    <%= kpi_result.user_firstname %>&nbsp;
-                    <%= kpi_result.user_surname %>&nbsp;on
+                    <%= kpi_result.user.firstname if kpi_result.user.present? %>&nbsp;
+                    <%= kpi_result.user.surname if kpi_result.user.present? %>&nbsp;on
                     <%= kpi_result.updated_at.strftime("%d-%b-%Y") %>
                 </td>
                 <td>
@@ -72,15 +72,15 @@
                 <td><%= kpi_result.performance_comments %></td>
                 <td><%= kpi_result.corrective_measures %></td>
                 <td>
-                    <%= kpi_result.departmental_sdbip_source_of_evidence %>
+                    <%= kpi_result.departmental_sdbip.source_of_evidence %>
                     <br/>
                     <% kpi_result.attachments.each do |attachment| %>
                     <%= link_to attachment.poe_file_name,attachment.poe.url, target: '_blank' %>
                     <% end %>
                 </td>
                 <td>
-                    <%= kpi_result.user_firstname %>&nbsp;
-                    <%= kpi_result.user_surname %>&nbsp;on
+                    <%= kpi_result.user.firstname if kpi_result.user.present? %>&nbsp;
+                    <%= kpi_result.user.surname if kpi_result.user.present? %>&nbsp;on
                     <%= kpi_result.updated_at.strftime("%d-%b-%Y") %>
                 </td>
                 <td>
@@ -114,15 +114,15 @@
                 <td><%= kpi_result.performance_comments %></td>
                 <td><%= kpi_result.corrective_measures %></td>
                 <td>
-                    <%= kpi_result.departmental_sdbip_source_of_evidence %>
+                    <%= kpi_result.departmental_sdbip.source_of_evidence %>
                     <br/>
                     <% kpi_result.attachments.each do |attachment| %>
                     <%= link_to attachment.poe_file_name,attachment.poe.url, target: '_blank' %>
                     <% end %>
                 </td>
                 <td>
-                    <%= kpi_result.user_firstname %>&nbsp;
-                    <%= kpi_result.user_surname %>&nbsp;on
+                    <%= kpi_result.user.firstname if kpi_result.user.present? %>&nbsp;
+                    <%= kpi_result.user.surname if kpi_result.user.present? %>&nbsp;on
                     <%= kpi_result.updated_at.strftime("%d-%b-%Y") %>
                 </td>
                 <td>
@@ -156,15 +156,15 @@
                 <td><%= kpi_result.performance_comments %></td>
                 <td><%= kpi_result.corrective_measures %></td>
                 <td>
-                    <%= kpi_result.departmental_sdbip_source_of_evidence %>
+                    <%= kpi_result.departmental_sdbip.source_of_evidence %>
                     <br/>
                     <% kpi_result.attachments.each do |attachment| %>
                     <%= link_to attachment.poe_file_name,attachment.poe.url, target: '_blank' %>
                     <% end %>
                 </td>
                 <td>
-                    <%= kpi_result.user_firstname %>&nbsp;
-                    <%= kpi_result.user_surname %>&nbsp;on
+                    <%= kpi_result.user.firstname if kpi_result.user.present? %>&nbsp;
+                    <%= kpi_result.user.surname if kpi_result.user.present? %>&nbsp;on
                     <%= kpi_result.updated_at.strftime("%d-%b-%Y") %>
                 </td>
                 <td>
@@ -198,15 +198,15 @@
                 <td><%= kpi_result.performance_comments %></td>
                 <td><%= kpi_result.corrective_measures %></td>
                 <td>
-                    <%= kpi_result.departmental_sdbip_source_of_evidence %>
+                    <%= kpi_result.departmental_sdbip.source_of_evidence %>
                     <br/>
                     <% kpi_result.attachments.each do |attachment| %>
                     <%= link_to attachment.poe_file_name,attachment.poe.url, target: '_blank' %>
                     <% end %>
                 </td>
                 <td>
-                    <%= kpi_result.user_firstname %>&nbsp;
-                    <%= kpi_result.user_surname %>&nbsp;on
+                    <%= kpi_result.user.firstname if kpi_result.user.present? %>&nbsp;
+                    <%= kpi_result.user.surname if kpi_result.user.present? %>&nbsp;on
                     <%= kpi_result.updated_at.strftime("%d-%b-%Y") %>
                 </td>
                 <td>
@@ -240,15 +240,15 @@
                 <td><%= kpi_result.performance_comments %></td>
                 <td><%= kpi_result.corrective_measures %></td>
                 <td>
-                    <%= kpi_result.departmental_sdbip_source_of_evidence %>
+                    <%= kpi_result.departmental_sdbip.source_of_evidence %>
                     <br/>
                     <% kpi_result.attachments.each do |attachment| %>
                     <%= link_to attachment.poe_file_name,attachment.poe.url, target: '_blank' %>
                     <% end %>
                 </td>
                 <td>
-                    <%= kpi_result.user_firstname %>&nbsp;
-                    <%= kpi_result.user_surname %>&nbsp;on
+                    <%= kpi_result.user.firstname if kpi_result.user.present? %>&nbsp;
+                    <%= kpi_result.user.surname if kpi_result.user.present? %>&nbsp;on
                     <%= kpi_result.updated_at.strftime("%d-%b-%Y") %>
                 </td>
                 <td>
@@ -282,15 +282,15 @@
                 <td><%= kpi_result.performance_comments %></td>
                 <td><%= kpi_result.corrective_measures %></td>
                 <td>
-                    <%= kpi_result.departmental_sdbip_source_of_evidence %>
+                    <%= kpi_result.departmental_sdbip.source_of_evidence %>
                     <br/>
                     <% kpi_result.attachments.each do |attachment| %>
                     <%= link_to attachment.poe_file_name,attachment.poe.url, target: '_blank' %>
                     <% end %>
                 </td>
                 <td>
-                    <%= kpi_result.user_firstname %>&nbsp;
-                    <%= kpi_result.user_surname %>&nbsp;on
+                    <%= kpi_result.user.firstname if kpi_result.user.present? %>&nbsp;
+                    <%= kpi_result.user.surname if kpi_result.user.present? %>&nbsp;on
                     <%= kpi_result.updated_at.strftime("%d-%b-%Y") %>
                 </td>
                 <td><%= render "assurance_results" %></td>
@@ -322,15 +322,15 @@
                 <td><%= kpi_result.performance_comments %></td>
                 <td><%= kpi_result.corrective_measures %></td>
                 <td>
-                    <%= kpi_result.departmental_sdbip_source_of_evidence %>
+                    <%= kpi_result.departmental_sdbip.source_of_evidence %>
                     <br/>
                     <% kpi_result.attachments.each do |attachment| %>
                     <%= link_to attachment.poe_file_name,attachment.poe.url, target: '_blank' %>
                     <% end %>
                 </td>
                 <td>
-                    <%= kpi_result.user_firstname %>&nbsp;
-                    <%= kpi_result.user_surname %>&nbsp;on
+                    <%= kpi_result.user.firstname if kpi_result.user.present? %>&nbsp;
+                    <%= kpi_result.user.surname if kpi_result.user.present? %>&nbsp;on
                     <%= kpi_result.updated_at.strftime("%d-%b-%Y") %>
                 </td>
                 <td><%= render "assurance_results" %></td>
@@ -362,15 +362,15 @@
                 <td><%= kpi_result.performance_comments %></td>
                 <td><%= kpi_result.corrective_measures %></td>
                 <td>
-                    <%= kpi_result.departmental_sdbip_source_of_evidence %>
+                    <%= kpi_result.departmental_sdbip.source_of_evidence %>
                     <br/>
                     <% kpi_result.attachments.each do |attachment| %>
                     <%= link_to attachment.poe_file_name,attachment.poe.url, target: '_blank' %>
                     <% end %>
                 </td>
                 <td>
-                    <%= kpi_result.user_firstname %>&nbsp;
-                    <%= kpi_result.user_surname %>&nbsp;on
+                    <%= kpi_result.user.firstname if kpi_result.user.present? %>&nbsp;
+                    <%= kpi_result.user.surname if kpi_result.user.present? %>&nbsp;on
                     <%= kpi_result.updated_at.strftime("%d-%b-%Y") %>
                 </td>
                 <td><%= render "assurance_results" %></td>
@@ -402,15 +402,15 @@
                 <td><%= kpi_result.performance_comments %></td>
                 <td><%= kpi_result.corrective_measures %></td>
                 <td>
-                    <%= kpi_result.departmental_sdbip_source_of_evidence %>
+                    <%= kpi_result.departmental_sdbip.source_of_evidence %>
                     <br/>
                     <% kpi_result.attachments.each do |attachment| %>
                     <%= link_to attachment.poe_file_name,attachment.poe.url, target: '_blank' %>
                     <% end %>
                 </td>
                 <td>
-                    <%= kpi_result.user_firstname %>&nbsp;
-                    <%= kpi_result.user_surname %>&nbsp;on
+                    <%= kpi_result.user.firstname if kpi_result.user.present? %>&nbsp;
+                    <%= kpi_result.user.surname if kpi_result.user.present? %>&nbsp;on
                     <%= kpi_result.updated_at.strftime("%d-%b-%Y") %>
                 </td>
                 <td><%= render "assurance_results" %></td>
@@ -442,15 +442,15 @@
                 <td><%= kpi_result.performance_comments %></td>
                 <td><%= kpi_result.corrective_measures %></td>
                 <td>
-                    <%= kpi_result.departmental_sdbip_source_of_evidence %>
+                    <%= kpi_result.departmental_sdbip.source_of_evidence %>
                     <br/>
                     <% kpi_result.attachments.each do |attachment| %>
                     <%= link_to attachment.poe_file_name,attachment.poe.url, target: '_blank' %>
                     <% end %>
                 </td>
                 <td>
-                    <%= kpi_result.user_firstname %>&nbsp;
-                    <%= kpi_result.user_surname %>&nbsp;on
+                    <%= kpi_result.user.firstname if kpi_result.user.present? %>&nbsp;
+                    <%= kpi_result.user.surname if kpi_result.user.present? %>&nbsp;on
                     <%= kpi_result.updated_at.strftime("%d-%b-%Y") %>
                 </td>
                 <td><%= render "assurance_results" %></td>
@@ -482,15 +482,15 @@
                 <td><%= kpi_result.performance_comments %></td>
                 <td><%= kpi_result.corrective_measures %></td>
                 <td>
-                    <%= kpi_result.departmental_sdbip_source_of_evidence %>
+                    <%= kpi_result.departmental_sdbip.source_of_evidence %>
                     <br/>
                     <% kpi_result.attachments.each do |attachment| %>
                     <%= link_to attachment.poe_file_name,attachment.poe.url, target: '_blank' %>
                     <% end %>
                 </td>
                 <td>
-                    <%= kpi_result.user_firstname %>&nbsp;
-                    <%= kpi_result.user_surname %>&nbsp;on
+                    <%= kpi_result.user.firstname if kpi_result.user.present? %>&nbsp;
+                    <%= kpi_result.user.surname if kpi_result.user.present? %>&nbsp;on
                     <%= kpi_result.updated_at.strftime("%d-%b-%Y") %>
                 </td>
                 <td><%= render "assurance_results" %></td>

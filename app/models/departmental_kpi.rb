@@ -9,7 +9,6 @@ class DepartmentalKpi < ActiveRecord::Base
 	belongs_to :national_outcome
 	belongs_to :strategic_objective
 	belongs_to :kpa
-	belongs_to :area
 	belongs_to :kpi_calculation_type
 	belongs_to :kpi_concept
 	belongs_to :kpi_target_type
@@ -20,5 +19,4 @@ class DepartmentalKpi < ActiveRecord::Base
 	belongs_to :reporting_category
 	belongs_to :risk_rating
 	belongs_to :strategic_objective
-	belongs_to :ward
 end

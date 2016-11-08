@@ -24,8 +24,21 @@ class UsersController < ApplicationController
         @new_users = User.where(activated: false).paginate(page: params[:page], per_page: 15)
         @locked_users = User.where('login_attempts >= max_login_attempts').paginate(page: params[:page], per_page: 15)
         @user_login_attempts = User.where('login_count > ? OR login_attempts > ?', 0, 0).paginate(page: params[:page], per_page: 15)
+        respond_to do |format|
+          format.html
+          format.json { render json: @active_users}
+          format.js
+        end
     end
-
+    def report_users
+      @user_activities = ActivityLog.where(admin: false).paginate(page: params[:page], per_page: 15).includes(:user)
+      @super_user_activities = ActivityLog.where(admin: true).paginate(page: params[:page], per_page: 15).includes(:user)
+      @users = User.paginate(page: params[:page], per_page: 15).includes(:department).includes(:role)
+      @user_login_attempts = User.where('login_count > ? OR login_attempts > ?', 0, 0).paginate(page: params[:page], per_page: 15)
+    end
+    def setup_users
+      @users = User.paginate(page: params[:page], per_page: 15).includes(:department).includes(:role)
+    end
     def set_new_password
         @user = User.find(current_user.id)
     end
@@ -36,7 +49,7 @@ class UsersController < ApplicationController
         @doc = @response.doc
         @forecast = @doc['item']['forecast']
     rescue SocketError => e
-        flash[:danger] = "received Exception #{e.message}" 
+        flash[:danger] = "received Exception #{e.message}"
     end
 
     def set_super_user
@@ -54,9 +67,7 @@ class UsersController < ApplicationController
 
     def new
         @user = User.new
-        if @user.update_columns(new: true, added_at: Time.zone.now, status: 'New')
-            redirect_to users_path
-        end
+        @system_users = User.all
     end
 
     def edit_new_user
@@ -71,6 +82,7 @@ class UsersController < ApplicationController
     def create
         @user = User.new(user_params)
         if @user.save
+          @user.update_columns(new: true, added_at: Time.zone.now, status: 'New')
             @user.send_activation_email
             flash[:info] = 'Please check your email to confirm your account.'
             redirect_to users_url
@@ -161,7 +173,7 @@ class UsersController < ApplicationController
         max_attempts = @user.max_login_attempts
         max_attempts.to_i
         max_attempts += 1
-        if @user.update_columns(login_attempts: max_attempts, activated: false, status: 'Locked')
+        if @user.update_columns(login_attempts: max_attempts, status: 'Locked')
             @user.send_locked_account_email
             flash[:success] = "#{@user.firstname}'s account locked successfully."
             redirect_to users_path
@@ -172,14 +184,13 @@ class UsersController < ApplicationController
     end
 
     def unlock_user
-        if @user.update_columns(login_attempts: 0, activated: true, status: 'Active')
+        if @user.update_columns(login_attempts: 0, status: 'Active')
             @user.send_unlocked_account_email
             flash[:success] = "Unlocked #{@user.firstname}'s account successfully."
-            redirect_to users_path
         else
             flash[:danger] = "Failed to unlock #{@user.firstname}'s account."
-            redirect_to :back
         end
+        redirect_to :back
     end
 
     def activate

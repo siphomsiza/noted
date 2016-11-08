@@ -2,22 +2,11 @@
 <article class="users">
   <%= render 'layouts/municipality' %>
 
-  <div class="tabbable tabs second-level-navs">
-    <ul class="nav nav-tabs">
-      <li class="active"><a href="#manage_users" data-toggle="tab">Manage Users</a></li>
-      <li><a href="#report_users" data-toggle="tab">Report Users</a></li>
-      <li><a href="#setup_users" data-toggle="tab">Setup Users</a></li>
-      <li><a href="#add_user" data-toggle="tab">Add User</a></li>
-    </ul><!-- nav nav-tabs -->
-  </div><!-- tabbable tabs -->
+  <%= render 'user_navigation' %>
 
   <section class="tab-content">
-
     <%= render 'manage_users' %>
     <%= render 'report_users' %>
     <%= render 'setup_users' %>
-    <%= render partial: 'form', :locals => {:user=>@user,:system_users => @users} %>
-
   </section><!-- tab-content -->
-
 </article><!-- users -->

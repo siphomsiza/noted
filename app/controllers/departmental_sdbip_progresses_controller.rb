@@ -108,16 +108,17 @@ class DepartmentalSdbipProgressesController < ApplicationController
         @graph_value = params[:data_value].to_i
         @include_sub_graphs = params[:include_sub_graph]
         if !params[:data_value].blank? && params[:data_value].to_i == 0
-            @departmental_sdbips = DepartmentalSdbip.all
+            @departmental_sdbips = DepartmentalSdbip.all.order(performance_standard: :asc)
             @departments = Department.includes(:departmental_sdbips)
         end
         if !params[:data_value].blank? && params[:data_value].to_i > 0
             @department = Department.includes(:subdepartments, :departmental_sdbips).find(params[:data_value].to_i)
-            @departmental_sdbips = DepartmentalSdbip.where(department_id: params[:data_value])
+            @departmental_sdbips = DepartmentalSdbip.where(department_id: params[:data_value]).order(performance_standard: :asc)
         end
         @departments_sdibps = @departmental_sdbips.select(:performance_standard).uniq.order(performance_standard: :asc)
         $colors = []
         $colors = DepartmentalSdbip.chart_theme @departments_sdibps
+        puts $colors.inspect
         @colours = $colors
     end
 

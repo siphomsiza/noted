@@ -25,31 +25,17 @@
 
 <div class="row">
 <div class="col col-lg-12">
-	<div class="tabbable tabs third-level-navs">
-		<ul id="myTab" class="nav nav-tabs">
-			<li class="active">
-				<a href="#master-setup" data-toggle="tab">Locations</a>
-			</li>
-			<li>
-				<a href="#job-titles" data-toggle="tab">Job Titles</a>
-			</li>
-		</ul>
-		<!-- nav nav-tabs -->
-	</div>
 	<!-- tabbable tabs -->
-	<section class="tab-content">
 		<%= render 'master_setup', :master_setups=>@master_setups,:areas=>@areas %>
-		<%= render 'setup_job_titles' %>
-	</section>
-
 </div>
 </div>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD1n4JTMGUMSgr0PeFr01A0rFTm5Fx-Du0&sensor=false"></script>
 <script>
 'use strict';
-
-document.addEventListener('DOMContentLoaded', drawMap);
-
+$(document).ready(function()
+{
+	drawMap();
+});
 // make map available in global scope
 var map;
 

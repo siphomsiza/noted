@@ -10,7 +10,6 @@ class DepartmentalSdbip < ActiveRecord::Base
     belongs_to :national_outcome
     belongs_to :strategic_objective
     belongs_to :kpa
-    belongs_to :area
     belongs_to :funding_source
     belongs_to :kpi_calculation_type
     belongs_to :kpi_concept
@@ -23,7 +22,6 @@ class DepartmentalSdbip < ActiveRecord::Base
     belongs_to :revenue_by_source
     belongs_to :risk_rating
     belongs_to :strategic_objective
-    belongs_to :ward
     has_one :capital_project
     has_many :kpi_results, dependent: :destroy
     accepts_nested_attributes_for :kpi_results, allow_destroy: true
@@ -50,11 +48,21 @@ class DepartmentalSdbip < ActiveRecord::Base
         DepartmentalSdbip.import(file)
     end
 
-    class << self
+     class << self
         def import(file)
-            case File.extname(file.original_filename)
+          puts "started inspecting file"
+          puts file
+          puts file.inspect
+          puts "started inspecting file 2"
+          file = Dir.glob(File.join("#{Rails.root}/db_mkhondo/data/SDBIPs",'*.*')).max {|a,b| File.ctime(a) <=> File.ctime(b)}
+          # file = File.open(file)
+          puts file
+          puts file.inspect
+          puts "finished inspecting files"
+          my_file = File.basename(file)
+          case File.extname(my_file)
             when '.csv' then
-                CSV.foreach(file.path, headers: true) do |row|
+                CSV.foreach(file, headers: true) do |row|
                     departmental_sdbip_hash = row.to_hash
                     departmental_sdbip = DepartmentalSdbip.find_or_create_by(id: departmental_sdbip_hash['id'])
                     departmental_sdbip.save!
@@ -69,12 +77,12 @@ class DepartmentalSdbip < ActiveRecord::Base
             when '.ods' then
                 fetch_excel_data(file)
 
-            else raise "Unknown file type: #{file.original_filename}"
+            else raise "Unknown file type: #{file}"
 
-            end
+          end
         end
         handle_asynchronously :import_from_file, priority: 2, run_at: proc { 3.seconds.from_now }, queue: 'departmental_sdbips'
-    end
+     end
     def self.fetch_excel_data(file)
         spreadsheet = open_spreadsheet(file)
         header = spreadsheet.row(1)
@@ -88,22 +96,23 @@ class DepartmentalSdbip < ActiveRecord::Base
                 DepartmentalSdbip.create!(departmental_sdbip_hash)
             end
         end
-        handle_asynchronously :import_from_file, priority: 2, run_at: proc { 3.seconds.from_now }, queue: 'departmental_sdbips'
+        #handle_asynchronously :import_from_file, priority: 2, run_at: proc { 3.seconds.from_now }, queue: 'departmental_sdbips'
     end
 
     def self.open_spreadsheet(file)
-        case File.extname(file.original_filename)
+        my_file = File.basename(file)
+        case File.extname(file)
 
         when '.xls' then
-            Roo::Spreadsheet.open(file.path)
+            Roo::Spreadsheet.open(file)
 
         when '.xlsx' then
-            Roo::Spreadsheet.open(file.path)
+            Roo::Spreadsheet.open(file)
 
         when '.ods' then
-            Roo::Spreadsheet.open(file.path)
+            Roo::Spreadsheet.open(file)
 
-        else raise "Unknown file type: #{file.original_filename}"
+        else raise "Unknown file type: #{file}"
         end
     end
 
