@@ -45,12 +45,11 @@ class DepartmentalAdministratorsController < ApplicationController
     begin
       if @departmental_administrator.save
         flash[:success] = 'Departmental administrator was successfully created.'
-        redirect_to departmental_administrators_url
       end
     rescue => e
         flash[:danger] = "Departmental administrator was not created #{e.message}."
-        redirect_to departmental_administrators_url
-     end
+    end
+     redirect_to :back
   end
 
   # PATCH/PUT /departmental_administrators/1
@@ -93,7 +92,7 @@ class DepartmentalAdministratorsController < ApplicationController
           flash[:danger] = "Please log in."
           redirect_to login_url
         end
-      end
+    end
 
       # Confirms an admin user.
       def admin_user

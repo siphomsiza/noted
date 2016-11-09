@@ -35,7 +35,7 @@
                                 <tr>
                                     <td rowspan="<%= subdepartment.subdepartmental_administrators.count%>"><%= subdepartment.name %></td>
                                     <% subdepartment.subdepartmental_administrators.each do |subdepartmental_administrator| %>
-                                    <td><%= subdepartmental_administrator.user_firstname %>&nbsp;<%= subdepartmental_administrator.user_surname %></td>
+                                    <td><%= subdepartmental_administrator.user.firstname %>&nbsp;<%= subdepartmental_administrator.user.surname %></td>
                                     <td><% if subdepartmental_administrator.can_create? %>Yes<% else %>No<% end %></td>
                                     <td><% if subdepartmental_administrator.can_edit? %>Yes<% else %>No<% end %></td>
                                     <td><% if subdepartmental_administrator.can_update? %>Yes<% else %>No<% end %></td>
