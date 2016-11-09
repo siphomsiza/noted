@@ -14,7 +14,36 @@ User.create!( firstname: "Casey Abram",
               super_admin: true,
               activated: true,status: "Active",
               activated_at: Time.zone.now)
-
+              User.create!(firstname: 'Sandile',
+                           surname: 'Swana',
+                           username: 'sswana',
+                           email: 'sandile@sableassets.co.za',
+                           password: 'sableassets',
+                           title: 'Mr',
+                           mobile: '0832687954',
+                           landline: '0112563984',
+                           id_number: Faker::Number.number(13),
+                           birth_date: Time.now.strftime('/%dd%mm/%YYYY'),
+                           location: 'Riversands Incubation Hub',
+                           password_confirmation: 'sableassets',
+                           super_admin: true,
+                           activated: true, status: 'Active',
+                           activated_at: Time.zone.now)
+              User.create!(firstname: 'Bushidi',
+                           surname: 'Rachidi',
+                           username: 'brachidi',
+                           email: 'rachidi@sableassets.co.za',
+                           password: 'sableassets',
+                           title: 'Mr',
+                           mobile: '0764338939',
+                           landline: '0112563984',
+                           id_number: Faker::Number.number(13),
+                           birth_date: Time.now.strftime('/%dd%mm/%YYYY'),
+                           location: 'Riversands Incubation Hub',
+                           password_confirmation: 'sableassets',
+                           super_admin: true,
+                           activated: true, status: 'Active',
+                           activated_at: Time.zone.now)
 20.times do |n|
 name  = Faker::Name.first_name
 lastname = Faker::Name.last_name

@@ -42,7 +42,7 @@ namespace :deploy do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
       # Here we can do anything such as:
       # within "#{current_path}" do
-      invoke 'delayed_job:restart'
+      # invoke 'delayed_job:restart'
       #   execute :rake, 'jobs:work'
       # #   execute :rake, 'cache:clear'
       # end

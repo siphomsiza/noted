@@ -1,11 +1,4 @@
 $(document).ready(function(){
-window.setTimeout(function() {
-    $(".alert").fadeTo(1500, 0).slideUp(500, function(){
-        $(this).remove();
-    });
-  }, 5000);
-});
-$(document).ready(function(){
   $(".first-quarter-target").hide();
   $(".second-quarter-target").hide();
   $(".third-quarter-target").hide();
@@ -49,47 +42,54 @@ $(document).ready(function(){
     });
   });
 });
-
 $(document).ready(function(){
-  $('input[type="checkbox"]').click(function(){
-        if($('#disablity_checkbox').prop("checked") === true){
-                  $('#disability_description_fields').show();
-                }
-                if($('#disablity_checkbox').prop("checked") === false){
-                  $('#disability_description_fields').hide();
-                }
-                if($('#kpi_owner_checkbox').prop("checked") === true){
-                    $('#kpi_owner_select').show();
-                }
-                if($('#kpi_owner_checkbox').prop("checked") === false){
-                  $("#kpi_owner_select").hide();
-                }
-                if($('#subdepartmental_administrator_checkbox').prop("checked") === true){
-                    $('#subdepartment_select').show();
-                }
-                if($('#subdepartmental_administrator_checkbox').prop("checked") === false){
-                  $("#subdepartment_select").hide();
-
-                }
-                if($('#departmental_administrator_checkbox').prop("checked") === true){
-                    $("#department_select").show();
-                }
-                if($('#departmental_administrator_checkbox').prop("checked") === false && $('#kpi_owner_checkbox').prop("checked") === false){
-                  $("#department_select").hide();
-                }
-            });
-            toggleFields();
-
-        function toggleFields(){
-          $("#kpi_owner_select").hide();
-          $("#department_select").hide();
-          $("#subdepartment_select").hide();
-          $("#update_kpi_owner_select").hide();
-          $("#update_department_select").hide();
-          $("#update_subdepartment_select").hide();
-          $('#disability_description_fields').hide();
-        }
+window.setTimeout(function() {
+    $(".alert").fadeTo(1500, 0).slideUp(500, function(){
+        $(this).remove();
+    });
+  }, 5000);
 });
+
+// $(document).ready(function(){
+//   $('input[type="checkbox"]').click(function(){
+//         if($('#disablity_checkbox').prop("checked") === true){
+//                   $('#disability_description_fields').show();
+//                 }
+//                 if($('#disablity_checkbox').prop("checked") === false){
+//                   $('#disability_description_fields').hide();
+//                 }
+//                 if($('#kpi_owner_checkbox').prop("checked") === true){
+//                     $('#kpi_owner_select').show();
+//                 }
+//                 if($('#kpi_owner_checkbox').prop("checked") === false){
+//                   $("#kpi_owner_select").hide();
+//                 }
+//                 if($('#subdepartmental_administrator_checkbox').prop("checked") === true){
+//                     $('#subdepartment_select').show();
+//                 }
+//                 if($('#subdepartmental_administrator_checkbox').prop("checked") === false){
+//                   $("#subdepartment_select").hide();
+//
+//                 }
+//                 if($('#departmental_administrator_checkbox').prop("checked") === true){
+//                     $("#department_select").show();
+//                 }
+//                 if($('#departmental_administrator_checkbox').prop("checked") === false && $('#kpi_owner_checkbox').prop("checked") === false){
+//                   $("#department_select").hide();
+//                 }
+//             });
+//             toggleFields();
+//
+//         function toggleFields(){
+//           $("#kpi_owner_select").hide();
+//           $("#department_select").hide();
+//           $("#subdepartment_select").hide();
+//           $("#update_kpi_owner_select").hide();
+//           $("#update_department_select").hide();
+//           $("#update_subdepartment_select").hide();
+//           $('#disability_description_fields').hide();
+//         }
+// });
 $(document).ready(function(){
   $(function() {
       $( "#accordion" ).accordion({

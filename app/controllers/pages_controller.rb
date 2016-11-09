@@ -25,10 +25,6 @@ class PagesController < ApplicationController
     rescue SocketError => e
     flash[:danger] = "received Exception #{e.message}"
     end
-    @closed_primary = SdbipTimePeriod.where("extract(day from primary_closure) = ? AND extract(month from primary_closure) = ? AND extract(year from primary_closure) = ? AND primary_status = ?",Date.today.day,Date.today.month,Date.today.year,true)
-    @closed_secondary = SdbipTimePeriod.where("extract(day from secondary_closure) = ? AND extract(month from secondary_closure) = ? AND extract(year from secondary_closure) = ? AND secondary_status = ?",Date.today.day,Date.today.month,Date.today.year,true)
-    @primary_reminders = SdbipTimePeriod.where("extract(day from primary_reminder) = ? AND extract(month from primary_reminder) = ? AND extract(year from primary_reminder) = ? AND primary_status = ? AND primary_notification_sent = ?",Date.today.day,Date.today.month,Date.today.year,true,false)
-    @secondary_reminders = SdbipTimePeriod.where("extract(day from secondary_reminder) = ? AND extract(month from secondary_reminder) = ? AND extract(year from secondary_reminder) = ? AND secondary_status = ? AND secondary_notification_sent = ? ", Date.today.day,Date.today.month,Date.today.year,true,false)
   end
   def contact
   end

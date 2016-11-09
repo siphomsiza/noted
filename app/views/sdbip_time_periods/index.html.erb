@@ -35,7 +35,7 @@
 					<a href="#add_sdbip_time_periods" data-toggle="tab">Create Time Period(s)</a>
 				</li>
 				<li class="pull-right">
-					<% if current_user.admin? %>
+					<% if current_user.admin? || current_user.super_admin? %>
 					<button class="btn pull-right" data-toggle="modal" data-target="#importTimePeriodsModal" title="Click to upload Time Periods.">
 						<span class="glyphicon glyphicon-upload"></span>&nbsp;Import Time Periods</button>&nbsp;
 					<button class="btn pull-right" data-toggle="modal" data-target="#updateTimePeriodsModal" title="Click to update all automatic Time Periods.">
@@ -86,7 +86,7 @@
 							<td>
 								<% if  sdbip_time_period.primary_status? %>
 								<label class="label label-success">Open</label>
-							<% else sdbip_time_period.primary_status? %>
+							<% else %>
 								<label class="label label-danger">Closed</label>
 								<% end %>
 							</td>
@@ -164,7 +164,7 @@
 
 <!-- Import Time Periods modal -->
 <div class="modal fade" id="importTimePeriodsModal" tabindex="-1" role="dialog" aria-labelledby="importModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<%= form_tag import_sdbip_time_periods_path, accept: 'text/csv,text/xls,text/xlsx,text/ods', multipart: true do %>
 			<div class="modal-header">
@@ -199,7 +199,7 @@
 </div>
 <!-- Import Time Periods modal -->
 <div class="modal fade" id="updateTimePeriodsModal" tabindex="-1" role="dialog" aria-labelledby="importModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
+	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<%= form_tag controller: :sdbip_time_periods, method: :post, action: :update_time_periods do %>
 			<div class="modal-header">

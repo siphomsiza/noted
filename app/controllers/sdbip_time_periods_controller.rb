@@ -40,7 +40,9 @@ class SdbipTimePeriodsController < ApplicationController
   end
   def send_notification
     #sends a reminder notification to Administrators
-    if !params[:primary_notification_value].blank?
+    @primary_reminders = SdbipTimePeriod.where("extract(day from primary_reminder) = ? AND extract(month from primary_reminder) = ? AND extract(year from primary_reminder) = ? AND primary_status = ? AND primary_notification_sent = ?",Date.today.day,Date.today.month,Date.today.year,true,false)
+    @secondary_reminders = SdbipTimePeriod.where("extract(day from secondary_reminder) = ? AND extract(month from secondary_reminder) = ? AND extract(year from secondary_reminder) = ? AND secondary_status = ? AND secondary_notification_sent = ? ", Date.today.day,Date.today.month,Date.today.year,true,false)
+    if !@primary_reminders.blank?
       @primary_sdbip_time_periods = SdbipTimePeriod.find(params[:primary_notification_value])
       @primary_users = User.includes(:role).where(roles:{kpi_owner: true})
     if !@primary_sdbip_time_periods.blank?
@@ -52,8 +54,8 @@ class SdbipTimePeriodsController < ApplicationController
         sdbip_time_period.update_columns(:primary_notification_sent => true)
       end
     end
-  end
-  if !params[:secondary_notification_value].blank?
+    end
+  if !@secondary_reminders.blank?
     @secondary_users = User.joins(:roles).where("roles.finance_admin = ? OR roles.top_layer_administrator = ? OR roles.secondary_time_period = ?",true,true,true)#includes(:role).where(:roles => {"role.finance_admin = ? OR role.top_layer_administrator = ? OR role.secondary_time_period = ?",true,true,true})#(roles:{finance_admin: true,top_layer_administrator: true, secondary_time_period: true})
     @secondary_sdbip_time_periods = SdbipTimePeriod.find(params[:secondary_notification_value])
     if !@secondary_sdbip_time_periods.blank?
@@ -66,24 +68,25 @@ class SdbipTimePeriodsController < ApplicationController
       end
     end
   end
-  redirect_to introduction_url
+  redirect_to :back
   end
   def update_status
-    if !params[:primary_data_value].blank?
-    @primary_sdbip_time_periods = SdbipTimePeriod.find(params[:primary_data_value])
+    #Auto close a time period
+    @closed_primary = SdbipTimePeriod.where("extract(month from primary_closure) <= ? AND extract(year from primary_closure) = ? AND primary_status = ?",Date.today.month,Date.today.year,true)
+    @closed_secondary = SdbipTimePeriod.where("extract(month from secondary_closure) <= ? AND extract(year from secondary_closure) = ? AND secondary_status = ?",Date.today.month,Date.today.year,true)
+    if !@closed_primary.blank?
+    @primary_sdbip_time_periods = @closed_primary
     @primary_sdbip_time_periods.each do |primary_sdbip_time_period|
-      @time_period = SdbipTimePeriod.find(primary_sdbip_time_period.id)
-      @time_period.update_columns(:primary_status => false)
+      primary_sdbip_time_period.update_columns(:primary_status => false)
     end
-  end
-  if !params[:secondary_data_value].blank?
-    @secondary_sdbip_time_periods = SdbipTimePeriod.find(params[:secondary_data_value])
+    end
+  if !@closed_secondary.blank?
+    @secondary_sdbip_time_periods = @closed_secondary
     @secondary_sdbip_time_periods.each do |secondary_sdbip_time_period|
-      @time_period = SdbipTimePeriod.find(secondary_sdbip_time_period.id)
-      @time_period.update_columns(:secondary_status => false)
+      secondary_sdbip_time_period.update_columns(:secondary_status => false)
     end
   end
-  redirect_to introduction_url
+  redirect_to :back
   end
   def close_primary
     @sdbip_time_period = SdbipTimePeriod.find(params[:id])
