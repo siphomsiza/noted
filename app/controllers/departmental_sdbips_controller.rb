@@ -41,7 +41,7 @@ class DepartmentalSdbipsController < ApplicationController
         @departmental_sdbips = nil
       end
     elsif !params[:subdepartment_id] && (!current_user.role.blank? || current_user.admin? || current_user.super_admin?)
-      @periods = KpiResult.select('distinct(extract(year from period), extract(month from period))') # .map{|x| x.month}.uniq
+      @periods = KpiResult.select(:period).distinct.limit(1) # .map{|x| x.month}.uniq
       @result_periods = KpiResult.select(:period)
       @departmental_sdbips = DepartmentalSdbip.all
       if current_user.admin? || current_user.super_admin? || current_user.role.audit_log_reporting? || current_user.role.top_layer_administrator? || current_user.role.assurance_provider? || current_user.role.secondary_time_period? || current_user.role.finance_admin?
@@ -59,7 +59,7 @@ class DepartmentalSdbipsController < ApplicationController
         department_id = current_user.departmental_administrator.department_id
         @departmental_sdbips = @departmental_sdbips.where(department_id: department_id)
       end
-        
+
     end
     @deleted_kpis = DepartmentalKpi.paginate(page: params[:page], per_page: 15)
     @departmental_sdbips = @departmental_sdbips.paginate(per_page: 15, page: params[:page]).includes(:capital_project, :department, :subdepartment, :kpi_type, :kpi_owner, :kpi_concept, :kpi_calculation_type, :mscore_classification, :kpa, :strategic_objective, :national_outcome, :reporting_category, :ndp_objective, :risk_rating, :kpi_results).order(id: :asc)

@@ -85,7 +85,7 @@ class DepartmentalSdbipProgressesController < ApplicationController
         @selected_audit_headers = selected_audit_headers
         # ###Graphs###
         @departmental_sdbip_progresses = @departmental_sdbip_progresses
-        @periods = KpiResult.select(:period).distinct
+        @periods = KpiResult.select(:period).distinct.limit(1)
         @departmental_sdbips = DepartmentalSdbip.order(performance_standard: :asc).includes(:kpi_results)
         @departments_sdibps = @departmental_sdbips.select(:performance_standard).uniq
         @departmental_sdbips = @departmental_sdbips.paginate(page: params[:page], per_page: 15).order(id: :asc)
