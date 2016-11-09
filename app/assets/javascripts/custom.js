@@ -1,9 +1,10 @@
-window.setTimeout(function() {
+$(document).ready(function(){
+  window.setTimeout(function() {
     $(".alert").fadeTo(1500, 0).slideUp(500, function(){
         $(this).remove();
     });
   }, 5000);
-
+});
 // $(document).ready(function(){
 //   $('input[type="checkbox"]').click(function(){
 //         if($('#disablity_checkbox').prop("checked") === true){
