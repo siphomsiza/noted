@@ -1,10 +1,8 @@
-$(document).ready(function(){
 window.setTimeout(function() {
     $(".alert").fadeTo(1500, 0).slideUp(500, function(){
         $(this).remove();
     });
   }, 5000);
-});
 
 // $(document).ready(function(){
 //   $('input[type="checkbox"]').click(function(){
@@ -52,7 +50,8 @@ $(document).ready(function(){
         collapsible: true
       });
     });
-
+    });
+$(document).ready(function(){
   $(function(){
         $(document).on('change','#selected_department', function(){
            var select_value = $(this).val();
@@ -65,6 +64,8 @@ $(document).ready(function(){
 
         });
   });
+  });
+  $(document).ready(function(){
     $(function() {
 
     //activate schedule tabs

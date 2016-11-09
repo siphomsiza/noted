@@ -47,7 +47,7 @@
                 <% if !periods.blank? %>
                 <% periods.each do |kpi_result_period| %>
                 <th colspan="6">
-                    <h4><%= kpi_result_period.period.strftime("%B %Y") %></h4>
+                    <h4><%= kpi_result_period.period.strftime("%B %Y") if !kpi_result_period.period.blank? %></h4>
                 </th>
                 <tr>
                     <th>Target</th>

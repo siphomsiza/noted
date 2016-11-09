@@ -58,12 +58,10 @@ class DepartmentalAdministratorsController < ApplicationController
 
       if @departmental_administrator.update(departmental_administrator_params)
         flash[:success] = 'Departmental administrator was successfully updated.'
-        redirect_to departmental_administrators_url
-
       else
         flash[:danger] = 'Departmental administrator was not updated.'
-        redirect_to departmental_administrators_url
       end
+      redirect_to :back
   end
 
   # DELETE /departmental_administrators/1

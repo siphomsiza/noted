@@ -19,11 +19,13 @@ class UserMailer < ApplicationMailer
   end
   def primary_reminder_email(user)
     @user = user
-    mail to: user.email, subject: "KPI Update Reminder"
+    # mail to: user.email, subject: "KPI Update Reminder"
+    mail to: "casey@sableassets.com", subject: "KPI Update Reminder"
   end
   def secondary_reminder_email(user)
     @user = user
-    mail to: user.email, subject: "KPI Update Reminder"
+    # mail to: user.email, subject: "KPI Update Reminder"
+    mail to: "casey@sableassets.com", subject: "KPI Update Reminder"
   end
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:

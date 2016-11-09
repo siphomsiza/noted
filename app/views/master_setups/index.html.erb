@@ -2,14 +2,13 @@
 <script>
 	$(function () {
 		//highlight the current nav
-		$("#applicationmanifest a:contains('SETUP')").parent().addClass('active');
+		$("#applicationmanifest  ul.navbar-nav li:eq(2)").addClass('active');
 	}); //jQuery is loaded
 </script>
 
 <div class="row">
 	<div class="col col-lg-12">
 		<%= render 'layouts/municipality' %>
-	</article>
 
 	<ul class="nav nav-pills nav-justified">
 		<li class="active"><%= link_to "Master Setup", master_setups_path %></li>

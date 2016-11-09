@@ -13,4 +13,4 @@ $.ajax({
   success: function (data) {},
   error: function (data) {}
   });
-},300000);
+},100000);

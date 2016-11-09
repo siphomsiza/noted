@@ -30,12 +30,10 @@ class SubdepartmentalAdministratorsController < ApplicationController
 
       if @subdepartmental_administrator.save
         flash[:success] = 'Subdepartmental administrator was successfully created.'
-        redirect_to :back
-
       else
         flash[:success] = 'Subdepartmental administrator was not created.'
-        redirect_to :back
      end
+     redirect_to :back
   end
 
   # PATCH/PUT /subdepartmental_administrators/1
@@ -44,12 +42,10 @@ class SubdepartmentalAdministratorsController < ApplicationController
 
       if @subdepartmental_administrator.update(subdepartmental_administrator_params)
         flash[:success] = 'Subdepartmental administrator was successfully updated.'
-        redirect_to @subdepartmental_administrator
       else
         flash[:danger] = 'Subdepartmental administrator was not updated.'
-        redirect_to :back
-
     end
+    redirect_to :back
   end
 
   # DELETE /subdepartmental_administrators/1

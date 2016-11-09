@@ -32,26 +32,21 @@ class KpiOwnersController < ApplicationController
 
       if @kpi_owner.save
         flash[:success] = 'Kpi Owner was successfully created.'
-        redirect_to :back
       else
         flash[:danger] = "KPI Owner not created."
-        redirect_to :back
       end
-
+      redirect_to :back
   end
 
   # PATCH/PUT /kpi_owners/1
   # PATCH/PUT /kpi_owners/1.json
   def update
-
       if @kpi_owner.update(kpi_owner_params)
         flash[:success] = 'Kpi Owner was successfully saved.'
-        redirect_to :back
       else
         flash[:danger] = "KPI Owner was not saved."
-        redirect_to :back
       end
-
+      redirect_to :back
   end
 
   # DELETE /kpi_owners/1
@@ -60,7 +55,6 @@ class KpiOwnersController < ApplicationController
     @kpi_owner.destroy
       flash[:success] = 'Kpi owner was successfully deleted.'
       redirect_to :back
-
   end
 
   private

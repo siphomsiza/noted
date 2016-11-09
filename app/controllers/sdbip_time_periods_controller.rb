@@ -40,8 +40,8 @@ class SdbipTimePeriodsController < ApplicationController
   end
   def send_notification
     #sends a reminder notification to Administrators
-    @primary_reminders = SdbipTimePeriod.where("extract(day from primary_reminder) = ? AND extract(month from primary_reminder) = ? AND extract(year from primary_reminder) = ? AND primary_status = ? AND primary_notification_sent = ?",Date.today.day,Date.today.month,Date.today.year,true,false)
-    @secondary_reminders = SdbipTimePeriod.where("extract(day from secondary_reminder) = ? AND extract(month from secondary_reminder) = ? AND extract(year from secondary_reminder) = ? AND secondary_status = ? AND secondary_notification_sent = ? ", Date.today.day,Date.today.month,Date.today.year,true,false)
+    @primary_reminders = SdbipTimePeriod.all#where("extract(day from primary_reminder) = ? AND extract(month from primary_reminder) = ? AND extract(year from primary_reminder) = ? AND primary_status = ? AND primary_notification_sent = ?",Date.today.day,Date.today.month,Date.today.year,true,false)
+    @secondary_reminders = SdbipTimePeriod.all#.where("extract(day from secondary_reminder) = ? AND extract(month from secondary_reminder) = ? AND extract(year from secondary_reminder) = ? AND secondary_status = ? AND secondary_notification_sent = ? ", Date.today.day,Date.today.month,Date.today.year,true,false)
     if !@primary_reminders.blank?
       @primary_sdbip_time_periods = SdbipTimePeriod.find(params[:primary_notification_value])
       @primary_users = User.includes(:role).where(roles:{kpi_owner: true})
