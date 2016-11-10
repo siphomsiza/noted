@@ -82,6 +82,7 @@ class DepartmentalSdbip < ActiveRecord::Base
           end
         end
         handle_asynchronously :import_from_file, priority: 2, run_at: proc { 3.seconds.from_now }, queue: 'departmental_sdbips'
+        reload_page
      end
     def self.fetch_excel_data(file)
         spreadsheet = open_spreadsheet(file)
