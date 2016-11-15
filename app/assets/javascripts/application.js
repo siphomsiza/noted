@@ -11,6 +11,13 @@
 // about supported directives.
 //
 //= require jquery
+//= require sdbip_time_periods_autoclosure
+//= require jquery.dataTables
+//= require dataTables.buttons
+//= require jszip
+//= require pdfmake
+//= require vfs_fonts
+//= require buttons.html5
 //= require jquery_ujs
 //= require bootstrap
 //= require turbolinks

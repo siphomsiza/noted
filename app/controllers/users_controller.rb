@@ -13,17 +13,17 @@ class UsersController < ApplicationController
         rescue SocketError => e
             flash[:danger] = "received Exception #{e.message}"
         end
-        @user_activities = ActivityLog.where(admin: false).paginate(page: params[:page], per_page: 15).includes(:user)
-        @super_user_activities = ActivityLog.where(admin: true).paginate(page: params[:page], per_page: 15).includes(:user)
+        @user_activities = ActivityLog.where(admin: false)#.paginate(page: params[:page], per_page: 15).includes(:user)
+        @super_user_activities = ActivityLog.where(admin: true)#.paginate(page: params[:page], per_page: 15).includes(:user)
         @user = User.new
-        @users = User.paginate(page: params[:page], per_page: 15).includes(:department).includes(:role)
-        @admin_users = User.where('admin = ? OR super_admin = ?', true, true).paginate(page: params[:page], per_page: 15)
-        @active_users = User.where(activated: true).paginate(page: params[:page], per_page: 15).includes(:role)
-        @inactive_users = User.where(activated: false).paginate(page: params[:page], per_page: 15)
-        @terminated_users = User.where(terminated: true).paginate(page: params[:page], per_page: 15)
-        @new_users = User.where(activated: false).paginate(page: params[:page], per_page: 15)
-        @locked_users = User.where('login_attempts >= max_login_attempts').paginate(page: params[:page], per_page: 15)
-        @user_login_attempts = User.where('login_count > ? OR login_attempts > ?', 0, 0).paginate(page: params[:page], per_page: 15)
+        @users = User.all.includes(:department).includes(:role)
+        @admin_users = User.where('admin = ? OR super_admin = ?', true, true)#.paginate(page: params[:page], per_page: 15)
+        @active_users = User.where(activated: true)#.paginate(page: params[:page], per_page: 15).includes(:role)
+        @inactive_users = User.where(activated: false)#.paginate(page: params[:page], per_page: 15)
+        @terminated_users = User.where(terminated: true)#.paginate(page: params[:page], per_page: 15)
+        @new_users = User.where(activated: false)#.paginate(page: params[:page], per_page: 15)
+        @locked_users = User.where('login_attempts >= max_login_attempts')#.paginate(page: params[:page], per_page: 15)
+        @user_login_attempts = User.where('login_count > ? OR login_attempts > ?', 0, 0)#.paginate(page: params[:page], per_page: 15)
         respond_to do |format|
           format.html
           format.json { render json: @active_users}
@@ -31,13 +31,13 @@ class UsersController < ApplicationController
         end
     end
     def report_users
-      @user_activities = ActivityLog.where(admin: false).paginate(page: params[:page], per_page: 15).includes(:user)
-      @super_user_activities = ActivityLog.where(admin: true).paginate(page: params[:page], per_page: 15).includes(:user)
-      @users = User.paginate(page: params[:page], per_page: 15).includes(:department).includes(:role)
-      @user_login_attempts = User.where('login_count > ? OR login_attempts > ?', 0, 0).paginate(page: params[:page], per_page: 15)
+      @user_activities = ActivityLog.where(admin: false)#.paginate(page: params[:page], per_page: 15).includes(:user)
+      @super_user_activities = ActivityLog.where(admin: true)#.paginate(page: params[:page], per_page: 15).includes(:user)
+      @users = User.all.includes(:department).includes(:role)
+      @user_login_attempts = User.where('login_count > ? OR login_attempts > ?', 0, 0)#.paginate(page: params[:page], per_page: 15)
     end
     def setup_users
-      @users = User.paginate(page: params[:page], per_page: 15).includes(:department).includes(:role)
+      @users = User.all.includes(:department).includes(:role)
     end
     def set_new_password
         @user = User.find(current_user.id)

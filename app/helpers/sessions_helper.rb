@@ -34,7 +34,7 @@ module SessionsHelper
         ActiveRecord::Base.establish_connection(:production) if Rails.env.production?
         ActiveRecord::Base.establish_connection(:development) if Rails.env.development?
         $logged_in_database = :production if Rails.env.production?
-        $logged_in_database = :development if Rails.env.development?
+        $logged_in_database = :development if Rails.env.development
         $municipality_info = MasterSetup.first
     end
     if company_code == "SAK001"
@@ -42,7 +42,12 @@ module SessionsHelper
       $logged_in_database = DB2_CONF
       $municipality_info = MasterSetup.first
     end
-    if company_code != "MKH001" && company_code != "SAK001" && company_code != "DEV001"
+    if company_code == "LPN001"
+      ActiveRecord::Base.establish_connection(DB3_CONF)
+      $logged_in_database = DB3_CONF
+      $municipality_info = MasterSetup.first
+    end
+    if company_code != "MKH001" && company_code != "SAK001" && company_code != "DEV001" && company_code != "LPN001"
       ActiveRecord::Base.clear_all_connections!
     end
   end

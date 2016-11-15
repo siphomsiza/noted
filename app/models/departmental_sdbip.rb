@@ -101,17 +101,17 @@ class DepartmentalSdbip < ActiveRecord::Base
     end
 
     def self.open_spreadsheet(file)
-        my_file = File.basename(file)
+        my_file = File.basename(my_file)
         case File.extname(file)
 
         when '.xls' then
-            Roo::Spreadsheet.open(file)
+            Roo::Spreadsheet.open(my_file)
 
         when '.xlsx' then
-            Roo::Spreadsheet.open(file)
+            Roo::Spreadsheet.open(my_file)
 
         when '.ods' then
-            Roo::Spreadsheet.open(file)
+            Roo::Spreadsheet.open(my_file)
 
         else raise "Unknown file type: #{file}"
         end

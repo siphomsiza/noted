@@ -27,23 +27,21 @@ class DepartmentsController < ApplicationController
   def create
   	@department = Department.new(department_params)
   	if @department.save
-      flash[:success] = 'Department was successfully created.'
-  		redirect_to departments_path
-
+      flash[:success] = 'Department record was successfully created.'
       else
-      redirect_to :back
+        flash[:danger] = 'Department record was not created.'
   	end
+    redirect_to :back
   end
 
   def update
     @department = Department.find(params[:id])
       if @department.update(department_params)
-        flash[:success] = 'Department was successfully updated.'
-        redirect_to :back
+        flash[:success] = 'Department record was successfully updated.'
       else
-        flash[:danger] = 'Department was not updated.'
-        redirect_to :back
+        flash[:danger] = 'Department record was not updated.'
       end
+      redirect_to :back
   end
 
   # DELETE /municipalities/1
@@ -51,7 +49,7 @@ class DepartmentsController < ApplicationController
   def destroy
     @department = Department.find(params[:id])
     @department.destroy
-      flash[:success]='Department was successfully deleted.'
+      flash[:success]='Department record was successfully deleted.'
       redirect_to departments_path
   end
 

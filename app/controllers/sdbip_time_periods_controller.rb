@@ -40,10 +40,10 @@ class SdbipTimePeriodsController < ApplicationController
   end
   def send_notification
     #sends a reminder notification to Administrators
-    @primary_reminders = SdbipTimePeriod.all#where("extract(day from primary_reminder) = ? AND extract(month from primary_reminder) = ? AND extract(year from primary_reminder) = ? AND primary_status = ? AND primary_notification_sent = ?",Date.today.day,Date.today.month,Date.today.year,true,false)
-    @secondary_reminders = SdbipTimePeriod.all#.where("extract(day from secondary_reminder) = ? AND extract(month from secondary_reminder) = ? AND extract(year from secondary_reminder) = ? AND secondary_status = ? AND secondary_notification_sent = ? ", Date.today.day,Date.today.month,Date.today.year,true,false)
+    @primary_reminders = SdbipTimePeriod.where("extract(month from primary_reminder) <= ? AND extract(year from primary_reminder) = ? AND primary_status = ? AND primary_notification_sent = ?",Date.today.month,Date.today.year,true,false)
+    @secondary_reminders = SdbipTimePeriod.where("extract(month from secondary_reminder) <= ? AND extract(year from secondary_reminder) = ? AND secondary_status = ? AND secondary_notification_sent = ? ",Date.today.month,Date.today.year,true,false)
     if !@primary_reminders.blank?
-      @primary_sdbip_time_periods = SdbipTimePeriod.find(params[:primary_notification_value])
+      @primary_sdbip_time_periods = @primary_reminders
       @primary_users = User.includes(:role).where(roles:{kpi_owner: true})
     if !@primary_sdbip_time_periods.blank?
       @primary_users.each do |user|
@@ -57,7 +57,7 @@ class SdbipTimePeriodsController < ApplicationController
     end
   if !@secondary_reminders.blank?
     @secondary_users = User.joins(:roles).where("roles.finance_admin = ? OR roles.top_layer_administrator = ? OR roles.secondary_time_period = ?",true,true,true)#includes(:role).where(:roles => {"role.finance_admin = ? OR role.top_layer_administrator = ? OR role.secondary_time_period = ?",true,true,true})#(roles:{finance_admin: true,top_layer_administrator: true, secondary_time_period: true})
-    @secondary_sdbip_time_periods = SdbipTimePeriod.find(params[:secondary_notification_value])
+    @secondary_sdbip_time_periods = @secondary_reminders
     if !@secondary_sdbip_time_periods.blank?
       @secondary_users.each do |user|
         @user = User.find(user.id)

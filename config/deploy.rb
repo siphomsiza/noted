@@ -24,7 +24,7 @@ set :scm, :git
 # set :pty, true
 
 # Default value for :linked_files is []
-set :linked_files, fetch(:linked_files, []).push('config/mkhondo_db.yml','config/sakhisizwe_db.yml','config/database.yml', 'config/secrets.yml')
+set :linked_files, fetch(:linked_files, []).push('config/lepelle_nkumpi_db.yml','config/mkhondo_db.yml','config/sakhisizwe_db.yml','config/database.yml', 'config/secrets.yml')
 
 # Default value for linked_dirs is []
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/uploads')
@@ -41,11 +41,10 @@ namespace :deploy do
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
       # Here we can do anything such as:
-      # within "#{current_path}" do
-      # invoke 'delayed_job:restart'
-      #   execute :rake, 'jobs:work'
-      # #   execute :rake, 'cache:clear'
+      # within release_path do
+      #   execute :rake, 'cache:clear'
       # end
     end
   end
+
 end
