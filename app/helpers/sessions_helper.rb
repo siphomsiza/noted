@@ -20,7 +20,6 @@ module SessionsHelper
   end
   def increment_login_attempts(user)
     user.increment!(:login_attempts)
-    user.update_columns(:status=> "Locked")
   end
   #Connects user to database for a session
   def set_up_database(company_code)
