@@ -7,14 +7,7 @@ class DepartmentsController < ApplicationController
   end
 
   def index
-    begin
-        @client = YahooWeather::Client.new
-        @response = @client.fetch(1582504)
-        @doc = @response.doc
-        @forecast = @doc["item"]["forecast"]
-  rescue SocketError => e
-    flash[:danger] = "received Exception #{e.message}"
-  end
+      Setup.weather_details
       @department = Department.new
   	   @departments = Department.includes(:subdepartments).paginate(page: params[:page],per_page: 10).order(id: :asc)
   end
@@ -58,7 +51,7 @@ class DepartmentsController < ApplicationController
 
    def set_department
       @department = Department.find(params[:id])
-    end
+   end
 
   def department_params
   	params.require(:department).permit(:name, :tel_no, :fax_no, :subdepartments_attributes => [ :id,:name,:_destroy])

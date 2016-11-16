@@ -11,6 +11,8 @@
  * file per style scope.
  *
  *= require prettify
+ *= require jquery.dataTables
+ *= require buttons.dataTables
  *= require_tree .
  *= require_self
  *= require bootstrap-datepicker3
