@@ -7,7 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 require 'active_record/fixtures'
 User.create!( firstname: "Donald",
-              surname: "Maphori",
+              surname: "Maphoru",
               email: "donald.maphoru@lepelle-nkumpi.gov.za",
               password: "donald1234",
               title: "Mr",
