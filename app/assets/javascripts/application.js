@@ -14,13 +14,11 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require jquery.dataTables
-//= require buttons.print
 //= require dataTables.buttons
 //= require jszip
 //=require pdfmake
 //= require vfs_fonts
 //= require buttons.html5
-//= require buttons.colVis
 //= require turbolinks
 //= require sdbip_time_periods_autoclosure
 //= require bootstrap-datepicker
