@@ -14,6 +14,7 @@ namespace :deploy do
           execute :rake, "db:reset"
           execute :rake, "mkhondo:db:reset"
           execute :rake, "sakhisizwe:db:reset"
+          execute :rake, "lepelle_nkumpi:db:reset"
         end
       end
     end
