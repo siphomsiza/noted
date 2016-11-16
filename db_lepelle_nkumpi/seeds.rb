@@ -8,7 +8,7 @@
 require 'active_record/fixtures'
 User.create!( firstname: "Donald",
               surname: "Maphori",
-              email: "dmaphori@lepellenkumpi.co.za",
+              email: "donald.maphoru@lepelle-nkumpi.gov.za",
               password: "donald1234",
               title: "Mr",
               mobile: Faker::Number.number(10),
