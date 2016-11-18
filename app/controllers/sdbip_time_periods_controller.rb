@@ -3,14 +3,7 @@ class SdbipTimePeriodsController < ApplicationController
   before_action :admin_user, only: [:close_primary,:close_secondary,:close_finance,:index, :show, :edit, :update, :destroy,:update_time_periods]
   skip_before_filter  :verify_authenticity_token
   def index
-    begin
-      @client = YahooWeather::Client.new
-      @response = @client.fetch(1582504)
-      @doc = @response.doc
-      @forecast = @doc["item"]["forecast"]
-    rescue SocketError => e
-        flash[:danger] = "received Exception #{e.message}"
-    end
+    weather_details
     @sdbip_time_period = SdbipTimePeriod.new
     @sdbip_time_periods = SdbipTimePeriod.all.order(id: :asc)
   end

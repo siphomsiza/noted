@@ -7,24 +7,10 @@ class PagesController < ApplicationController
   end
 
   def about
-    begin
-        @client = YahooWeather::Client.new
-        @response = @client.fetch(1582504)
-        @doc = @response.doc
-        @forecast = @doc["item"]["forecast"]
-   rescue SocketError => e
-    flash[:danger] = "received Exception #{e.message}"
-    end
+    weather_details
   end
   def introduction
-    begin
-        @client = YahooWeather::Client.new
-        @response = @client.fetch(1582504)
-        @doc = @response.doc
-        @forecast = @doc["item"]["forecast"]
-    rescue SocketError => e
-    flash[:danger] = "received Exception #{e.message}"
-    end
+    weather_details
   end
   def contact
   end
@@ -42,14 +28,7 @@ class PagesController < ApplicationController
     $colors = []
     $colors = DepartmentalSdbip.chart_theme @departments_sdibps
     @colours = $colors
-    begin
-        @client = YahooWeather::Client.new
-        @response = @client.fetch(1582504)
-        @doc = @response.doc
-        @forecast = @doc["item"]["forecast"]
-    rescue SocketError => e
-      flash[:danger] = "received Exception #{e.message}"
-    end
+    weather_details
 
   end
   private

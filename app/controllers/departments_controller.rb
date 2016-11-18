@@ -7,7 +7,7 @@ class DepartmentsController < ApplicationController
   end
 
   def index
-      Setup.weather_details
+      weather_details
       @department = Department.new
   	   @departments = Department.includes(:subdepartments).paginate(page: params[:page],per_page: 10).order(id: :asc)
   end

@@ -7,15 +7,7 @@ class CapitalProjectsController < ApplicationController
   # GET /capital_projects
   # GET /capital_projects.json
   def index
-    begin
-
-        @client = YahooWeather::Client.new
-        @response = @client.fetch(1582504)
-        @doc = @response.doc
-        @forecast = @doc["item"]["forecast"]
-  rescue SocketError => e
-    flash[:danger] = "received Exception #{e.message}"
-  end
+    weather_details
     @capital_project = CapitalProject.new
     @capital_projects = CapitalProject.all.order(id: :asc)
       if !@capital_projects.blank?

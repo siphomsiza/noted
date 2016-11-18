@@ -1,7 +1,6 @@
 class DepartmentalKpi < ActiveRecord::Base
   ActiveRecord::Base.establish_connection($current_session_db)
   belongs_to :department
-	belongs_to :list
 	belongs_to :subdepartment
 	belongs_to :kpi_owner
 	belongs_to :predetermined_objective
