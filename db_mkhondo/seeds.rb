@@ -20,65 +20,6 @@ User.create!(firstname: 'Sandiswa',
              super_admin: true,
              activated: true, status: 'Active',
              activated_at: Time.zone.now)
-User.create!(firstname: 'Casey Abram',
-             surname: 'Seabela',
-             username: 'caseabela',
-             email: 'casey@sableassets.com',
-             password: 'sableassets',
-             title: 'Mr',
-             mobile: '0764338939',
-             landline: '0112563984',
-             id_number: Faker::Number.number(13),
-             birth_date: Time.now.strftime('/%dd%mm/%YYYY'),
-             location: 'Riversands Incubation Hub',
-             password_confirmation: 'sableassets',
-             super_admin: true,
-             activated: true, status: 'Active',
-             activated_at: Time.zone.now)
-User.create!(firstname: 'Sandile',
-             surname: 'Swana',
-             username: 'sswana',
-             email: 'sandile@sableassets.co.za',
-             password: 'sableassets',
-             title: 'Mr',
-             mobile: '0832687954',
-             landline: '0112563984',
-             id_number: Faker::Number.number(13),
-             birth_date: Time.now.strftime('/%dd%mm/%YYYY'),
-             location: 'Riversands Incubation Hub',
-             password_confirmation: 'sableassets',
-             super_admin: true,
-             activated: true, status: 'Active',
-             activated_at: Time.zone.now)
-User.create!(firstname: 'Bushidi',
-             surname: 'Rachidi',
-             username: 'brachidi',
-             email: 'rachidi@sableassets.co.za',
-             password: 'sableassets',
-             title: 'Mr',
-             mobile: '0764338939',
-             landline: '0112563984',
-             id_number: Faker::Number.number(13),
-             birth_date: Time.now.strftime('/%dd%mm/%YYYY'),
-             location: 'Riversands Incubation Hub',
-             password_confirmation: 'sableassets',
-             super_admin: true,
-             activated: true, status: 'Active',
-             activated_at: Time.zone.now)
-User.create!(firstname: 'Arms',
-             surname: 'Audit',
-             email: 'armsuser@sableassets.co.za',
-             password: 'sableassets',
-             id_number: Faker::Number.number(13),
-             birth_date: Time.now.strftime('/%dd%mm/%YYYY'),
-             title: 'Mrs',
-             mobile: '+27 86 619-9887',
-             landline: '+27 11 484-1253/8223',
-             location: "1st Floor, St David's Place, Parktown,Johannesburg, South Africa, 2193",
-             password_confirmation: 'sableassets',
-             admin: true, status: 'Active',
-             activated: true,
-             activated_at: Time.zone.now)
 
 20.times do |n|
   name = Faker::Name.first_name
@@ -106,15 +47,6 @@ User.create!(firstname: 'Arms',
                activated_at: Time.zone.now)
 end
 
-MasterSetup.create!(
-  municipality: 'Mkhondo Local Municipality',
-  logo: File.open(File.join(Rails.root, '/app/assets/images', 'mkhondo-logo.png')), # File.open("../app/assets/images/mkhondo-logo.png"),
-  province: 'Mpumalanga',
-  latitude: -27.007764,
-  longitude: 30.801888,
-  address: 'Mkhondo Municipality<br />Piet Retief, 2380<br />Mpumalanga, South Africa'
-)
-
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 #
@@ -122,7 +54,6 @@ MasterSetup.create!(
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-require 'active_record/fixtures'
 User.create!( firstname: "Donald",
               surname: "Maphoru",
               email: "donald.maphoru@lepelle-nkumpi.gov.za",
