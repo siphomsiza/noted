@@ -140,7 +140,7 @@ class DepartmentalSdbipsController < ApplicationController
           FileUtils.copy(temp_file, "#{Rails.root}/db_mkhondo/data/SDBIPs")
           # DepartmentalSdbip.import_from_file(File.open(File.join(Rails.root,'/db_mkhondo/data/SDBIPs',File.basename(temp_file))))
           DepartmentalSdbip.import(params[:file])
-          flash[:success] = 'SDBIP submitted successfully for processing.'
+          flash[:success] = 'SDBIP submitted successfully.'
         rescue => e
           flash[:danger] = "SDBIP failed to import #{e.message}."
           Rails.logger.error { "#{e.message} #{e.backtrace.join("\n")}" }

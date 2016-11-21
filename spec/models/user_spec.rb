@@ -15,7 +15,7 @@ RSpec.describe User, type: :model do
     }
   end
   describe 'associations' do
-    it { should have_many(:roles) }
+    it { should have_one(:role) }
     it { should have_many(:kpi_results) }
     it { should have_many(:top_layer_administrators) }
     it { should have_many(:assurances) }

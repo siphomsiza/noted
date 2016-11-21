@@ -27,6 +27,7 @@ class SessionsController < ApplicationController
             flash[:danger] = message
             redirect_to(root_url) and return
           end
+          redirect_to(root_url) and return
         else
           message  = "Account Locked. "
           message += "please contact your system administrator."

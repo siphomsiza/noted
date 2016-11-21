@@ -1,17 +1,11 @@
 Feature: User Management
 
-    Background: Given I go to login page
-        When I fill in "session[email]" with "casey@sableassets.com"
-        And I fill in "session[company_code]" with "LPN001"
-        And I fill in "session[password]" with "sableassets"
-        Then I press "Log in"
-        Then I should be on the introduction page
+    Scenario: View Active Users
+        Given I am on the introduction page
         And I should see "USERS"
         When I follow "USERS"
-        Then I should be on the Manage Users page
-
-    Scenario: View Active Users
-        Given I am on the Manage Users page
+        Then I should be on the manage users page
+        Given I am on the manage users page
         And I should see "Avatar"
         And I should see "Ref"
         And I should see "First Name"
@@ -21,7 +15,11 @@ Feature: User Management
         And I should see "Last Login"
 
     Scenario: Edit/Update Active User details
-        Given I am on Manage Users page
+        Given I am on the introduction page
+        And I should see "USERS"
+        When I follow "USERS"
+        Then I should be on the manage users page
+        Given I am on manage users page
         When I follow "Active"
         Then I should be on the active users page
         And I should see "Actions"
@@ -33,7 +31,11 @@ Feature: User Management
         And I should be on the active users page
 
     Scenario: Lock Active User
-        Given I am on Manage Users page
+        Given I am on the introduction page
+        And I should see "USERS"
+        When I follow "USERS"
+        Then I should be on the manage users page
+        Given I am on manage users page
         When I follow "Active"
         Then I should be on the active users page
         And I should see "Actions"
@@ -44,7 +46,11 @@ Feature: User Management
         And I should be on the active users page
 
     Scenario: Terminate Active User
-        Given I am on Manage Users page
+        Given I am on the introduction page
+        And I should see "USERS"
+        When I follow "USERS"
+        Then I should be on the manage users page
+        Given I am on manage users page
         When I follow "Active"
         Then I should be on the active users page
         And I should see "Actions"
@@ -55,13 +61,21 @@ Feature: User Management
         And I should be on the active users page
 
     Scenario: View locked User
-        Given I am on Manage Users page
+        Given I am on the introduction page
+        And I should see "USERS"
+        When I follow "USERS"
+        Then I should be on the manage users page
+        Given I am on manage users page
         When I follow "Locked"
         Then I should be on the locked users page
         And I should see "Unlock User"
 
     Scenario: Unlock User
-        Given I am on Manage Users page
+        Given I am on the introduction page
+        And I should see "USERS"
+        When I follow "USERS"
+        Then I should be on the manage users page
+        Given I am on manage users page
         When I follow "Locked"
         Then I should be on the locked users page
         And I should see "Unlock User"
@@ -74,13 +88,21 @@ Feature: User Management
         And I should be on the active users page
 
     Scenario: View Terminated users
-        Given I am on Manage Users page
+        Given I am on the introduction page
+        And I should see "USERS"
+        When I follow "USERS"
+        Then I should be on the manage users page
+        Given I am on manage users page
         When I follow "Terminated"
         Then I should be on the terminated users page
         And I should see "Restore"
 
     Scenario: Restore Terminated users
-        Given I am on Manage Users page
+        Given I am on the introduction page
+        And I should see "USERS"
+        When I follow "USERS"
+        Then I should be on the manage users page
+        Given I am on manage users page
         When I follow "Terminated"
         Then I should be on the terminated users page
         And I should see "Restore"
@@ -91,7 +113,11 @@ Feature: User Management
         And I should be on the active users page
 
     Scenario: View All Users
-        Given I am on Manage Users page
+        Given I am on the introduction page
+        And I should see "USERS"
+        When I follow "USERS"
+        Then I should be on the manage users page
+        Given I am on manage users page
         When I follow "All"
         Then I should be on the all users page
         And I should see "Avatar"
@@ -105,7 +131,11 @@ Feature: User Management
         And I should see "Actions"
 
     Scenario: Edit User details
-        Given I am on Manage Users page
+        Given I am on the introduction page
+        And I should see "USERS"
+        When I follow "USERS"
+        Then I should be on the manage users page
+        Given I am on manage users page
         When I follow "All"
         Then I should be on the all users page
         And I should see "Actions"
@@ -117,7 +147,11 @@ Feature: User Management
         And I should be on the active users page
 
     Scenario: Edit User Access
-        Given I am on Manage Users page
+        Given I am on the introduction page
+        And I should see "USERS"
+        When I follow "USERS"
+        Then I should be on the manage users page
+        Given I am on manage users page
         When I follow "All"
         Then I should be on the all users page
         And I should see "Actions"
@@ -129,7 +163,11 @@ Feature: User Management
         And I should be on the active users page
 
     Scenario: Edit User Access
-        Given I am on Manage Users page
+        Given I am on the introduction page
+        And I should see "USERS"
+        When I follow "USERS"
+        Then I should be on the manage users page
+        Given I am on manage users page
         When I follow "All"
         Then I should be on the all users page
         And I should see "Actions"
@@ -141,7 +179,11 @@ Feature: User Management
         And I should be on the active users page
 
     Scenario: Delete User
-        Given I am on Manage Users page
+        Given I am on the introduction page
+        And I should see "USERS"
+        When I follow "USERS"
+        Then I should be on the manage users page
+        Given I am on manage users page
         When I follow "All"
         Then I should be on the all users page
         And I should see "Actions"
@@ -152,7 +194,11 @@ Feature: User Management
         And I should be on the active users page
 
     Scenario: Lock User
-        Given I am on Manage Users page
+        Given I am on the introduction page
+        And I should see "USERS"
+        When I follow "USERS"
+        Then I should be on the manage users page
+        Given I am on manage users page
         When I follow "All"
         Then I should be on the all users page
         And I should see "Actions"
@@ -163,7 +209,11 @@ Feature: User Management
         And I should be on the active users page
 
     Scenario: Terminate User
-        Given I am on Manage Users page
+        Given I am on the introduction page
+        And I should see "USERS"
+        When I follow "USERS"
+        Then I should be on the manage users page
+        Given I am on manage users page
         When I follow "All"
         Then I should be on the all users page
         And I should see "Actions"
@@ -174,14 +224,22 @@ Feature: User Management
         And I should be on the active users page
 
     Scenario: View User details
-        Given I am on Manage Users page
+        Given I am on the introduction page
+        And I should see "USERS"
+        When I follow "USERS"
+        Then I should be on the manage users page
+        Given I am on manage users page
         When I follow "Report Users"
         Then I should be on the report users page
         And I should see "User Details"
         And should see "Avatar"
 
     Scenario: View User details Log
-        Given I am on Manage Users page
+        Given I am on the introduction page
+        And I should see "USERS"
+        When I follow "USERS"
+        Then I should be on the manage users page
+        Given I am on manage users page
         When I follow "Report Users"
         Then I should be on the report users page
         And I should see "User Details Log"
@@ -190,7 +248,11 @@ Feature: User Management
         And should see "Avatar"
 
     Scenario: View Login Attempts log
-        Given I am on Manage Users page
+        Given I am on the introduction page
+        And I should see "USERS"
+        When I follow "USERS"
+        Then I should be on the manage users page
+        Given I am on manage users page
         When I follow "Report Users"
         Then I should be on the report users page
         And I should see "Login Attempts Log"
@@ -199,7 +261,11 @@ Feature: User Management
         And should see "Avatar"
 
     Scenario: View Super User Activity log
-        Given I am on Manage Users page
+        Given I am on the introduction page
+        And I should see "USERS"
+        When I follow "USERS"
+        Then I should be on the manage users page
+        Given I am on manage users page
         When I follow "Report Users"
         Then I should be on the report users page
         And I should see "Super User Activity Log"
@@ -208,7 +274,11 @@ Feature: User Management
         And should see "Avatar"
 
     Scenario: View User Activity log
-        Given I am on Manage Users page
+        Given I am on the introduction page
+        And I should see "USERS"
+        When I follow "USERS"
+        Then I should be on the manage users page
+        Given I am on manage users page
         When I follow "Report Users"
         Then I should be on the report users page
         And I should see "User Activity Log"
@@ -217,7 +287,11 @@ Feature: User Management
         And should see "Avatar"
 
     Scenario: Setup User Access
-        Given I am on Manage Users page
+        Given I am on the introduction page
+        And I should see "USERS"
+        When I follow "USERS"
+        Then I should be on the manage users page
+        Given I am on manage users page
         When I follow "Setup Users"
         Then I should be on the setup users page
         And I should see "User Access"
@@ -235,7 +309,11 @@ Feature: User Management
         And should see "Action"
 
     Scenario: Setup User Access
-        Given I am on Manage Users page
+        Given I am on the introduction page
+        And I should see "USERS"
+        When I follow "USERS"
+        Then I should be on the manage users page
+        Given I am on manage users page
         When I follow "Setup Users"
         Then I should be on the setup users page
         And I should see "User Access"
@@ -259,7 +337,11 @@ Feature: User Management
         And I should be on the user access page
 
     Scenario: Remove Admin Users
-        Given I am on Manage Users page
+        Given I am on the introduction page
+        And I should see "USERS"
+        When I follow "USERS"
+        Then I should be on the manage users page
+        Given I am on manage users page
         When I follow "Setup Users"
         Then I should be on the setup users page
         And I should see "Admin Users"
@@ -277,7 +359,11 @@ Feature: User Management
         And I should be on the setup users page
 
     Scenario: Set Admin Users
-        Given I am on Manage Users page
+        Given I am on the introduction page
+        And I should see "USERS"
+        When I follow "USERS"
+        Then I should be on the manage users page
+        Given I am on manage users page
         When I follow "Setup Users"
         Then I should be on the setup users page
         And I should see "Admin Users"
@@ -295,7 +381,11 @@ Feature: User Management
         And I should be on the setup users page
 
     Scenario: Set Maximum Log in Attempts
-        Given I am on Manage Users page
+        Given I am on the introduction page
+        And I should see "USERS"
+        When I follow "USERS"
+        Then I should be on the manage users page
+        Given I am on manage users page
         When I follow "Setup Users"
         Then I should be on the setup users page
         And I should see "Security Settings"
@@ -311,7 +401,11 @@ Feature: User Management
         And I should be on the setup users page
 
     Scenario: Set Super User
-        Given I am on Manage Users page
+        Given I am on the introduction page
+        And I should see "USERS"
+        When I follow "USERS"
+        Then I should be on the manage users page
+        Given I am on manage users page
         When I follow "Setup Users"
         Then I should be on the setup users page
         And I should see "Security Settings"
@@ -326,7 +420,11 @@ Feature: User Management
         And I should be on the setup users page
 
     Scenario: Add User to System with valid Information
-        Given I am on Manage Users page
+        Given I am on the introduction page
+        And I should see "USERS"
+        When I follow "USERS"
+        Then I should be on the manage users page
+        Given I am on manage users page
         When I follow "Add User"
         Then I should be on the add user page
         And I should see "New User"
@@ -349,7 +447,11 @@ Feature: User Management
         And I should be on the add user page
 
     Scenario: Add User to System with invalid Information
-        Given I am on Manage Users page
+        Given I am on the introduction page
+        And I should see "USERS"
+        When I follow "USERS"
+        Then I should be on the manage users page
+        Given I am on manage users page
         When I follow "Add User"
         Then I should be on the add user page
         And I should see "New User"
