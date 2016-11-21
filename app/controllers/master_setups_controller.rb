@@ -34,10 +34,10 @@ class MasterSetupsController < ApplicationController
   def create
     @master_setup = MasterSetup.new(master_setup_params)
       if @master_setup.save
-        flash[:success] = 'Location was successfully saved.'
+        flash[:success] = 'Master setup was successfully saved.'
         redirect_to master_setups_url
       else
-        flash[:danger] = 'Location was not saved.'
+        flash[:danger] = 'Master setup was not saved.'
         redirect_to master_setups_url
     end
   end
