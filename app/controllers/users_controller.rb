@@ -5,14 +5,7 @@ class UsersController < ApplicationController
     before_action :set_user, only: [:show, :edit, :update, :destroy, :deactivate, :set_admin, :set_normal_user, :terminate, :restore, :lock_user, :unlock_user, :activate, :edit_new_user, :edit_active_user, :edit_user_profile]
 
     def index
-        begin
-            @client = YahooWeather::Client.new
-            @response = @client.fetch(1_582_504)
-            @doc = @response.doc
-            @forecast = @doc['item']['forecast']
-        rescue SocketError => e
-            flash[:danger] = "received Exception #{e.message}"
-        end
+        weather_details
         @user_activities = ActivityLog.where(admin: false)#.paginate(page: params[:page], per_page: 15).includes(:user)
         @super_user_activities = ActivityLog.where(admin: true)#.paginate(page: params[:page], per_page: 15).includes(:user)
         @user = User.new
@@ -57,12 +50,11 @@ class UsersController < ApplicationController
             @user = User.find(params[:user_id])
             if @user.update_columns(super_admin: true)
                 flash[:success] = "#{@user.firstname} #{@user.surname} set to super user/admin successfully."
-                redirect_to users_path
             end
         else
             flash[:danger] = "failed to set #{@user.firstname} #{@user.surname} as super user/admin."
-            redirect_to users_path
         end
+        redirect_to :back
     end
 
     def new
@@ -85,11 +77,10 @@ class UsersController < ApplicationController
           @user.update_columns(new: true, added_at: Time.zone.now, status: 'New')
             @user.send_activation_email
             flash[:info] = 'Please check your email to confirm your account.'
-            redirect_to users_url
         else
             flash[:danger] = 'Failed to add new user. Please complete properly the fields below.'
-            redirect_to users_url
         end
+        redirect_to :back
     end
 
     def edit
@@ -98,11 +89,10 @@ class UsersController < ApplicationController
     def update
         if @user.update_attributes(user_params)
             flash[:success] = 'User details updated successfully'
-            redirect_to :back
         else
             flash[:danger] = 'Profile not updated.'
-            redirect_to :back
         end
+          redirect_to :back
     end
 
     def destroy
@@ -114,18 +104,17 @@ class UsersController < ApplicationController
     def deactivate
         if @user.update_columns(activated: false, activated_at: Time.zone.now)
             flash[:success] = "#{@user.firstname} #{@user.surname}'s account deactivated successfully."
-            redirect_to users_path
         end
+        redirect_to :back
     end
 
     def set_admin
         if @user.update_columns(admin: true)
             flash[:success] = "#{@user.firstname}  #{@user.surname} set as System Administrator."
-            redirect_to users_path
         else
             flash[:danger] = "Failed to set #{@user.firstname}  #{@user.surname} as System Administrator."
-            redirect_to :back
         end
+        redirect_to :back
     end
 
     def set_maximum_attempts
@@ -135,38 +124,35 @@ class UsersController < ApplicationController
             @users = User.all
             if @users.update_all(max_login_attempts: params[:new_maximum_attempts])
                 flash[:success] = 'Maximum login attempts updated successfully.'
-                redirect_to users_path
             end
         else
             flash[:danger] = 'Maximum login attempts not updated.'
-            redirect_to users_path
         end
+        redirect_to :back
     end
 
     def set_normal_user
         if @user.update_columns(admin: false)
             flash[:success] = 'User removed as System Administrator successfully.'
-            redirect_to users_path
         else
             flash[:danger] = "Failed to remove #{@user.firstname}  #{@user.surname} as System Administrator."
-            redirect_to :back
         end
+        redirect_to :back
     end
 
     def terminate
         if @user.update_columns(terminated: true, terminated_at: Time.zone.now, status: 'Terminated')
             flash[:success] = 'Account terminated successfully.'
-            redirect_to users_path
         else
             flash[:danger] = "Failed to terminate #{@user.firstname}'s Account."
-            redirect_to :back
         end
+        redirect_to :back
     end
 
     def restore
         if @user.update_columns(terminated: false, terminated_at: nil)
-            redirect_to users_path
         end
+        redirect_to :back
     end
 
     def lock_user
@@ -176,11 +162,10 @@ class UsersController < ApplicationController
         if @user.update_columns(login_attempts: max_attempts, status: 'Locked')
             @user.send_locked_account_email
             flash[:success] = "#{@user.firstname}'s account locked successfully."
-            redirect_to users_path
         else
             flash[:danger] = "Failed to lock #{@user.firstname}'s account."
-            redirect_to :back
         end
+        redirect_to :back
     end
 
     def unlock_user
@@ -196,8 +181,8 @@ class UsersController < ApplicationController
     def activate
         if @user.update_columns(activated: true, activated_at: Time.zone.now)
             flash[:success] = 'Account deactivated successfully.'
-            redirect_to users_path
         end
+        redirect_to :back
     end
 
     private

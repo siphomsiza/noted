@@ -1,11 +1,7 @@
 class Subdepartment < ActiveRecord::Base
 	ActiveRecord::Base.establish_connection($current_session_db)
 	include PublicActivity::Common
-	has_many :users
-	has_many :roles
-	has_many :top_layer_sdbips
 	has_many :subdepartmental_administrators
-	has_many :roles_details
 	belongs_to :department
 	has_many :departmental_sdbips
 	has_many :capital_projects

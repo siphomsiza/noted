@@ -6,18 +6,10 @@ class RevenueBySourcesController < ApplicationController
   # GET /revenue_by_sources
   # GET /revenue_by_sources.json
   def index
-    begin
-
-        @client = YahooWeather::Client.new
-        @response = @client.fetch(1582504)
-        @doc = @response.doc
-        @forecast = @doc["item"]["forecast"]
-  rescue SocketError => e
-    flash[:danger] = "received Exception #{e.message}"
-  end
+    weather_details
     @revenue_by_source = RevenueBySource.new
     @revenue_by_sources = RevenueBySource.paginate(page: params[:page],per_page: 10)
-    
+
   end
 
   # GET /revenue_by_sources/1

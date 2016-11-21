@@ -5,14 +5,7 @@ class DepartmentalSdbipProgressesController < ApplicationController
     skip_before_filter :verify_authenticity_token
 
     def index
-        begin
-          @client = YahooWeather::Client.new
-          @response = @client.fetch(1_582_504)
-          @doc = @response.doc
-          @forecast = @doc['item']['forecast']
-       rescue SocketError => e
-          flash[:danger] = "received Exception #{e.message}"
-        end
+        weather_details
         selected_headings = []
         if params[:data_value] && !params[:data_value].blank? && (params[:start_date] || params[:end_date] || params[:department_id] || params[:department_id] || params[:subdepartment_id] || params[:kpi_ref_number] || params[:predetermined_objective_id] || params[:kpi_owner_id] || params[:kpi] || params[:unit_of_measurement] || params[:mcore_classification_id] || params[:strategic_objective_id] || params[:source_of_evidence] || params[:baseline] || params[:annual_target] || params[:revised_target] || params[:national_kpa_id] || params[:ndp_objective_id] || params[:kpi_concept_id] || params[:kpi_type_id] || params[:provincial_strategic_outcome_id] || params[:ward_id] || params[:area_id] || params[:performance_standard] || params[:kpi_calculation_type_id] || params[:kpi_target_type_id])
             selected_audit_headers = params[:data_value]

@@ -5,14 +5,7 @@ class DepartmentalSdbipsController < ApplicationController
   before_action :admin_user, only: [:edit_kpis, :new, :restore_kpi, :index, :edit, :update, :destroy, :show]
   before_action :correct_user, only: [:edit_kpis, :index, :restore_kpi, :edit, :update, :show, :audit_performance]
   def index
-    begin
-      @client = YahooWeather::Client.new
-      @response = @client.fetch(1_582_504)
-      @doc = @response.doc
-      @forecast = @doc['item']['forecast']
-    rescue SocketError => e
-      flash[:danger] = "received Exception #{e.message}"
-    end
+    weather_details
     @departmental_sdbip = DepartmentalSdbip.new
     @departments = Department.includes(:subdepartments)
     @departmental_sdbips_to_file = DepartmentalSdbip.order(:department_id, :subdepartment_id)
@@ -145,9 +138,9 @@ class DepartmentalSdbipsController < ApplicationController
           end
           temp_file = params[:file].tempfile
           FileUtils.copy(temp_file, "#{Rails.root}/db_mkhondo/data/SDBIPs")
-          DepartmentalSdbip.import_from_file(File.open(File.join(Rails.root,'/db_mkhondo/data/SDBIPs',File.basename(temp_file))))
-          # DepartmentalSdbip.import(params[:file])
-          flash[:success] = 'SDBIP submitted successfully for processing.'
+          # DepartmentalSdbip.import_from_file(File.open(File.join(Rails.root,'/db_mkhondo/data/SDBIPs',File.basename(temp_file))))
+          DepartmentalSdbip.import(params[:file])
+          flash[:success] = 'SDBIP submitted successfully.'
         rescue => e
           flash[:danger] = "SDBIP failed to import #{e.message}."
           Rails.logger.error { "#{e.message} #{e.backtrace.join("\n")}" }

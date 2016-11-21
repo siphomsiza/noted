@@ -19,5 +19,4 @@ class Department < ActiveRecord::Base
 	delegate :name, :to => :roles, :prefix => true
 	delegate :name, :to => :monthly_cashflows, :prefix => true
 	delegate :name, :to => :top_layer_sdbips, :prefix => true
-	
 end

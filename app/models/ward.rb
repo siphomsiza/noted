@@ -3,7 +3,6 @@ class Ward < ActiveRecord::Base
 	include PublicActivity::Common
 	belongs_to :area
 	has_many :top_layer_sdbips
-	has_many :departmental_sdbips
 	has_many :capital_projects
 	delegate :name, :to => :departmental_sdbips, :prefix => true
 	delegate :name, :to => :capital_projects, :prefix => true

@@ -1,8 +1,6 @@
 class SdbipTimePeriod < ActiveRecord::Base
   ActiveRecord::Base.establish_connection($current_session_db)
   include PublicActivity::Common
-  has_many :departmental_sdbips
-  belongs_to :sdbip_report
   def self.import(file)
   	case File.extname(file.original_filename)
    	when ".csv" then
@@ -30,7 +28,7 @@ class SdbipTimePeriod < ActiveRecord::Base
    	else raise "Unknown file type: #{file.original_filename}"
    	end
 
-   end
+  end
 
  def self.fetch_excel_data(file)
 
@@ -47,7 +45,7 @@ class SdbipTimePeriod < ActiveRecord::Base
        end
    end
  end
- 
+
  def self.open_spreadsheet(file)
 
    case File.extname(file.original_filename)

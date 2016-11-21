@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
 
-# ...
+  # ...
   auto_session_timeout 5.minutes
   before_timedout_action
   include PublicActivity::StoreController
@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
   include SessionsHelper
   def record_activity(note)
     if !current_user.blank?
-      @activity = self.new
+      @activity = ActivityLog.new
       @activity = current_user.activity_logs.build
       @activity.admin = current_user.admin || current_user.super_admin
       @activity.browser = request.env['HTTP_USER_AGENT']
@@ -25,23 +25,34 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate
-   redirect_to root_url if session[:session_key].nil?
+    redirect_to root_url if session[:session_key].nil?
   end
+
   # def reload_page
   #   redirect_to :back
   # end
+  def weather_details
+    @client = YahooWeather::Client.new
+    @response = @client.fetch(1_582_504)
+    @doc = @response.doc
+    @forecast = @doc['item']['forecast']
+  end
+
   private
+
   def current_user
     @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
   end
+
   def admin_user
-    #@admin_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
-    #@admin_user = @admin_user.admin
-  end
-  protected
-  #override before_timedout
-  def before_timedout
-    #your custom code here
+    # @admin_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
+    # @admin_user = @admin_user.admin
   end
 
+  protected
+
+  # override before_timedout
+  def before_timedout
+    # your custom code here
+  end
 end

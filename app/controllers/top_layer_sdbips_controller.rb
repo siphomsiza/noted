@@ -6,18 +6,10 @@ class TopLayerSdbipsController < ApplicationController
   # GET /top_layer_sdbips
   # GET /top_layer_sdbips.json
   def index
-    begin
-
-        @client = YahooWeather::Client.new
-        @response = @client.fetch(1582504)
-        @doc = @response.doc
-        @forecast = @doc["item"]["forecast"]
-  rescue SocketError => e
-    flash[:danger] = "received Exception #{e.message}"
-  end
+    weather_details
     @top_layer_sdbip = TopLayerSdbip.new
     @top_layer_sdbips = TopLayerSdbip.paginate(page: params[:page],per_page: 10)
-    
+
   end
 
   # GET /top_layer_sdbips/1

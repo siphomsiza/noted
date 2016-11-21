@@ -27,6 +27,7 @@ class SessionsController < ApplicationController
             flash[:danger] = message
             redirect_to(root_url) and return
           end
+          redirect_to(root_url) and return
         else
           message  = "Account Locked. "
           message += "please contact your system administrator."
@@ -50,8 +51,7 @@ class SessionsController < ApplicationController
               message += "your account has been locked."
               flash[:danger] = message
           end
-      end
-      if !@user.blank? && @user.login_attempts >= @user.max_login_attempts
+      elsif !@user.blank? && @user.login_attempts >= @user.max_login_attempts
               increment_login_attempts @user
               message = "Your account has been locked."
               message += "please contact your system administrator.."

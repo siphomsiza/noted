@@ -6,14 +6,7 @@ class MasterSetupsController < ApplicationController
   # GET /master_setups.json
   def index
 
-    begin
-        @client = YahooWeather::Client.new
-        @response = @client.fetch(1582504)
-        @doc = @response.doc
-        @forecast = @doc["item"]["forecast"]
-   rescue SocketError => e
-    flash[:danger] = "received Exception #{e.message}"
-    end
+    weather_details
     @jobtitle = Jobtitle.new
     @areas = Area.all
     @job_titles = Jobtitle.paginate(page: params[:page],per_page: 15)
@@ -41,10 +34,10 @@ class MasterSetupsController < ApplicationController
   def create
     @master_setup = MasterSetup.new(master_setup_params)
       if @master_setup.save
-        flash[:success] = 'Location was successfully saved.'
+        flash[:success] = 'Master setup was successfully saved.'
         redirect_to master_setups_url
       else
-        flash[:danger] = 'Location was not saved.'
+        flash[:danger] = 'Master setup was not saved.'
         redirect_to master_setups_url
     end
   end
