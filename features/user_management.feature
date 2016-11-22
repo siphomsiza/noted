@@ -1,11 +1,20 @@
-Feature: User Management
+Feature: User Management Module(s)
+
+    Background: Log in Successfully As an Admin
+        Given I am on the login page
+        When I fill in "session[email]" with "casey@sableassets.com"
+        And I fill in "session[company_code]" with "LPN001"
+        And I fill in "session[password]" with "sableassets"
+        And I press "Log in"
+        Then I should be on the introduction page
+        And I should see "Logged in sucessfully..."
 
     Scenario: View Active Users
         Given I am on the introduction page
         And I should see "USERS"
         When I follow "USERS"
-        Then I should be on the manage users page
-        Given I am on the manage users page
+        Then I should be on manage users page
+        Given I am on manage users page
         And I should see "Avatar"
         And I should see "Ref"
         And I should see "First Name"
@@ -18,14 +27,14 @@ Feature: User Management
         Given I am on the introduction page
         And I should see "USERS"
         When I follow "USERS"
-        Then I should be on the manage users page
+        Then I should be on manage users page
         Given I am on manage users page
         When I follow "Active"
         Then I should be on the active users page
         And I should see "Actions"
         When I follow "Edit Details"
         Then I should be on the edit active user page
-        When I select "Mr" from "user[title]"
+        When I select "Mr." from "user[title]"
         And I press "Save"
         Then I should see "User details updated successfully"
         And I should be on the active users page
@@ -34,7 +43,7 @@ Feature: User Management
         Given I am on the introduction page
         And I should see "USERS"
         When I follow "USERS"
-        Then I should be on the manage users page
+        Then I should be on manage users page
         Given I am on manage users page
         When I follow "Active"
         Then I should be on the active users page
@@ -49,7 +58,7 @@ Feature: User Management
         Given I am on the introduction page
         And I should see "USERS"
         When I follow "USERS"
-        Then I should be on the manage users page
+        Then I should be on manage users page
         Given I am on manage users page
         When I follow "Active"
         Then I should be on the active users page
@@ -64,7 +73,7 @@ Feature: User Management
         Given I am on the introduction page
         And I should see "USERS"
         When I follow "USERS"
-        Then I should be on the manage users page
+        Then I should be on manage users page
         Given I am on manage users page
         When I follow "Locked"
         Then I should be on the locked users page
@@ -74,7 +83,7 @@ Feature: User Management
         Given I am on the introduction page
         And I should see "USERS"
         When I follow "USERS"
-        Then I should be on the manage users page
+        Then I should be on manage users page
         Given I am on manage users page
         When I follow "Locked"
         Then I should be on the locked users page
@@ -91,7 +100,7 @@ Feature: User Management
         Given I am on the introduction page
         And I should see "USERS"
         When I follow "USERS"
-        Then I should be on the manage users page
+        Then I should be on manage users page
         Given I am on manage users page
         When I follow "Terminated"
         Then I should be on the terminated users page
@@ -101,7 +110,7 @@ Feature: User Management
         Given I am on the introduction page
         And I should see "USERS"
         When I follow "USERS"
-        Then I should be on the manage users page
+        Then I should be on manage users page
         Given I am on manage users page
         When I follow "Terminated"
         Then I should be on the terminated users page
@@ -116,7 +125,7 @@ Feature: User Management
         Given I am on the introduction page
         And I should see "USERS"
         When I follow "USERS"
-        Then I should be on the manage users page
+        Then I should be on manage users page
         Given I am on manage users page
         When I follow "All"
         Then I should be on the all users page
@@ -134,7 +143,7 @@ Feature: User Management
         Given I am on the introduction page
         And I should see "USERS"
         When I follow "USERS"
-        Then I should be on the manage users page
+        Then I should be on manage users page
         Given I am on manage users page
         When I follow "All"
         Then I should be on the all users page
@@ -150,7 +159,7 @@ Feature: User Management
         Given I am on the introduction page
         And I should see "USERS"
         When I follow "USERS"
-        Then I should be on the manage users page
+        Then I should be on manage users page
         Given I am on manage users page
         When I follow "All"
         Then I should be on the all users page
@@ -166,7 +175,7 @@ Feature: User Management
         Given I am on the introduction page
         And I should see "USERS"
         When I follow "USERS"
-        Then I should be on the manage users page
+        Then I should be on manage users page
         Given I am on manage users page
         When I follow "All"
         Then I should be on the all users page
@@ -182,14 +191,14 @@ Feature: User Management
         Given I am on the introduction page
         And I should see "USERS"
         When I follow "USERS"
-        Then I should be on the manage users page
+        Then I should be on manage users page
         Given I am on manage users page
         When I follow "All"
         Then I should be on the all users page
         And I should see "Actions"
         When I follow "Delete"
-        Then I should see "Are you sure?"
-        When I press "ok"
+        Then I should see "Are you sure?" within a dialog
+        When I press "OK" within a dialog
         Then I should see "User deleted"
         And I should be on the active users page
 
@@ -197,7 +206,7 @@ Feature: User Management
         Given I am on the introduction page
         And I should see "USERS"
         When I follow "USERS"
-        Then I should be on the manage users page
+        Then I should be on manage users page
         Given I am on manage users page
         When I follow "All"
         Then I should be on the all users page
@@ -212,7 +221,7 @@ Feature: User Management
         Given I am on the introduction page
         And I should see "USERS"
         When I follow "USERS"
-        Then I should be on the manage users page
+        Then I should be on manage users page
         Given I am on manage users page
         When I follow "All"
         Then I should be on the all users page
@@ -227,7 +236,7 @@ Feature: User Management
         Given I am on the introduction page
         And I should see "USERS"
         When I follow "USERS"
-        Then I should be on the manage users page
+        Then I should be on manage users page
         Given I am on manage users page
         When I follow "Report Users"
         Then I should be on the report users page
@@ -238,12 +247,12 @@ Feature: User Management
         Given I am on the introduction page
         And I should see "USERS"
         When I follow "USERS"
-        Then I should be on the manage users page
+        Then I should be on manage users page
         Given I am on manage users page
         When I follow "Report Users"
         Then I should be on the report users page
-        And I should see "User Details Log"
-        When I follow "User Details Log"
+        And I should see "Users Details Log"
+        When I follow "Users Details Log"
         Then I should be on the user details log page
         And should see "Avatar"
 
@@ -251,7 +260,7 @@ Feature: User Management
         Given I am on the introduction page
         And I should see "USERS"
         When I follow "USERS"
-        Then I should be on the manage users page
+        Then I should be on manage users page
         Given I am on manage users page
         When I follow "Report Users"
         Then I should be on the report users page
@@ -264,7 +273,7 @@ Feature: User Management
         Given I am on the introduction page
         And I should see "USERS"
         When I follow "USERS"
-        Then I should be on the manage users page
+        Then I should be on manage users page
         Given I am on manage users page
         When I follow "Report Users"
         Then I should be on the report users page
@@ -277,7 +286,7 @@ Feature: User Management
         Given I am on the introduction page
         And I should see "USERS"
         When I follow "USERS"
-        Then I should be on the manage users page
+        Then I should be on manage users page
         Given I am on manage users page
         When I follow "Report Users"
         Then I should be on the report users page
@@ -290,7 +299,7 @@ Feature: User Management
         Given I am on the introduction page
         And I should see "USERS"
         When I follow "USERS"
-        Then I should be on the manage users page
+        Then I should be on manage users page
         Given I am on manage users page
         When I follow "Setup Users"
         Then I should be on the setup users page
@@ -312,7 +321,7 @@ Feature: User Management
         Given I am on the introduction page
         And I should see "USERS"
         When I follow "USERS"
-        Then I should be on the manage users page
+        Then I should be on manage users page
         Given I am on manage users page
         When I follow "Setup Users"
         Then I should be on the setup users page
@@ -340,7 +349,7 @@ Feature: User Management
         Given I am on the introduction page
         And I should see "USERS"
         When I follow "USERS"
-        Then I should be on the manage users page
+        Then I should be on manage users page
         Given I am on manage users page
         When I follow "Setup Users"
         Then I should be on the setup users page
@@ -362,7 +371,7 @@ Feature: User Management
         Given I am on the introduction page
         And I should see "USERS"
         When I follow "USERS"
-        Then I should be on the manage users page
+        Then I should be on manage users page
         Given I am on manage users page
         When I follow "Setup Users"
         Then I should be on the setup users page
@@ -380,31 +389,11 @@ Feature: User Management
         Then I should see "User set as System Administrator."
         And I should be on the setup users page
 
-    Scenario: Set Maximum Log in Attempts
-        Given I am on the introduction page
-        And I should see "USERS"
-        When I follow "USERS"
-        Then I should be on the manage users page
-        Given I am on manage users page
-        When I follow "Setup Users"
-        Then I should be on the setup users page
-        And I should see "Security Settings"
-        When I follow "Security Settings"
-        Then I should be on the security setup page
-        And should see "Set Maximum Attempts"
-        And should see "Set Super User"
-        When I follow "Set Maximum Attempts"
-        Then I should be on the set maximum login attempts page
-        When I fill in "attempts" with "5"
-        And I press "Save"
-        Then I should see "Maximum login attempts updated successfully."
-        And I should be on the setup users page
-
     Scenario: Set Super User
         Given I am on the introduction page
         And I should see "USERS"
         When I follow "USERS"
-        Then I should be on the manage users page
+        Then I should be on manage users page
         Given I am on manage users page
         When I follow "Setup Users"
         Then I should be on the setup users page
@@ -412,23 +401,23 @@ Feature: User Management
         When I follow "Security Settings"
         Then I should be on the security setup page
         And should see "Set Super User"
-        When I follow "Set Super User"
+        When I press "Set Super User"
         Then I should be on the set super user page
-        When I select "8" from "user_id"
+        When I select "Sandiswa" from "user_id"
         And I press "Save"
-        Then I should see "User set to Super User."
+        Then I should see "User set to super user/admin successfully."
         And I should be on the setup users page
 
     Scenario: Add User to System with valid Information
         Given I am on the introduction page
         And I should see "USERS"
         When I follow "USERS"
-        Then I should be on the manage users page
+        Then I should be on manage users page
         Given I am on manage users page
         When I follow "Add User"
         Then I should be on the add user page
         And I should see "New User"
-        When I select "Mr" from "user[title]"
+        When I select "Mr." from "user[title]"
         And I fill in "user[firstname]" with "Security Settings"
         And I fill in "user[surname]" with "Sable"
         And I fill in "user[birth_date]" with "1988/02/29"
@@ -438,8 +427,7 @@ Feature: User Management
         And I fill in "user[password_confirmation]" with "foobar"
         And I fill in "user[employee_number]" with "MBV232"
         And I fill in "user[employment_date]" with "2015/12/01"
-        And I select "General Manager Corporate" from "user[job_title]"
-        And I select "1" from "user[department_id]"
+        And I select "Municipal Manager's Office" from "user[department_id]"
         And I fill in "user[email]" with "neziswa@sableassets.com"
         And I select "Male" from "user[gender]"
         And I press "Save"
@@ -450,12 +438,12 @@ Feature: User Management
         Given I am on the introduction page
         And I should see "USERS"
         When I follow "USERS"
-        Then I should be on the manage users page
+        Then I should be on manage users page
         Given I am on manage users page
         When I follow "Add User"
         Then I should be on the add user page
         And I should see "New User"
-        When I select "Mr" from "user[title]"
+        When I select "Mr." from "user[title]"
         And I fill in "user[firstname]" with ""
         And I fill in "user[surname]" with ""
         And I fill in "user[birth_date]" with "1988/02/29"
@@ -465,10 +453,29 @@ Feature: User Management
         And I fill in "user[password_confirmation]" with "foobar"
         And I fill in "user[employee_number]" with "MBV232"
         And I fill in "user[employment_date]" with "2015/12/01"
-        And I select "General Manager Corporate" from "user[job_title]"
-        And I select "1" from "user[department_id]"
+        And I select "Municipal Manager's Office" from "user[department_id]"
         And I fill in "user[email]" with "neziswa@sableassets.com"
         And I select "Male" from "user[gender]"
         And I press "Save"
         Then I should see "Failed to add new user. Please complete properly the fields below."
         And I should be on the add user page
+
+    Scenario: Set Maximum Log in Attempts
+        Given I am on the introduction page
+        And I should see "USERS"
+        When I follow "USERS"
+        Then I should be on manage users page
+        Given I am on manage users page
+        When I follow "Setup Users"
+        Then I should be on the setup users page
+        And I should see "Security Settings"
+        When I follow "Security Settings"
+        Then I should be on the security setup page
+        And should see "Set Maximum Attempts"
+        And should see "Set Super User"
+        When I press "Set Maximum Attempts"
+        Then I should be on the set maximum login attempts page
+        When I fill in "attempts" with 5
+        And I press "Submit"
+        Then I should see "Maximum login attempts updated successfully."
+        And I should be on the setup users page

@@ -54,10 +54,13 @@ When (/^(?:|I )press "([^"]*)"$/) do |button|
 end
 
 When (/^(?:|I )follow "([^"]*)"$/) do |link|
-  click_link(link)
+  click_link(link, :match => :first)
 end
 
 When (/^(?:|I )fill in "([^"]*)" with "([^"]*)"$/) do |field, value|
+  fill_in(field, :with => value)
+end
+When(/^I fill in "([^"]*)" with (\d+)$/) do |field, value|
   fill_in(field, :with => value)
 end
 
@@ -109,7 +112,11 @@ Then (/^(?:|I )should see "([^"]*)"$/) do |text|
     assert page.has_content?(text)
   end
 end
-
+Then (/^(?:|I )should see "([^"]*) within a dialog"$/) do |wrapped_step,text|
+with_scope(".jquery-ui-dialog-class") do
+  Then wrapped_step
+end
+end
 Then (/^(?:|I )should see \/([^\/]*)\/$/) do |regexp|
   regexp = Regexp.new(regexp)
 

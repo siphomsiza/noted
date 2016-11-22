@@ -6,69 +6,21 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 require 'active_record/fixtures'
-User.create!(firstname: 'Sandiswa',
-             surname: 'Nqampoyi',
-             email: 'Sandiswa@sableassets.co.za',
-             password: 'sableassets',
-             title: 'Mr',
-             mobile: '0832687954',
-             landline: '0112563984',
-             id_number: Faker::Number.number(13),
-             birth_date: Time.now.strftime('%dd/%mm/%YYYY'),
-             location: 'Riversands Incubation Hub',
-             password_confirmation: 'sableassets',
-             super_admin: true,
-             activated: true, status: 'Active',
-             activated_at: Time.zone.now)
-
-20.times do |n|
-  name = Faker::Name.first_name
-  lastname = Faker::Name.last_name
-  title = Faker::Name.prefix
-  location = Faker::Address.city
-  landline = Faker::PhoneNumber.phone_number
-  mobile = Faker::PhoneNumber.cell_phone
-  email = "example-#{n + 1}@railstutorial.org"
-  password = 'password'
-  User.create!(firstname:  name,
-               surname: lastname,
-               email: email,
-               location: location,
-               mobile: mobile,
-               landline: landline,
-               password:              password,
-               password_confirmation: password,
-               title: title,
-               id_number: Faker::Number.number(13),
-               birth_date: Time.now.strftime('/%dd%mm/%YYYY'),
-               status: 'Active',
-               activated: true,
-               admin: false,
-               activated_at: Time.zone.now)
-end
-
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
-User.create!( firstname: "Donald",
-              surname: "Maphoru",
-              email: "donald.maphoru@lepelle-nkumpi.gov.za",
-              password: "donald1234",
+User.create!( firstname: "Sandiswa",
+              surname: "Nqampoyi",
+              email: "Sandiswa@sableassets.co.za",
+              password: "sableassets",
               title: "Mr",
-              mobile: Faker::Number.number(10),
-              landline: Faker::Number.number(10),
+              mobile: "0832687954",
+              landline: "0112563984",
               id_number: Faker::Number.number(13),
               birth_date: Time.now.strftime("%dd/%mm/%YYYY"),
-              location: "Lepelle Nkumpi Local Municipality",
-              password_confirmation: "donald1234",
+              location: "Riversands Incubation Hub",
+              password_confirmation: "sableassets",
               super_admin: true,
               activated: true,status: "Active",
               activated_at: Time.zone.now)
-User.create!( firstname: "Casey Abram",
+              User.create!( firstname: "Casey Abram",
                             surname: "Seabela",
                             username: "caseabela",
                             email: "casey@sableassets.com",
@@ -77,20 +29,61 @@ User.create!( firstname: "Casey Abram",
                             mobile: "0764338939",
                             landline: "0112563984",
                             id_number: Faker::Number.number(13),
-                            birth_date: Time.now.strftime("%dd/%mm/%YYYY"),
+                            birth_date: Time.now.strftime("/%dd%mm/%YYYY"),
                             location: "Riversands Incubation Hub",
                             password_confirmation: "sableassets",
                             super_admin: true,
                             activated: true,status: "Active",
                             activated_at: Time.zone.now)
 
+User.create!( firstname: "Arms",
+              surname: "Audit",
+              email: "armsuser@sableassets.co.za",
+              password: "sableassets",
+              id_number: Faker::Number.number(13),
+              birth_date: Time.now.strftime("/%dd%mm/%YYYY"),
+              title: "Mrs",
+              mobile: "+27 86 619-9887",
+              landline: "+27 11 484-1253/8223",
+              location: "1st Floor, St David's Place, Parktown,Johannesburg, South Africa, 2193",
+              password_confirmation: "sableassets",
+              admin: true,status: "Active",
+              activated: true,
+              activated_at: Time.zone.now)
+
+20.times do |n|
+name  = Faker::Name.first_name
+lastname = Faker::Name.last_name
+title =Faker::Name.prefix
+location = Faker::Address.city
+landline=Faker::PhoneNumber.phone_number
+mobile=Faker::PhoneNumber.cell_phone
+  email = "example-#{n+1}@railstutorial.org"
+  password = "password"
+  User.create!(firstname:  name,
+              surname: lastname,
+              email: email,
+              location: location,
+              mobile: mobile,
+              landline: landline,
+              password:              password,
+              password_confirmation: password,
+              title: title,
+              id_number: Faker::Number.number(13),
+              birth_date: Time.now.strftime("/%dd%mm/%YYYY"),
+              status: "Active",
+              activated: true,
+              admin: false,
+              activated_at: Time.zone.now)
+end
+
 MasterSetup.create!(
-  municipality: "Lepelle Nkumpi Local Municipality",
-  logo: File.open(File.join(Rails.root,'/app/assets/images','lepelle-logo.jpg')),# File.open("../app/assets/images/mkhondo-logo.png"),
-  province: "Limpopo",
-  latitude: -24.2585 ,
-  longitude: 29.6499,
-  address: 'Lepelle Nkumpi Local Municipality<br />Lebowakgomo-BA, 0737<br />Limpopo, South Africa'
+  municipality: "Mkhondo Local Municipality",
+  logo: File.open(File.join(Rails.root,'/app/assets/images','mkhondo-logo.png')),# File.open("../app/assets/images/mkhondo-logo.png"),
+  province: "Mpumalanga",
+  latitude: -27.007764 ,
+  longitude: 30.801888,
+  address: 'Mkhondo Municipality<br />Piet Retief, 2380<br />Mpumalanga, South Africa'
 )
 
 landline=Faker::Number.number(10)
@@ -122,12 +115,12 @@ Department.create!(name: "Department in the MM's Office",
   tel_no:landline,
   fax_no: mobile)
 
-Subdepartment.create!(name: "Municipal Manager's Office", department_id: "1")
-
-Subdepartment.create!(name: "Internal Audit", department_id: "7",)
-Subdepartment.create!(name: "Performance Management Unit", department_id: "7")
-Subdepartment.create!(name: "Legal Services", department_id: "7")
-Subdepartment.create!(name: "Forestry", department_id: "7")
+Subdepartment.create!(name: "Municipal Manager", department_id: "1")
+Subdepartment.create!(name: "Internal Audit", department_id: "1",)
+Subdepartment.create!(name: "Performance Management Unit", department_id: "1")
+Subdepartment.create!(name: "Risk Management", department_id: "1")
+Subdepartment.create!(name: "Legal Services", department_id: "1")
+Subdepartment.create!(name: "Forestry", department_id: "1")
 
 Subdepartment.create!(name: "Budget And Financial Reporting", department_id: "2")
 Subdepartment.create!(name: "Expenditure", department_id: "2")
@@ -135,16 +128,14 @@ Subdepartment.create!(name: "ICT", department_id: "2")
 Subdepartment.create!(name: "Revenue", department_id: "2")
 Subdepartment.create!(name: "Supply Chain Management", department_id: "2")
 
-Subdepartment.create!(name: "Public Safety", department_id: "3")
+Subdepartment.create!(name: "Department Of Community Service", department_id: "3")
 
-Subdepartment.create!(name: "Human Resources", department_id: "4")
-Subdepartment.create!(name: "Mayorality and Communications", department_id: "4")
-Subdepartment.create!(name: "Secretariat, Records and Auxillary Services", department_id: "4")
+Subdepartment.create!(name: "Corporate Services", department_id: "4")
 
-Subdepartment.create!(name: "Parks and Solid Waste", department_id: "3")
-Subdepartment.create!(name: "General Manager: Community Services", department_id: "3")
-
-Subdepartment.create!(name: "Technical Services", department_id: "5")
+Subdepartment.create!(name: "Water and Sanitation", department_id: "5")
+Subdepartment.create!(name: "Electrical Services", department_id: "5")
+Subdepartment.create!(name: "Roads and Storm Water", department_id: "5")
+Subdepartment.create!(name: "Project Management Unit", department_id: "5")
 
 Subdepartment.create!(name: "Planning and Development", department_id: "6")
 Subdepartment.create!(name: "Human Settlements", department_id: "6")
@@ -162,49 +153,77 @@ Subdepartment.create!(name: "Risk", department_id: "7")
 # From lookups
 #ActiveRecord::FixtureSet.create_fixtures(File.join(Rails.root, 'db/migrate/data'), 'strategic_objectives')
 
-CSV.foreach('db/data/kpa.csv', headers: true, :col_sep => ',') do |row|
+CSV.foreach('db_mkhondo/data/kpa.csv', headers: true, :col_sep => ',') do |row|
   Kpa.create! row.to_hash
 end
-CSV.foreach('db/data/strategic_objectives.csv', headers: true, :col_sep => ',') do |row|
+CSV.foreach('db_mkhondo/data/strategic_objectives.csv', headers: true, :col_sep => ',') do |row|
   StrategicObjective.create! row.to_hash
 end
-CSV.foreach('db/data/risk_ratings.csv', headers: true, :col_sep => ',') do |row|
+CSV.foreach('db_mkhondo/data/risk_ratings.csv', headers: true, :col_sep => ',') do |row|
   RiskRating.create! row.to_hash
 end
 
-CSV.foreach('db/data/kpi_concept.csv', headers: true, :col_sep => ',') do |row|
+CSV.foreach('db_mkhondo/data/kpi_concept.csv', headers: true, :col_sep => ',') do |row|
   KpiConcept.create! row.to_hash
 end
-CSV.foreach('db/data/jobs.csv', headers: true, :col_sep => ',') do |row|
+CSV.foreach('db_mkhondo/data/jobs.csv', headers: true, :col_sep => ',') do |row|
   Jobtitle.create! row.to_hash
 end
-CSV.foreach('db/data/kpi_owners.csv', headers: true, :col_sep => ',') do |row|
+CSV.foreach('db_mkhondo/data/kpi_owners.csv', headers: true, :col_sep => ',') do |row|
   KpiOwner.create! row.to_hash
 end
-CSV.foreach('db/data/kpi_type.csv', headers: true, :col_sep => ',') do |row|
+CSV.foreach('db_mkhondo/data/kpi_type.csv', headers: true, :col_sep => ',') do |row|
   KpiType.create! row.to_hash
 end
-CSV.foreach('db/data/kpi_calculation_types.csv', headers: true, :col_sep => ',') do |row|
+CSV.foreach('db_mkhondo/data/kpi_calculation_types.csv', headers: true, :col_sep => ',') do |row|
   KpiCalculationType.create! row.to_hash
 end
-CSV.foreach('db/data/ndp_objectives.csv', headers: true, :col_sep => ',') do |row|
+CSV.foreach('db_mkhondo/data/ndp_objectives.csv', headers: true, :col_sep => ',') do |row|
   NdpObjective.create! row.to_hash
 end
-CSV.foreach('db/data/predetermined_objectives.csv', headers: true, :col_sep => ',') do |row|
+CSV.foreach('db_mkhondo/data/predetermined_objectives.csv', headers: true, :col_sep => ',') do |row|
   PredeterminedObjective.create! row.to_hash
 end
-CSV.foreach('db/data/national_outcomes.csv', headers: true, :col_sep => ',') do |row|
+CSV.foreach('db_mkhondo/data/national_outcomes.csv', headers: true, :col_sep => ',') do |row|
   NationalOutcome.create! row.to_hash
 end
-CSV.foreach('db/data/mscore_classification.csv', headers: true, :col_sep => ',') do |row|
+CSV.foreach('db_mkhondo/data/mscore_classification.csv', headers: true, :col_sep => ',') do |row|
   MscoreClassification.create! row.to_hash
 end
-CSV.foreach('db/data/reporting.csv', headers: true, :col_sep => ',') do |row|
+CSV.foreach('db_mkhondo/data/reporting.csv', headers: true, :col_sep => ',') do |row|
   ReportingCategory.create! row.to_hash
 end
 Ward.create!(name: "All",ward_no: 1,area_id: 1, mun_ref: "Unspecified")
+Ward.create!(name: "1",ward_no: 1,area_id: 1, mun_ref:1)
+Ward.create!(name: "2",ward_no: 1,area_id: 1, mun_ref:2)
+Ward.create!(name: "3",ward_no: 1,area_id: 1, mun_ref:3)
+Ward.create!(name: "4",ward_no: 1,area_id: 1, mun_ref:4)
+Ward.create!(name: "5",ward_no: 1,area_id: 1, mun_ref:5)
+Ward.create!(name: "6",ward_no: 1,area_id: 1, mun_ref:6)
+Ward.create!(name: "7",ward_no: 1,area_id: 1, mun_ref:7)
+Ward.create!(name: "8",ward_no: 1,area_id: 1, mun_ref:8)
+Ward.create!(name: "9",ward_no: 1,area_id: 1, mun_ref:9)
+Ward.create!(name: "10",ward_no: 1,area_id: 1, mun_ref:10)
+Ward.create!(name: "11",ward_no: 1,area_id: 1, mun_ref:11)
+Ward.create!(name: "12",ward_no: 1,area_id: 1, mun_ref:12)
+Ward.create!(name: "13",ward_no: 1,area_id: 1, mun_ref:13)
+Ward.create!(name: "14",ward_no: 1,area_id: 1, mun_ref:14)
+Ward.create!(name: "15",ward_no: 1,area_id: 1, mun_ref:15)
+Ward.create!(name: "16",ward_no: 1,area_id: 1, mun_ref:16)
+Ward.create!(name: "17",ward_no: 1,area_id: 1, mun_ref:17)
+Ward.create!(name: "18",ward_no: 1,area_id: 1, mun_ref:18)
+Ward.create!(name: "19",ward_no: 1,area_id: 1, mun_ref:19)
 
 Area.create!(name: "All")
+Area.create!(name: "Amsterdam")
+Area.create!(name: "Dirkiesdorp")
+Area.create!(name: "Driefontein")
+Area.create!(name: "Ethandkukhanya")
+Area.create!(name: "Iswepe")
+Area.create!(name: "Kempville")
+Area.create!(name: "Kwathandeka")
+Area.create!(name: "Piet Retief")
+Area.create!(name: "Retief ville")
 
 KpiTargetType.create!(name: "Currency", code: "R")
 KpiTargetType.create!(name: "Percentage", code: "%")
@@ -491,16 +510,9 @@ while $i < $num  do
   SdbipTimePeriod.create!(period: period,primary_reminder: primary_reminder,primary_closure: primary_closure, secondary_reminder: secondary_reminder,secondary_closure: secondary_closure)
    $i +=1
 end
-  # CSV.foreach('db/data/capital.csv', headers: true, :col_sep => ',') do |row|
+  # CSV.foreach('db_mkhondo/data/capital.csv', headers: true, :col_sep => ',') do |row|
   #   CapitalProject.create! row.to_hash
   # end
-  CSV.foreach('db/data/sdbips.csv', headers: true, :col_sep => ',') do |row|
-    DepartmentalSdbip.create! row.to_hash
-  end
-
-# CSV.foreach('db_mkhondo/data/capital.csv', headers: true, :col_sep => ',') do |row|
-#   CapitalProject.create! row.to_hash
-# end
-# CSV.foreach('db_mkhondo/data/sdbips.csv', headers: true, :col_sep => ',') do |row|
-#   DepartmentalSdbip.create! row.to_hash
-# end
+  # CSV.foreach('db_mkhondo/data/sdbips.csv', headers: true, :col_sep => ',') do |row|
+  #   DepartmentalSdbip.create! row.to_hash
+  # end

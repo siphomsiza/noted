@@ -1,9 +1,18 @@
 Feature: Setup Management
 
+    Background: Log in Successfully As an Admin
+        Given I am on the login page
+        When I fill in "session[email]" with "casey@sableassets.com"
+        And I fill in "session[company_code]" with "LPN001"
+        And I fill in "session[password]" with "sableassets"
+        And I press "Log in"
+        Then I should be on the introduction page
+        And I should see "Logged in sucessfully..."
+
     Scenario: View Master Setup
         Given I am on the introduction page
         When I follow "SETUP"
-        Then I should be on the master setup page
+        Then I should be on view master setup page
         And I should see "Ref"
         And I should see "Municipality"
         And I should see "Province"
@@ -14,7 +23,7 @@ Feature: Setup Management
     Scenario: Edit Master Setup
         Given I am on the introduction page
         When I follow "SETUP"
-        Then I should be on the master setup page
+        Then I should be on view master setup page
         And I should see "Ref"
         And I should see "Municipality"
         And I should see "Province"
@@ -24,13 +33,13 @@ Feature: Setup Management
         When I follow "Edit"
         Then I should be on the edit master setup page
         When I press "Save"
-        Then I should be on the master setup page
+        Then I should be on view master setup page
         And should see "Master setup was successfully saved."
 
     Scenario: Successfully Setup System
         Given I am on the introduction page
         When I follow "SETUP"
-        Then I should be on the master setup page
+        Then I should be on view master setup page
         When I follow "System Setup"
         Then I should be on the system setup page
         When I follow "Create"
@@ -43,7 +52,7 @@ Feature: Setup Management
     Scenario: Successfully Setup Departments
         Given I am on the introduction page
         When I follow "SETUP"
-        Then I should be on the master setup page
+        Then I should be on view master setup page
         When I follow "Departments"
         Then I should be on Department Setup page
         When I follow "Create"
@@ -58,7 +67,7 @@ Feature: Setup Management
     Scenario: Successfully Setup Departments with Sub-departments
         Given I am on the introduction page
         When I follow "SETUP"
-        Then I should be on the master setup page
+        Then I should be on view master setup page
         When I follow "Departments"
         Then I should be on Department Setup page
         When I follow "Create"
@@ -75,7 +84,7 @@ Feature: Setup Management
     Scenario: Unsuccessful Department Setup
         Given I am on the introduction page
         When I follow "SETUP"
-        Then I should be on the master setup page
+        Then I should be on view master setup page
         When I follow "Departments"
         Then I should be on Department Setup page
         When I follow "Create"
@@ -90,7 +99,7 @@ Feature: Setup Management
     Scenario: Unsuccessful Department Setup with Sub-departments
         Given I am on the introduction page
         When I follow "SETUP"
-        Then I should be on the master setup page
+        Then I should be on view master setup page
         When I follow "Departments"
         Then I should be on Department Setup page
         When I follow "Create"
@@ -107,7 +116,7 @@ Feature: Setup Management
     Scenario: View Departmental Administrators
         Given I am on the introduction page
         When I follow "SETUP"
-        Then I should be on the master setup page
+        Then I should be on view master setup page
         When I follow "Administrators"
         Then I should be on the toplayer administrators setup page
         When I follow "Departmental Administrators"
@@ -118,7 +127,7 @@ Feature: Setup Management
     Scenario: Successful Departmental Administrators Setup
         Given I am on the introduction page
         When I follow "SETUP"
-        Then I should be on the master setup page
+        Then I should be on view master setup page
         When I follow "Administrators"
         Then I should be on the toplayer administrators setup page
         When I follow "Departmental Administrators"
@@ -135,7 +144,7 @@ Feature: Setup Management
     Scenario: Unsuccessful Departmental Administrators Setup
         Given I am on the introduction page
         When I follow "SETUP"
-        Then I should be on the master setup page
+        Then I should be on view master setup page
         When I follow "Administrators"
         Then I should be on the toplayer administrators setup page
         When I follow "Departmental Administrators"
@@ -152,7 +161,7 @@ Feature: Setup Management
     Scenario: View Subdepartmental Administrators
         Given I am on the introduction page
         When I follow "SETUP"
-        Then I should be on the master setup page
+        Then I should be on view master setup page
         When I follow "Administrators"
         Then I should be on the toplayer administrators setup page
         When I follow "Subdepartmental Administrators"
@@ -164,7 +173,7 @@ Feature: Setup Management
     Scenario: Successful Subdepartmental Administrators Setup
         Given I am on the introduction page
         When I follow "SETUP"
-        Then I should be on the master setup page
+        Then I should be on view master setup page
         When I follow "Administrators"
         Then I should be on the toplayer administrators setup page
         When I follow "Subdepartmental Administrators"
@@ -181,7 +190,7 @@ Feature: Setup Management
     Scenario: Unsuccessful Subdepartmental Administrators Setup
         Given I am on the introduction page
         When I follow "SETUP"
-        Then I should be on the master setup page
+        Then I should be on view master setup page
         When I follow "Administrators"
         Then I should be on the toplayer administrators setup page
         When I follow "Subdepartmental Administrators"
@@ -198,11 +207,11 @@ Feature: Setup Management
     Scenario: View KPI Owners
         Given I am on the introduction page
         When I follow "SETUP"
-        Then I should be on the master setup page
+        Then I should be on view master setup page
         When I follow "Administrators"
         Then I should be on the toplayer administrators setup page
         When I follow "KPI Owners"
-        Then I should be on the kpi owners page
+        Then I should be on kpi owners page
         And I should see "KPI Owner"
         And I should see "Administrators"
         And I should see "Action"
@@ -210,11 +219,11 @@ Feature: Setup Management
     Scenario: Successful KPI Owners Setup
         Given I am on the introduction page
         When I follow "SETUP"
-        Then I should be on the master setup page
+        Then I should be on view master setup page
         When I follow "Administrators"
         Then I should be on the toplayer administrators setup page
         When I follow "KPI Owners"
-        Then I should be on the kpi owners page
+        Then I should be on kpi owners page
         And I should see "KPI Owner"
         And I should see "Administrators"
         And I should see "Action"
@@ -230,11 +239,11 @@ Feature: Setup Management
     Scenario: Unsuccessful KPI Owners Setup
         Given I am on the introduction page
         When I follow "SETUP"
-        Then I should be on the master setup page
+        Then I should be on view master setup page
         When I follow "Administrators"
         Then I should be on the toplayer administrators setup page
         When I follow "KPI Owners"
-        Then I should be on the kpi owners page
+        Then I should be on kpi owners page
         And I should see "KPI Owner"
         And I should see "Administrators"
         And I should see "Action"
@@ -250,7 +259,7 @@ Feature: Setup Management
     Scenario: View General Headings
         Given I am on the introduction page
         When I follow "SETUP"
-        Then I should be on the master setup page
+        Then I should be on view master setup page
         When I follow "Headings"
         Then I should be on the view general headings page
         And I should see "Create"
@@ -266,7 +275,7 @@ Feature: Setup Management
     Scenario: View General Headings
         Given I am on the introduction page
         When I follow "SETUP"
-        Then I should be on the master setup page
+        Then I should be on view master setup page
         When I follow "Headings"
         Then I should be on the view general headings page
         And I should see "Default Terminology"
@@ -275,7 +284,7 @@ Feature: Setup Management
     Scenario: Edit General Headings
         Given I am on the introduction page
         When I follow "SETUP"
-        Then I should be on the master setup page
+        Then I should be on view master setup page
         When I follow "Headings"
         Then I should be on the view general headings page
         And I should see "Default Terminology"
@@ -290,7 +299,7 @@ Feature: Setup Management
     Scenario: Delete General Headings
         Given I am on the introduction page
         When I follow "SETUP"
-        Then I should be on the master setup page
+        Then I should be on view master setup page
         When I follow "Headings"
         Then I should be on the view general headings page
         And I should see "Default Terminology"
@@ -304,7 +313,7 @@ Feature: Setup Management
     Scenario: View Departmental Headings
         Given I am on the introduction page
         When I follow "SETUP"
-        Then I should be on the master setup page
+        Then I should be on view master setup page
         When I follow "Headings"
         Then I should be on the view general headings page
         And I should see "Departmental SDBIP"
@@ -316,7 +325,7 @@ Feature: Setup Management
     Scenario: Edit Departmental Headings
         Given I am on the introduction page
         When I follow "SETUP"
-        Then I should be on the master setup page
+        Then I should be on view master setup page
         When I follow "Headings"
         Then I should be on the view general headings page
         And I should see "Departmental SDBIP"
@@ -334,7 +343,7 @@ Feature: Setup Management
     Scenario: Delete Departmental Headings
         Given I am on the introduction page
         When I follow "SETUP"
-        Then I should be on the master setup page
+        Then I should be on view master setup page
         When I follow "Headings"
         Then I should be on the view general headings page
         And I should see "Departmental SDBIP"
@@ -351,7 +360,7 @@ Feature: Setup Management
     Scenario: View Top Layer Headings
         Given I am on the introduction page
         When I follow "SETUP"
-        Then I should be on the master setup page
+        Then I should be on view master setup page
         When I follow "Headings"
         Then I should be on the view general headings page
         And I should see "Top Layer SDBIP"
@@ -363,7 +372,7 @@ Feature: Setup Management
     Scenario: Edit Top Layer Headings
         Given I am on the introduction page
         When I follow "SETUP"
-        Then I should be on the master setup page
+        Then I should be on view master setup page
         When I follow "Headings"
         Then I should be on the view general headings page
         And I should see "Top Layer SDBIP"
@@ -381,7 +390,7 @@ Feature: Setup Management
     Scenario: Delete Top Layer Headings
         Given I am on the introduction page
         When I follow "SETUP"
-        Then I should be on the master setup page
+        Then I should be on view master setup page
         When I follow "Headings"
         Then I should be on the view general headings page
         And I should see "Top Layer SDBIP"
@@ -398,7 +407,7 @@ Feature: Setup Management
     Scenario: View Capital Projects
         Given I am on the introduction page
         When I follow "SETUP"
-        Then I should be on the master setup page
+        Then I should be on view master setup page
         When I follow "Headings"
         Then I should be on the view general headings page
         And I should see "Capital Projects"
@@ -410,7 +419,7 @@ Feature: Setup Management
     Scenario: Edit Capital Projects Headings
         Given I am on the introduction page
         When I follow "SETUP"
-        Then I should be on the master setup page
+        Then I should be on view master setup page
         When I follow "Headings"
         Then I should be on the view general headings page
         And I should see "Capital Projects"
@@ -428,7 +437,7 @@ Feature: Setup Management
     Scenario: Delete Capital Projects Headings
         Given I am on the introduction page
         When I follow "SETUP"
-        Then I should be on the master setup page
+        Then I should be on view master setup page
         When I follow "Headings"
         Then I should be on the view general headings page
         And I should see "Capital Projects"
@@ -445,7 +454,7 @@ Feature: Setup Management
     Scenario: View Monthly Cashflows
         Given I am on the introduction page
         When I follow "SETUP"
-        Then I should be on the master setup page
+        Then I should be on view master setup page
         When I follow "Headings"
         Then I should be on the view general headings page
         And I should see "Monthly Cashflows"
@@ -457,7 +466,7 @@ Feature: Setup Management
     Scenario: Edit Monthly Cashflows Headings
         Given I am on the introduction page
         When I follow "SETUP"
-        Then I should be on the master setup page
+        Then I should be on view master setup page
         When I follow "Headings"
         Then I should be on the view general headings page
         And I should see "Monthly Cashflows"
@@ -475,7 +484,7 @@ Feature: Setup Management
     Scenario: Delete Monthly Cashflows Headings
         Given I am on the introduction page
         When I follow "SETUP"
-        Then I should be on the master setup page
+        Then I should be on view master setup page
         When I follow "Headings"
         Then I should be on the view general headings page
         And I should see "Monthly Cashflows"
@@ -492,7 +501,7 @@ Feature: Setup Management
     Scenario: View Revenue by Source
         Given I am on the introduction page
         When I follow "SETUP"
-        Then I should be on the master setup page
+        Then I should be on view master setup page
         When I follow "Headings"
         Then I should be on the view general headings page
         And I should see "Revenue by Source"
@@ -504,7 +513,7 @@ Feature: Setup Management
     Scenario: Edit Revenue by Source Headings
         Given I am on the introduction page
         When I follow "SETUP"
-        Then I should be on the master setup page
+        Then I should be on view master setup page
         When I follow "Headings"
         Then I should be on the view general headings page
         And I should see "Revenue by Source"
@@ -522,7 +531,7 @@ Feature: Setup Management
     Scenario: Delete Revenue by Source Headings
         Given I am on the introduction page
         When I follow "SETUP"
-        Then I should be on the master setup page
+        Then I should be on view master setup page
         When I follow "Headings"
         Then I should be on the view general headings page
         And I should see "Revenue by Source"
