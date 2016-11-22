@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   ActiveRecord::Base.establish_connection($current_session_db)
+  belongs_to :department
   has_many :role, :dependent => :destroy
   has_many :kpi_results
   has_many :top_layer_administrators

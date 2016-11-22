@@ -78,7 +78,7 @@ Rails.application.routes.draw do
   get 'users/:id/edit_active_user' => 'users#edit_active_user', :as => :edit_active_user
   get 'users/:id/edit_user_profile' => 'users#edit_user_profile', :as => :edit_user_profile
   get 'users/:id/set_new_password' => 'users#set_new_password', :as => :set_new_password
-  get 'set_super_user' => 'users#set_super_user', :as => :set_super_user
+  post 'set_super_user' => 'users#set_super_user', :as => :set_super_user
 
   get 'headings/:id/edit_departmental_headings' => 'headings#edit_departmental_headings', :as => :edit_departmental_headings
   get 'headings/:id/edit_top_layer_headings' => 'headings#edit_top_layer_headings', :as => :edit_top_layer_headings

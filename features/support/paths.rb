@@ -19,6 +19,86 @@ module NavigationHelpers
       '/users'
     when /^introduction page$/
       '/introduction'
+    when /^the add user page$/
+      '/users/new'
+    when /^the security setup page$/
+      '/users/setup_users'
+    when /^the admin user page$/
+      '/users/setup_users'
+    when /^the user access page$/
+      '/users/setup_users'
+    when /^the all users page$/
+      '/users'
+    when /^the active users page$/
+      '/users'
+    when /^the super user activity log page$/
+      '/users/report_users'
+    when /^the login attempts log page$/
+      '/users/report_users'
+    when /^the super user activity log page$/
+      '/users/report_users'
+    when /^the user activity log page$/
+      '/users/report_users'
+    when /^the user details page$/
+      '/users/report_users'
+    when /^the locked users page$/
+      '/users'
+    when /^the user details log page$/
+      '/users/report_users'
+    when /^the terminated users page$/
+      '/users'
+    when /^the reset password page$/
+      '/users'
+    when /^the set maximum login attempts page$/
+      '/users/setup_users'
+    when /^the set super user page$/
+      '/users/setup_users'
+    when /^view master setup page$/
+      '/master_setups'
+    when /^the departmental sdbips generate report page$/
+      '/departmental_sdbip_progresses'
+    when /^the generate graphs page$/
+      '/departmental_sdbip_progresses'
+    when /^the generate report page$/
+      '/departmental_sdbip_progresses'
+    when /^the ytd dashboard page$/
+      '/departmental_sdbip_progresses'
+    when /^the toplayer administrators setup page$/
+      '/departmental_administrators'
+    when /^the view general headings page$/
+      '/headings'
+    when /^the departmental headings page$/
+      '/headings'
+    when /^the toplayer headings page$/
+      '/headings'
+    when /^the capital projects headings page$/
+      '/headings'
+    when /^the monthly cashflows headings page$/
+      '/headings'
+    when /^the revenue by source headings page$/
+      '/headings'
+    when /^the departmental view page$/
+      '/departmental_sdbips'
+    when /^the revenue by source headings page$/
+      '/revenue_by_sources'
+    when /^the monthly cashflows page$/
+      '/monthly_cashflows'
+    when /^kpi owners page$/
+      '/departmental_administrators'
+    when /^the add kpi page$/
+      '/departmental_sdbips'
+    when /^Department Setup page$/
+      '/departments'
+    when /^the create department page$/
+      '/departments'
+    when /^the deleted kpis page$/
+      '/departmental_sdbips'
+    when /^the create departmental administrators page$/
+      '/departmental_administrators'
+    when /^the create subdepartmental administrators page$/
+      '/departmental_administrators'
+    when /^the create heading page$/
+      '/headings'
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
@@ -28,11 +108,11 @@ module NavigationHelpers
     else
       begin
         page_name =~ /^the (.*) page$/
-        path_components = $1.split(/\s+/)
-        self.send(path_components.push('path').join('_').to_sym)
+        path_components = Regexp.last_match(1).split(/\s+/)
+        send(path_components.push('path').join('_').to_sym)
       rescue NoMethodError, ArgumentError
-        raise "Can't find mapping from \"#{page_name}\" to a path.\n" +
-          "Now, go and add a mapping in #{__FILE__}"
+        raise "Can't find mapping from \"#{page_name}\" to a path.\n" \
+              "Now, go and add a mapping in #{__FILE__}"
       end
     end
   end

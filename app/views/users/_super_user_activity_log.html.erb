@@ -17,11 +17,11 @@
       <% super_user_activities.each do |super_user_activity| %>
 
       <tr>
-        <td><%= image_tag(super_user_activity.user.avatar.url(:thumb), size: 50) %></td>
+        <td><%= image_tag(super_user_activity.user.avatar.url(:thumb), size: 50) if super_user_activity.user.present? %></td>
         <td><%= super_user_activity.id %></td>
-        <td><% if !super_user_activity.user_id.blank? %><%= super_user_activity.user.firstname %><% end %></td>
-        <td><% if !super_user_activity.user_id.blank? %><%= super_user_activity.user.surname %><% end %></td>
-        <td><% if !super_user_activity.user_id.blank? %><%= super_user_activity.user.email %><% end %></td>
+        <td><% if !super_user_activity.user_id.blank? %><%= super_user_activity.user.firstname if super_user_activity.user.present? %><% end %></td>
+        <td><% if !super_user_activity.user_id.blank? %><%= super_user_activity.user.surname if super_user_activity.user.present? %><% end %></td>
+        <td><% if !super_user_activity.user_id.blank? %><%= super_user_activity.user.email if super_user_activity.user.present? %><% end %></td>
         <td><% if !super_user_activity.user_id.blank? %><%= super_user_activity.created_at.strftime("%Y %b %d %H-%M-%S") %><% end %></td>
 
         <td><% if !super_user_activity.user_id.blank? %><%= super_user_activity.note %><% end %></td>

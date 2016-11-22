@@ -90,10 +90,12 @@ module SessionsHelper
 
   # Redirects to stored location (or to the default).
   def redirect_back_or(default)
-    #redirect_to(session[:forwarding_url] || default)
-    #session.delete(:forwarding_url)
+    redirect_to(store_location || default)
+    session.delete(:forwarding_url)
   end
-
+  def account_locked?(user)
+    user.login_attempts >= user.max_login_attempts
+  end
   # Stores the URL trying to be accessed.
   def store_location
     session[:forwarding_url] = request.url if request.get?

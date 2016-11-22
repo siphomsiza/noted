@@ -49,7 +49,7 @@ class UsersController < ApplicationController
         if params[:user_id] && !params[:user_id].blank?
             @user = User.find(params[:user_id])
             if @user.update_columns(super_admin: true)
-                flash[:success] = "#{@user.firstname} #{@user.surname} set to super user/admin successfully."
+                flash[:success] = "User set to super user/admin successfully."
             end
         else
             flash[:danger] = "failed to set #{@user.firstname} #{@user.surname} as super user/admin."
@@ -74,7 +74,7 @@ class UsersController < ApplicationController
     def create
         @user = User.new(user_params)
         if @user.save
-          @user.update_columns(new: true, added_at: Time.zone.now, status: 'New')
+          @user.update_columns(updated_at: Time.zone.now,created_at: Time.zone.now, status: 'New')
             @user.send_activation_email
             flash[:info] = 'Please check your email to confirm your account.'
         else
@@ -110,9 +110,9 @@ class UsersController < ApplicationController
 
     def set_admin
         if @user.update_columns(admin: true)
-            flash[:success] = "#{@user.firstname}  #{@user.surname} set as System Administrator."
+            flash[:success] = "User set as System Administrator."
         else
-            flash[:danger] = "Failed to set #{@user.firstname}  #{@user.surname} as System Administrator."
+            flash[:danger] = "Failed to set User as System Administrator."
         end
         redirect_to :back
     end
@@ -122,7 +122,7 @@ class UsersController < ApplicationController
             new_maximum_attempts = params[:attempts]
             new_maximum_attempts.to_i
             @users = User.all
-            if @users.update_all(max_login_attempts: params[:new_maximum_attempts])
+            if @users.update_all(max_login_attempts: new_maximum_attempts)
                 flash[:success] = 'Maximum login attempts updated successfully.'
             end
         else
@@ -161,7 +161,7 @@ class UsersController < ApplicationController
         max_attempts += 1
         if @user.update_columns(login_attempts: max_attempts, status: 'Locked')
             @user.send_locked_account_email
-            flash[:success] = "#{@user.firstname}'s account locked successfully."
+            flash[:success] = "User's account locked successfully."
         else
             flash[:danger] = "Failed to lock #{@user.firstname}'s account."
         end
@@ -171,7 +171,7 @@ class UsersController < ApplicationController
     def unlock_user
         if @user.update_columns(login_attempts: 0, status: 'Active')
             @user.send_unlocked_account_email
-            flash[:success] = "Unlocked #{@user.firstname}'s account successfully."
+            flash[:success] = "Unlocked User's account successfully."
         else
             flash[:danger] = "Failed to unlock #{@user.firstname}'s account."
         end
