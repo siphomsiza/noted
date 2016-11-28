@@ -99,6 +99,28 @@ module NavigationHelpers
       '/departmental_administrators'
     when /^the create heading page$/
       '/headings'
+    when /^the time periods page$/
+      '/sdbip_time_periods'
+    when /^the import time periods page$/
+      '/sdbip_time_periods'
+    when /^the update all automatic time periods page$/
+      '/sdbip_time_periods'
+    when /^the add time period page$/
+      '/sdbip_time_periods'
+    when /^the system setup page$/
+      '/setups'
+    when /^the send kpi owner notifications page$/
+      '/send_notification'
+    when /^the update time period status page$/
+      '/update_status'
+    when /^the edit kpi page$/
+      '/departmental_sdbips'
+    when /^the update kpi page$/
+      '/departmental_sdbips'
+    when /^the import sdbip page$/
+      '/departmental_sdbips'
+    when /^the import top layers sdbip page$/
+      '/top_layer_sdbips'
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #

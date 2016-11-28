@@ -1,17 +1,7 @@
 class KpiTargetTypesController < ApplicationController
-  before_action :set_kpi_target_type, only: [:show, :edit, :update, :destroy]
-
-  # GET /kpi_target_types
-  # GET /kpi_target_types.json
-  def index
-    @kpi_target_types = KpiTargetType.all
-  end
-
-  # GET /kpi_target_types/1
-  # GET /kpi_target_types/1.json
-  def show
-  end
-
+  before_action :set_kpi_target_type, only: [:edit, :update, :destroy]
+  protect_from_forgery
+  skip_before_action :verify_authenticity_token, if: :js_request?
   # GET /kpi_target_types/new
   def new
     @kpi_target_type = KpiTargetType.new
@@ -60,6 +50,9 @@ class KpiTargetTypesController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def js_request?
+        request.format.js?
+    end
     def set_kpi_target_type
       @kpi_target_type = KpiTargetType.find(params[:id])
     end

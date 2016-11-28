@@ -41,7 +41,7 @@ RSpec.describe HeadingsController, :type => :controller do
           end
 
           it {expect(response).to have_http_status(200)}
-          it {expect(response.content_type).to eq("text/html") }
+          it {expect(response.content_type).to eq("text/javascript") }
           it {expect(response).to render_template(:edit)}
     end
 
@@ -68,7 +68,7 @@ RSpec.describe HeadingsController, :type => :controller do
           end
 
           it {expect(response).to have_http_status(200)}
-          it {expect(response.content_type).to eq("text/html") }
+          it {expect(response.content_type).to eq("text/javascript") }
           it {expect(response).to render_template(:edit)}
     end
 
@@ -94,7 +94,7 @@ RSpec.describe HeadingsController, :type => :controller do
           get :edit_revenue_by_source_headings,{:id=>@heading.id}, :format => 'js'
         end
         it {expect(response).to have_http_status(200)}
-        it {expect(response.content_type).to eq("text/html") }
+        it {expect(response.content_type).to eq("text/javascript") }
         it {expect(response).to render_template(:edit)}
         end
 
@@ -119,7 +119,7 @@ RSpec.describe HeadingsController, :type => :controller do
           end
 
           it {expect(response).to have_http_status(200)}
-          it {expect(response.content_type).to eq("text/html") }
+          it {expect(response.content_type).to eq("text/javascript") }
           it {expect(response).to render_template(:edit)}
     end
 
@@ -145,7 +145,7 @@ RSpec.describe HeadingsController, :type => :controller do
           get :edit_monthly_cashflow_headings,{:id=>@heading.id}, :format => 'js'
         end
          it {expect(response).to have_http_status(200)}
-        it {expect(response.content_type).to eq("text/html") }
+        it {expect(response.content_type).to eq("text/javascript") }
         it {expect(response).to render_template(:edit)}
         end
         context "when user is not logged in" do
@@ -155,7 +155,7 @@ RSpec.describe HeadingsController, :type => :controller do
               end
 
           it {expect(response).to have_http_status(200)}
-          it {expect(response.content_type).to eq("text/html") }
+          it {expect(response.content_type).to eq("text/javascript") }
           it {expect(response).to render_template(:edit)}
     end
 
@@ -178,11 +178,11 @@ RSpec.describe HeadingsController, :type => :controller do
              @user = create(:user)
              @heading = create(:heading)
              session[:user_id] = @user.id
-             get :edit,{:id=>@heading.id}
+             get :edit,{:id=>@heading.id}, :format => 'js'
           end
 
           it {expect(response).to have_http_status(200)}
-          it {expect(response.content_type).to eq("text/html") }
+          it {expect(response.content_type).to eq("text/javascript") }
           it {expect(response).to render_template(:edit)}
           end
 
@@ -196,15 +196,6 @@ RSpec.describe HeadingsController, :type => :controller do
           it {expect(response).to redirect_to(login_path)}
           it {expect(flash[:danger]).to eq("Please log in.")}
     end
-  end
-
-  describe "GET #show" do
-
-          it "assigns the requested heading to @heading" do
-          heading = FactoryGirl.create(:heading)
-          get :show, id: heading
-          expect(assigns(:heading)).to eq(@heading)
-          end
   end
 
   describe "#new" do
@@ -262,7 +253,7 @@ RSpec.describe HeadingsController, :type => :controller do
 
           heading_params = FactoryGirl.attributes_for(:heading)
           expect {(assigns[:heading]).to eq(Heading(heading_params)) }
-          expect { post :create, :heading => heading_params }.to change(Heading, :count).by(1) 
+          expect { post :create, :heading => heading_params }.to change(Heading, :count).by(1)
           end
 
           it { expect(response).to have_http_status(200)}
@@ -333,4 +324,3 @@ RSpec.describe HeadingsController, :type => :controller do
     end
   end
 end
-    

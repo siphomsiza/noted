@@ -3,4 +3,5 @@ class KpiConcept < ActiveRecord::Base
 	include PublicActivity::Common
 	has_many :departmental_sdbips
 	delegate :name, :to => :departmental_sdbip, :prefix => true
+	validates :name, presence: true
 end

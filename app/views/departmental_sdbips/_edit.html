@@ -10,7 +10,7 @@
                         <%= f.hidden_field :performance_standard,:id=>"over-all-performance"%>
                             <div class="row">
 
-                                <%= f.fields_for :kpi_results do |f| %>
+                                <%= f.fields_for :kpi_results,@departmental_sdbip.kpi_results.build do |f| %>
 
                                     <table class="table table-striped">
                                         <tr>
@@ -48,7 +48,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <th>Attachment(s)</th>
+                                                <th>POE(s)</th>
                                                 <td>
 
                                                     <%= f.hidden_field :_destroy %>
@@ -61,7 +61,7 @@
                                                 </td>
                                             </tr>
                                     </table>
-                                    <%= f.hidden_field :user_id,:id=>"update-user" %>
+                                    <%= f.hidden_field :user_id,{:value => current_user.id} %>
                                         <%= f.hidden_field :period,:id=>"update-period" %>
                                             <%= f.hidden_field :_destroy %>
 
@@ -113,18 +113,13 @@
 </div>
 <script>
     $(document).ready(function() {
-
-        var selected_value = <%= current_user.id %>;
-
-        $("#update-user").val(selected_value);
-
         var current_date = Date();
         $("#update-period").val(current_date);
         $("#assurance-user").val(selected_value);
 
-        var target = <%= @departmental_sdbip.annual_target %>;
+        var target = <%= @departmental_sdbip.annual_target %> || 0;
 
-        var over_actual = <%= @departmental_sdbip.kpi_results.to_a.sum(&:actual) if @departmental_sdbip.kpi_results.any? %>;
+        var over_actual = <%= kpi_actual_to_date %> || 0;
 
         $("#kpi-actual").blur(function() {
 

@@ -18,12 +18,12 @@ RSpec.describe DepartmentalSdbipsController, :type => :controller do
     end
 
           it "assigns @departmental_sdbip" do
-          departmental_sdbip = DepartmentalSdbip.create
+          @departmental_sdbip = DepartmentalSdbip.create
           expect {(assigns[:departmental_sdbip]).to eq(DepartmentalSdbip(departmental_sdbip_params)) }
           end
 
           it "assigns @departments" do
-          departments = Department.create
+          @departments = Department.create
           expect(assigns(:department)).to eq(@department)
           end
 
@@ -34,17 +34,17 @@ RSpec.describe DepartmentalSdbipsController, :type => :controller do
   end
 
   describe "#edit" do
-    context "when user is logged in" do 
+    context "when user is logged in" do
 
           before do
               @user = create(:user)
-              departmental_sdbip = DepartmentalSdbip.create
+              @departmental_sdbip = DepartmentalSdbip.create
               session[:user_id] = @user.id
-              get :edit,{:id=>@departmental_sdbip.id}
+              get :edit,:id=>@departmental_sdbip.id,:format => 'js'
           end
 
           it {expect(response.status).to eq(200) }
-          it {expect(response.content_type).to eq("text/html") }
+          it {expect(response.content_type).to eq("text/javascript") }
           it {expect(response).to render_template("edit")}
     end
   end
@@ -55,35 +55,19 @@ RSpec.describe DepartmentalSdbipsController, :type => :controller do
           before do
               @user = create(:user)
               session[:user_id] = @user.id
-              departmental_sdbip = DepartmentalSdbip.create
+              @departmental_sdbip = DepartmentalSdbip.create
               get :index
           end
 
           it "#save departmental_sdbip" do
           departmental_sdbip_params = FactoryGirl.attributes_for(:departmental_sdbip)
           expect {(assigns[:departmental_sdbip]).to eq(DepartmentalSdbip(departmental_sdbip_params)) }
-          expect { post :create, :departmental_sdbip => departmental_sdbip_params }.to change(DepartmentalSdbip, :count).by(1) 
+          expect { post :create, :departmental_sdbip => departmental_sdbip_params }.to change(DepartmentalSdbip, :count).by(1)
           end
 
           it { expect(response).to have_http_status(200)}
     end
   end
-
-  describe "#new" do
-    context "when user is admin and logged in" do
-
-        before do
-          @user = create(:user)
-          session[:user_id] = @user.id
-          departmental_sdbip = DepartmentalSdbip.create
-          get :new
-        end
-        it {expect(assigns[:departmental_sdbip]).to be_a_new(DepartmentalSdbip)}
-        it {expect(response).to have_http_status(200)}
-        it {expect(response.content_type).to eq("text/html") }
-        it {expect(response).to render_template("new")}
-        end
-      end
 
   describe "#update" do
     context "when user is logged in" do
@@ -104,28 +88,6 @@ RSpec.describe DepartmentalSdbipsController, :type => :controller do
     end
   end
 
-describe "POST #import" do
-    it "redirects to the home page" do
-      allow(DepartmentalSdbip).to receive(:import).with("foo.txt")
-      post :import, file: "foo.txt"
-      expect(response).to redirect_to departmental_sdbips_path
-    end
-
-    it "adds a flash success" do
-      allow(DepartmentalSdbip).to receive(:import).with("foo.txt")
-      post :import, file: "foo.txt"
-      expect(flash[:success]).to eq "SDBIP submitted successfully for processing."
-      expect(response).to redirect_to departmental_sdbips_path
-    end
-
-    it "imports the departmental_sdbip file" do
-      expect(DepartmentalSdbip).to receive(:import).with("foo.txt")
-      post :import, file: "foo.txt"
-      expect(response).to redirect_to departmental_sdbips_path
-    end
-  end
-
-        
   describe "delete#destroy" do
     context "when user is logged in" do
 

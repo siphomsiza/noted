@@ -96,8 +96,8 @@ Rails.application.routes.draw do
   get 'departmental_sdbips/:id/restore_kpi' => 'departmental_sdbips#restore_kpi', :as => :restore_kpi
   get 'departmental_sdbip_progresses/generate_graphs' => 'departmental_sdbip_progresses#generate_graphs', :as => :generate_graphs
   get 'departmental_sdbip_progresses/assurance_results' => 'departmental_sdbip_progresses#assurance_results', :as => :assurance_results
-  post 'sdbip_time_periods/update_status' => 'sdbip_time_periods#update_status', :as => :update_status
-  post 'sdbip_time_periods/send_notification' => 'sdbip_time_periods#send_notification', :as => :send_notification
+  get 'update_status' => 'sdbip_time_periods#update_status', :as => :update_status
+  get 'send_notification' => 'sdbip_time_periods#send_notification', :as => :send_notification
   post 'sdbip_time_periods/update_time_periods' => 'sdbip_time_periods#update_time_periods', :as => :update_time_periods
   post 'sdbip_time_periods/update_deadline' => 'sdbip_time_periods#update_deadline', :as => :update_deadline
   get 'sdbip_time_periods/close_primary' => 'sdbip_time_periods#close_primary', :as => :close_primary

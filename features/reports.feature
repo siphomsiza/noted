@@ -49,3 +49,97 @@ Feature: Reporting Module(s)
         Then I should be on the view ytd dashboard page
         And I should see "YTD Graphs For"
         And I should see "Sub-Department"
+
+    Scenario: View Departmental SDBIPs Assurance
+        Given I am on the introduction page
+        And I should see "REPORTS"
+        When I follow "REPORTS"
+        Then I should be on the departmental sdbips generate report page
+        Given I am on the departmental sdbips generate report page
+        When I follow "Assurance"
+        Then I should be on the assurance page
+        And I should see "Assurance"
+        And I should see "Ref"
+        And I should see "Department"
+        And I should see "Subdepartment"
+        And I should see "KPI"
+        And I should see "KPI Ref Number"
+        And I should see "KPI Owner"
+        And I should see "Unit of Measurement"
+        And I should see "Source of Evidence"
+        And I should see "NDP Objective"
+        And I should see "Capital Project"
+        And I should see "Reporting Category"
+        And I should see "KPI Calculation Type"
+        And I should see "Number of km of road resealed and maintained at unit BA during fourth quarter"
+
+    Scenario: Conduct Audit process on Departmental KPIs
+        Given I am on the introduction page
+        And I should see "REPORTS"
+        When I follow "REPORTS"
+        Then I should be on the departmental sdbips generate report page
+        Given I am on the departmental sdbips generate report page
+        When I follow "Assurance"
+        Then I should be on the assurance page
+        And I should see "Assurance"
+        And I should see "Ref"
+        And I should see "Department"
+        And I should see "Subdepartment"
+        And I should see "KPI"
+        And I should see "KPI Ref Number"
+        And I should see "KPI Owner"
+        And I should see "Unit of Measurement"
+        And I should see "Source of Evidence"
+        And I should see "NDP Objective"
+        And I should see "Capital Project"
+        And I should see "Reporting Category"
+        And I should see "KPI Calculation Type"
+        And I should see "Number of km of road resealed and maintained at unit BA during fourth quarter"
+        When I follow "Number of km of road resealed and maintained at unit BA during fourth quarter"
+        Then I should be on the view assurance page
+        And I should see "Assurance Review: KPI D"
+        And I should see "Ref"
+        And I should see "Department"
+        And I should see "KPI"
+        And I should see "Unit of Measurement"
+        And I should see "Source of Evidence"
+        And I should see "KPI Calculation Type"
+        And I should see "Assurance Review History"
+
+    Scenario: View Departmental KPI Assurance Review details
+        Given I am on the introduction page
+        And I should see "REPORTS"
+        When I follow "REPORTS"
+        Then I should be on the departmental sdbips generate report page
+        Given I am on the departmental sdbips generate report page
+        When I follow "Assurance"
+        Then I should be on the assurance page
+        And I should see "Assurance"
+        And I should see "Ref"
+        And I should see "Department"
+        And I should see "Subdepartment"
+        And I should see "KPI"
+        And I should see "KPI Ref Number"
+        And I should see "KPI Owner"
+        And I should see "Unit of Measurement"
+        And I should see "Source of Evidence"
+        And I should see "NDP Objective"
+        And I should see "Capital Project"
+        And I should see "Reporting Category"
+        And I should see "KPI Calculation Type"
+        And I should see "Number of km of road resealed and maintained at unit BA during fourth quarter"
+        When I follow "Number of km of road resealed and maintained at unit BA during fourth quarter"
+        Then I should be on the view assurance page
+        And I should see "Assurance Review: KPI D"
+        And I should see "Ref"
+        And I should see "Department"
+        And I should see "KPI"
+        And I should see "Unit of Measurement"
+        And I should see "Source of Evidence"
+        And I should see "KPI Calculation Type"
+        And I should see "Assurance Review History"
+        And I should see "Reviewed By:"
+        And I should see "Signed-Off:"
+        And I should see "Response:"
+        And I should see "Assigned to:"
+        And I should see "Update Deadline"

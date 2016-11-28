@@ -69,7 +69,7 @@ end
 group :test do
   gem 'capybara',                       '2.7.1'
   gem 'rspec-rails',                    '3.4.2'
-  gem 'simplecov',                      '0.11.2', :require => false
+  gem 'simplecov',                      '0.11.2', :require => false, :group => :test
   gem 'simplecov-rcov',                 '0.2.3'
   gem 'rspec_junit_formatter',          '0.2.3'
   gem 'cucumber-rails',                 '1.4.3', :require => false

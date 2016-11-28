@@ -1,16 +1,7 @@
 class AreasController < ApplicationController
-  before_action :set_area, only: [:show, :edit, :update, :destroy]
-
-  # GET /areas
-  # GET /areas.json
-  def index
-    @areas = Area.includes(:wards)
-  end
-
-  # GET /areas/1
-  # GET /areas/1.json
-  def show
-  end
+  before_action :set_area, only: [:edit, :update, :destroy]
+  protect_from_forgery
+  skip_before_action :verify_authenticity_token, if: :js_request?
 
   # GET /areas/new
   def new
@@ -25,7 +16,6 @@ class AreasController < ApplicationController
   # POST /areas.json
   def create
     @area = Area.new(area_params)
-
       if @area.save
         flash[:success] = 'Area was successfully created.'
         redirect_to :back
@@ -38,7 +28,6 @@ class AreasController < ApplicationController
   # PATCH/PUT /areas/1
   # PATCH/PUT /areas/1.json
   def update
-
       if @area.update(area_params)
         flash[:success] = 'Area was successfully updated.'
         redirect_to :back
@@ -58,6 +47,9 @@ class AreasController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def js_request?
+      request.format.js?
+    end
     def set_area
       @area = Area.find(params[:id])
     end

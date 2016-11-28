@@ -28,8 +28,15 @@
     <%= f.label :name,"KPA:" %><br>
     <%= f.text_field :name,:class=>'form-control', :autocomplete=>'off' %>
   </div>
+  <div class="field">
+    <%= f.label :code,"Code:" %><br>
+    <%= f.text_field :code,:class=>'form-control', :autocomplete=>'off' %>
+  </div>
   <div class="actions">
     <%= f.submit "Save", class: 'btn col-lg-3 pull-right' %>
+    <% if !@kpa.new_record? %>
+      <%= link_to "Delete",kpa_path(@kpa),method: :delete, data: {confirm: "Are you sure?"}, :class=>'btn col-lg-3 pull-right'%>
+    <% end %>
   </div>
 <% end %>
 </div>

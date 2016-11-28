@@ -1,18 +1,13 @@
 class DepartmentsController < ApplicationController
-  before_action :logged_in_user, only: [:new, :index, :edit, :update, :destroy,:show]
-  before_action :admin_user,     only: [:new, :index, :edit, :update, :destroy,:show]
-  before_action :set_department,     only: [:edit, :update, :destroy,:show]
-  def new
-  	 @department = Department.new
-  end
-
+  before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
+  before_action :admin_user,     only: [:index, :edit, :update, :destroy]
+  before_action :set_department,     only: [:edit, :update, :destroy]
+  protect_from_forgery
+  skip_before_action :verify_authenticity_token, if: :js_request?
   def index
       weather_details
       @department = Department.new
   	   @departments = Department.includes(:subdepartments).paginate(page: params[:page],per_page: 10).order(id: :asc)
-  end
-
-  def show
   end
 
   def edit
@@ -48,7 +43,9 @@ class DepartmentsController < ApplicationController
 
 
   private
-
+  def js_request?
+      request.format.js?
+  end
    def set_department
       @department = Department.find(params[:id])
    end

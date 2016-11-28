@@ -47,6 +47,7 @@ class SessionsController < ApplicationController
         record_activity(note)
       end
       log_out if logged_in?
+      flash[:success] = "Logged out sucessfully..."
     end
     redirect_to root_url
   end
