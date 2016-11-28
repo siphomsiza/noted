@@ -3,7 +3,7 @@
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times; </button>
       <% if @mscore_classification.new_record? %>
-        <h3>Configure GFS Classification</h3>
+        <h3>Configure MSCOA Classification</h3>
       <% else %>
         <h3><%= "Editing #{@mscore_classification.name}" %></h3>
       <% end %>
@@ -30,6 +30,9 @@
   </div>
   <div class="actions">
     <%= f.submit "Save", class: 'btn col-lg-3 pull-right' %>
+    <% if !@mscore_classification.new_record? %>
+      <%= link_to "Delete",mscore_classification_path(@mscore_classification),method: :delete, data: {confirm: "Are you sure?"}, :class=>'btn col-lg-3 pull-right'%>
+    <% end %>
   </div>
 <% end %>
 </div>

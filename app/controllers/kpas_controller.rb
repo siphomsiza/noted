@@ -1,16 +1,7 @@
 class KpasController < ApplicationController
-  before_action :set_kpa, only: [:show, :edit, :update, :destroy]
-
-  # GET /kpas
-  # GET /kpas.json
-  def index
-    @kpas = Kpa.all
-  end
-
-  # GET /kpas/1
-  # GET /kpas/1.json
-  def show
-  end
+  before_action :set_kpa, only: [:edit, :update, :destroy]
+  protect_from_forgery
+  skip_before_action :verify_authenticity_token, if: :js_request?
 
   # GET /kpas/new
   def new
@@ -25,7 +16,6 @@ class KpasController < ApplicationController
   # POST /kpas.json
   def create
     @kpa = Kpa.new(kpa_params)
-
       if @kpa.save
         flash[:success] = 'KPA was successfully created.'
         redirect_to :back
@@ -58,12 +48,15 @@ class KpasController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def js_request?
+      request.format.js?
+    end
     def set_kpa
       @kpa = Kpa.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def kpa_params
-      params.require(:kpa).permit(:name)
+      params.require(:kpa).permit(:name,:code)
     end
 end

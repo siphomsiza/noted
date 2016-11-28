@@ -27,7 +27,7 @@ RSpec.describe User, type: :model do
   end # end of association description
   describe '#downcase_email' do
     before do
-      @user = User.find(152)
+      @user = User.find(5)
     end
     it 'triggers downcase on save' do
       expect(@user.email).to receive(:downcase_email)
@@ -94,7 +94,7 @@ RSpec.describe User, type: :model do
   end
 describe "token" do
   before do
-    @user = User.find(152)
+    @user = User.find(5)
   end
   it 'Remembers token' do
     @user.update_attribute(:remember_digest, User.digest(User.new_token))
@@ -103,7 +103,7 @@ describe "token" do
 end
 describe "" do
   before do
-    @user = User.find(152)
+    @user = User.find(5)
   end
   it 'authenticated? should return false for a user with nil digest' do
     assert_not @user.authenticated?
@@ -115,7 +115,7 @@ end
 
   describe 'activate account' do
     before do
-      @user = User.find(152)
+      @user = User.find(5)
     end
     let(:mail) { UserMailer.account_activation(@user) }
     it 'renders the headers' do
@@ -125,16 +125,16 @@ end
 
   describe 'confirmation' do
     before do
-      @user = User.find(152)
+      @user = User.find(5)
     end
     it 'send an activation email' do
       delivery = UserMailer.account_activation(@user)
       expect(delivery).to receive(:deliver_now)
-      should have_link('Activate Account', href: edit_account_activation_url(@@user.activation_token,@user.id))
+      should have_link('Activate Account', href: edit_account_activation_path(@user.activation_token,@user.id))
     end
 
     it 'Sets the password reset attributes(create_reset_digest).' do
-      valid_attributes = FactoryGirl.create(:user, password: 'sableassets')
+      valid_attributes = FactoryGirl.create(:user, password: 'sableassets',password_confirmation: 'sableassets')
       visit(edit_password_reset_path(valid_attributes.reset_token,
                                      email: valid_attributes.email))
     end
@@ -166,7 +166,7 @@ end
   end
   describe "send email notifications" do
     before(:all) do
-      @user = User.find(152)
+      @user = User.find(5)
     end
     it "should be able to send primary reminder email" do
       UserMailer.primary_reminder_email(@user)

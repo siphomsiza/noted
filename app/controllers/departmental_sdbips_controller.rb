@@ -131,14 +131,7 @@ class DepartmentalSdbipsController < ApplicationController
     else
       begin
           sdbip_file = params[:file]
-          sdbip_file = sdbip_file.original_filename
-          if Dir.exist?("#{Rails.root}/db_mkhondo/data/SDBIPs")
-          else
-            Dir.mkdir("#{Rails.root}/db_mkhondo/data/SDBIPs")
-          end
-          temp_file = params[:file].tempfile
-          FileUtils.copy(temp_file, "#{Rails.root}/db_mkhondo/data/SDBIPs")
-          # DepartmentalSdbip.import_from_file(File.open(File.join(Rails.root,'/db_mkhondo/data/SDBIPs',File.basename(temp_file))))
+          DepartmentalSdbip.copy_sdbip_to_system(sdbip_file)
           DepartmentalSdbip.import(params[:file])
           flash[:success] = 'SDBIP submitted successfully.'
         rescue => e

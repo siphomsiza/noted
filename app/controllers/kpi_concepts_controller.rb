@@ -1,17 +1,7 @@
 class KpiConceptsController < ApplicationController
-  before_action :set_kpi_concept, only: [:show, :edit, :update, :destroy]
-
-  # GET /kpi_concepts
-  # GET /kpi_concepts.json
-  def index
-    @kpi_concepts = KpiConcept.all
-  end
-
-  # GET /kpi_concepts/1
-  # GET /kpi_concepts/1.json
-  def show
-  end
-
+  before_action :set_kpi_concept, only: [:edit, :update, :destroy]
+  protect_from_forgery
+  skip_before_action :verify_authenticity_token, if: :js_request?
   # GET /kpi_concepts/new
   def new
     @kpi_concept = KpiConcept.new
@@ -60,6 +50,9 @@ class KpiConceptsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def js_request?
+        request.format.js?
+    end
     def set_kpi_concept
       @kpi_concept = KpiConcept.find(params[:id])
     end

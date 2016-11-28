@@ -1,6 +1,5 @@
 class DepartmentalSdbip < ActiveRecord::Base
   include PublicActivity::Model
-  # tracked owner: ->(controller, model) { controller && controller.current_user }
   ActiveRecord::Base.establish_connection($current_session_db)
   belongs_to :department
   belongs_to :subdepartment
@@ -109,6 +108,29 @@ class DepartmentalSdbip < ActiveRecord::Base
   #     else raise "Unknown file type: #{file}"
   #     end
   # end
+  def self.copy_sdbip_to_system(file)
+    if $logged_in_database == DB1_CONF
+      Dir.mkdir("#{Rails.root}/db_mkhondo/data/SDBIPs") unless Dir.exist?("#{Rails.root}/db_mkhondo/data/SDBIPs")
+      temp_file = file.tempfile
+      FileUtils.copy(temp_file, "#{Rails.root}/db_mkhondo/data/SDBIPs")
+      # DepartmentalSdbip.import_from_file(File.open(File.join(Rails.root,'/db_mkhondo/data/SDBIPs',File.basename(temp_file))))
+    elsif $logged_in_database == DB2_CONF
+      Dir.mkdir("#{Rails.root}/db_sakhisizwe/data/SDBIPs") unless Dir.exist?("#{Rails.root}/db_sakhisizwe/data/SDBIPs")
+      temp_file = file.tempfile
+      FileUtils.copy(temp_file, "#{Rails.root}/db_sakhisizwe/data/SDBIPs")
+      # DepartmentalSdbip.import_from_file(File.open(File.join(Rails.root,'/db_mkhondo/data/SDBIPs',File.basename(temp_file))))
+    elsif $logged_in_database == DB3_CONF
+      Dir.mkdir("#{Rails.root}/db_lepelle_nkumpi/data/SDBIPs") unless Dir.exist?("#{Rails.root}/db_lepelle_nkumpi/data/SDBIPs")
+      temp_file = file.tempfile
+      FileUtils.copy(temp_file, "#{Rails.root}/db_lepelle_nkumpi/data/SDBIPs")
+      # DepartmentalSdbip.import_from_file(File.open(File.join(Rails.root,'/db_mkhondo/data/SDBIPs',File.basename(temp_file))))
+    else
+      Dir.mkdir("#{Rails.root}/db/data/SDBIPs") unless Dir.exist?("#{Rails.root}/db/data/SDBIPs")
+      temp_file = file.tempfile
+      FileUtils.copy(temp_file, "#{Rails.root}/db/data/SDBIPs")
+      # DepartmentalSdbip.import_from_file(File.open(File.join(Rails.root,'/db_mkhondo/data/SDBIPs',File.basename(temp_file))))
+    end
+  end
   def self.import(file)
     case File.extname(file.original_filename)
     when '.csv' then

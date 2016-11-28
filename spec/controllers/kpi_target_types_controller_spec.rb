@@ -2,41 +2,19 @@ require 'spec_helper'
 require 'rails_helper'
 
 RSpec.describe KpiTargetTypesController, :type => :controller do
-
-	describe "GET index" do
-      context "when user is admin and logged in" do
-
-            before do
-               kpi_target_type = KpiTargetType.create
-              @user = create(:user)
-              session[:user_id] = @user.id
-              get :index
-            end
-
-            it "assigns @kpi_calculation_type" do
-            kpi_target_types = KpiTargetType.all
-            expect(kpi_target_types).to be_truthy
-            end
-
-            it {expect(response.status).to eq(200) }
-            it {expect(response.content_type).to eq("text/html") }
-            it {expect(response).to render_template("index")}
-      end
-    end
-
     describe "#new" do
     context "when user is logged in and is admin" do
 
           before do
               @user = create(:user)
               session[:user_id] = @user.id
-              kpi_target_type = KpiTargetType.new
-              get :new
+              @kpi_target_type = KpiTargetType.new
+              get :new, :format => 'js'
           end
 
           it {expect(assigns[:kpi_target_type]).to be_a_new(KpiTargetType)}
           it {expect(response.status).to eq(200) }
-          it {expect(response.content_type).to eq("text/html") }
+          it {expect(response.content_type).to eq("text/javascript") }
           it {expect(response).to render_template("new")}
     end
   end
@@ -49,25 +27,29 @@ RSpec.describe KpiTargetTypesController, :type => :controller do
 
     context 'with valid attributes' do
       it 'creates the kpi_target_type' do
-        post :create, kpi_target_type: attributes_for(:kpi_target_type)
-        expect(KpiTargetType.count).to eq(1)
+        expect{
+					post :create, kpi_target_type: attributes_for(:kpi_target_type)
+				}.to change(KpiTargetType,:count).by(1)
       end
 
-      it 'redirects to the "show" action for the new kpi_target_type' do
+      it 'redirects index action' do
         post :create, kpi_target_type: attributes_for(:kpi_target_type)
-        expect(response).to redirect_to :back
+				expect(flash[:success]).to eq("KPI Target Type was successfully created.")
+				expect(response).to redirect_to :back
       end
     end
 
     context 'with invalid attributes' do
       it 'does not create the kpi_target_type' do
-        post :create, kpi_target_type: attributes_for(:kpi_target_type, name: nil)
-        expect(KpiTargetType.count).to eq(1)
+				expect{
+					post :create, kpi_target_type: attributes_for(:kpi_target_type, name: nil)
+				}.to_not change(KpiTargetType,:count)
       end
 
-      it 're-renders the "new" view' do
+      it 'redirects to index' do
         post :create, kpi_target_type: attributes_for(:kpi_target_type, name: nil)
-        
+				expect(flash[:danger]).to eq("KPI Target Type was not created.")
+				expect(response).to redirect_to :back
       end
     end
   end
@@ -81,16 +63,16 @@ RSpec.describe KpiTargetTypesController, :type => :controller do
           end
 
           it "should re-render edit template on failed update" do
-          @attr = { :name => "Currency", :code => "R"}
+          @attr = { :name => nil, :code => nil}
           put :update, :id => @kpi_target_type.id, :kpi_target_type => @attr
-          expect(flash[:success]).to eq("KPI Target Type was successfully updated.")
+          expect(flash[:danger]).to eq("KPI Target Type was not updated.")
           end
 
           it "should redirect to index with a notice on successful update" do
           @attr = { :name => "Number", :code => "R"}
           put :update, :id => @kpi_target_type.id, :kpi_target_type => @attr
           expect(assigns[:kpi_target_type]).not_to be_new_record
-          expect(flash[:danger]).not_to eq("KPI Target Type was not updated.")
+          expect(flash[:success]).to eq("KPI Target Type was successfully updated.")
           expect(response).to redirect_to :back
           end
   end

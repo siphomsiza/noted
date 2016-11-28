@@ -34,6 +34,9 @@
   </div>
   <div class="actions">
     <%= f.submit "Save", class: 'btn col-lg-3 pull-right' %>
+    <% if !@kpi_concept.new_record? %>
+      <%= link_to "Delete",kpi_concept_path(@kpi_concept),method: :delete, data: {confirm: "Are you sure?"}, :class=>'btn col-lg-3 pull-right'%>
+    <% end %>
   </div>
 <% end %>
 </div>

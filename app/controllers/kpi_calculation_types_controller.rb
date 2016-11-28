@@ -1,16 +1,7 @@
 class KpiCalculationTypesController < ApplicationController
-  before_action :set_kpi_calculation_type, only: [:show, :edit, :update, :destroy]
-
-  # GET /kpi_calculation_types
-  # GET /kpi_calculation_types.json
-  def index
-    @kpi_calculation_types = KpiCalculationType.all
-  end
-
-  # GET /kpi_calculation_types/1
-  # GET /kpi_calculation_types/1.json
-  def show
-  end
+  before_action :set_kpi_calculation_type, only: [:edit, :update, :destroy]
+  protect_from_forgery
+  skip_before_action :verify_authenticity_token, if: :js_request?
 
   # GET /kpi_calculation_types/new
   def new
@@ -61,6 +52,9 @@ class KpiCalculationTypesController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def js_request?
+        request.format.js?
+    end
     def set_kpi_calculation_type
       @kpi_calculation_type = KpiCalculationType.find(params[:id])
     end

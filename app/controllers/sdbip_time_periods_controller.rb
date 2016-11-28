@@ -19,11 +19,11 @@ class SdbipTimePeriodsController < ApplicationController
   def create
     @sdbip_time_period = SdbipTimePeriod.new(sdbip_time_period_params)
     if @sdbip_time_period.save
-      SendTimePeriodReminderEmailJob.set(wait: 10.seconds).perform_later
+      # SendTimePeriodReminderEmailJob.set(wait: 10.seconds).perform_later
       flash[:success]="Sdbip Time Period was successfully created."
       redirect_to sdbip_time_periods_path
     else
-      flash[:danger]="Sdbip Time Period was not updated."
+      flash[:danger]="Sdbip Time Period was not created."
       redirect_to :back
     end
   end
@@ -49,7 +49,7 @@ class SdbipTimePeriodsController < ApplicationController
     end
     end
   if !@secondary_reminders.blank?
-    @secondary_users = User.joins(:roles).where("roles.finance_admin = ? OR roles.top_layer_administrator = ? OR roles.secondary_time_period = ?",true,true,true)#includes(:role).where(:roles => {"role.finance_admin = ? OR role.top_layer_administrator = ? OR role.secondary_time_period = ?",true,true,true})#(roles:{finance_admin: true,top_layer_administrator: true, secondary_time_period: true})
+    @secondary_users = User.joins(:role).where("role.finance_admin = ? OR role.top_layer_administrator = ? OR role.secondary_time_period = ?",true,true,true)#includes(:role).where(:roles => {"role.finance_admin = ? OR role.top_layer_administrator = ? OR role.secondary_time_period = ?",true,true,true})#(roles:{finance_admin: true,top_layer_administrator: true, secondary_time_period: true})
     @secondary_sdbip_time_periods = @secondary_reminders
     if !@secondary_sdbip_time_periods.blank?
       @secondary_users.each do |user|
@@ -61,7 +61,7 @@ class SdbipTimePeriodsController < ApplicationController
       end
     end
   end
-  redirect_to :back
+  redirect_to(:back) and return
   end
   def update_status
     #Auto close a time period
@@ -79,7 +79,7 @@ class SdbipTimePeriodsController < ApplicationController
       secondary_sdbip_time_period.update_columns(:secondary_status => false)
     end
   end
-  redirect_to :back
+  redirect_to(:back) and return
   end
   def close_primary
     @sdbip_time_period = SdbipTimePeriod.find(params[:id])
@@ -115,7 +115,7 @@ class SdbipTimePeriodsController < ApplicationController
   end
 
   def update_time_periods
-    if params[:primary_reminder] || params[:secondary_reminder] || params[:primary_closure] || params[:secondary_closure]
+    if !params[:primary_reminder].blank? || !params[:secondary_reminder].blank? || !params[:primary_closure].blank? || !params[:secondary_closure].blank?
       @time_periods = SdbipTimePeriod.all
       @time_periods.each do |time_period|
         new_primary_reminder = time_period.period.days_ago(-params[:primary_reminder].to_i)
@@ -130,14 +130,13 @@ class SdbipTimePeriodsController < ApplicationController
         #TimePeriodReminder.send_secondary_time_period_reminder_email(@secondary_users).deliver
 
         #reminder_date = (@sdbip_time_period.primary_reminder - Date.now)* 24 * 60
-          SendTimePeriodReminderEmailJob.set(wait: 30.seconds).perform_later
+        # SendTimePeriodReminderEmailJob.set(wait: 30.seconds).perform_later
       end
         flash[:success] = "All automatic time periods updated successfully."
-        redirect_to :back
     else
       flash[:danger] = "All automatic time periods were not updated."
-      redirect_to :back
     end
+    redirect_to :back
   end
 
   def import
@@ -173,7 +172,7 @@ class SdbipTimePeriodsController < ApplicationController
       @secondary_users = User.includes(:role).where(roles:{finance_admin: true,top_layer_administrator: true,secondary_time_period: true})
 
       #reminder_date = (@sdbip_time_period.primary_reminder - Date.now)* 24 * 60
-      SendTimePeriodReminderEmailJob.set(wait: 30.seconds).perform_later
+      # SendTimePeriodReminderEmailJob.set(wait: 30.seconds).perform_later
       flash[:success]="Sdbip Time Period was successfully updated."
       redirect_to sdbip_time_periods_path
     else

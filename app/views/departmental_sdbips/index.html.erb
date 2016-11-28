@@ -182,7 +182,7 @@
 	<div class="modal fade" id="importModal" tabindex="-1" role="dialog" aria-labelledby="importModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
-				<%= form_tag import_departmental_sdbips_path, accept: 'text/csv,text/xls,text/xlsx,text/ods', multipart: true do %>
+				<%= form_tag import_departmental_sdbips_path, accept: 'text/csv,text/xlsx,text/ods', multipart: true do %>
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
 						&times;
@@ -196,7 +196,7 @@
 							<li class="active">Importing SDBIP</li>
 						</ol>
 					</h4>
-					<%= label_tag :NB,"Note: Supported files types are xls,xlsx, ods and csv types.", id: 'import_info' %>
+					<%= label_tag :NB,"Note: Supported files types are xlsx, ods and csv types.", id: 'import_info' %>
 				</div>
 				<div class="modal-body">
 					<%= label_tag :file,"Select File to upload:" %>

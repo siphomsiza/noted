@@ -55,4 +55,5 @@ Feature: Log in & Log out Feature
         Then I should see "Account"
         When I follow "Log out"
         Then I should be on login page
+        And I should see "Logged out sucessfully..."
         And I should see "Welcome Home"

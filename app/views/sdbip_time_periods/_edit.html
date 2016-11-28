@@ -13,7 +13,7 @@
           <% if @sdbip_time_period.primary_status? %>
           <div class="col pull-right">
           <%= link_to controller: :sdbip_time_periods, action: :close_primary, id: @sdbip_time_period.id, method: :post,class: 'btn btn-sm pull-right' do %>
-              Close
+              Close Primary
           <% end %>
         </div>
           <% end %>
@@ -62,7 +62,7 @@
           <% if @sdbip_time_period.secondary_status? %>
           <div class="col pull-right">
           <%= link_to controller: :sdbip_time_periods, action: :close_secondary, id: @sdbip_time_period.id, method: :post,class: 'btn btn-sm pull-right' do %>
-              Close
+              Close Secondary
           <% end %>
         </div>
           <% end %>
@@ -109,7 +109,7 @@
           <div class="col pull-right">
             <% if @sdbip_time_period.finance_status? %>
             <%= link_to controller: :sdbip_time_periods, action: :close_finance, id: @sdbip_time_period.id, method: :post,class: 'btn btn-sm pull-right' do %>
-                Close
+                Close Finance
             <% end %>
             <% end %>
           </div>

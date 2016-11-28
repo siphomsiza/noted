@@ -1,6 +1,7 @@
 class SdbipTimePeriod < ActiveRecord::Base
   ActiveRecord::Base.establish_connection($current_session_db)
   include PublicActivity::Common
+  validates :period, presence: true
   def self.import(file)
   	case File.extname(file.original_filename)
    	when ".csv" then

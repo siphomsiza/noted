@@ -1,18 +1,12 @@
 class SetupsController < ApplicationController
-  before_action :logged_in_user, only: [:index, :show, :edit, :update, :destroy]
-  before_action :admin_user, only: [:index, :show, :edit, :update, :destroy]
+  before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
+  before_action :admin_user, only: [:index, :edit, :update, :destroy]
+  protect_from_forgery
+  skip_before_action :verify_authenticity_token, if: :js_request?
   def index
     weather_details
     @setup = Setup.new
   	@setups = Setup.all
-  end
-
-  def show
-  	@setup =Setup.find(params[:id])
-  end
-
-  def new
-  	@setup=Setup.new
   end
 
   def edit
@@ -52,6 +46,9 @@ class SetupsController < ApplicationController
   end
 
   private
+  def js_request?
+      request.format.js?
+  end
   def setup_params
   	params.require(:setup).permit(:performance_comments,:performance_length,:project_life_cycle,:include_previous_departmental_actual,:include_departmental_previous_comments,:include_departmental_next_target,:include_toplayer_previous_target,:include_toplayer_next_target,:include_toplayer_previous_comments,:attach_poe)
   end

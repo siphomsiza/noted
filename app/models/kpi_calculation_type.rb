@@ -5,4 +5,5 @@ class KpiCalculationType < ActiveRecord::Base
 	has_many :top_layer_sdbips
 	delegate :name, :to => :top_layer_sdbips, :prefix => true
 	delegate :name,:code, :to => :departmental_sdbip, :prefix => true
+	validates :name, presence: true
 end

@@ -30,6 +30,9 @@
   </div>
   <div class="actions">
     <%= f.submit "Save", class: 'btn col-lg-3 pull-right' %>
+    <% if !@mtas_indicator.new_record? %>
+      <%= link_to "Delete",mtas_indicator_path(@mtas_indicator),method: :delete, data: {confirm: "Are you sure?"}, :class=>'btn col-lg-3 pull-right'%>
+    <% end %>
   </div>
 <% end %>
 </div>

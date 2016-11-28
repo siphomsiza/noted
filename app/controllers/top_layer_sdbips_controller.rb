@@ -22,7 +22,7 @@ class TopLayerSdbipsController < ApplicationController
       redirect_to top_layer_sdbips_url
     else
     begin
-       CapitalProject.import(params[:file])
+       TopLayerSdbip.import(params[:file])
        flash[:success] = "Top Layer SDBIPs imported successfully."
        redirect_to top_layer_sdbips_url
     rescue=> e

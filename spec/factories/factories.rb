@@ -1,6 +1,6 @@
 FactoryGirl.define do
 
-  factory :user do
+factory :user do
 #avatar { File.new("#{Rails.root}/public/avatars/original/missing.png") }
 firstname "Winnie"
 email {Faker::Internet.email}
@@ -17,7 +17,7 @@ terminated false
 disability_description nil
 employee_number "mm02"
 employment_date "01-02-2016"
-job_title "Manager" 
+job_title "Manager"
 location "RiverSands"
 manager false
 country_prefix "+27"
@@ -46,7 +46,7 @@ password_digest nil
 department_id "01"
 password "foobar"
 password_confirmation "foobar"
-    
+
   end
   #factory :invalid_user, parent: :user do
   #  name nil
@@ -54,7 +54,7 @@ password_confirmation "foobar"
 end
 FactoryGirl.define do
   factory :department do
-    name "Technical Services"
+    name {Faker::Commerce.department}
     tel_no "1221122"
     fax_no "67699887"
   end
@@ -201,7 +201,7 @@ FactoryGirl.define do
     municipality "Mkhondo"
     province "Gauteng"
 end
-factory :invalid_master_setup, parent: :master_setup do 
+factory :invalid_master_setup, parent: :master_setup do
   municipality nil
 end
 end
@@ -235,19 +235,28 @@ end
 
 FactoryGirl.define do
   factory :funding_source do
-
     name "CRR"
 end
 end
+FactoryGirl.define do
+  factory :invalid_funding_source, :parent => :funding_source do
+    name nil
+end
+end
+
 
 FactoryGirl.define do
-  factory :kpa do
-
-    name "Basic Service Delivery"
-    code 3
+factory :kpa do
+  name {Faker::Name.name}
+  code {Faker::Number.between(1,100)}
 end
 end
-
+FactoryGirl.define do
+factory :invalid_kpa, parent: :kpa do
+  name ''
+  code ''
+end
+end
 FactoryGirl.define do
   factory :kpi_calculation_type do
 
@@ -303,7 +312,7 @@ FactoryGirl.define do
 
 name "% of projects completed on time and meeting specifications(quality assessment)"
     end
-end  
+end
 
 FactoryGirl.define do
   factory :national_outcome do

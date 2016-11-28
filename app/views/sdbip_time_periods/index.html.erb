@@ -139,7 +139,7 @@
 							<td></td>
 
 							<td><%= link_to edit_sdbip_time_period_path(sdbip_time_period),remote: true,'data-target' => "#time-periods-modal", 'data-toggle' => 'modal', class: 'btn btn-sm' do %>
-								<span class="glyphicon glyphicon-edit"></span>&nbsp;Update
+								<span class="glyphicon glyphicon-edit"></span>&nbsp;Update Period
 								<% end %>
 								<div id="time-periods-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true"></div>
 
@@ -180,7 +180,7 @@
 						<li class="active">Importing SDBIP Time Periods</li>
 					</ol>
 				</h4>
-				<%= label_tag :NB,"Note: Supported files types are xls,xlsx, ods and csv types.", id: 'import_info' %>
+				<%= label_tag :NB,"Note: Supported files types are xlsx, ods and csv types.", id: 'import_info' %>
 			</div>
 			<div class="modal-body">
 				<%= label_tag :select_file,"Primary Reminder:" %>
@@ -229,7 +229,7 @@
 			</div>
 			<div class="modal-footer">
 				<div class="col-md-4 pull-right">
-					<%= submit_tag "Save", :class=>"btn btn-midi" %>
+					<%= submit_tag "Submit", :class=>"btn btn-midi" %>
 				</div>
 			</div>
 			<% end %>

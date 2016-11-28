@@ -5,4 +5,5 @@ class KpiTargetType < ActiveRecord::Base
 	has_many :departmental_sdbips
 	delegate :name, :to => :top_layer_sdbips, :prefix => true
 	delegate :name, :to => :departmental_sdbips, :prefix => true
+	validates :name, presence: true
 end

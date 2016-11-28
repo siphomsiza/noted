@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   include SessionsHelper
   def record_activity(note)
-    if !current_user.blank?
+    unless current_user.blank?
       @activity = ActivityLog.new
       @activity = current_user.activity_logs.build
       @activity.admin = current_user.admin || current_user.super_admin
@@ -33,9 +33,9 @@ class ApplicationController < ActionController::Base
   # end
   def weather_details
     @client = YahooWeather::Client.new
-    @response = @client.fetch(1_582_504)
-    @doc = @response.doc
-    @forecast = @doc['item']['forecast']
+    @response = @client.fetch(1_582_504) unless @client.blank?
+    @doc = @response.doc unless @response.blank?
+    @forecast = @doc['item']['forecast'] unless @doc.blank?
   end
 
   private

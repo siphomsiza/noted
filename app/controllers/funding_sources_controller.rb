@@ -1,16 +1,7 @@
 class FundingSourcesController < ApplicationController
-  before_action :set_funding_source, only: [:show, :edit, :update, :destroy]
-
-  # GET /funding_sources
-  # GET /funding_sources.json
-  def index
-    @funding_sources = FundingSource.all
-  end
-
-  # GET /funding_sources/1
-  # GET /funding_sources/1.json
-  def show
-  end
+  before_action :set_funding_source, only: [:edit, :update, :destroy]
+  protect_from_forgery
+  skip_before_action :verify_authenticity_token, if: :js_request?
 
   # GET /funding_sources/new
   def new
@@ -44,7 +35,7 @@ class FundingSourcesController < ApplicationController
           flash[:success] =  'Funding source was successfully updated.'
           redirect_to :back
       else
-        flash[:success] = 'Funding source was not updated.'
+        flash[:danger] = 'Funding source was not updated.'
         redirect_to :back
       end
 
@@ -60,6 +51,9 @@ class FundingSourcesController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def js_request?
+          request.format.js?
+    end
     def set_funding_source
       @funding_source = FundingSource.find(params[:id])
     end
