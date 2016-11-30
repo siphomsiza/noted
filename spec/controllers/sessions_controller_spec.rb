@@ -49,7 +49,7 @@ RSpec.describe SessionsController, :type => :controller do
 
       post :create, session: { email: user.email, password: user.password }
 
-      expect(response).to redirect_to '/dashboard'
+      expect(response).to redirect_to introduction_url
       expect(controller.current_user).to eq user
     end
     context "User is activated, not terminated, not locked and correct password" do
