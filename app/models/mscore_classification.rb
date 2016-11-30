@@ -9,4 +9,5 @@ class MscoreClassification < ActiveRecord::Base
 	delegate :name, :to => :departmental_sdbip, :prefix => true
 	delegate :name, :to => :capital_projects, :prefix => true
 	delegate :name, :to => :monthly_cashflows, :prefix => true
+	validates :name, presence: true
 end

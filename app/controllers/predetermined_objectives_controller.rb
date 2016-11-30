@@ -1,16 +1,7 @@
 class PredeterminedObjectivesController < ApplicationController
-  before_action :set_predetermined_objective, only: [:show, :edit, :update, :destroy]
-
-  # GET /predetermined_objectives
-  # GET /predetermined_objectives.json
-  def index
-    @predetermined_objectives = PredeterminedObjective.all
-  end
-
-  # GET /predetermined_objectives/1
-  # GET /predetermined_objectives/1.json
-  def show
-  end
+  before_action :set_predetermined_objective, only: [:edit, :update, :destroy]
+  protect_from_forgery
+  skip_before_action :verify_authenticity_token, if: :js_request?
 
   # GET /predetermined_objectives/new
   def new
@@ -57,6 +48,9 @@ class PredeterminedObjectivesController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def js_request?
+        request.format.js?
+    end
     def set_predetermined_objective
       @predetermined_objective = PredeterminedObjective.find(params[:id])
     end

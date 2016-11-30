@@ -1,15 +1,12 @@
 class JobtitlesController < ApplicationController
-  before_action :set_jobtitle, only: [:show, :edit, :update, :destroy]
+  before_action :set_jobtitle, only: [:edit, :update, :destroy]
+  protect_from_forgery
+  skip_before_action :verify_authenticity_token, if: :js_request?
 
   # GET /jobtitles
   # GET /jobtitles.json
   def index
     @jobtitles = Jobtitle.all
-  end
-
-  # GET /jobtitles/1
-  # GET /jobtitles/1.json
-  def show
   end
 
   # GET /jobtitles/new
@@ -25,34 +22,25 @@ class JobtitlesController < ApplicationController
   # POST /jobtitles.json
   def create
     @jobtitle = Jobtitle.new(jobtitle_params)
-
-    respond_to do |format|
       if @jobtitle.save
         flash[:success] = 'Jobtitle was successfully created.'
-        format.html { redirect_to :back }
-        format.json { render :show, status: :created, location: master_setups_path }
+        redirect_to :back
       else
         flash[:danger] = 'Jobtitle was not created.'
-        format.html { redirect_to :back }
-        format.json { render json: @jobtitle.errors, status: :unprocessable_entity }
+        redirect_to :back
       end
-    end
   end
 
   # PATCH/PUT /jobtitles/1
   # PATCH/PUT /jobtitles/1.json
   def update
-    respond_to do |format|
       if @jobtitle.update(jobtitle_params)
         flash[:success] = 'Jobtitle was successfully updated.'
-        format.html { redirect_to :back }
-        format.json { render :show, status: :ok, location: master_setups_path }
+        redirect_to :back
       else
-        flash[:success] = 'Jobtitle was not updated.'
-        format.html { redirect_to :back }
-        format.json { render :show, status: :ok, location: master_setups_path }
+        flash[:danger] = 'Jobtitle was not updated.'
+        redirect_to :back
       end
-    end
   end
 
   # DELETE /jobtitles/1
@@ -68,6 +56,9 @@ class JobtitlesController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def js_request?
+        request.format.js?
+    end
     def set_jobtitle
       @jobtitle = Jobtitle.find(params[:id])
     end

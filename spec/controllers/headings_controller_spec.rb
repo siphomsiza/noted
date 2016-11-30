@@ -273,22 +273,25 @@ RSpec.describe HeadingsController, :type => :controller do
 
   describe "#update" do
 
-          before(:each) do
-              @heading = FactoryGirl.create(:heading)
+          before do
               request.env['HTTP_REFERER'] = root_url
+              @heading = FactoryGirl.create(:heading)
+              @user = FactoryGirl.create(:user)
+              session[:user_id] = @user.id
           end
-
-          it "should re-render edit template on failed update" do
-          @attr = { "term" => "kpi name", "description" => "kpi name", "category" => "Departmental SDBIP"}
-          put :update, :id => @heading.id, :heading => @attr
-          expect(flash[:success]).to eq("Heading was successfully updated.")
-          end
-
           it "should redirect to index with a notice on successful update" do
-          @attr = { "term" => "kpi name", "description" => "kpi name", "category" => "Top Layer SDBIP"}
-          put :update, :id => @heading.id, :heading => @attr
+          @attr = { :term => "kpi name", :description => "kpi name", :category => "Departmental SDBIP"}
+          patch :update, :id => @heading.id, :heading => @attr
           expect(assigns[:heading]).not_to be_new_record
-          expect(flash[:success]).not_to eq("Heading was not updated.")
+          expect(flash[:success]).to eq("Heading was successfully updated.")
+          expect(response).to redirect_to  headings_path
+          end
+
+          it "should redirect to index with a notice on unsuccessful update" do
+          @attr = { :term => nil, "description" => "kpi name", "category" => "Top Layer SDBIP"}
+          patch :update, :id => @heading.id, :heading => @attr
+          expect(assigns[:heading]).not_to be_new_record
+          expect(flash[:danger]).to eq("Heading was not updated.")
           expect(response).to redirect_to :back
           end
 

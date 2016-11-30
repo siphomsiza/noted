@@ -13,7 +13,7 @@ class Department < ActiveRecord::Base
 	accepts_nested_attributes_for :subdepartments, allow_destroy: true
 	validates_presence_of :name, :tel_no, :fax_no
 	validates_uniqueness_of :name
-	validates :name,format: { with: /\A[a-zA-Z',. ]+\z/ }
+	validates :name,presence: true#format: { with: /\A[a-zA-Z',. ]+\z/ }
 	validates_numericality_of :tel_no, :fax_no
 	delegate :name, :to => :departmental_sdbip, :prefix => true
 	delegate :name, :to => :roles, :prefix => true

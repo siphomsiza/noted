@@ -11,7 +11,6 @@ RSpec.describe RolesController, :type => :controller do
               session[:user_id] = @user.id
               get :index
           end
-        
           it "assigns @role" do
           role = Role.create
           expect(assigns[:role]).to be_a_new(Role)
@@ -37,7 +36,7 @@ RSpec.describe RolesController, :type => :controller do
           it {expect(response).to render_template("index")}
     end
   end
-            
+
   describe 'POST #create' do
 
     before(:each) do
@@ -45,60 +44,62 @@ RSpec.describe RolesController, :type => :controller do
   end
     context 'with valid attributes' do
       it 'creates the role' do
-        post :create, role: attributes_for(:role)
-        expect(Role.count).to eq(1)
+        expect{
+          post :create, role: attributes_for(:role)
+        }.to change(Role,:count).by(1)
       end
 
       it 'redirects to the "show" action for the new role' do
         post :create, role: attributes_for(:role)
+        expect(flash[:success]).to eq("Role was successfully saved.")
         expect(response).to redirect_to :back
       end
     end
 
     context 'with invalid attributes' do
       it 'does not create the role' do
-        post :create, role: attributes_for(:role, name: nil)
-        expect(Role.count).to eq(1)
+        expect{
+          post :create, role: attributes_for(:role,user_id: nil)
+        }.to_not change(Role,:count)
       end
 
       it 're-renders the "new" view' do
-        post :create, role: attributes_for(:role, name: nil)
-  
-        
+        post :create, role: attributes_for(:role,user_id: nil)
+        expect(flash[:danger]).to eq("Role was not saved.")
+        expect(response).to redirect_to :back
       end
     end
   end
-        
+
   describe "#edit_user_role" do
     context "when user is admin and logged in" do
 
           before do
           @user = create(:user)
-          role = Role.create
+          @role = FactoryGirl.create(:role)
           session[:user_id] = @user.id
           end
-
           it {expect(response).to have_http_status(200)}
     end
 
     context "when user is not logged in" do
 
           before do
-              role = Role.create
-              get :edit_user_role,:id => @role
+              @role = FactoryGirl.create(:role)
+              get :edit_user_role,:id => @role.id, :format => 'js'
           end
 
           it {expect(response).to redirect_to(login_path)}
           it {expect(flash[:danger]).to eq("Please log in.")}
     end
-  end 
+  end
 
   describe "#edit_grant_new_user_access" do
     context "when user is admin and logged in" do
 
           before do
           @user = create(:user)
-          role = Role.create
+          @role = FactoryGirl.create(:role)
           session[:user_id] = @user.id
           end
           it {expect(assigns[:role]).to be_a_new(Role)}
@@ -108,14 +109,14 @@ RSpec.describe RolesController, :type => :controller do
     context "when user is not logged in" do
 
           before do
-              role = Role.create
-              get :edit_grant_new_user_access,:id => @role
+              @role = FactoryGirl.create(:role)
+              get :edit_grant_new_user_access,:id => @role.id, :format => 'js'
           end
 
           it {expect(response).to redirect_to(login_path)}
           it {expect(flash[:danger]).to eq("Please log in.")}
     end
-  end 
+  end
 
   describe "#grant new user access" do
     context "user is correct user or user is admin and is logged on to the system" do
@@ -123,11 +124,11 @@ RSpec.describe RolesController, :type => :controller do
           before do
               @user = create(:user)
               session[:user_id] = @user.id
-              get :grant_new_user_access,:id => @user.id
+              get :grant_new_user_access,:id => @user.id,:format => 'js'
           end
 
           it {expect(response).to have_http_status(200)}
-          
+
     end
   end
 
@@ -137,11 +138,11 @@ RSpec.describe RolesController, :type => :controller do
           before do
               @user = create(:user)
               session[:user_id] = @user.id
-              get :new_user_role,:id => @user.id
+              get :new_user_role,:id => @user.id,:format => 'js'
           end
 
           it {expect(response).to have_http_status(200)}
-      
+
     end
   end
 
@@ -150,7 +151,7 @@ RSpec.describe RolesController, :type => :controller do
 
           before do
           @user = create(:user)
-          role = Role.create
+          @role = FactoryGirl.create(:role)
           session[:user_id] = @user.id
           end
           it {expect(assigns[:role]).to be_a_new(Role)}
@@ -160,38 +161,38 @@ RSpec.describe RolesController, :type => :controller do
     context "when user is not logged in" do
 
           before do
-              role = Role.create
-              get :edit_grant_new_user_access,:id => @role
+              @role = FactoryGirl.create(:role)
+              get :edit_grant_new_user_access,:id => @role.id,:format => 'js'
           end
 
           it {expect(response).to redirect_to(login_path)}
           it {expect(flash[:danger]).to eq("Please log in.")}
     end
-  end 
+  end
 
   describe "#edit" do
     context "when user is admin and logged in" do
 
           before do
               @user = create(:user)
-              role = Role.create
+              @role = FactoryGirl.create(:role)
               session[:user_id] = @user.id
-              get :edit,{:id=>@role.id}
+              get :edit,:id=>@role.id,:format => 'js'
           end
 
           it {expect(response).to have_http_status(200)}
-          it {expect(response.content_type).to eq("text/html") }
+          it {expect(response.content_type).to eq("text/javascript") }
           it {expect(response).to render_template(:edit)}
     end
 
     context "when user is not logged in" do
 
           before do
-              role = Role.create
+              @role = FactoryGirl.create(:role)
               get :edit,{:id=>@role.id}
           end
 
-          it { expect(response).to have_http_status(302)}    
+          it { expect(response).to have_http_status(302)}
     end
   end
 
@@ -201,13 +202,13 @@ RSpec.describe RolesController, :type => :controller do
           before do
               @user = create(:user)
               session[:user_id] = @user.id
-              role = Role.create
-              get :new
+              @role = FactoryGirl.create(:role)
+              get :new,:format => 'js'
           end
 
           it {expect(assigns[:role]).to be_a_new(Role)}
           it {expect(response.status).to eq(200) }
-          it {expect(response.content_type).to eq("text/html") }
+          it {expect(response.content_type).to eq("text/javascript") }
           it {expect(response).to render_template("new")}
         end
       end
@@ -216,21 +217,22 @@ RSpec.describe RolesController, :type => :controller do
 
           before(:each) do
             request.env['HTTP_REFERER'] = root_url
-              role = Role.create
+              @role = FactoryGirl.create(:role)
           end
 
           it "should re-render edit template on failed update" do
-          @attr = { :kpi_owner => false, :finance_admin => false }
-          put :update, :id => @role.id, :role => @attr
-          expect(flash[:danger]).to eq("role was not updated.")
+          @attr = { user_id: nil, :kpi_owner => false, :finance_admin => false }
+          patch :update, :id => @role.id, :role => @attr
+          expect(flash[:danger]).to eq("Role was not saved.")
           expect(response).to redirect_to :back
           end
 
           it "should redirect to index with a notice on successful update" do
-          @attr = { :kpi_owner => true, :finance_admin => false}
-          put :update, :id => @role.id, :role => @attr
+          @attr = { user_id: 1, :kpi_owner => true, :finance_admin => false}
+          patch :update, :id => @role.id, :role => @attr
           expect(assigns[:role]).not_to be_new_record
-          expect(flash[:success]).not_to eq("Role was successfully saved")          
+          expect(flash[:success]).to eq("Role was successfully saved.")
+          expect(response).to redirect_to :back
           end
   end
 
@@ -240,17 +242,18 @@ RSpec.describe RolesController, :type => :controller do
             request.env['HTTP_REFERER'] = root_url
               @user = create(:user)
               session[:user_id] = @user.id
-              role = Role.create
+              @role = FactoryGirl.create(:role)
           end
 
           it 'destroys the requested role' do
           expect {
-          delete :destroy, id: @role
+          delete :destroy, :id => @role.id
                  }.to change(Role, :count).by(-1)
           end
- 
+
           it 'redirects to the roles list' do
-          delete:destroy, id: @role
+          delete:destroy, :id => @role.id
+          expect(flash[:success]).to eq("Role was successfully deleted.")
           expect(response).to redirect_to :back
           end
   end

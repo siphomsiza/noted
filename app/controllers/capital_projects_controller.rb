@@ -35,9 +35,8 @@ class CapitalProjectsController < ApplicationController
        CapitalProject.import(params[:file])
        flash[:success] = "Capital Projects imported successfully."
        redirect_to capital_projects_url
-    rescue=> e
-       Rails.logger.error { "#{e.message} #{e.backtrace.join("\n")}" }
-      flash[:danger] = "Capital Projects failed to import #{e.message}."
+    rescue
+      flash[:danger] = "Capital Projects failed to import."
        redirect_to capital_projects_url
     end
     end

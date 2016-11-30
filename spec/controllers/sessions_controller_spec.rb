@@ -32,7 +32,6 @@ RSpec.describe SessionsController, :type => :controller do
   end
 
   describe 'POST #create' do
-    
   context 'when password is invalid' do
     it 'renders the page with error' do
       user = create(:user)
@@ -70,7 +69,7 @@ RSpec.describe SessionsController, :type => :controller do
           end
 
           it "Increments user log on counts" do
-          expect { @user.login_count = @user.login_count + 1 } 
+          expect { @user.login_count = @user.login_count + 1 }
           end
   end
   context "User is not activated" do
@@ -102,7 +101,7 @@ RSpec.describe SessionsController, :type => :controller do
           expect(response).to have_http_status(200)
           end
     end
-  
+
     context "User is locked" do
 
           before do

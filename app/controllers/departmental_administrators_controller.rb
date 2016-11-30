@@ -22,11 +22,6 @@ class DepartmentalAdministratorsController < ApplicationController
   def show
   end
 
-  # GET /departmental_administrators/new
-  def new
-    @departmental_administrator = DepartmentalAdministrator.new
-  end
-
   # GET /departmental_administrators/1/edit
   def edit
   end
@@ -38,9 +33,10 @@ class DepartmentalAdministratorsController < ApplicationController
     begin
       if @departmental_administrator.save
         flash[:success] = 'Departmental administrator was successfully created.'
+      else
+        flash[:danger] = "Departmental administrator was not created."
       end
-    rescue => e
-        flash[:danger] = "Departmental administrator was not created #{e.message}."
+    rescue
     end
      redirect_to :back
   end

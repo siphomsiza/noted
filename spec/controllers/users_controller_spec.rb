@@ -3,6 +3,9 @@ require 'spec_helper'
 require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
+  before(:each) do
+    request.env['HTTP_REFERER'] = root_url
+  end
   describe '#index' do
     let(:admin) { build_stubbed(:admin) }
     let(:user) { build_stubbed(:user) }
@@ -274,7 +277,7 @@ RSpec.describe UsersController, type: :controller do
       end
 
       it { expect(response).to have_http_status(302) }
-      it { expect(flash[:success]).to eq("#{@new_user.firstname} #{@new_user.surname}'s account deactivated successfully") }
+      it { expect(flash[:success]).to eq("User's account deactivated successfully") }
       it { expect(response).to redirect_to(users_path) }
     end
 
@@ -502,7 +505,7 @@ RSpec.describe UsersController, type: :controller do
       end
 
       it { expect(response).to have_http_status(302) }
-      it { expect(flash[:success]).to eq('User unlocked successfully.') }
+      it { expect(flash[:success]).to eq("Unlocked user's account successfully.") }
       it { expect(response).to redirect_to(users_path) }
     end
     context 'when user is not logged in' do

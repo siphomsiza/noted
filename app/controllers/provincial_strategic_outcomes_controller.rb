@@ -1,16 +1,7 @@
 class ProvincialStrategicOutcomesController < ApplicationController
-  before_action :set_provincial_strategic_outcome, only: [:show, :edit, :update, :destroy]
-
-  # GET /provincial_strategic_outcomes
-  # GET /provincial_strategic_outcomes.json
-  def index
-    @provincial_strategic_outcomes = ProvincialStrategicOutcome.all
-  end
-
-  # GET /provincial_strategic_outcomes/1
-  # GET /provincial_strategic_outcomes/1.json
-  def show
-  end
+  before_action :set_provincial_strategic_outcome, only: [:edit, :update, :destroy]
+  protect_from_forgery
+  skip_before_action :verify_authenticity_token, if: :js_request?
 
   # GET /provincial_strategic_outcomes/new
   def new
@@ -58,6 +49,9 @@ class ProvincialStrategicOutcomesController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def js_request?
+        request.format.js?
+    end
     def set_provincial_strategic_outcome
       @provincial_strategic_outcome = ProvincialStrategicOutcome.find(params[:id])
     end

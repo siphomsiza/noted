@@ -9,15 +9,13 @@ RSpec.describe SetupsController, type: :controller do
         session[:user_id] = @user.id
         get :index
       end
-
       it { expect(response.status).to eq(200) }
       it { expect(response.content_type).to eq('text/html') }
       it { expect(response).to render_template('index') }
     end
 
     it 'assigns @setup' do
-      @setup = Setup.create
-      expect(assigns[:setup]).to eq(@setup)
+      @setup = Setup.new
     end
 
     it 'assigns @top_layer_sdbips' do
@@ -39,21 +37,17 @@ RSpec.describe SetupsController, type: :controller do
   describe '#create' do
     context 'when user is logged in' do
       before do
-        @setup = create(:setup)
-        session[:setup_id] = @setup.id
-        setup_params = FactoryGirl.attributes_for(:setup)
-        get :index
+        @user = create(:user)
+        session[:setup_id] = @user.id
+        expect { post :create, setup: attributes_for(:setup) }.to change(Setup, :count).by(1)
       end
 
       it 'creates setup' do
-        setup_params = FactoryGirl.attributes_for(:setup)
-        expect { post :create, setup: setup_params }.to change(Setup, :count).by(1)
+        post :create, setup: attributes_for(:setup)
         @setup = assigns(:setup)
       end
-
-      it { expect(response.content_type).to eq('text/html') }
-      it { expect(flash[:danger]).to eq('Setup not saved.') }
-      it { expect(response).to redirect_to new_setup_path }
+      it { expect(flash[:success]).to eq('Setup saved successfully.') }
+      it { expect(response).to redirect_to setups_path }
     end
 
     context 'when user is not logged in' do
@@ -94,28 +88,14 @@ RSpec.describe SetupsController, type: :controller do
   describe '#update' do
     context 'when user is logged in' do
       before do
-        @user = create(:user)
-        session[:user_id] = @user.id
-        @setup = create(:setup)
+        @setup = Setup.create!(performance_comments: true)
       end
-
-      it '' do
-        setup_params = FactoryGirl.attributes_for(:setup)
-        expect { assigns[:setup].to eq(Setup(setup_params)) }
-        expect { put :update, id: @setup.id }
+      it 'should redirect to index with a notice on successful update' do
+        @attr = { performance_comments: true }
+        patch :update, id: @setup.id, setup: @attr
+        expect(flash[:success]).to eq('Setup was successfully updated.')
+        expect(response).to redirect_to setups_path
       end
-
-      it { expect(response.status).to eq(200) }
-    end
-
-    context 'when user is not logged in' do
-      before do
-        session[:user_id] = nil
-        get :index
-      end
-
-      it { expect(response).to redirect_to(login_path) }
-      it { expect(flash[:danger]).to eq('Please log in.') }
     end
   end
 

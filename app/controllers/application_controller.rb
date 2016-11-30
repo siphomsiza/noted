@@ -25,7 +25,7 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate
-    redirect_to root_url if session[:session_key].nil?
+    #redirect_to root_url if session[:session_key].nil?
   end
 
   # def reload_page

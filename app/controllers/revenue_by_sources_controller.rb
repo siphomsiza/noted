@@ -2,6 +2,8 @@ class RevenueBySourcesController < ApplicationController
   before_action :set_revenue_by_source, only: [:show, :edit, :update, :destroy,:edit_revenue_by_sources]
   before_action :logged_in_user, only: [:index,:show,:new,:edit,:destroy,:edit_revenue_by_sources]
   before_action :admin_user,     only: [:index,:show,:new,:edit,:destroy,:edit_revenue_by_sources]
+  protect_from_forgery
+  skip_before_action :verify_authenticity_token, if: :js_request?
 
   # GET /revenue_by_sources
   # GET /revenue_by_sources.json
@@ -17,11 +19,6 @@ class RevenueBySourcesController < ApplicationController
   def show
   end
 
-  # GET /revenue_by_sources/new
-  def new
-    @revenue_by_source = RevenueBySource.new
-  end
-
   # GET /revenue_by_sources/1/edit
   def edit
   end
@@ -34,31 +31,25 @@ class RevenueBySourcesController < ApplicationController
   def create
     @revenue_by_source = RevenueBySource.new(revenue_by_source_params)
 
-    respond_to do |format|
       if @revenue_by_source.save
         flash[:success] = 'Revenue by source was successfully created.'
-        format.html { redirect_to revenue_by_sources_url}
-        format.json { render :show, status: :created, location: revenue_by_sources_url }
+        redirect_to :back
       else
-          format.html { redirect_to revenue_by_sources_url}
-        format.json { render json: @revenue_by_source.errors, status: :unprocessable_entity }
+        flash[:danger] = 'Revenue by source was not created.'
+        redirect_to :back
       end
-    end
   end
 
   # PATCH/PUT /revenue_by_sources/1
   # PATCH/PUT /revenue_by_sources/1.json
   def update
-    respond_to do |format|
       if @revenue_by_source.update(revenue_by_source_params)
         flash[:success] = 'Revenue by source was successfully updated.'
-        format.html { redirect_to revenue_by_sources_url }
-        format.json { render :show, status: :ok, location: revenue_by_sources_url }
+        redirect_to :back
       else
-        format.html { redirect_to revenue_by_sources_url}
-        format.json { render json: @revenue_by_source.errors, status: :unprocessable_entity }
+        flash[:danger] = 'Revenue by source was not updated.'
+        redirect_to :back
       end
-    end
   end
 
   # DELETE /revenue_by_sources/1
@@ -74,6 +65,9 @@ class RevenueBySourcesController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def js_request?
+        request.format.js?
+    end
     def set_revenue_by_source
       @revenue_by_source = RevenueBySource.find(params[:id])
     end
@@ -89,7 +83,7 @@ class RevenueBySourcesController < ApplicationController
           flash[:danger] = "Please log in."
           redirect_to login_url
         end
-      end
+    end
 
       # Confirms an admin user.
       def admin_user

@@ -23,7 +23,6 @@ class DepartmentsController < ApplicationController
   end
 
   def update
-    @department = Department.find(params[:id])
       if @department.update(department_params)
         flash[:success] = 'Department record was successfully updated.'
       else
@@ -35,7 +34,6 @@ class DepartmentsController < ApplicationController
   # DELETE /municipalities/1
   # DELETE /municipalities/1.json
   def destroy
-    @department = Department.find(params[:id])
     @department.destroy
       flash[:success]='Department record was successfully deleted.'
       redirect_to departments_path
