@@ -14,11 +14,6 @@ class SubdepartmentalAdministratorsController < ApplicationController
   def show
   end
 
-  # GET /subdepartmental_administrators/new
-  def new
-    @subdepartmental_administrator = SubdepartmentalAdministrator.new
-  end
-
   # GET /subdepartmental_administrators/1/edit
   def edit
   end
@@ -31,7 +26,7 @@ class SubdepartmentalAdministratorsController < ApplicationController
       if @subdepartmental_administrator.save
         flash[:success] = 'Subdepartmental administrator was successfully created.'
       else
-        flash[:success] = 'Subdepartmental administrator was not created.'
+        flash[:danger] = 'Subdepartmental administrator was not created.'
      end
      redirect_to :back
   end

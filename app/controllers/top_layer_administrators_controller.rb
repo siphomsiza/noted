@@ -15,11 +15,6 @@ class TopLayerAdministratorsController < ApplicationController
   def show
   end
 
-  # GET /top_layer_administrators/new
-  def new
-    @top_layer_administrator = TopLayerAdministrator.new
-  end
-
   # GET /top_layer_administrators/1/edit
   def edit
   end
@@ -70,7 +65,7 @@ class TopLayerAdministratorsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def top_layer_administrator_params
-      params.require(:top_layer_administrator).permit(:user_id, :can_edit, :can_create, :can_approve, :can_update)
+      params.require(:top_layer_administrator).permit(:user_id, :department_id, :can_edit, :can_create, :can_approve, :can_update)
     end
     def logged_in_user
         unless logged_in?

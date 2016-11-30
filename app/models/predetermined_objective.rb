@@ -5,4 +5,5 @@ class PredeterminedObjective < ActiveRecord::Base
 	has_many :top_layer_sdbips
 	delegate :name, :to => :departmental_sdbip, :prefix => true
 	delegate :name, :to => :top_layer_sdbips, :prefix => true
+	validates :name, presence: true
 end

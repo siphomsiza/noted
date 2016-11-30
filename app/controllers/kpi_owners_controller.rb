@@ -1,11 +1,7 @@
 class KpiOwnersController < ApplicationController
   before_action :set_kpi_owner, only: [:edit_kpi_owner_title,:show, :edit, :update, :destroy,:add_admin]
-
-  # GET /kpi_owners
-  # GET /kpi_owners.json
-  def index
-    @kpi_owners = KpiOwner.all
-  end
+  protect_from_forgery
+  skip_before_action :verify_authenticity_token, if: :js_request?
 
   # GET /kpi_owners/1
   # GET /kpi_owners/1.json
@@ -31,9 +27,9 @@ class KpiOwnersController < ApplicationController
     @kpi_owner = KpiOwner.new(kpi_owner_params)
 
       if @kpi_owner.save
-        flash[:success] = 'Kpi Owner was successfully created.'
+        flash[:success] = 'KPI Owner was successfully created.'
       else
-        flash[:danger] = "KPI Owner not created."
+        flash[:danger] = "KPI Owner was not created."
       end
       redirect_to :back
   end
@@ -42,7 +38,7 @@ class KpiOwnersController < ApplicationController
   # PATCH/PUT /kpi_owners/1.json
   def update
       if @kpi_owner.update(kpi_owner_params)
-        flash[:success] = 'Kpi Owner was successfully saved.'
+        flash[:success] = 'KPI Owner was successfully saved.'
       else
         flash[:danger] = "KPI Owner was not saved."
       end
@@ -53,12 +49,15 @@ class KpiOwnersController < ApplicationController
   # DELETE /kpi_owners/1.json
   def destroy
     @kpi_owner.destroy
-      flash[:success] = 'Kpi owner was successfully deleted.'
+      flash[:success] = 'KPI owner was successfully deleted.'
       redirect_to :back
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def js_request?
+        request.format.js?
+    end
     def set_kpi_owner
       @kpi_owner = KpiOwner.find(params[:id])
     end

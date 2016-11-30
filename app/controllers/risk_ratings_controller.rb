@@ -1,17 +1,7 @@
 class RiskRatingsController < ApplicationController
-  before_action :set_risk_rating, only: [:show, :edit, :update, :destroy]
-
-  # GET /risk_ratings
-  # GET /risk_ratings.json
-  def index
-    @risk_ratings = RiskRating.all
-  end
-
-  # GET /risk_ratings/1
-  # GET /risk_ratings/1.json
-  def show
-  end
-
+  before_action :set_risk_rating, only: [:edit, :update, :destroy]
+  protect_from_forgery
+  skip_before_action :verify_authenticity_token, if: :js_request?
   # GET /risk_ratings/new
   def new
     @risk_rating = RiskRating.new
@@ -31,7 +21,7 @@ class RiskRatingsController < ApplicationController
         flash[:success] = 'Risk Rating was successfully created.'
         redirect_to :back
       else
-        flash[:success] = 'Risk Rating was not created.'
+        flash[:danger] = 'Risk Rating was not created.'
         redirect_to :back
       end
   end
@@ -61,6 +51,9 @@ class RiskRatingsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def js_request?
+        request.format.js?
+    end
     def set_risk_rating
       @risk_rating = RiskRating.find(params[:id])
     end

@@ -1,17 +1,7 @@
 class MscoreClassificationsController < ApplicationController
-  before_action :set_mscore_classification, only: [:show, :edit, :update, :destroy]
-
-  # GET /mscore_classifications
-  # GET /mscore_classifications.json
-  def index
-    @mscore_classifications = MscoreClassification.all
-  end
-
-  # GET /mscore_classifications/1
-  # GET /mscore_classifications/1.json
-  def show
-  end
-
+  before_action :set_mscore_classification, only: [:edit, :update, :destroy]
+  protect_from_forgery
+  skip_before_action :verify_authenticity_token, if: :js_request?
   # GET /mscore_classifications/new
   def new
     @mscore_classification = MscoreClassification.new
@@ -60,6 +50,9 @@ class MscoreClassificationsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def js_request?
+        request.format.js?
+    end
     def set_mscore_classification
       @mscore_classification = MscoreClassification.find(params[:id])
     end

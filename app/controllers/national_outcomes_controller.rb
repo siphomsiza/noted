@@ -1,17 +1,7 @@
 class NationalOutcomesController < ApplicationController
-  before_action :set_national_outcome, only: [:show, :edit, :update, :destroy]
-
-  # GET /national_outcomes
-  # GET /national_outcomes.json
-  def index
-    @national_outcomes = NationalOutcome.all
-  end
-
-  # GET /national_outcomes/1
-  # GET /national_outcomes/1.json
-  def show
-  end
-
+  before_action :set_national_outcome, only: [ :edit, :update, :destroy]
+  protect_from_forgery
+  skip_before_action :verify_authenticity_token, if: :js_request?
   # GET /national_outcomes/new
   def new
     @national_outcome = NationalOutcome.new
@@ -61,6 +51,9 @@ class NationalOutcomesController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def js_request?
+        request.format.js?
+    end
     def set_national_outcome
       @national_outcome = NationalOutcome.find(params[:id])
     end

@@ -1,16 +1,7 @@
 class StrategicObjectivesController < ApplicationController
-  before_action :set_strategic_objective, only: [:show, :edit, :update, :destroy]
-
-  # GET /strategic_objectives
-  # GET /strategic_objectives.json
-  def index
-    @strategic_objectives = StrategicObjective.all
-  end
-
-  # GET /strategic_objectives/1
-  # GET /strategic_objectives/1.json
-  def show
-  end
+  before_action :set_strategic_objective, only: [:edit, :update, :destroy]
+  protect_from_forgery
+  skip_before_action :verify_authenticity_token, if: :js_request?
 
   # GET /strategic_objectives/new
   def new
@@ -43,7 +34,7 @@ class StrategicObjectivesController < ApplicationController
         flash[:success] = 'Strategic objective was successfully updated.'
         redirect_to :back
       else
-        flash[:success] = 'Strategic objective was not updated.'
+        flash[:danger] = 'Strategic objective was not updated.'
         redirect_to :back
       end
   end
@@ -58,6 +49,9 @@ class StrategicObjectivesController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def js_request?
+        request.format.js?
+    end
     def set_strategic_objective
       @strategic_objective = StrategicObjective.find(params[:id])
     end

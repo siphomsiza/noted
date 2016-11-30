@@ -1,16 +1,7 @@
 class MtasIndicatorsController < ApplicationController
-  before_action :set_mtas_indicator, only: [:show, :edit, :update, :destroy]
-
-  # GET /mtas_indicators
-  # GET /mtas_indicators.json
-  def index
-    @mtas_indicators = MtasIndicator.all
-  end
-
-  # GET /mtas_indicators/1
-  # GET /mtas_indicators/1.json
-  def show
-  end
+  before_action :set_mtas_indicator, only: [:edit, :update, :destroy]
+  protect_from_forgery
+  skip_before_action :verify_authenticity_token, if: :js_request?
 
   # GET /mtas_indicators/new
   def new
@@ -58,6 +49,9 @@ class MtasIndicatorsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def js_request?
+        request.format.js?
+    end
     def set_mtas_indicator
       @mtas_indicator = MtasIndicator.find(params[:id])
     end

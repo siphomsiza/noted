@@ -15,12 +15,6 @@ class MonthlyCashflowsController < ApplicationController
   # GET /monthly_cashflows/1.json
   def show
   end
-
-  # GET /monthly_cashflows/new
-  def new
-    @monthly_cashflow = MonthlyCashflow.new
-  end
-
   # GET /monthly_cashflows/1/edit
   def edit
   end

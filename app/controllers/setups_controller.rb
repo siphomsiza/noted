@@ -1,4 +1,5 @@
 class SetupsController < ApplicationController
+  before_action :set_setup, only: [:edit, :update, :destroy]
   before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
   before_action :admin_user, only: [:index, :edit, :update, :destroy]
   protect_from_forgery
@@ -18,29 +19,18 @@ class SetupsController < ApplicationController
   	if @setup.save
   		flash[:success]="Setup saved successfully."
       redirect_to setups_path
-  	else
-  		flash[:danger]="Setup not saved."
-  		redirect_to setups_path
   	end
   end
   def update
-
-    @setup = Setup.find(params[:id])
-
       if @setup.update(setup_params)
         flash[:success]='Setup was successfully updated.'
         redirect_to setups_path
-
-      else
-        flash[:danger]='Setup was not updated.'
-        redirect_to :back
-    end
+      end
   end
 
   # DELETE /municipalities/1
   # DELETE /municipalities/1.json
   def destroy
-    @setup = Setup.find(params[:id])
     @setup.destroy
       redirect_to setups_path, notice: 'Setup was successfully deleted.'
   end
@@ -62,7 +52,9 @@ class SetupsController < ApplicationController
       redirect_to login_url
     end
   end
-
+  def set_setup
+    @setup = Setup.find(params[:id])
+  end
   # Confirms an admin user.
   def admin_user
     redirect_to(root_url) unless current_user.admin? || current_user.super_admin?

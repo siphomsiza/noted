@@ -20,11 +20,6 @@ class MasterSetupsController < ApplicationController
   def show
   end
 
-  # GET /master_setups/new
-  def new
-    @master_setup = MasterSetup.new
-  end
-
   # GET /master_setups/1/edit
   def edit
   end
@@ -35,10 +30,10 @@ class MasterSetupsController < ApplicationController
     @master_setup = MasterSetup.new(master_setup_params)
       if @master_setup.save
         flash[:success] = 'Master setup was successfully saved.'
-        redirect_to master_setups_url
+        redirect_to :back
       else
         flash[:danger] = 'Master setup was not saved.'
-        redirect_to master_setups_url
+        redirect_to :back
     end
   end
 
@@ -47,12 +42,12 @@ class MasterSetupsController < ApplicationController
   def update
 
       if @master_setup.update(master_setup_params)
-        flash[:success] = 'Location was successfully saved.'
-        redirect_to master_setups_url
+        flash[:success] = 'Master setup was successfully saved.'
+        redirect_to :back
 
       else
-        flash[:danger] = 'Location was not saved.'
-        redirect_to master_setups_url
+        flash[:danger] = 'Master setup was not saved.'
+        redirect_to :back
     end
   end
 
@@ -60,8 +55,8 @@ class MasterSetupsController < ApplicationController
   # DELETE /master_setups/1.json
   def destroy
     @master_setup.destroy
-    flash[:danger] =  'Master setup was successfully deleted.'
-      redirect_to master_setups_url
+    flash[:success] =  'Master setup was successfully deleted.'
+    redirect_to :back
 
   end
 

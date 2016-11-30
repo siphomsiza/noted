@@ -1,16 +1,7 @@
 class ReportingCategoriesController < ApplicationController
-  before_action :set_reporting_category, only: [:show, :edit, :update, :destroy]
-
-  # GET /reporting_categories
-  # GET /reporting_categories.json
-  def index
-    @reporting_categories = ReportingCategory.all
-  end
-
-  # GET /reporting_categories/1
-  # GET /reporting_categories/1.json
-  def show
-  end
+  before_action :set_reporting_category, only: [:edit, :update, :destroy]
+  protect_from_forgery
+  skip_before_action :verify_authenticity_token, if: :js_request?
 
   # GET /reporting_categories/new
   def new
@@ -58,6 +49,9 @@ class ReportingCategoriesController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def js_request?
+        request.format.js?
+    end
     def set_reporting_category
       @reporting_category = ReportingCategory.find(params[:id])
     end

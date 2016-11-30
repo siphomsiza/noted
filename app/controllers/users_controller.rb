@@ -24,6 +24,7 @@ class UsersController < ApplicationController
         end
     end
     def report_users
+      weather_details
       @user_activities = ActivityLog.where(admin: false)#.paginate(page: params[:page], per_page: 15).includes(:user)
       @super_user_activities = ActivityLog.where(admin: true)#.paginate(page: params[:page], per_page: 15).includes(:user)
       @users = User.all.includes(:department).includes(:role)
@@ -37,12 +38,7 @@ class UsersController < ApplicationController
     end
 
     def show
-        @client = YahooWeather::Client.new
-        @response = @client.fetch(1_582_504)
-        @doc = @response.doc
-        @forecast = @doc['item']['forecast']
-    rescue SocketError => e
-        flash[:danger] = "received Exception #{e.message}"
+        weather_details
     end
 
     def set_super_user

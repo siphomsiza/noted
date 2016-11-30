@@ -5,5 +5,5 @@ class MonthlyCashflow < ActiveRecord::Base
   belongs_to :capital_project
   belongs_to :subdepartment
   belongs_to :mscore_classification
-  validates :month, presence: true
+  validates :month,:department_id, presence: true
 end

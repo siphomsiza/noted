@@ -2,7 +2,9 @@ require 'spec_helper'
 require 'rails_helper'
 
 RSpec.describe JobtitlesController, :type => :controller do
-
+  before(:each) do
+    request.env['HTTP_REFERER'] = root_url
+  end
   describe "GET index" do
     context "when user is admin and logged in" do
 
@@ -28,13 +30,13 @@ RSpec.describe JobtitlesController, :type => :controller do
 
           before do
               @user = create(:user)
-              jobtitle = Jobtitle.create
+              @jobtitle = Jobtitle.create!(title: Faker::Name.title)
               session[:user_id] = @user.id
-              get :edit,{:id=>@jobtitle.id}
+              get :edit,:id=>@jobtitle.id, :format => 'js'
           end
 
           it {expect(response.status).to eq(200) }
-          it {expect(response.content_type).to eq("text/html") }
+          it {expect(response.content_type).to eq("text/javascript") }
           it {expect(response).to render_template("edit")}
     end
   end
@@ -51,25 +53,27 @@ RSpec.describe JobtitlesController, :type => :controller do
   context 'json' do
   context 'with valid attributes' do
     it 'creates the jobtitle' do
-      post :create, jobtitle: attributes_for(:jobtitle), format: :json
-      expect(Jobtitle.count).to eq(2)
+      expect{
+        post :create, jobtitle: attributes_for(:jobtitle), format: :json
+      }.to change(Jobtitle,:count).by(1)
     end
 
     it 'responds with 201' do
       post :create, jobtitle: attributes_for(:jobtitle), format: :json
-      expect(response).to have_http_status(201)
+      expect(response).to redirect_to :back
     end
   end
 
   context 'with invalid attributes' do
     it 'does not create the jobtitle' do
-      post :create, jobtitle: attributes_for(:jobtitle, title: nil), format: :json
-      expect(Jobtitle.count).to eq(1)
+      expect{
+        post :create, jobtitle: attributes_for(:jobtitle, title: nil), format: :json
+      }.to_not change(Jobtitle,:count)
     end
 
     it 'responds with 422' do
       post :create, jobtitle: attributes_for(:jobtitle, title: nil), format: :json
-      expect(response).to have_http_status(422)
+      expect(response).to redirect_to :back
     end
   end
 end
@@ -82,12 +86,12 @@ end
               @user = create(:user)
               session[:user_id] = @user.id
               jobtitle = Jobtitle.create
-              get :new
+              get :new, :format => 'js'
           end
 
           it {expect(assigns[:jobtitle]).to be_a_new(Jobtitle)}
           it {expect(response.status).to eq(200) }
-          it {expect(response.content_type).to eq("text/html") }
+          it {expect(response.content_type).to eq("text/javascript") }
           it {expect(response).to render_template("new")}
     end
   end
@@ -96,21 +100,22 @@ end
 
           before(:each) do
               @jobtitle = FactoryGirl.create(:jobtitle)
-              
-          end
-
-          it "should re-render edit template on failed update" do
-          @attr = { :title => "KPI Owner"}
-          patch :update, :id => @jobtitle.id, :jobtitle => @attr
-          expect(flash[:success]).to eq("Jobtitle was successfully updated.")
           end
 
           it "should redirect to index with a notice on successful update" do
-          @attr = { :title => "New title"}
+          @attr = { :title => "KPI Owner"}
           patch :update, :id => @jobtitle.id, :jobtitle => @attr
           expect(assigns[:jobtitle]).not_to be_new_record
-          expect(flash[:success]).not_to eq("Jobtitle was not updated.")
-          expect(response).to redirect_to master_setups_path
+          expect(flash[:success]).to eq("Jobtitle was successfully updated.")
+          expect(response).to redirect_to :back
+          end
+
+          it "should redirect to index with a notice on unsuccessful update" do
+          @attr = { :title => nil}
+          patch :update, :id => @jobtitle.id, :jobtitle => @attr
+          expect(assigns[:jobtitle]).not_to be_new_record
+          expect(flash[:danger]).to eq("Jobtitle was not updated.")
+          expect(response).to redirect_to :back
           end
   end
   describe "delete#destroy" do
@@ -125,7 +130,7 @@ end
 
           it {expect(assigns(:jobtitle).destroyed?).to be true}
           it {expect(response.content_type).to eq("text/html") }
-          it {expect(response).to redirect_to master_setups_path}
+          it {expect(response).to redirect_to :back}
     end
   end
 end

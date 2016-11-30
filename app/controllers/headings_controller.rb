@@ -1,4 +1,5 @@
 class HeadingsController < ApplicationController
+  before_action :set_heading, only: [:edit_top_layer_headings,:edit_capital_projects_headings,:edit_revenue_by_source_headings,:edit_monthly_cashflow_headings,:edit_departmental_headings,:edit, :update, :destroy]
   before_action :logged_in_user, only: [:index, :show, :new, :edit, :update, :destroy,:edit_departmental_headings,:edit_top_layer_headings,:edit_capital_projects_headings,:edit_revenue_by_source_headings,:edit_monthly_cashflow_headings]
   before_action :admin_user,   only: [:index,:show, :new, :edit, :update, :destroy,:edit_departmental_headings,:edit_top_layer_headings,:edit_capital_projects_headings,:edit_revenue_by_source_headings,:edit_monthly_cashflow_headings]
   def index
@@ -13,7 +14,6 @@ class HeadingsController < ApplicationController
   end
 
   def show
-    @heading = Heading.find(params[:id])
   end
 
   def new
@@ -29,38 +29,32 @@ class HeadingsController < ApplicationController
   end
 
   def edit
-    @heading = Heading.find(params[:id])
   end
   def edit_departmental_headings
-    @heading = Heading.find(params[:id])
     respond_to do |format|
       format.html
       format.js
     end
   end
   def edit_top_layer_headings
-    @heading = Heading.find(params[:id])
     respond_to do |format|
       format.html
       format.js
     end
   end
   def edit_capital_projects_headings
-    @heading = Heading.find(params[:id])
     respond_to do |format|
       format.html
       format.js
     end
   end
   def edit_revenue_by_source_headings
-    @heading = Heading.find(params[:id])
     respond_to do |format|
       format.html
       format.js
     end
   end
   def edit_monthly_cashflow_headings
-    @heading = Heading.find(params[:id])
     respond_to do |format|
       format.html
       format.js
@@ -68,8 +62,6 @@ class HeadingsController < ApplicationController
   end
 
   def update
-    @heading = Heading.find(params[:id])
-
     if @heading.update_attributes(heading_params)
         flash[:success] = "Heading was successfully updated."
       redirect_to headings_path
@@ -86,6 +78,9 @@ class HeadingsController < ApplicationController
   private
     def heading_params
         params.require(:heading).permit(:term, :description, :category)
+    end
+    def set_heading
+      @heading = Heading.find(params[:id])
     end
     # Before filters
 
