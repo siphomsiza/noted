@@ -112,17 +112,13 @@
     </div>
 </div>
 <script>
-    $(document).ready(function() {
         var current_date = Date();
         $("#update-period").val(current_date);
-        $("#assurance-user").val(selected_value);
-
         var target = <%= @departmental_sdbip.annual_target %> || 0;
 
         var over_actual = <%= kpi_actual_to_date %> || 0;
 
         $("#kpi-actual").blur(function() {
-
             var target_value = parseFloat(target) || 0;
 
             var actual_value = parseFloat($('#kpi-actual').val()) || 0;
@@ -178,6 +174,4 @@
 
 
         });
-
-    });
 </script>

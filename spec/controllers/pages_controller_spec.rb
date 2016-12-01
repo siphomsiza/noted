@@ -8,6 +8,7 @@ RSpec.describe PagesController, :type => :controller do
 
           before do
               user = create(:user)
+              session[:user_id] = user.id
               get :introduction
           end
 
@@ -27,7 +28,7 @@ RSpec.describe PagesController, :type => :controller do
           it {expect(flash[:danger]).to eq("Please log in.")}
     end
   end
-    
+
   describe "#help" do
     context "when user is logged in" do
 
@@ -83,13 +84,23 @@ RSpec.describe PagesController, :type => :controller do
 
             before do
                 user = create(:user)
-                #log_in(user)
+                session[:user_id] = user.id
                 get :about
             end
             it {expect(response.status).to eq(200) }
             it {expect(response.content_type).to eq("text/html") }
             it {expect(response).to render_template("about")}
         end
+        context "when user is not logged in" do
+
+              before do
+                  session[:user_id] = nil
+                  get :about
+              end
+              it {expect(response.status).to eq(200) }
+              it {expect(response.content_type).to eq("text/html") }
+              it {expect(response).to render_template("about")}
+          end
       end
 
   describe "#setup" do
@@ -193,5 +204,5 @@ RSpec.describe PagesController, :type => :controller do
           it {expect(response).to redirect_to(login_path)}
           it {expect(flash[:danger]).to eq("Please log in.")}
     end
-  end 
+  end
 end
