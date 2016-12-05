@@ -58,6 +58,11 @@ User.create!(firstname: 'Sandiswa',
   mobile = Faker::PhoneNumber.cell_phone
   email = "example-#{n + 1}@railstutorial.org"
   password = 'password'
+  terminated = if n == 19
+                 true
+               else
+                 false
+               end
   User.create!(firstname:  name,
                surname: lastname,
                email: email,
@@ -66,6 +71,7 @@ User.create!(firstname: 'Sandiswa',
                landline: landline,
                password:              password,
                password_confirmation: password,
+               terminated: terminated,
                title: title,
                id_number: Faker::Number.number(13),
                birth_date: Time.now.strftime('/%dd%mm/%YYYY'),

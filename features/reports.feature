@@ -45,7 +45,7 @@ Feature: Reporting Module(s)
         When I follow "YTD Dashboard"
         Then I should be on the ytd dashboard page
         And I should see "YTD Dashboard"
-        When I press "View"
+        When I go to view graphs page
         Then I should be on the view ytd dashboard page
         And I should see "YTD Graphs For"
         And I should see "Sub-Department"

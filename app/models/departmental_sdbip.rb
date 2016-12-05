@@ -26,7 +26,7 @@ class DepartmentalSdbip < ActiveRecord::Base
   accepts_nested_attributes_for :kpi_results, allow_destroy: true
   has_many :assurances, dependent: :destroy
   accepts_nested_attributes_for :assurances, allow_destroy: true
-  validates :department_name, :subdepartment_name, :kpi, :kpi_ref_number, presence: true
+  validates :department_name, :subdepartment_name, :kpi, :kpi_ref_number,:performance_standard, presence: true
   delegate :kpi, :id, :unit_of_measurement, :kpi, :kpi_ref_number, :annual_target, :source_of_evidence, to: :capital_project, prefix: true
   delegate :source_of_evidence, to: :kpi_results, prefix: true
 

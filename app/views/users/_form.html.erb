@@ -67,14 +67,14 @@
       <section class="row">
         <label class="col col-lg-4 control-label" for="password">Password</label>
         <div class="controls col col-lg-8">
-           <%= f.password_field :password, class: 'form-control' %>
+           <%= f.password_field :password, class: 'form-control', :required => true %>
 
         </div><!-- controls -->
       </section><!-- row -->
       <section class="row">
         <label class="col col-lg-4 control-label" for="confirmpassword">Confirm Password</label>
         <div class="controls col col-lg-8">
-           <%= f.password_field :password_confirmation, class: 'form-control' %>
+           <%= f.password_field :password_confirmation, class: 'form-control', :required => true %>
         </div><!-- controls -->
       </section><!-- row -->
       <section class="row">
@@ -181,7 +181,7 @@
       <section class="row">
         <label class="col col-lg-4 control-label" for="email">Email</label>
         <div class="controls col col-lg-8">
-          <%= f.email_field :email, class: "form-control", :autocomplete=>"off",:placeholder=>"email@example.com" %>
+          <%= f.email_field :email, class: "form-control", :autocomplete=>"off",:placeholder=>"email@example.com", :required => true %>
         </div><!-- controls -->
       </section><!-- row -->
 

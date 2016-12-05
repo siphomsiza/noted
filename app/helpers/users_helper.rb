@@ -22,4 +22,7 @@ module UsersHelper
   def user_account_locked(user)
     user.login_attempts < user.max_login_attempts
   end
+  def user_not_activated?(user)
+    !user.activated?
+  end
 end

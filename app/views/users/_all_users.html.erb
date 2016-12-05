@@ -50,7 +50,7 @@
                 </div>
           <% end %>
           <% if user && user.editable_by?(current_user) %> |
-          <%= link_to "",'data-target' => "#reset-password", 'data-toggle' => 'modal', class: "btn btn-sm", :title=>"Click to change your password" do %>
+          <%= link_to "#",'data-target' => "#reset-password", 'data-toggle' => 'modal', class: "btn btn-sm", :title=>"Click to change your password" do %>
               <span class="glyphicon glyphicon-lock"></span>&nbsp;Reset Password
             <% end %>
           <% end %>
@@ -61,7 +61,7 @@
           <% end %>
           <% end %>
           <% else user.terminated? %>
-          <%= link_to "",controller: "users", action: "restore", id: user.id, method: "get",class:"btn btn-default btn-sm" do %>
+          <%= link_to "#",controller: "users", action: "restore", id: user.id, method: "get",class:"btn btn-default btn-sm" do %>
             <span class="glyphicon glyphicon-circle-ok"></span>Restore
           <% end %><% end %>
         </td>
@@ -69,11 +69,10 @@
       <% end %>
           </tbody>
   </table>
-  
 </div> <!-- table-responsive -->
 </div>
 <!-- Modal -->
-<div class="modal fade" id="reset-password-Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="reset-password" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 <div class="modal-dialog">
 <div class="modal-content">
 <div class="modal-header">

@@ -59,12 +59,15 @@ class UsersController < ApplicationController
     end
 
     def edit_new_user
+
     end
 
     def edit_active_user
+
     end
 
     def edit_user_profile
+
     end
 
     def create
@@ -80,6 +83,10 @@ class UsersController < ApplicationController
     end
 
     def edit
+      respond_to do |format|
+        format.html
+        format.js
+      end
     end
 
     def update
@@ -175,8 +182,9 @@ class UsersController < ApplicationController
     end
 
     def activate
-        if @user.update_columns(activated: true, activated_at: Time.zone.now)
-            flash[:success] = 'Account deactivated successfully.'
+        if @user
+          @user.activate
+          flash[:success] = 'Account activated successfully.'
         end
         redirect_to :back
     end

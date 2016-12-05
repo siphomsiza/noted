@@ -31,6 +31,30 @@ module WithinHelpers
 end
 World(WithinHelpers)
 
+When(/^I click the "([^"]*)" link$/) do |arg1|
+  click_link(arg1).first
+end
+Then(/^I accept the popup to confirm$/) do
+  wait = Selenium::WebDriver::Wait.new ignore: Selenium::WebDriver::Error::NoAlertPresentError
+  alert = wait.until { page.driver.browser.switch_to.alert }
+  alert.accept
+end
+
+Then(/^I should a popup with user information$/) do
+  within('#edit-active-user-modal') do
+    page.should have_content('User Info')
+  end
+end
+
+Given(/^I have received email confirmation$/) do
+
+end
+
+When(/^I visit the account activation page$/) do
+  @user = User.last
+  get edit_account_activation_url(@user.activation_token,email: @user.email,id:@user.id)
+end
+
 # Single-line step scoper
 When (/^(.*) within (.*[^:])$/) do |step, parent|
   with_scope(parent) { When step }
@@ -113,9 +137,8 @@ Then (/^(?:|I )should see "([^"]*)"$/) do |text|
   end
 end
 Then (/^(?:|I )should see "([^"]*) within a dialog"$/) do |wrapped_step,text|
-with_scope(".jquery-ui-dialog-class") do
-  Then wrapped_step
-end
+page.evaluate_script('window.confirm = function(){return true;}')
+page.click('Remove')
 end
 Then (/^(?:|I )should see \/([^\/]*)\/$/) do |regexp|
   regexp = Regexp.new(regexp)

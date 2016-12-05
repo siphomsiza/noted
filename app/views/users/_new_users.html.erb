@@ -16,7 +16,7 @@
     <tbody>
      <% new_users.each do |new_user| %>
       <tr>
-        <td><%= gravatar_for new_user, size: 50 %></td>
+        <td><%= image_tag new_user.avatar.url(:thumb), size: 50 %></td>
         <td><%= new_user.id %></td>
         <td><%= new_user.firstname %></td>
         <td><%= new_user.surname %></td>
@@ -31,24 +31,15 @@
               <div id="edit-new-user-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
 
               </div>
-              <% if current_user.admin? && !current_user?(new_user) %> |
+              <% if (current_user.admin? || current_user.super_admin?) && !current_user?(new_user) %> |
 
-              <%= link_to "#", class: "btn btn-sm" do %>
-              <span class="glyphicon glyphicon-edit"></span>&nbsp;
-              Edit Access
-            <% end %>
-
-            <% end %>
-            <% if current_user.admin? && !current_user?(new_user) %> |
-
-            <%= link_to "",'data-target' => "#reset-password", 'data-toggle' => 'modal', class: "btn btn-sm", :title=>"Click to change your password" do %>
+            <%= link_to "#",'data-target' => "#reset-password", 'data-toggle' => 'modal', class: "btn btn-sm", :title=>"Click to change your password" do %>
                 <span class="glyphicon glyphicon-lock"></span>&nbsp;Reset Password
               <% end %>
-
-            <% end %>
-
+              |
           <%= link_to new_user, data: {:confirm => 'Are you sure?'}, :method => :delete, class: "btn btn-sm" do %>
             <span class="glyphicon glyphicon-trash"></span>&nbsp;Delete
+          <% end %>
           <% end %>
         </td>
 

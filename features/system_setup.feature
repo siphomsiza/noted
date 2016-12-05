@@ -9,6 +9,12 @@ Feature: Setup Management
         Then I should be on the introduction page
         And I should see "Logged in sucessfully..."
 
+    Scenario: Given I have not logged in
+        Given I am on the login page
+        When I go to view master setup page
+        Then I should be on the login page
+        And I should see "Please log in."
+
     Scenario: View Master Setup
         Given I am on the introduction page
         When I follow "SETUP"
@@ -134,8 +140,8 @@ Feature: Setup Management
         Then I should be on the departmental administrators page
         When I follow "Create"
         Then I should be on the create departmental administrators page
-        When I select "1" from "departmental_administrator[department_id]"
-        And I select "6" from "departmental_administrator[user_id]"
+        When I select "Municipal Manager's Office" from "departmental_administrator[department_id]"
+        And I select "Ayana" from "departmental_administrator[user_id]"
         And I check "departmental_administrator[can_update]"
         And I press "Save"
         Then I should see "Departmental administrator was successfully created."
@@ -151,7 +157,7 @@ Feature: Setup Management
         Then I should be on the departmental administrators page
         When I follow "Create"
         Then I should be on the create departmental administrators page
-        When I select "1" from "departmental_administrator[department_id]"
+        When I select "Municipal Manager's Office" from "departmental_administrator[department_id]"
         And I select "" from "departmental_administrator[user_id]"
         And I check "departmental_administrator[can_update]"
         And I press "Save"
@@ -180,8 +186,8 @@ Feature: Setup Management
         Then I should be on the subdepartmental administrators page
         When I follow "Create"
         Then I should be on the create subdepartmental administrators page
-        When I select "1" from "subdepartmental_administrator[subdepartment_id]"
-        And I select "6" from "subdepartmental_administrator[user_id]"
+        When I select "Internal Audit" from "subdepartmental_administrator[subdepartment_id]"
+        And I select "Ayana" from "subdepartmental_administrator[user_id]"
         And I check "departmental_administrator[can_update]"
         And I press "Save"
         Then I should see "Subdepartmental administrator was successfully created."
@@ -197,7 +203,7 @@ Feature: Setup Management
         Then I should be on the subdepartmental administrators page
         When I follow "Create"
         Then I should be on the create subdepartmental administrators page
-        When I select "1" from "subdepartmental_administrator[subdepartment_id]"
+        When I select "Internal Audit" from "subdepartmental_administrator[subdepartment_id]"
         And I select "" from "subdepartmental_administrator[user_id]"
         And I check "departmental_administrator[can_update]"
         And I press "Save"

@@ -35,8 +35,8 @@ module NavigationHelpers
       '/users/report_users'
     when /^the login attempts log page$/
       '/users/report_users'
-    when /^the super user activity log page$/
-      '/users/report_users'
+    when /^the assurance page$/
+      '/departmental_sdbip_progresses'
     when /^the user activity log page$/
       '/users/report_users'
     when /^the user details page$/
@@ -121,6 +121,12 @@ module NavigationHelpers
       '/departmental_sdbips'
     when /^the import top layers sdbip page$/
       '/top_layer_sdbips'
+    when /^view graphs page$/
+      '/departmental_sdbip_progresses'
+    when /^the new users page$/
+      '/users'
+    when /^set new password page$/
+      '/users/:id/set_new_password'
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
