@@ -16,8 +16,10 @@
                                         <tr>
                                             <th>Target</th>
                                             <td>
-                                                <%= f.text_field :target,{:value => @departmental_sdbip.annual_target ,:class=>"form-control", :readonly => true,:id => "target"} %>
-
+                                                <%= f.text_field :target,{:value => @departmental_sdbip.first_quarter_target || 0 ,:class=>"form-control", :readonly => true,:id => "target"} if Date.today.month == 9 %>
+                                                <%= f.text_field :target,{:value => @departmental_sdbip.second_quarter_target || 0 ,:class=>"form-control", :readonly => true,:id => "target"} if Date.today.month == 12 %>
+                                                <%= f.text_field :target,{:value => @departmental_sdbip.third_quarter_target || 0 ,:class=>"form-control", :readonly => true,:id => "target"} if Date.today.month == 3 %>
+                                                <%= f.text_field :target,{:value => @departmental_sdbip.fourth_quarter_target || 0 ,:class=>"form-control", :readonly => true,:id => "target"} if Date.today.month == 6 %>
                                             </td>
                                         </tr>
                                         <tr>

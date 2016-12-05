@@ -171,7 +171,7 @@ Feature: User Management Module(s)
         Then I should see "Role was successfully saved"
         And I should be on the active users page
 
-    Scenario: Edit User Access
+    Scenario: Reset User Password
         Given I am on the introduction page
         And I should see "USERS"
         When I follow "USERS"
@@ -180,12 +180,13 @@ Feature: User Management Module(s)
         When I follow "All"
         Then I should be on the all users page
         And I should see "Actions"
+        And I should see "Reset Password"
         When I follow "Reset Password"
         Then I should be on the reset password page
         When I fill in "password_reset[email]" with "casey@sableassets.com"
         And I press "Submit"
-        Then I should see "Email sent with password reset instructions"
-        And I should be on the active users page
+        Then I should be on the active users page
+        And I should see "Email sent with password reset instructions"
 
     Scenario: Delete User
         Given I am on the introduction page
@@ -197,8 +198,6 @@ Feature: User Management Module(s)
         Then I should be on the all users page
         And I should see "Actions"
         When I follow "Delete"
-        Then I should see "Are you sure?" within a dialog
-        When I press "OK" within a dialog
         Then I should see "User deleted"
         And I should be on the active users page
 
@@ -211,6 +210,7 @@ Feature: User Management Module(s)
         When I follow "All"
         Then I should be on the all users page
         And I should see "Actions"
+        And I should see "Edit Details"
         When I follow "Edit Details"
         Then I should be on the edit active user page
         When I follow "Lock"
@@ -460,7 +460,7 @@ Feature: User Management Module(s)
         Then I should see "Failed to add new user. Please complete properly the fields below."
         And I should be on the add user page
 
-    Scenario: Set Maximum Log in Attempts
+    Scenario: Successfully set Maximum Log in Attempts
         Given I am on the introduction page
         And I should see "USERS"
         When I follow "USERS"
@@ -479,3 +479,56 @@ Feature: User Management Module(s)
         And I press "Submit"
         Then I should see "Maximum login attempts updated successfully."
         And I should be on the setup users page
+
+    Scenario: Unsuccessfully set Maximum Log in Attempts
+        Given I am on the introduction page
+        And I should see "USERS"
+        When I follow "USERS"
+        Then I should be on manage users page
+        Given I am on manage users page
+        When I follow "Setup Users"
+        Then I should be on the setup users page
+        And I should see "Security Settings"
+        When I follow "Security Settings"
+        Then I should be on the security setup page
+        And should see "Set Maximum Attempts"
+        And should see "Set Super User"
+        When I press "Set Maximum Attempts"
+        Then I should be on the set maximum login attempts page
+        When I fill in "attempts" with ""
+        And I press "Submit"
+        Then I should see "Maximum login attempts not updated."
+        And I should be on the setup users page
+
+    Scenario: Activate User Account
+        Given I am on the introduction page
+        And I should see "USERS"
+        When I follow "USERS"
+        Then I should be on manage users page
+        Given I am on manage users page
+        And I should see "New"
+        When I follow "New"
+        Then I should be on the new users page
+        And I should see "Actions"
+        When I follow "Edit Details"
+        Then I should be on the edit active user page
+        And I should see "Activate"
+        When I follow "Activate"
+        Then I should see "Account activated successfully."
+        And I should be on the active users page
+
+    Scenario: Deactivate User Account
+        Given I am on the introduction page
+        And I should see "USERS"
+        When I follow "USERS"
+        Then I should be on manage users page
+        Given I am on manage users page
+        When I follow "Active"
+        Then I should be on the active users page
+        And I should see "Actions"
+        When I follow "Edit Details"
+        Then I should be on the edit active user page
+        And I should see "Deactivate"
+        When I follow "Deactivate"
+        Then I should see "@user.firstname @user.surname's account deactivated successfully."
+        And I should be on the active users page

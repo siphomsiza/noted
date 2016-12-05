@@ -46,7 +46,7 @@
                         <% if current_user.admin? && !current_user?(active_user) %>
                         |
 
-                        <%= link_to "",'data-target' => "#reset-password", 'data-toggle' => 'modal', class: "btn btn-sm", :title=>"Click to change your password" do %>
+                        <%= link_to "#",'data-target' => "#reset-password-modal", 'data-toggle' => 'modal', class: "btn btn-sm", :title=>"Click to change your password" do %>
                         <span class="glyphicon glyphicon-lock"></span>&nbsp;Reset Password
                         <% end %>
 
@@ -66,8 +66,8 @@
     </div>
     <!-- table-responsive -->
 </div>
-<div class="modal fade" id="reset-password" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+<div class="modal fade" id="reset-password-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>

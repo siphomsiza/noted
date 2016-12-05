@@ -36,10 +36,29 @@ Feature: SDBIP Management Module(s)
         Then I should be on the import sdbip page
         And I should see "SDBIP Departmental SDBIP Importing SDBIP"
         And I should see "Note: Supported files types are xlsx, ods and csv types."
-        When I attach the file "../../sdbips data.xlsx" to "file"
+        When I attach the file "../../sdbips.xlsx" to "file"
         And I press "Import"
         Then I should be on the departmental sdbips page
         And should see "SDBIP submitted successfully."
+
+    Scenario: Unsuccessful Import Departmental SDBIPs
+        Given I am on the introduction page
+        And I should see "SDBIP"
+        When I follow "SDBIP"
+        Then I should be on the departmental view page
+        Given I am on the departmental view page
+        And I should see "Who"
+        And I should see "What"
+        And I should see "When"
+        And I should see "Import SDBIP"
+        When I press "Import SDBIP"
+        Then I should be on the import sdbip page
+        And I should see "SDBIP Departmental SDBIP Importing SDBIP"
+        And I should see "Note: Supported files types are xlsx, ods and csv types."
+        When I attach the file "../../sdbips data.xlsx" to "file"
+        And I press "Import"
+        Then I should be on the departmental sdbips page
+        And should see "SDBIP failed to import."
 
     Scenario: Unsuccessful Import Departmental SDBIPs
         Given I am on the introduction page

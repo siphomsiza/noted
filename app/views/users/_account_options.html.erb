@@ -1,15 +1,25 @@
 <% if system_administration_user(@user) %>
 <%= link_to terminate_path(:id => @user.id), class: "btn btn-sm pull-left" do%>
-<span class = "glyphicon glyphicon-remove-sign"></span>Terminate
+<span class="glyphicon glyphicon-remove-sign"></span>Terminate
 <% end %>
 &nbsp;|&nbsp;
 <% if user_account_locked(@user) %>
 <%= link_to lock_user_path(:id => @user.id), class: "btn btn-sm" do%>
-<span class = "glyphicon glyphicon-lock"></span>Lock
+<span class="glyphicon glyphicon-lock"></span>Lock
 <% end %>
 <% else %>
 <%= link_to unlock_user_path(:id => @user.id),:data =>{confirm: "Unlock #{@user.firstname}?"}, :class => "btn btn-sm", :title=>"Click to Edit user details" do %>
 <span class="glyphicon glyphicon-edit"></span>&nbsp;Unlock User
+<% end %>
+<% end %>
+&nbsp;|&nbsp;
+<% if user_not_activated?(@user) %>
+<%= link_to activate_path(:id => @user.id), class: "btn btn-sm" do%>
+<span class="glyphicon glyphicon-edit"></span>Activate
+<% end %>
+<% else %>
+<%= link_to deactivate_path(:id => @user.id),:data =>{confirm: "Unlock #{@user.firstname}?"}, :class => "btn btn-sm", :title=>"Click to Edit user details" do %>
+<span class="glyphicon glyphicon-edit"></span>&nbsp;Deactivate
 <% end %>
 <% end %>
 <% end %>

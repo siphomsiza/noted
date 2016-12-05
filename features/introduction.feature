@@ -38,3 +38,9 @@ Feature: Introduction
         And I should see "SDBIP Time Periods"
         And I should see "Users Statistics"
         And I should see "Activity Log"
+
+    Scenario: Given I have not logged in
+        Given I am on the login page
+        When I go to the introduction page
+        Then I should be on the login page
+        And I should see "Please log in."
