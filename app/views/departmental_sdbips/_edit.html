@@ -16,10 +16,10 @@
                                         <tr>
                                             <th>Target</th>
                                             <td>
-                                                <%= f.text_field :target,{:value => @departmental_sdbip.first_quarter_target || 0 ,:class=>"form-control", :readonly => true,:id => "target"} if first_quarter  %>
-                                                <%= f.text_field :target,{:value => @departmental_sdbip.second_quarter_target || 0 ,:class=>"form-control", :readonly => true,:id => "target"} if second_quarter %>
-                                                <%= f.text_field :target,{:value => @departmental_sdbip.third_quarter_target || 0 ,:class=>"form-control", :readonly => true,:id => "target"} if third_quarter %>
-                                                <%= f.text_field :target,{:value => @departmental_sdbip.fourth_quarter_target || 0 ,:class=>"form-control", :readonly => true,:id => "target"} if fourth_quarter %>
+                                                <%= f.text_field :target,{:value => @departmental_sdbip.first_quarter_target, :class=>"form-control target", :readonly => true} if first_quarter  %>
+                                                <%= f.text_field :target,{:value => @departmental_sdbip.second_quarter_target, :class=>"form-control target", :readonly => true} if second_quarter %>
+                                                <%= f.text_field :target,{:value => @departmental_sdbip.third_quarter_target, :class=>"form-control target", :readonly => true} if third_quarter %>
+                                                <%= f.text_field :target,{:value => @departmental_sdbip.fourth_quarter_target, :class=>"form-control target", :readonly => true} if fourth_quarter %>
                                             </td>
                                         </tr>
                                         <tr>
