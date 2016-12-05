@@ -12,11 +12,11 @@ module DepartmentalSdbipsHelper
   end
 
   def first_quarter
-    Date.today.month >= 9 && Date.today <= Date.new(Date.today.year,11, 15)
+    Date.today.month >= 9 && Date.today <= Date.new(Date.today.year,12, 15)
   end
 
   def second_quarter
-    Date.today >= Date.new(Date.today.year,12,15) && Date.today.month < 2
+    Date.today > Date.new(Date.today.year,12,15) && Date.today.month < 2
   end
 
   def third_quarter
