@@ -1,0 +1,136 @@
+wb = xlsx_package.workbook
+wb.use_autowidth = true
+wb.styles do |style|
+  header_cell = style.add_style(b: true,fg_color: "0000ff",font_name: "Calibri",sz: 20, u: true,alignment: {horizontal: :center})
+  sub_header_cell = style.add_style(b: true,fg_color: "0000ff",font_name: "Calibri",sz: 16,alignment: {horizontal: :center})
+  overall_summary_header = style.add_style(b: true,fg_color: "0000ff",font_name: "Calibri",sz: 16)
+  summary_header = style.add_style(b: true)
+  t_label = style.add_style(b: true, u: true)
+  highlight_cell = style.add_style(bg_color: "EFC376")
+  highlight_kpi_not_yet_measured_cell = style.add_style(bg_color: "808080")
+  highlight_kpi_not_met_cell = style.add_style(bg_color: "ff0000")
+  highlight_kpi_almost_met_cell = style.add_style(bg_color: "FFA500")
+  highlight_kpi_met_cell = style.add_style(bg_color: "008000")
+  highlight_kpi_well_met_cell = style.add_style(bg_color: "006400")
+  highlight_kpi_extremely_well_met_cell = style.add_style(bg_color: "00008B")
+
+  wb.add_worksheet(name: "SDBIP Report") do |sheet|
+    if !$municipality_info.blank?
+    sheet.add_row ["",$municipality_info.municipality], style: [nil,header_cell], height: 26.286176471
+    end
+    sheet.add_row ["","SDBIP #{sdbip_year}: Departmental SDBIP Report"], style: [nil,sub_header_cell], height: 20.887835052
+    sheet.merge_cells "B1:F1"
+    sheet.merge_cells "B2:F2"
+    sheet.add_row [""]
+    sheet.add_row @selected_headers
+    @report_departments.each do |department|
+      @report_departmental_sdbips.where(department_id: department.id).all.each do |departmental_sdbip|
+      puts @records
+      if departmental_sdbip.kpi_owner_id.blank? || !departmental_sdbip.kpi_owner.present?
+        @records.each do |s|
+          s.gsub!('departmental_sdbip.kpi_owner.name', 'nil')
+        end
+        end
+      if departmental_sdbip.predetermined_objective_id.blank? || !departmental_sdbip.predetermined_objective.present?
+        @records.each do |s|
+          s.gsub!('departmental_sdbip.predetermined_objective.name', 'nil')
+        end
+      end
+      if departmental_sdbip.mscore_classification_id.blank? || !departmental_sdbip.mscore_classification.present?
+        @records.each do |s|
+          s.gsub!('departmental_sdbip.mscore_classification.name', 'nil')
+        end
+      end
+      if departmental_sdbip.strategic_objective_id.blank? || !departmental_sdbip.strategic_objective.present?
+        @records.each do |s|
+          s.gsub!('departmental_sdbip.strategic_objective.name', 'nil')
+        end
+      end
+      if departmental_sdbip.ndp_objective_id.blank? || !departmental_sdbip.ndp_objective.present?
+        @records.each do |s|
+          s.gsub!('departmental_sdbip.ndp_objective.name', 'nil')
+        end
+      end
+      if departmental_sdbip.risk_rating_id.blank? || !departmental_sdbip.risk_rating.present?
+        @records.each do |s|
+          s.gsub!('departmental_sdbip.risk_rating.name', 'nil')
+        end
+      end
+      if departmental_sdbip.kpi_concept_id.blank? || !departmental_sdbip.kpi_concept.present?
+        @records.each do |s|
+          s.gsub!('departmental_sdbip.kpi_concept.name', 'nil')
+        end
+      end
+      if departmental_sdbip.kpi_type_id.blank? || !departmental_sdbip.kpi_type.present?
+        @records.each do |s|
+          s.gsub!('departmental_sdbip.kpi_type.name', 'nil')
+        end
+      end
+      if departmental_sdbip.kpa_id.blank? || !departmental_sdbip.kpa.present?
+        @records.each do |s|
+          s.gsub!('departmental_sdbip.kpa.name', 'nil')
+        end
+      end
+      if departmental_sdbip.reporting_category_id.blank? || !departmental_sdbip.reporting_category.present?
+        @records.each do |s|
+          s.gsub!('departmental_sdbip.reporting_category.name', 'nil')
+        end
+      end
+      if departmental_sdbip.kpi_calculation_type_id.blank? || !departmental_sdbip.kpi_calculation_type.present?
+        @records.each do |s|
+          s.gsub!('departmental_sdbip.kpi_calculation_type.name', 'nil')
+        end
+      end
+      if departmental_sdbip.provincial_strategic_outcome_id.blank? || !departmental_sdbip.provincial_strategic_outcome.present?
+        @records.each do |s|
+          s.gsub!('departmental_sdbip.provincial_strategic_outcome.name', 'nil')
+        end
+      end
+      if departmental_sdbip.provincial_strategic_outcome_id.blank? || !departmental_sdbip.provincial_strategic_outcome.present?
+        @records.each do |s|
+          s.gsub!('departmental_sdbip.provincial_strategic_outcome.name', 'nil')
+        end
+      end
+      if departmental_sdbip.national_outcome_id.blank? || !departmental_sdbip.national_outcome.present?
+        @records.each do |s|
+          s.gsub!('departmental_sdbip.national_outcome.name', 'nil')
+        end
+      end
+      if departmental_sdbip.kpi_target_type_id.blank? || !departmental_sdbip.kpi_target_type.present?
+        @records.each do |s|
+          s.gsub!('departmental_sdbip.kpi_target_type.name', 'nil')
+        end
+      end
+      if departmental_sdbip.mtas_indicator_id.blank? || !departmental_sdbip.mtas_indicator.present?
+        @records.each do |s|
+          s.gsub!('departmental_sdbip.mtas_indicator.name', 'nil')
+        end
+      end
+        sheet.add_row eval @records.to_s.gsub('"','')
+      end
+      if department.departmental_sdbips.any?
+        sheet.add_row [""]
+        sheet.add_row ["", "Summary of KPIs: #{department.name}"], style: [nil,summary_header]
+        sheet.add_row ["", "KPI Not Yet Measured",kpi_not_yet_measured(department.departmental_sdbips)], style: [highlight_kpi_not_yet_measured_cell]
+        sheet.add_row ["", "KPI Not Met",kpi_not_met(department.departmental_sdbips)], style: [highlight_kpi_not_met_cell]
+        sheet.add_row ["", "KPI Almost Met",kpi_almost_met(department.departmental_sdbips)], style: [highlight_kpi_almost_met_cell]
+        sheet.add_row ["", "KPI Met",kpi_met(department.departmental_sdbips)], style: [highlight_kpi_met_cell]
+        sheet.add_row ["", "KPI Well Met",kpi_well_met(department.departmental_sdbips)], style: [highlight_kpi_well_met_cell]
+        sheet.add_row ["", "KPI Extremely Well Met",kpi_extremely_well_met(department.departmental_sdbips)], style: [highlight_kpi_extremely_well_met_cell]
+        sheet.add_row ["","Total KPIs",total_kpis(department.departmental_sdbips)],style:[nil,t_label,t_label]
+    end
+    end
+    sheet.add_row [""]
+    sheet.add_row ["", "Summary of Results"], style: [nil,overall_summary_header], height: 20.887835052
+    sheet.add_row ["", "KPI Not Yet Measured",kpi_not_yet_measured(@report_departmental_sdbips)], style: [highlight_kpi_not_yet_measured_cell]
+    sheet.add_row ["", "KPI Not Met",kpi_not_met(@report_departmental_sdbips)], style: [highlight_kpi_not_met_cell]
+    sheet.add_row ["", "KPI Almost Met",kpi_almost_met(@report_departmental_sdbips)], style: [highlight_kpi_almost_met_cell]
+    sheet.add_row ["", "KPI Met",kpi_met(@report_departmental_sdbips)], style: [highlight_kpi_met_cell]
+    sheet.add_row ["", "KPI Well Met",kpi_well_met(@report_departmental_sdbips)], style: [highlight_kpi_well_met_cell]
+    sheet.add_row ["", "KPI Extremely Well Met",kpi_extremely_well_met(@report_departmental_sdbips)], style: [highlight_kpi_extremely_well_met_cell]
+    sheet.add_row ["","Total KPIs",total_kpis(@report_departmental_sdbips)],style:[nil,t_label,t_label]
+    sheet.add_row [""]
+    sheet.add_row ["","Report generated on #{(DateTime.now).strftime('%d %B %Y')} at #{Time.now.strftime('%H:%M')}"]
+
+  end
+end

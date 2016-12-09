@@ -155,8 +155,8 @@ class DepartmentalSdbip < ActiveRecord::Base
       fetch_excel_data(file)
 
     else raise "Unknown file type: #{file.original_filename}"
-      end
     end
+  end
 
   def self.fetch_excel_data(file)
     spreadsheet = open_spreadsheet(file)
@@ -206,6 +206,7 @@ class DepartmentalSdbip < ActiveRecord::Base
     @audits = DepartmentalSdbip.all
     audit_columns = []
     audit_columns_headers = []
+    kpi_results_headers = []
 
     unless sdbip_top_layer_kpi_ref_filters.blank?
 
@@ -229,12 +230,16 @@ class DepartmentalSdbip < ActiveRecord::Base
       end
 
     end
+    audit_columns.push('departmental_sdbip.id')
+    audit_columns_headers.push('Ref')
     if selected_columns.include?('Department')
       audit_columns.push('departmental_sdbip.department_name')
       audit_columns_headers.push('Department')
-      unless department_id.blank?
+      if !department_id.blank? && department_id != '0'
         departments_value = department_id
-        @audits = @audits.where(department_id: departments_value.split(''))
+        @audits = @audits.where(department_id: [departments_value.split('')])
+      else
+        @audits = @audits
       end
     end
 
@@ -263,15 +268,6 @@ class DepartmentalSdbip < ActiveRecord::Base
       unless kpi_ref_number.blank?
         kpi_ref_number_values = kpi_ref_number
         @audits = @audits.where(kpi_ref_number: kpi_ref_number_values.split(''))
-
-      end
-    end
-    if selected_columns.include?('Revised Target')
-      audit_columns.push('departmental_sdbip.revised_target')
-      audit_columns_headers.push('Revised Target')
-      unless revised_target.blank?
-        revised_target_values = revised_target
-        @audits = @audits.where(revised_target: revised_target_values.split(''))
 
       end
     end
@@ -316,7 +312,7 @@ class DepartmentalSdbip < ActiveRecord::Base
       end
     end
     if selected_columns.include?('Ward')
-      audit_columns.push('departmental_sdbip.ward.name')
+      audit_columns.push('departmental_sdbip.wards')
       audit_columns_headers.push('Ward')
       unless ward_id.blank?
         ward_values = ward_id
@@ -326,7 +322,7 @@ class DepartmentalSdbip < ActiveRecord::Base
 
     end
     if selected_columns.include?('Area')
-      audit_columns.push('departmental_sdbip.area.name')
+      audit_columns.push('departmental_sdbip.areas')
       audit_columns_headers.push('Area')
       unless area_id.blank?
         area_values = area_id
@@ -383,7 +379,6 @@ class DepartmentalSdbip < ActiveRecord::Base
       unless predetermined_objective_id.blank?
         predetermined_objectives_values = predetermined_objective_id
         @audits = @audits.where(predetermined_objective_id: predetermined_objectives_values.split(''))
-
       end
     end
     if selected_columns.include?('GFS Classification')
@@ -392,7 +387,6 @@ class DepartmentalSdbip < ActiveRecord::Base
       unless mscore_classification_id.blank?
         mscore_classification_values = mscore_classification_id
         @audits = @audits.where(mscore_classification_id: mscore_classification_values.split(''))
-
       end
     end
 
@@ -455,6 +449,15 @@ class DepartmentalSdbip < ActiveRecord::Base
 
       end
     end
+    if selected_columns.include?('Revised Target')
+      audit_columns.push('departmental_sdbip.revised_target')
+      audit_columns_headers.push('Revised Target')
+      unless revised_target.blank?
+        revised_target_values = revised_target
+        @audits = @audits.where(revised_target: revised_target_values.split(''))
+
+      end
+    end
     if selected_columns.include?('Reporting Category')
       audit_columns.push('departmental_sdbip.reporting_category.name')
       audit_columns_headers.push('Reporting Category')
@@ -478,10 +481,6 @@ class DepartmentalSdbip < ActiveRecord::Base
       audit_columns.push('departmental_sdbip.corrective_measures')
       audit_columns_headers.push('Corrective Measures')
     end
-    if selected_columns.include?('Target')
-      audit_columns.push('departmental_sdbip.target')
-      audit_columns_headers.push('Target')
-    end
     if selected_columns.include?('Proof of evidence')
       audit_columns.push('departmental_sdbip.first_quarter_poe')
       audit_columns_headers.push('Proof of evidence')
@@ -495,7 +494,41 @@ class DepartmentalSdbip < ActiveRecord::Base
       audit_columns_headers.push('KPI Target Type')
     end
     if selected_columns.include?('Target, Actual and Results')
-      @kpi_results = KpiResult.where('extract(month from period) >= ? AND extract(year from period) >= ? AND extract(month from period) <= ? AND extract(year from period) <= ?', start_date.to_date.month, start_date.to_date.year, end_date.to_date.month, end_date.to_date.year)
+      @kpi_results = KpiResult.all
+      if !start_date.blank? && !end_date.blank?
+          if (start_date.to_date.month >= 7) && (end_date.to_date.month == 9 || end_date.to_date.month == 12 || end_date.to_date.month == 3 || end_date.to_date.month == 6)
+            audit_columns_headers.push("Target")
+            audit_columns_headers.push("Actual")
+            audit_columns_headers.push("Result")
+            audit_columns.push('departmental_sdbip.first_quarter_target')
+            audit_columns.push('departmental_sdbip.first_quarter_actual')
+            audit_columns.push('departmental_sdbip.first_quarter_results')
+          end
+          if (start_date.to_date.month >= 7) && (end_date.to_date.month == 12 || end_date.to_date.month == 3 || end_date.to_date.month == 6)
+            audit_columns_headers.push("Target")
+            audit_columns_headers.push("Actual")
+            audit_columns_headers.push("Result")
+            audit_columns.push('departmental_sdbip.second_quarter_target')
+            audit_columns.push('departmental_sdbip.second_quarter_actual')
+            audit_columns.push('departmental_sdbip.second_quarter_results')
+          end
+          if (start_date.to_date.month >= 7 || start_date.to_date.month == 1 ) && (end_date.to_date.month == 3 || end_date.to_date.month == 6)
+            audit_columns_headers.push("Target")
+            audit_columns_headers.push("Actual")
+            audit_columns_headers.push("Result")
+            audit_columns.push('departmental_sdbip.third_quarter_target')
+            audit_columns.push('departmental_sdbip.third_quarter_actual')
+            audit_columns.push('departmental_sdbip.third_quarter_results')
+          end
+          if (start_date.to_date.month >= 7 || start_date.to_date.month == 1 || start_date.to_date.month == 4) && (end_date.to_date.month == 6)# || (start_date.to_date.month >= 7 && end_date.to_date.month >= end_date.to_date.end_of_quarter.month)
+            audit_columns_headers.push("Target")
+            audit_columns_headers.push("Actual")
+            audit_columns_headers.push("Result")
+            audit_columns.push('departmental_sdbip.fourth_quarter_target')
+            audit_columns.push('departmental_sdbip.fourth_quarter_actual')
+            audit_columns.push('departmental_sdbip.fourth_quarter_results')
+          end
+      end
     end
     $results = @kpi_results
     $selected_array_of_values = audit_columns
@@ -556,7 +589,7 @@ class DepartmentalSdbip < ActiveRecord::Base
         end
         if $selected_array_of_headers.include?('Target, Actual and Results')
           if departmental_sdbip.kpi_results.any?
-            departmental_sdbip.kpi_results.each do |_kpi_result|
+            departmental_sdbip.kpi_results.each do |kpi_result|
               # array_of_values.push('departmental_sdbip.kpi_result');
             end
           elsif !departmental_sdbip.kpi_results.any?
@@ -583,7 +616,15 @@ class DepartmentalSdbip < ActiveRecord::Base
       end
     end
   end
-
+  def self.selected_departments(department_id)
+    @report_departments = Department.find(department_id) if department_id != '0'
+    @report_departments = Department.all if department_id == '0'
+    return @report_departments
+  end
+  def self.selected_kpi_results(start_date,end_date)
+    @report_kpi_results = KpiResult.where('extract(month from created_at) >= ? AND extract(year from created_at) >= ? AND extract(month from created_at) <= ? AND extract(year from created_at) <= ?', start_date.to_date.month, start_date.to_date.year, end_date.to_date.month, end_date.to_date.year)
+    return @report_kpi_results
+  end
   def self.filter_audit_logs(top_layer_kpi_ref_filters, capital_project_filters, selected_columns, department_id, subdepartment_id,
                              kpi_ref_number, predetermined_objective_id,
                              kpi_owner_id, kpi,
@@ -716,7 +757,7 @@ class DepartmentalSdbip < ActiveRecord::Base
       audit_columns_headers.push('Ward')
       unless ward_id.blank?
         ward_values = ward_id
-        @audits = @audits.where(ward_id: ward_values.split(''))
+        @audits = @audits.where(wards: ward_values.split(''))
 
       end
 
@@ -726,7 +767,7 @@ class DepartmentalSdbip < ActiveRecord::Base
       audit_columns_headers.push('Area')
       unless area_id.blank?
         area_values = area_id
-        @audits = @audits.where(area_id: area_values.split(''))
+        @audits = @audits.where(areas: area_values.split(''))
 
       end
     end
@@ -886,8 +927,10 @@ class DepartmentalSdbip < ActiveRecord::Base
       audit_columns.push('departmental_sdbip.kpi_calculation_type.name')
       audit_columns_headers.push('KPI Target Type')
     end
-    if selected_columns.include?('Target, Actual and Results')
+    if selected_columns.include?('Target, Actual and Results') && !start_date.blank? && !end_date.blank?
       @kpi_results = KpiResult.where('extract(month from period) >= ? AND extract(year from period) >= ? AND extract(month from period) <= ? AND extract(year from period) <= ?', start_date.to_date.month, start_date.to_date.year, end_date.to_date.month, end_date.to_date.year)
+    else
+      @kpi_results = KpiResult.all
     end
     $results = @kpi_results
     $selected_array_of_values = audit_columns
@@ -900,7 +943,7 @@ class DepartmentalSdbip < ActiveRecord::Base
       column_names = ['KPI Ref no.', 'KPI', 'Department', 'Subdepartment', 'KPA', 'KPI Type', 'KPI Owner', 'Strategic Objectives', 'Baseline', 'Annual Target', 'Revised Target', 'Area', 'Ward', 'Source of Evidence', 'Unit of Measurement']
       csv << column_names
       all.each do |departmental_sdbip|
-        csv << [departmental_sdbip.kpi_ref_number, departmental_sdbip.kpi, departmental_sdbip.department_name, departmental_sdbip.subdepartment_name, departmental_sdbip.kpa_name, departmental_sdbip.kpi_type_name, departmental_sdbip.kpi_owner_name, departmental_sdbip.strategic_objective_name, departmental_sdbip.baseline, departmental_sdbip.annual_target, departmental_sdbip.revised_target, departmental_sdbip.area_name, departmental_sdbip.ward_name, departmental_sdbip.source_of_evidence, departmental_sdbip.unit_of_measurement]
+        csv << [departmental_sdbip.kpi_ref_number, departmental_sdbip.kpi, departmental_sdbip.department_name, departmental_sdbip.subdepartment_name, departmental_sdbip.kpa_name, departmental_sdbip.kpi_type_name, departmental_sdbip.kpi_owner_name, departmental_sdbip.strategic_objective_name, departmental_sdbip.baseline, departmental_sdbip.annual_target, departmental_sdbip.revised_target, departmental_sdbip.areas, departmental_sdbip.wards, departmental_sdbip.source_of_evidence, departmental_sdbip.unit_of_measurement]
       end
     end
   end

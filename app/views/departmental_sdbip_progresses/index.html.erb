@@ -58,6 +58,15 @@
 				var report_selected_columns = [];
 				var audit_selected_columns = [];
 				var project_selected_columns = [];
+				var departmentals_values = [];
+
+				// $('#department-filter').click(function(){
+				// 	var departments = $('#department-filter option:selected');
+				// 	for(var i = 0; i < departments.length; i++)
+				// 	departmentals_values.push(departments[i]);
+				// 	$("#report-selected-departments").val(JSON.stringify(unique(departmentals_values)));
+				// 	alert($("#report-selected-departments").val());
+				// });
 
 				$("input[name='audit_checkbox']").click(function () {
 					if ($("input[name='audit_checkbox']").prop("checked") == true) {
