@@ -43,6 +43,10 @@ gem 'airbrake'
 gem 'god'
 gem "paperclip", "~> 5.0.0"
 gem 'auto-session-timeout-warning', '~> 1.1'
+gem 'rubyzip', '~> 1.1.0'
+gem 'axlsx', '~> 2.0.1'
+gem 'axlsx_rails'
+# gem 'rspec_html_formatter', '~> 0.3.1'
 group :development, :test do
   gem 'byebug',                         '8.2.2'
   gem 'web-console',                    '3.1.1'

@@ -37,7 +37,7 @@ class CreateDepartmentalSdbips < ActiveRecord::Migration
       t.decimal :revised_target
       t.text    :performance_comments
       t.text    :corrective_measures
-      t.string :performance_standard
+      t.string :performance_standard, default: "KPI Not Yet Measured"
       t.string :risk
       t.integer :risk_rating_id
       t.integer :kpa_id

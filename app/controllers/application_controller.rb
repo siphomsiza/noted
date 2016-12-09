@@ -25,17 +25,24 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate
-    #redirect_to root_url if session[:session_key].nil?
+    # redirect_to root_url if session[:session_key].nil?
   end
 
   # def reload_page
-  #   redirect_to :back
+  #   redirect_to :back http.read_timeout = 500
   # end
   def weather_details
     @client = YahooWeather::Client.new
-    @response = @client.fetch(1_582_504) unless @client.blank?
-    @doc = @response.doc unless @response.blank?
-    @forecast = @doc['item']['forecast'] unless @doc.blank?
+    begin
+      @response = Timeout.timeout(5) do
+        @client.fetch(1_582_504) unless @client.blank?
+      end
+      @doc = @response.doc unless @response.blank?
+      @forecast = @doc['item']['forecast'] unless @doc.blank?
+    rescue Net::ReadTimeout, Timeout::Error, Errno::EINVAL, Errno::ECONNRESET, EOFError,
+           Net::HTTPBadResponse, Net::HTTPHeaderSyntaxError, Net::ProtocolError => e
+      puts e.message
+    end
   end
 
   private

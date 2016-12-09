@@ -1,5 +1,5 @@
 <div class="tab-pane active fade in" id="generate_reports">
-    <%= form_tag departmental_sdbip_progresses_path(format: "csv"), method: :get do %>
+    <%= form_tag departmental_sdbip_progresses_path(format: :xls), method: :get do %>
     <fieldset id="select-info">
 
         <legend><br/>1. Select the information to be displayed in the report:</legend>
@@ -206,7 +206,7 @@
                 <div>
                     <label>Results From:</label>
                     <div class="input-group date" data-provide="datepicker" data-date-format="M-yyyy" data-date-start-view="months" data-date-min-view-mode="months">
-                          <%= text_field_tag :start_date, nil , :class=>'form-control'%>
+                          <%= text_field_tag :start_date, nil , :class=>'form-control', :required => true %>
                         <div class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
                         </div>
@@ -217,7 +217,7 @@
                 <div>
                     <label>To:</label>
                     <div class="input-group date" data-provide="datepicker" data-date-format="M-yyyy" data-date-start-view="months" data-date-min-view-mode="months">
-                          <%= text_field_tag :end_date, nil , :class=>'form-control'%>
+                          <%= text_field_tag :end_date, nil , :class=>'form-control', :required => true %>
                         <div class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
                         </div>
@@ -250,81 +250,82 @@
         <legend>2. Select the filter you wish to apply:</legend>
         <div class="form-group col col-lg-12">
             <label>Department:</label>
-            <%= select_tag :department_id,options_for_select(Department.all.collect {|p| [ p.name, p.id ] }),{:required => true, :id=>"department-filter",:multiple => "true",:class=>'form-control'}%>
+            <%= select_tag :department_id,options_for_select([["Entire Municipality",0]]+Department.all.collect {|p| [ p.name, p.id ] }),{:required => true, :id=>"department-filter",:multiple => "multiple",:class=>'form-control'}%>
         </div>
+        <%= hidden_field_tag "departments_vales",nil,:multiple => true,:id=> "report-selected-departments" %>
         <%= hidden_field_tag "data_value",nil,:multiple => true,:id=> "current-report-selected-columns" %>
         <div class="form-group col col-lg-12">
             <label>Sub-Department:</label>
-            <%= select_tag :subdepartment_id, options_for_select(Subdepartment.all.collect {|p| [ p.name, p.id ] }),{:id=>"sub-department-filter",:multiple => "true",:class=>'form-control'} %>
+            <%= select_tag :subdepartment_id, options_for_select(Subdepartment.all.collect {|p| [ p.name, p.id ] }),{:id=>"sub-department-filter",:multiple => "multiple",:class=>'form-control'} %>
         </div>
         <div class="form-group col col-lg-12">
 
             <label class="control-label">KPI Ref Number:</label>
-            <%= select_tag :kpi_ref_number,options_for_select(DepartmentalSdbip.all.collect {|p| [ p.kpi_ref_number, p.id ] }),{:id=>"kpi-ref-number-filter",:multiple => "true",:class=>'form-control'} %>
+            <%= select_tag :kpi_ref_number,options_for_select(DepartmentalSdbip.all.collect {|p| [ p.kpi_ref_number, p.id ] }),{:id=>"kpi-ref-number-filter",:multiple => "multiple",:class=>'form-control'} %>
         </div>
         <div class="form-group col col-lg-12">
             <label>Pre-determined Objectives:</label>
-            <%= select_tag :predetermined_objective_id,options_for_select(PredeterminedObjective.all.collect {|p| [ p.name, p.id ] }),{:id=>"pre-determined-filter",:multiple => "true",:class=>'form-control'} %>
+            <%= select_tag :predetermined_objective_id,options_for_select(PredeterminedObjective.all.collect {|p| [ p.name, p.id ] }),{:id=>"pre-determined-filter",:multiple => "multiple",:class=>'form-control'} %>
         </div>
         <div class="form-group col col-lg-12">
             <label>KPI Owner:</label><br/>
-            <%= select_tag :kpi_owner_id,options_for_select(KpiOwner.all.collect {|p| [ p.name, p.id ] }),{:id=>"kpi-owner-filter",:multiple => "true",:class=>'form-control'} %>
+            <%= select_tag :kpi_owner_id,options_for_select(KpiOwner.all.collect {|p| [ p.name, p.id ] }),{:id=>"kpi-owner-filter",:multiple => "multiple",:class=>'form-control'} %>
         </div>
         <div class="form-group col col-lg-12">
 
             <label class="control-label">KPI:</label>
-            <%= select_tag :kpi,options_for_select(DepartmentalSdbip.all.collect {|p| [ p.kpi, p.id ] }),{:id=>"kpi-filter",:multiple => "true",:class=>'form-control'} %>
+            <%= select_tag :kpi,options_for_select(DepartmentalSdbip.all.collect {|p| [ p.kpi, p.id ] }),{:id=>"kpi-filter",:multiple => "multiple",:class=>'form-control'} %>
 
         </div>
         <div class="form-group col col-lg-12">
 
             <label class="control-label">Unit of Measurement:</label><br/>
-            <%= select_tag :unit_of_measurement, options_for_select(DepartmentalSdbip.all.collect {|p| [ p.unit_of_measurement, p.id ] }),{:id=>"unit-of-measurement-filter",:multiple => "true",:class=>'form-control'} %>
+            <%= select_tag :unit_of_measurement, options_for_select(DepartmentalSdbip.all.collect {|p| [ p.unit_of_measurement, p.id ] }),{:id=>"unit-of-measurement-filter",:multiple => "multiple",:class=>'form-control'} %>
 
         </div>
         <div class="form-group col col-lg-12">
             <label>GFS Classification:</label>
-            <%= select_tag :mscore_classification_id, options_for_select(MscoreClassification.all.collect {|p| [ p.name, p.id ] }),{:id=>"gfs-classification-filter",:multiple => "true",:class=>'form-control'} %>
+            <%= select_tag :mscore_classification_id, options_for_select(MscoreClassification.all.collect {|p| [ p.name, p.id ] }),{:id=>"gfs-classification-filter",:multiple => "multiple",:class=>'form-control'} %>
         </div>
         <div class="form-group col col-lg-12">
             <label>Strategic Objective:</label>
-            <%= select_tag :strategic_objective_id,options_for_select(StrategicObjective.all.collect {|p| [ p.name, p.id ] }),{:id=>"strategic-objective-filter",:multiple => "true",:class=>'form-control'} %>
+            <%= select_tag :strategic_objective_id,options_for_select(StrategicObjective.all.collect {|p| [ p.name, p.id ] }),{:id=>"strategic-objective-filter",:multiple => "multiple",:class=>'form-control'} %>
         </div>
         <div class="form-group col col-lg-12">
             <label class="control-label">Source of Evidence:</label>
 
-            <%= select_tag :source_of_evidence,options_for_select(DepartmentalSdbip.all.collect {|p| [ p.source_of_evidence, p.id ] }),{:multiple => "true",:class=>'form-control'} %>
+            <%= select_tag :source_of_evidence,options_for_select(DepartmentalSdbip.all.collect {|p| [ p.source_of_evidence, p.id ] }),{:multiple => "multiple",:class=>'form-control'} %>
         </div>
         <div class="form-group col col-lg-12">
             <label class="control-label">Baseline:</label>
-            <%= select_tag :baseline,options_for_select(DepartmentalSdbip.all.collect {|p| [ p.baseline, p.id ] }),{:id=>'baseline-filter',:multiple => "true",:class=>'form-control'} %>
+            <%= select_tag :baseline,options_for_select(DepartmentalSdbip.all.collect {|p| [ p.baseline, p.id ] }),{:id=>'baseline-filter',:multiple => "multiple",:class=>'form-control'} %>
         </div>
         <div class="form-group col col-lg-12">
             <label class="control-label">Target:</label>
 
-            <%= select_tag :annual_target,options_for_select(DepartmentalSdbip.all.collect {|p| [ p.annual_target, p.id ] }),{:multiple => "true",:class=>'form-control'} %>
+            <%= select_tag :annual_target,options_for_select(DepartmentalSdbip.all.collect {|p| [ p.annual_target, p.id ] }),{:multiple => "multiple",:class=>'form-control'} %>
 
         </div>
         <div class="form-group col col-lg-12">
             <label class="control-label">Annual Target:</label>
-            <%= select_tag :annual_target,options_for_select(DepartmentalSdbip.all.collect {|p| [ p.annual_target, p.id ] }),{:multiple => "true",:class=>'form-control'} %>
+            <%= select_tag :annual_target,options_for_select(DepartmentalSdbip.all.collect {|p| [ p.annual_target, p.id ] }),{:multiple => "multiple",:class=>'form-control'} %>
         </div>
         <div class="form-group col col-lg-12">
             <label class="control-label">Revised Target:</label>
 
-            <%= select_tag :revised_target,options_for_select(DepartmentalSdbip.all.collect {|p| [ p.revised_target, p.id ] }),{:multiple => "true",:class=>'form-control'} %>
+            <%= select_tag :revised_target,options_for_select(DepartmentalSdbip.all.collect {|p| [ p.revised_target, p.id ] }),{:multiple => "multiple",:class=>'form-control'} %>
         </div>
         <div class="form-group col col-lg-12">
             <label>National KPA:</label>
-            <%= select_tag :national_kpa_id,options_for_select(Kpa.all.collect {|p| [ p.name, p.id ] }),{:id=>"national-kpa-filter",:multiple => "true",:class=>'form-control'} %>
+            <%= select_tag :national_kpa_id,options_for_select(Kpa.all.collect {|p| [ p.name, p.id ] }),{:id=>"national-kpa-filter",:multiple => "multiple",:class=>'form-control'} %>
         </div>
         <div class="form-group col col-lg-12">
             <label>Municipal KPA:</label>
-            <%= select_tag :national_kpa_id,options_for_select(Kpa.all.collect {|p| [ p.name, p.id ] }),{:id=>'municipal-kpa-filter',:multiple => "true",:class=>'form-control'} %>
+            <%= select_tag :national_kpa_id,options_for_select(Kpa.all.collect {|p| [ p.name, p.id ] }),{:id=>'municipal-kpa-filter',:multiple => "multiple",:class=>'form-control'} %>
         </div>
         <div class="form-group col col-lg-12">
             <label>NDP Objectives:</label>
-            <%= select_tag :ndp_objective_id,options_for_select(NdpObjective.all.collect {|p| [ p.name, p.id ] }),{:id=>'ndp-objectives-filter',:multiple => "true",:class=>'form-control'} %>
+            <%= select_tag :ndp_objective_id,options_for_select(NdpObjective.all.collect {|p| [ p.name, p.id ] }),{:id=>'ndp-objectives-filter',:multiple => "multiple",:class=>'form-control'} %>
         </div>
         <div class="form-group col col-lg-12">
             <%= hidden_field_tag "sdbip_capital_project_filters",nil,:multiple => false,:id=> "sdbip_capital_project_filter" %>
@@ -440,8 +441,8 @@
         </div>
         <div class="form-group col col-lg-12">
             <%= submit_tag "PDF",{:selected_columns => nil, :id => "audit-target-report", 'data-target'=>"audit_log_modal", 'data-toggle'=>"modal",:class=>"btn btn-midi col-lg-2 pull-right disabled"} %>&nbsp;&nbsp;
-            <%= submit_tag "Excel",{:selected_columns => nil, :id => "audit-target-report", 'data-target'=>"audit_log_modal", 'data-toggle'=>"modal",:class=>"btn btn-midi col-lg-2 pull-right disabled"} %>&nbsp;&nbsp;
-            <%= submit_tag "CSV", :id=>"sdbip-target-report",:class=> "btn btn-midi col-lg-2 pull-right"%>
+            <%= submit_tag "Excel",{:selected_columns => nil, :id => "audit-target-report",:class=>"btn btn-midi col-lg-2 pull-right"} %>&nbsp;&nbsp;
+            <%= submit_tag "CSV", :id=>"sdbip-target-report",:class=> "btn btn-midi col-lg-2 pull-right disabled"%>
             <!--<button class="btn btn-primary pull-right" id="submit-button" type="submit" style="margin-right: 0px;"> Generate Report</button>
       -->
         </div>
