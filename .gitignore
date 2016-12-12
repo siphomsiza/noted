@@ -29,6 +29,7 @@ bower.json
 /Vagrantfile
 /backups/*
 /config/database.yml
+/config/lepelle_nkumpi_db.yml
 /config/sakhisizwe_db.yml
 /config/mkhondo_db.yml
 /config/initializers/rack_attack.rb
