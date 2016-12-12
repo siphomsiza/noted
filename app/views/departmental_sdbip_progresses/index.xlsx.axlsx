@@ -16,94 +16,94 @@ wb.styles do |style|
 
   wb.add_worksheet(name: "SDBIP Report") do |sheet|
     if !$municipality_info.blank?
-    sheet.add_row ["",$municipality_info.municipality], style: [nil,header_cell], height: 26.286176471
+    sheet.add_row [$municipality_info.municipality], style: [header_cell], height: 26.286176471
     end
-    sheet.add_row ["","SDBIP #{sdbip_year}: Departmental SDBIP Report"], style: [nil,sub_header_cell], height: 20.887835052
-    sheet.merge_cells "B1:F1"
-    sheet.merge_cells "B2:F2"
+    sheet.add_row ["SDBIP #{sdbip_year}: Departmental SDBIP Report"], style: [sub_header_cell], height: 20.887835052
+    sheet.merge_cells "A1:#{(@selected_headers.length.to_s.tr('123456789','abcdefghijk')).upcase}1"
+    sheet.merge_cells "A2:#{@selected_headers.length.to_s.tr('123456789','abcdefghijk').upcase}2"
     sheet.add_row [""]
-    sheet.add_row @selected_headers
     @report_departments.each do |department|
+    if @report_departmental_sdbips.where(department_id: department.id).any?
+    sheet.add_row [department.name], style: [overall_summary_header], height: 20.887835052
+    sheet.add_row @period_headers if !@period_headers.blank?
+    sheet.add_row @selected_headers
+    end
+
       @report_departmental_sdbips.where(department_id: department.id).all.each do |departmental_sdbip|
-      puts @records
+
       if departmental_sdbip.kpi_owner_id.blank? || !departmental_sdbip.kpi_owner.present?
         @records.each do |s|
-          s.gsub!('departmental_sdbip.kpi_owner.name', 'nil')
+          s.gsub!('departmental_sdbip.kpi_owner.name', 'nil') if s.include?('departmental_sdbip.kpi_owner.name')
         end
         end
       if departmental_sdbip.predetermined_objective_id.blank? || !departmental_sdbip.predetermined_objective.present?
         @records.each do |s|
-          s.gsub!('departmental_sdbip.predetermined_objective.name', 'nil')
+          s.gsub!('departmental_sdbip.predetermined_objective.name', 'nil') if s.include?('departmental_sdbip.predetermined_objective.name')
         end
       end
       if departmental_sdbip.mscore_classification_id.blank? || !departmental_sdbip.mscore_classification.present?
         @records.each do |s|
-          s.gsub!('departmental_sdbip.mscore_classification.name', 'nil')
+          s.gsub!('departmental_sdbip.mscore_classification.name', 'nil') if s.include?('departmental_sdbip.mscore_classification.name')
         end
       end
       if departmental_sdbip.strategic_objective_id.blank? || !departmental_sdbip.strategic_objective.present?
         @records.each do |s|
-          s.gsub!('departmental_sdbip.strategic_objective.name', 'nil')
+          s.gsub!('departmental_sdbip.strategic_objective.name', 'nil') if s.include?('departmental_sdbip.strategic_objective.name')
         end
       end
       if departmental_sdbip.ndp_objective_id.blank? || !departmental_sdbip.ndp_objective.present?
         @records.each do |s|
-          s.gsub!('departmental_sdbip.ndp_objective.name', 'nil')
+          s.gsub!('departmental_sdbip.ndp_objective.name', 'nil') if s.include?('departmental_sdbip.ndp_objective.name')
         end
       end
       if departmental_sdbip.risk_rating_id.blank? || !departmental_sdbip.risk_rating.present?
         @records.each do |s|
-          s.gsub!('departmental_sdbip.risk_rating.name', 'nil')
+          s.gsub!('departmental_sdbip.risk_rating.name', 'nil') if s.include?('departmental_sdbip.risk_rating.name')
         end
       end
       if departmental_sdbip.kpi_concept_id.blank? || !departmental_sdbip.kpi_concept.present?
         @records.each do |s|
-          s.gsub!('departmental_sdbip.kpi_concept.name', 'nil')
+          s.gsub!('departmental_sdbip.kpi_concept.name', 'nil') if s.include?('departmental_sdbip.kpi_concept.name')
         end
       end
       if departmental_sdbip.kpi_type_id.blank? || !departmental_sdbip.kpi_type.present?
         @records.each do |s|
-          s.gsub!('departmental_sdbip.kpi_type.name', 'nil')
+          s.gsub!('departmental_sdbip.kpi_type.name', 'nil') if s.include?('departmental_sdbip.kpi_type.name')
         end
       end
       if departmental_sdbip.kpa_id.blank? || !departmental_sdbip.kpa.present?
         @records.each do |s|
-          s.gsub!('departmental_sdbip.kpa.name', 'nil')
+          s.gsub!('departmental_sdbip.kpa.name', 'nil') if s.include?('departmental_sdbip.kpa.name')
         end
       end
       if departmental_sdbip.reporting_category_id.blank? || !departmental_sdbip.reporting_category.present?
         @records.each do |s|
-          s.gsub!('departmental_sdbip.reporting_category.name', 'nil')
+          s.gsub!('departmental_sdbip.reporting_category.name', 'nil') if s.include?('departmental_sdbip.reporting_category.name')
         end
       end
       if departmental_sdbip.kpi_calculation_type_id.blank? || !departmental_sdbip.kpi_calculation_type.present?
         @records.each do |s|
-          s.gsub!('departmental_sdbip.kpi_calculation_type.name', 'nil')
+          s.gsub!('departmental_sdbip.kpi_calculation_type.name', 'nil') if s.include?('departmental_sdbip.kpi_calculation_type.name')
         end
       end
       if departmental_sdbip.provincial_strategic_outcome_id.blank? || !departmental_sdbip.provincial_strategic_outcome.present?
         @records.each do |s|
-          s.gsub!('departmental_sdbip.provincial_strategic_outcome.name', 'nil')
-        end
-      end
-      if departmental_sdbip.provincial_strategic_outcome_id.blank? || !departmental_sdbip.provincial_strategic_outcome.present?
-        @records.each do |s|
-          s.gsub!('departmental_sdbip.provincial_strategic_outcome.name', 'nil')
+          s.gsub!('departmental_sdbip.provincial_strategic_outcome.name', 'nil') if s.include?('departmental_sdbip.provincial_strategic_outcome.name')
         end
       end
       if departmental_sdbip.national_outcome_id.blank? || !departmental_sdbip.national_outcome.present?
         @records.each do |s|
-          s.gsub!('departmental_sdbip.national_outcome.name', 'nil')
+          s.gsub!('departmental_sdbip.national_outcome.name', 'nil') if s.include?('departmental_sdbip.national_outcome.name')
         end
       end
       if departmental_sdbip.kpi_target_type_id.blank? || !departmental_sdbip.kpi_target_type.present?
         @records.each do |s|
-          s.gsub!('departmental_sdbip.kpi_target_type.name', 'nil')
+          s.gsub!('departmental_sdbip.kpi_target_type.name', 'nil') if s.include?('departmental_sdbip.kpi_target_type.name')
         end
       end
       if departmental_sdbip.mtas_indicator_id.blank? || !departmental_sdbip.mtas_indicator.present?
         @records.each do |s|
-          s.gsub!('departmental_sdbip.mtas_indicator.name', 'nil')
+          s.gsub!('departmental_sdbip.mtas_indicator.name', 'nil') if s.include?('departmental_sdbip.mtas_indicator.name')
         end
       end
         sheet.add_row eval @records.to_s.gsub('"','')
@@ -131,6 +131,6 @@ wb.styles do |style|
     sheet.add_row ["","Total KPIs",total_kpis(@report_departmental_sdbips)],style:[nil,t_label,t_label]
     sheet.add_row [""]
     sheet.add_row ["","Report generated on #{(DateTime.now).strftime('%d %B %Y')} at #{Time.now.strftime('%H:%M')}"]
-
+    sheet.column_widths(5.541649485)
   end
 end

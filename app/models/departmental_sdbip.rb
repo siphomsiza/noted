@@ -43,7 +43,6 @@ class DepartmentalSdbip < ActiveRecord::Base
     end
     $colors = $colors
   end
-
   # def self.import_from_file(file)
   #     DepartmentalSdbip.import(file)
   # end
@@ -206,7 +205,7 @@ class DepartmentalSdbip < ActiveRecord::Base
     @audits = DepartmentalSdbip.all
     audit_columns = []
     audit_columns_headers = []
-    kpi_results_headers = []
+    $period_headers = []
 
     unless sdbip_top_layer_kpi_ref_filters.blank?
 
@@ -232,9 +231,11 @@ class DepartmentalSdbip < ActiveRecord::Base
     end
     audit_columns.push('departmental_sdbip.id')
     audit_columns_headers.push('Ref')
+    $period_headers.push('')
     if selected_columns.include?('Department')
       audit_columns.push('departmental_sdbip.department_name')
       audit_columns_headers.push('Department')
+      $period_headers.push('')
       if !department_id.blank? && department_id != '0'
         departments_value = department_id
         @audits = @audits.where(department_id: [departments_value.split('')])
@@ -246,6 +247,7 @@ class DepartmentalSdbip < ActiveRecord::Base
     if selected_columns.include?('Sub-Department')
       audit_columns.push('departmental_sdbip.subdepartment_name')
       audit_columns_headers.push('Sub-Department')
+      $period_headers.push('')
       unless subdepartment_id.blank?
         subdepartments_value = subdepartment_id
         @audits = @audits.where(subdepartment_id: [subdepartments_value.split('')])
@@ -255,6 +257,7 @@ class DepartmentalSdbip < ActiveRecord::Base
     if selected_columns.include?('KPI Owner')
       audit_columns.push('departmental_sdbip.kpi_owner.name')
       audit_columns_headers.push('KPI Owner')
+      $period_headers.push('')
       unless kpi_owner_id.blank?
         kpi_owner_values = kpi_owner_id
         @audits = @audits.where(kpi_owner_id: kpi_owner_values.split(''))
@@ -265,6 +268,7 @@ class DepartmentalSdbip < ActiveRecord::Base
     if selected_columns.include?('KPI Ref Number')
       audit_columns.push('departmental_sdbip.kpi_ref_number')
       audit_columns_headers.push('KPI Ref Number')
+      $period_headers.push('')
       unless kpi_ref_number.blank?
         kpi_ref_number_values = kpi_ref_number
         @audits = @audits.where(kpi_ref_number: kpi_ref_number_values.split(''))
@@ -274,6 +278,7 @@ class DepartmentalSdbip < ActiveRecord::Base
     if selected_columns.include?('KPI Concept')
       audit_columns.push('departmental_sdbip.kpi_concept.name')
       audit_columns_headers.push('KPI Concept')
+      $period_headers.push('')
       unless kpi_concept_id.blank?
         kpi_concept_values = kpi_concept_id
         @audits = @audits.where(kpi_concept_id: kpi_concept_values.split(''))
@@ -283,6 +288,7 @@ class DepartmentalSdbip < ActiveRecord::Base
     if selected_columns.include?('KPI Type')
       audit_columns.push('departmental_sdbip.kpi_type.name')
       audit_columns_headers.push('KPI Type')
+      $period_headers.push('')
       unless kpi_type_id.blank?
         kpi_type_values = kpi_type_id
         @audits = @audits.where(kpi_type_id: kpi_type_values.split(''))
@@ -292,6 +298,7 @@ class DepartmentalSdbip < ActiveRecord::Base
     if selected_columns.include?('KPI Calculation Type')
       audit_columns.push('departmental_sdbip.kpi_calculation_type.name')
       audit_columns_headers.push('KPI Calculation Type')
+      $period_headers.push('')
       unless kpi_calculation_type_id.blank?
         kpi_calculation_type_values = kpi_calculation_type_id
         @audits = @audits.where(kpi_calculation_type_id: kpi_calculation_type_values.split(''))
@@ -301,10 +308,12 @@ class DepartmentalSdbip < ActiveRecord::Base
     if selected_columns.include?('Top Layer KPI Ref')
       audit_columns.push('departmental_sdbip.top_layer_kpi_ref')
       audit_columns_headers.push('Top Layer KPI Ref')
+      $period_headers.push('')
     end
     if selected_columns.include?('Baseline')
       audit_columns.push('departmental_sdbip.baseline')
       audit_columns_headers.push('Baseline')
+      $period_headers.push('')
       unless baseline.blank?
         baseline_values = baseline
         @audits = @audits.where(baseline: baseline_values.split(''))
@@ -314,6 +323,7 @@ class DepartmentalSdbip < ActiveRecord::Base
     if selected_columns.include?('Ward')
       audit_columns.push('departmental_sdbip.wards')
       audit_columns_headers.push('Ward')
+      $period_headers.push('')
       unless ward_id.blank?
         ward_values = ward_id
         @audits = @audits.where(ward_id: ward_values.split(''))
@@ -324,6 +334,7 @@ class DepartmentalSdbip < ActiveRecord::Base
     if selected_columns.include?('Area')
       audit_columns.push('departmental_sdbip.areas')
       audit_columns_headers.push('Area')
+      $period_headers.push('')
       unless area_id.blank?
         area_values = area_id
         @audits = @audits.where(area_id: area_values.split(''))
@@ -334,10 +345,12 @@ class DepartmentalSdbip < ActiveRecord::Base
     if selected_columns.include?('Capital Project')
       audit_columns.push('departmental_sdbip.capital_project.mun_cp_ref')
       audit_columns_headers.push('Capital Project')
+      $period_headers.push('')
     end
     if 'KPI'.in?selected_columns
       audit_columns.push('departmental_sdbip.kpi')
       audit_columns_headers.push('KPI')
+      $period_headers.push('')
       unless kpi.blank?
         kpi_values = kpi
         @audits = @audits.where(id: kpi_values.split(''))
@@ -347,6 +360,7 @@ class DepartmentalSdbip < ActiveRecord::Base
     if selected_columns.include?('KPA')
       audit_columns.push('departmental_sdbip.kpa.name')
       audit_columns_headers.push('KPA')
+      $period_headers.push('')
       unless national_kpa_id.blank?
         kpa_values = kpa_values
         @audits = @audits.where(kpa_id: kpa_values.split(''))
@@ -356,7 +370,7 @@ class DepartmentalSdbip < ActiveRecord::Base
     if selected_columns.include?('Previous Year Actual Performance')
       audit_columns.push('departmental_sdbip.past_year_performance')
       audit_columns_headers.push('Previous Year Actual Performance')
-
+      $period_headers.push('')
       unless past_year_performance.blank?
         past_year_performance_values = past_year_performance_values
         @audits = @audits.where(id: past_year_performance_values.split(''))
@@ -366,6 +380,7 @@ class DepartmentalSdbip < ActiveRecord::Base
     if selected_columns.include?('Provincial Strategic Objectives')
       audit_columns.push('departmental_sdbip.provincial_strategic_outcome.name')
       audit_columns_headers.push('Provincial Strategic Objectives')
+      $period_headers.push('')
       unless provincial_strategic_outcome_id.blank?
         provincial_strategic_outcome_values = provincial_startegic_id
         @audits = @audits.where(provincial_strategic_outcome_id: provincial_strategic_outcome_values.split(''))
@@ -375,6 +390,7 @@ class DepartmentalSdbip < ActiveRecord::Base
     if selected_columns.include?('Pre-determined Objectives')
       audit_columns.push('departmental_sdbip.predetermined_objective.name')
       audit_columns_headers.push('Pre-determined Objectives')
+      $period_headers.push('')
 
       unless predetermined_objective_id.blank?
         predetermined_objectives_values = predetermined_objective_id
@@ -384,6 +400,7 @@ class DepartmentalSdbip < ActiveRecord::Base
     if selected_columns.include?('GFS Classification')
       audit_columns.push('departmental_sdbip.mscore_classification.name')
       audit_columns_headers.push('GFS Classification')
+      $period_headers.push('')
       unless mscore_classification_id.blank?
         mscore_classification_values = mscore_classification_id
         @audits = @audits.where(mscore_classification_id: mscore_classification_values.split(''))
@@ -393,6 +410,7 @@ class DepartmentalSdbip < ActiveRecord::Base
     if selected_columns.include?('NDP Objectives')
       audit_columns.push('departmental_sdbip.ndp_objective.name')
       audit_columns_headers.push('NDP Objectives')
+      $period_headers.push('')
       unless ndp_objective_id.blank?
         ndp_objective_values = ndp_objective_id
         @audits = @audits.where(ndp_objective_id: ndp_objective_values.split(''))
@@ -403,6 +421,7 @@ class DepartmentalSdbip < ActiveRecord::Base
     if selected_columns.include?('Strategic Objectives')
       audit_columns.push('departmental_sdbip.strategic_objective.name')
       audit_columns_headers.push('Strategic Objectives')
+      $period_headers.push('')
       unless strategic_objective_id.blank?
         strategic_objective_values = strategic_objective_id
         @audits = @audits.where(strategic_objective_id: strategic_objective_values.split(''))
@@ -412,6 +431,7 @@ class DepartmentalSdbip < ActiveRecord::Base
     if selected_columns.include?('Impact')
       audit_columns.push('departmental_sdbip.impact')
       audit_columns_headers.push('Impact')
+      $period_headers.push('')
       unless impact.blank?
         impact_values = impact_values
         @audits = @audits.where(impact: impact_values.split(''))
@@ -421,6 +441,7 @@ class DepartmentalSdbip < ActiveRecord::Base
     if selected_columns.include?('Source of Evidence')
       audit_columns.push('departmental_sdbip.source_of_evidence')
       audit_columns_headers.push('Source of Evidence')
+      $period_headers.push('')
       unless source_of_evidence.blank?
         source_of_evidence_values = source_of_evidence
         @audits = @audits.where(source_of_evidence: source_of_evidence_values.split(''))
@@ -430,6 +451,7 @@ class DepartmentalSdbip < ActiveRecord::Base
     if selected_columns.include?('Unit of Measurement')
       audit_columns.push('departmental_sdbip.unit_of_measurement')
       audit_columns_headers.push('Unit of Measurement')
+      $period_headers.push('')
       unless unit_of_measurement.blank?
         unit_of_measurement_values = unit_of_measurement_values
         @audits = @audits.where(unit_of_measurement: unit_of_measurement_values.split(''))
@@ -439,10 +461,12 @@ class DepartmentalSdbip < ActiveRecord::Base
     if selected_columns.include?('National Outcome')
       audit_columns.push('departmental_sdbip.national_outcome.name')
       audit_columns_headers.push('National Outcome')
+      $period_headers.push('')
     end
     if selected_columns.include?('Annual Target')
       audit_columns.push('departmental_sdbip.annual_target')
       audit_columns_headers.push('Annual Target')
+      $period_headers.push('')
       unless annual_target.blank?
         annual_target_values = annual_target
         @audits = @audits.where(annual_target: annual_target_values.split(''))
@@ -452,6 +476,7 @@ class DepartmentalSdbip < ActiveRecord::Base
     if selected_columns.include?('Revised Target')
       audit_columns.push('departmental_sdbip.revised_target')
       audit_columns_headers.push('Revised Target')
+      $period_headers.push('')
       unless revised_target.blank?
         revised_target_values = revised_target
         @audits = @audits.where(revised_target: revised_target_values.split(''))
@@ -461,14 +486,17 @@ class DepartmentalSdbip < ActiveRecord::Base
     if selected_columns.include?('Reporting Category')
       audit_columns.push('departmental_sdbip.reporting_category.name')
       audit_columns_headers.push('Reporting Category')
+      $period_headers.push('')
     end
     if selected_columns.include?('IDP Ref')
       audit_columns.push('departmental_sdbip.idp_ref')
       audit_columns_headers.push('IDP Ref')
+      $period_headers.push('')
     end
     if selected_columns.include?('Performance Standard')
       audit_columns.push('departmental_sdbip.performance_standard')
       audit_columns_headers.push('Performance Standard')
+      $period_headers.push('')
       unless performance_standard.blank?
         @audits = @audits.where(performance_standard: performance_standard)
       end
@@ -476,22 +504,27 @@ class DepartmentalSdbip < ActiveRecord::Base
     if selected_columns.include?('Performance Comment')
       audit_columns.push('departmental_sdbip.performance_comments')
       audit_columns_headers.push('Performance Comment')
+      $period_headers.push('')
     end
     if selected_columns.include?('Corrective Measures')
       audit_columns.push('departmental_sdbip.corrective_measures')
       audit_columns_headers.push('Corrective Measures')
+      $period_headers.push('')
     end
     if selected_columns.include?('Proof of evidence')
       audit_columns.push('departmental_sdbip.first_quarter_poe')
       audit_columns_headers.push('Proof of evidence')
+      $period_headers.push('')
     end
     if selected_columns.include?('KPI Target Type')
       audit_columns.push('departmental_sdbip.kpi_calculation_type.name')
       audit_columns_headers.push('KPI Target Type')
+      $period_headers.push('')
     end
     if selected_columns.include?('KPI Target Type')
       audit_columns.push('kpi_result.kpi_calculation_type.name')
       audit_columns_headers.push('KPI Target Type')
+      $period_headers.push('')
     end
     if selected_columns.include?('Target, Actual and Results')
       @kpi_results = KpiResult.all
@@ -503,6 +536,7 @@ class DepartmentalSdbip < ActiveRecord::Base
             audit_columns.push('departmental_sdbip.first_quarter_target')
             audit_columns.push('departmental_sdbip.first_quarter_actual')
             audit_columns.push('departmental_sdbip.first_quarter_results')
+            $period_headers.push("#{end_date}")
           end
           if (start_date.to_date.month >= 7) && (end_date.to_date.month == 12 || end_date.to_date.month == 3 || end_date.to_date.month == 6)
             audit_columns_headers.push("Target")
@@ -511,6 +545,7 @@ class DepartmentalSdbip < ActiveRecord::Base
             audit_columns.push('departmental_sdbip.second_quarter_target')
             audit_columns.push('departmental_sdbip.second_quarter_actual')
             audit_columns.push('departmental_sdbip.second_quarter_results')
+            $period_headers.push("#{end_date}")
           end
           if (start_date.to_date.month >= 7 || start_date.to_date.month == 1 ) && (end_date.to_date.month == 3 || end_date.to_date.month == 6)
             audit_columns_headers.push("Target")
@@ -519,6 +554,7 @@ class DepartmentalSdbip < ActiveRecord::Base
             audit_columns.push('departmental_sdbip.third_quarter_target')
             audit_columns.push('departmental_sdbip.third_quarter_actual')
             audit_columns.push('departmental_sdbip.third_quarter_results')
+            $period_headers.push("#{end_date}")
           end
           if (start_date.to_date.month >= 7 || start_date.to_date.month == 1 || start_date.to_date.month == 4) && (end_date.to_date.month == 6)# || (start_date.to_date.month >= 7 && end_date.to_date.month >= end_date.to_date.end_of_quarter.month)
             audit_columns_headers.push("Target")
@@ -527,9 +563,11 @@ class DepartmentalSdbip < ActiveRecord::Base
             audit_columns.push('departmental_sdbip.fourth_quarter_target')
             audit_columns.push('departmental_sdbip.fourth_quarter_actual')
             audit_columns.push('departmental_sdbip.fourth_quarter_results')
+            $period_headers.push("#{end_date}")
           end
       end
     end
+    $period_headers = $period_headers
     $results = @kpi_results
     $selected_array_of_values = audit_columns
     $selected_array_of_headers = audit_columns_headers

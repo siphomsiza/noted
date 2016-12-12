@@ -1,6 +1,6 @@
 module DepartmentalSdbipsHelper
   Alpha26 = ("a".."z").to_a
-  def alph
+  def to_alphabet(q)
     return "" if self < 1
     s, q = "", self
     loop do
