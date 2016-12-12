@@ -86,6 +86,7 @@ class DepartmentalSdbipProgressesController < ApplicationController
     @colours = $colors
     @selected_headers = $selected_array_of_headers
     @records = $selected_array_of_values
+    @period_headers = $period_headers
     @departmental_sdbip_progresses = @sdbip_progresses
     #Reports
     @report_departments = DepartmentalSdbip.selected_departments(params[:department_id]) unless params[:department_id].blank?
