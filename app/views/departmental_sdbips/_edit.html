@@ -183,11 +183,15 @@
                     $("#over-all-performance").val("KPI Extremely Well Met");
                 }
 
-            } else {
+            } else if (target_value == 0 && $("#kpi-actual").val() > target_value ) {
                 $("#quarter-results").val("KPI Extremely Well Met");
                 $("#kpi-result").val("KPI Extremely Well Met");
                 $("#over-all-performance").val("KPI Extremely Well Met");
 
+            }else {
+              $("#quarter-results").val("KPI Not Yet Measured");
+              $("#kpi-result").val("KPI Not Yet Measured");
+              $("#over-all-performance").val("KPI Not Yet Measured");
             }
 
 
