@@ -14,8 +14,6 @@
             <th>Capital Project</th>
             <th>Reporting Category</th>
             <th>KPI Calculation Type</th>
-            <th>Create Date</th>
-            <th>Update Date</th>
         </tr>
         <% departmental_sdbips.each do |departmental_sdbip| %>
         <tr>
@@ -29,16 +27,14 @@
                 <div id="departmental-sdbip-edit-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true"></div>
             </td>
             <td><%= departmental_sdbip.kpi_ref_number %></td>
-            <td><% if !departmental_sdbip.predetermined_objective_id.blank? %><%= departmental_sdbip.predetermined_objective.name %><% end %></td>
-            <td><% if !departmental_sdbip.kpi_owner_id.blank? %><%= departmental_sdbip.kpi_owner.name %><% end %></td>
+            <td><% if !departmental_sdbip.predetermined_objective_id.blank? && departmental_sdbip.predetermined_objective.present? %><%= departmental_sdbip.predetermined_objective.name %><% end %></td>
+            <td><% if !departmental_sdbip.kpi_owner_id.blank? && departmental_sdbip.kpi_owner.present? %><%= departmental_sdbip.kpi_owner.name %><% end %></td>
             <td><%= departmental_sdbip.unit_of_measurement %></td>
             <td><%= departmental_sdbip.source_of_evidence %></td>
-            <td><% if !departmental_sdbip.ndp_objective_id.blank? %><%= departmental_sdbip.ndp_objective.name %><% end %></td>
+            <td><% if !departmental_sdbip.ndp_objective_id.blank? && departmental_sdbip.ndp_objective.present? %><%= departmental_sdbip.ndp_objective.name %><% end %></td>
             <td><% if departmental_sdbip.capital_project %><%= departmental_sdbip.capital_project.mun_cp_ref %><% end %></td>
-            <td><% if !departmental_sdbip.reporting_category_id.blank? %><%= departmental_sdbip.reporting_category.name %><% end %></td>
-            <td><% if !departmental_sdbip.kpi_calculation_type_id.blank? %><%= departmental_sdbip.kpi_calculation_type.name %><% end %></td>
-            <td><%= departmental_sdbip.created_at.strftime(' %Y-%B-%d') %></td>
-            <td><%= departmental_sdbip.updated_at.strftime('%d-%B-%Y') %></td>
+            <td><% if !departmental_sdbip.reporting_category_id.blank? && departmental_sdbip.reporting_category.present? %><%= departmental_sdbip.reporting_category.name %><% end %></td>
+            <td><% if !departmental_sdbip.kpi_calculation_type_id.blank? && departmental_sdbip.kpi_calculation_type.present? %><%= departmental_sdbip.kpi_calculation_type.name %><% end %></td>
 
         </tr>
         <% end %>

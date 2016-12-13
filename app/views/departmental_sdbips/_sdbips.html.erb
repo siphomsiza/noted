@@ -32,23 +32,38 @@
 			<th rowspan="2" class="ward">Ward</th>
 			<th rowspan="2" class="past-year-performance">Past Year Performance</th>
 			<th rowspan="2" class="top-layer-ref">Top Layer KPI Ref</th>
-			<% if !@periods.blank? %>
-			<% @periods.each do |kpi_result_period| %>
 			<th class="target-actual-and-results" colspan="3">
-				<h4><%= kpi_result_period.period.strftime("%B %Y") if !kpi_result_period.period.blank? %></h4>
+				<h4><%= "Sept-#{Date.today.year}" %></h4>
 			</th>
-
-			<% end %>
-			<% end %>
-		<% if !@periods.blank? %>
-		<% @periods.each do |kpi_result_period| %>
+			<th class="target-actual-and-results" colspan="3">
+				<h4><%= "Dec-#{Date.today.year}" %></h4>
+			</th>
+			<th class="target-actual-and-results" colspan="3">
+				<h4><%= "Mar-#{Date.today.year+1}" %></h4>
+			</th>
+			<th class="target-actual-and-results" colspan="3">
+				<h4><%= "Jun-#{Date.today.year+1}" %></h4>
+			</th>
 		<tr>
 			<th class="target-actual-and-results">Target</th>
 			<th class="target-actual-and-results">Actual</th>
 			<th class="target-actual-and-results">Result</th>
+		<!-- </tr>
+		<tr> -->
+			<th class="target-actual-and-results">Target</th>
+			<th class="target-actual-and-results">Actual</th>
+			<th class="target-actual-and-results">Result</th>
+		<!-- </tr>
+		<tr> -->
+			<th class="target-actual-and-results">Target</th>
+			<th class="target-actual-and-results">Actual</th>
+			<th class="target-actual-and-results">Result</th>
+		<!-- </tr>
+		<tr> -->
+			<th class="target-actual-and-results">Target</th>
+			<th class="target-actual-and-results">Actual</th>
+			<th class="target-actual-and-results">Result</th>
 		</tr>
-		<% end %>
-		<% end %>
 	</tr>
 		<% @departmental_sdbips.each do |departmental_sdbip| %>
 		<tbody>
@@ -64,64 +79,129 @@
 				<div id="show-departmental-sdbip-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true"></div>
 			</td>
 			<td class="kpi-ref"><%= departmental_sdbip.kpi_ref_number %></td>
-			<td class="predetermined-objectives"><% if !departmental_sdbip.predetermined_objective_id.blank? %><%= departmental_sdbip.predetermined_objective.name %><% end %></td>
-			<td class="kpi-owner"><% if !departmental_sdbip.kpi_owner_id.blank? %><%= departmental_sdbip.kpi_owner.name %><% end %></td>
+			<td class="predetermined-objectives"><% if !departmental_sdbip.predetermined_objective_id.blank? && departmental_sdbip.predetermined_objective.present? %><%= departmental_sdbip.predetermined_objective.name %><% end %></td>
+			<td class="kpi-owner"><% if !departmental_sdbip.kpi_owner_id.blank? && departmental_sdbip.kpi_owner.present? %><%= departmental_sdbip.kpi_owner.name %><% end %></td>
 			<td class="unit-of-measurement"><%= departmental_sdbip.unit_of_measurement %></td>
 			<td class="source-of-evidence"><%= departmental_sdbip.source_of_evidence %></td>
-			<td class="ndp-objectives"><% if !departmental_sdbip.ndp_objective_id.blank? %><%= departmental_sdbip.ndp_objective.name %><% end %></td>
+			<td class="ndp-objectives"><% if !departmental_sdbip.ndp_objective_id.blank? && departmental_sdbip.ndp_objective.present? %><%= departmental_sdbip.ndp_objective.name %><% end %></td>
 			<td class="capital-project"><% if departmental_sdbip.capital_project %><%= departmental_sdbip.capital_project.mun_cp_ref %><% end %></td>
-			<td class="reporting-category"><% if !departmental_sdbip.reporting_category_id.blank? %><%= departmental_sdbip.reporting_category.name %><% end %></td>
-			<td class="kpi-calculation-type"><% if !departmental_sdbip.kpi_calculation_type_id.blank? %><%= departmental_sdbip.kpi_calculation_type.name %><% end %></td>
-			<td class="kpi-type"><% if !departmental_sdbip.kpi_type_id.blank? %><%= departmental_sdbip.kpi_type.name %><% end %></td>
-			<td class="kpi-target-type"><% if !departmental_sdbip.kpi_target_type_id.blank? %><%= departmental_sdbip.kpi_target_type.name %><% end %></td>
+			<td class="reporting-category"><% if !departmental_sdbip.reporting_category_id.blank? && departmental_sdbip.reporting_category.present? %><%= departmental_sdbip.reporting_category.name %><% end %></td>
+			<td class="kpi-calculation-type"><% if !departmental_sdbip.kpi_calculation_type_id.blank? && departmental_sdbip.kpi_calculation_type.present? %><%= departmental_sdbip.kpi_calculation_type.name %><% end %></td>
+			<td class="kpi-type"><% if !departmental_sdbip.kpi_type_id.blank? && departmental_sdbip.kpi_type.present? %><%= departmental_sdbip.kpi_type.name %><% end %></td>
+			<td class="kpi-target-type"><% if !departmental_sdbip.kpi_target_type_id.blank? && departmental_sdbip.kpi_target_type.present? %><%= departmental_sdbip.kpi_target_type.name %><% end %></td>
 			<td class="idp-ref"><%= departmental_sdbip.idp_ref %></td>
 
-			<td class="mscore-classification"><% if !departmental_sdbip.mscore_classification_id.blank? %><%= departmental_sdbip.mscore_classification.name %><% end %></td>
-			<td class="national-outcome"><% if !departmental_sdbip.national_outcome_id.blank? %><%= departmental_sdbip.national_outcome.name %><% end %></td>
+			<td class="mscore-classification"><% if !departmental_sdbip.mscore_classification_id.blank? && departmental_sdbip.mscore_classification.present? %><%= departmental_sdbip.mscore_classification.name %><% end %></td>
+			<td class="national-outcome"><% if !departmental_sdbip.national_outcome_id.blank? && departmental_sdbip.national_outcome.present? %><%= departmental_sdbip.national_outcome.name %><% end %></td>
 			<td class="strategic-objectives"><% if !departmental_sdbip.strategic_objective_id.blank? %><%= departmental_sdbip.strategic_objective.name %><% end %></td>
 			<td class="baseline"><%= departmental_sdbip.baseline %></td>
 			<td class="budget"><%= departmental_sdbip.budget %></td>
 			<td class="performance-standard"><%= departmental_sdbip.performance_standard %></td>
-			<td class="risk-rating"><% if !departmental_sdbip.risk_rating_id.blank?%><%= departmental_sdbip.risk_rating.name %><% end %></td>
-			<td class="kpa"><% if !departmental_sdbip.kpa_id.blank? %><%= departmental_sdbip.kpa.name %><% end %></td>
+			<td class="risk-rating"><% if !departmental_sdbip.risk_rating_id.blank? && departmental_sdbip.risk_rating.present? %><%= departmental_sdbip.risk_rating.name %><% end %></td>
+			<td class="kpa"><% if !departmental_sdbip.kpa_id.blank? && departmental_sdbip.kpa.present? %><%= departmental_sdbip.kpa.name %><% end %></td>
 
-			<td class="kpi-concept"><% if !departmental_sdbip.kpi_concept_id.blank? %><%= departmental_sdbip.kpi_concept.name %><% end %></td>
+			<td class="kpi-concept"><% if !departmental_sdbip.kpi_concept_id.blank? && departmental_sdbip.kpi_concept.present? %><%= departmental_sdbip.kpi_concept.name %><% end %></td>
 
 			<td class="impact"><%= departmental_sdbip.impact %></td>
-			<td class="provincial-strategic-outcome"><% if !departmental_sdbip.provincial_strategic_outcome_id.blank? %><%= departmental_sdbip.provincial_strategic_outcome.name %><% end %></td>
+			<td class="provincial-strategic-outcome"><% if !departmental_sdbip.provincial_strategic_outcome_id.blank? && departmental_sdbip.provincial_strategic_outcome.present? %><%= departmental_sdbip.provincial_strategic_outcome.name %><% end %></td>
 			<td class="area"><%= departmental_sdbip.areas %></td>
 			<td class="ward"><%= departmental_sdbip.wards %></td>
 			<td class="past-year-performance"><%= departmental_sdbip.past_year_performance %></td>
 
 			<td class="top-layer-ref"><%= departmental_sdbip.top_layer_kpi_ref %></td>
-			<% if departmental_sdbip.kpi_results.any? %>
-			<% departmental_sdbip.kpi_results.where(departmental_sdbip: departmental_sdbip.id).each do |kpi_result| %>
-			<td class="target-actual-and-results"><%= kpi_result.target %></td>
-			<td class="target-actual-and-results"><%= kpi_result.actual %></td>
+
+			<td class="target-actual-and-results"><%= departmental_sdbip.first_quarter_target %></td>
+			<td class="target-actual-and-results"><%= departmental_sdbip.first_quarter_actual %></td>
 			<td class="target-actual-and-results">
-				<% if kpi_result.kpi_performance_standard == "KPI Not Met" %>
+				<% if departmental_sdbip.first_quarter_results == "KPI Not Yet Measured" %>
+						<span class="glyphicon glyphicon-stop gray">
+				<% end %>
+				<% if departmental_sdbip.first_quarter_results == "KPI Not Met" %>
 						<span class="glyphicon glyphicon-stop red">
 				<% end %>
-				<% if kpi_result.kpi_performance_standard == "KPI Almost Met" %>
+				<% if departmental_sdbip.first_quarter_results == "KPI Almost Met" %>
 							<span class="glyphicon glyphicon-stop orange">
 					<% end %>
-				<% if kpi_result.kpi_performance_standard == "KPI Met" %>
+				<% if departmental_sdbip.first_quarter_results == "KPI Met" %>
 								<span class="glyphicon glyphicon-stop limegreen">
 					<% end %>
-			 <% if kpi_result.kpi_performance_standard == "KPI Well Met" %>
+			 <% if departmental_sdbip.first_quarter_results == "KPI Well Met" %>
 							<span class="glyphicon glyphicon-stop darkgreen">
 				<% end %>
-				<% if kpi_result.kpi_performance_standard == "KPI Extremely Well Met" %>
+				<% if departmental_sdbip.first_quarter_results == "KPI Extremely Well Met" %>
 						<span class="glyphicon glyphicon-stop darkblue">
 					<% end %>
-				</span><%= kpi_result.kpi_performance_standard %>
+				</span>
 			</td>
-			<% end %>
-			<% elsif !@periods.blank? && !departmental_sdbip.kpi_results.any? %>
-				<td class="target-actual-and-results"></td>
-				<td class="target-actual-and-results"></td>
-				<td class="target-actual-and-results"></td>
-			<% end %>
+			<td class="target-actual-and-results"><%= departmental_sdbip.second_quarter_target %></td>
+			<td class="target-actual-and-results"><%= departmental_sdbip.second_quarter_actual %></td>
+			<td class="target-actual-and-results">
+				<% if departmental_sdbip.second_quarter_results == "KPI Not Yet Measured" %>
+						<span class="glyphicon glyphicon-stop gray">
+				<% end %>
+				<% if departmental_sdbip.second_quarter_results == "KPI Not Met" %>
+						<span class="glyphicon glyphicon-stop red">
+				<% end %>
+				<% if departmental_sdbip.second_quarter_results == "KPI Almost Met" %>
+							<span class="glyphicon glyphicon-stop orange">
+					<% end %>
+				<% if departmental_sdbip.second_quarter_results == "KPI Met" %>
+								<span class="glyphicon glyphicon-stop limegreen">
+					<% end %>
+			 <% if departmental_sdbip.second_quarter_results == "KPI Well Met" %>
+							<span class="glyphicon glyphicon-stop darkgreen">
+				<% end %>
+				<% if departmental_sdbip.second_quarter_results == "KPI Extremely Well Met" %>
+						<span class="glyphicon glyphicon-stop darkblue">
+					<% end %>
+				</span>
+			</td>
+			<td class="target-actual-and-results"><%= departmental_sdbip.third_quarter_target %></td>
+			<td class="target-actual-and-results"><%= departmental_sdbip.third_quarter_actual %></td>
+			<td class="target-actual-and-results">
+				<% if departmental_sdbip.third_quarter_results == "KPI Not Yet Measured" %>
+						<span class="glyphicon glyphicon-stop gray">
+				<% end %>
+				<% if departmental_sdbip.third_quarter_results == "KPI Not Met" %>
+						<span class="glyphicon glyphicon-stop red">
+				<% end %>
+				<% if departmental_sdbip.third_quarter_results == "KPI Almost Met" %>
+							<span class="glyphicon glyphicon-stop orange">
+					<% end %>
+				<% if departmental_sdbip.third_quarter_results == "KPI Met" %>
+								<span class="glyphicon glyphicon-stop limegreen">
+					<% end %>
+			 <% if departmental_sdbip.third_quarter_results == "KPI Well Met" %>
+							<span class="glyphicon glyphicon-stop darkgreen">
+				<% end %>
+				<% if departmental_sdbip.third_quarter_results == "KPI Extremely Well Met" %>
+						<span class="glyphicon glyphicon-stop darkblue">
+					<% end %>
+				</span>
+			</td>
+			<td class="target-actual-and-results"><%= departmental_sdbip.fourth_quarter_target %></td>
+			<td class="target-actual-and-results"><%= departmental_sdbip.fourth_quarter_actual %></td>
+			<td class="target-actual-and-results">
+				<% if departmental_sdbip.fourth_quarter_results == "KPI Not Yet Measured" %>
+						<span class="glyphicon glyphicon-stop gray">
+				<% end %>
+				<% if departmental_sdbip.fourth_quarter_results == "KPI Not Met" %>
+						<span class="glyphicon glyphicon-stop red">
+				<% end %>
+				<% if departmental_sdbip.fourth_quarter_results == "KPI Almost Met" %>
+							<span class="glyphicon glyphicon-stop orange">
+					<% end %>
+				<% if departmental_sdbip.fourth_quarter_results == "KPI Met" %>
+								<span class="glyphicon glyphicon-stop limegreen">
+					<% end %>
+			 <% if departmental_sdbip.fourth_quarter_results == "KPI Well Met" %>
+							<span class="glyphicon glyphicon-stop darkgreen">
+				<% end %>
+				<% if departmental_sdbip.fourth_quarter_results == "KPI Extremely Well Met" %>
+						<span class="glyphicon glyphicon-stop darkblue">
+					<% end %>
+				</span>
+			</td>
 		</tr>
 	</tbody>
 		<% end %>
