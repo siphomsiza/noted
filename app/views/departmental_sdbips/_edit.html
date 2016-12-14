@@ -176,14 +176,16 @@
                 if (over_all_percentages == 100) {
                     $("#over-all-performance").val("KPI Met");
                 }
-                if (over_all_percentages >= 101 && over_all_percentages <= 149) {
+                if (over_all_percentages > 100 && over_all_percentages <= 149) {
                     $("#over-all-performance").val("KPI Well Met");
                 }
                 if (over_all_percentages >= 150) {
                     $("#over-all-performance").val("KPI Extremely Well Met");
                 }
 
-            } else if (target_value == 0 && $("#kpi-actual").val() > target_value ) {
+            }
+            else if (target_value == 0 && $("#kpi-actual").val() > target_value )
+            {
                 $("#quarter-results").val("KPI Extremely Well Met");
                 $("#kpi-result").val("KPI Extremely Well Met");
                 $("#over-all-performance").val("KPI Extremely Well Met");

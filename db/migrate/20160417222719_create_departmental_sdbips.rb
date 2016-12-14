@@ -34,7 +34,7 @@ class CreateDepartmentalSdbips < ActiveRecord::Migration
       t.string :third_quarter_results, default:"KPI Not Yet Measured"
       t.string :fourth_quarter_results, default: "KPI Not Yet Measured"
       t.decimal :annual_target, default: 0.00
-      t.decimal :revised_target
+      t.decimal :revised_target, default: 0.00
       t.text    :performance_comments
       t.text    :corrective_measures
       t.string :performance_standard, default: "KPI Not Yet Measured"
