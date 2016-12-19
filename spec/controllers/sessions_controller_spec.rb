@@ -5,11 +5,9 @@ RSpec.describe SessionsController, :type => :controller do
 
   describe "#new" do
     context "If" do
-
           before do
               get :new, session[:user_id] = nil
           end
-
           it "renders the log in template" do
           expect(response).to render_template("new")
           end
@@ -18,15 +16,13 @@ RSpec.describe SessionsController, :type => :controller do
 
   describe "#new" do
     context "If there's a session" do
-
           before do
               @user = create(:user)
               session[:user_id] = @user.id
               get :new
           end
-
           it "redirects to introduction page" do
-          expect(response).to redirect_to(introduction_url)
+          expect(response).to redirect_to_back_or(introduction_url)
           end
     end
   end

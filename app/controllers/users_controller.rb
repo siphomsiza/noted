@@ -1,15 +1,15 @@
 class UsersController < ApplicationController
-    before_action :logged_in_user, only: [:index, :edit, :set_super_user, :update, :destroy, :edit_new_user, :edit_active_user, :set_new_password]
+    before_action :logged_in_user, only: [:index, :edit, :set_super_user, :update, :destroy, :edit_new_user, :edit_active_user, :set_new_password,:report_users,:setup_users]
     before_action :correct_user,   only: [:edit, :update, :show]
-    before_action :admin_user,     only: [:edit, :update, :destroy, :index, :show, :edit_new_user, :edit_active_user]
+    before_action :admin_user,     only: [:edit, :update, :destroy, :index, :show, :edit_new_user, :edit_active_user, :set_new_password,:report_users,:setup_users]
     before_action :set_user, only: [:show, :edit, :update, :destroy, :deactivate, :set_admin, :set_normal_user, :terminate, :restore, :lock_user, :unlock_user, :activate, :edit_new_user, :edit_active_user, :edit_user_profile]
+    before_action :set_users, only: [:index, :report_users,:setup_users]
 
     def index
         weather_details
         @user_activities = ActivityLog.where(admin: false)#.paginate(page: params[:page], per_page: 15).includes(:user)
         @super_user_activities = ActivityLog.where(admin: true)#.paginate(page: params[:page], per_page: 15).includes(:user)
         @user = User.new
-        @users = User.all.includes(:department).includes(:role)
         @admin_users = User.where('admin = ? OR super_admin = ?', true, true)#.paginate(page: params[:page], per_page: 15)
         @active_users = User.where(activated: true)#.paginate(page: params[:page], per_page: 15).includes(:role)
         @inactive_users = User.where(activated: false)#.paginate(page: params[:page], per_page: 15)
@@ -27,11 +27,10 @@ class UsersController < ApplicationController
       weather_details
       @user_activities = ActivityLog.where(admin: false)#.paginate(page: params[:page], per_page: 15).includes(:user)
       @super_user_activities = ActivityLog.where(admin: true)#.paginate(page: params[:page], per_page: 15).includes(:user)
-      @users = User.all.includes(:department).includes(:role)
       @user_login_attempts = User.where('login_count > ? OR login_attempts > ?', 0, 0)#.paginate(page: params[:page], per_page: 15)
     end
     def setup_users
-      @users = User.all.includes(:department).includes(:role)
+      weather_details
     end
     def set_new_password
         @user = User.find(current_user.id)
@@ -138,7 +137,7 @@ class UsersController < ApplicationController
         if @user.update_columns(admin: false)
             flash[:success] = 'User removed as System Administrator successfully.'
         else
-            flash[:danger] = "Failed to remove #{@user.firstname}  #{@user.surname} as System Administrator."
+            flash[:danger] = "Failed to remove user as System Administrator."
         end
         redirect_to :back
     end
@@ -202,6 +201,9 @@ class UsersController < ApplicationController
     #
     def set_user
         @user = User.find(params[:id])
+    end
+    def set_users
+        @users = User.all.includes(:department).includes(:role)
     end
 
     # Before filters

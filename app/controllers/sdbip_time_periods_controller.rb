@@ -1,6 +1,7 @@
 class SdbipTimePeriodsController < ApplicationController
    before_action :logged_in_user, only: [:close_primary,:close_secondary,:close_finance,:index, :show, :edit, :update, :destroy,:update_time_periods]
-  before_action :admin_user, only: [:close_primary,:close_secondary,:close_finance,:index, :show, :edit, :update, :destroy,:update_time_periods]
+   before_action :admin_user, only: [:close_primary,:close_secondary,:close_finance,:index, :show, :edit, :update, :destroy,:update_time_periods]
+   before_action :set_sdbip_time_period, only: [:show, :edit, :update, :destroy,:update]
   skip_before_filter  :verify_authenticity_token
   def index
     weather_details
@@ -9,7 +10,6 @@ class SdbipTimePeriodsController < ApplicationController
   end
 
   def show
-    @sdbip_time_period = SdbipTimePeriod.find(params[:id])
   end
 
   def new
@@ -21,15 +21,14 @@ class SdbipTimePeriodsController < ApplicationController
     if @sdbip_time_period.save
       # SendTimePeriodReminderEmailJob.set(wait: 10.seconds).perform_later
       flash[:success]="Sdbip Time Period was successfully created."
-      redirect_to sdbip_time_periods_path
     else
       flash[:danger]="Sdbip Time Period was not created."
-      redirect_to :back
     end
+    redirect_to :back
   end
 
   def edit
-    @sdbip_time_period = SdbipTimePeriod.find(params[:id])
+
   end
   def send_notification
     #sends a reminder notification to Administrators
@@ -166,7 +165,6 @@ class SdbipTimePeriodsController < ApplicationController
     end
   end
   def update
-      @sdbip_time_period = SdbipTimePeriod.find(params[:id])
     if @sdbip_time_period.update_attributes(sdbip_time_period_params)
       @primary_users = User.includes(:role).where(roles:{kpi_owner: true})
       @secondary_users = User.includes(:role).where(roles:{finance_admin: true,top_layer_administrator: true,secondary_time_period: true})
@@ -174,26 +172,24 @@ class SdbipTimePeriodsController < ApplicationController
       #reminder_date = (@sdbip_time_period.primary_reminder - Date.now)* 24 * 60
       # SendTimePeriodReminderEmailJob.set(wait: 30.seconds).perform_later
       flash[:success]="Sdbip Time Period was successfully updated."
-      redirect_to sdbip_time_periods_path
     else
       flash[:danger]="Sdbip Time Period was not updated."
-      redirect_to :back
     end
+    redirect_to :back
   end
 
   def destroy
-    @sdbip_time_period = SdbipTimePeriod.find(params[:id])
     @sdbip_time_period.destroy
         flash[:success]="Sdbip Time Period was successfully deleted."
         redirect_to sdbip_time_periods_path
   end
 
-
-
-
   private
     def sdbip_time_period_params
         params.require(:sdbip_time_period).permit(:period,:primary_reminder, :primary_closure,:secondary_reminder,:secondary_closure,:finance_reminder,:finance_closure,:finance_status,:primary_status,:secondary_status)
+    end
+    def set_sdbip_time_period
+      @sdbip_time_period = SdbipTimePeriod.find(params[:id])
     end
       # Confirms a logged-in user.
   def logged_in_user

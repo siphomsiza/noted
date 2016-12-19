@@ -179,10 +179,7 @@ end
 
 FactoryGirl.define do
   factory :sdbip_time_period do
-    period nil
-    start_date nil
-    end_date nil
-    departmental_sdbip_id '1'
+    period Date.today
   end
 end
 
