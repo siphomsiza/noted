@@ -2,6 +2,8 @@ class HeadingsController < ApplicationController
   before_action :set_heading, only: [:edit_top_layer_headings,:edit_capital_projects_headings,:edit_revenue_by_source_headings,:edit_monthly_cashflow_headings,:edit_departmental_headings,:edit, :update, :destroy]
   before_action :logged_in_user, only: [:index, :show, :new, :edit, :update, :destroy,:edit_departmental_headings,:edit_top_layer_headings,:edit_capital_projects_headings,:edit_revenue_by_source_headings,:edit_monthly_cashflow_headings]
   before_action :admin_user,   only: [:index,:show, :new, :edit, :update, :destroy,:edit_departmental_headings,:edit_top_layer_headings,:edit_capital_projects_headings,:edit_revenue_by_source_headings,:edit_monthly_cashflow_headings]
+  protect_from_forgery
+  skip_before_action :verify_authenticity_token, if: :js_request?
   def index
     weather_details
     @general_headings = Heading.where(category: 'General').paginate( page: params[:page],per_page: 17)
@@ -76,6 +78,9 @@ class HeadingsController < ApplicationController
   end
 
   private
+  def js_request?
+        request.format.js?
+  end
     def heading_params
         params.require(:heading).permit(:term, :description, :category)
     end

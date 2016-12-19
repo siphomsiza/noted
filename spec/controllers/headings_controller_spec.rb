@@ -37,7 +37,7 @@ RSpec.describe HeadingsController, :type => :controller do
               @user = create(:user)
               @heading = create(:heading)
               session[:user_id] = @user.id
-              get :edit_top_layer_headings,{:id=>@heading.id}, :format => 'js'
+              get :edit_top_layer_headings,:id=>@heading.id , :format => 'js'
           end
 
           it {expect(response).to have_http_status(200)}
@@ -49,7 +49,8 @@ RSpec.describe HeadingsController, :type => :controller do
 
           before do
               @heading = create(:heading)
-              get :edit_top_layer_heading,{:id=>@heading.id}, :format => 'js'
+              session[:user_id] = nil
+              get :edit_top_layer_headings,:id=>@heading.id, :format => 'js'
           end
 
           it {expect(response).to redirect_to(login_path)}
@@ -64,7 +65,7 @@ RSpec.describe HeadingsController, :type => :controller do
               @user = create(:user)
               @heading = create(:heading)
               session[:user_id] = @user.id
-              get :edit_capital_projects_headings,{:id=>@heading.id}, :format => 'js'
+              get :edit_capital_projects_headings,:id=>@heading.id, :format => 'js'
           end
 
           it {expect(response).to have_http_status(200)}
@@ -76,6 +77,7 @@ RSpec.describe HeadingsController, :type => :controller do
 
           before do
               @heading = create(:heading)
+              session[:user_id] = nil
               get :edit_capital_projects_headings,{:id=>@heading.id}, :format => 'js'
           end
 
@@ -91,7 +93,7 @@ RSpec.describe HeadingsController, :type => :controller do
           @user = create(:user)
           @heading = create(:heading)
           session[:user_id] = @user.id
-          get :edit_revenue_by_source_headings,{:id=>@heading.id}, :format => 'js'
+          get :edit_revenue_by_source_headings,:id=>@heading.id, :format => 'js'
         end
         it {expect(response).to have_http_status(200)}
         it {expect(response.content_type).to eq("text/javascript") }
@@ -101,7 +103,8 @@ RSpec.describe HeadingsController, :type => :controller do
         context "when user is not logged in" do
               before do
                 @heading = create(:heading)
-                get :edit_revenue_by_source_headings,{:id=>@heading.id}, :format => 'js'
+                session[:user_id] = nil
+                get :edit_revenue_by_source_headings,:id=>@heading.id, :format => 'js'
               end
               it {expect(response).to redirect_to(login_path)}
               it {expect(flash[:danger]).to eq("Please log in.")}
@@ -115,7 +118,7 @@ RSpec.describe HeadingsController, :type => :controller do
               @user = create(:user)
               @heading = create(:heading)
               session[:user_id] = @user.id
-              get :edit_departmental_headings,{:id=>@heading.id}, :format => 'js'
+              get :edit_departmental_headings,:id=>@heading.id, :format => 'js'
           end
 
           it {expect(response).to have_http_status(200)}
@@ -127,7 +130,8 @@ RSpec.describe HeadingsController, :type => :controller do
 
           before do
               @heading = create(:heading)
-              get :edit_departmental_headings,{:id=>@heading.id}, :format => 'js'
+              session[:user_id] = nil
+              get :edit_departmental_headings,:id=>@heading.id, :format => 'js'
               end
               it {expect(response).to redirect_to(login_path)}
               it {expect(flash[:danger]).to eq("Please log in.")}
@@ -142,7 +146,7 @@ RSpec.describe HeadingsController, :type => :controller do
           @user = create(:user)
           @heading = create(:heading)
           session[:user_id] = @user.id
-          get :edit_monthly_cashflow_headings,{:id=>@heading.id}, :format => 'js'
+          get :edit_monthly_cashflow_headings,:id=>@heading.id, :format => 'js'
         end
          it {expect(response).to have_http_status(200)}
         it {expect(response.content_type).to eq("text/javascript") }
@@ -151,23 +155,13 @@ RSpec.describe HeadingsController, :type => :controller do
         context "when user is not logged in" do
               before do
                 @heading = create(:heading)
-                get :edit_monthly_cashflow_headings,{:id=>@heading.id}, :format => 'js'
+                session[:user_id] = nil
+                get :edit_monthly_cashflow_headings,:id=>@heading.id, :format => 'js'
               end
 
           it {expect(response).to have_http_status(200)}
           it {expect(response.content_type).to eq("text/javascript") }
           it {expect(response).to render_template(:edit)}
-    end
-
-    context "when user is not logged in" do
-
-          before do
-              @heading = create(:heading)
-              get :edit_monthly_cashflow_headings,{:id=>@heading.id}, :format => 'js'
-          end
-
-          it {expect(response).to redirect_to(login_path)}
-          it {expect(flash[:danger]).to eq("Please log in.")}
     end
   end
 
@@ -178,7 +172,7 @@ RSpec.describe HeadingsController, :type => :controller do
              @user = create(:user)
              @heading = create(:heading)
              session[:user_id] = @user.id
-             get :edit,{:id=>@heading.id}, :format => 'js'
+             get :edit,:id=>@heading.id, :format => 'js'
           end
 
           it {expect(response).to have_http_status(200)}
@@ -190,6 +184,7 @@ RSpec.describe HeadingsController, :type => :controller do
 
           before do
               @heading = create(:heading)
+              session[:user_id] = nil
               get :edit,{:id=>@heading.id}
           end
 
@@ -197,32 +192,6 @@ RSpec.describe HeadingsController, :type => :controller do
           it {expect(flash[:danger]).to eq("Please log in.")}
     end
   end
-
-  describe "#new" do
-    context "when user is admin and logged in" do
-
-          before do
-              @user = create(:user)
-              session[:user_id] = @user.id
-              get :new
-          end
-
-          it {expect(response).to have_http_status(200)}
-          it {expect(response.content_type).to eq("text/html") }
-          it {expect(response).to render_template("new")}
-    end
-
-    context "when user is not logged in" do
-
-          before do
-               get :new
-          end
-
-          it {expect(response).to redirect_to(login_path)}
-          it {expect(flash[:danger]).to eq("Please log in.")}
-    end
-  end
-
   describe "DELETE #destroy" do
     context "when user is admin and logged in" do
 
@@ -298,28 +267,7 @@ RSpec.describe HeadingsController, :type => :controller do
     context "when user is not logged in" do
 
           before do
-              get :edit, :id=>1
-          end
-
-          it {expect(response).to redirect_to(login_path)}
-          it {expect(flash[:danger]).to eq("Please log in.")}
-    end
-
-    context "when user is not admin" do
-
-          before do
-          get :edit, id: 1
-          end
-
-          it {expect(response).to redirect_to(login_path)}
-    end
-
-    context "when user is correct user" do
-
-          before do
-              @user = create(:user)
-              session[:user_id] =  nil
-              get :edit, id: 1
+              get :edit, :id=>1, :format => 'js'
           end
 
           it {expect(response).to redirect_to(login_path)}

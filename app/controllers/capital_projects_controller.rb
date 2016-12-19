@@ -9,10 +9,7 @@ class CapitalProjectsController < ApplicationController
   def index
     weather_details
     @capital_project = CapitalProject.new
-    @capital_projects = CapitalProject.all.order(id: :asc)
-      if !@capital_projects.blank?
-       @capital_projects =  @capital_projects.paginate(page: params[:page],per_page: 15).includes(:departmental_sdbip,:mscore_classification,subdepartment: [:department])
-      end
+    @capital_projects = CapitalProject.all.order(id: :asc).paginate(page: params[:page],per_page: 15).includes(:departmental_sdbip,:mscore_classification,subdepartment: [:department])
   end
 
   # GET /capital_projects/1
@@ -43,11 +40,9 @@ class CapitalProjectsController < ApplicationController
   end
   # GET /capital_projects/1/edit
   def edit
-    @time_periods = SdbipTimePeriod.all
   end
 
   def edit_capital_projects
-    @time_periods = SdbipTimePeriod.all
   end
 
   # POST /capital_projects
@@ -93,6 +88,7 @@ class CapitalProjectsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_capital_project
       @capital_project = CapitalProject.find(params[:id])
+      @time_periods = SdbipTimePeriod.all
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

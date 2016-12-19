@@ -88,6 +88,8 @@ RSpec.describe SetupsController, type: :controller do
   describe '#update' do
     context 'when user is logged in' do
       before do
+        @user = create(:user)
+        session[:user_id] = @user.id
         @setup = Setup.create!(performance_comments: true)
       end
       it 'should redirect to index with a notice on successful update' do

@@ -6,6 +6,46 @@ RSpec.describe UsersController, type: :controller do
   before(:each) do
     request.env['HTTP_REFERER'] = root_url
   end
+  describe '#report users' do
+    context 'User is logged in and admin' do
+      before do
+        @user = create(:user)
+        session[:user_id] = @user.id
+        get :report_users
+      end
+      it { expect(response.status).to eq(200) }
+      it { expect(response.content_type).to eq('text/html') }
+      it { expect(response).to render_template('report_users') }
+    end
+    context 'User is not logged in/is not admin' do
+      before do
+        session[:user_id] = nil
+        get :report_users
+      end
+      it { expect(flash[:danger]).to eq('Please log in.') }
+      it { expect(response).to redirect_to(login_url) }
+    end
+  end
+  describe '#setup users' do
+    context 'User is logged in and admin' do
+      before do
+        @user = create(:user)
+        session[:user_id] = @user.id
+        get :setup_users
+      end
+      it { expect(response.status).to eq(200) }
+      it { expect(response.content_type).to eq('text/html') }
+      it { expect(response).to render_template('setup_users') }
+    end
+    context 'User is not logged in/is not admin' do
+      before do
+        session[:user_id] = nil
+        get :setup_users
+      end
+      it { expect(flash[:danger]).to eq('Please log in.') }
+      it { expect(response).to redirect_to(login_url) }
+    end
+  end
   describe '#index' do
     let(:admin) { build_stubbed(:admin) }
     let(:user) { build_stubbed(:user) }
@@ -301,11 +341,9 @@ RSpec.describe UsersController, type: :controller do
         session[:user_id] = @user.id
         get :index
       end
-
       it '' do
         expect { post :set_admin, id: @new_user.id, user: attributes_for(:user).merge(users_attributes: [attributes_for(:user)]) }
       end
-
       it { expect(response).to have_http_status(200) }
     end
 
@@ -327,14 +365,15 @@ RSpec.describe UsersController, type: :controller do
         @user = create(:user)
         session[:user_id] = @user.id
         @users = User.all
-        post :index
+        get :setup_users
       end
 
       it 'update maximum log in attempts' do
-        expect { post :set_maximum_attempts, @users.each do |user| user.update_attributes(max_login_attempts: 5) end }
+        expect { post :set_maximum_attempts, @users.update_all(max_login_attempts: 5) }
       end
-
       it { expect(response).to have_http_status(200) }
+      it { expect(response).to redirect_to(setup_users) }
+      it { expect(flash[:success]).to eq('Maximum login attempts updated successfully.') }
     end
 
     context 'user is not logged on to the system' do
@@ -343,7 +382,6 @@ RSpec.describe UsersController, type: :controller do
         session[:user_id] = nil
         post :set_maximum_attempts, id: @user.id
       end
-
       it { expect(response).to redirect_to(login_path) }
       it { expect(flash[:danger]).to eq('Please log in.') }
     end
@@ -357,8 +395,17 @@ RSpec.describe UsersController, type: :controller do
         get :set_normal_user, id: @user.id
       end
 
-      it { expect(response).to have_http_status(302) }
-      it { expect(flash[:success]).to eq('User removed from System Admin role successfully.') }
+      it { expect(flash[:success]).to eq('User removed as System Administrator successfully.') }
+      it { expect(response).to redirect_to(users_path) }
+    end
+    context 'user is correct user or user is admin and is logged on to the system' do
+      before do
+        @logged_in_user = create(:user)
+        @user = nil
+        session[:user_id] = @logged_in_user.id
+        get :set_normal_user, id: @user.id
+      end
+      it { expect(flash[:danger]).to eq('Failed to remove user as System Administrator.') }
       it { expect(response).to redirect_to(users_path) }
     end
 
@@ -379,14 +426,14 @@ RSpec.describe UsersController, type: :controller do
       before do
         @user = create(:user)
         session[:user_id] = @user.id
-        get :set_super_user, id: @user.id
+        get :set_super_user, id: @user.id, :format => 'js'
       end
       it '' do
         expect { post :set_super_user, id: @new_user.id, user: attributes_for(:user).merge(users_attributes: [attributes_for(:user)]) }
       end
 
       it { expect(response).to have_http_status(200) }
-      it { expect(flash[:warning]).to eq("failed to set #{@user.firstname} #{@user.surname} as super user/admin.") }
+      it { expect(flash[:danger]).to eq("failed to set #{@user.firstname} #{@user.surname} as super user/admin.") }
       it { expect(response).to redirect_to users_path }
     end
     context 'user is not logged on to the system' do
