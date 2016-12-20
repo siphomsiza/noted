@@ -3,7 +3,8 @@ class CapitalProjectsController < ApplicationController
   before_action :set_capital_project, only: [:show, :edit, :update, :destroy,:edit_capital_projects]
   before_action :logged_in_user, only: [:index,:show,:new,:edit,:destroy,:edit_capital_projects]
   before_action :admin_user,     only: [:index,:show,:new,:edit,:destroy,:edit_capital_projects]
-
+  protect_from_forgery
+  skip_before_action :verify_authenticity_token, if: :js_request?
   # GET /capital_projects
   # GET /capital_projects.json
   def index
@@ -15,8 +16,6 @@ class CapitalProjectsController < ApplicationController
   # GET /capital_projects/1
   # GET /capital_projects/1.json
   def show
-    @capital_project = CapitalProject.includes(:departmental_sdbip=>[:kpi_results]).find(params[:id])
-    @time_periods = SdbipTimePeriod.all
   end
 
   # GET /capital_projects/new
@@ -51,14 +50,11 @@ class CapitalProjectsController < ApplicationController
     @capital_project = CapitalProject.new(capital_project_params)
 
       if @capital_project.save
-        flash[:success] = 'Capital project was successfully created.'
-        redirect_to capital_projects_url
-
+        flash[:success] = 'Capital Project was successfully created.'
       else
-        flash[:danger] = 'Capital project was not created.'
-        redirect_to capital_projects_url
-
-    end
+        flash[:danger] = 'Capital Project was not created.'
+      end
+    redirect_to :back
   end
 
   # PATCH/PUT /capital_projects/1
@@ -66,28 +62,29 @@ class CapitalProjectsController < ApplicationController
   def update
 
       if @capital_project.update(capital_project_params)
-          flash[:success] ='Capital project was successfully updated.'
-          redirect_to capital_projects_url
+          flash[:success] ='Capital Project was successfully updated.'
       else
-
-           flash[:success] ='Capital project was not updated.'
-           redirect_to capital_projects_url
-    end
+           flash[:danger] ='Capital Project was not updated.'
+      end
+    redirect_to :back
   end
 
   # DELETE /capital_projects/1
   # DELETE /capital_projects/1.json
   def destroy
     @capital_project.destroy
-    flash[:success]='Capital project was successfully deleted.'
+    flash[:success]='Capital Project was successfully deleted.'
 
       redirect_to capital_projects_url
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def js_request?
+          request.format.js?
+    end
     def set_capital_project
-      @capital_project = CapitalProject.find(params[:id])
+      @capital_project = CapitalProject.includes(:departmental_sdbip=>[:kpi_results]).find(params[:id])
       @time_periods = SdbipTimePeriod.all
     end
 

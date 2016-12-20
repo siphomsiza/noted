@@ -14,10 +14,6 @@ RSpec.describe CapitalProjectsController, type: :controller do
       it { expect(response.content_type).to eq('text/html') }
       it { expect(response).to render_template('index') }
     end
-    it 'assigns @capital_project' do
-      capital_project = CapitalProject.create
-      expect(assigns[:capital_project]).to be_a_new(CapitalProject)
-    end
 
     it 'assigns @capital_projects' do
       capital_projects = CapitalProject.all
@@ -37,32 +33,56 @@ RSpec.describe CapitalProjectsController, type: :controller do
 
   describe 'GET #show' do
     it 'assigns the requested capital_project to @capital_project' do
-      @capital_project = CapitalProject.create
+      @capital_project = FactoryGirl.create(:capital_project)
       get :show, :id => @capital_project.id, :format => 'js'
       expect(assigns(:capital_project)).to eq(@capital_project)
     end
 
     it { expect(response.status).to eq(200) }
+    it { expect(response.content_type).to eq('text/javascript') }
+    it { expect(response).to render_template('show') }
   end
 
   describe '#edit' do
     context 'when user is logged in and is admin' do
       before do
         @user = create(:user)
-        @capital_project = CapitalProject.create
+        @capital_project = FactoryGirl.create(:capital_project)
         session[:user_id] = @user.id
         get :edit, :id => @capital_project.id, :format => 'js'
       end
-
-      it { expect(assigns(:time_period)).to eq(time_period) }
       it { expect(response.status).to eq(200) }
       it { expect(response.content_type).to eq('text/javascript') }
-      it { expect(response).to render_template('edit') }
+      it { expect(response).to render_template(:edit) }
     end
     context 'when user is not logged in' do
       before do
+        @capital_project = FactoryGirl.create(:capital_project)
         session[:user_id] = nil
-        get :index
+        get :edit, :id => @capital_project.id, :format => 'js'
+      end
+
+      it { expect(response).to redirect_to(login_path) }
+      it { expect(flash[:danger]).to eq('Please log in.') }
+    end
+  end
+  describe '#edit_capital_projects' do
+    context 'when user is logged in and is admin' do
+      before do
+        @user = create(:user)
+        @capital_project = FactoryGirl.create(:capital_project)
+        session[:user_id] = @user.id
+        get :edit_capital_projects, :id => @capital_project.id, :format => 'js'
+      end
+      it { expect(response.status).to eq(200) }
+      it { expect(response.content_type).to eq('text/javascript') }
+      it { expect(response).to render_template(:edit_capital_projects) }
+    end
+    context 'when user is not logged in' do
+      before do
+        @capital_project = FactoryGirl.create(:capital_project)
+        session[:user_id] = nil
+        get :edit_capital_projects, :id => @capital_project.id, :format => 'js'
       end
 
       it { expect(response).to redirect_to(login_path) }
@@ -70,33 +90,92 @@ RSpec.describe CapitalProjectsController, type: :controller do
     end
   end
 
-  describe '#create' do
-    context 'when user is admin and logged in' do
-      before do
-        @user = create(:user)
-        session[:user_id] = @user.id
-        @capital_project = CapitalProject.create
-        get :index
-      end
+  describe "#create" do
+    context "with valid info" do
+          before do
+            request.env['HTTP_REFERER'] = root_url
+              @user = create(:user)
+              session[:user_id] = @user.id
+              @capital_project = FactoryGirl.create(:capital_project)
+              get :index
+          end
 
-      it '#save capital_project' do
-        department_params = FactoryGirl.attributes_for(:capital_project)
-        expect { assigns[:capital_project].to eq(CapitalProject(department_params)) }
-        expect { post :create, capital_project: department_params }.to change(CapitalProject, :count).by(0)
-      end
-
-      it { expect(response).to have_http_status(200) }
-      it { expect(response.content_type).to eq('text/html') }
-      it { expect(response).to render_template('capital_projects/index') }
+          it "#save capital_project" do
+              expect{
+      				post :create, capital_project: attributes_for(:capital_project)
+      			}.to change(CapitalProject,:count).by(1)
+          end
+          it 'redirects to back' do
+            post :create, capital_project: attributes_for(:capital_project)
+    				expect(flash[:success]).to eq("Capital Project was successfully created.")
+            expect(response).to redirect_to :back
+          end
     end
-    context 'when user is not logged in' do
-      before do
-        session[:user_id] = nil
-        get :index
-      end
+    context "with invalid info" do
+          before do
+            request.env['HTTP_REFERER'] = root_url
+              @user = create(:user)
+              session[:user_id] = @user.id
+              @capital_project = FactoryGirl.create(:capital_project)
+              get :index
+          end
 
-      it { expect(response).to redirect_to(login_path) }
-      it { expect(flash[:danger]).to eq('Please log in.') }
+          it 'does not create the capital_project' do
+    				expect{
+    				post :create, capital_project: attributes_for(:capital_project,subdepartment_id: nil)
+    			}.to_not change(CapitalProject,:count)
+          end
+    			it 'redirects to back' do
+            post :create, capital_project: attributes_for(:capital_project,subdepartment_id: nil)
+    				expect(flash[:danger]).to eq("Capital Project was not created.")
+            expect(response).to redirect_to :back
+          end
+    end
+
+    context "when user is not logged in" do
+
+          before do
+          session[:user_id] = nil
+          get :index
+          end
+          it {expect(response).to redirect_to(login_path)}
+          it {expect(flash[:danger]).to eq("Please log in.")}
+    end
+  end
+
+  describe "#update" do
+          before do
+              request.env['HTTP_REFERER'] = root_url
+              @capital_project = FactoryGirl.create(:capital_project)
+              @user = FactoryGirl.create(:user)
+              session[:user_id] = @user.id
+              get :edit, :id => @capital_project.id, :format => 'js'
+          end
+          it "should redirect to index with a notice on successful update" do
+          @attr = { :subdepartment_id => 2}
+          patch :update, :id => @capital_project.id, :capital_project => @attr
+          expect(assigns[:capital_project]).not_to be_new_record
+          expect(flash[:success]).to eq("Capital Project was successfully updated.")
+          expect(response).to redirect_to  :back
+          end
+
+          it "should redirect to index with a notice on unsuccessful update" do
+          @attr = { :subdepartment_id => nil}
+          patch :update, :id => @capital_project.id, :capital_project => @attr
+          expect(assigns[:capital_project]).not_to be_new_record
+          expect(flash[:danger]).to eq("Capital Project was not updated.")
+          expect(response).to redirect_to :back
+          end
+
+    context "when user is not logged in" do
+          before do
+            @capital_project = FactoryGirl.create(:capital_project)
+            session[:user_id] = nil
+            get :edit, :id => @capital_project.id, :format => 'js'
+          end
+
+          it {expect(response).to redirect_to(login_path)}
+          it {expect(flash[:danger]).to eq("Please log in.")}
     end
   end
 
@@ -125,35 +204,6 @@ RSpec.describe CapitalProjectsController, type: :controller do
     end
   end
 
-  describe '#update' do
-    before(:each) do
-      @capital_project = FactoryGirl.create(:capital_project)
-    end
-
-    it 'should re-render edit template on failed update' do
-      @attr = { project_name: 'Technical Services', project_description: 'mm20' }
-      put :update, :id => @capital_project.id, capital_project: @attr
-      expect(response.status).to eq(200)
-    end
-
-    it 'should redirect to index with a notice on successful update' do
-      @attr = { project_name: 'water and sanitations', project_description: 'mm20' }
-      put :update, :id => @capital_project.id, capital_project: @attr
-      expect(assigns[:capital_project]).not_to be_new_record
-      expect(flash[:success]).to eq('Capital project was successfully updated.')
-      expect(response).to redirect_to capital_projects_url
-    end
-    context 'when user is not logged in' do
-      before do
-        session[:user_id] = nil
-        get :index
-      end
-
-      it { expect(response).to redirect_to(login_path) }
-      it { expect(flash[:danger]).to eq('Please log in.') }
-    end
-  end
-
   describe 'POST #import' do
     it 'redirects to the home page' do
       allow(CapitalProject).to receive(:import).with('foo.txt')
@@ -168,9 +218,17 @@ RSpec.describe CapitalProjectsController, type: :controller do
       expect(response).to redirect_to capital_projects_url
     end
 
+    it 'adds a flash danger message' do
+      allow(CapitalProject).to receive(:import).with('foo.txt')
+      post :import, file: nil
+      expect(flash[:danger]).to eq 'You have not selected a file'
+      expect(response).to redirect_to capital_projects_url
+    end
+
     it 'imports the capital_project file' do
-      expect(CapitalProject).to receive(:import).with('foo.txt')
-      post :import, file: 'foo.txt'
+      #expect(CapitalProject).to receive(:import).with(File.open(File.join(Rails.root, '/spec/data', 'capital_project.csv')))
+      post :import, file: File.open(File.join(Rails.root, '/spec/data', 'capital_project.csv'))
+      expect(flash[:danger]).to eq 'Capital Projects failed to import.'
       expect(response).to redirect_to capital_projects_url
     end
   end

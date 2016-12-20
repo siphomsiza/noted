@@ -1,7 +1,7 @@
 class HeadingsController < ApplicationController
   before_action :set_heading, only: [:edit_top_layer_headings,:edit_capital_projects_headings,:edit_revenue_by_source_headings,:edit_monthly_cashflow_headings,:edit_departmental_headings,:edit, :update, :destroy]
-  before_action :logged_in_user, only: [:index, :show, :new, :edit, :update, :destroy,:edit_departmental_headings,:edit_top_layer_headings,:edit_capital_projects_headings,:edit_revenue_by_source_headings,:edit_monthly_cashflow_headings]
-  before_action :admin_user,   only: [:index,:show, :new, :edit, :update, :destroy,:edit_departmental_headings,:edit_top_layer_headings,:edit_capital_projects_headings,:edit_revenue_by_source_headings,:edit_monthly_cashflow_headings]
+  before_action :logged_in_user, only: [:index, :show, :edit, :update, :destroy,:edit_departmental_headings,:edit_top_layer_headings,:edit_capital_projects_headings,:edit_revenue_by_source_headings,:edit_monthly_cashflow_headings]
+  before_action :admin_user,   only: [:index,:show, :edit, :update, :destroy,:edit_departmental_headings,:edit_top_layer_headings,:edit_capital_projects_headings,:edit_revenue_by_source_headings,:edit_monthly_cashflow_headings]
   protect_from_forgery
   skip_before_action :verify_authenticity_token, if: :js_request?
   def index
@@ -16,10 +16,6 @@ class HeadingsController < ApplicationController
   end
 
   def show
-  end
-
-  def new
-    @heading = Heading.new
   end
 
   def create
@@ -66,8 +62,10 @@ class HeadingsController < ApplicationController
   def update
     if @heading.update_attributes(heading_params)
         flash[:success] = "Heading was successfully updated."
-      redirect_to headings_path
+    else
+      flash[:danger] = "Heading was not updated."
     end
+    redirect_to :back
   end
 
   def destroy

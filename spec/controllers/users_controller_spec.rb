@@ -97,38 +97,6 @@ RSpec.describe UsersController, type: :controller do
     end
   end
 
-  describe '#create' do
-    context 'when user is logged in' do
-      before do
-        @user = create(:user)
-        session[:user_id] = @user.id
-        user_params = FactoryGirl.attributes_for(:user)
-        get :index
-      end
-
-      it 'creates user' do
-        user_params = FactoryGirl.attributes_for(:user)
-        expect { post :create, user: user_params }.to change(User, :count).by(1)
-        user = assigns(:user)
-      end
-
-      it { expect(response.status).to eq(200) }
-      it { expect(response).to redirect_to users_path }
-      # it {expect(flash[:info]).to eq("Please check your email to activate your account.")}
-      it { expect(response).to render_template('users/index') }
-    end
-    context 'user is not logged on to the system' do
-      before do
-        @user = create(:user)
-        session[:user_id] = nil
-        get index: @user.id
-      end
-
-      it { expect(response).to redirect_to(login_path) }
-      it { expect(flash[:danger]).to eq('Please log in.') }
-    end
-  end
-
   describe '#new' do
     context 'when user is logged in and is admin' do
       before do
@@ -136,19 +104,17 @@ RSpec.describe UsersController, type: :controller do
         session[:user_id] = @user.id
         get :new
       end
-
       it { expect(assigns[:user]).to be_a_new(User) }
       it { expect(response.status).to eq(200) }
       it { expect(response.content_type).to eq('text/html') }
-      it { expect(response).to redirect_to users_path }
+      it { expect(response).to render_template(:new) }
     end
     context 'when user is not logged in' do
       before do
         @user = create(:user)
-        session[:user_id] = @user.id
+        session[:user_id] = nil
         get :new
       end
-
       it { expect(response).to redirect_to(login_path) }
       it { expect(flash[:danger]).to eq('Please log in.') }
     end
@@ -173,7 +139,6 @@ RSpec.describe UsersController, type: :controller do
         session[:user_id] = nil
         get :show, id: @user.id
       end
-
       it { expect(response).to redirect_to(login_path) }
       it { expect(flash[:danger]).to eq('Please log in.') }
     end
@@ -188,7 +153,7 @@ RSpec.describe UsersController, type: :controller do
       end
 
       it { expect(response).to have_http_status(200) }
-      it { expect(response.content_type).to eq('text/html') }
+      it { expect(response.content_type).to eq('text/javascript') }
       it { expect(response).to render_template('edit') }
     end
 
@@ -279,37 +244,10 @@ RSpec.describe UsersController, type: :controller do
     end
   end
 
-  describe '#update' do
-    context 'when user is logged in' do
-      before do
-        @user = create(:user)
-        session[:user_id] = @user.id
-        request.env['HTTP_REFERER'] = root_url
-      end
-
-      it 'update user' do
-        patch :update, id: @user.id, user: FactoryGirl.attributes_for(:user)
-        expect { assigns[:user].to eq(User(user_params)) }
-        expect { patch :update, id: @user.id }
-      end
-
-      it { expect(response.status).to eq(200) }
-    end
-    context 'when user is not logged in' do
-      before do
-        @user = create(:user)
-        session[:user_id] = @user.id
-        patch :update, id: @user.id
-      end
-
-      it { expect(response).to redirect_to(login_path) }
-      it { expect(flash[:danger]).to eq('Please log in.') }
-    end
-  end
-
   describe '#deactivate' do
     context 'user is correct user or user is admin and is logged on to the system' do
       before do
+        request.env['HTTP_REFERER'] = root_url
         @user = create(:user)
         @new_user = create(:user)
         session[:user_id] = @user.id
@@ -317,8 +255,8 @@ RSpec.describe UsersController, type: :controller do
       end
 
       it { expect(response).to have_http_status(302) }
-      it { expect(flash[:success]).to eq("User's account deactivated successfully") }
-      it { expect(response).to redirect_to(users_path) }
+      it { expect(flash[:success]).to eq("#{@user.firstname} #{@user.surname}'s account deactivated successfully.") }
+      it { expect(response).to redirect_to(:back) }
     end
 
     context 'user is not logged on to the system' do
@@ -334,18 +272,20 @@ RSpec.describe UsersController, type: :controller do
   end
 
   describe '#set admin' do
-    context 'user is correct user or user is admin and is logged on to the system' do
       before do
+        request.env['HTTP_REFERER'] = root_url
         @user = create(:user)
-        @new_user = create(:user)
-        session[:user_id] = @user.id
-        get :index
+        @admin = create(:user)
+        session[:user_id] = @admin.id
+        post :set_admin, id: @user.id
       end
-      it '' do
-        expect { post :set_admin, id: @new_user.id, user: attributes_for(:user).merge(users_attributes: [attributes_for(:user)]) }
+      it "should redirect to index with a notice on successful update" do
+      @attr = { :admin => true}
+      post :set_admin, :id => @user.id, :user => @attr
+      expect(assigns[:user]).not_to be_new_record
+      expect(flash[:success]).to eq("User set as System Administrator.")
+      expect(response).to redirect_to :back
       end
-      it { expect(response).to have_http_status(200) }
-    end
 
     context 'user is not logged on to the system' do
       before do
@@ -354,27 +294,32 @@ RSpec.describe UsersController, type: :controller do
         session[:user_id] = nil
         get :set_admin, id: @new_user.id
       end
-
       it { expect(flash[:danger]).to eq('Please log in.') }
+      it { expect(response).to redirect_to(login_url) }
     end
   end
 
   describe '#set maximum attempts' do
-    context 'user is correct user or user is admin and is logged on to the system' do
       before do
+        request.env['HTTP_REFERER'] = root_url
         @user = create(:user)
         session[:user_id] = @user.id
         @users = User.all
-        get :setup_users
+        get :set_maximum_attempts,:attempts => 5
       end
 
-      it 'update maximum log in attempts' do
-        expect { post :set_maximum_attempts, @users.update_all(max_login_attempts: 5) }
+      it "should redirect to index with a notice on successful update" do
+      @attr = { :max_login_attempts => 5}
+      get :set_maximum_attempts, :user => @attr
+      expect(flash[:success]).to eq("Maximum login attempts updated successfully.")
+      expect(response).to redirect_to :back
       end
-      it { expect(response).to have_http_status(200) }
-      it { expect(response).to redirect_to(setup_users) }
-      it { expect(flash[:success]).to eq('Maximum login attempts updated successfully.') }
-    end
+      it "should redirect to index with a notice on unsuccessful update" do
+      @attr = { :max_login_attempts => nil}
+      post :set_maximum_attempts, :user => @attr
+      expect(flash[:danger]).to eq("Maximum login attempts not updated.")
+      expect(response).to redirect_to :back
+      end
 
     context 'user is not logged on to the system' do
       before do
@@ -390,23 +335,15 @@ RSpec.describe UsersController, type: :controller do
   describe '#set normal user' do
     context 'user is correct user or user is admin and is logged on to the system' do
       before do
+        request.env['HTTP_REFERER'] = root_url
         @user = create(:user)
-        session[:user_id] = @user.id
+        @admin = create(:user)
+        session[:user_id] = @admin.id
         get :set_normal_user, id: @user.id
       end
 
       it { expect(flash[:success]).to eq('User removed as System Administrator successfully.') }
-      it { expect(response).to redirect_to(users_path) }
-    end
-    context 'user is correct user or user is admin and is logged on to the system' do
-      before do
-        @logged_in_user = create(:user)
-        @user = nil
-        session[:user_id] = @logged_in_user.id
-        get :set_normal_user, id: @user.id
-      end
-      it { expect(flash[:danger]).to eq('Failed to remove user as System Administrator.') }
-      it { expect(response).to redirect_to(users_path) }
+      it { expect(response).to redirect_to(:back) }
     end
 
     context 'user is not logged on to the system' do
@@ -415,31 +352,36 @@ RSpec.describe UsersController, type: :controller do
         session[:user_id] = nil
         get :set_normal_user, id: @user.id
       end
-
       it { expect(response).to redirect_to(login_path) }
       it { expect(flash[:danger]).to eq('Please log in.') }
     end
   end
 
   describe '#set_super_user' do
-    context 'user is correct user or user is admin and is logged on to the system' do
       before do
         @user = create(:user)
         session[:user_id] = @user.id
-        get :set_super_user, id: @user.id, :format => 'js'
+        get :set_super_user, user_id: @user.id
       end
-      it '' do
-        expect { post :set_super_user, id: @new_user.id, user: attributes_for(:user).merge(users_attributes: [attributes_for(:user)]) }
+      it "should redirect to index with a notice on successful update" do
+      @attr = { :super_admin => true}
+      post :set_super_user, :user_id => @user.id, :user => @attr
+      expect(assigns[:user]).not_to be_new_record
+      expect(flash[:success]).to eq("User set to super user/admin successfully.")
+      expect(response).to redirect_to :back
+      end
+      it "should redirect to index with a notice on unsuccessful update" do
+      @attr = { :super_admin => true}
+      post :set_super_user, :user_id => nil, :user => @attr
+      expect(assigns[:user]).not_to be_new_record
+      expect(flash[:danger]).to eq("failed to set user as super user/admin.")
+      expect(response).to redirect_to :back
       end
 
-      it { expect(response).to have_http_status(200) }
-      it { expect(flash[:danger]).to eq("failed to set #{@user.firstname} #{@user.surname} as super user/admin.") }
-      it { expect(response).to redirect_to users_path }
-    end
     context 'user is not logged on to the system' do
       before do
         @user = create(:user)
-        session[:user_id] = @user.id
+        session[:user_id] = nil
         get :set_super_user, id: @user.id
       end
 
@@ -462,7 +404,7 @@ RSpec.describe UsersController, type: :controller do
     context 'user is not logged on to the system' do
       before do
         @user = create(:user)
-        session[:user_id] = @user.id
+        session[:user_id] = nil
         get :set_new_password, id: @user.id
       end
 
@@ -474,22 +416,23 @@ RSpec.describe UsersController, type: :controller do
   describe '#terminate' do
     context 'user is correct user or user is admin and is logged on to the system' do
       before do
+        request.env['HTTP_REFERER'] = root_url
+        @admin = create(:user)
         @user = create(:user)
-        session[:user_id] = @user.id
+        session[:user_id] = @admin.id
         get :terminate, id: @user.id
       end
 
       it { expect(response).to have_http_status(302) }
       it { expect(flash[:success]).to eq('Account terminated successfully.') }
-      it { expect(response).to redirect_to(users_url) }
+      it { expect(response).to redirect_to(:back) }
     end
     context 'when user is not logged in' do
       before do
         @user = create(:user)
-        session[:user_id] = @user.id
+        session[:user_id] = nil
         get :terminate, id: @user.id
       end
-
       it { expect(response).to redirect_to(login_path) }
       it { expect(flash[:danger]).to eq('Please log in.') }
     end
@@ -498,22 +441,23 @@ RSpec.describe UsersController, type: :controller do
   describe '#restore' do
     context 'user is correct user or user is admin and is logged on to the system' do
       before do
+        request.env['HTTP_REFERER'] = root_url
         @user = create(:user)
-        session[:user_id] = @user.id
+        @admin = create(:user)
+        session[:user_id] = @admin.id
+        @user.update_columns(terminated: true)
         get :restore, id: @user.id
       end
-
       it { expect(response).to have_http_status(302) }
       it { expect(flash[:success]).to eq('User restored successfully.') }
-      it { expect(response).to redirect_to(users_path) }
+      it { expect(response).to redirect_to(:back) }
     end
     context 'when user is not logged in' do
       before do
         @user = create(:user)
-        session[:user_id] = @user.id
+        session[:user_id] = nil
         get :restore, id: @user.id
       end
-
       it { expect(response).to redirect_to(login_path) }
       it { expect(flash[:danger]).to eq('Please log in.') }
     end
@@ -522,22 +466,23 @@ RSpec.describe UsersController, type: :controller do
   describe '#lock user' do
     context 'user is correct user or user is admin and is logged on to the system' do
       before do
+        request.env['HTTP_REFERER'] = root_url
+        @admin = create(:user)
         @user = create(:user)
-        session[:user_id] = @user.id
+        session[:user_id] = @admin.id
         get :lock_user, id: @user.id
       end
 
       it { expect(response).to have_http_status(302) }
-      it { expect(flash[:success]).to eq('Account locked successfully.') }
-      it { expect(response).to redirect_to(users_path) }
+      it { expect(flash[:success]).to eq("User's account locked successfully.") }
+      it { expect(response).to redirect_to(:back) }
     end
     context 'when user is not logged in' do
       before do
         @user = create(:user)
-        session[:user_id] = @user.id
+        session[:user_id] = nil
         get :lock_user, id: @user.id
       end
-
       it { expect(response).to redirect_to(login_path) }
       it { expect(flash[:danger]).to eq('Please log in.') }
     end
@@ -546,22 +491,23 @@ RSpec.describe UsersController, type: :controller do
   describe '#unlock user' do
     context 'user is correct user or user is admin and is logged on to the system' do
       before do
+        request.env['HTTP_REFERER'] = root_url
         @user = create(:user)
-        session[:user_id] = @user.id
+        @admin = create(:user)
+        session[:user_id] = @admin.id
         get :unlock_user, id: @user.id
       end
 
       it { expect(response).to have_http_status(302) }
-      it { expect(flash[:success]).to eq("Unlocked user's account successfully.") }
-      it { expect(response).to redirect_to(users_path) }
+      it { expect(flash[:success]).to eq("Unlocked User's account successfully.") }
+      it { expect(response).to redirect_to(:back) }
     end
     context 'when user is not logged in' do
       before do
         @user = create(:user)
-        session[:user_id] = @user.id
+        session[:user_id] = nil
         get :unlock_user, id: @user.id
       end
-
       it { expect(response).to redirect_to(login_path) }
       it { expect(flash[:danger]).to eq('Please log in.') }
     end
@@ -570,71 +516,98 @@ RSpec.describe UsersController, type: :controller do
   describe '#activate' do
     context 'user is correct user or user is admin and is logged on to the system' do
       before do
+        request.env['HTTP_REFERER'] = root_url
         @user = create(:user)
         session[:user_id] = @user.id
         get :activate, id: @user.id
       end
       it { expect(response).to have_http_status(302) }
       it { expect(flash[:success]).to eq('Account activated successfully.') }
-      it { expect(response).to redirect_to(users_path) }
+      it { expect(response).to redirect_to(:back) }
     end
-  end
-  def user
-    @user ||= User.new
-  end
-
-  describe 'Get destroy' do
-    let!(:user_params) do
-      user_params = { username: "username#{rand(1000)}",
-                      email: "user#{rand(1000)}@factory.com",
-                      password: 'Password123',
-                      password_confirmation: 'Password123',
-                      admin: false,
-                      description: 'Nihil eligendi ab debitis iure.' }
-    end
-    context 'when user is logged in' do
+    context 'user is not logged on to the system' do
       before do
         @user = create(:user)
-        @new_user = create(:user)
-        session[:user_id] = @user.id
-        get :index #:destroy,{:id=>@new_user.id}
+        session[:user_id] = nil
+        get :activate, id: @user.id
       end
-      it 'user destroy' do
-        delete :destroy, { id: user.id }, { user_id: user.id }, user: user_params
-        expect(response).to redirect_to(users_path)
-      end
-      it '' do
-        expect { delete :destroy, id: @new_user.id }.to change(User, :count).by(-1)
-      end
-      context 'when user is not logged in' do
-        before do
-          @user = create(:user)
-          session[:user_id] = @user.id
-          get :index
-        end
+      it { expect(flash[:danger]).to eq('Please log in.') }
+      it { expect(response).to redirect_to(login_url) }
+    end
+  end
 
-        it { expect(response).to redirect_to(login_path) }
-        it { expect(flash[:danger]).to eq('Please log in.') }
+  describe 'POST #create' do
+
+    before(:each) do
+    request.env['HTTP_REFERER'] = root_url
+  end
+    context 'with valid attributes' do
+      it 'creates the kpi_concept' do
+        expect{
+				post :create, user: attributes_for(:user)
+			}.to change(User,:count).by(1)
+      end
+
+      it 'redirects to back' do
+        post :create, user: attributes_for(:user)
+				expect(flash[:info]).to eq("Please check your email to confirm your account.")
+        expect(response).to redirect_to :back
+      end
+    end
+
+    context 'with invalid attributes' do
+      it 'does not create the user' do
+				expect{
+				post :create, user: attributes_for(:kpi_concept,email: nil)
+			}.to_not change(User,:count)
+      end
+			it 'redirects to back' do
+        post :create, user: attributes_for(:user,email: nil)
+				expect(flash[:danger]).to eq("Failed to add new user. Please complete properly the fields below.")
+        expect(response).to redirect_to :back
       end
     end
   end
-  def log_in(user)
-    session[:user_id] = user.id
-     end
 
-  def logged_in?
-    !current_user.nil?
+  describe "#update" do
+
+          before(:each) do
+            request.env['HTTP_REFERER'] = root_url
+              @user = FactoryGirl.create(:user)
+              @logged_in_user = FactoryGirl.create(:user)
+              session[:user_id] = @logged_in_user.id
+          end
+
+          it "should redirect to index with a notice on successful update" do
+          @attr = { :firstname => "CRR"}
+          put :update, :id => @user.id, :user => @attr
+					expect(assigns[:user]).not_to be_new_record
+          expect(flash[:success]).to eq("User details updated successfully")
+          end
+
+          it "should redirect to index with a notice on unsuccessful update" do
+          @attr = { :email => nil}
+          put :update, :id => @user.id, :user => @attr
+          expect(assigns[:user]).not_to be_new_record
+          expect(flash[:danger]).to eq("Profile not updated.")
+          expect(response).to redirect_to :back
+          end
   end
 
-  def current_user
-    if (user_id = session[:user_id])
-      @current_user ||= User.find_by(id: user_id)
-    elsif (user_id = cookies.signed[:user_id])
-      user = User.find_by(id: user_id)
-      if user && user.authenticated?(:remember, cookies[:remember_token])
-        log_in user
-        @current_user = user
-      end
+  describe "delete#destroy" do
+    context "when user is logged in" do
+
+          before do
+            request.env['HTTP_REFERER'] = root_url
+              @user = create(:user)
+              @admin = FactoryGirl.create(:user)
+              session[:user_id] = @admin.id
+              delete :destroy,:id=>@user.id
+          end
+          it {expect(assigns(:user)).to eq(@user)}
+          it { expect(flash[:success]).to eq("User deleted")}
+          it {expect(response).to redirect_to :back}
     end
   end
+
 end
