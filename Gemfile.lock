@@ -121,6 +121,8 @@ GEM
       rest-client (>= 1.6.0)
       ruby_parser (~> 3.0)
       sexp_processor (~> 4.1)
+    ci_reporter (2.0.0)
+      builder (>= 2.1.2)
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cocaine (0.5.8)
@@ -652,6 +654,7 @@ DEPENDENCIES
   capybara (= 2.7.1)
   carrierwave (= 0.10.0)
   chartkick (= 1.5.2)
+  ci_reporter
   coffee-rails (= 4.1.1)
   cucumber-rails (= 1.4.3)
   cucumber-rails-training-wheels (= 1.0.0)
