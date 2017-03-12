@@ -24,4 +24,4 @@ test:
   database: engcobo_test
 production:
   <<: *default
-  database: lepelle_production
+  database: engcobo_production
