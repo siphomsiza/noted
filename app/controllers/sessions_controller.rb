@@ -28,6 +28,7 @@ class SessionsController < ApplicationController
         flash[:danger] = message
         redirect_to root_url
       end
+      redirect_to root_url
     else
       increment_login_attempts user unless user.blank?
       user.update_columns(status: 'Locked') unless user.blank?

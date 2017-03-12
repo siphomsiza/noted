@@ -18,10 +18,10 @@ default: &default
 # Do not set this db to the same as development or production.
 development:
   <<: *default
-  database: lepelle_nkumpi_development
+  database: engcobo_development
 test:
   <<: *default
-  database: lepelle_nkumpi_test
+  database: engcobo_test
 production:
   <<: *default
-  database: lepelle_nkumpi_production
+  database: engcobo_production

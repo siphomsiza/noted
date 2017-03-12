@@ -31,6 +31,7 @@ bower.json
 /config/database.yml
 /config/lepelle_nkumpi_db.yml
 /config/sakhisizwe_db.yml
+/config/engcobo_db.yml
 /config/mkhondo_db.yml
 /config/initializers/rack_attack.rb
 /config/initializers/smtp_settings.rb
