@@ -20,6 +20,8 @@ server '129.232.191.58', user: 'sable', roles: %w{app db web}
 role :app, %w{sable@129.232.191.58}
 role :web, %w{sable@129.232.191.58}
 role :db,  %w{sable@129.232.191.58}
+
+
 # role :web, %w{user1@primary.com user2@additional.com}, other_property: :other_value
 # role :db,  %w{deploy@example.com}
 

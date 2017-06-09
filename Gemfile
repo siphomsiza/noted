@@ -41,12 +41,8 @@ gem 'newrelic_rpm'
 gem 'scout_apm'
 gem 'airbrake'
 gem 'god'
-gem "paperclip", "~> 5.0.0"
-gem 'auto-session-timeout-warning', '~> 1.1'
-gem 'rubyzip', '~> 1.1.0'
-gem 'axlsx', '~> 2.0.1'
-gem 'axlsx_rails'
-# gem 'rspec_html_formatter', '~> 0.3.1'
+gem 'paperclip',                        '~> 5.0.0'
+
 group :development, :test do
   gem 'byebug',                         '8.2.2'
   gem 'web-console',                    '3.1.1'
@@ -68,16 +64,13 @@ group :development, :test do
   gem 'rails_best_practices',           '1.16.0'
   gem 'rubocop',                        '0.40.0'
   gem 'metric_fu',                      '4.12.0'
-  gem 'ZenTest',                        '~> 4.3'
-  gem 'guard-rspec',                    '~> 4.7','>= 4.7.3'
 end
 
 group :test do
   gem 'capybara',                       '2.7.1'
   gem 'rspec-rails',                    '3.4.2'
-  gem 'simplecov',                      '0.11.2', :require => false, :group => :test
+  gem 'simplecov',                      '0.11.2', :require => false
   gem 'simplecov-rcov',                 '0.2.3'
-  gem "ci_reporter"
   gem 'rspec_junit_formatter',          '0.2.3'
   gem 'cucumber-rails',                 '1.4.3', :require => false
   gem 'cucumber-rails-training-wheels', '1.0.0' # basic imperative step defs
