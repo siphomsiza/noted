@@ -195,11 +195,11 @@ namespace :engcobo do
       end
     end
 
-    task db_engcobo_upload: :set_custom_db_config_paths do
-      Dir[File.join(Rails.root, 'db_engcobo', 'engcobo_uploads', '*.rb')].each do |filename|
-        load(filename) if File.exist?(filename)
-      end
-    end
+    # task db_engcobo_upload: :set_custom_db_config_paths do
+    #   Dir[File.join(Rails.root, 'db_engcobo', 'engcobo_uploads', '*.rb')].each do |filename|
+    #     load(filename) if File.exist?(filename)
+    #   end
+    # end
 
   end
 end
