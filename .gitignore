@@ -28,16 +28,10 @@ bower.json
 /.byebug_history
 /Vagrantfile
 /backups/*
-/config/database.yml
-/config/lepelle_nkumpi_db.yml
-/config/sakhisizwe_db.yml
-/config/engcobo_db.yml
-/config/mkhondo_db.yml
 /config/initializers/rack_attack.rb
 /config/initializers/smtp_settings.rb
 /config/initializers/relative_url.rb
 /config/unicorn.rb
-/config/secrets.yml
 /coverage/*
 /db/*.sqlite3
 /db/*.sqlite3-journal

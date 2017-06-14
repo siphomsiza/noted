@@ -1,0 +1,82 @@
+# SQLite version 3.x
+#   gem install sqlite3
+#
+#   Ensure the SQLite 3 gem is defined in your Gemfile
+#   gem 'sqlite3'
+#
+default: &default
+  adapter: postgresql
+  encoding: utf8
+  pool: 5
+  timeout: 5000
+  username: sable_user
+  password: '12345'
+  host: localhost
+
+development:
+  <<: *default
+  database: keystone_development
+
+# Warning: The database defined as "test" will be erased and
+# re-generated from your development database when you run "rake".
+# Do not set this db to the same as development or production.
+db1:
+  development:
+    <<: *default
+    database: mkhondo_development
+
+  test:
+    <<: *default
+    database: mkhondo_test
+
+  production:
+    <<: *default
+    database: mkhondo_production
+
+db2:
+  development:
+    <<: *default
+    database: sakhisizwe_development
+
+  test:
+    <<: *default
+    database: sakhisizwe_test
+
+  production:
+    <<: *default
+    database: sakhisizwe_production
+db3:
+  development:
+    <<: *default
+    database: lepelle_nkumpi_development
+  test:
+    <<: *default
+    database: lepelle_nkumpi_test
+  production:
+    <<: *default
+    database: lepelle_nkumpi_production
+db4:
+  development:
+    <<: *default
+    database: engcobo_development
+  test:
+    <<: *default
+    database: engcobo_test
+  production:
+    <<: *default
+    database: engcobo_production
+
+old_db_development:
+  <<: *default
+  database: engcobo_development
+
+test: &test
+  <<: *default
+  database: keystone_test
+
+production:
+  <<: *default
+  database: keystone_production
+
+cucumber:
+  <<: *test
