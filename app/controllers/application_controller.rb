@@ -3,8 +3,8 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
 
   # ...
-  auto_session_timeout 5.minutes
-  before_timedout_action
+  #auto_session_timeout 5.minutes
+  #before_timedout_action
   include PublicActivity::StoreController
   hide_action :current_user
   protect_from_forgery with: :exception

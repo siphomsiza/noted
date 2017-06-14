@@ -6,6 +6,30 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 require 'active_record/fixtures'
+
+User.delete_all
+MasterSetup.delete_all
+Department.delete_all
+Subdepartment.delete_all
+Kpa.delete_all
+StrategicObjective.delete_all
+RiskRating.delete_all
+KpiConcept.delete_all
+Jobtitle.delete_all
+KpiOwner.delete_all
+KpiType.delete_all
+KpiCalculationType.delete_all
+NdpObjective.delete_all
+PredeterminedObjective.delete_all
+NationalOutcome.delete_all
+MscoreClassification.delete_all
+Ward.delete_all
+Area.delete_all
+KpiTargetType.delete_all
+FundingSource.delete_all
+Heading.delete_all
+SdbipTimePeriod.delete_all
+
 User.create!( firstname: "Sandiswa",
               surname: "Nqampoyi",
               email: "Sandiswa@sableassets.co.za",
@@ -81,15 +105,20 @@ Department.create!(name: "Technical Services",
   tel_no:landline,
   fax_no: mobile)
 
-Department.create!(name: "Planning and Development",
+Department.create!(name: "Planning And Development",
   tel_no:landline,
   fax_no: mobile)
-Department.create!(name: "Department in the MM's Office",
+Department.create!(name: "Department In The Mm's Office",
+  tel_no:landline,
+  fax_no: mobile)
+Department.create!(name: "Information Technology",
+  tel_no:landline,
+  fax_no: mobile)
+Department.create!(name: "Human Resources Management",
   tel_no:landline,
   fax_no: mobile)
 
 Subdepartment.create!(name: "Municipal Manager's Office", department_id: "1")
-
 Subdepartment.create!(name: "Internal Audit", department_id: "7",)
 Subdepartment.create!(name: "Performance Management Unit", department_id: "7")
 Subdepartment.create!(name: "Legal Services", department_id: "7")

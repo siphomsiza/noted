@@ -55,6 +55,16 @@ db3:
   production:
     <<: *default
     database: lepelle_nkumpi_production
+db4:
+  development:
+    <<: *default
+    database: engcobo_development
+  test:
+    <<: *default
+    database: engcobo_test
+  production:
+    <<: *default
+    database: engcobo_production
 
 test: &test
   <<: *default

@@ -1,4 +1,5 @@
-
+require 'roo'
+require "#{Rails.root}/config/environment"
 namespace :mkhondo do
   desc 'Configure the variables that rails need in order to look up for the db configuration in a different folder'
 
@@ -173,9 +174,10 @@ namespace :engcobo do
     task rollback: :set_custom_db_config_paths do
       Rake::Task['db:rollback'].invoke
     end
-    task seed: :set_custom_db_config_paths do
+    task seed:  :set_custom_db_config_paths do
       Rake::Task['db:seed'].invoke
     end
+
     namespace :test do
       task prepare: :set_custom_db_config_paths do
         Rake::Task['db:test:prepare'].invoke
@@ -192,6 +194,13 @@ namespace :engcobo do
         Rake::Task['db:schema:load'].invoke
       end
     end
+
+    task db_engcobo_upload: :set_custom_db_config_paths do
+      Dir[File.join(Rails.root, 'db_engcobo', 'engcobo_uploads', '*.rb')].each do |filename|
+        load(filename) if File.exist?(filename)
+      end
+    end
+
   end
 end
 db_conf = YAML.load(File.open(File.join(Rails.root, '/config', 'database.yml')))
