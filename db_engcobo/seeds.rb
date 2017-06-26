@@ -87,36 +87,36 @@ landline=Faker::Number.number(10)
 mobile=Faker::Number.number(10)
 Department.create!(name: "Municipal Manager's Office",
   tel_no: landline,
-  fax_no:mobile)
+  fax_no:mobile,:without_protection => true)
 
 Department.create!(name: "Financial Services",
   tel_no:landline,
-  fax_no: mobile)
+  fax_no:mobile,:without_protection => true)
 
 Department.create!(name: "Community Services",
   tel_no:landline,
-  fax_no:mobile)
+  fax_no:mobile,:without_protection => true)
 
 Department.create!(name: "Corporate Services",
   tel_no:landline,
-  fax_no: mobile)
+  fax_no:mobile,:without_protection => true)
 
 Department.create!(name: "Technical Services",
   tel_no:landline,
-  fax_no: mobile)
+  fax_no:mobile,:without_protection => true)
 
 Department.create!(name: "Planning And Development",
   tel_no:landline,
-  fax_no: mobile)
+  fax_no:mobile,:without_protection => true)
 Department.create!(name: "Department In The Mm's Office",
   tel_no:landline,
-  fax_no: mobile)
+  fax_no:mobile,:without_protection => true)
 Department.create!(name: "Information Technology",
   tel_no:landline,
-  fax_no: mobile)
+  fax_no:mobile,:without_protection => true)
 Department.create!(name: "Human Resources Management",
   tel_no:landline,
-  fax_no: mobile)
+  fax_no:mobile,:without_protection => true)
 
 Subdepartment.create!(name: "Municipal Manager's Office", department_id: "1")
 Subdepartment.create!(name: "Internal Audit", department_id: "7",)
