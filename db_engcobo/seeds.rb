@@ -91,7 +91,7 @@ User.create!( firstname: "Sipho",
               super_admin: true,
               activated: true,status: "Active",
               activated_at: Time.zone.now)
-binding.pry
+
 MasterSetup.create!(
   municipality: "Engcobo Local Municipality",
   logo: File.open(File.join(Rails.root,'/app/assets/images','engcobo-logo.jpg')),

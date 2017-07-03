@@ -47,7 +47,7 @@ module SessionsHelper
       $logged_in_database = DB3_CONF
       $municipality_info = MasterSetup.first
     end
-	if company_code == "ENG001"
+	  if company_code == "ENG001"
       ActiveRecord::Base.establish_connection(DB4_CONF)
       $logged_in_database = DB4_CONF
       $municipality_info = MasterSetup.first

@@ -1,5 +1,5 @@
 class Area < ActiveRecord::Base
-  ActiveRecord::Base.establish_connection($current_session_db)
+  ActiveRecord::Base.establish_connection(Rails.env.to_sym)
   has_many :capital_projects
   has_many :top_layer_sdbips
   has_many :wards, :dependent => :destroy

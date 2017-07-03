@@ -1,5 +1,5 @@
 class RiskRating < ActiveRecord::Base
-	ActiveRecord::Base.establish_connection($current_session_db)
+	ActiveRecord::Base.establish_connection(Rails.env.to_sym)
 	include PublicActivity::Common
 	has_many :departmental_sdbips
 	delegate :name, :to => :departmental_sdbip, :prefix => true

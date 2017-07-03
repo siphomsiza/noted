@@ -1,5 +1,5 @@
 class KpiResult < ActiveRecord::Base
-  ActiveRecord::Base.establish_connection($current_session_db)
+  ActiveRecord::Base.establish_connection(Rails.env.to_sym)
   belongs_to :user
   belongs_to :departmental_sdbip
   has_one :assurance

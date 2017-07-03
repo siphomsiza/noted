@@ -5,7 +5,8 @@ set :application, 'keystone'
 #set :repo_url, 'http://gitlab-sable:S%40ble%40Admin@gitlab-sableassets.co.za:81/katherine-johnson/keystone.git'
 
 #set :repo_url, 'http://gitlab-sable:S%40ble%40git@129.232.191.58:SABLE-ASSETS/keystone.git'
-set :repo_url, 'git@localhost:SABLE-ASSETS/keystone.git'
+#set :repo_url, 'git@129.232.191.58:SABLE-ASSETS/keystone.git'
+set :repo_url, 'git@bitbucket.org:sable-assets/keystone.git'
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp

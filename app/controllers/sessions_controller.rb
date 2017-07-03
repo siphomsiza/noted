@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
   skip_before_filter :verify_authenticity_token
   def new
-    redirect_to introduction_url unless session[:user_id].blank?
+    redirect_to introduction_url if current_user #unless session[:user_id].blank?
   end
 
   def active
@@ -20,7 +20,7 @@ class SessionsController < ApplicationController
         increment_login_count user
         params[:session][:remember_me] == '1' ? remember(user) : forget(user)
         flash[:success] = "Logged in sucessfully..."
-        redirect_back_or introduction_url
+        #redirect_back_or introduction_url
       else
         message  = 'Account terminated.please contact your system administrator.' if user.terminated?
         message  = 'Account not activated.Check your email for the activation link.' unless user.activated?
@@ -43,7 +43,7 @@ class SessionsController < ApplicationController
     note = 'User logged out of the system.'
     unless session[:user_id].blank?
       @user = current_user
-      if @user.update_columns(current_login_at: nil, current_login_ip: '', last_login: Time.zone.now, last_login_ip: request.env['REMOTE_ADDR'])
+      if @user && @user.update_columns(current_login_at: nil, current_login_ip: '', last_login: Time.zone.now, last_login_ip: request.env['REMOTE_ADDR'])
         note = 'user logged out of the system.'
         record_activity(note)
       end

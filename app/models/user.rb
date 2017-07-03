@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
-  ActiveRecord::Base.establish_connection($current_session_db)
+  #ActiveRecord::Base.establish_connection($current_session_db)
+  ActiveRecord::Base.establish_connection(Rails.env.to_sym)
   belongs_to :department
   has_many :role, :dependent => :destroy
   has_many :kpi_results
