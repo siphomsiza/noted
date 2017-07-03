@@ -29,8 +29,6 @@ KpiTargetType.delete_all
 FundingSource.delete_all
 Heading.delete_all
 SdbipTimePeriod.delete_all
-MtasIndicator.delete_all
-DepartmentalSdbip.delete_all
 
 User.create!( firstname: "Sandiswa",
               surname: "Nqampoyi",
@@ -91,7 +89,7 @@ User.create!( firstname: "Sipho",
               super_admin: true,
               activated: true,status: "Active",
               activated_at: Time.zone.now)
-binding.pry
+
 MasterSetup.create!(
   municipality: "Engcobo Local Municipality",
   logo: File.open(File.join(Rails.root,'/app/assets/images','engcobo-logo.jpg')),
@@ -100,15 +98,72 @@ MasterSetup.create!(
   longitude: 31.6728,
   address: 'Engcobo Local Municipality<br />58 Union Street,<br />ENGCOBO, 5050<br />Eastern Cape, South Africa'
 )
-#Creating Departments from csv
-CSV.foreach('db_engcobo/data/departments.csv', headers: true, :col_sep => ',') do |row|
-  Department.create! row.to_hash
-end
 
-#Creating Subdepartment from csv
-CSV.foreach('db_engcobo/data/subdepartments.csv', headers: true, :col_sep => ',') do |row|
-  Subdepartment.create! row.to_hash
-end
+landline=Faker::Number.number(10)
+mobile=Faker::Number.number(10)
+Department.create!(name: "Municipal Manager's Office",
+  tel_no: landline,
+  fax_no:mobile,:without_protection => true)
+
+Department.create!(name: "Financial Services",
+  tel_no:landline,
+  fax_no:mobile,:without_protection => true)
+
+Department.create!(name: "Community Services",
+  tel_no:landline,
+  fax_no:mobile,:without_protection => true)
+
+Department.create!(name: "Corporate Services",
+  tel_no:landline,
+  fax_no:mobile,:without_protection => true)
+
+Department.create!(name: "Technical Services",
+  tel_no:landline,
+  fax_no:mobile,:without_protection => true)
+
+Department.create!(name: "Planning And Development",
+  tel_no:landline,
+  fax_no:mobile,:without_protection => true)
+Department.create!(name: "Department In The Mm's Office",
+  tel_no:landline,
+  fax_no:mobile,:without_protection => true)
+Department.create!(name: "Information Technology",
+  tel_no:landline,
+  fax_no:mobile,:without_protection => true)
+Department.create!(name: "Human Resources Management",
+  tel_no:landline,
+  fax_no:mobile,:without_protection => true)
+
+Subdepartment.create!(name: "Municipal Manager's Office", department_id: "1")
+Subdepartment.create!(name: "Internal Audit", department_id: "7",)
+Subdepartment.create!(name: "Performance Management Unit", department_id: "7")
+Subdepartment.create!(name: "Legal Services", department_id: "7")
+Subdepartment.create!(name: "Forestry", department_id: "7")
+
+Subdepartment.create!(name: "Budget And Financial Reporting", department_id: "2")
+Subdepartment.create!(name: "Expenditure", department_id: "2")
+Subdepartment.create!(name: "ICT", department_id: "2")
+Subdepartment.create!(name: "Revenue", department_id: "2")
+Subdepartment.create!(name: "Supply Chain Management", department_id: "2")
+
+Subdepartment.create!(name: "Department Of Community Service", department_id: "3")
+
+Subdepartment.create!(name: "Corporate Services", department_id: "4")
+
+Subdepartment.create!(name: "Water and Sanitation", department_id: "5")
+Subdepartment.create!(name: "Electrical Services", department_id: "5")
+Subdepartment.create!(name: "Roads and Storm Water", department_id: "5")
+Subdepartment.create!(name: "Project Management Unit", department_id: "5")
+
+Subdepartment.create!(name: "Planning and Development", department_id: "6")
+Subdepartment.create!(name: "Human Settlements", department_id: "6")
+Subdepartment.create!(name: "Building Control", department_id: "6")
+
+Subdepartment.create!(name: "Executive Mayor's Office", department_id: "1")
+
+Subdepartment.create!(name: "Finance", department_id: "2")
+
+Subdepartment.create!(name: "Risk", department_id: "7")
 
 #directory = File.join(File.dirname(__FILE__), '/migrate/data')
 # From lookup_classes
@@ -123,7 +178,6 @@ end
 CSV.foreach('db_engcobo/data/strategic_objectives.csv', headers: true, :col_sep => ',') do |row|
   StrategicObjective.create! row.to_hash
 end
-
 CSV.foreach('db_engcobo/data/risk_ratings.csv', headers: true, :col_sep => ',') do |row|
   RiskRating.create! row.to_hash
 end
@@ -131,43 +185,33 @@ end
 CSV.foreach('db_engcobo/data/kpi_concept.csv', headers: true, :col_sep => ',') do |row|
   KpiConcept.create! row.to_hash
 end
-
 CSV.foreach('db_engcobo/data/jobs.csv', headers: true, :col_sep => ',') do |row|
   Jobtitle.create! row.to_hash
 end
-
 CSV.foreach('db_engcobo/data/kpi_owners.csv', headers: true, :col_sep => ',') do |row|
   KpiOwner.create! row.to_hash
 end
-
 CSV.foreach('db_engcobo/data/kpi_type.csv', headers: true, :col_sep => ',') do |row|
   KpiType.create! row.to_hash
 end
-
 CSV.foreach('db_engcobo/data/kpi_calculation_types.csv', headers: true, :col_sep => ',') do |row|
   KpiCalculationType.create! row.to_hash
 end
-
 CSV.foreach('db_engcobo/data/ndp_objectives.csv', headers: true, :col_sep => ',') do |row|
   NdpObjective.create! row.to_hash
 end
-
 CSV.foreach('db_engcobo/data/predetermined_objectives.csv', headers: true, :col_sep => ',') do |row|
   PredeterminedObjective.create! row.to_hash
 end
-
 CSV.foreach('db_engcobo/data/national_outcomes.csv', headers: true, :col_sep => ',') do |row|
   NationalOutcome.create! row.to_hash
 end
-
 CSV.foreach('db_engcobo/data/mscore_classification.csv', headers: true, :col_sep => ',') do |row|
   MscoreClassification.create! row.to_hash
 end
-
 CSV.foreach('db_engcobo/data/reporting.csv', headers: true, :col_sep => ',') do |row|
   ReportingCategory.create! row.to_hash
 end
-
 Ward.create!(name: "All",ward_no: 1,area_id: 1, mun_ref: "Unspecified")
 Ward.create!(name: "1",ward_no: 1,area_id: 1, mun_ref:1)
 Ward.create!(name: "2",ward_no: 1,area_id: 1, mun_ref:2)
@@ -476,15 +520,9 @@ while $i < $num  do
   SdbipTimePeriod.create!(period: period,primary_reminder: primary_reminder,primary_closure: primary_closure, secondary_reminder: secondary_reminder,secondary_closure: secondary_closure)
    $i +=1
 end
-
-CSV.foreach('db_engcobo/data/capital.csv', headers: true, :col_sep => ',') do |row|
-  CapitalProject.create! row.to_hash
-end
-
-CSV.foreach('db_engcobo/data/mtas_indicators.csv', headers: true, :col_sep => ',') do |row|
-  MtasIndicator.create! row.to_hash
-end
-
-CSV.foreach('db_engcobo/data/departmental_kpis.csv', headers: true, :col_sep => ',') do |row|
-  DepartmentalSdbip.create! row.to_hash
-end
+  CSV.foreach('db_engcobo/data/capital.csv', headers: true, :col_sep => ',') do |row|
+    CapitalProject.create! row.to_hash
+  end
+  CSV.foreach('db_engcobo/data/sdbips.csv', headers: true, encoding:'iso-8859-1:utf-8', :col_sep => ',') do |row|
+    DepartmentalSdbip.create! row.to_hash
+  end

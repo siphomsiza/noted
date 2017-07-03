@@ -93,7 +93,7 @@
 
 			<td class="mscore-classification"><% if !departmental_sdbip.mscore_classification_id.blank? && departmental_sdbip.mscore_classification.present? %><%= departmental_sdbip.mscore_classification.name %><% end %></td>
 			<td class="national-outcome"><% if !departmental_sdbip.national_outcome_id.blank? && departmental_sdbip.national_outcome.present? %><%= departmental_sdbip.national_outcome.name %><% end %></td>
-			<td class="strategic-objectives"><% if !departmental_sdbip.strategic_objective_id.blank? %><%= departmental_sdbip.strategic_objective.name %><% end %></td>
+			<td class="strategic-objectives"><% if !departmental_sdbip.strategic_objective_id.blank? %><%= departmental_sdbip.try(:strategic_objective).try(:name) %><% end %></td>
 			<td class="baseline"><%= departmental_sdbip.baseline %></td>
 			<td class="budget"><%= departmental_sdbip.budget %></td>
 			<td class="performance-standard"><%= departmental_sdbip.performance_standard %></td>
