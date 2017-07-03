@@ -47,7 +47,6 @@ gem 'sprockets', '3.6.3'
 
 group :development, :test do
   gem 'byebug',                         '8.2.2'
-  gem 'web-console',                    '3.1.1'
   gem 'spring',                         '1.6.4'
   gem 'jasmine-rails',                  '0.12.4'
   gem 'capistrano',                     '3.5.0'

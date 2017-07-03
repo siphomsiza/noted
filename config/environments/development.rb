@@ -42,9 +42,6 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
-  # Activate Web Console in the test environment
-  config.web_console.development_only = false
-
   config.active_job.queue_adapter = :delayed_job
 
   config.after_initialize do

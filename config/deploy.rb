@@ -2,9 +2,13 @@
 #lock '3.5.0'
 
 set :application, 'keystone'
-set :repository, 'https://github.com/siphomsiza/noted.git'
-set :git_https_username, 'siphosmall@gmail.com'
-set :git_https_password, 'sipho!@#$%54321'
+set :repo_url, 'https://github.com/siphomsiza/noted.git'
+#set :repo_url, '129.232.191.58/home/sable/pro/sable'
+set :local_repository , '129.232.191.58/home/sable/pro/sable'
+set :deploy_via, :copy
+
+#set :git_https_username, 'siphosmall@gmail.com'
+#set :git_https_password, 'sipho!@#$%54321'
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
@@ -12,8 +16,8 @@ set :git_https_password, 'sipho!@#$%54321'
 set :deploy_to, '/home/sable/repos/keystone'
 
 # Default value for :scm is :git
-set :scm, :git
-
+#set :scm, :git
+#set :scm, :none
 # Default value for :format is :airbrussh.
 # set :format, :airbrussh
 
