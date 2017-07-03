@@ -2,12 +2,9 @@
 #lock '3.5.0'
 
 set :application, 'keystone'
-#set :repo_url, 'http://gitlab-sable:S%40ble%40Admin@gitlab-sableassets.co.za:81/katherine-johnson/keystone.git'
-
-#set :repo_url, 'http://gitlab-sable:S%40ble%40git@129.232.191.58:SABLE-ASSETS/keystone.git'
-#set :repo_url, 'git@129.232.191.58:SABLE-ASSETS/keystone.git'
-set :repo_url, 'git@bitbucket.org:sable-assets/keystone.git'
-
+set :repository, 'https://github.com/siphomsiza/noted.git'
+set :git_https_username, 'siphosmall@gmail.com'
+set :git_https_password, 'sipho!@#$%54321'
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
